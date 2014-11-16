@@ -1,0 +1,266 @@
+/*
+ * Copyright (c) 2014, Pierre-Anthony Lemieux (pal@sandflow.com)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+package com.sandflow.smpte.tools;
+
+import com.sandflow.smpte.klv.Group;
+import com.sandflow.smpte.klv.KLVInputStream;
+import com.sandflow.smpte.klv.LocalSet;
+import com.sandflow.smpte.klv.LocalSetRegister;
+import com.sandflow.smpte.klv.Triplet;
+import com.sandflow.smpte.klv.exception.KLVException;
+import com.sandflow.smpte.mxf.FillItem;
+import com.sandflow.smpte.mxf.PartitionPack;
+import com.sandflow.smpte.regxml.FragmentBuilder;
+import com.sandflow.smpte.regxml.PrimerPack;
+import com.sandflow.smpte.regxml.definition.ClassDefinition;
+import com.sandflow.smpte.regxml.definition.Definition;
+import com.sandflow.smpte.regxml.definition.PropertyDefinition;
+import com.sandflow.smpte.regxml.dict.DuplicateDefinitionException;
+import com.sandflow.smpte.regxml.dict.MetaDictionary;
+import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.UL;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.xml.bind.JAXBException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
+
+/**
+ *
+ * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ */
+public class RegXMLDump {
+
+    private static final UL ESSENCE_DESCRIPTOR_UL
+            = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x01, 0x01, 0x01, 0x0D, 0x01, 0x01, 0x01, 0x01, 0x01, 0x24, 0x00});
+
+    private final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
+            + "  Usage:\n"
+            + "     RegXMLDump ( -all | -ed ) -d regxmldictionary -i mxffile\n"
+            + "     RegXMLDump -?\n"
+            + "  Where:\n"
+            + "     -all: dumps all header metadata\n"
+            + "     -ed: dumps only the first essence descriptor found\n";
+
+    public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, DuplicateDefinitionException {
+
+        if (args.length != 5
+                || "-?".equals(args[0])
+                || (!"-d".equals(args[1]))
+                || (!"-i".equals(args[3]))) {
+
+            System.out.println(USAGE);
+
+            return;
+        }
+
+        /* load the regxml metadictionary */
+        FileReader fr = new FileReader(args[2]);
+
+        MetaDictionary md = MetaDictionary.fromXML(fr);
+
+        /* create the fragment builder */
+        FragmentBuilder fb = new FragmentBuilder();
+
+        fb.setDict(md);
+
+        /* retrieve the mxf file */
+        FileInputStream f = new FileInputStream(args[4]);
+
+        /* look for the partition pack */
+        KLVInputStream kis = new KLVInputStream(f);
+
+        PartitionPack pp = null;
+
+        for (Triplet t; (t = kis.readTriplet()) != null;) {
+
+            if ((pp = PartitionPack.fromTriplet(t)) != null) {
+                break;
+            }
+        }
+
+        if (pp == null) {
+            System.err.println("No Partition Pack found.");
+            return;
+        }
+
+        /* start counting header metadata bytes */
+        long bytecount = 0;
+
+        /* look for the primer pack */
+        LocalSetRegister localreg = null;
+
+        for (Triplet t; (t = kis.readTriplet()) != null;) {
+
+            /* skip fill items, if any */
+            if (FillItem.fromTriplet(t) == null) {
+                localreg = PrimerPack.createLocalSetRegister(t);
+                bytecount += t.getLength();
+                break;
+            }
+
+        }
+
+        if (localreg == null) {
+            System.err.println("No Primer Pack found");
+        }
+
+        fb.setLocaltags(localreg);
+
+        /* add localtags from the dictionary */
+        for (Definition def : md.getDefinitions()) {
+
+            if (def instanceof PropertyDefinition) {
+
+                PropertyDefinition pdef = (PropertyDefinition) def;
+
+                if (pdef.getLocalIdentification() != 0 && pdef.getIdentification().isUL()) {
+
+                    UL existul = localreg.get(pdef.getLocalIdentification());
+
+                    if (existul != null) {
+                        if (!pdef.getIdentification().equals(existul)) {
+                            throw new RuntimeException("Duplicate Local Tag with inconsistent UL: "
+                                    + pdef.getIdentification().asUL()
+                                    + " -> "
+                                    + pdef.getLocalIdentification());
+                        }
+                    } else {
+                        localreg.add(pdef.getLocalIdentification(), pdef.getIdentification().asUL());
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        /* capture all local sets within the header metadata */
+        ArrayList<Group> gs = new ArrayList<>();
+
+        for (Triplet t; bytecount < pp.getHeaderByteCount() && (t = kis.readTriplet()) != null;) {
+
+            bytecount += t.getLength();
+
+            Group g = LocalSet.fromTriplet(t, localreg);
+
+            if (g != null) {
+
+                gs.add(g);
+
+                fb.addGroup(g);
+            }
+        }
+
+        /* create dom */
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        Document doc = docBuilder.newDocument();
+
+        if ("-ed".equals(args[0])) {
+
+            Group ed = null;
+
+            Iterator<Group> iter = gs.iterator();
+
+            /* find first essence descriptor */
+            while (ed == null && iter.hasNext()) {
+
+                Group g = iter.next();
+
+                AUID tmpauid = new AUID(g.getKey());
+
+                /* go up the class hierarchy */
+                while (ed == null && tmpauid != null) {
+
+                    Definition def = md.getDefinition(tmpauid);
+
+                    /* skip if not a class instance */
+                    if (!(def instanceof ClassDefinition)) {
+                        break;
+                    }
+
+                    /* is this an essence descriptor */
+                    UL deful = def.getIdentification().asUL();
+
+                    if (deful.equals(ESSENCE_DESCRIPTOR_UL, 0b1111101011111111 /*11111010 11111111*/)) {
+                        ed = g;
+
+                    } else {
+
+                        /* get parent class */
+                        tmpauid = ((ClassDefinition) def).getParentClass();
+                    }
+                }
+
+            }
+
+            if (ed == null) {
+                System.err.println("No Essence Descriptor found");
+                return;
+            }
+
+            /* generate fragment */
+            DocumentFragment df = fb.fragmentFromTriplet(ed, doc);
+
+            // root elements
+            doc.appendChild(df);
+        } else {
+
+            /* generate fragment */
+            DocumentFragment df = fb.fragmentFromTriplet(gs.get(0), doc);
+
+            // root elements
+            doc.appendChild(df);
+
+        }
+        /* write DOM to file */
+        Transformer tr = TransformerFactory.newInstance().newTransformer();
+
+        tr.setOutputProperty(OutputKeys.INDENT, "yes");
+
+        tr.transform(
+                new DOMSource(doc),
+                new StreamResult(System.out)
+        );
+
+    }
+}
