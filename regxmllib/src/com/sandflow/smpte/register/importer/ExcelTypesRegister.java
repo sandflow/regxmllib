@@ -58,7 +58,7 @@ import javax.xml.transform.stream.StreamResult;
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
 public class ExcelTypesRegister {
-    
+
     private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
 
     static final UL AUID_TYPE_UL = UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000");
@@ -115,39 +115,35 @@ public class ExcelTypesRegister {
 
                     f.setDefinition(fields.get(c.get("n:detail")));
 
-                    switch (lasttype.getTypeKind()) {
-                        case Record:
+                    if (TypeEntry.RECORD_TYPEKIND.equals(lasttype.getTypeKind())) {
+
+                        f.setSymbol(fields.get(c.get("n:sym")));
+                        f.setName(fields.get(c.get("n:name")));
+
+                        if (fields.get(c.get("n:type_urn")) != null) {
+                            f.setType(UL.fromURN(fields.get(c.get("n:type_urn"))));
+                        } else {
+                            throw new InvalidEntryException(
+                                    String.format(
+                                            "Missing n:type_urn from Record face %s",
+                                            fields.get(c.get("a:urn"))
+                                    )
+                            );
+                        }
+
+                    } else if (TypeEntry.ENUMERATION_TYPEKIND.equals(lasttype.getTypeKind())) {
+
+                        if (lasttype.getBaseType().equals(AUID_TYPE_UL)) {
+                            f.setValue(UL.fromDotValue(fields.get(c.get("n:urn"))).toString());
+                        } else {
                             f.setSymbol(fields.get(c.get("n:sym")));
                             f.setName(fields.get(c.get("n:name")));
+                            f.setValue(fields.get(c.get("n:value")));
+                        }
 
-                            if (fields.get(c.get("n:type_urn")) != null) {
-                                f.setType(UL.fromURN(fields.get(c.get("n:type_urn"))));
-                            } else {
-                                throw new InvalidEntryException(
-                                        String.format(
-                                                "Missing n:type_urn from Record face %s",
-                                                fields.get(c.get("a:urn"))
-                                        )
-                                );
-                            }
+                    } else if (TypeEntry.WEAKREF_TYPEKIND.equals(lasttype.getTypeKind())) {
 
-                            break;
-                        case Enumerated:
-
-                            if (lasttype.getBaseType().equals(AUID_TYPE_UL)) {
-                                f.setUL(UL.fromDotValue(fields.get(c.get("n:urn"))));
-                            } else {
-                                f.setSymbol(fields.get(c.get("n:sym")));
-                                f.setName(fields.get(c.get("n:name")));
-                                f.setValue(fields.get(c.get("n:value")));
-                            }
-
-                            break;
-                        case WeakReference:
-
-                            f.setUL(UL.fromDotValue(fields.get(c.get("n:target_urn"))));
-
-                            break;
+                        f.setUL(UL.fromDotValue(fields.get(c.get("n:target_urn"))));
 
                     }
 
@@ -188,10 +184,11 @@ public class ExcelTypesRegister {
                     type.setDeprecated(!("No".equalsIgnoreCase(fields.get(c.get("n:deprecated")))));
 
                     type.setSymbol(fields.get(c.get("n:sym")));
-                    
+
                     /* BUG: there is no StrongReferenceNameValue type */
-                    
-                    if (type.getSymbol().equals("StrongReferenceSetNameValue")) continue;
+                    if (type.getSymbol().equals("StrongReferenceSetNameValue")) {
+                        continue;
+                    }
 
                     type.setDefiningDocument(fields.get(c.get("n:docs")));
 
@@ -217,7 +214,7 @@ public class ExcelTypesRegister {
                         if ("integer".equalsIgnoreCase(kind)) {
 
                             /* INTEGER */
-                            type.setTypeKind(TypeEntry.TypeKind.Integer);
+                            type.setTypeKind(TypeEntry.INTEGER_TYPEKIND);
                             type.setTypeSize(Long.parseLong(fields.get(c.get("n:qualif"))));
 
                             if ("True".equals(fields.get(c.get("n:value")))) {
@@ -238,7 +235,7 @@ public class ExcelTypesRegister {
 
                         } else if ("rename".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Rename);
+                            type.setTypeKind(TypeEntry.RENAME_TYPEKIND);
 
                             if (target_urn != null) {
 
@@ -259,11 +256,11 @@ public class ExcelTypesRegister {
 
                         } else if ("record".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Record);
+                            type.setTypeKind(TypeEntry.RECORD_TYPEKIND);
 
                         } else if ("array".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Multiple);
+                            type.setTypeKind(TypeEntry.ARRAY_TYPEKIND);
 
                             if (target_urn != null) {
 
@@ -295,7 +292,8 @@ public class ExcelTypesRegister {
 
                                 if (type.getSymbol().startsWith("StrongReferenceVector")) {
 
-                                    String symbol = "StrongReference" + type.getSymbol().substring("StrongReferenceVector".length());
+                                    String symbol = "StrongReference" +
+                                            type.getSymbol().substring("StrongReferenceVector".length());
 
                                     TypeEntry realtype = reg.getEntryBySymbol(symbol, type.getNamespaceName());
 
@@ -305,14 +303,22 @@ public class ExcelTypesRegister {
                                 type.setTypeSize(0L);
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
-                                type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isIdentified);
 
                             } else if ("weak".equals(qualif)) {
+                                
+                                if (type.getSymbol().startsWith("WeakReferenceVector")) {
+
+                                    String symbol = "WeakReference" +
+                                            type.getSymbol().substring("WeakReferenceVector".length());
+
+                                    TypeEntry realtype = reg.getEntryBySymbol(symbol, type.getNamespaceName());
+
+                                    type.setBaseType(realtype.getUL());
+                                }
 
                                 type.setTypeSize(0L);
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
-                                type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isIdentified);
 
                             } else {
 
@@ -327,12 +333,12 @@ public class ExcelTypesRegister {
 
                         } else if ("character".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Character);
+                            type.setTypeKind(TypeEntry.CHARACTER_TYPEKIND);
                             type.setTypeSize(Long.parseLong(fields.get(c.get("n:qualif"))));
 
                         } else if ("string".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.String);
+                            type.setTypeKind(TypeEntry.STRING_TYPEKIND);
 
                             if (target_urn != null) {
 
@@ -346,10 +352,14 @@ public class ExcelTypesRegister {
                                         )
                                 );
                             }
+                            
+                            type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isCountImplicit);
+                            type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
+                            type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
 
                         } else if ("enumeration".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Enumerated);
+                            type.setTypeKind(TypeEntry.ENUMERATION_TYPEKIND);
 
                             if (target_urn != null) {
 
@@ -366,28 +376,41 @@ public class ExcelTypesRegister {
 
                         } else if ("extendible".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Enumerated);
+                            type.setTypeKind(TypeEntry.ENUMERATION_TYPEKIND);
 
                             type.setBaseType(UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000"));
 
                         } else if ("set".equalsIgnoreCase(kind)) {
+                            
+                            if ("global".equals(qualif)) {
+                                /* BUG: missing Global reference types */
+                            }
 
-                            type.setTypeKind(TypeEntry.TypeKind.Multiple);
+                            type.setTypeKind(TypeEntry.SET_TYPEKIND);
                             type.setTypeSize(0L);
 
                             type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
                             type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isIdentified);
-                            
-                            /* BUG: StrongReferenceSets do no have entries of type Strong Reference */
 
+                            /* BUG: StrongReferenceSets do no have entries of type Strong Reference */
                             if (type.getSymbol().startsWith("StrongReferenceSet")) {
 
-                                String symbol = "StrongReference" + type.getSymbol().substring("StrongReferenceSet".length());
+                                String symbol = "StrongReference" +
+                                        type.getSymbol().substring("StrongReferenceSet".length());
+
+                                TypeEntry realtype = reg.getEntryBySymbol(symbol, type.getNamespaceName());
+
+                                type.setBaseType(realtype.getUL());
+                            } else if (type.getSymbol().startsWith("WeakReferenceSet")) {
+
+                                String symbol = "WeakReference" +
+                                        type.getSymbol().substring("WeakReferenceSet".length());
 
                                 TypeEntry realtype = reg.getEntryBySymbol(symbol, type.getNamespaceName());
 
                                 type.setBaseType(realtype.getUL());
                             } else if (target_urn != null) {
+                                
 
                                 type.setBaseType(target_urn);
 
@@ -402,19 +425,19 @@ public class ExcelTypesRegister {
 
                         } else if ("stream".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Stream);
+                            type.setTypeKind(TypeEntry.STREAM_TYPEKIND);
 
                         } else if ("indirect".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Indirect);
+                            type.setTypeKind(TypeEntry.INDIRECT_TYPEKIND);
 
                         } else if ("opaque".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.TypeKind.Opaque);
+                            type.setTypeKind(TypeEntry.OPAQUE_TYPEKIND);
 
                         } else if ("formal".equalsIgnoreCase(kind)) {
 
-                            /* BUG: what is 'formal; */
+                            /* BUG: what is 'formal' */
                             continue;
 
                         } else if ("reference".equalsIgnoreCase(kind)) {
@@ -422,10 +445,10 @@ public class ExcelTypesRegister {
                             type.setBaseType(target_urn);
 
                             if ("strong".equalsIgnoreCase(qualif)) {
-                                type.setTypeKind(TypeEntry.TypeKind.StrongReference);
+                                type.setTypeKind(TypeEntry.STRONGREF_TYPEKIND);
 
                             } else if ("weak".equalsIgnoreCase(qualif)) {
-                                type.setTypeKind(TypeEntry.TypeKind.WeakReference);
+                                type.setTypeKind(TypeEntry.WEAKREF_TYPEKIND);
                             } else {
                                 throw new InvalidEntryException(
                                         String.format(
@@ -476,7 +499,6 @@ public class ExcelTypesRegister {
 
                     reg.addEntry(type);
 
-
                 }
 
             }
@@ -486,7 +508,6 @@ public class ExcelTypesRegister {
         return reg;
 
     }
-
 
     public static void main(String args[]) throws FileNotFoundException, ExcelCSVParser.SyntaxException, IOException, InvalidEntryException, JAXBException, DuplicateEntryException {
         FileInputStream f = new FileInputStream("\\\\SERVER\\Business\\sandflow-consulting\\projects\\imf\\regxml\\register-format\\input\\types-smpte-ra-frozen-20140304.2118.csv");

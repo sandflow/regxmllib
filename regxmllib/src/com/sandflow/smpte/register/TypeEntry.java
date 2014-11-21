@@ -48,6 +48,20 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 public class TypeEntry {
 
+    public static final String INTEGER_TYPEKIND = "Integer";
+    public static final String RENAME_TYPEKIND = "Rename";
+    public static final String RECORD_TYPEKIND = "Record";
+    public static final String ARRAY_TYPEKIND = "Array";
+    public static final String CHARACTER_TYPEKIND = "Character";
+    public static final String STRING_TYPEKIND = "String";
+    public static final String ENUMERATION_TYPEKIND = "Enumeration";
+    public static final String SET_TYPEKIND = "Set";
+    public static final String STREAM_TYPEKIND = "Stream";
+    public static final String INDIRECT_TYPEKIND = "Indirect";
+    public static final String OPAQUE_TYPEKIND = "Opaque";
+    public static final String STRONGREF_TYPEKIND = "StrongReference";
+    public static final String WEAKREF_TYPEKIND = "WeakReference";
+
     @XmlElement(name = "Register")
     final static String register = "Types";
 
@@ -71,7 +85,7 @@ public class TypeEntry {
     private String definition;
 
     @XmlElement(name = "TypeKind")
-    private TypeKind typeKind;
+    private String typeKind;
 
     @XmlElement(name = "TypeSize")
     private Long typeSize;
@@ -97,8 +111,7 @@ public class TypeEntry {
     private String definingDocument;
 
     @XmlElement(name = "ContextScope")
-    private String contextScope;
-
+    private ContextScope contextScope = ContextScope.UnknownContext;
 
     @XmlElement(name = "TypeQualifiers")
     @XmlList
@@ -163,11 +176,11 @@ public class TypeEntry {
         this.definition = definition;
     }
 
-    public TypeKind getTypeKind() {
+    public String getTypeKind() {
         return typeKind;
     }
 
-    public void setTypeKind(TypeKind typeKind) {
+    public void setTypeKind(String typeKind) {
         this.typeKind = typeKind;
     }
 
@@ -227,44 +240,43 @@ public class TypeEntry {
         this.definingDocument = definingDocument;
     }
 
-    public String getContextScope() {
+    public ContextScope getContextScope() {
         return contextScope;
     }
 
-    public void setContextScope(String contextScope) {
+    public void setContextScope(ContextScope contextScope) {
         this.contextScope = contextScope;
     }
-
 
     @XmlAccessorType(value = XmlAccessType.NONE)
     public static class Facet {
 
         @XmlElement(name = "Symbol")
         private String symbol;
-        
+
         @XmlElement(name = "Name")
         private String name;
-        
+
         @XmlJavaTypeAdapter(value = ULAdapter.class)
         @XmlElement(name = "Type")
         private UL type;
-        
+
         @XmlElement(name = "Value")
         private String value;
-        
+
         @XmlJavaTypeAdapter(value = ULAdapter.class)
         @XmlElement(name = "UL")
         private UL ul;
-        
+
         @XmlElement(name = "Definition")
         private String definition;
-        
+
         @XmlElement(name = "Applications")
         private String applications;
-        
+
         @XmlElement(name = "Notes")
         private String notes;
-        
+
         @XmlElement(name = "IsDeprecated")
         private boolean deprecated;
 
@@ -341,27 +353,21 @@ public class TypeEntry {
         }
     }
 
-    /*    private Boolean numeric;
-    private Boolean signed;
-    private Boolean identified;
-    private Boolean ordered;
-    private Boolean countImplicit;
-    private Boolean sizeImplicit;
-     */
+
     public enum TypeQualifiers {
 
-        isNumeric, isSigned
-    ,   isIdentified, isOrdered, isCountImplicit, isSizeImplicit}
+        isNumeric, isSigned, isIdentified, isOrdered, isCountImplicit, isSizeImplicit
+    }
 
     public enum Kind {
 
         NODE,
-        LEAF}
+        LEAF
+    }
 
-    public enum TypeKind {
+    public enum ContextScope {
 
-        Integer, Rename, Record, Multiple, Enumerated, Character, String, Stream, Indirect, Opaque, WeakReference, StrongReference
-
+        DefinedContext, AbstractContext, UnknownContext
     }
 
 }

@@ -76,9 +76,8 @@ import org.xml.sax.SAXException;
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
 public class XMLRegistryImporter {
-    
-    private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
 
+    private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
 
     public static MetaDictionary fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
 
@@ -132,12 +131,12 @@ public class XMLRegistryImporter {
 
                 if (element == null) {
                     LOGGER.warning(String.format(
-                                    "Undefined Element %s for Group %s",
-                                    child.getItem(),
-                                    group.getUL()
-                            )
+                            "Undefined Element %s for Group %s",
+                            child.getItem(),
+                            group.getUL()
+                    )
                     );
-                    
+
                     continue;
                 }
 
@@ -172,157 +171,157 @@ public class XMLRegistryImporter {
                 continue;
             }
 
-            switch (type.getTypeKind()) {
-                case Rename:
+            if (TypeEntry.RENAME_TYPEKIND.equals(type.getTypeKind())) {
 
-                    tdef = new RenameTypeDefinition();
+                tdef = new RenameTypeDefinition();
 
-                    ((RenameTypeDefinition) tdef).setRenamedType(new AUID(type.getBaseType()));
+                ((RenameTypeDefinition) tdef).setRenamedType(new AUID(type.getBaseType()));
 
-                    break;
+            } else if (TypeEntry.INTEGER_TYPEKIND.equals(type.getTypeKind())) {
 
-                case Integer:
+                tdef = new IntegerTypeDefinition();
 
-                    tdef = new IntegerTypeDefinition();
+                ((IntegerTypeDefinition) tdef).setSigned(type.getTypeQualifiers().contains(TypeEntry.TypeQualifiers.isSigned));
 
-                    ((IntegerTypeDefinition) tdef).setSigned(type.getTypeQualifiers().contains(TypeEntry.TypeQualifiers.isSigned));
+                switch (type.getTypeSize().intValue()) {
+                    case 1:
+                        ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.ONE);
+                        break;
+                    case 2:
+                        ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.TWO);
+                        break;
+                    case 4:
+                        ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.FOUR);
+                        break;
+                    case 8:
+                        ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.EIGHT);
+                        break;
+                    default:
+                        throw new Exception("Illegal Type Size.");
 
-                    switch (type.getTypeSize().intValue()) {
-                        case 1:
-                            ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.ONE);
-                            break;
-                        case 2:
-                            ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.TWO);
-                            break;
-                        case 4:
-                            ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.FOUR);
-                            break;
-                        case 8:
-                            ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.EIGHT);
-                            break;
-                        default:
-                            throw new Exception("Illegal Type Size.");
+                }
 
-                    }
+            } else if (TypeEntry.RECORD_TYPEKIND.equals(type.getTypeKind())) {
 
-                    break;
+                tdef = new RecordTypeDefinition();
 
-                case Record:
+                for (TypeEntry.Facet tchild : type.getFacets()) {
+                    Member m = new Member();
 
-                    tdef = new RecordTypeDefinition();
+                    m.setName(tchild.getName());
+                    m.setType(new AUID(tchild.getType()));
 
-                    for (TypeEntry.Facet tchild : type.getFacets()) {
-                        Member m = new Member();
+                    ((RecordTypeDefinition) tdef).addMember(m);
+                }
 
-                        m.setName(tchild.getName());
-                        m.setType(new AUID(tchild.getType()));
+            } else if (TypeEntry.ARRAY_TYPEKIND.equals(type.getTypeKind())) {
 
-                        ((RecordTypeDefinition) tdef).addMember(m);
-                    }
+                if (type.getTypeSize().intValue() != 0) {
+                    tdef = new FixedArrayTypeDefinition();
 
-                    break;
-                case Multiple:
-                    if (type.getTypeSize().intValue() != 0) {
-                        tdef = new FixedArrayTypeDefinition();
+                    ((FixedArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
-                        ((FixedArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
+                    ((FixedArrayTypeDefinition) tdef).setElementCount(type.getTypeSize().intValue());
 
-                        ((FixedArrayTypeDefinition) tdef).setElementCount(type.getTypeSize().intValue());
+                } else {
 
-                    } else {
+                    tdef = new VariableArrayTypeDefinition();
+                    ((VariableArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
+                }
 
-                        if (type.getTypeQualifiers().contains(TypeEntry.TypeQualifiers.isIdentified)) {
-                            tdef = new SetTypeDefinition();
-                            ((SetTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
-                        } else {
-                            tdef = new VariableArrayTypeDefinition();
-                            ((VariableArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
-                        }
-                    }
+            } else if (TypeEntry.SET_TYPEKIND.equals(type.getTypeKind())) {
 
-                    break;
+                tdef = new SetTypeDefinition();
+                ((SetTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
-                case Indirect:
-                    tdef = new IndirectTypeDefinition();
-                    break;
-                case Opaque:
-                    tdef = new OpaqueTypeDefinition();
-                    break;
-                case Stream:
-                    tdef = new StreamTypeDefinition();
-                    break;
-                case WeakReference:
+            } else if (TypeEntry.INDIRECT_TYPEKIND.equals(type.getTypeKind())) {
 
-                    tdef = new WeakReferenceTypeDefinition();
+                tdef = new IndirectTypeDefinition();
 
-                    if (type.getBaseType() == null) {
-                        throw new Exception(
-                                String.format(
-                                        "Missing base type for Type %s",
-                                        type.getUL()
-                                )
-                        );
-                    }
+            } else if (TypeEntry.OPAQUE_TYPEKIND.equals(type.getTypeKind())) {
 
-                    ((WeakReferenceTypeDefinition) tdef).setReferencedType(new AUID(type.getBaseType()));
+                tdef = new OpaqueTypeDefinition();
+
+            } else if (TypeEntry.STREAM_TYPEKIND.equals(type.getTypeKind())) {
+
+                tdef = new StreamTypeDefinition();
+
+            } else if (TypeEntry.WEAKREF_TYPEKIND.equals(type.getTypeKind())) {
+
+                tdef = new WeakReferenceTypeDefinition();
+
+                if (type.getBaseType() == null) {
+                    throw new Exception(
+                            String.format(
+                                    "Missing base type for Type %s",
+                                    type.getUL()
+                            )
+                    );
+                }
+
+                ((WeakReferenceTypeDefinition) tdef).setReferencedType(new AUID(type.getBaseType()));
+
+                for (Facet f : type.getFacets()) {
+                    ((WeakReferenceTypeDefinition) tdef).getTargetSet().add(new AUID(f.getUL()));
+                }
+
+            } else if (TypeEntry.STRONGREF_TYPEKIND.equals(type.getTypeKind())) {
+
+                tdef = new StrongReferenceTypeDefinition();
+
+                ((StrongReferenceTypeDefinition) tdef).setReferenceType(new AUID(type.getBaseType()));
+
+                /* BUG: class_of_objects_referenced has wrong UL format */
+            } else if (TypeEntry.ENUMERATION_TYPEKIND.equals(type.getTypeKind())) {
+
+                if (type.getBaseType().equals(UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000"))) {
+                    ArrayList<ExtendibleEnumerationTypeDefinition.Element> ecelems = new ArrayList<>();
+
+                    /* TODO: deal with labels */
+                    
+                    /* for now, do not import facets */
+                    /*
+                    for (Facet f : type.getFacets()) {
+                        ExtendibleEnumerationTypeDefinition.Element m = new ExtendibleEnumerationTypeDefinition.Element();
+
+                        m.setValue(new AUID(f.getUL()));
+
+                        ecelems.add(m);
+                    }*/
+
+                    tdef = new ExtendibleEnumerationTypeDefinition(ecelems);
+
+                } else {
+
+                    ArrayList<EnumerationTypeDefinition.Element> celems = new ArrayList<>();
 
                     for (Facet f : type.getFacets()) {
-                        ((WeakReferenceTypeDefinition) tdef).getTargetSet().add(new AUID(f.getUL()));
+                        EnumerationTypeDefinition.Element m = new EnumerationTypeDefinition.Element();
+
+                        m.setName(f.getSymbol());
+                        m.setValue(Integer.decode(f.getValue()));
+
+                        // BUG: some enumerations use hex notation
+                        celems.add(m);
                     }
 
-                    break;
-                case StrongReference:
-                    tdef = new StrongReferenceTypeDefinition();
+                    tdef = new EnumerationTypeDefinition(celems);
 
-                    ((StrongReferenceTypeDefinition) tdef).setReferenceType(new AUID(type.getBaseType()));
+                    ((EnumerationTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
+                }
 
-                    /* BUG: class_of_objects_referenced has wrong UL format */
-                    break;
-                case Enumerated:
+            } else if (TypeEntry.CHARACTER_TYPEKIND.equals(type.getTypeKind())) {
 
-                    if (type.getBaseType().equals(UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000"))) {
-                        ArrayList<ExtendibleEnumerationTypeDefinition.Element> ecelems = new ArrayList<>();
+                tdef = new CharacterTypeDefinition();
 
-                        for (Facet f : type.getFacets()) {
-                            ExtendibleEnumerationTypeDefinition.Element m = new ExtendibleEnumerationTypeDefinition.Element();
+            } else if (TypeEntry.STRING_TYPEKIND.equals(type.getTypeKind())) {
 
-                            m.setValue(new AUID(f.getUL()));
+                tdef = new StringTypeDefinition();
 
-                            /* TODO: lookup labels */
-                            ecelems.add(m);
-                        }
+                ((StringTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
-                        tdef = new ExtendibleEnumerationTypeDefinition(ecelems);
-
-                    } else {
-
-                        ArrayList<EnumerationTypeDefinition.Element> celems = new ArrayList<>();
-
-                        for (Facet f : type.getFacets()) {
-                            EnumerationTypeDefinition.Element m = new EnumerationTypeDefinition.Element();
-
-                            m.setName(f.getSymbol());
-                            m.setValue(Integer.decode(f.getValue()));
-
-                            // BUG: some enumerations use hex notation
-                            celems.add(m);
-                        }
-
-                        tdef = new EnumerationTypeDefinition(celems);
-
-                        ((EnumerationTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
-                    }
-                    break;
-                case Character:
-                    tdef = new CharacterTypeDefinition();
-                    break;
-                case String:
-                    tdef = new StringTypeDefinition();
-
-                    ((StringTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
-                    break;
-
-                default:
+            } else {
+                LOGGER.warning("Unknown type kind.");
                 /* todo: error handling */
             }
 
@@ -334,7 +333,7 @@ public class XMLRegistryImporter {
 
                 defs.put(tdef.getIdentification(), tdef);
             } else {
-                /* todo: error handling */
+                LOGGER.warning("Unknown type def.");
             }
         }
 
