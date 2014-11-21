@@ -25,16 +25,25 @@
  */
 package com.sandflow.smpte.regxml.definition;
 
+import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.xml.AUIDAdapter;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import static org.w3c.dom.Node.ELEMENT_NODE;
 
 /**
  *
@@ -42,18 +51,88 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class EnumerationTypeDefinition extends Definition {
-    
+
+    private static class EnumerationElementAdapter extends XmlAdapter<Object, ArrayList<Element>> {
+
+        public ArrayList<Element> unmarshal(Object v) throws Exception {
+
+            ArrayList<Element> al = new ArrayList<>();
+
+            org.w3c.dom.Node node = ((org.w3c.dom.Element) v).getFirstChild();
+
+            while (node != null) {
+
+                if (node.getNodeType() == ELEMENT_NODE) {
+
+                    org.w3c.dom.Element elem = (org.w3c.dom.Element) node;
+
+                    if ("Name".equals(elem.getNodeName())) {
+                        
+                        al.add(new Element());
+                        al.get(al.size() - 1).setName(elem.getTextContent());
+                        
+                    } else if ("Value".equals(elem.getNodeName())) {
+                        
+                        al.get(al.size() - 1).setValue(Integer.parseInt(elem.getTextContent()));
+                        
+                    } else if ("Description".equals(elem.getNodeName())) {
+                        
+                        al.get(al.size() - 1).setDescription(elem.getTextContent());
+                        
+                    }
+                }
+
+                node = node.getNextSibling();
+            }
+
+            return al;
+        }
+
+        public Object marshal(ArrayList<Element> v) throws Exception {
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.newDocument();
+            org.w3c.dom.Element elem = doc.createElementNS(MetaDictionary.ST2001_1_NS, "Elements");
+
+            for (Element e : v) {
+
+                org.w3c.dom.Element e1 = doc.createElementNS(MetaDictionary.ST2001_1_NS, "Name");
+
+                e1.setTextContent(e.getName());
+
+                elem.appendChild(e1);
+
+                e1 = doc.createElementNS(MetaDictionary.ST2001_1_NS, "Value");
+
+                e1.setTextContent(Integer.toString(e.getValue()));
+
+                elem.appendChild(e1);
+
+                if (e.getDescription() != null) {
+                    e1 = doc.createElementNS(MetaDictionary.ST2001_1_NS, "Description");
+
+                    e1.setTextContent(e.getDescription());
+
+                    elem.appendChild(e1);
+                }
+
+            }
+
+            return elem;
+        }
+    }
 
     @XmlJavaTypeAdapter(value = AUIDAdapter.class)
     @XmlElement(name = "ElementType")
     private AUID elementType;
- 
 
-    @XmlElementWrapper(name = "Elements")
-    @XmlElement(name = "Element")
+    @XmlJavaTypeAdapter(value = EnumerationElementAdapter.class)
+    @XmlAnyElement(lax = false)
     private ArrayList<Element> elements;
 
-    public EnumerationTypeDefinition() {}
+    public EnumerationTypeDefinition() {
+    }
 
     public EnumerationTypeDefinition(Collection<Element> elements) {
         this.elements = new ArrayList<>(elements);

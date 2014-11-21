@@ -48,7 +48,7 @@ public class PropertyDefinition extends Definition {
     @XmlElement(name = "Type")
     private AUID type;
 
-    @XmlElement(name = "Optional")
+    @XmlElement(name = "IsOptional")
     private boolean optional;
 
     @XmlElement(name = "IsUniqueIdentifier")

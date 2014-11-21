@@ -44,8 +44,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class ExtendibleEnumerationTypeDefinition extends Definition {
     
 
-    @XmlElementWrapper(name = "Elements")
-    @XmlElement(name = "Element")
     private ArrayList<Element> elements;
 
     public ExtendibleEnumerationTypeDefinition() {}
@@ -63,7 +61,6 @@ public class ExtendibleEnumerationTypeDefinition extends Definition {
         return elements;
     }
 
-    @XmlType(name = "")
     @XmlAccessorType(value = XmlAccessType.NONE)
     public static class Element {
 

@@ -73,6 +73,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -80,9 +81,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author pal
  */
-@XmlRootElement(name = "Baseline", namespace = "http://www.smpte-ra.org/schemas/2001-1b/2014/metadict")
+@XmlRootElement(name = "Baseline")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MetaDictionary {
+    
+    public final static String ST2001_1_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
 
     @XmlAttribute(name = "rootElement", required = true)
     private final static String rootElement = "MXF";
@@ -191,35 +194,35 @@ public class MetaDictionary {
                 type = PropertyDefinition.class),
         @XmlElement(name = "PropertyAliasDefinition",
                 type = PropertyAliasDefinition.class),
-        @XmlElement(name = "TypeCharacterDefinition",
+        @XmlElement(name = "TypeDefinitionCharacter",
                 type = CharacterTypeDefinition.class),
-        @XmlElement(name = "TypeEnumerationDefinition",
+        @XmlElement(name = "TypeDefinitionEnumeration",
                 type = EnumerationTypeDefinition.class),
-        @XmlElement(name = "TypeExtendibleEnumerationDefinition",
+        @XmlElement(name = "TypeDefinitionExtendibleEnumeration",
                 type = ExtendibleEnumerationTypeDefinition.class),
-        @XmlElement(name = "TypeFixedArrayDefinition",
+        @XmlElement(name = "TypeDefinitionFixedArray",
                 type = FixedArrayTypeDefinition.class),
-        @XmlElement(name = "TypeIndirectDefinition",
+        @XmlElement(name = "TypeDefinitionIndirect",
                 type = IndirectTypeDefinition.class),
-        @XmlElement(name = "TypeIntegerDefinition",
+        @XmlElement(name = "TypeDefinitionInteger",
                 type = IntegerTypeDefinition.class),
-        @XmlElement(name = "TypeOpaqueDefinition",
+        @XmlElement(name = "TypeDefinitionOpaque",
                 type = OpaqueTypeDefinition.class),
-        @XmlElement(name = "TypeRecordDefinition",
+        @XmlElement(name = "TypeDefinitionRecord",
                 type = RecordTypeDefinition.class),
-        @XmlElement(name = "TypeRenameDefinition",
+        @XmlElement(name = "TypeDefinitionRename",
                 type = RenameTypeDefinition.class),
-        @XmlElement(name = "TypeSetDefinition",
+        @XmlElement(name = "TypeDefinitionSet",
                 type = SetTypeDefinition.class),
-        @XmlElement(name = "TypeStreamDefinition",
+        @XmlElement(name = "TypeDefinitionStream",
                 type = StreamTypeDefinition.class),
-        @XmlElement(name = "TypeStringDefinition",
+        @XmlElement(name = "TypeDefinitionString",
                 type = StringTypeDefinition.class),
-        @XmlElement(name = "TypeStrongReferenceDefinition",
+        @XmlElement(name = "TypeDefinitionStrongObjectReference",
                 type = StrongReferenceTypeDefinition.class),
-        @XmlElement(name = "TypeVariableArrayDefinition",
+        @XmlElement(name = "TypeDefinitionVariableArray",
                 type = VariableArrayTypeDefinition.class),
-        @XmlElement(name = "TypeWeakReferenceDefinition",
+        @XmlElement(name = "TypeDefinitionWeakObjectReference",
                 type = WeakReferenceTypeDefinition.class)
     })
     public ArrayList<Definition> getDefinitions() {

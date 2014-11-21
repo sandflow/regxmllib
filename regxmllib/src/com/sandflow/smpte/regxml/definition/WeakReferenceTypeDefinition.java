@@ -56,7 +56,8 @@ public class WeakReferenceTypeDefinition extends Definition {
     }
 
     @XmlElementWrapper(name = "TargetSet")
-    @XmlElement(name = "Target")
+    @XmlElement(name = "MetaDefRef")
+    @XmlJavaTypeAdapter(value = AUIDAdapter.class)
     private ArrayList<AUID> targetSet = new ArrayList<>();
 
     public AUID getReferencedType() {

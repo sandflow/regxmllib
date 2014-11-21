@@ -45,7 +45,7 @@ public class StrongReferenceTypeDefinition extends Definition {
     
 
     @XmlJavaTypeAdapter(value = AUIDAdapter.class)
-    @XmlElement(name = "ReferenceType")
+    @XmlElement(name = "ReferencedType")
     private AUID referenceType;
 
     @Override

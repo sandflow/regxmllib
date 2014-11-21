@@ -25,15 +25,21 @@
  */
 package com.sandflow.smpte.regxml.definition;
 
+import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.xml.AUIDAdapter;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import static org.w3c.dom.Node.ELEMENT_NODE;
 
 /**
  *
@@ -85,8 +91,8 @@ public class RecordTypeDefinition extends Definition {
 
     }
 
-    @XmlElementWrapper(name = "Members")
-    @XmlElement(name = "Member")
+    @XmlJavaTypeAdapter(value = RecordMemberAdapter.class)
+    @XmlAnyElement(lax = false)
     ArrayList<Member> members = new ArrayList<>();
 
     @Override
@@ -100,6 +106,66 @@ public class RecordTypeDefinition extends Definition {
 
     public Collection<Member> getMembers() {
         return members;
+    }
+    
+    
+    private static class RecordMemberAdapter extends XmlAdapter<Object, ArrayList<RecordTypeDefinition.Member>> {
+
+        public ArrayList<RecordTypeDefinition.Member> unmarshal(Object v) throws Exception {
+
+            ArrayList<RecordTypeDefinition.Member> al = new ArrayList<>();
+
+            org.w3c.dom.Node node = ((org.w3c.dom.Element) v).getFirstChild();
+
+            while (node != null) {
+
+                if (node.getNodeType() == ELEMENT_NODE) {
+
+                    org.w3c.dom.Element elem = (org.w3c.dom.Element) node;
+
+                    if ("Name".equals(elem.getNodeName())) {
+                        
+                        al.add(new RecordTypeDefinition.Member());
+                        al.get(al.size() - 1).setName(elem.getTextContent());
+                        
+                    } else if ("Type".equals(elem.getNodeName())) {
+                        
+                        al.get(al.size() - 1).setType(AUID.fromURN(elem.getTextContent()));
+                        
+                    }
+                }
+
+                node = node.getNextSibling();
+            }
+
+            return al;
+        }
+
+        public Object marshal(ArrayList<RecordTypeDefinition.Member> v) throws Exception {
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.newDocument();
+            org.w3c.dom.Element elem = doc.createElementNS(MetaDictionary.ST2001_1_NS, "Members");
+
+            for (RecordTypeDefinition.Member e : v) {
+
+                org.w3c.dom.Element e1 = doc.createElementNS(MetaDictionary.ST2001_1_NS, "Name");
+
+                e1.setTextContent(e.getName());
+
+                elem.appendChild(e1);
+
+                e1 = doc.createElementNS(MetaDictionary.ST2001_1_NS, "Type");
+
+                e1.setTextContent(e.getType().toString());
+
+                elem.appendChild(e1);
+
+            }
+
+            return elem;
+        }
     }
 
 }

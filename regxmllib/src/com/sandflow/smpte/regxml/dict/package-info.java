@@ -23,66 +23,16 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sandflow.smpte.regxml.definition;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+@XmlSchema(
+        namespace = MetaDictionary.ST2001_1_NS,
+        xmlns = { 
+        @XmlNs(prefix = "", namespaceURI = MetaDictionary.ST2001_1_NS)
+        },
+        elementFormDefault=XmlNsForm.QUALIFIED)  
+package com.sandflow.smpte.regxml.dict;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
-@XmlAccessorType(XmlAccessType.NONE)
-public class IntegerTypeDefinition extends Definition {
+import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;
 
-
-
-    /**
-     * specifies the number of bytes to store the value
-     */
-    @XmlElement(name = "Size")
-    private Size size;
-
-    /**
-     * specifies whether the integer is signed or unsigned
-     */
-    @XmlElement(name = "IsSigned")
-    private boolean signed;
-
-    public IntegerTypeDefinition() {
-    }
-
-    @Override
-    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
-        visitor.visit(this);
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public void setSize(Size size) {
-        this.size = size;
-    }
-
-    public boolean isSigned() {
-        return signed;
-    }
-
-    public void setSigned(boolean signed) {
-        this.signed = signed;
-    }
-
-    @XmlEnum(Integer.class)
-    public enum Size {
-        @XmlEnumValue("1") ONE, 
-        @XmlEnumValue("2") TWO, 
-        @XmlEnumValue("4") FOUR, 
-        @XmlEnumValue("8") EIGHT
-    }
-
-    
-}
