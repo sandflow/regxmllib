@@ -25,20 +25,12 @@
  */
 package com.sandflow.smpte.regxml;
 
-import com.sandflow.smpte.regxml.dict.DuplicateDefinitionException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.klv.Group;
 import com.sandflow.smpte.klv.exception.KLVException;
-import com.sandflow.smpte.klv.KLVInputStream;
-import com.sandflow.smpte.klv.LocalSet;
 import com.sandflow.smpte.klv.LocalSetRegister;
 import com.sandflow.smpte.klv.Triplet;
-import com.sandflow.smpte.mxf.FillItem;
 import com.sandflow.smpte.mxf.MXFInputStream;
-import com.sandflow.smpte.mxf.PartitionPack;
-import com.sandflow.smpte.register.ElementsRegister;
-import com.sandflow.smpte.register.GroupsRegister;
-import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.regxml.definition.CharacterTypeDefinition;
 import com.sandflow.smpte.regxml.definition.ClassDefinition;
 import com.sandflow.smpte.regxml.definition.Definition;
@@ -58,19 +50,11 @@ import com.sandflow.smpte.regxml.definition.StringTypeDefinition;
 import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.dict.importer.BBCViewsImporter;
-import static com.sandflow.smpte.regxml.dict.importer.XMLRegistryImporter.fromRegister;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UMID;
 import com.sandflow.smpte.util.UUID;
-import java.io.BufferedWriter;
 import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -80,26 +64,12 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
 
 /**
  *

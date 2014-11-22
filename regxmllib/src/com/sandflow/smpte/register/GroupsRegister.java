@@ -49,24 +49,24 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlRootElement(name = "GroupsRegister", namespace = "http://www.smpte-ra.org/schemas/395/2014")
+@XmlRootElement(name = "GroupsRegister", namespace = GroupsRegister.REG_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "")
 @XmlSeeAlso(value = GroupEntry.class)
 public class GroupsRegister {
-    
-     private final HashMap<QualifiedSymbol, GroupEntry> entriesBySymbol = new HashMap<>();
+
+    public final static String REG_NAMESPACE = "http://www.smpte-ra.org/schemas/395/2014";
+
+    private final HashMap<QualifiedSymbol, GroupEntry> entriesBySymbol = new HashMap<>();
 
     private final HashMap<UL, GroupEntry> entriesByUL = new HashMap<>();
 
-    @XmlElement(name="Entry")
-    @XmlElementWrapper(name = "Elements")
+    @XmlElement(name = "Entry", namespace = REG_NAMESPACE)
+    @XmlElementWrapper(name = "Entries", namespace = REG_NAMESPACE)
     private final ArrayList<GroupEntry> entries = new ArrayList<>();
 
     public GroupsRegister() {
     }
-    
-    
 
     public GroupEntry getEntryByUL(UL ul) {
         return entriesByUL.get(ul);
@@ -89,11 +89,10 @@ public class GroupsRegister {
         entriesBySymbol.put(sym, entry);
     }
 
-    
     public Collection<GroupEntry> getEntries() {
         return entries;
     }
-    
+
     public void toXML(Writer writer) throws JAXBException, IOException {
 
         JAXBContext ctx = JAXBContext.newInstance(GroupsRegister.class);
@@ -109,8 +108,8 @@ public class GroupsRegister {
         JAXBContext ctx = JAXBContext.newInstance(GroupsRegister.class);
 
         Unmarshaller m = ctx.createUnmarshaller();
-        
-                GroupsRegister reg = (GroupsRegister) m.unmarshal(reader);
+
+        GroupsRegister reg = (GroupsRegister) m.unmarshal(reader);
 
         for (GroupEntry te : reg.entries) {
             QualifiedSymbol sym = new QualifiedSymbol(te.getSymbol(), te.getNamespaceName());
@@ -121,5 +120,5 @@ public class GroupsRegister {
         return reg;
 
     }
-    
+
 }

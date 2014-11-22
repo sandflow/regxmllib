@@ -30,7 +30,6 @@ import com.sandflow.smpte.util.UL;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -50,18 +49,20 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlRootElement(name = "ElementsRegister", namespace = "http://www.smpte-ra.org/schemas/XXXX/2014")
+@XmlRootElement(name = "ElementsRegister", namespace = ElementsRegister.REG_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "")
 @XmlSeeAlso(value = ElementEntry.class)
 public class ElementsRegister {
+    
+    public final static String REG_NAMESPACE = "http://www.smpte-ra.org/reg/335/2012";
 
     private final HashMap<QualifiedSymbol, ElementEntry> entriesBySymbol = new HashMap<>();
 
     private final HashMap<UL, ElementEntry> entriesByUL = new HashMap<>();
 
-    @XmlElement(name = "Entry")
-    @XmlElementWrapper(name = "Elements")
+    @XmlElement(name = "Entry", namespace = REG_NAMESPACE)
+    @XmlElementWrapper(name = "Entries", namespace = REG_NAMESPACE)
     private final ArrayList<ElementEntry> entries = new ArrayList<>();
 
     public ElementsRegister() {

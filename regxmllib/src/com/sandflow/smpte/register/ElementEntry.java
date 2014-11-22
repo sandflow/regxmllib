@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlType(name = "ElementEntry")
+@XmlType(name = "ElementEntry", namespace = ElementsRegister.REG_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 public class ElementEntry {
 
@@ -212,6 +212,7 @@ public class ElementEntry {
         this.deprecated = deprecated;
     }
 
+    @XmlType(name = "")
     public enum Kind {
 
         NODE, LEAF

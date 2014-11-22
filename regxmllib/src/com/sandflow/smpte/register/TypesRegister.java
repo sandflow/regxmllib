@@ -50,18 +50,20 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlRootElement(name = "TypesRegister", namespace = "http://www.smpte-ra.org/schemas/2003/2014")
+@XmlRootElement(name = "TypesRegister", namespace = TypesRegister.REG_NAMESPACE)
 @XmlType(name = "")
 @XmlSeeAlso(value = TypeEntry.class)
 @XmlAccessorType(XmlAccessType.NONE)
 public class TypesRegister {
+    
+    public final static String REG_NAMESPACE = "http://www.smpte-ra.org/schemas/2003/2012";
 
     private final HashMap<QualifiedSymbol, TypeEntry> entriesBySymbol = new HashMap<>();
 
     private final HashMap<UL, TypeEntry> entriesByUL = new HashMap<>();
 
-    @XmlElement(name="Entry")
-    @XmlElementWrapper(name = "Elements")
+    @XmlElement(name="Entry", namespace = REG_NAMESPACE)
+    @XmlElementWrapper(name = "Entries", namespace = REG_NAMESPACE)
     private final ArrayList<TypeEntry> entries = new ArrayList<>();
 
     public TypesRegister() {

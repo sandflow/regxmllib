@@ -38,10 +38,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlType(name = "LabelEntry")
+@XmlType(name = "LabelEntry", namespace = LabelsRegister.REG_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 public class LabelEntry {
-
+    
     @XmlElement(name = "Register")
     static final String register = "Labels";
 
@@ -147,6 +147,7 @@ public class LabelEntry {
         this.deprecated = deprecated;
     }
 
+    @XmlType(name = "")
     public enum Kind {
 
         NODE, LEAF

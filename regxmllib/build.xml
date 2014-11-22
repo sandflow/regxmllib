@@ -21,13 +21,13 @@
         </exec>
     </target>
     
-    <target name="build-xml-registers" depends="jar">
+    <target name="build-xml-registers" depends="jar,build-register-schemas">
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-element"/>
             <arg value="-i"/>
             <arg value="../register/input/elements-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
-            <arg value="../register/elements.xml"/>
+            <arg value="../register/ElementsRegister.xml"/>
             <classpath>
                 <pathelement location="${dist.jar}"/>
             </classpath>
@@ -37,17 +37,17 @@
             <arg value="-i"/>
             <arg value="../register/input/types-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
-            <arg value="../register/types.xml"/>
+            <arg value="../register/TypesRegister.xml"/>
             <classpath>
                 <pathelement location="${dist.jar}"/>
             </classpath>
         </java>
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
-            <arg value="-element"/>
+            <arg value="-label"/>
             <arg value="-i"/>
             <arg value="../register/input/labels-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
-            <arg value="../register/labels.xml"/>
+            <arg value="../register/LabelsRegister.xml"/>
             <classpath>
                 <pathelement location="${dist.jar}"/>
             </classpath>
@@ -58,7 +58,7 @@
             <arg value="-i"/>
             <arg value="../register/input/groups-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
-            <arg value="../register/groups.xml"/>
+            <arg value="../register/GroupsRegister.xml"/>
             <classpath>
                 <pathelement location="${dist.jar}"/>
             </classpath>
@@ -71,13 +71,13 @@
     <target name="build-regxml-dict" depends="build-xml-registers">
         <java classname="com.sandflow.smpte.tools.XMLRegistersToDict">
             <arg value="-e"/>
-            <arg value="../register/elements.xml"/>
+            <arg value="../register/ElementsRegister.xml"/>
             <arg value="-l"/>
-            <arg value="../register/labels.xml"/>
+            <arg value="../register/LabelsRegister.xml"/>
             <arg value="-g"/>
-            <arg value="../register/groups.xml"/>
+            <arg value="../register/GroupsRegister.xml"/>
             <arg value="-t"/>
-            <arg value="../register/types.xml"/>
+            <arg value="../register/TypesRegister.xml"/>
             <arg value="../dict/regxml.xml"/>
 
             <classpath>
@@ -85,6 +85,51 @@
             </classpath>
         </java>
     </target>
+    
+    
+        <target name="build-register-schemas" depends="jar">
+        <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
+            <arg value="-cp"/>
+            <arg value="com.sandflow.smpte.register.TypesRegister"/>
+            <arg value="-d"/>
+            <arg value="../schemas"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+        
+                <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
+            <arg value="-cp"/>
+            <arg value="com.sandflow.smpte.register.LabelsRegister"/>
+            <arg value="-d"/>
+            <arg value="../schemas"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+        
+                <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
+            <arg value="-cp"/>
+            <arg value="com.sandflow.smpte.register.ElementsRegister"/>
+            <arg value="-d"/>
+            <arg value="../schemas"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+        
+                <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
+            <arg value="-cp"/>
+            <arg value="com.sandflow.smpte.register.GroupsRegister"/>
+            <arg value="-d"/>
+            <arg value="../schemas"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+    </target>
+    
+    
 
     <!--
 

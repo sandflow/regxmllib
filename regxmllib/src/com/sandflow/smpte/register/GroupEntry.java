@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlType(name = "GroupEntry")
+@XmlType(name = "GroupEntry", namespace = GroupsRegister.REG_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 public class GroupEntry {
 
@@ -80,8 +80,8 @@ public class GroupEntry {
     @XmlList
     private HashSet<Byte> klvSyntax = new HashSet<>();
 
-    @XmlElementWrapper(name = "Records")
-    @XmlElement(name = "Record")
+    @XmlElementWrapper(name = "Records", namespace = GroupsRegister.REG_NAMESPACE)
+    @XmlElement(name = "Record", namespace = GroupsRegister.REG_NAMESPACE)
     private List<Record> contents = new ArrayList<>();
 
     @XmlElement(name = "Applications")
@@ -208,6 +208,7 @@ public class GroupEntry {
         this.definingDocument = definingDocument;
     }
     
+    @XmlType(name = "RecordType", namespace = GroupsRegister.REG_NAMESPACE)
     @XmlAccessorType(value = XmlAccessType.NONE)
     public static class Record {
 
@@ -302,6 +303,7 @@ public class GroupEntry {
 
     }
 
+    @XmlType(name = "")
     public enum Kind {
         NODE, LEAF
     }

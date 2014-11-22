@@ -36,7 +36,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -44,7 +43,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlType(name = "TypeEntry")
+@XmlType(name = "TypeEntry", namespace = TypesRegister.REG_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 public class TypeEntry {
 
@@ -248,6 +247,7 @@ public class TypeEntry {
         this.contextScope = contextScope;
     }
 
+    @XmlType(name = "FacetType", namespace = TypesRegister.REG_NAMESPACE)
     @XmlAccessorType(value = XmlAccessType.NONE)
     public static class Facet {
 
@@ -353,18 +353,20 @@ public class TypeEntry {
         }
     }
 
-
+    @XmlType(name = "")
     public enum TypeQualifiers {
 
         isNumeric, isSigned, isIdentified, isOrdered, isCountImplicit, isSizeImplicit
     }
 
+    @XmlType(name = "")
     public enum Kind {
 
         NODE,
         LEAF
     }
 
+    @XmlType(name = "")
     public enum ContextScope {
 
         DefinedContext, AbstractContext, UnknownContext

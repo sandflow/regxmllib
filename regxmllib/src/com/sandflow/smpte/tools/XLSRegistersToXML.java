@@ -37,15 +37,27 @@ import com.sandflow.smpte.register.importer.ExcelLabelsRegister;
 import com.sandflow.smpte.register.importer.ExcelTypesRegister;
 import com.sandflow.smpte.util.ExcelCSVParser;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -56,7 +68,7 @@ public class XLSRegistersToXML {
     private final static String USAGE = "Converts SMPTE Elements Register spreadsheet to an XML representation.\n"
             + "  Usage: BuildXMLElementsRegister (-element | -type | -label | -group) -i xlspath -o xmlpath";
 
-    public static void main(String[] args) throws FileNotFoundException, ExcelCSVParser.SyntaxException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException {
+    public static void main(String[] args) throws FileNotFoundException, ExcelCSVParser.SyntaxException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, ParserConfigurationException, TransformerException {
         if (args.length != 5
                 || "-?".equals(args[0])
                 || (!"-i".equals(args[1]))
@@ -66,10 +78,12 @@ public class XLSRegistersToXML {
 
             return;
         }
-        
-        Logger.getLogger("").setLevel(Level.OFF);
 
-        FileInputStream f = new FileInputStream(args[2]);
+        Logger.getLogger("").setLevel(Level.OFF);
+        
+        File f = new File(args[2]);
+
+        FileInputStream is = new FileInputStream(f);
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(args[4]));
 
@@ -78,22 +92,22 @@ public class XLSRegistersToXML {
 
         if ("-element".equals(args[0])) {
 
-            reg = ExcelElementsRegister.fromXLS(f);
+            reg = ExcelElementsRegister.fromXLS(is);
             ctx = JAXBContext.newInstance(ElementsRegister.class);
 
         } else if ("-type".equals(args[0])) {
 
-            reg = ExcelTypesRegister.fromXLS(f);
+            reg = ExcelTypesRegister.fromXLS(is);
             ctx = JAXBContext.newInstance(TypesRegister.class);
 
         } else if ("-label".equals(args[0])) {
 
-            reg = ExcelLabelsRegister.fromXLS(f);
+            reg = ExcelLabelsRegister.fromXLS(is);
             ctx = JAXBContext.newInstance(LabelsRegister.class);
 
         } else if ("-group".equals(args[0])) {
 
-            reg = ExcelGroupsRegister.fromXLS(f);
+            reg = ExcelGroupsRegister.fromXLS(is);
             ctx = JAXBContext.newInstance(GroupsRegister.class);
 
         } else {
@@ -106,9 +120,28 @@ public class XLSRegistersToXML {
 
         Marshaller m = ctx.createMarshaller();
 
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        Document doc = docBuilder.newDocument();
+
+        Date now = new java.util.Date();
+        doc.appendChild(doc.createComment("Created: " + now.toString()));
+        doc.appendChild(doc.createComment("From: " + f.getName()));
+        doc.appendChild(doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()));
+        doc.appendChild(doc.createComment("See: https://github.com/sandflow/regxmllib"));
+
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        m.marshal(reg, writer);
+        m.marshal(reg, doc);
+
+        Transformer tr = TransformerFactory.newInstance().newTransformer();
+
+        tr.setOutputProperty(OutputKeys.INDENT, "yes");
+
+        tr.transform(
+                new DOMSource(doc),
+                new StreamResult(writer)
+        );
 
         writer.close();
     }
