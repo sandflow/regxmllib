@@ -56,7 +56,25 @@ XLSRegistersToXML: converts SMPTE registers contained in a spreadsheet to an
                    
 XMLRegistersToDict: converts XML-based registers to a RegXML metadictionary
 
+GenerateXMLSchemaDocuments: generates XSDs for the Registers
+                            created by XLSRegistersToXML
 
+
+BUILD TARGETS
+=============
+
+build-regxml-schemas: generates a RegXML XSD at /dict/RegXML.xsd based on
+                      the output of build-regxml-dict
+
+build-xml-registers: generates XML-based Registers at /register based on
+                     the contents of register/input (see DEPENDENCIES)
+                     
+build-regxml-dict: generates a RegXML Metadictionary at /dict/RegXML.xml
+                   based on the ouput of build-xml-registers
+                   
+build-register-schemas: generates at /register/schemas the XSDs for the
+                        Registers created by build-xml-registers 
+                            
 KNOWN ISSUES
 ============
 
@@ -72,6 +90,9 @@ DIRECTORIES AND NOTABLE FILES
 
 /regxmllib/build.xml                    Build script (Ant)
 
+/regxmllib/build.properties             Constants, e.g. directory paths, used
+                                        by the build script
+
 /regxmllib/nbproject                    Netbeans project files
 
 /regxmllib/src/repoversion.properties   Java properties file containing the 
@@ -86,6 +107,9 @@ DIRECTORIES AND NOTABLE FILES
 
 /register/input                         Stub directory for source CSV registers 
                                         extracted from [1]
+                                        
+/xsl/regxml-dict-to-xsd.xsl             XSL Stylesheet used to generate a RegXML
+                                        XSD from a RegXML Metadictionary
            
            
 DEPENDENCIES

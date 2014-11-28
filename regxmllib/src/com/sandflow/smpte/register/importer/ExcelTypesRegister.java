@@ -29,6 +29,8 @@ import com.sandflow.smpte.register.exception.DuplicateEntryException;
 import com.sandflow.smpte.register.exception.InvalidEntryException;
 import com.sandflow.smpte.register.TypeEntry;
 import com.sandflow.smpte.register.TypesRegister;
+import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
+import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.ExcelCSVParser;
 import com.sandflow.smpte.util.UL;
 import java.io.BufferedReader;
@@ -89,6 +91,19 @@ public class ExcelTypesRegister {
         TypesRegister reg = new TypesRegister();
 
         TypeEntry lasttype = null;
+        
+        
+        /* BUG: there is no StrongReferenceNameValue type */
+        
+        TypeEntry entry = new TypeEntry();
+        entry.setKind(TypeEntry.Kind.LEAF);
+        entry.setDeprecated(false);
+        entry.setSymbol("StrongReferenceNameValue");
+        entry.setUL(UL.fromURN("urn:smpte:ul:060E2B34.01040101.05022900.00000000"));
+        entry.setName("StrongReferenceNameValue");
+        entry.setTypeKind(TypeEntry.STRONGREF_TYPEKIND);
+        entry.setBaseType(UL.fromDotValue("06.0E.2B.34.02.7F.01.01.0D.01.04.01.01.1F.01.00"));
+        reg.addEntry(entry);
 
         for (AbstractList<String> fields; (fields = p.getLine()) != null;) {
 
@@ -184,11 +199,6 @@ public class ExcelTypesRegister {
                     type.setDeprecated(!("No".equalsIgnoreCase(fields.get(c.get("n:deprecated")))));
 
                     type.setSymbol(fields.get(c.get("n:sym")));
-
-                    /* BUG: there is no StrongReferenceNameValue type */
-                    if (type.getSymbol().equals("StrongReferenceSetNameValue")) {
-                        continue;
-                    }
 
                     type.setDefiningDocument(fields.get(c.get("n:docs")));
 
