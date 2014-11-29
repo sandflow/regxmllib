@@ -38,21 +38,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlType(name = "ElementEntry", namespace = ElementsRegister.REG_NAMESPACE)
+@XmlType(name = "ElementEntry", namespace = ElementsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 public class ElementEntry {
 
     @XmlElement(name = "Register")
     static final String register = "Elements";
 
-    @XmlElement(name = "NamespaceName")
+    @XmlElement(name = "NamespaceName", required = true)
     protected URI namespaceName;
 
-    @XmlElement(name = "Symbol")
+    @XmlElement(name = "Symbol", required = true)
     protected String symbol;
 
     @XmlJavaTypeAdapter(value = ULAdapter.class)
-    @XmlElement(name = "UL")
+    @XmlElement(name = "UL", required = true)
     protected UL ul;
 
     @XmlElement(name = "Kind")
@@ -63,6 +63,21 @@ public class ElementEntry {
 
     @XmlElement(name = "Definition")
     private String definition;
+    
+    @XmlElement(name = "Applications")
+    private String applications;
+
+    @XmlElement(name = "Notes")
+    private String notes;
+    
+    @XmlElement(name = "DefiningDocument")
+    private String definingDocument;
+
+    @XmlElement(name = "IsDeprecated")
+    private boolean deprecated;
+    
+    @XmlElement(name = "ContextScope")
+    private String contextScope;
 
     @XmlJavaTypeAdapter(value = ULAdapter.class)
     @XmlElement(name = "TypeUL")
@@ -77,20 +92,6 @@ public class ElementEntry {
     @XmlElement(name = "UnitOfMeasure")
     private String unitOfMeasure;
 
-    @XmlElement(name = "DefiningDocument")
-    private String definingDocument;
-
-    @XmlElement(name = "ContextScope")
-    private String contextScope;
-
-    @XmlElement(name = "Applications")
-    private String applications;
-
-    @XmlElement(name = "Notes")
-    private String notes;
-
-    @XmlElement(name = "IsDeprecated")
-    private boolean deprecated;
 
     public URI getNamespaceName() {
         return namespaceName;

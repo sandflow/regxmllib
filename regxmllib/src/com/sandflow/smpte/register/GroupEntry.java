@@ -44,20 +44,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlType(name = "GroupEntry", namespace = GroupsRegister.REG_NAMESPACE)
+@XmlType(name = "GroupEntry", namespace = GroupsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 public class GroupEntry {
 
+    @XmlElement(name = "Register")
     static final String register = "Groups";
 
-    @XmlElement(name = "NamespaceName")
+    @XmlElement(name = "NamespaceName", required = true)
     protected URI namespaceName;
 
-    @XmlElement(name = "Symbol")
+    @XmlElement(name = "Symbol", required = true)
     protected String symbol;
 
     @XmlJavaTypeAdapter(value = ULAdapter.class)
-    @XmlElement(name = "UL")
+    @XmlElement(name = "UL", required = true)
     protected UL ul;
 
     @XmlElement(name = "Kind")
@@ -68,6 +69,18 @@ public class GroupEntry {
 
     @XmlElement(name = "Definition")
     private String definition;
+    
+    @XmlElement(name = "Applications")
+    private String applications;
+
+    @XmlElement(name = "Notes")
+    private String notes;
+    
+    @XmlElement(name = "DefiningDocument")
+    private String definingDocument;
+
+    @XmlElement(name = "isDeprecated")
+    private boolean deprecated = false;
 
     @XmlJavaTypeAdapter(value = ULAdapter.class)
     @XmlElement(name = "Parent")
@@ -80,21 +93,9 @@ public class GroupEntry {
     @XmlList
     private HashSet<Byte> klvSyntax = new HashSet<>();
 
-    @XmlElementWrapper(name = "Records", namespace = GroupsRegister.REG_NAMESPACE)
-    @XmlElement(name = "Record", namespace = GroupsRegister.REG_NAMESPACE)
+    @XmlElementWrapper(name = "Contents", namespace = GroupsRegister.XML_NAMESPACE)
+    @XmlElement(name = "Record", namespace = GroupsRegister.XML_NAMESPACE)
     private List<Record> contents = new ArrayList<>();
-
-    @XmlElement(name = "Applications")
-    private String applications;
-
-    @XmlElement(name = "Notes")
-    private String notes;
-
-    @XmlElement(name = "isDeprecated")
-    private boolean deprecated = false;
-
-    @XmlElement(name = "DefiningDocument")
-    private String definingDocument;
 
     public URI getNamespaceName() {
         return namespaceName;
@@ -208,7 +209,7 @@ public class GroupEntry {
         this.definingDocument = definingDocument;
     }
     
-    @XmlType(name = "RecordType", namespace = GroupsRegister.REG_NAMESPACE)
+    @XmlType(name = "RecordType", namespace = GroupsRegister.XML_NAMESPACE)
     @XmlAccessorType(value = XmlAccessType.NONE)
     public static class Record {
 

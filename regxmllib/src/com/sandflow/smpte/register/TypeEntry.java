@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlType(name = "TypeEntry", namespace = TypesRegister.REG_NAMESPACE)
+@XmlType(name = "TypeEntry", namespace = TypesRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 public class TypeEntry {
 
@@ -64,14 +64,14 @@ public class TypeEntry {
     @XmlElement(name = "Register")
     final static String register = "Types";
 
-    @XmlElement(name = "NamespaceName")
+    @XmlElement(name = "NamespaceName", required = true)
     protected URI namespaceName;
 
-    @XmlElement(name = "Symbol")
+    @XmlElement(name = "Symbol", required = true)
     protected String symbol;
 
     @XmlJavaTypeAdapter(value = ULAdapter.class)
-    @XmlElement(name = "UL")
+    @XmlElement(name = "UL", required = true)
     protected UL ul;
 
     @XmlElement(name = "Kind")
@@ -82,6 +82,21 @@ public class TypeEntry {
 
     @XmlElement(name = "Definition")
     private String definition;
+    
+    @XmlElement(name = "Applications")
+    private String applications;
+
+    @XmlElement(name = "Notes")
+    private String notes;
+    
+    @XmlElement(name = "DefiningDocument")
+    private String definingDocument;
+
+    @XmlElement(name = "IsDeprecated")
+    private boolean deprecated;
+
+    @XmlElement(name = "ContextScope")
+    private ContextScope contextScope = ContextScope.UnknownContext;
 
     @XmlElement(name = "TypeKind")
     private String typeKind;
@@ -93,28 +108,14 @@ public class TypeEntry {
     @XmlElement(name = "BaseType")
     private UL baseType;
 
+    @XmlElement(name = "TypeQualifiers")
+    @XmlList
+    private EnumSet<TypeQualifiers> typeQualifiers = EnumSet.noneOf(TypeQualifiers.class);
+    
     @XmlElementWrapper(name = "Facets")
     @XmlElement(name = "Facet")
     private List<Facet> facets = new ArrayList<>();
 
-    @XmlElement(name = "Applications")
-    private String applications;
-
-    @XmlElement(name = "Notes")
-    private String notes;
-
-    @XmlElement(name = "IsDeprecated")
-    private boolean deprecated;
-
-    @XmlElement(name = "DefiningDocument")
-    private String definingDocument;
-
-    @XmlElement(name = "ContextScope")
-    private ContextScope contextScope = ContextScope.UnknownContext;
-
-    @XmlElement(name = "TypeQualifiers")
-    @XmlList
-    private EnumSet<TypeQualifiers> typeQualifiers = EnumSet.noneOf(TypeQualifiers.class);
 
     public TypeEntry() {
     }
@@ -247,7 +248,7 @@ public class TypeEntry {
         this.contextScope = contextScope;
     }
 
-    @XmlType(name = "FacetType", namespace = TypesRegister.REG_NAMESPACE)
+    @XmlType(name = "FacetType", namespace = TypesRegister.XML_NAMESPACE)
     @XmlAccessorType(value = XmlAccessType.NONE)
     public static class Facet {
 

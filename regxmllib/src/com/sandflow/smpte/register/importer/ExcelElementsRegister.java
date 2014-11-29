@@ -61,6 +61,8 @@ import javax.xml.transform.stream.StreamResult;
 public class ExcelElementsRegister {
 
     private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
+    
+    public final static String SMPTE_NAMESPACE = "http://www.smpte-ra.org/reg/335/2012";
 
     static final UL ApplicationSchemeBatch_UL = UL.fromDotValue("06.0E.2B.34.01.01.01.0C.01.02.02.10.02.03.00.00");
 
@@ -212,10 +214,10 @@ public class ExcelElementsRegister {
 
                     } else {
 
-                        if (element.getUL().getValueOctet(8) < 8) {
-                            element.setNamespaceName(new URI("http://www.smpte-ra.org/reg/335/2012"));
+                        if (element.getUL().getValueOctet(8) <= 12) {
+                            element.setNamespaceName(new URI(SMPTE_NAMESPACE));
                         } else {
-                            element.setNamespaceName(null);
+                            element.setNamespaceName(new URI(SMPTE_NAMESPACE + "/" + element.getUL().getValueOctet(8) + "/" + element.getUL().getValueOctet(9)));
                         }
                     }
                 } catch (URISyntaxException ex) {

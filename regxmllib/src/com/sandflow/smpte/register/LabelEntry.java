@@ -38,21 +38,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlType(name = "LabelEntry", namespace = LabelsRegister.REG_NAMESPACE)
+@XmlType(name = "LabelEntry", namespace = LabelsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 public class LabelEntry {
     
     @XmlElement(name = "Register")
     static final String register = "Labels";
 
-    @XmlElement(name = "NamespaceName")
+    @XmlElement(name = "NamespaceName", required = true)
     protected URI namespaceName;
 
-    @XmlElement(name = "Symbol")
+    @XmlElement(name = "Symbol", required = true)
     protected String symbol;
 
     @XmlJavaTypeAdapter(value = ULAdapter.class)
-    @XmlElement(name = "UL")
+    @XmlElement(name = "UL", required = true)
     protected UL ul;
 
     @XmlElement(name = "Kind")
@@ -60,15 +60,18 @@ public class LabelEntry {
 
     @XmlElement(name = "Name")
     private String name;
-
+    
     @XmlElement(name = "Definition")
     private String definition;
+    
+    @XmlElement(name = "Applications")
+    private String applications;
+    
+    @XmlElement(name = "Notes")
+    private String notes;
 
     @XmlElement(name = "DefiningDocument")
     private String definingDocument;
-
-    @XmlElement(name = "Notes")
-    private String notes;
 
     @XmlElement(name = "IsDeprecated")
     private boolean deprecated = false;
@@ -127,6 +130,14 @@ public class LabelEntry {
 
     public void setDefiningDocument(String definingDocument) {
         this.definingDocument = definingDocument;
+    }
+
+    public String getApplications() {
+        return applications;
+    }
+
+    public void setApplications(String applications) {
+        this.applications = applications;
     }
 
 

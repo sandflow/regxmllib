@@ -49,20 +49,20 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-@XmlRootElement(name = "GroupsRegister", namespace = GroupsRegister.REG_NAMESPACE)
+@XmlRootElement(name = "GroupsRegister", namespace = GroupsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "")
 @XmlSeeAlso(value = GroupEntry.class)
 public class GroupsRegister {
 
-    public final static String REG_NAMESPACE = "http://www.smpte-ra.org/schemas/395/2014";
+    public final static String XML_NAMESPACE = "http://www.smpte-ra.org/schemas/395/2014";
 
     private final HashMap<QualifiedSymbol, GroupEntry> entriesBySymbol = new HashMap<>();
 
     private final HashMap<UL, GroupEntry> entriesByUL = new HashMap<>();
 
-    @XmlElement(name = "Entry", namespace = REG_NAMESPACE)
-    @XmlElementWrapper(name = "Entries", namespace = REG_NAMESPACE)
+    @XmlElement(name = "Entry", namespace = XML_NAMESPACE)
+    @XmlElementWrapper(name = "Entries", namespace = XML_NAMESPACE)
     private final ArrayList<GroupEntry> entries = new ArrayList<>();
 
     public GroupsRegister() {

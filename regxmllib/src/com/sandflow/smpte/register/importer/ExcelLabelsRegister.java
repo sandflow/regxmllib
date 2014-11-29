@@ -62,7 +62,9 @@ import javax.xml.transform.stream.StreamResult;
 public class ExcelLabelsRegister {
 
     private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
-   
+
+    public final static String SMPTE_NAMESPACE = "http://www.smpte-ra.org/reg/400/2012";
+
     static public LabelsRegister fromXLS(InputStream xlsfile) throws ExcelCSVParser.SyntaxException, IOException, InvalidEntryException, DuplicateEntryException {
         InputStreamReader isr;
 
@@ -122,12 +124,12 @@ public class ExcelLabelsRegister {
                 } else {
                     label.setKind(LabelEntry.Kind.LEAF);
                 }
-                
+
                 UL ul = UL.fromDotValue(fields.get(c.get("n:urn")));
-                
+
                 if (ul == null) {
-                                       LOGGER.warning(String.format("Bad UL at %s -> %s",
-                           fields.get(c.get("n:sym")), fields.get(c.get("n:urn"))
+                    LOGGER.warning(String.format("Bad UL at %s -> %s",
+                            fields.get(c.get("n:sym")), fields.get(c.get("n:urn"))
                     ));
                     continue;
                 }
@@ -135,38 +137,41 @@ public class ExcelLabelsRegister {
                 label.setUL(UL.fromDotValue(fields.get(c.get("n:urn"))));
 
                 label.setSymbol(fields.get(c.get("n:sym")));
-                
+
                 label.setName(fields.get(c.get("n:name")));
 
                 label.setDefinition(fields.get(c.get("n:detail")));
 
                 label.setDefiningDocument(fields.get(c.get("n:docs")));
 
-
                 label.setNotes(fields.get(c.get("i:notes")));
 
                 label.setDeprecated(!("No".equalsIgnoreCase(fields.get(c.get("n:deprecated")))));
-if (label.getKind() == NODE) {
-                    try {
-                        if (fields.get(c.get("n:ns_uri")) != null) {
+                
+                try {
+                    if (fields.get(c.get("n:ns_uri")) != null) {
 
-                            label.setNamespaceName(new URI(fields.get(c.get("n:ns_uri"))));
+                        label.setNamespaceName(new URI(fields.get(c.get("n:ns_uri"))));
 
+                    } else {
+
+                        if (label.getUL().getValueOctet(8) <= 12) {
+                            label.setNamespaceName(new URI(SMPTE_NAMESPACE));
                         } else {
-                            label.setNamespaceName(new URI("http://www.smpte-ra.org/reg/XXXX/2012"));
+                            label.setNamespaceName(new URI(SMPTE_NAMESPACE + "/" + label.getUL().getValueOctet(8) + "/" + label.getUL().getValueOctet(9)));
                         }
-                    } catch (URISyntaxException ex) {
-                        throw new InvalidEntryException("Invalid URI at "
-                                + label.getUL()
-                                + " -> "
-                                + fields.get(c.get("n:ns_uri")), ex);
                     }
+                } catch (URISyntaxException ex) {
+                    throw new InvalidEntryException("Invalid URI at "
+                            + label.getUL()
+                            + " -> "
+                            + fields.get(c.get("n:ns_uri")), ex);
                 }
 
                 try {
                     reg.addEntry(label);
                 } catch (DuplicateEntryException e) {
-                    LOGGER.warning("Duplicate Entry:" +  e.getMessage());
+                    LOGGER.warning("Duplicate Entry:" + e.getMessage());
                 }
 
             }

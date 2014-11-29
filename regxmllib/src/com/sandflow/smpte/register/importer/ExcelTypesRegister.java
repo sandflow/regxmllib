@@ -29,8 +29,6 @@ import com.sandflow.smpte.register.exception.DuplicateEntryException;
 import com.sandflow.smpte.register.exception.InvalidEntryException;
 import com.sandflow.smpte.register.TypeEntry;
 import com.sandflow.smpte.register.TypesRegister;
-import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
-import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.ExcelCSVParser;
 import com.sandflow.smpte.util.UL;
 import java.io.BufferedReader;
@@ -61,6 +59,8 @@ import javax.xml.transform.stream.StreamResult;
  */
 public class ExcelTypesRegister {
 
+    public final static String SMPTE_NAMESPACE = "http://www.smpte-ra.org/reg/2003/2012";
+
     private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
 
     static final UL AUID_TYPE_UL = UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000");
@@ -68,7 +68,7 @@ public class ExcelTypesRegister {
     static final UL CanonicalDOINameType_TYPE_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01200700.00000000");
     static final UL BAD_UUID_TYPE_UL = UL.fromURN("urn:smpte:ul:060E2B34.01040101.04011100.00000000");
 
-    static public TypesRegister fromXLS(InputStream xlsfile) throws ExcelCSVParser.SyntaxException, IOException, InvalidEntryException, DuplicateEntryException {
+    static public TypesRegister fromXLS(InputStream xlsfile) throws ExcelCSVParser.SyntaxException, IOException, InvalidEntryException, DuplicateEntryException, URISyntaxException {
         InputStreamReader isr;
 
         try {
@@ -91,10 +91,8 @@ public class ExcelTypesRegister {
         TypesRegister reg = new TypesRegister();
 
         TypeEntry lasttype = null;
-        
-        
+
         /* BUG: there is no StrongReferenceNameValue type */
-        
         TypeEntry entry = new TypeEntry();
         entry.setKind(TypeEntry.Kind.LEAF);
         entry.setDeprecated(false);
@@ -103,7 +101,9 @@ public class ExcelTypesRegister {
         entry.setName("StrongReferenceNameValue");
         entry.setTypeKind(TypeEntry.STRONGREF_TYPEKIND);
         entry.setBaseType(UL.fromDotValue("06.0E.2B.34.02.7F.01.01.0D.01.04.01.01.1F.01.00"));
+        entry.setNamespaceName(new URI(SMPTE_NAMESPACE));
         reg.addEntry(entry);
+
 
         for (AbstractList<String> fields; (fields = p.getLine()) != null;) {
 
@@ -158,7 +158,11 @@ public class ExcelTypesRegister {
 
                     } else if (TypeEntry.WEAKREF_TYPEKIND.equals(lasttype.getTypeKind())) {
 
-                        f.setUL(UL.fromDotValue(fields.get(c.get("n:target_urn"))));
+                        /* BUG: skip Weak Reference children since there are apparently many
+                        bugs with them.
+                        */
+                        
+                        continue;
 
                     }
 
@@ -201,6 +205,28 @@ public class ExcelTypesRegister {
                     type.setSymbol(fields.get(c.get("n:sym")));
 
                     type.setDefiningDocument(fields.get(c.get("n:docs")));
+
+                    try {
+                        if (fields.get(c.get("n:ns_uri")) != null) {
+
+                            type.setNamespaceName(new URI(fields.get(c.get("n:ns_uri"))));
+
+                        } else {
+                            if (type.getUL().getValueOctet(8) <= 12) {
+                                type.setNamespaceName(new URI(SMPTE_NAMESPACE));
+                            } else {
+                                type.setNamespaceName(new URI(SMPTE_NAMESPACE + "/" + type.getUL().getValueOctet(8) + "/" + type.getUL().getValueOctet(9)));
+                            }
+
+                        }
+                    } catch (URISyntaxException ex) {
+                        LOGGER.warning(
+                                String.format(
+                                        "Invalid URI %s at Type %s",
+                                        fields.get(c.get("n:ns_uri")),
+                                        type.getUL()
+                                ));
+                    }
 
                     if ("Leaf".equalsIgnoreCase(fields.get(c.get("n:node")))) {
 
@@ -302,8 +328,8 @@ public class ExcelTypesRegister {
 
                                 if (type.getSymbol().startsWith("StrongReferenceVector")) {
 
-                                    String symbol = "StrongReference" +
-                                            type.getSymbol().substring("StrongReferenceVector".length());
+                                    String symbol = "StrongReference"
+                                            + type.getSymbol().substring("StrongReferenceVector".length());
 
                                     TypeEntry realtype = reg.getEntryBySymbol(symbol, type.getNamespaceName());
 
@@ -315,11 +341,11 @@ public class ExcelTypesRegister {
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
 
                             } else if ("weak".equals(qualif)) {
-                                
+
                                 if (type.getSymbol().startsWith("WeakReferenceVector")) {
 
-                                    String symbol = "WeakReference" +
-                                            type.getSymbol().substring("WeakReferenceVector".length());
+                                    String symbol = "WeakReference"
+                                            + type.getSymbol().substring("WeakReferenceVector".length());
 
                                     TypeEntry realtype = reg.getEntryBySymbol(symbol, type.getNamespaceName());
 
@@ -362,7 +388,7 @@ public class ExcelTypesRegister {
                                         )
                                 );
                             }
-                            
+
                             type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isCountImplicit);
                             type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
                             type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
@@ -391,7 +417,7 @@ public class ExcelTypesRegister {
                             type.setBaseType(UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000"));
 
                         } else if ("set".equalsIgnoreCase(kind)) {
-                            
+
                             if ("global".equals(qualif)) {
                                 /* BUG: missing Global reference types */
                             }
@@ -405,22 +431,30 @@ public class ExcelTypesRegister {
                             /* BUG: StrongReferenceSets do no have entries of type Strong Reference */
                             if (type.getSymbol().startsWith("StrongReferenceSet")) {
 
-                                String symbol = "StrongReference" +
-                                        type.getSymbol().substring("StrongReferenceSet".length());
+                                String symbol = "StrongReference"
+                                        + type.getSymbol().substring("StrongReferenceSet".length());
 
                                 TypeEntry realtype = reg.getEntryBySymbol(symbol, type.getNamespaceName());
+                                
+                                if (realtype == null) {
+                                    throw new InvalidEntryException(
+                                        String.format(
+                                                "Could not find %s.",
+                                                symbol
+                                        )
+                                ); 
+                                }
 
                                 type.setBaseType(realtype.getUL());
                             } else if (type.getSymbol().startsWith("WeakReferenceSet")) {
 
-                                String symbol = "WeakReference" +
-                                        type.getSymbol().substring("WeakReferenceSet".length());
+                                String symbol = "WeakReference"
+                                        + type.getSymbol().substring("WeakReferenceSet".length());
 
                                 TypeEntry realtype = reg.getEntryBySymbol(symbol, type.getNamespaceName());
 
                                 type.setBaseType(realtype.getUL());
                             } else if (target_urn != null) {
-                                
 
                                 type.setBaseType(target_urn);
 
@@ -484,25 +518,6 @@ public class ExcelTypesRegister {
                         /* NODE */
                         type.setKind(TypeEntry.Kind.NODE);
 
-                        /* BUG: ns:uri is empty */
-                        try {
-                            if (fields.get(c.get("n:ns_uri")) != null) {
-
-                                type.setNamespaceName(new URI(fields.get(c.get("n:ns_uri"))));
-
-                            } else {
-                                type.setNamespaceName(new URI("http://www.smpte-ra.org/reg/2003/2012"));
-
-                            }
-                        } catch (URISyntaxException ex) {
-                            throw new InvalidEntryException(
-                                    String.format(
-                                            "Invalid URI %s at Type %s",
-                                            fields.get(c.get("n:ns_uri")),
-                                            type.getUL()
-                                    ), ex);
-                        }
-
                         lasttype = null;
 
                     }
@@ -519,7 +534,7 @@ public class ExcelTypesRegister {
 
     }
 
-    public static void main(String args[]) throws FileNotFoundException, ExcelCSVParser.SyntaxException, IOException, InvalidEntryException, JAXBException, DuplicateEntryException {
+    public static void main(String args[]) throws FileNotFoundException, ExcelCSVParser.SyntaxException, IOException, InvalidEntryException, JAXBException, DuplicateEntryException, URISyntaxException {
         FileInputStream f = new FileInputStream("\\\\SERVER\\Business\\sandflow-consulting\\projects\\imf\\regxml\\register-format\\input\\types-smpte-ra-frozen-20140304.2118.csv");
 
         TypesRegister reg = ExcelTypesRegister.fromXLS(f);

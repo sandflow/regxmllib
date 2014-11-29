@@ -62,6 +62,8 @@ import javax.xml.transform.stream.StreamResult;
 public class ExcelGroupsRegister {
     
     private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
+    
+    public final static String SMPTE_NAMESPACE = "http://www.smpte-ra.org/reg/395/2014";
 
     static final UL PARTITION_PACK_UL = UL.fromDotValue("06.0E.2B.34.02.7F.01.01.0D.01.02.01.01.00.00.00");
     static final UL HeaderPartitionPack_UL = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010201.01020000");
@@ -226,9 +228,11 @@ public class ExcelGroupsRegister {
 
                             group.setNamespaceName(new URI(fields.get(c.get("n:ns_uri"))));
 
-                        } else if (group.getUL().getValueOctet(8) < 8) {
+                        } else if (group.getUL().getValueOctet(8) <= 12) {
 
-                            group.setNamespaceName(new URI("http://www.smpte-ra.org/reg/395/2012"));
+                            group.setNamespaceName(new URI(SMPTE_NAMESPACE));
+                        } else {
+                            group.setNamespaceName(new URI(SMPTE_NAMESPACE + "/" + group.getUL().getValueOctet(8) + "/" + group.getUL().getValueOctet(9))); 
                         }
                     } catch (URISyntaxException ex) {
                         throw new InvalidEntryException("Invalid URI at "
