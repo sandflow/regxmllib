@@ -214,20 +214,19 @@ public class XMLRegistryImporter {
                     ((RecordTypeDefinition) tdef).addMember(m);
                 }
 
-            } else if (TypeEntry.ARRAY_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (TypeEntry.FIXEDARRAY_TYPEKIND.equals(type.getTypeKind())) {
 
-                if (type.getTypeSize().intValue() != 0) {
                     tdef = new FixedArrayTypeDefinition();
 
                     ((FixedArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
                     ((FixedArrayTypeDefinition) tdef).setElementCount(type.getTypeSize().intValue());
 
-                } else {
+            } else if (TypeEntry.ARRAY_TYPEKIND.equals(type.getTypeKind())) {
 
                     tdef = new VariableArrayTypeDefinition();
                     ((VariableArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
-                }
+              
 
             } else if (TypeEntry.SET_TYPEKIND.equals(type.getTypeKind())) {
 

@@ -214,7 +214,7 @@ public class GroupEntry {
     public static class Record {
 
         @XmlJavaTypeAdapter(value = ULAdapter.class)
-        @XmlElement(name = "UL")
+        @XmlElement(name = "UL", required = true)
         private UL item;
 
         @XmlElement(name = "LocalTag")

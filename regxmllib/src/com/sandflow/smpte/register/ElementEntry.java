@@ -80,7 +80,7 @@ public class ElementEntry {
     private String contextScope;
 
     @XmlJavaTypeAdapter(value = ULAdapter.class)
-    @XmlElement(name = "TypeUL")
+    @XmlElement(name = "Type")
     private UL typeUL;
 
     @XmlElement(name = "ValueLength")

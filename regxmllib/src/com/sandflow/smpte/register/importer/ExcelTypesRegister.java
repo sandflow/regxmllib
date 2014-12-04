@@ -296,7 +296,7 @@ public class ExcelTypesRegister {
 
                         } else if ("array".equalsIgnoreCase(kind)) {
 
-                            type.setTypeKind(TypeEntry.ARRAY_TYPEKIND);
+                            
 
                             if (target_urn != null) {
 
@@ -312,19 +312,25 @@ public class ExcelTypesRegister {
                             }
 
                             if ("fixed".equals(qualif)) {
+                                
+                                type.setTypeKind(TypeEntry.FIXEDARRAY_TYPEKIND);
 
                                 type.setTypeSize(Long.parseLong(fields.get(c.get("n:minOccurs"))));
 
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
+                                type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isCountImplicit);
 
                             } else if ("varying".equals(qualif)) {
 
+                                type.setTypeKind(TypeEntry.ARRAY_TYPEKIND);
+                                
                                 type.setTypeSize(0L);
-                                type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
 
                             } else if ("strong".equals(qualif)) {
+                                
+                                type.setTypeKind(TypeEntry.ARRAY_TYPEKIND);
 
                                 if (type.getSymbol().startsWith("StrongReferenceVector")) {
 
@@ -337,11 +343,12 @@ public class ExcelTypesRegister {
                                 }
 
                                 type.setTypeSize(0L);
-                                type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
 
                             } else if ("weak".equals(qualif)) {
-
+                                
+                                type.setTypeKind(TypeEntry.ARRAY_TYPEKIND);
+                                
                                 if (type.getSymbol().startsWith("WeakReferenceVector")) {
 
                                     String symbol = "WeakReference"
@@ -353,7 +360,6 @@ public class ExcelTypesRegister {
                                 }
 
                                 type.setTypeSize(0L);
-                                type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
                                 type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isOrdered);
 
                             } else {
