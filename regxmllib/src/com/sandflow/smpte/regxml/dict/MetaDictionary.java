@@ -47,10 +47,7 @@ import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UUID;
-import com.sandflow.smpte.util.xml.ULAdapter;
 import com.sandflow.smpte.util.xml.UUIDAdapter;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
@@ -73,7 +70,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -83,8 +79,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlRootElement(name = "Baseline")
 @XmlAccessorType(XmlAccessType.NONE)
-public class MetaDictionary {
-    
+public class MetaDictionary implements DefinitionResolver {
+
     public final static String ST2001_1_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
 
     @XmlAttribute(name = "rootElement", required = true)
@@ -92,14 +88,14 @@ public class MetaDictionary {
 
     @XmlAttribute(name = "rootObject", required = true)
     private final static String rootObject = "Preface";
-    
+
     @XmlJavaTypeAdapter(value = UUIDAdapter.class)
     @XmlElement(name = "SchemeID", required = true)
     private UUID schemeID;
-    
+
     @XmlElement(name = "SchemeURI", required = true)
     private URI schemeURI;
-    
+
     @XmlElement(name = "Description")
     private String description;
 
@@ -111,53 +107,54 @@ public class MetaDictionary {
     private MetaDictionary() {
     }
 
-    public MetaDictionary(URI scheme, Collection<Definition> inputdefs) throws DuplicateDefinitionException {
+    public MetaDictionary(URI scheme) {
+        /* BUG: ST 2001-1 does not allow label to be used in multiple enumerations */
         
-         MessageDigest digest;
-         
-      UUID nsid = UUID.fromURN("urn:uuid:6ba7b810-9dad-11d1-80b4-00c04fd430c8");
+        
+        /* TODO: refactor to UUID class */
+        MessageDigest digest;
 
-         /* BUG: ST 2001-1 does not allow label to be used in multiple enumerations */
-        
+        UUID nsid = UUID.fromURN("urn:uuid:6ba7b810-9dad-11d1-80b4-00c04fd430c8");
+
         try {
             digest = MessageDigest.getInstance("SHA-1");
             digest.update(nsid.getValue());
             digest.update(scheme.toString().getBytes("ASCII"));
-        } catch (NoSuchAlgorithmException |UnsupportedEncodingException ex) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
             throw new RuntimeException(ex);
         }
-        
-        /* TODO: refactor to UUID class */
-        
+
+
         byte[] result = digest.digest();
-        
+
         result[6] = (byte) ((result[6] & 0x0f) | 0xaf);
         result[8] = (byte) ((result[8] & 0x3f) | 0x7f);
-        
-        
-       this.schemeID = new UUID(result);
+
+        this.schemeID = new UUID(result);
         this.schemeURI = scheme;
-       
+    }
 
-        for (Definition def : inputdefs) {
+    public void add(Definition def) throws IllegalDefinitionException {
+        
+        if (! def.getNamespace().equals(this.getSchemeURI())) {
+            throw new IllegalDefinitionException("Namespace does not match Metadictionary Scheme URI: " + def.getSymbol());
+        }
+                
+        AUID defid = createNormalizedAUID(def.getIdentification());
 
-            AUID defid = createNormalizedAUID(def.getIdentification());
-
-            if (this.definitionsByAUID.put(defid, def) != null) {
-                throw new DuplicateDefinitionException("Duplicate AUID: " + def.getIdentification());
-            }
-
-            if (this.definitionsBySymbol.put(def.getSymbol(), def) != null) {
-                throw new DuplicateDefinitionException("Duplicate Symbol: " + def.getSymbol());
-            }
-
-            if (def instanceof ClassDefinition) {
-                this.membersOf.getOrDefault(defid, new HashSet<>()).add(def);
-            }
-            
-            this.definitions.add(def);
+        if (this.definitionsByAUID.put(defid, def) != null) {
+            throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
         }
 
+        if (this.definitionsBySymbol.put(def.getSymbol(), def) != null) {
+            throw new IllegalDefinitionException("Duplicate Symbol: " + def.getSymbol());
+        }
+
+        if (def instanceof ClassDefinition) {
+            this.membersOf.getOrDefault(defid, new HashSet<>()).add(def);
+        }
+        
+        this.definitions.add(def);
     }
 
     public static String getRootElement() {
@@ -179,8 +176,6 @@ public class MetaDictionary {
     public String getDescription() {
         return description;
     }
-    
-    
 
     public Collection<Definition> getMembersOf(ClassDefinition def) {
         return membersOf.get(def.getIdentification());
@@ -233,10 +228,6 @@ public class MetaDictionary {
         return definitionsByAUID.get(createNormalizedAUID(id));
     }
 
-    public Definition getDefinition(UL id) {
-        return definitionsByAUID.get(new AUID(createNormalizedUL(id)));
-    }
-
     public Definition getDefinition(String symbol) {
         return definitionsBySymbol.get(symbol);
     }
@@ -274,10 +265,9 @@ public class MetaDictionary {
             return namespace + " " + symbol;
         }
     }
-    
-    
+
     public void toXML(Writer writer) throws JAXBException, IOException {
-                        
+
         JAXBContext ctx = JAXBContext.newInstance(MetaDictionary.class);
 
         Marshaller m = ctx.createMarshaller();
@@ -285,32 +275,36 @@ public class MetaDictionary {
         m.marshal(this, writer);
         writer.close();
     }
-    
-      public static MetaDictionary fromXML(Reader reader) throws JAXBException, IOException, DuplicateDefinitionException {
-                        
+
+    public static MetaDictionary fromXML(Reader reader) throws JAXBException, IOException, IllegalDefinitionException {
+
         JAXBContext ctx = JAXBContext.newInstance(MetaDictionary.class);
 
         Unmarshaller m = ctx.createUnmarshaller();
         MetaDictionary md = (MetaDictionary) m.unmarshal(reader);
-        
-         for (Definition def : md.definitions) {
+
+        for (Definition def : md.definitions) {
+            
+            /* TODO: can this be factored out? */
+            
+            def.setNamespace(md.getSchemeURI());
 
             AUID defid = createNormalizedAUID(def.getIdentification());
 
             if (md.definitionsByAUID.put(defid, def) != null) {
-                throw new DuplicateDefinitionException("Duplicate AUID: " + def.getIdentification());
+                throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
             }
 
             if (md.definitionsBySymbol.put(def.getSymbol(), def) != null) {
-                throw new DuplicateDefinitionException("Duplicate Symbol: " + def.getSymbol());
+                throw new IllegalDefinitionException("Duplicate Symbol: " + def.getSymbol());
             }
 
             if (def instanceof ClassDefinition) {
                 md.membersOf.getOrDefault(defid, new HashSet<>()).add(def);
             }
-            
+
         }
-        
+
         return md;
-    }  
+    }
 }

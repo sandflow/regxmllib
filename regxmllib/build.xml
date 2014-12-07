@@ -21,20 +21,6 @@
             <arg value="--pretty=format:%H"/>
         </exec>
     </target>
-
-<!--    <target name="apply-xsl" depends="jar">
-        <java classname="com.sandflow.smpte.tools.ApplyXSL">
-            <arg value="-x"/>
-            <arg value="../xsl/regxml-dict-to-xsd.xsl"/>
-            <arg value="-i"/>
-            <arg value="${regxml.dict}"/>
-            <arg value="-o"/>
-            <arg value="${regxml.schema}"/>
-            <classpath>
-                <pathelement location="${dist.jar}"/>
-            </classpath>
-        </java>
-    </target>-->
     
     <target name="build-regxml-schema" depends="build-regxml-dict">
         <xslt style="../xsl/regxml-dict-to-xsd.xsl" in="${regxml.dict}" out="${regxml.schema}">
@@ -45,7 +31,7 @@
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-element"/>
             <arg value="-i"/>
-            <arg value="../register/input/elements-smpte-ra-frozen-20140304.2118.csv"/>
+            <arg value="${register.xls.input.dir}/elements-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
             <arg value="${elements.register}"/>
             <classpath>
@@ -55,7 +41,7 @@
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-type"/>
             <arg value="-i"/>
-            <arg value="../register/input/types-smpte-ra-frozen-20140304.2118.csv"/>
+            <arg value="${register.xls.input.dir}/types-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
             <arg value="${types.register}"/>
             <classpath>
@@ -65,7 +51,7 @@
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-label"/>
             <arg value="-i"/>
-            <arg value="../register/input/labels-smpte-ra-frozen-20140304.2118.csv"/>
+            <arg value="${register.xls.input.dir}/labels-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
             <arg value="${labels.register}"/>
             <classpath>
@@ -76,7 +62,7 @@
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-group"/>
             <arg value="-i"/>
-            <arg value="../register/input/groups-smpte-ra-frozen-20140304.2118.csv"/>
+            <arg value="${register.xls.input.dir}/groups-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
             <arg value="${groups.register}"/>
             <classpath>
@@ -98,7 +84,7 @@
             <arg value="${groups.register}"/>
             <arg value="-t"/>
             <arg value="${types.register}"/>
-            <arg value="${regxml.dict}"/>
+            <arg value="${regxml.dict.dir}"/>
 
             <classpath>
                 <pathelement location="${dist.jar}"/>

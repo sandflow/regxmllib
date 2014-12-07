@@ -31,8 +31,10 @@ import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.register.exception.DuplicateEntryException;
 import com.sandflow.smpte.register.exception.InvalidEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
+import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import static com.sandflow.smpte.regxml.dict.importer.XMLRegistryImporter.fromRegister;
 import com.sandflow.smpte.util.ExcelCSVParser;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -52,7 +54,7 @@ public class XMLRegistersToDict {
             + "                            -l labelsregpath\n"
             + "                            -g groupsregpath\n"
             + "                            -t typesregpath\n"
-            + "                            outputdictpath\n"
+            + "                            outputdir\n"
             + "         XMLRegistersToDict -?";
 
     public static void main(String[] args) throws FileNotFoundException, ExcelCSVParser.SyntaxException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, Exception {
@@ -80,9 +82,20 @@ public class XMLRegistersToDict {
         GroupsRegister greg = GroupsRegister.fromXML(fg);
         TypesRegister treg = TypesRegister.fromXML(ft);
 
-        MetaDictionary md = fromRegister(treg, greg, ereg);
+        MetaDictionaryGroup mds = fromRegister(treg, greg, ereg);
         
-        md.toXML(new FileWriter(args[8]));
+        for(MetaDictionary md : mds.getDictionaries()) {
+            
+            /* create file name from the Scheme URI */
+            
+            String fname = md.getSchemeURI().getAuthority() + md.getSchemeURI().getPath();
+            
+            File f = new File(args[8], fname.replaceAll("[^a-zA-Z0-9]", "-") + ".xml");
+         
+            md.toXML(new FileWriter(f));
+        }
+        
+        
 
     }
 }

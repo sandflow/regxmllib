@@ -28,9 +28,11 @@ package com.sandflow.smpte.regxml.definition;
 
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.xml.AUIDAdapter;
+import java.net.URI;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.NONE)
@@ -48,6 +50,17 @@ abstract public class Definition {
 
     @XmlElement(name = "Name")
     private String name;
+    
+    @XmlTransient()
+    private URI namespace;
+
+    public URI getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(URI namespace) {
+        this.namespace = namespace;
+    }
 
     public AUID getIdentification() {
         return identification;

@@ -42,6 +42,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +69,7 @@ public class XLSRegistersToXML {
     private final static String USAGE = "Converts SMPTE Elements Register spreadsheet to an XML representation.\n"
             + "  Usage: BuildXMLElementsRegister (-element | -type | -label | -group) -i xlspath -o xmlpath";
 
-    public static void main(String[] args) throws FileNotFoundException, ExcelCSVParser.SyntaxException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, ParserConfigurationException, TransformerException {
+    public static void main(String[] args) throws FileNotFoundException, ExcelCSVParser.SyntaxException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, ParserConfigurationException, TransformerException, URISyntaxException {
         if (args.length != 5
                 || "-?".equals(args[0])
                 || (!"-i".equals(args[1]))

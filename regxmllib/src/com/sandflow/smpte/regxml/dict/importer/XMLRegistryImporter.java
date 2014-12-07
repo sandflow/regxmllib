@@ -56,6 +56,7 @@ import com.sandflow.smpte.regxml.definition.StringTypeDefinition;
 import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
+import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.ExcelCSVParser;
 import java.io.FileInputStream;
@@ -79,7 +80,7 @@ public class XMLRegistryImporter {
 
     private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
 
-    public static MetaDictionary fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
+    public static MetaDictionaryGroup fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
 
         /* create definition collection */
         HashMap<AUID, Definition> defs = new HashMap<>();
@@ -111,6 +112,8 @@ public class XMLRegistryImporter {
             cdef.setName(group.getName());
 
             cdef.setSymbol(group.getSymbol());
+            
+            cdef.setNamespace(group.getNamespaceName());
 
             if (group.getParent() != null) {
                 cdef.setParentClass(new AUID(group.getParent()));
@@ -125,7 +128,7 @@ public class XMLRegistryImporter {
                 pdef.setIdentification(new AUID(child.getItem()));
                 pdef.setUniqueIdentifier(child.getUniqueID());
                 pdef.setLocalIdentification((int) (child.getLocalTag() == null ? 0 : child.getLocalTag()));
-
+                
                 /* retrieve the element */
                 ElementEntry element = er.getEntryByUL(child.getItem());
 
@@ -149,6 +152,8 @@ public class XMLRegistryImporter {
                 pdef.setType(new AUID(element.getTypeUL()));
 
                 pdef.setMemberOf(cdef.getIdentification());
+                
+                pdef.setNamespace(element.getNamespaceName());
 
                 /* add property definition */
                 defs.put(pdef.getIdentification(), pdef);
@@ -329,13 +334,16 @@ public class XMLRegistryImporter {
                 tdef.setSymbol(type.getSymbol());
                 tdef.setName(type.getName());
                 tdef.setDescription(type.getDefinition());
-
+                tdef.setNamespace(type.getNamespaceName());
+                
                 defs.put(tdef.getIdentification(), tdef);
             } else {
                 LOGGER.warning("Unknown type def.");
             }
         }
-
+        
+        MetaDictionaryGroup mds = new MetaDictionaryGroup();
+        
         /* BUG: check for duplicate symbols */
         HashSet<String> syms = new HashSet<>();
         long index = 0;
@@ -344,28 +352,14 @@ public class XMLRegistryImporter {
             if (syms.contains(def.getSymbol())) {
                 def.setSymbol("dup" + def.getSymbol() + (index++));
             }
+            
+            mds.addDefinition(def);
+            
 
             syms.add(def.getSymbol());
         }
 
-        /* create dictionary */
-        MetaDictionary md = new MetaDictionary(new URI("http://www.smpte-ra.org/reg"), defs.values());
-
-        return md;
-
-    }
-
-    public static void main(String args[]) throws FileNotFoundException, SAXException, IOException, ParserConfigurationException, XPathExpressionException, MissingElementDefinitionException, JAXBException, InvalidIdentificationException, ExcelCSVParser.SyntaxException, Exception {
-
-        FileInputStream fe = new FileInputStream("\\\\SERVER\\Business\\sandflow-consulting\\projects\\imf\\regxml\\register-format\\input\\elements-smpte-ra-frozen-20140304.2118.csv");
-        FileInputStream fg = new FileInputStream("\\\\SERVER\\Business\\sandflow-consulting\\projects\\imf\\regxml\\register-format\\input\\groups-smpte-ra-frozen-20140304.2118.csv");
-        FileInputStream ft = new FileInputStream("\\\\SERVER\\Business\\sandflow-consulting\\projects\\imf\\regxml\\register-format\\input\\types-smpte-ra-frozen-20140304.2118.csv");
-
-        ElementsRegister ereg = ExcelElementsRegister.fromXLS(fe);
-        GroupsRegister greg = ExcelGroupsRegister.fromXLS(fg);
-        TypesRegister treg = ExcelTypesRegister.fromXLS(ft);
-
-        MetaDictionary md = fromRegister(treg, greg, ereg);
+        return mds;
 
     }
 

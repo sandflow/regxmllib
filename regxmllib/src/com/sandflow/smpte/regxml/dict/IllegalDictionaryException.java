@@ -29,13 +29,10 @@ package com.sandflow.smpte.regxml.dict;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class IllegalDefinitionException extends Exception {
+public class IllegalDictionaryException extends Exception {
 
-    public IllegalDefinitionException() {
-    }
-
-    public IllegalDefinitionException(String msg) {
+    public IllegalDictionaryException(String msg) {
         super(msg);
     }
-
+    
 }

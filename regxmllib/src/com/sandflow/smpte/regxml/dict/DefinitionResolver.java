@@ -25,17 +25,14 @@
  */
 package com.sandflow.smpte.regxml.dict;
 
+import com.sandflow.smpte.regxml.definition.Definition;
+import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.UL;
+
 /**
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class IllegalDefinitionException extends Exception {
-
-    public IllegalDefinitionException() {
-    }
-
-    public IllegalDefinitionException(String msg) {
-        super(msg);
-    }
-
+public interface DefinitionResolver {
+        public Definition getDefinition(AUID auid);
 }

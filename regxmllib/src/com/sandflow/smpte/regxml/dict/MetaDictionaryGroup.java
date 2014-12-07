@@ -25,17 +25,59 @@
  */
 package com.sandflow.smpte.regxml.dict;
 
+import com.sandflow.smpte.regxml.definition.Definition;
+import com.sandflow.smpte.util.AUID;
+import java.net.URI;
+import java.util.Collection;
+import java.util.HashMap;
+
 /**
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class IllegalDefinitionException extends Exception {
+public class MetaDictionaryGroup implements DefinitionResolver {
 
-    public IllegalDefinitionException() {
+    final private HashMap<URI, MetaDictionary> dicts = new HashMap<>();
+
+    @Override
+    public Definition getDefinition(AUID auid) {
+        Definition def = null;
+
+        for (MetaDictionary md : dicts.values()) {
+            if ((def = md.getDefinition(auid)) != null) {
+                break;
+            }
+        }
+
+        return def;
     }
 
-    public IllegalDefinitionException(String msg) {
-        super(msg);
+    public void addDictionary(MetaDictionary metadictionary) throws IllegalDictionaryException {
+        MetaDictionary md = dicts.get(metadictionary.getSchemeURI());
+
+        if (md == null) {
+            dicts.put(metadictionary.getSchemeURI(), metadictionary);
+        } else {
+            throw new IllegalDictionaryException("Metadictionary already present in group.");
+        }
+
+    }
+
+    /* TODO: not necessarily cool to automatically create a metadictionary */
+    public void addDefinition(Definition def) throws IllegalDefinitionException {
+        MetaDictionary md = dicts.get(def.getNamespace());
+
+        if (md == null) {
+            md = new MetaDictionary(def.getNamespace());
+
+            dicts.put(md.getSchemeURI(), md);
+        }
+
+        md.add(def);
+    }
+
+    public Collection<MetaDictionary> getDictionaries() {
+        return dicts.values();
     }
 
 }

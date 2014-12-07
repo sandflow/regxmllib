@@ -37,13 +37,13 @@ import com.sandflow.smpte.regxml.FragmentBuilder;
 import com.sandflow.smpte.regxml.PrimerPack;
 import com.sandflow.smpte.regxml.definition.ClassDefinition;
 import com.sandflow.smpte.regxml.definition.Definition;
-import com.sandflow.smpte.regxml.definition.PropertyDefinition;
-import com.sandflow.smpte.regxml.dict.DuplicateDefinitionException;
+import com.sandflow.smpte.regxml.dict.IllegalDefinitionException;
+import com.sandflow.smpte.regxml.dict.IllegalDictionaryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
+import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.io.EOFException;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -70,39 +70,50 @@ public class RegXMLDump {
 
     private static final UL ESSENCE_DESCRIPTOR_UL
             = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x01, 0x01, 0x01, 0x0D, 0x01, 0x01, 0x01, 0x01, 0x01, 0x24, 0x00});
+    
+    private static final UL INDEX_TABLE_SEGMENT_UL
+            = UL.fromURN("urn:smpte:ul:060e2b34.02530101.0d010201.01100100");
 
     private final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
             + "  Usage:\n"
-            + "     RegXMLDump ( -all | -ed ) -d regxmldictionary -i mxffile\n"
+            + "     RegXMLDump ( -all | -ed ) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
             + "     RegXMLDump -?\n"
             + "  Where:\n"
             + "     -all: dumps all header metadata\n"
             + "     -ed: dumps only the first essence descriptor found\n";
 
-    public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, DuplicateDefinitionException {
+    public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException {
 
-        if (args.length != 5
+        if (args.length < 5
                 || "-?".equals(args[0])
                 || (!"-d".equals(args[1]))
-                || (!"-i".equals(args[3]))) {
+                || (!"-i".equals(args[args.length - 2]))) {
 
             System.out.println(USAGE);
 
             return;
         }
+        
+        MetaDictionaryGroup mds = new MetaDictionaryGroup();
+        
+        for(int i = 2; i < args.length - 2; i++) {
+            
+                /* load the regxml metadictionary */
+            FileReader fr = new FileReader(args[i]);
+            
+                /* add it to the dictionary group */
+            mds.addDictionary(MetaDictionary.fromXML(fr));
+            
+        }
 
-        /* load the regxml metadictionary */
-        FileReader fr = new FileReader(args[2]);
-
-        MetaDictionary md = MetaDictionary.fromXML(fr);
 
         /* create the fragment builder */
         FragmentBuilder fb = new FragmentBuilder();
 
-        fb.setDict(md);
+        fb.setDefinitionResolver(mds);
 
         /* retrieve the mxf file */
-        FileInputStream f = new FileInputStream(args[4]);
+        FileInputStream f = new FileInputStream(args[args.length - 1]);
 
         /* look for the partition pack */
         KLVInputStream kis = new KLVInputStream(f);
@@ -144,42 +155,16 @@ public class RegXMLDump {
 
         fb.setLocaltags(localreg);
 
-        /* add localtags from the dictionary */
-        for (Definition def : md.getDefinitions()) {
-
-            if (def instanceof PropertyDefinition) {
-
-                PropertyDefinition pdef = (PropertyDefinition) def;
-
-                if (pdef.getLocalIdentification() != 0 && pdef.getIdentification().isUL()) {
-
-                    UL existul = localreg.get(pdef.getLocalIdentification());
-
-                    if (existul != null) {
-                        if (!pdef.getIdentification().equals(existul)) {
-                            throw new RuntimeException("Duplicate Local Tag with inconsistent UL: "
-                                    + pdef.getIdentification().asUL()
-                                    + " -> "
-                                    + pdef.getLocalIdentification());
-                        }
-                    } else {
-                        localreg.add(pdef.getLocalIdentification(), pdef.getIdentification().asUL());
-
-                    }
-
-                }
-
-            }
-
-        }
-
         /* capture all local sets within the header metadata */
         ArrayList<Group> gs = new ArrayList<>();
 
-        for (Triplet t; bytecount < pp.getHeaderByteCount() && (t = kis.readTriplet()) != null;) {
+        for (Triplet t; bytecount < pp.getHeaderByteCount()
+                && (t = kis.readTriplet()) != null
+                && (! t.getKey().equals(INDEX_TABLE_SEGMENT_UL));
+                bytecount += t.getLength()) {
 
-            bytecount += t.getLength();
-
+            /* TODO: follow-up on whether getHeaderByteCount includes Index Table */
+               
             Group g = LocalSet.fromTriplet(t, localreg);
 
             if (g != null) {
@@ -194,6 +179,8 @@ public class RegXMLDump {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
+        
+        doc.setXmlStandalone(true);
 
         if ("-ed".equals(args[0])) {
 
@@ -211,7 +198,7 @@ public class RegXMLDump {
                 /* go up the class hierarchy */
                 while (ed == null && tmpauid != null) {
 
-                    Definition def = md.getDefinition(tmpauid);
+                    Definition def = mds.getDefinition(tmpauid);
 
                     /* skip if not a class instance */
                     if (!(def instanceof ClassDefinition)) {

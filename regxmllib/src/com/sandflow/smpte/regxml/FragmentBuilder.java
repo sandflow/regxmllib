@@ -50,6 +50,7 @@ import com.sandflow.smpte.regxml.definition.StringTypeDefinition;
 import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
+import com.sandflow.smpte.regxml.dict.DefinitionResolver;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UMID;
@@ -61,10 +62,12 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
@@ -79,9 +82,6 @@ public class FragmentBuilder {
 
     private static final UL INSTANCE_UID_ITEM_UL
             = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x15, 0x02, 0x00, 0x00, 0x00, 0x00});
-
-    private static final UL ESSENCE_DESCRIPTOR_UL
-            = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x01, 0x01, 0x01, 0x0D, 0x01, 0x01, 0x01, 0x01, 0x01, 0x24, 0x00});
 
     private static final UL AUID_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.01.03.01.00.00.00.00.00");
     private static final UL UUID_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.01.03.03.00.00.00.00.00");
@@ -98,25 +98,32 @@ public class FragmentBuilder {
     private static final String ACTUALTYPE_ATTR = "actualType";
     private static final String UID_ATTR = "uid";
 
-    private MetaDictionary dict;
+    private DefinitionResolver resolver;
     private LocalSetRegister localtags;
     private final HashMap<UUID, Group> groups = new HashMap<>();
+    private final HashMap<URI, String> nsprefixes = new HashMap<>();
 
     public DocumentFragment fragmentFromTriplet(Group group, Document document) throws ParserConfigurationException, KLVException, RuleException {
 
         DocumentFragment df = document.createDocumentFragment();
 
         applyRule3(df, group);
+        
+        /* TODO: hack to clean-up namespace prefixes */
+        
+        for (Map.Entry<URI, String> entry : nsprefixes.entrySet()) {
+            ((Element) df.getFirstChild()).setAttributeNS("http://www.w3.org/2000/xmlns/",  "xmlns:" + entry.getValue() , entry.getKey().toString());
+        }
 
         return df;
     }
 
-    public MetaDictionary getDict() {
-        return dict;
+    public DefinitionResolver getDefinitionResolver() {
+        return resolver;
     }
 
-    public void setDict(MetaDictionary dict) {
-        this.dict = dict;
+    public void setDefinitionResolver(DefinitionResolver resolver) {
+        this.resolver = resolver;
     }
 
     public LocalSetRegister getLocaltags() {
@@ -125,6 +132,19 @@ public class FragmentBuilder {
 
     public void setLocaltags(LocalSetRegister localtags) {
         this.localtags = localtags;
+    }
+
+    private String getPrefix(URI ns) {
+        String prefix = this.nsprefixes.get(ns);
+
+        /* if prefix does not exist, create one */
+        if (prefix == null) {
+            prefix = "r" + this.nsprefixes.size();
+
+            this.nsprefixes.put(ns, prefix);
+        }
+
+        return prefix;
     }
 
     public void addGroup(Group obj) {
@@ -147,9 +167,11 @@ public class FragmentBuilder {
 
     void applyRule3(Node node, Group group) throws RuleException {
 
-        Definition definition = dict.getDefinition(group.getKey());
+        Definition definition = resolver.getDefinition(new AUID(group.getKey()));
 
-        Element elem = node.getOwnerDocument().createElementNS(dict.getSchemeURI().toString(), definition.getSymbol());
+        Element elem = node.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
+
+        elem.setPrefix(getPrefix(definition.getNamespace()));
 
         for (Triplet item : group.getItems()) {
 
@@ -172,7 +194,7 @@ public class FragmentBuilder {
 
             } else {
 
-                Definition itemdef = dict.getDefinition(item.getKey());
+                Definition itemdef = resolver.getDefinition(new AUID(item.getKey()));
 
                 if (itemdef == null) {
                     break;
@@ -190,7 +212,9 @@ public class FragmentBuilder {
 
     void applyRule4(Element element, InputStream value, Definition definition) throws RuleException {
 
-        Element elem = element.getOwnerDocument().createElementNS(dict.getSchemeURI().toString(), definition.getSymbol());
+        Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
+
+        elem.setPrefix(getPrefix(definition.getNamespace()));
 
         if (definition.getIdentification().equals(ByteOrder_UL)) {
             MXFInputStream kis = new MXFInputStream(value);
@@ -214,10 +238,10 @@ public class FragmentBuilder {
         } else {
 
             if (definition instanceof PropertyAliasDefinition) {
-                definition = dict.getDefinition(((PropertyAliasDefinition) definition).getOriginalProperty());
+                definition = resolver.getDefinition(((PropertyAliasDefinition) definition).getOriginalProperty());
             }
 
-            Definition typedef = dict.getDefinition(((PropertyDefinition) definition).getType());
+            Definition typedef = resolver.getDefinition(((PropertyDefinition) definition).getType());
 
             applyRule5(elem, value, typedef);
         }
@@ -343,7 +367,7 @@ public class FragmentBuilder {
             }
         } else {
 
-            Definition typedef = dict.getDefinition(definition.getElementType());
+            Definition typedef = resolver.getDefinition(definition.getElementType());
 
             applyCoreRule5_4(element, value, typedef, definition.getElementCount());
 
@@ -362,7 +386,9 @@ public class FragmentBuilder {
             } else {
 
                 /* Rule 5.4.2 */
-                Element elem = element.getOwnerDocument().createElementNS(dict.getSchemeURI().toString(), typedef.getSymbol());
+                Element elem = element.getOwnerDocument().createElementNS(typedef.getNamespace().toString(), typedef.getSymbol());
+
+                elem.setPrefix(getPrefix(typedef.getNamespace()));
 
                 applyRule5(elem, value, typedef);
 
@@ -509,9 +535,11 @@ public class FragmentBuilder {
 
                 for (RecordTypeDefinition.Member member : definition.getMembers()) {
 
-                    Definition itemdef = dict.getDefinition(member.getType());
+                    Definition itemdef = resolver.getDefinition(member.getType());
 
-                    Element elem = element.getOwnerDocument().createElementNS(dict.getSchemeURI().toString(), member.getName());
+                    Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), member.getName());
+
+                    elem.setPrefix(getPrefix(definition.getNamespace()));
 
                     applyRule5(elem, value, itemdef);
 
@@ -527,7 +555,7 @@ public class FragmentBuilder {
 
     void applyRule5_9(Element element, InputStream value, RenameTypeDefinition definition) throws RuleException {
 
-        Definition rdef = dict.getDefinition(definition.getRenamedType());
+        Definition rdef = resolver.getDefinition(definition.getRenamedType());
 
         applyRule5(element, value, rdef);
 
@@ -535,7 +563,7 @@ public class FragmentBuilder {
 
     void applyRule5_10(Element element, InputStream value, SetTypeDefinition definition) throws RuleException {
 
-        Definition typedef = dict.getDefinition(definition.getElementType());
+        Definition typedef = resolver.getDefinition(definition.getElementType());
 
         try {
 
@@ -593,7 +621,7 @@ public class FragmentBuilder {
 
     void applyRule5_13(Element element, InputStream value, StrongReferenceTypeDefinition definition) throws RuleException {
 
-        Definition typedef = dict.getDefinition(definition.getReferenceType());
+        Definition typedef = resolver.getDefinition(definition.getReferenceType());
 
         if (!(typedef instanceof ClassDefinition)) {
             throw new RuleException("Rule 5.13 applied to non class.");
@@ -617,7 +645,7 @@ public class FragmentBuilder {
     Definition findBaseDefinition(Definition definition) {
 
         while (definition instanceof RenameTypeDefinition) {
-            definition = dict.getDefinition(((RenameTypeDefinition) definition).getRenamedType());
+            definition = resolver.getDefinition(((RenameTypeDefinition) definition).getRenamedType());
         }
 
         return definition;
@@ -627,7 +655,7 @@ public class FragmentBuilder {
 
     void applyRule5_14(Element element, InputStream value, VariableArrayTypeDefinition definition) throws RuleException {
 
-        Definition typedef = dict.getDefinition(definition.getElementType());
+        Definition typedef = resolver.getDefinition(definition.getElementType());
 
         try {
 
