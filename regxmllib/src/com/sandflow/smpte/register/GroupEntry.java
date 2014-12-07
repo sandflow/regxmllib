@@ -79,15 +79,15 @@ public class GroupEntry {
     @XmlElement(name = "DefiningDocument")
     private String definingDocument;
 
-    @XmlElement(name = "isDeprecated")
+    @XmlElement(name = "IsDeprecated")
     private boolean deprecated = false;
 
     @XmlJavaTypeAdapter(value = ULAdapter.class)
     @XmlElement(name = "Parent")
     private UL parent;
 
-    @XmlElement(name = "isConcrete")
-    private boolean concrete;
+    @XmlElement(name = "IsConcrete")
+    private Boolean concrete;
 
     @XmlElement(name = "KLVSyntax")
     @XmlList
@@ -153,11 +153,11 @@ public class GroupEntry {
         this.parent = parent;
     }
 
-    public boolean isConcrete() {
+    public Boolean isConcrete() {
         return concrete;
     }
 
-    public void setConcrete(boolean concrete) {
+    public void setConcrete(Boolean concrete) {
         this.concrete = concrete;
     }
 
@@ -223,17 +223,17 @@ public class GroupEntry {
         @XmlElement(name = "LimitLength")
         private Long limitLength;
 
-        @XmlElement(name = "isUniqueID")
-        private boolean uniqueID = false;
+        @XmlElement(name = "IsUniqueID")
+        private Boolean uniqueID;
         
-        @XmlElement(name = "isOptional")
-        private boolean optional = true;
+        @XmlElement(name = "IsOptional")
+        private Boolean optional;
 
-        @XmlElement(name = "isIgnorable")
-        private boolean ignorable = false;
+        @XmlElement(name = "IsIgnorable")
+        private Boolean ignorable;
 
-        @XmlElement(name = "isDistinguished")
-        private boolean distinguished = false;
+        @XmlElement(name = "IsDistinguished")
+        private Boolean distinguished;
 
         @XmlElement(name = "Value")
         private String value;
@@ -266,31 +266,31 @@ public class GroupEntry {
             return uniqueID;
         }
 
-        public void setUniqueID(boolean uniqueID) {
+        public void setUniqueID(Boolean uniqueID) {
             this.uniqueID = uniqueID;
         }
 
-        public boolean getOptional() {
+        public Boolean getOptional() {
             return optional;
         }
 
-        public void setOptional(boolean optional) {
+        public void setOptional(Boolean optional) {
             this.optional = optional;
         }
 
-        public boolean getIgnorable() {
+        public Boolean getIgnorable() {
             return ignorable;
         }
 
-        public void setIgnorable(boolean ignorable) {
+        public void setIgnorable(Boolean ignorable) {
             this.ignorable = ignorable;
         }
 
-        public boolean getDistinguished() {
+        public Boolean getDistinguished() {
             return distinguished;
         }
 
-        public void setDistinguished(boolean distinguished) {
+        public void setDistinguished(Boolean distinguished) {
             this.distinguished = distinguished;
         }
 
