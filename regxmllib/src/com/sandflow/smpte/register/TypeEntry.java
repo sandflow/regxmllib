@@ -50,7 +50,7 @@ public class TypeEntry {
     public static final String INTEGER_TYPEKIND = "Integer";
     public static final String RENAME_TYPEKIND = "Rename";
     public static final String RECORD_TYPEKIND = "Record";
-    public static final String ARRAY_TYPEKIND = "Array";
+    public static final String ARRAY_TYPEKIND = "VariableArray";
     public static final String FIXEDARRAY_TYPEKIND = "FixedArray";
     public static final String CHARACTER_TYPEKIND = "Character";
     public static final String STRING_TYPEKIND = "String";

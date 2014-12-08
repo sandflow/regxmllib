@@ -66,6 +66,10 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
@@ -102,17 +106,17 @@ public class FragmentBuilder {
     private LocalSetRegister localtags;
     private final HashMap<UUID, Group> groups = new HashMap<>();
     private final HashMap<URI, String> nsprefixes = new HashMap<>();
+    private Object OffsetDate;
 
     public DocumentFragment fragmentFromTriplet(Group group, Document document) throws ParserConfigurationException, KLVException, RuleException {
 
         DocumentFragment df = document.createDocumentFragment();
 
         applyRule3(df, group);
-        
+
         /* TODO: hack to clean-up namespace prefixes */
-        
         for (Map.Entry<URI, String> entry : nsprefixes.entrySet()) {
-            ((Element) df.getFirstChild()).setAttributeNS("http://www.w3.org/2000/xmlns/",  "xmlns:" + entry.getValue() , entry.getKey().toString());
+            ((Element) df.getFirstChild()).setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:" + entry.getValue(), entry.getKey().toString());
         }
 
         return df;
@@ -243,6 +247,16 @@ public class FragmentBuilder {
 
             Definition typedef = resolver.getDefinition(((PropertyDefinition) definition).getType());
 
+            if (typedef == null) {
+                throw new RuleException(
+                        String.format(
+                                "Type %s not found at %s.",
+                                ((PropertyDefinition) definition).getType().toString(),
+                                definition.getSymbol()
+                        )
+                );
+            }
+
             applyRule5(elem, value, typedef);
         }
 
@@ -284,7 +298,12 @@ public class FragmentBuilder {
             applyRule5_15(element, value, (WeakReferenceTypeDefinition) definition);
         } else {
 
-            throw new RuleException("Illegage Definition in Rule 5.");
+            throw new RuleException(
+                    String.format(
+                            "Illegal Definition %s in Rule 5.",
+                            definition.getClass().toString()
+                    )
+            );
 
         }
 
@@ -481,9 +500,11 @@ public class FragmentBuilder {
                 int month = kis.readUnsignedByte();
                 int day = kis.readUnsignedByte();
 
-                LocalDate ld = LocalDate.of(year, month, day);
+                LocalDateTime ldt = LocalDateTime.of(year, month, day, 0, 0);
+                
+                OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
 
-                element.setTextContent(ld.toString());
+                element.setTextContent(odt.format(DateTimeFormatter.ISO_DATE));
 
             } else if (definition.getIdentification().equals(PackageID_UL)) {
 
@@ -496,7 +517,7 @@ public class FragmentBuilder {
                 int numerator = kis.readInt();
                 int denominator = kis.readInt();
 
-                element.setTextContent(String.format("%d / %d", numerator, denominator));
+                element.setTextContent(String.format("%d/%d", numerator, denominator));
 
             } else if (definition.getIdentification().equals(TimeStruct_UL)) {
 
@@ -507,8 +528,10 @@ public class FragmentBuilder {
                 int fraction = kis.readUnsignedByte();
 
                 LocalTime lt = LocalTime.of(hour, minute, second, fraction * 4000000);
+                
+                OffsetTime ot = OffsetTime.of(lt, ZoneOffset.UTC);
 
-                element.setTextContent(lt.toString());
+                element.setTextContent(ot.toString());
 
             } else if (definition.getIdentification().equals(TimeStamp_UL)) {
 
@@ -521,8 +544,10 @@ public class FragmentBuilder {
                 int fraction = kis.readUnsignedByte();
 
                 LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second, fraction * 4000000);
+                
+                OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
 
-                element.setTextContent(ldt.toString());
+                element.setTextContent(odt.toString());
 
             } else if (definition.getIdentification().equals(VersionType_UL)) {
 

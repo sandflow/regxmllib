@@ -25,9 +25,13 @@
  */
 package com.sandflow.smpte.regxml.dict;
 
+import com.sandflow.smpte.regxml.definition.ClassDefinition;
 import com.sandflow.smpte.regxml.definition.Definition;
+import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
+import com.sandflow.smpte.regxml.definition.PropertyDefinition;
 import com.sandflow.smpte.util.AUID;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -78,6 +82,36 @@ public class MetaDictionaryGroup implements DefinitionResolver {
 
     public Collection<MetaDictionary> getDictionaries() {
         return dicts.values();
+    }
+
+    @Override
+    public Collection<AUID> getSubclassesOf(ClassDefinition parent) {
+
+        ArrayList<AUID> subclasses = new ArrayList<>();
+
+        for (MetaDictionary md : dicts.values()) {
+            
+            Collection<AUID> defs = md.getSubclassesOf(parent);
+            
+            if (defs != null) subclasses.addAll(defs);
+
+        }
+
+        return subclasses;
+    }
+
+    @Override
+    public Collection<AUID> getMembersOf(ClassDefinition parent) {
+        ArrayList<AUID> members = new ArrayList<>();
+
+        for (MetaDictionary md : dicts.values()) {
+            
+            Collection<AUID> defs = md.getMembersOf(parent);
+
+            if (defs != null) members.addAll(defs);
+        }
+
+        return members;
     }
 
 }

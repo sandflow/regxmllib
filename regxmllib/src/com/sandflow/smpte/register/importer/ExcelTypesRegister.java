@@ -431,7 +431,6 @@ public class ExcelTypesRegister {
                             type.setTypeKind(TypeEntry.SET_TYPEKIND);
                             type.setTypeSize(0L);
 
-                            type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isSizeImplicit);
                             type.getTypeQualifiers().add(TypeEntry.TypeQualifiers.isIdentified);
 
                             /* BUG: StrongReferenceSets do no have entries of type Strong Reference */

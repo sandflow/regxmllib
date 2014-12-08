@@ -28,8 +28,6 @@ package com.sandflow.smpte.regxml.dict.importer;
 import com.sandflow.smpte.register.ElementEntry;
 import com.sandflow.smpte.register.ElementsRegister;
 import com.sandflow.smpte.register.importer.ExcelElementsRegister;
-import com.sandflow.smpte.register.importer.ExcelGroupsRegister;
-import com.sandflow.smpte.register.importer.ExcelTypesRegister;
 import com.sandflow.smpte.register.GroupEntry;
 import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypeEntry;
@@ -44,7 +42,6 @@ import com.sandflow.smpte.regxml.definition.ExtendibleEnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
-import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.definition.PropertyDefinition;
 import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
 import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
@@ -58,19 +55,10 @@ import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import com.sandflow.smpte.util.UL;
-import com.sandflow.smpte.util.ExcelCSVParser;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -112,7 +100,7 @@ public class XMLRegistryImporter {
             cdef.setName(group.getName());
 
             cdef.setSymbol(group.getSymbol());
-            
+
             cdef.setNamespace(group.getNamespaceName());
 
             if (group.getParent() != null) {
@@ -128,7 +116,7 @@ public class XMLRegistryImporter {
                 pdef.setIdentification(new AUID(child.getItem()));
                 pdef.setUniqueIdentifier(child.getUniqueID());
                 pdef.setLocalIdentification((int) (child.getLocalTag() == null ? 0 : child.getLocalTag()));
-                
+
                 /* retrieve the element */
                 ElementEntry element = er.getEntryByUL(child.getItem());
 
@@ -149,10 +137,21 @@ public class XMLRegistryImporter {
 
                 pdef.setSymbol(element.getSymbol());
 
+                if (element.getTypeUL() == null) {
+                    LOGGER.warning(String.format(
+                            "Missing Type UL at Element %s for Group %s",
+                            child.getItem(),
+                            group.getUL()
+                    )
+                    );
+
+                    continue;
+                }
+
                 pdef.setType(new AUID(element.getTypeUL()));
 
                 pdef.setMemberOf(cdef.getIdentification());
-                
+
                 pdef.setNamespace(element.getNamespaceName());
 
                 /* add property definition */
@@ -221,17 +220,16 @@ public class XMLRegistryImporter {
 
             } else if (TypeEntry.FIXEDARRAY_TYPEKIND.equals(type.getTypeKind())) {
 
-                    tdef = new FixedArrayTypeDefinition();
+                tdef = new FixedArrayTypeDefinition();
 
-                    ((FixedArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
+                ((FixedArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
-                    ((FixedArrayTypeDefinition) tdef).setElementCount(type.getTypeSize().intValue());
+                ((FixedArrayTypeDefinition) tdef).setElementCount(type.getTypeSize().intValue());
 
             } else if (TypeEntry.ARRAY_TYPEKIND.equals(type.getTypeKind())) {
 
-                    tdef = new VariableArrayTypeDefinition();
-                    ((VariableArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
-              
+                tdef = new VariableArrayTypeDefinition();
+                ((VariableArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
             } else if (TypeEntry.SET_TYPEKIND.equals(type.getTypeKind())) {
 
@@ -265,7 +263,20 @@ public class XMLRegistryImporter {
 
                 ((WeakReferenceTypeDefinition) tdef).setReferencedType(new AUID(type.getBaseType()));
 
+                /* BUG: skip Weak Reference target sets due to missing ULs in the registry */
                 for (Facet f : type.getFacets()) {
+
+                    if (f.getUL() == null) {
+                        LOGGER.warning(String.format(
+                                "Missing Target Set UL at Facet %s for Type %s",
+                                f.getSymbol(),
+                                type.getUL()
+                        )
+                        );
+
+                        continue;
+                    }
+
                     ((WeakReferenceTypeDefinition) tdef).getTargetSet().add(new AUID(f.getUL()));
                 }
 
@@ -282,17 +293,15 @@ public class XMLRegistryImporter {
                     ArrayList<ExtendibleEnumerationTypeDefinition.Element> ecelems = new ArrayList<>();
 
                     /* TODO: deal with labels */
-                    
                     /* for now, do not import facets */
                     /*
-                    for (Facet f : type.getFacets()) {
-                        ExtendibleEnumerationTypeDefinition.Element m = new ExtendibleEnumerationTypeDefinition.Element();
+                     for (Facet f : type.getFacets()) {
+                     ExtendibleEnumerationTypeDefinition.Element m = new ExtendibleEnumerationTypeDefinition.Element();
 
-                        m.setValue(new AUID(f.getUL()));
+                     m.setValue(new AUID(f.getUL()));
 
-                        ecelems.add(m);
-                    }*/
-
+                     ecelems.add(m);
+                     }*/
                     tdef = new ExtendibleEnumerationTypeDefinition(ecelems);
 
                 } else {
@@ -335,15 +344,15 @@ public class XMLRegistryImporter {
                 tdef.setName(type.getName());
                 tdef.setDescription(type.getDefinition());
                 tdef.setNamespace(type.getNamespaceName());
-                
+
                 defs.put(tdef.getIdentification(), tdef);
             } else {
                 LOGGER.warning("Unknown type def.");
             }
         }
-        
+
         MetaDictionaryGroup mds = new MetaDictionaryGroup();
-        
+
         /* BUG: check for duplicate symbols */
         HashSet<String> syms = new HashSet<>();
         long index = 0;
@@ -352,9 +361,8 @@ public class XMLRegistryImporter {
             if (syms.contains(def.getSymbol())) {
                 def.setSymbol("dup" + def.getSymbol() + (index++));
             }
-            
+
             mds.addDefinition(def);
-            
 
             syms.add(def.getSymbol());
         }

@@ -23,15 +23,50 @@
     </target>
     
     <target name="build-regxml-schema" depends="build-regxml-dict">
-        <xslt style="../xsl/regxml-dict-to-xsd.xsl" in="${regxml.dict}" out="${regxml.schema}">
-        </xslt>
+        
+         <fileset dir="${dict.dir}" id="dicts">
+            <include name="*.xml" />
+        </fileset>
+        
+        <pathconvert property="dictpaths" refid="dicts" pathsep=" " />
+        
+         <java classname="com.sandflow.smpte.tools.GenerateDictionaryXMLSchema">
+            <arg value="-d"/>
+            <arg line="${dictpaths}"/>
+            <arg value="-o"/>
+            <arg value="${dict.schema.dir}"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
     </target>
     
-    <target name="build-xml-registers" depends="jar,build-register-schemas">
+    <target name="xml-registers-exist">
+    <condition property="xml-registers-exist">
+ <and>
+  <available file="${register.xml.input.dir}/ElementsRegister.xml"/>
+ <available file="${register.xml.input.dir}/GroupsRegister.xml"/>
+  <available file="${register.xml.input.dir}/TypesRegister.xml"/>
+   <available file="${register.xml.input.dir}/LabelsRegister.xml"/>
+ </and>
+</condition>
+    </target>
+
+    
+    <target name="build-xml-registers" depends="build-xml-registers-from-csv, build-xml-registers-from-xml"/>
+    
+    <target name="build-xml-registers-from-xml" depends="jar, xml-registers-exist" if="xml-registers-exist">
+  <copy file="${register.xml.input.dir}/ElementsRegister.xml" tofile="${elements.register}"/>
+ <copy file="${register.xml.input.dir}/GroupsRegister.xml"  tofile="${groups.register}"/>
+  <copy file="${register.xml.input.dir}/TypesRegister.xml"  tofile="${types.register}"/>
+   <copy file="${register.xml.input.dir}/LabelsRegister.xml"  tofile="${labels.register}"/>
+    </target>
+    
+    <target name="build-xml-registers-from-csv" depends="jar, xml-registers-exist" unless="xml-registers-exist">
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-element"/>
             <arg value="-i"/>
-            <arg value="${register.xls.input.dir}/elements-smpte-ra-frozen-20140304.2118.csv"/>
+            <arg value="${register.csv.input.dir}/elements-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
             <arg value="${elements.register}"/>
             <classpath>
@@ -41,7 +76,7 @@
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-type"/>
             <arg value="-i"/>
-            <arg value="${register.xls.input.dir}/types-smpte-ra-frozen-20140304.2118.csv"/>
+            <arg value="${register.csv.input.dir}/types-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
             <arg value="${types.register}"/>
             <classpath>
@@ -51,7 +86,7 @@
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-label"/>
             <arg value="-i"/>
-            <arg value="${register.xls.input.dir}/labels-smpte-ra-frozen-20140304.2118.csv"/>
+            <arg value="${register.csv.input.dir}/labels-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
             <arg value="${labels.register}"/>
             <classpath>
@@ -62,7 +97,7 @@
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-group"/>
             <arg value="-i"/>
-            <arg value="${register.xls.input.dir}/groups-smpte-ra-frozen-20140304.2118.csv"/>
+            <arg value="${register.csv.input.dir}/groups-smpte-ra-frozen-20140304.2118.csv"/>
             <arg value="-o"/>
             <arg value="${groups.register}"/>
             <classpath>
@@ -74,7 +109,12 @@
 
     </target>
 
-    <target name="build-regxml-dict" depends="build-xml-registers">
+    <target name="build-regxml-dict" depends="jar,build-xml-registers">
+        
+        <delete>
+    <fileset dir="${dict.dir}" includes="*.xml"/>
+  </delete>
+        
         <java classname="com.sandflow.smpte.tools.XMLRegistersToDict">
             <arg value="-e"/>
             <arg value="${elements.register}"/>
@@ -84,13 +124,14 @@
             <arg value="${groups.register}"/>
             <arg value="-t"/>
             <arg value="${types.register}"/>
-            <arg value="${regxml.dict.dir}"/>
+            <arg value="${dict.dir}"/>
 
             <classpath>
                 <pathelement location="${dist.jar}"/>
             </classpath>
         </java>
     </target>
+    
     
     
         <target name="build-register-schemas" depends="jar">

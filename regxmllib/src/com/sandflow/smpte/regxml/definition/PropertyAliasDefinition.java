@@ -38,13 +38,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class PropertyAliasDefinition extends Definition {
+public class PropertyAliasDefinition extends PropertyDefinition {
 
     public PropertyAliasDefinition() {
     }
-    
-    
-    
     
     @XmlJavaTypeAdapter(value = AUIDAdapter.class)
     @XmlElement(name = "OriginalProperty")
