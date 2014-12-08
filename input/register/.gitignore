@@ -1,3 +1,4 @@
 *
 !.gitignore
-!register/
+!csv/
+!xml/
