@@ -25,7 +25,6 @@
  */
 package com.sandflow.smpte.regxml;
 
-import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.klv.Group;
 import com.sandflow.smpte.klv.exception.KLVException;
 import com.sandflow.smpte.klv.LocalSetRegister;
@@ -63,7 +62,6 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URI;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
@@ -72,7 +70,9 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
@@ -83,6 +83,8 @@ import org.w3c.dom.Node;
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
 public class FragmentBuilder {
+
+    private final static Logger LOG = Logger.getLogger(FragmentBuilder.class.getName());
 
     private static final UL INSTANCE_UID_ITEM_UL
             = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x15, 0x02, 0x00, 0x00, 0x00, 0x00});
@@ -100,13 +102,14 @@ public class FragmentBuilder {
     private static final String REGXML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
 
     private static final String ACTUALTYPE_ATTR = "actualType";
+    private static final String BYTEORDER_ATTR = "byteOrder";
+    private static final String BYTEORDER_BE = "BigEndian";
     private static final String UID_ATTR = "uid";
 
     private DefinitionResolver resolver;
     private LocalSetRegister localtags;
     private final HashMap<UUID, Group> groups = new HashMap<>();
     private final HashMap<URI, String> nsprefixes = new HashMap<>();
-    private Object OffsetDate;
 
     public DocumentFragment fragmentFromTriplet(Group group, Document document) throws ParserConfigurationException, KLVException, RuleException {
 
@@ -173,6 +176,17 @@ public class FragmentBuilder {
 
         Definition definition = resolver.getDefinition(new AUID(group.getKey()));
 
+        if (definition == null) {
+            LOG.warning(
+                    String.format(
+                            "Unknown Group UL = %s",
+                            group.getKey().toString()
+                    )
+            );
+            
+            return;
+        }
+
         Element elem = node.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
 
         elem.setPrefix(getPrefix(definition.getNamespace()));
@@ -201,7 +215,12 @@ public class FragmentBuilder {
                 Definition itemdef = resolver.getDefinition(new AUID(item.getKey()));
 
                 if (itemdef == null) {
-                    break;
+                    LOG.warning(
+                            String.format(
+                                    "Unknown property UL = %s",
+                                    item.getKey().toString()
+                            )
+                    );
                 } else {
                     applyRule4(elem, item.getValueAsStream(), itemdef);
                 }
@@ -475,11 +494,17 @@ public class FragmentBuilder {
         element.setAttributeNS(
                 REGXML_NS,
                 ACTUALTYPE_ATTR,
-                MetaDictionary.createQualifiedSymbol(null, definition.getIdentification().toString())
+                ""
         );
 
-        /*TODO: complete */
-        throw new RuleException("Rule 5.7 is not supported yet.");
+        element.setAttributeNS(
+                REGXML_NS,
+                BYTEORDER_ATTR,
+                BYTEORDER_BE
+        );
+
+        /* BUG: buffer lengths should be int */
+        /* TODO: figure out opaque encoding */
     }
 
     void applyRule5_8(Element element, InputStream value, RecordTypeDefinition definition) throws RuleException {
@@ -501,7 +526,7 @@ public class FragmentBuilder {
                 int day = kis.readUnsignedByte();
 
                 LocalDateTime ldt = LocalDateTime.of(year, month, day, 0, 0);
-                
+
                 OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
 
                 element.setTextContent(odt.format(DateTimeFormatter.ISO_DATE));
@@ -528,7 +553,7 @@ public class FragmentBuilder {
                 int fraction = kis.readUnsignedByte();
 
                 LocalTime lt = LocalTime.of(hour, minute, second, fraction * 4000000);
-                
+
                 OffsetTime ot = OffsetTime.of(lt, ZoneOffset.UTC);
 
                 element.setTextContent(ot.toString());
@@ -544,7 +569,7 @@ public class FragmentBuilder {
                 int fraction = kis.readUnsignedByte();
 
                 LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second, fraction * 4000000);
-                
+
                 OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
 
                 element.setTextContent(odt.toString());
@@ -602,7 +627,7 @@ public class FragmentBuilder {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } catch (IOException ioe) {
-            throw new RuleException(ioe);
+            throw new RuleException(String.format("Value too short for %s", definition.getSymbol()), ioe);
         }
 
     }
@@ -660,7 +685,28 @@ public class FragmentBuilder {
 
             Group g = groups.get(uuid);
 
-            applyRule3(element, g);
+            if (g != null) {
+
+                applyRule3(element, g);
+
+            } else {
+                LOG.warning(
+                        String.format(
+                                "Strong Reference %s not found at %s",
+                                uuid.toString(),
+                                definition.getSymbol()
+                        )
+                );
+                
+                Comment comment = element.getOwnerDocument().createComment(
+                    String.format(
+                        "Strong Reference %s not found",
+                        uuid.toString()
+                    )
+                );
+                
+                element.appendChild(comment);
+            }
 
         } catch (IOException ioe) {
             throw new RuleException(ioe);
@@ -677,6 +723,20 @@ public class FragmentBuilder {
     }
 
     final static char[] HEXMAP = "0123456789abcdef".toCharArray();
+
+    String bytesToString(byte[] buffer) {
+
+        char[] out = new char[2 * buffer.length];
+
+        for (int j = 0; j < buffer.length; j++) {
+
+            int v = buffer[j] & 0xFF;
+            out[j * 2] = HEXMAP[v >>> 4];
+            out[j * 2 + 1] = HEXMAP[v & 0x0F];
+        }
+
+        return new String(out);
+    }
 
     void applyRule5_14(Element element, InputStream value, VariableArrayTypeDefinition definition) throws RuleException {
 
@@ -729,16 +789,7 @@ public class FragmentBuilder {
 
                     dis.read(buffer);
 
-                    char[] out = new char[2 * buffer.length];
-
-                    for (int j = 0; j < buffer.length; j++) {
-
-                        int v = buffer[j] & 0xFF;
-                        out[j * 2] = HEXMAP[v >>> 4];
-                        out[j * 2 + 1] = HEXMAP[v & 0x0F];
-                    }
-
-                    element.setTextContent(new String(out));
+                    element.setTextContent(bytesToString(buffer));
                 } else {
 
                     applyCoreRule5_4(element, value, typedef, (int) itemcount);
@@ -776,6 +827,10 @@ public class FragmentBuilder {
 
         public RuleException(String msg) {
             super(msg);
+        }
+        
+        public RuleException(String msg, Throwable t) {
+            super(msg, t);
         }
 
     }

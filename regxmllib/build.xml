@@ -41,28 +41,32 @@
         </java>
     </target>
     
-    <target name="xml-registers-exist">
-    <condition property="xml-registers-exist">
- <and>
-  <available file="${register.xml.input.dir}/ElementsRegister.xml"/>
- <available file="${register.xml.input.dir}/GroupsRegister.xml"/>
-  <available file="${register.xml.input.dir}/TypesRegister.xml"/>
-   <available file="${register.xml.input.dir}/LabelsRegister.xml"/>
- </and>
-</condition>
+    <!-- Build XML Registers -->
+    
+    <target name="check-if-xml-registers-exist">
+        <condition property="xml-registers-exist">
+            <and>
+                <available file="${register.xml.input.dir}/Elements.xml"/>
+                <available file="${register.xml.input.dir}/Groups.xml"/>
+                <available file="${register.xml.input.dir}/Types.xml"/>
+                <available file="${register.xml.input.dir}/Labels.xml"/>
+            </and>
+        </condition>
     </target>
 
     
-    <target name="build-xml-registers" depends="build-xml-registers-from-csv, build-xml-registers-from-xml"/>
+    <target name="build-xml-registers" depends="check-if-xml-registers-exist,build-xml-registers-from-csv,build-xml-registers-from-xml"/>
     
-    <target name="build-xml-registers-from-xml" depends="jar, xml-registers-exist" if="xml-registers-exist">
-  <copy file="${register.xml.input.dir}/ElementsRegister.xml" tofile="${elements.register}"/>
- <copy file="${register.xml.input.dir}/GroupsRegister.xml"  tofile="${groups.register}"/>
-  <copy file="${register.xml.input.dir}/TypesRegister.xml"  tofile="${types.register}"/>
-   <copy file="${register.xml.input.dir}/LabelsRegister.xml"  tofile="${labels.register}"/>
+    <target name="build-xml-registers-from-xml" depends="jar,check-if-xml-registers-exist" if="xml-registers-exist">
+        <copy file="${register.xml.input.dir}/Elements.xml" tofile="${elements.register}"/>
+        <copy file="${register.xml.input.dir}/Groups.xml"  tofile="${groups.register}"/>
+        <copy file="${register.xml.input.dir}/Types.xml"  tofile="${types.register}"/>
+        <copy file="${register.xml.input.dir}/Labels.xml"  tofile="${labels.register}"/>
     </target>
     
-    <target name="build-xml-registers-from-csv" depends="jar, xml-registers-exist" unless="xml-registers-exist">
+    <target name="force-build-xml-registers-from-csv" depends="build-xml-registers-from-csv"/>
+    
+    <target name="build-xml-registers-from-csv" depends="jar" unless="xml-registers-exist">
         <java classname="com.sandflow.smpte.tools.XLSRegistersToXML">
             <arg value="-element"/>
             <arg value="-i"/>
@@ -105,15 +109,15 @@
             </classpath>
         </java>
             
-            
-
     </target>
+    
+    <!--buid RegXML dictionary-->
 
     <target name="build-regxml-dict" depends="jar,build-xml-registers">
         
         <delete>
-    <fileset dir="${dict.dir}" includes="*.xml"/>
-  </delete>
+            <fileset dir="${dict.dir}" includes="*.xml"/>
+        </delete>
         
         <java classname="com.sandflow.smpte.tools.XMLRegistersToDict">
             <arg value="-e"/>

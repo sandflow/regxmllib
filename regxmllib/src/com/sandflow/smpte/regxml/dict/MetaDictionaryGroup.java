@@ -27,8 +27,6 @@ package com.sandflow.smpte.regxml.dict;
 
 import com.sandflow.smpte.regxml.definition.ClassDefinition;
 import com.sandflow.smpte.regxml.definition.Definition;
-import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
-import com.sandflow.smpte.regxml.definition.PropertyDefinition;
 import com.sandflow.smpte.util.AUID;
 import java.net.URI;
 import java.util.ArrayList;

@@ -49,6 +49,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -68,9 +69,11 @@ import org.w3c.dom.DocumentFragment;
  */
 public class RegXMLDump {
 
+    private final static Logger LOG = Logger.getLogger(RegXMLDump.class.getName());
+
     private static final UL ESSENCE_DESCRIPTOR_UL
             = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x01, 0x01, 0x01, 0x0D, 0x01, 0x01, 0x01, 0x01, 0x01, 0x24, 0x00});
-    
+
     private static final UL INDEX_TABLE_SEGMENT_UL
             = UL.fromURN("urn:smpte:ul:060e2b34.02530101.0d010201.01100100");
 
@@ -93,17 +96,17 @@ public class RegXMLDump {
 
             return;
         }
-        
+
         MetaDictionaryGroup mds = new MetaDictionaryGroup();
-        
-        for(int i = 2; i < args.length - 2; i++) {
-            
-                /* load the regxml metadictionary */
+
+        for (int i = 2; i < args.length - 2; i++) {
+
+            /* load the regxml metadictionary */
             FileReader fr = new FileReader(args[i]);
-            
-                /* add it to the dictionary group */
+
+            /* add it to the dictionary group */
             mds.addDictionary(MetaDictionary.fromXML(fr));
-            
+
         }
 
 
@@ -158,13 +161,17 @@ public class RegXMLDump {
         /* capture all local sets within the header metadata */
         ArrayList<Group> gs = new ArrayList<>();
 
-        for (Triplet t; bytecount < pp.getHeaderByteCount()
-                && (t = kis.readTriplet()) != null
-                && (! t.getKey().equals(INDEX_TABLE_SEGMENT_UL));
+        for (Triplet t;
+                bytecount < pp.getHeaderByteCount()
+                && (t = kis.readTriplet()) != null;
                 bytecount += t.getLength()) {
 
+            if (t.getKey().equals(INDEX_TABLE_SEGMENT_UL)) {
+                LOG.warning("Index Table Segment encountered before Header Byte Count bytes read.");
+                break;
+            }
+
             /* TODO: follow-up on whether getHeaderByteCount includes Index Table */
-               
             Group g = LocalSet.fromTriplet(t, localreg);
 
             if (g != null) {
@@ -179,66 +186,73 @@ public class RegXMLDump {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
-        
+
         doc.setXmlStandalone(true);
 
-        if ("-ed".equals(args[0])) {
+        try {
+            if ("-ed".equals(args[0])) {
 
-            Group ed = null;
+                Group ed = null;
 
-            Iterator<Group> iter = gs.iterator();
+                Iterator<Group> iter = gs.iterator();
 
-            /* find first essence descriptor */
-            while (ed == null && iter.hasNext()) {
+                /* find first essence descriptor */
+                while (ed == null && iter.hasNext()) {
 
-                Group g = iter.next();
+                    Group g = iter.next();
 
-                AUID tmpauid = new AUID(g.getKey());
+                    AUID tmpauid = new AUID(g.getKey());
 
-                /* go up the class hierarchy */
-                while (ed == null && tmpauid != null) {
+                    /* go up the class hierarchy */
+                    while (ed == null && tmpauid != null) {
 
-                    Definition def = mds.getDefinition(tmpauid);
+                        Definition def = mds.getDefinition(tmpauid);
 
-                    /* skip if not a class instance */
-                    if (!(def instanceof ClassDefinition)) {
-                        break;
+                        /* skip if not a class instance */
+                        if (!(def instanceof ClassDefinition)) {
+                            break;
+                        }
+
+                        /* is this an essence descriptor */
+                        UL deful = def.getIdentification().asUL();
+
+                        if (deful.equals(ESSENCE_DESCRIPTOR_UL, 0b1111101011111111 /*11111010 11111111*/)) {
+                            ed = g;
+
+                        } else {
+
+                            /* get parent class */
+                            tmpauid = ((ClassDefinition) def).getParentClass();
+                        }
                     }
 
-                    /* is this an essence descriptor */
-                    UL deful = def.getIdentification().asUL();
-
-                    if (deful.equals(ESSENCE_DESCRIPTOR_UL, 0b1111101011111111 /*11111010 11111111*/)) {
-                        ed = g;
-
-                    } else {
-
-                        /* get parent class */
-                        tmpauid = ((ClassDefinition) def).getParentClass();
-                    }
                 }
 
+                if (ed == null) {
+                    System.err.println("No Essence Descriptor found");
+                    return;
+                }
+
+                /* generate fragment */
+                DocumentFragment df = fb.fragmentFromTriplet(ed, doc);
+
+                // root elements
+                doc.appendChild(df);
+
+            } else {
+
+                /* generate fragment */
+                DocumentFragment df = fb.fragmentFromTriplet(gs.get(0), doc);
+
+                // root elements
+                doc.appendChild(df);
+
             }
 
-            if (ed == null) {
-                System.err.println("No Essence Descriptor found");
-                return;
-            }
-
-            /* generate fragment */
-            DocumentFragment df = fb.fragmentFromTriplet(ed, doc);
-
-            // root elements
-            doc.appendChild(df);
-        } else {
-
-            /* generate fragment */
-            DocumentFragment df = fb.fragmentFromTriplet(gs.get(0), doc);
-
-            // root elements
-            doc.appendChild(df);
-
+        } catch (FragmentBuilder.RuleException | KLVException | ParserConfigurationException e) {
+            LOG.severe(e.getMessage());
         }
+
         /* write DOM to file */
         Transformer tr = TransformerFactory.newInstance().newTransformer();
 

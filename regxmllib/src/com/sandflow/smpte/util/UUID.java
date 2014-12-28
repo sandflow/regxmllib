@@ -25,6 +25,11 @@
  */
 package com.sandflow.smpte.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -67,6 +72,38 @@ public class UUID {
     }
 
     private final static Pattern URN_PATTERN = Pattern.compile("urn:uuid:[a-fA-F0-9]{8}-(?:[a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}");
+    
+    public static UUID fromRandom() {
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[16];
+        random.nextBytes(bytes);
+        
+        bytes[6] = (byte) ((bytes[6] & 0x0f) | 0x4f);
+        bytes[8] = (byte) ((bytes[8] & 0x3f) | 0x7f);
+        
+        return new UUID(bytes);
+    }
+    
+    public static UUID fromURIName(URI uri) {
+        MessageDigest digest;
+
+        UUID nsid = UUID.fromURN("urn:uuid:6ba7b811-9dad-11d1-80b4-00c04fd430c8");
+
+        try {
+            digest = MessageDigest.getInstance("SHA-1");
+            digest.update(nsid.getValue());
+            digest.update(uri.toString().getBytes("ASCII"));
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        byte[] result = digest.digest();
+
+        result[6] = (byte) ((result[6] & 0x0f) | 0x5f);
+        result[8] = (byte) ((result[8] & 0x3f) | 0x7f);
+        
+        return new UUID(result);
+    }
 
     public static UUID fromURN(String val) {
 

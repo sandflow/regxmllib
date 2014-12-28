@@ -44,6 +44,7 @@ import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyDefinition;
 import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
+import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
 import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
 import com.sandflow.smpte.regxml.definition.RecordTypeDefinition.Member;
 import com.sandflow.smpte.regxml.definition.RenameTypeDefinition;
@@ -56,7 +57,6 @@ import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import com.sandflow.smpte.util.UL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
@@ -71,8 +71,12 @@ public class XMLRegistryImporter {
     public static MetaDictionaryGroup fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
 
         /* create definition collection */
-        HashMap<AUID, Definition> defs = new HashMap<>();
+        ArrayList<Definition> defs = new ArrayList<>();
 
+        /* keep track of definitions to prevent duplicates */
+        
+        HashSet<AUID> defIDs = new HashSet<>();
+        
 
         /* handle groups */
         for (GroupEntry group : gr.getEntries()) {
@@ -93,7 +97,11 @@ public class XMLRegistryImporter {
 
             ClassDefinition cdef = new ClassDefinition();
 
-            cdef.setConcrete(group.isConcrete());
+            if (group.isConcrete() != null) {
+                cdef.setConcrete(group.isConcrete());
+            } else {
+                cdef.setConcrete(true);
+            }
 
             cdef.setDescription(group.getDefinition());
 
@@ -110,11 +118,33 @@ public class XMLRegistryImporter {
             cdef.setIdentification(new AUID(group.getUL()));
 
             for (GroupEntry.Record child : group.getContents()) {
-                PropertyDefinition pdef = new PropertyDefinition();
+                
+                AUID id = new AUID(child.getItem());
+                
+                PropertyDefinition pdef = null;
+                                        
+                if (defIDs.contains(id)) {
 
+                    /* if the property has already been added, e.g. BodySID, create an alias */
+                    
+                    PropertyAliasDefinition padef =  new PropertyAliasDefinition();
+                    
+                    padef.setOriginalProperty(id);
+                    
+                    pdef = padef;
+                
+                } else {
+                
+                    pdef = new PropertyDefinition();
+                
+                }
+
+                pdef.setIdentification(id);
                 pdef.setOptional(child.getOptional());
-                pdef.setIdentification(new AUID(child.getItem()));
-                pdef.setUniqueIdentifier(child.getUniqueID());
+                
+                if (child.getUniqueID() != null) {
+                    pdef.setUniqueIdentifier(child.getUniqueID());
+                }
                 pdef.setLocalIdentification((int) (child.getLocalTag() == null ? 0 : child.getLocalTag()));
 
                 /* retrieve the element */
@@ -154,11 +184,12 @@ public class XMLRegistryImporter {
 
                 pdef.setNamespace(element.getNamespaceName());
 
-                /* add property definition */
-                defs.put(pdef.getIdentification(), pdef);
+                defs.add(pdef);
+                defIDs.add(pdef.getIdentification());
             }
 
-            defs.put(cdef.getIdentification(), cdef);
+            defs.add(cdef);
+            defIDs.add(cdef.getIdentification());
         }
 
         /* handle types */
@@ -345,7 +376,8 @@ public class XMLRegistryImporter {
                 tdef.setDescription(type.getDefinition());
                 tdef.setNamespace(type.getNamespaceName());
 
-                defs.put(tdef.getIdentification(), tdef);
+                defs.add(tdef);
+                defIDs.add(tdef.getIdentification());
             } else {
                 LOGGER.warning("Unknown type def.");
             }
@@ -357,14 +389,21 @@ public class XMLRegistryImporter {
         HashSet<String> syms = new HashSet<>();
         long index = 0;
 
-        for (Definition def : defs.values()) {
-            if (syms.contains(def.getSymbol())) {
-                def.setSymbol("dup" + def.getSymbol() + (index++));
+        for (Definition def : defs) {
+
+            if (!(def instanceof PropertyAliasDefinition)) {
+
+                if (syms.contains(def.getSymbol())) {
+                    
+                    def.setSymbol("dup" + def.getSymbol() + (index++));
+                    
+                }
+                
+                syms.add(def.getSymbol());
             }
 
             mds.addDefinition(def);
 
-            syms.add(def.getSymbol());
         }
 
         return mds;
@@ -375,12 +414,6 @@ public class XMLRegistryImporter {
 
         public MissingElementDefinitionException(String string) {
             super(string);
-        }
-    }
-
-    private static class InvalidIdentificationException extends Exception {
-
-        public InvalidIdentificationException() {
         }
     }
 

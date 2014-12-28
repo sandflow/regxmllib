@@ -72,7 +72,7 @@ public class XMLRegistersToDict {
         
         /* mute logging */
         /* TODO: add switch to enable warnings */
-        Logger.getLogger("").setLevel(Level.OFF);
+        //Logger.getLogger("").setLevel(Level.OFF);
 
         FileReader fe = new FileReader(args[1]);
         FileReader fg = new FileReader(args[5]);

@@ -50,11 +50,8 @@ import com.sandflow.smpte.util.UUID;
 import com.sandflow.smpte.util.xml.UUIDAdapter;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URI;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -111,25 +108,7 @@ public class MetaDictionary implements DefinitionResolver {
     public MetaDictionary(URI scheme) {
         /* BUG: ST 2001-1 does not allow label to be used in multiple enumerations */
 
-        /* TODO: refactor to UUID class */
-        MessageDigest digest;
-
-        UUID nsid = UUID.fromURN("urn:uuid:6ba7b810-9dad-11d1-80b4-00c04fd430c8");
-
-        try {
-            digest = MessageDigest.getInstance("SHA-1");
-            digest.update(nsid.getValue());
-            digest.update(scheme.toString().getBytes("ASCII"));
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            throw new RuntimeException(ex);
-        }
-
-        byte[] result = digest.digest();
-
-        result[6] = (byte) ((result[6] & 0x0f) | 0xaf);
-        result[8] = (byte) ((result[8] & 0x3f) | 0x7f);
-
-        this.schemeID = new UUID(result);
+        this.schemeID = UUID.fromURIName(scheme);
         this.schemeURI = scheme;
     }
 
@@ -140,46 +119,50 @@ public class MetaDictionary implements DefinitionResolver {
         }
 
         AUID defid = createNormalizedAUID(def.getIdentification());
-
-        if (this.definitionsByAUID.put(defid, def) != null) {
-            throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
-        }
-
-        if (this.definitionsBySymbol.put(def.getSymbol(), def) != null) {
-            throw new IllegalDefinitionException("Duplicate Symbol: " + def.getSymbol());
-        }
-
-            if (def instanceof PropertyDefinition) {
-
-                AUID parentauid = createNormalizedAUID(((PropertyDefinition) def).getMemberOf());
-                
-                
-                
-                Set<AUID> hs = this.membersOf.get(parentauid);
-                
-                if (hs == null) {
-                   hs = new HashSet<>();
-                   this.membersOf.put(parentauid, hs);
-                }
-                
-                hs.add(defid);
-
+        
+        if (def.getClass() != PropertyAliasDefinition.class) {
+            
+            /* TODO: do we really want to exclude aliases here? */
+        
+            if (this.definitionsByAUID.put(defid, def) != null) {
+                throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
             }
 
-            if (def instanceof ClassDefinition && ((ClassDefinition) def).getParentClass() != null) {
-
-                AUID parentauid = createNormalizedAUID(((ClassDefinition) def).getParentClass());
-
-                Set<AUID> hs = this.subclassesOf.get(parentauid);
-                
-                if (hs == null) {
-                   hs = new HashSet<>();
-                   this.subclassesOf.put(parentauid, hs);
-                }
-                
-                hs.add(defid);
-
+            if (this.definitionsBySymbol.put(def.getSymbol(), def) != null) {
+                throw new IllegalDefinitionException("Duplicate Symbol: " + def.getSymbol());
             }
+        
+        }
+
+        if (def instanceof PropertyDefinition) {
+
+            AUID parentauid = createNormalizedAUID(((PropertyDefinition) def).getMemberOf());
+
+            Set<AUID> hs = this.membersOf.get(parentauid);
+
+            if (hs == null) {
+                hs = new HashSet<>();
+                this.membersOf.put(parentauid, hs);
+            }
+
+            hs.add(defid);
+
+        }
+
+        if (def instanceof ClassDefinition && ((ClassDefinition) def).getParentClass() != null) {
+
+            AUID parentauid = createNormalizedAUID(((ClassDefinition) def).getParentClass());
+
+            Set<AUID> hs = this.subclassesOf.get(parentauid);
+
+            if (hs == null) {
+                hs = new HashSet<>();
+                this.subclassesOf.put(parentauid, hs);
+            }
+
+            hs.add(defid);
+
+        }
 
         this.definitions.add(def);
     }
@@ -312,28 +295,30 @@ public class MetaDictionary implements DefinitionResolver {
             def.setNamespace(md.getSchemeURI());
 
             AUID defid = createNormalizedAUID(def.getIdentification());
+            
+            if (def.getClass() != PropertyAliasDefinition.class) {
 
-            if (md.definitionsByAUID.put(defid, def) != null) {
-                throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
-            }
+                if (md.definitionsByAUID.put(defid, def) != null) {
+                    throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
+                }
 
-            if (md.definitionsBySymbol.put(def.getSymbol(), def) != null) {
-                throw new IllegalDefinitionException("Duplicate Symbol: " + def.getSymbol());
+                if (md.definitionsBySymbol.put(def.getSymbol(), def) != null) {
+                    throw new IllegalDefinitionException("Duplicate Symbol: " + def.getSymbol());
+                }
+
             }
 
             if (def instanceof PropertyDefinition) {
 
                 AUID parentauid = createNormalizedAUID(((PropertyDefinition) def).getMemberOf());
-                
-                
-                
+
                 Set<AUID> hs = md.membersOf.get(parentauid);
-                
+
                 if (hs == null) {
-                   hs = new HashSet<>();
-                   md.membersOf.put(parentauid, hs);
+                    hs = new HashSet<>();
+                    md.membersOf.put(parentauid, hs);
                 }
-                
+
                 hs.add(defid);
 
             }
@@ -343,12 +328,12 @@ public class MetaDictionary implements DefinitionResolver {
                 AUID parentauid = createNormalizedAUID(((ClassDefinition) def).getParentClass());
 
                 Set<AUID> hs = md.subclassesOf.get(parentauid);
-                
+
                 if (hs == null) {
-                   hs = new HashSet<>();
-                   md.subclassesOf.put(parentauid, hs);
+                    hs = new HashSet<>();
+                    md.subclassesOf.put(parentauid, hs);
                 }
-                
+
                 hs.add(defid);
 
             }
@@ -365,7 +350,7 @@ public class MetaDictionary implements DefinitionResolver {
 
     @Override
     public Collection<AUID> getMembersOf(ClassDefinition parent) {
-       return membersOf.get(createNormalizedAUID(parent.getIdentification()));
+        return membersOf.get(createNormalizedAUID(parent.getIdentification()));
     }
 
 }

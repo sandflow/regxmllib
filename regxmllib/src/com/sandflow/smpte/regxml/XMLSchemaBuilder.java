@@ -35,6 +35,7 @@ import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
 import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
+import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyDefinition;
 import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
 import com.sandflow.smpte.regxml.definition.RenameTypeDefinition;
@@ -169,9 +170,13 @@ public class XMLSchemaBuilder {
 
                 applyRule4(doc.getDocumentElement(), (ClassDefinition) definition);
 
-            } else if (definition instanceof PropertyDefinition) {
+            } else if (definition.getClass() == PropertyDefinition.class) {
 
                 applyRule5(doc.getDocumentElement(), (PropertyDefinition) definition);
+
+            } else if (definition.getClass() == PropertyAliasDefinition.class) {
+
+               /* BUG: need to supress alias declaration since they use the same symbol and AUID as parent */
 
             } else {
                 applyRule6(doc.getDocumentElement(), definition);

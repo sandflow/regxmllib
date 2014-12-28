@@ -38,10 +38,12 @@ public class AUID {
     public static AUID fromURN(String val) {
         if (val != null && val.startsWith("urn:smpte:ul:")) {
             return new AUID(UL.fromURN(val));
+        } else {
+            return new AUID(UUID.fromURN(val));
         }
 
-        // TODO: handle UUID and errors
-        return null;
+        // TODO: handle errors
+ 
     }
 
     private byte[] value;
@@ -55,6 +57,9 @@ public class AUID {
     }
 
     public AUID(UUID uuid) {
+        
+        value = new byte[16];
+        
         System.arraycopy(uuid.getValue(), 8, value, 0, 8);
         System.arraycopy(uuid.getValue(), 0, value, 8, 8);
     }
