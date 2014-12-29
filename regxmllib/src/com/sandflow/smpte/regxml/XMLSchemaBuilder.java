@@ -1159,7 +1159,7 @@ public class XMLSchemaBuilder {
             element.setAttribute("ref", createQName(elemdef.getNamespace(), elemdef.getSymbol()));
             sequence.appendChild(element);
 
-        } else if (elemdef.getSymbol().equals("DataValue")) {
+        } else if (definition.getSymbol().equals("DataValue")) {
 
             /* Rule 6.14.3
              <simpleType name="DataValue">

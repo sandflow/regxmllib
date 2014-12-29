@@ -25,7 +25,7 @@
 </xs:simpleType>
 <xs:simpleType name='HexByteArrayType'>
     <xs:restriction base='xs:string'>
-        <xs:pattern value=' (\s*[0-9a-fA-F][0-9a-fA-F])*\s*'/>
+        <xs:pattern value='(\s*[0-9a-fA-F][0-9a-fA-F])*\s*'/>
     </xs:restriction>
 </xs:simpleType>
 <xs:attribute name='uid' type='reg:TargetType'/>

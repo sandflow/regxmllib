@@ -183,7 +183,7 @@ public class FragmentBuilder {
                             group.getKey().toString()
                     )
             );
-            
+
             return;
         }
 
@@ -697,14 +697,14 @@ public class FragmentBuilder {
                                 definition.getSymbol()
                         )
                 );
-                
+
                 Comment comment = element.getOwnerDocument().createComment(
-                    String.format(
-                        "Strong Reference %s not found",
-                        uuid.toString()
-                    )
+                        String.format(
+                                "Strong Reference %s not found",
+                                uuid.toString()
+                        )
                 );
-                
+
                 element.appendChild(comment);
             }
 
@@ -746,7 +746,8 @@ public class FragmentBuilder {
 
             DataInputStream dis = new DataInputStream(value);
 
-            if (definition.getSymbol().equals("UInt8Array")) {
+            /* BUG: UInt8Array is not used correctly for J2K items */
+            if (/*definition.getSymbol().equals("UInt8Array")*/false) {
 
                 /* BUG: this is stored as an array that takes the entire item */
                 byte[] buffer = new byte[32];
@@ -767,32 +768,46 @@ public class FragmentBuilder {
 
             } else {
 
-                long itemcount = dis.readInt() & 0xfffffffL;
-                long itemlength = dis.readInt() & 0xfffffffL;
+                
 
-                Definition base = findBaseDefinition(typedef);
-
-                if (base instanceof CharacterTypeDefinition || base.getName().contains("StringArray")) {
-
-                    /* RULE 5.14.1 */
-                    /* BUG: where is StringArray defined? */
-                    throw new RuleException("StringArray not supported.");
-
-                } else if (base.getName().equals("DataValue")) {
+                if (definition.getSymbol().equals("DataValue")) {
 
                     /* RULE 5.14.2 */
-                    if (itemlength != 1) {
-                        throw new RuleException("Illegal DataValue element length.");
+                    /* DataValue is string of octets, without number of elements or size of elements */
+                    byte[] buffer = new byte[32];
+
+                    StringBuilder sb = new StringBuilder();
+
+                    for (int sz = 0; (sz = dis.read(buffer)) > -1;) {
+
+                        for (int j = 0; j < sz; j++) {
+
+                            int v = buffer[j] & 0xFF;
+                            sb.append(HEXMAP[v >>> 4]);
+                            sb.append(HEXMAP[v & 0x0F]);
+                        }
                     }
 
-                    byte[] buffer = new byte[(int) itemcount];
+                    element.setTextContent(sb.toString());
 
-                    dis.read(buffer);
-
-                    element.setTextContent(bytesToString(buffer));
                 } else {
 
-                    applyCoreRule5_4(element, value, typedef, (int) itemcount);
+                    long itemcount = dis.readInt() & 0xfffffffL;
+                    long itemlength = dis.readInt() & 0xfffffffL;
+                    
+                    Definition base = findBaseDefinition(typedef);
+
+                    if (base instanceof CharacterTypeDefinition || base.getName().contains("StringArray")) {
+
+                        /* RULE 5.14.1 */
+                        /* BUG: where is StringArray defined? */
+                        throw new RuleException("StringArray not supported.");
+
+                    } else {
+
+                        applyCoreRule5_4(element, value, typedef, (int) itemcount);
+                    }
+
                 }
             }
         } catch (UnsupportedEncodingException e) {
@@ -828,7 +843,7 @@ public class FragmentBuilder {
         public RuleException(String msg) {
             super(msg);
         }
-        
+
         public RuleException(String msg, Throwable t) {
             super(msg, t);
         }

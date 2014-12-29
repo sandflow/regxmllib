@@ -74,9 +74,8 @@ public class XMLRegistryImporter {
         ArrayList<Definition> defs = new ArrayList<>();
 
         /* keep track of definitions to prevent duplicates */
-        
         HashSet<AUID> defIDs = new HashSet<>();
-        
+
 
         /* handle groups */
         for (GroupEntry group : gr.getEntries()) {
@@ -118,30 +117,29 @@ public class XMLRegistryImporter {
             cdef.setIdentification(new AUID(group.getUL()));
 
             for (GroupEntry.Record child : group.getContents()) {
-                
+
                 AUID id = new AUID(child.getItem());
-                
+
                 PropertyDefinition pdef = null;
-                                        
+
                 if (defIDs.contains(id)) {
 
                     /* if the property has already been added, e.g. BodySID, create an alias */
-                    
-                    PropertyAliasDefinition padef =  new PropertyAliasDefinition();
-                    
+                    PropertyAliasDefinition padef = new PropertyAliasDefinition();
+
                     padef.setOriginalProperty(id);
-                    
+
                     pdef = padef;
-                
+
                 } else {
-                
+
                     pdef = new PropertyDefinition();
-                
+
                 }
 
                 pdef.setIdentification(id);
                 pdef.setOptional(child.getOptional());
-                
+
                 if (child.getUniqueID() != null) {
                     pdef.setUniqueIdentifier(child.getUniqueID());
                 }
@@ -199,12 +197,12 @@ public class XMLRegistryImporter {
                 continue;
             }
 
-            Definition tdef = null;
-
             /* BUG: skip bad UUID type */
             if (type.getUL().equals(UL.fromURN("urn:smpte:ul:060E2B34.01040101.04011100.00000000"))) {
                 continue;
             }
+
+            Definition tdef = null;
 
             if (TypeEntry.RENAME_TYPEKIND.equals(type.getTypeKind())) {
 
@@ -365,7 +363,15 @@ public class XMLRegistryImporter {
                 ((StringTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
             } else {
-                LOGGER.warning("Unknown type kind.");
+                LOGGER.warning(
+                        String.format(
+                                "Unknown type kind of %s for Type UL %s.",
+                                type.getTypeKind(),
+                                type.getUL().toString()
+                        )
+                );
+
+                continue;
                 /* todo: error handling */
             }
 
@@ -379,7 +385,12 @@ public class XMLRegistryImporter {
                 defs.add(tdef);
                 defIDs.add(tdef.getIdentification());
             } else {
-                LOGGER.warning("Unknown type def.");
+                LOGGER.warning(
+                        String.format(
+                                "Byte Type UL %s.",
+                                type.getUL().toString()
+                        )
+                );
             }
         }
 
@@ -394,11 +405,11 @@ public class XMLRegistryImporter {
             if (!(def instanceof PropertyAliasDefinition)) {
 
                 if (syms.contains(def.getSymbol())) {
-                    
+
                     def.setSymbol("dup" + def.getSymbol() + (index++));
-                    
+
                 }
-                
+
                 syms.add(def.getSymbol());
             }
 
