@@ -481,8 +481,33 @@ public class XMLSchemaBuilder {
          2.	otherwise rule 6.4.2
          */
         Definition elemdef = resolver.getDefinition(definition.getElementType());
+        
+        if (definition.getIdentification().equals(UUID_AUID)) {
+            /*
+             <simpleType name="AUID">
+             <restriction base="xs:anyURI">
+             <pattern 
+             value="urn:smpte:ul:([0-9a-fA-F]{8}\.){3}[0-9a-fA-F]{8}"/>
+             <pattern 
+             value="urn:uuid:[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}"/>
+             </restriction>
+             </simpleType>
 
-        if (elemdef instanceof StrongReferenceTypeDefinition) {
+             */
+
+            Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
+            simpleType.setAttribute("name", "UUID");
+            root.appendChild(simpleType);
+
+            Element restriction = root.getOwnerDocument().createElementNS(XSD_NS, "xs:restriction");
+            restriction.setAttribute("base", "xs:anyURI");
+            simpleType.appendChild(restriction);
+
+            Element pattern = root.getOwnerDocument().createElementNS(XSD_NS, "xs:pattern");
+            pattern.setAttribute("value", "urn:uuid:[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}");
+            restriction.appendChild(pattern);
+            
+        } else if (elemdef instanceof StrongReferenceTypeDefinition) {
 
             /* Rule 6.4.1 */
 
@@ -736,31 +761,6 @@ public class XMLSchemaBuilder {
             restriction.appendChild(pattern);
 
             pattern = root.getOwnerDocument().createElementNS(XSD_NS, "xs:pattern");
-            pattern.setAttribute("value", "urn:uuid:[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}");
-            restriction.appendChild(pattern);
-
-        } else if (definition.getIdentification().equals(UUID_AUID)) {
-            /*
-             <simpleType name="AUID">
-             <restriction base="xs:anyURI">
-             <pattern 
-             value="urn:smpte:ul:([0-9a-fA-F]{8}\.){3}[0-9a-fA-F]{8}"/>
-             <pattern 
-             value="urn:uuid:[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}"/>
-             </restriction>
-             </simpleType>
-
-             */
-
-            Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
-            simpleType.setAttribute("name", "UUID");
-            root.appendChild(simpleType);
-
-            Element restriction = root.getOwnerDocument().createElementNS(XSD_NS, "xs:restriction");
-            restriction.setAttribute("base", "xs:anyURI");
-            simpleType.appendChild(restriction);
-
-            Element pattern = root.getOwnerDocument().createElementNS(XSD_NS, "xs:pattern");
             pattern.setAttribute("value", "urn:uuid:[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}");
             restriction.appendChild(pattern);
 
