@@ -118,6 +118,10 @@ public class UL {
 
         return true;
     }
+    
+    public byte getVersion() {
+        return getValueOctet(7);
+    }
 
     public boolean equals(UL ul, int bytemask) {
 

@@ -187,6 +187,16 @@ public class FragmentBuilder {
             return;
         }
 
+        if (definition.getIdentification().asUL().getVersion() != group.getKey().getVersion()) {
+            LOG.warning(
+                    String.format(
+                            "Group UL %s in file does not have the same version as in the register (0x%02x)",
+                            group.getKey(),
+                            definition.getIdentification().asUL().getVersion()
+                    )
+            );
+        }
+
         Element elem = node.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
 
         elem.setPrefix(getPrefix(definition.getNamespace()));
@@ -222,6 +232,17 @@ public class FragmentBuilder {
                             )
                     );
                 } else {
+
+                    if (itemdef.getIdentification().asUL().getVersion() != item.getKey().getVersion()) {
+                        LOG.warning(
+                                String.format(
+                                        "Property UL %s in file does not have the same version as in the register (0x%02x)",
+                                        item.getKey().toString(),
+                                        itemdef.getIdentification().asUL().getVersion()
+                                )
+                        );
+                    }
+
                     applyRule4(elem, item.getValueAsStream(), itemdef);
                 }
 
@@ -768,8 +789,6 @@ public class FragmentBuilder {
 
             } else {
 
-                
-
                 if (definition.getSymbol().equals("DataValue")) {
 
                     /* RULE 5.14.2 */
@@ -794,7 +813,7 @@ public class FragmentBuilder {
 
                     long itemcount = dis.readInt() & 0xfffffffL;
                     long itemlength = dis.readInt() & 0xfffffffL;
-                    
+
                     Definition base = findBaseDefinition(typedef);
 
                     if (base instanceof CharacterTypeDefinition || base.getName().contains("StringArray")) {
