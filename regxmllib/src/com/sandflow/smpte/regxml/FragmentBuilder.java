@@ -361,6 +361,9 @@ public class FragmentBuilder {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } catch (IOException ioe) {
+            
+            /* TODO: replace with inline XML error comments? */
+            
             throw new RuleException(ioe);
         }
     }
@@ -648,7 +651,16 @@ public class FragmentBuilder {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } catch (IOException ioe) {
-            throw new RuleException(String.format("Value too short for %s", definition.getSymbol()), ioe);
+            /*throw new RuleException(String.format("Value too short for %s", definition.getSymbol()), ioe);*/
+
+            Comment comment = element.getOwnerDocument().createComment(
+                    String.format(
+                            "Value too short for Type %s",
+                            typedef.getSymbol()
+                    )
+            );
+
+            element.appendChild(comment);
         }
 
     }
