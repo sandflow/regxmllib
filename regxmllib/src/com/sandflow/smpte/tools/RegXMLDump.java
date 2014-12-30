@@ -48,6 +48,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
@@ -189,6 +190,13 @@ public class RegXMLDump {
 
         doc.setXmlStandalone(true);
 
+        /* date and build version */
+        Date now = new java.util.Date();
+        doc.appendChild(doc.createComment("Created: " + now.toString()));
+        doc.appendChild(doc.createComment("From: " + args[args.length - 1]));
+        doc.appendChild(doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()));
+        doc.appendChild(doc.createComment("See: https://github.com/sandflow/regxmllib"));
+        
         try {
             if ("-ed".equals(args[0])) {
 

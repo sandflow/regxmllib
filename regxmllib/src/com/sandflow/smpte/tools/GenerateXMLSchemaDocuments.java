@@ -78,18 +78,6 @@ public class GenerateXMLSchemaDocuments {
 
         File baseDir = new File(args[3]);
 
-        /*        ctx.generateSchema(new SchemaOutputResolver() {
-            
-         int seq = -1;
-
-         @Override
-         public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-         seq++;
-         return new StreamResult(new File(baseDir, c.getSimpleName() + (seq == 0 ? "" : "." + seq) + ".xsd"));
-         }
-         });
-
-         */
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 

@@ -36,6 +36,7 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Date;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
@@ -52,7 +53,7 @@ import org.w3c.dom.Document;
  */
 public class GenerateDictionaryXMLSchema {
 
-     private final static String USAGE = "Generate XML Schema for RegXML Metadictionaries.\n"
+    private final static String USAGE = "Generate XML Schema for RegXML Metadictionaries.\n"
             + "  Usage:\n"
             + "     GenerateDictionaryXMLSchema -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -o outputdir\n"
             + "     GenerateDictionaryXMLSchema -?\n";
@@ -97,6 +98,21 @@ public class GenerateDictionaryXMLSchema {
 
             Document doc = sb.xmlSchemaFromDictionary(md);
 
+            /* date and build version */
+            Date now = new java.util.Date();
+            doc.insertBefore(
+                    doc.createComment("Created: " + now.toString()),
+                    doc.getDocumentElement()
+            );
+            doc.insertBefore(
+                   doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()),
+                    doc.getDocumentElement()
+            );
+            doc.insertBefore(
+                    doc.createComment("See: https://github.com/sandflow/regxmllib"),
+                    doc.getDocumentElement()
+            );
+            
             Transformer tr = TransformerFactory.newInstance().newTransformer();
 
             tr.setOutputProperty(OutputKeys.INDENT, "yes");

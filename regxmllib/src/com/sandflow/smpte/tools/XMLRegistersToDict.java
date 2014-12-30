@@ -39,9 +39,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -69,11 +76,10 @@ public class XMLRegistersToDict {
 
             return;
         }
-        
+
         /* mute logging */
         /* TODO: add switch to enable warnings */
         //Logger.getLogger("").setLevel(Level.OFF);
-
         FileReader fe = new FileReader(args[1]);
         FileReader fg = new FileReader(args[5]);
         FileReader ft = new FileReader(args[7]);
@@ -83,19 +89,40 @@ public class XMLRegistersToDict {
         TypesRegister treg = TypesRegister.fromXML(ft);
 
         MetaDictionaryGroup mds = fromRegister(treg, greg, ereg);
-        
-        for(MetaDictionary md : mds.getDictionaries()) {
-            
+
+        Transformer tr = TransformerFactory.newInstance().newTransformer();
+
+        tr.setOutputProperty(OutputKeys.INDENT, "yes");
+
+        for (MetaDictionary md : mds.getDictionaries()) {
+
             /* create file name from the Scheme URI */
-            
             String fname = md.getSchemeURI().getAuthority() + md.getSchemeURI().getPath();
-            
+
             File f = new File(args[8], fname.replaceAll("[^a-zA-Z0-9]", "-") + ".xml");
-         
-            md.toXML(new FileWriter(f));
+
+            Document doc = md.toXML();
+
+            /* date and build version */
+            Date now = new java.util.Date();
+            doc.insertBefore(
+                    doc.createComment("Created: " + now.toString()),
+                    doc.getDocumentElement()
+            );
+            doc.insertBefore(
+                    doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()),
+                    doc.getDocumentElement()
+            );
+            doc.insertBefore(
+                    doc.createComment("See: https://github.com/sandflow/regxmllib"),
+                    doc.getDocumentElement()
+            );
+
+            tr.transform(
+                    new DOMSource(doc),
+                    new StreamResult(f)
+            );
         }
-        
-        
 
     }
 }

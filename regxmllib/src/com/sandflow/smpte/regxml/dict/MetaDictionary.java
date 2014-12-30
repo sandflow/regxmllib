@@ -69,6 +69,9 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -272,7 +275,7 @@ public class MetaDictionary implements DefinitionResolver {
         }
     }
 
-    public void toXML(Writer writer) throws JAXBException, IOException {
+    public void writeXML(Writer writer) throws JAXBException, IOException {
 
         JAXBContext ctx = JAXBContext.newInstance(MetaDictionary.class);
 
@@ -280,6 +283,25 @@ public class MetaDictionary implements DefinitionResolver {
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.marshal(this, writer);
         writer.close();
+    }
+    
+    public Document toXML() {
+        
+        Document doc = null;
+        
+        try {
+                
+            doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+            Marshaller m = JAXBContext.newInstance(MetaDictionary.class).createMarshaller();
+            m.marshal(this, doc);
+        
+        } catch (JAXBException | ParserConfigurationException e) {
+            
+            throw new RuntimeException(e);
+            
+        }
+        
+        return doc;
     }
 
     public static MetaDictionary fromXML(Reader reader) throws JAXBException, IOException, IllegalDefinitionException {
