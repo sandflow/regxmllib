@@ -42,6 +42,7 @@ import com.sandflow.smpte.regxml.dict.IllegalDictionaryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.CountingInputStream;
 import com.sandflow.smpte.util.UL;
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -118,9 +119,11 @@ public class RegXMLDump {
 
         /* retrieve the mxf file */
         FileInputStream f = new FileInputStream(args[args.length - 1]);
+        
+        CountingInputStream cis = new CountingInputStream(f);
 
         /* look for the partition pack */
-        KLVInputStream kis = new KLVInputStream(f);
+        KLVInputStream kis = new KLVInputStream(cis);
 
         PartitionPack pp = null;
 
@@ -135,22 +138,22 @@ public class RegXMLDump {
             System.err.println("No Partition Pack found.");
             return;
         }
-
+        
         /* start counting header metadata bytes */
-        long bytecount = 0;
-
+         cis.resetCount();
+        
         /* look for the primer pack */
         LocalSetRegister localreg = null;
 
         for (Triplet t; (t = kis.readTriplet()) != null;) {
-
+            
             /* skip fill items, if any */
             if (FillItem.fromTriplet(t) == null) {
                 localreg = PrimerPack.createLocalSetRegister(t);
-                bytecount += t.getLength();
                 break;
             }
 
+            cis.resetCount();
         }
 
         if (localreg == null) {
@@ -163,14 +166,14 @@ public class RegXMLDump {
         ArrayList<Group> gs = new ArrayList<>();
 
         for (Triplet t;
-                bytecount < pp.getHeaderByteCount()
-                && (t = kis.readTriplet()) != null;
-                bytecount += t.getLength()) {
-
+                cis.getCount() < pp.getHeaderByteCount()
+                && (t = kis.readTriplet()) != null;) {
+            
             if (t.getKey().equals(INDEX_TABLE_SEGMENT_UL)) {
                 LOG.warning("Index Table Segment encountered before Header Byte Count bytes read.");
                 break;
             }
+            
 
             /* TODO: follow-up on whether getHeaderByteCount includes Index Table */
             Group g = LocalSet.fromTriplet(t, localreg);
@@ -180,6 +183,8 @@ public class RegXMLDump {
                 gs.add(g);
 
                 fb.addGroup(g);
+            } else {
+                 LOG.warning("Failed to read Group: " + t.getKey().toString());        
             }
         }
 
