@@ -83,7 +83,7 @@ KNOWN ISSUES
 
 Issues are tracked at [1]
 
-[1] https://github.com/palemieux/regxml/issues
+[1] https://github.com/sandflow/regxmllib/issues
 
 
 DIRECTORIES AND NOTABLE FILES
