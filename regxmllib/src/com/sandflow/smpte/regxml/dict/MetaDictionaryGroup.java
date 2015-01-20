@@ -53,6 +53,18 @@ public class MetaDictionaryGroup implements DefinitionResolver {
 
         return def;
     }
+    
+    public Definition getDefinition(URI namespace, String symbol) {
+        Definition def = null;
+        
+        MetaDictionary md = dicts.get(namespace);
+        
+        if (md != null) {
+            def = md.getDefinition(symbol);
+        }
+
+        return def;
+    }
 
     public void addDictionary(MetaDictionary metadictionary) throws IllegalDictionaryException {
         MetaDictionary md = dicts.get(metadictionary.getSchemeURI());

@@ -54,6 +54,8 @@ import com.sandflow.smpte.regxml.definition.StringTypeDefinition;
 import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
+import com.sandflow.smpte.regxml.dict.DuplicateSymbolException;
+import com.sandflow.smpte.regxml.dict.IllegalDefinitionException;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import com.sandflow.smpte.util.UL;
 import java.util.ArrayList;
@@ -396,24 +398,32 @@ public class XMLRegistryImporter {
 
         MetaDictionaryGroup mds = new MetaDictionaryGroup();
 
-        /* BUG: check for duplicate symbols */
-        HashSet<String> syms = new HashSet<>();
         long index = 0;
 
         for (Definition def : defs) {
 
-            if (!(def instanceof PropertyAliasDefinition)) {
 
-                if (syms.contains(def.getSymbol())) {
+            try {
+                mds.addDefinition(def);
+            } catch (DuplicateSymbolException dse) {
+                
+                /* attempt to generate an ad hoc symbol instead of dying */
+                
+                String newsym = "dup" + def.getSymbol() + (index++);
 
-                    def.setSymbol("dup" + def.getSymbol() + (index++));
+                LOGGER.warning(
+                        String.format(
+                                "Duplicate symbol %s (%s) renamed %s",
+                                def.getSymbol(),
+                                def.getNamespace().toASCIIString(),
+                                newsym
+                        )
+                );
 
-                }
-
-                syms.add(def.getSymbol());
+                def.setSymbol(newsym);
+                
+                mds.addDefinition(def);
             }
-
-            mds.addDefinition(def);
 
         }
 

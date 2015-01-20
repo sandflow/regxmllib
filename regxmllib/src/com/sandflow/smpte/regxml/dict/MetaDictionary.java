@@ -132,7 +132,7 @@ public class MetaDictionary implements DefinitionResolver {
             }
 
             if (this.definitionsBySymbol.put(def.getSymbol(), def) != null) {
-                throw new IllegalDefinitionException("Duplicate Symbol: " + def.getSymbol());
+                throw new DuplicateSymbolException("Duplicate Symbol: " + def.getSymbol());
             }
         
         }
@@ -233,6 +233,7 @@ public class MetaDictionary implements DefinitionResolver {
         return definitions;
     }
 
+    @Override
     public Definition getDefinition(AUID id) {
         return definitionsByAUID.get(createNormalizedAUID(id));
     }
@@ -325,7 +326,7 @@ public class MetaDictionary implements DefinitionResolver {
                 }
 
                 if (md.definitionsBySymbol.put(def.getSymbol(), def) != null) {
-                    throw new IllegalDefinitionException("Duplicate Symbol: " + def.getSymbol());
+                    throw new DuplicateSymbolException("Duplicate Symbol: " + def.getSymbol());
                 }
 
             }
