@@ -297,18 +297,32 @@ public class XMLRegistryImporter {
                 /* BUG: skip Weak Reference target sets due to missing ULs in the registry */
                 for (Facet f : type.getFacets()) {
 
-                    if (f.getUL() == null) {
-                        LOGGER.warning(String.format(
-                                "Missing Target Set UL at Facet %s for Type %s",
-                                f.getSymbol(),
-                                type.getUL()
-                        )
+                    UL ul = null;
+
+                    if (f.getValue() != null) {
+                        ul = UL.fromURN(f.getValue());
+                    }
+
+                    if (ul == null) {
+                        LOGGER.warning(
+                                String.format(
+                                        "Missing Target Set UL at Type %s",
+                                        type.getUL().toString()
+                                )
                         );
 
                         continue;
                     }
 
-                    ((WeakReferenceTypeDefinition) tdef).getTargetSet().add(new AUID(f.getUL()));
+                    if (!((WeakReferenceTypeDefinition) tdef).getTargetSet().add(new AUID(ul))) {
+
+                        LOGGER.warning(
+                                String.format(
+                                        "Duplicate Target Set UL at Type %s",
+                                        type.getUL().toString()
+                                )
+                        );
+                    }
                 }
 
             } else if (TypeEntry.STRONGREF_TYPEKIND.equals(type.getTypeKind())) {
@@ -402,13 +416,11 @@ public class XMLRegistryImporter {
 
         for (Definition def : defs) {
 
-
             try {
                 mds.addDefinition(def);
             } catch (DuplicateSymbolException dse) {
-                
+
                 /* attempt to generate an ad hoc symbol instead of dying */
-                
                 String newsym = "dup" + def.getSymbol() + (index++);
 
                 LOGGER.warning(
@@ -421,7 +433,7 @@ public class XMLRegistryImporter {
                 );
 
                 def.setSymbol(newsym);
-                
+
                 mds.addDefinition(def);
             }
 
