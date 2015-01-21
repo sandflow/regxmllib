@@ -23,7 +23,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sandflow.smpte.regxml;
+package com.sandflow.smpte.mxf;
 
 import com.sandflow.smpte.klv.exception.KLVException;
 import com.sandflow.smpte.klv.KLVInputStream;
