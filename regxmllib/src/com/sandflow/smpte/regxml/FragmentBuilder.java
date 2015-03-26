@@ -98,6 +98,9 @@ public class FragmentBuilder {
     private static final UL TimeStamp_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.07.00.00.00.00.00");
     private static final UL VersionType_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.03.00.00.00.00.00");
     private static final UL ByteOrder_UL = UL.fromDotValue("06.0E.2B.34.01.01.01.01.03.01.02.01.02.00.00.00");
+    
+    private static final UL Character_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100100.00000000");
+    private static final UL Char_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100300.00000000");
 
     private static final String REGXML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
 
@@ -683,7 +686,20 @@ public class FragmentBuilder {
 
         try {
 
-            final Reader in = new InputStreamReader(value, "UTF-16BE");
+            Reader in = null;
+            
+            if (definition.getElementType().equals(Character_UL)) {
+                in = new InputStreamReader(value, "UTF-16BE");
+            } else if (definition.getElementType().equals(Char_UL)) {
+                in = new InputStreamReader(value, "US-ASCII");
+            } else {
+                throw new RuleException(
+                    String.format("String element type %s not supported",
+                            definition.getElementType().toString()
+                    )
+                );
+            }
+              
 
             while ((c = in.read(chars)) != -1) {
                 sb.append(chars, 0, c);
