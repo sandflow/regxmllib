@@ -855,10 +855,10 @@ public class FragmentBuilder {
         try {
 
             MXFInputStream kis = new MXFInputStream(value);
+            
+            AUID auid = kis.readAUID();
 
-            UL ul = kis.readUL();
-
-            element.setTextContent(ul.toString());
+            element.setTextContent(auid.toString());
 
         } catch (IOException ioe) {
             throw new RuleException(ioe);
