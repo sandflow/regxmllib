@@ -291,6 +291,18 @@ public class XMLSchemaBuilder {
             elem.setAttribute("type", "reg:ByteOrderType");
         } else {
             Definition typedef = resolver.getDefinition(definition.getType());
+            
+            if (typedef == null) {
+
+                throw new RuleException(
+                        String.format(
+                                "Type UL does not resolve at Element %s ",
+                                definition.getIdentification().toString()
+                        )
+                );
+                
+            }
+            
             elem.setAttribute("type", createQName(typedef.getNamespace(), typedef.getSymbol()));
         }
 

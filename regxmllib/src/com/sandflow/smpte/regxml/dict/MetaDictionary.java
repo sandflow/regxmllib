@@ -122,19 +122,20 @@ public class MetaDictionary implements DefinitionResolver {
         }
 
         AUID defid = createNormalizedAUID(def.getIdentification());
-        
+
         if (def.getClass() != PropertyAliasDefinition.class) {
-            
+
             /* TODO: do we really want to exclude aliases here? */
-        
-            if (this.definitionsByAUID.put(defid, def) != null) {
+            if (this.definitionsByAUID.containsKey(defid)) {
                 throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
             }
 
-            if (this.definitionsBySymbol.put(def.getSymbol(), def) != null) {
+            if (this.definitionsBySymbol.containsKey(def.getSymbol())) {
                 throw new DuplicateSymbolException("Duplicate Symbol: " + def.getSymbol());
             }
-        
+
+            this.definitionsByAUID.put(defid, def);
+            this.definitionsBySymbol.put(def.getSymbol(), def);
         }
 
         if (def instanceof PropertyDefinition) {
@@ -285,23 +286,23 @@ public class MetaDictionary implements DefinitionResolver {
         m.marshal(this, writer);
         writer.close();
     }
-    
+
     public Document toXML() {
-        
+
         Document doc = null;
-        
+
         try {
-                
+
             doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             Marshaller m = JAXBContext.newInstance(MetaDictionary.class).createMarshaller();
             m.marshal(this, doc);
-        
+
         } catch (JAXBException | ParserConfigurationException e) {
-            
+
             throw new RuntimeException(e);
-            
+
         }
-        
+
         return doc;
     }
 
@@ -318,16 +319,19 @@ public class MetaDictionary implements DefinitionResolver {
             def.setNamespace(md.getSchemeURI());
 
             AUID defid = createNormalizedAUID(def.getIdentification());
-            
+
             if (def.getClass() != PropertyAliasDefinition.class) {
 
-                if (md.definitionsByAUID.put(defid, def) != null) {
+                if (md.definitionsByAUID.containsKey(defid)) {
                     throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
                 }
 
-                if (md.definitionsBySymbol.put(def.getSymbol(), def) != null) {
+                if (md.definitionsBySymbol.containsKey(def.getSymbol())) {
                     throw new DuplicateSymbolException("Duplicate Symbol: " + def.getSymbol());
                 }
+
+                md.definitionsByAUID.put(defid, def);
+                md.definitionsBySymbol.put(def.getSymbol(), def);
 
             }
 
