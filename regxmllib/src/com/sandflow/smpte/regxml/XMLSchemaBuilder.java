@@ -32,8 +32,10 @@ import com.sandflow.smpte.regxml.definition.Definition;
 import com.sandflow.smpte.regxml.definition.EnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.ExtendibleEnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
+import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
+import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyDefinition;
@@ -67,7 +69,7 @@ import org.xml.sax.SAXException;
  */
 public class XMLSchemaBuilder {
 
-    private static final String REGXML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
+    private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
 
     private static final String XSD_NS = "http://www.w3.org/2001/XMLSchema";
 
@@ -86,44 +88,6 @@ public class XMLSchemaBuilder {
 
     private DefinitionResolver resolver;
     private final NamespacePrefixMapper prefixes = new NamespacePrefixMapper();
-
-    private static final String STD_DECL = "<?xml version='1.0' encoding='UTF-8'?>\n"
-            + "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'\n"
-            + "  elementFormDefault='qualified' attributeFormDefault='unqualified'>\n"
-            + "<xs:import namespace='http://www.w3.org/1999/xlink' schemaLocation='http://www.w3.org/1999/xlink.xsd'/>\n"
-            + "<xs:simpleType name='TargetType'>\n"
-            + "    <xs:union memberTypes='token'>\n"
-            + "        <xs:simpleType>\n"
-            + "            <xs:restriction base='reg:AUID'/>\n"
-            + "        </xs:simpleType>\n"
-            + "        <xs:simpleType>\n"
-            + "            <xs:restriction base='reg:PackageIDType'/>\n"
-            + "        </xs:simpleType>\n"
-            + "        <xs:simpleType>\n"
-            + "            <xs:restriction base='string'>\n"
-            + "                <xs:pattern value='([^\\s]+\\s)?[^\\s]+'/>\n"
-            + "            </xs:restriction>\n"
-            + "        </xs:simpleType>\n"
-            + "    </xs:union>\n"
-            + "</xs:simpleType>\n"
-            + "<xs:simpleType name='ByteOrderType'>\n"
-            + "     <xs:restriction base='string'>\n"
-            + "        <xs:enumeration value='BigEndian'/>\n"
-            + "        <xs:enumeration value='LittleEndian'/>\n"
-            + "     </xs:restriction>\n"
-            + "</xs:simpleType>\n"
-            + "<xs:simpleType name='HexByteArrayType'>\n"
-            + "    <xs:restriction base='string'>\n"
-            + "        <xs:pattern value=' (\\s*[0-9a-fA-F][0-9a-fA-F])*\\s*'/>\n"
-            + "    </xs:restriction>\n"
-            + "</xs:simpleType>\n"
-            + "<xs:attribute name='uid' type='reg:TargetType'/>\n"
-            + "<xs:attribute name='byteOrder' type='reg:ByteOrderType'/>\n"
-            + "<xs:attribute name='stream' type='ENTITY'/>\n"
-            + "<xs:attribute name='actualType' type='reg:TargetType'/>\n"
-            + "<xs:attribute name='escaped' type='xs:boolean'/>\n"
-            + "<xs:attribute name='path' type='xs:string'/>\n"
-            + "</xs:schema>\n";
 
     private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
 
@@ -398,7 +362,19 @@ public class XMLSchemaBuilder {
 
             applyRule6Sub2(element, definition);
 
-        } else {
+        } else if (definition instanceof FloatTypeDefinition) {
+
+            applyRule6_alpha(element, (FloatTypeDefinition) definition);
+
+            applyRule6Sub2(element, definition);
+
+        } else if (definition instanceof LensSerialFloatTypeDefinition) {
+
+            applyRule6_beta(element, (LensSerialFloatTypeDefinition) definition);
+
+            applyRule6Sub2(element, definition);
+
+        }  else {
 
             throw new RuleException("Illegage Definition in Rule 5.");
 
@@ -958,6 +934,10 @@ public class XMLSchemaBuilder {
             for (RecordTypeDefinition.Member member : definition.getMembers()) {
 
                 Definition typedef = resolver.getDefinition(member.getType());
+                
+                if (typedef == null) {
+                    throw new RuleException(String.format("Bad type %s at member %s.", member.getType().toString(), member.getName()));
+                }
 
                 Element element = root.getOwnerDocument().createElementNS(XSD_NS, "xs:element");
                 element.setAttribute("name", member.getName());
@@ -1224,6 +1204,58 @@ public class XMLSchemaBuilder {
         Element restriction = root.getOwnerDocument().createElementNS(XSD_NS, "xs:restriction");
         restriction.setAttribute("base", "reg:TargetType");
         simpleType.appendChild(restriction);
+    }
+    
+    void applyRule6_alpha(Element root, FloatTypeDefinition definition) throws RuleException {
+
+        /*
+         <simpleType name=”{name}”>
+         <restriction base=”{XSDL integer type name}”/>
+         </simpleType>
+
+         */
+        String typename = "ERROR";
+
+        switch (definition.getSize()) {
+            
+            /* not sure this is right */
+            
+            case HALF:
+            case SINGLE:
+                typename = "xs:float";
+                break;
+            case DOUBLE:
+                typename = "xs:double";
+                break;
+        }
+
+        Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
+        simpleType.setAttribute("name", definition.getSymbol());
+        root.appendChild(simpleType);
+
+        Element restriction = root.getOwnerDocument().createElementNS(XSD_NS, "xs:restriction");
+        restriction.setAttribute("base", typename);
+        simpleType.appendChild(restriction);
+
+    }
+    
+    void applyRule6_beta(Element root, LensSerialFloatTypeDefinition definition) throws RuleException {
+
+        /*
+         <simpleType name=”{name}”>
+         <restriction base=”decimal”/>
+         </simpleType>
+
+         */
+
+        Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
+        simpleType.setAttribute("name", definition.getSymbol());
+        root.appendChild(simpleType);
+
+        Element restriction = root.getOwnerDocument().createElementNS(XSD_NS, "xs:restriction");
+        restriction.setAttribute("base", "xs:decimal");
+        simpleType.appendChild(restriction);
+
     }
 
     public static class RuleException extends Exception {

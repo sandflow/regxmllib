@@ -43,6 +43,8 @@ import com.sandflow.smpte.regxml.definition.EnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
 import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
+import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
+import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
@@ -81,7 +83,7 @@ import org.w3c.dom.Document;
 @XmlAccessorType(XmlAccessType.NONE)
 public class MetaDictionary implements DefinitionResolver {
 
-    public final static String ST2001_1_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
+    public final static String ST2001_1_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
 
     @XmlAttribute(name = "rootElement", required = true)
     private final static String rootElement = "MXF";
@@ -228,7 +230,11 @@ public class MetaDictionary implements DefinitionResolver {
         @XmlElement(name = "TypeDefinitionVariableArray",
                 type = VariableArrayTypeDefinition.class),
         @XmlElement(name = "TypeDefinitionWeakObjectReference",
-                type = WeakReferenceTypeDefinition.class)
+                type = WeakReferenceTypeDefinition.class),
+        @XmlElement(name = "TypeDefinitionFloat",
+                type = FloatTypeDefinition.class),
+        @XmlElement(name = "TypeDefinitionLenseSerialFloat",
+                type = LensSerialFloatTypeDefinition.class)
     })
     public ArrayList<Definition> getDefinitions() {
         return definitions;

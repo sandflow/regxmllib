@@ -40,8 +40,10 @@ import com.sandflow.smpte.regxml.definition.Definition;
 import com.sandflow.smpte.regxml.definition.EnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.ExtendibleEnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
+import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
+import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyDefinition;
 import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
@@ -199,11 +201,6 @@ public class XMLRegistryImporter {
                 continue;
             }
 
-            /* BUG: skip bad UUID type */
-            if (type.getUL().equals(UL.fromURN("urn:smpte:ul:060E2B34.01040101.04011100.00000000"))) {
-                continue;
-            }
-
             Definition tdef = null;
 
             if (TypeEntry.RENAME_TYPEKIND.equals(type.getTypeKind())) {
@@ -236,6 +233,29 @@ public class XMLRegistryImporter {
 
                 }
 
+            } else if (TypeEntry.FLOAT_TYPEKIND.equals(type.getTypeKind())) {
+
+                tdef = new FloatTypeDefinition();
+
+                switch (type.getTypeSize().intValue()) {
+                    case 2:
+                        ((FloatTypeDefinition) tdef).setSize(FloatTypeDefinition.Size.HALF);
+                        break;
+                    case 4:
+                        ((FloatTypeDefinition) tdef).setSize(FloatTypeDefinition.Size.SINGLE);
+                        break;
+                    case 8:
+                        ((FloatTypeDefinition) tdef).setSize(FloatTypeDefinition.Size.DOUBLE);
+                        break;
+                    default:
+                        throw new Exception("Illegal Type Size.");
+
+                }
+
+            } else if (TypeEntry.LENSSERIALFLOAT_TYPEKIND.equals(type.getTypeKind())) {
+
+                tdef = new LensSerialFloatTypeDefinition();
+
             } else if (TypeEntry.RECORD_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new RecordTypeDefinition();
@@ -243,7 +263,7 @@ public class XMLRegistryImporter {
                 for (TypeEntry.Facet tchild : type.getFacets()) {
                     Member m = new Member();
 
-                    m.setName(tchild.getName());
+                    m.setName(tchild.getSymbol());
                     m.setType(new AUID(tchild.getType()));
 
                     ((RecordTypeDefinition) tdef).addMember(m);

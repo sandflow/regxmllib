@@ -61,6 +61,12 @@ public class TypeEntry {
     public static final String OPAQUE_TYPEKIND = "Opaque";
     public static final String STRONGREF_TYPEKIND = "StrongReference";
     public static final String WEAKREF_TYPEKIND = "WeakReference";
+    public static final String FLOAT_TYPEKIND = "Float";
+    
+    /**
+     * @deprecated
+     */
+    public static final String LENSSERIALFLOAT_TYPEKIND = "LensSerialFloat";
 
     @XmlElement(name = "Register")
     final static String register = "Types";

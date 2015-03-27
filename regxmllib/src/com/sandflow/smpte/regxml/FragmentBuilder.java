@@ -36,8 +36,10 @@ import com.sandflow.smpte.regxml.definition.Definition;
 import com.sandflow.smpte.regxml.definition.EnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.ExtendibleEnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
+import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
+import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyDefinition;
@@ -104,7 +106,9 @@ public class FragmentBuilder {
 
     private static final UL Boolean_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01040100.00000000");
 
-    private static final String REGXML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
+    private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
+  
+    
 
     private static final String ACTUALTYPE_ATTR = "actualType";
     private static final String BYTEORDER_ATTR = "byteOrder";
@@ -341,6 +345,10 @@ public class FragmentBuilder {
             applyRule5_14(element, value, (VariableArrayTypeDefinition) definition);
         } else if (definition instanceof WeakReferenceTypeDefinition) {
             applyRule5_15(element, value, (WeakReferenceTypeDefinition) definition);
+        } else if (definition instanceof FloatTypeDefinition) {
+            applyRule5_alpha(element, value, (FloatTypeDefinition) definition);
+        } else if (definition instanceof LensSerialFloatTypeDefinition) {
+            applyRule5_beta(element, value, (LensSerialFloatTypeDefinition) definition);
         } else {
 
             throw new RuleException(
@@ -785,6 +793,44 @@ public class FragmentBuilder {
         } catch (IOException ioe) {
             throw new RuleException(ioe);
         }
+    }
+    
+    void applyRule5_alpha(Element element, InputStream value, FloatTypeDefinition definition) throws RuleException {
+
+        try {
+            
+            DataInputStream dis = new DataInputStream(value);
+
+            double val = 0;
+
+            switch (definition.getSize()) {
+                case HALF:
+                    /* TODO: implement or deprecate half-floats */
+                   throw new RuleException("Half floats not supported.");
+                case SINGLE:
+                    val = dis.readFloat();
+                    break;
+                case DOUBLE:
+                    val = dis.readDouble();
+                    break;
+            }
+
+            element.setTextContent(Double.toString(val));
+
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (IOException ioe) {
+            throw new RuleException(ioe);
+        }
+
+    }
+    
+    void applyRule5_beta(Element element, InputStream value, LensSerialFloatTypeDefinition definition) throws RuleException {
+
+
+        throw new RuleException("Lens serial floats not supported.");
+              
+
     }
 
     Definition findBaseDefinition(Definition definition) {

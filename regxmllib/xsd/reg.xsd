@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
-  elementFormDefault='qualified' attributeFormDefault='unqualified' targetNamespace="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict" xmlns:reg="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+  elementFormDefault='qualified' attributeFormDefault='unqualified' targetNamespace="http://sandflow.com/ns/SMPTEST2001-1/baseline" xmlns:reg="http://sandflow.com/ns/SMPTEST2001-1/baseline">
 <xs:import namespace='http://www.w3.org/1999/xlink' schemaLocation='http://www.w3.org/1999/xlink.xsd'/>
 <xs:simpleType name='TargetType'>
     <xs:union memberTypes='xs:token'>

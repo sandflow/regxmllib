@@ -89,4 +89,6 @@ public interface DefinitionVisitor {
     public void visit(VariableArrayTypeDefinition def) throws VisitorException;
     public void visit(WeakReferenceTypeDefinition def) throws VisitorException;
     public void visit(PropertyAliasDefinition def) throws VisitorException;
+    public void visit(FloatTypeDefinition def) throws VisitorException;
+    public void visit(LensSerialFloatTypeDefinition def) throws VisitorException;
 }

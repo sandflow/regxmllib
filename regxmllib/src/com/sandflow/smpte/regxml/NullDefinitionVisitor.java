@@ -42,7 +42,9 @@ import com.sandflow.smpte.regxml.definition.ExtendibleEnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.EnumerationTypeDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
 import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
+import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
+import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
 
 /**
@@ -138,6 +140,16 @@ public class NullDefinitionVisitor implements DefinitionVisitor {
 
     @Override
     public void visit(WeakReferenceTypeDefinition def) throws VisitorException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public void visit(FloatTypeDefinition def) throws VisitorException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+   @Override
+    public void visit(LensSerialFloatTypeDefinition def) throws VisitorException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
