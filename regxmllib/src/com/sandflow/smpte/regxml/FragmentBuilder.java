@@ -98,9 +98,11 @@ public class FragmentBuilder {
     private static final UL TimeStamp_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.07.00.00.00.00.00");
     private static final UL VersionType_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.03.00.00.00.00.00");
     private static final UL ByteOrder_UL = UL.fromDotValue("06.0E.2B.34.01.01.01.01.03.01.02.01.02.00.00.00");
-    
+
     private static final UL Character_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100100.00000000");
     private static final UL Char_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100300.00000000");
+
+    private static final UL Boolean_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01040100.00000000");
 
     private static final String REGXML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
 
@@ -364,9 +366,8 @@ public class FragmentBuilder {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } catch (IOException ioe) {
-            
+
             /* TODO: replace with inline XML error comments? */
-            
             throw new RuleException(ioe);
         }
     }
@@ -378,9 +379,7 @@ public class FragmentBuilder {
             DataInputStream dis = new DataInputStream(value);
 
             int val = dis.readUnsignedByte();
-
-            /* TODO: better error */
-            String str = "ERROR";
+            String str = null;
 
             for (EnumerationTypeDefinition.Element e : definition.getElements()) {
                 if (e.getValue() == val) {
@@ -388,6 +387,33 @@ public class FragmentBuilder {
                 }
             }
 
+            if (str == null) {
+                
+                if (definition.getElementType().equals(Boolean_UL)) {
+                    
+                    /* find the "true" enum element */
+                    /* MXF can encode "true" as any value other than 0 */
+                    
+                    for (EnumerationTypeDefinition.Element e : definition.getElements()) {
+                        if (e.getValue() == 1) {
+                            str = e.getName();
+                        }
+                    }
+
+
+                } else {
+                    
+                    str = "ERROR";
+                    
+                    LOG.warning(
+                            String.format(
+                                    "Undefined Enumeration Value %d for definition %s.",
+                                    val,
+                                    definition.getIdentification()
+                            )
+                    );
+                }
+            }
             element.setTextContent(str);
 
         } catch (UnsupportedEncodingException e) {
@@ -687,19 +713,18 @@ public class FragmentBuilder {
         try {
 
             Reader in = null;
-            
+
             if (definition.getElementType().equals(Character_UL)) {
                 in = new InputStreamReader(value, "UTF-16BE");
             } else if (definition.getElementType().equals(Char_UL)) {
                 in = new InputStreamReader(value, "US-ASCII");
             } else {
                 throw new RuleException(
-                    String.format("String element type %s not supported",
-                            definition.getElementType().toString()
-                    )
+                        String.format("String element type %s not supported",
+                                definition.getElementType().toString()
+                        )
                 );
             }
-              
 
             while ((c = in.read(chars)) != -1) {
                 sb.append(chars, 0, c);
@@ -871,7 +896,7 @@ public class FragmentBuilder {
         try {
 
             MXFInputStream kis = new MXFInputStream(value);
-            
+
             AUID auid = kis.readAUID();
 
             element.setTextContent(auid.toString());
