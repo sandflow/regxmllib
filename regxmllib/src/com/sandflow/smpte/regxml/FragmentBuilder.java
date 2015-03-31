@@ -104,11 +104,11 @@ public class FragmentBuilder {
     private static final UL Character_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100100.00000000");
     private static final UL Char_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100300.00000000");
 
+    private static final UL ProductReleaseType_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.02010101.00000000");
+
     private static final UL Boolean_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01040100.00000000");
 
     private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
-  
-    
 
     private static final String ACTUALTYPE_ATTR = "actualType";
     private static final String BYTEORDER_ATTR = "byteOrder";
@@ -294,7 +294,7 @@ public class FragmentBuilder {
                 definition = resolver.getDefinition(((PropertyAliasDefinition) definition).getOriginalProperty());
             }
 
-            Definition typedef = resolver.getDefinition(((PropertyDefinition) definition).getType());
+            Definition typedef = findBaseDefinition(resolver.getDefinition(((PropertyDefinition) definition).getType()));
 
             if (typedef == null) {
                 throw new RuleException(
@@ -362,66 +362,125 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_1(Element element, InputStream value, CharacterTypeDefinition definition) throws RuleException {
-        byte[] c = new byte[2];
+    private void readCharacters(InputStream value, CharacterTypeDefinition definition, StringBuilder sb) throws RuleException {
 
         try {
 
-            value.read(c);
+            Reader in = null;
 
-            element.setTextContent(new String(c, "UTF-16BE"));
+            if (definition.getIdentification().equals(Character_UL)) {
+                in = new InputStreamReader(value, "UTF-16BE");
+            } else if (definition.getIdentification().equals(Char_UL)) {
+                in = new InputStreamReader(value, "US-ASCII");
+            } else {
+                throw new RuleException(
+                        String.format("Character  type %s not supported",
+                                definition.getIdentification().toString()
+                        )
+                );
+            }
 
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            char[] chars = new char[32];
+
+            for (int c; (c = in.read(chars)) != -1;) {
+                sb.append(chars, 0, c);
+            }
+
         } catch (IOException ioe) {
-
-            /* TODO: replace with inline XML error comments? */
             throw new RuleException(ioe);
         }
+    }
+
+    void applyRule5_1(Element element, InputStream value, CharacterTypeDefinition definition) throws RuleException {
+
+        StringBuilder sb = new StringBuilder();
+
+        readCharacters(value, definition, sb);
+
+        element.setTextContent(sb.toString());
+
     }
 
     void applyRule5_2(Element element, InputStream value, EnumerationTypeDefinition definition) throws RuleException {
 
         try {
 
-            DataInputStream dis = new DataInputStream(value);
+            Definition bdef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
 
-            int val = dis.readUnsignedByte();
+            if (!(bdef instanceof IntegerTypeDefinition)) {
+                throw new RuleException(
+                        String.format("Enum %s does not have an Integer base type.",
+                                definition.getIdentification().toString()
+                        ));
+            }
+
+            IntegerTypeDefinition idef = (IntegerTypeDefinition) bdef;
+
+            int len = 0;
+
+            if (definition.getIdentification().equals(ProductReleaseType_UL)) {
+
+                /* EXCEPTION: ProductReleaseType_UL is listed as 
+                 a UInt8 enum but encoded as a UInt16 */
+                len = 2;
+
+            } else {
+                switch (idef.getSize()) {
+                    case ONE:
+                        len = 1;
+                        break;
+                    case TWO:
+                        len = 2;
+                        break;
+                    case FOUR:
+                        len = 4;
+                        break;
+                    case EIGHT:
+                        len = 8;
+                        break;
+                }
+            }
+
+            byte[] val = new byte[len];
+
+            value.read(val);
+
+            BigInteger bi = idef.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
+
             String str = null;
 
             for (EnumerationTypeDefinition.Element e : definition.getElements()) {
-                if (e.getValue() == val) {
+                if (e.getValue() == bi.intValue()) {
                     str = e.getName();
                 }
             }
 
             if (str == null) {
-                
+
                 if (definition.getElementType().equals(Boolean_UL)) {
-                    
+
                     /* find the "true" enum element */
                     /* MXF can encode "true" as any value other than 0 */
-                    
                     for (EnumerationTypeDefinition.Element e : definition.getElements()) {
                         if (e.getValue() == 1) {
                             str = e.getName();
                         }
                     }
 
-
                 } else {
-                    
+
                     str = "ERROR";
-                    
+
                     LOG.warning(
                             String.format(
-                                    "Undefined Enumeration Value %d for definition %s.",
-                                    val,
+                                    "Undefined value %d for Enumeration %s.",
+                                    bi.intValue(),
                                     definition.getIdentification()
                             )
                     );
                 }
             }
+
             element.setTextContent(str);
 
         } catch (UnsupportedEncodingException e) {
@@ -466,7 +525,7 @@ public class FragmentBuilder {
             }
         } else {
 
-            Definition typedef = resolver.getDefinition(definition.getElementType());
+            Definition typedef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
 
             applyCoreRule5_4(element, value, typedef, definition.getElementCount());
 
@@ -637,6 +696,7 @@ public class FragmentBuilder {
 
             } else if (definition.getIdentification().equals(VersionType_UL)) {
 
+                /* EXCEPTION: registers used Int8 but MXF specifies UInt8 */
                 int major = kis.readUnsignedByte();
                 int minor = kis.readUnsignedByte();
 
@@ -646,7 +706,7 @@ public class FragmentBuilder {
 
                 for (RecordTypeDefinition.Member member : definition.getMembers()) {
 
-                    Definition itemdef = resolver.getDefinition(member.getType());
+                    Definition itemdef = findBaseDefinition(resolver.getDefinition(member.getType()));
 
                     Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), member.getName());
 
@@ -674,7 +734,7 @@ public class FragmentBuilder {
 
     void applyRule5_10(Element element, InputStream value, SetTypeDefinition definition) throws RuleException {
 
-        Definition typedef = resolver.getDefinition(definition.getElementType());
+        Definition typedef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
 
         try {
 
@@ -713,47 +773,32 @@ public class FragmentBuilder {
         /*TODO: handle integer-based strings Rule 5.12.1 */
         /* ASSUMES THAT VALUE TERMINATES ON THE FIELD */
         /*Rule 5.12 */
-        char[] chars = new char[32];
+        Definition chrdef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
 
-        int c;
+        if (!(chrdef instanceof CharacterTypeDefinition)) {
+            throw new RuleException(
+                    String.format(
+                            "String type %s does not have a Character Type as element.",
+                            definition.getIdentification().toString()
+                    )
+            );
+        }
+
         StringBuilder sb = new StringBuilder();
 
-        try {
-
-            Reader in = null;
-
-            if (definition.getElementType().equals(Character_UL)) {
-                in = new InputStreamReader(value, "UTF-16BE");
-            } else if (definition.getElementType().equals(Char_UL)) {
-                in = new InputStreamReader(value, "US-ASCII");
-            } else {
-                throw new RuleException(
-                        String.format("String element type %s not supported",
-                                definition.getElementType().toString()
-                        )
-                );
-            }
-
-            while ((c = in.read(chars)) != -1) {
-                sb.append(chars, 0, c);
-            }
-
-            /* remove trailing zeroes if any */
-            if (sb.length() > 0 && sb.charAt(sb.length() - 1) == 0) {
-                sb.deleteCharAt(sb.length() - 1);
-            }
-
-            element.setTextContent(sb.toString());
-
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
+        readCharacters(value, (CharacterTypeDefinition) chrdef, sb);
+        /* remove trailing zeroes if any */
+        if (sb.length() > 0 && sb.charAt(sb.length() - 1) == 0) {
+            sb.deleteCharAt(sb.length() - 1);
         }
+
+        element.setTextContent(sb.toString());
 
     }
 
     void applyRule5_13(Element element, InputStream value, StrongReferenceTypeDefinition definition) throws RuleException {
 
-        Definition typedef = resolver.getDefinition(definition.getReferenceType());
+        Definition typedef = findBaseDefinition(resolver.getDefinition(definition.getReferenceType()));
 
         if (!(typedef instanceof ClassDefinition)) {
             throw new RuleException("Rule 5.13 applied to non class.");
@@ -794,11 +839,11 @@ public class FragmentBuilder {
             throw new RuleException(ioe);
         }
     }
-    
+
     void applyRule5_alpha(Element element, InputStream value, FloatTypeDefinition definition) throws RuleException {
 
         try {
-            
+
             DataInputStream dis = new DataInputStream(value);
 
             double val = 0;
@@ -806,7 +851,7 @@ public class FragmentBuilder {
             switch (definition.getSize()) {
                 case HALF:
                     /* TODO: implement or deprecate half-floats */
-                   throw new RuleException("Half floats not supported.");
+                    throw new RuleException("Half floats not supported.");
                 case SINGLE:
                     val = dis.readFloat();
                     break;
@@ -824,12 +869,10 @@ public class FragmentBuilder {
         }
 
     }
-    
+
     void applyRule5_beta(Element element, InputStream value, LensSerialFloatTypeDefinition definition) throws RuleException {
 
-
         throw new RuleException("Lens serial floats not supported.");
-              
 
     }
 
@@ -860,16 +903,16 @@ public class FragmentBuilder {
 
     void applyRule5_14(Element element, InputStream value, VariableArrayTypeDefinition definition) throws RuleException {
 
-        Definition typedef = resolver.getDefinition(definition.getElementType());
+        Definition typedef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
 
         try {
 
             DataInputStream dis = new DataInputStream(value);
 
-            /* BUG: UInt8Array is not used correctly for J2K items */
-            if (/*definition.getSymbol().equals("UInt8Array")*/false) {
+            if (definition.getSymbol().equals("DataValue")) {
 
-                /* BUG: this is stored as an array that takes the entire item */
+                /* RULE 5.14.2 */
+                /* DataValue is string of octets, without number of elements or size of elements */
                 byte[] buffer = new byte[32];
 
                 StringBuilder sb = new StringBuilder();
@@ -888,46 +931,24 @@ public class FragmentBuilder {
 
             } else {
 
-                if (definition.getSymbol().equals("DataValue")) {
+                long itemcount = dis.readInt() & 0xfffffffL;
+                long itemlength = dis.readInt() & 0xfffffffL;
 
-                    /* RULE 5.14.2 */
-                    /* DataValue is string of octets, without number of elements or size of elements */
-                    byte[] buffer = new byte[32];
+                Definition base = findBaseDefinition(typedef);
 
-                    StringBuilder sb = new StringBuilder();
+                if (base instanceof CharacterTypeDefinition || base.getName().contains("StringArray")) {
 
-                    for (int sz = 0; (sz = dis.read(buffer)) > -1;) {
-
-                        for (int j = 0; j < sz; j++) {
-
-                            int v = buffer[j] & 0xFF;
-                            sb.append(HEXMAP[v >>> 4]);
-                            sb.append(HEXMAP[v & 0x0F]);
-                        }
-                    }
-
-                    element.setTextContent(sb.toString());
+                    /* RULE 5.14.1 */
+                    /* BUG: where is StringArray defined? */
+                    throw new RuleException("StringArray not supported.");
 
                 } else {
 
-                    long itemcount = dis.readInt() & 0xfffffffL;
-                    long itemlength = dis.readInt() & 0xfffffffL;
-
-                    Definition base = findBaseDefinition(typedef);
-
-                    if (base instanceof CharacterTypeDefinition || base.getName().contains("StringArray")) {
-
-                        /* RULE 5.14.1 */
-                        /* BUG: where is StringArray defined? */
-                        throw new RuleException("StringArray not supported.");
-
-                    } else {
-
-                        applyCoreRule5_4(element, value, typedef, (int) itemcount);
-                    }
-
+                    applyCoreRule5_4(element, value, typedef, (int) itemcount);
                 }
+
             }
+
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } catch (IOException ioe) {

@@ -52,7 +52,6 @@ import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.io.IOException;
-import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import javax.xml.parsers.DocumentBuilder;
@@ -60,7 +59,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
