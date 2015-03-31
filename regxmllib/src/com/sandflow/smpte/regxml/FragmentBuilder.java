@@ -240,6 +240,18 @@ public class FragmentBuilder {
                                     item.getKey().toString()
                             )
                     );
+                    
+                    
+                    
+                    elem.appendChild(
+                        elem.getOwnerDocument().createComment(
+                                String.format(
+                                        "Unknow Item\nKey: %s\nData: %s",
+                                        item.getKey().toString(),
+                                        bytesToString(item.getValue())
+                                )
+                        )
+                    );
                 } else {
 
                     if (itemdef.getIdentification().asUL().getVersion() != item.getKey().getVersion()) {
@@ -887,7 +899,7 @@ public class FragmentBuilder {
 
     final static char[] HEXMAP = "0123456789abcdef".toCharArray();
 
-    String bytesToString(byte[] buffer) {
+    private String bytesToString(byte[] buffer) {
 
         char[] out = new char[2 * buffer.length];
 
