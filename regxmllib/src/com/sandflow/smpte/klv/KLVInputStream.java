@@ -62,12 +62,12 @@ public class KLVInputStream extends DataInputStream {
         if (b <= 0) {
             throw new EOFException();
         }
-
+        
         if ((b & 0x80) == 0) {
-            throw new KLVException(INVALID_BER_LENGTH);
+           return b;
         }
 
-        int bersz = (b & 0x0f);
+        int bersz =  (b & 0x0f);
 
         if (bersz > 8) {
             throw new KLVException(MAX_LENGTH_EXCEEED);

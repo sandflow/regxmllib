@@ -78,6 +78,7 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
@@ -207,6 +208,8 @@ public class FragmentBuilder {
         }
 
         Element elem = node.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
+        
+        node.appendChild(elem);
 
         elem.setPrefix(getPrefix(definition.getNamespace()));
 
@@ -219,10 +222,49 @@ public class FragmentBuilder {
                 try {
                     UUID uuid = mis.readUUID();
 
+                    String uuidstr = uuid.toString();
+
+                    /* prevent self-references */
+                    
+                    Node parent = node;
+                    
+                    do {
+
+                        NamedNodeMap attrs = parent.getAttributes();
+                        
+                        if (attrs == null) continue;
+                        
+                        Node attr = attrs.getNamedItemNS(REGXML_NS, UID_ATTR);
+                        
+                        if (attr == null) continue;
+
+                        if (uuidstr.equals(attr.getTextContent())) {
+
+                            LOG.warning(
+                                    String.format(
+                                            "Self-referencing Strong Reference at Group %s with UID %s",
+                                            definition.getSymbol(),
+                                            uuidstr
+                                    )
+                            );
+
+                            Comment comment = node.getOwnerDocument().createComment(
+                                    String.format(
+                                            "Strong Reference %s not found",
+                                            uuid.toString()
+                                    )
+                            );
+
+                            node.appendChild(comment);
+
+                            return;
+                        }
+                    } while ((parent = parent.getParentNode()) != null);
+
                     elem.setAttributeNS(
                             REGXML_NS,
                             UID_ATTR,
-                            uuid.toString()
+                            uuidstr
                     );
 
                 } catch (IOException ex) {
@@ -236,21 +278,20 @@ public class FragmentBuilder {
                 if (itemdef == null) {
                     LOG.warning(
                             String.format(
-                                    "Unknown property UL = %s",
-                                    item.getKey().toString()
+                                    "Unknown property UL = %s at group %s",
+                                    item.getKey().toString(),
+                                    definition.getSymbol()
                             )
                     );
-                    
-                    
-                    
+
                     elem.appendChild(
-                        elem.getOwnerDocument().createComment(
-                                String.format(
-                                        "Unknow Item\nKey: %s\nData: %s",
-                                        item.getKey().toString(),
-                                        bytesToString(item.getValue())
-                                )
-                        )
+                            elem.getOwnerDocument().createComment(
+                                    String.format(
+                                            "Unknow Item\nKey: %s\nData: %s",
+                                            item.getKey().toString(),
+                                            bytesToString(item.getValue())
+                                    )
+                            )
                     );
                 } else {
 
@@ -271,13 +312,13 @@ public class FragmentBuilder {
 
         }
 
-        node.appendChild(elem);
-
     }
 
     void applyRule4(Element element, InputStream value, Definition definition) throws RuleException {
 
         Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
+        
+        element.appendChild(elem);
 
         elem.setPrefix(getPrefix(definition.getNamespace()));
 
@@ -320,8 +361,6 @@ public class FragmentBuilder {
 
             applyRule5(elem, value, typedef);
         }
-
-        element.appendChild(elem);
 
     }
 
