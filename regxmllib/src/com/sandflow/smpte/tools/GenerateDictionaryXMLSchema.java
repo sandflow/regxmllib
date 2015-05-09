@@ -36,8 +36,13 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -46,6 +51,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -58,6 +64,8 @@ public class GenerateDictionaryXMLSchema {
             + "     GenerateDictionaryXMLSchema -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -o outputdir\n"
             + "     GenerateDictionaryXMLSchema -?\n";
 
+    private final static String XMLSCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
+    
     public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
 
         if (args.length < 4
@@ -84,6 +92,34 @@ public class GenerateDictionaryXMLSchema {
             mds.addDictionary(md);
 
         }
+        
+
+        /* generate a schema document that includes all registers */
+        
+        Document masterxsd = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+        
+        Element masterxsd_root = masterxsd.createElementNS(XMLSCHEMA_NS, "schema");
+        
+        masterxsd.appendChild(masterxsd_root);
+        
+        /* generate the common xsd declarations */
+        
+        InputStream regis = GenerateDictionaryXMLSchema.class.getResourceAsStream("/resources/reg.xsd");
+                                
+        Files.copy(regis, Paths.get(args[args.length - 1], "reg.xsd"), StandardCopyOption.REPLACE_EXISTING);
+        
+                    Element masterxsd_import = masterxsd.createElementNS(XMLSCHEMA_NS, "import");
+            
+            masterxsd_import.setAttribute("namespace", XMLSchemaBuilder.REGXML_NS);
+            
+            masterxsd_import.setAttribute("schemaLocation", "reg.xsd");
+            
+            masterxsd_root.appendChild(masterxsd_import);
+        
+        /* create transformer to ouput a concrete representation of our DOMs */
+        
+        Transformer tr = TransformerFactory.newInstance().newTransformer();
+        tr.setOutputProperty(OutputKeys.INDENT, "yes");
 
 
         /* create the fragment builder */
@@ -92,9 +128,22 @@ public class GenerateDictionaryXMLSchema {
         sb.setDefinitionResolver(mds);
 
         for (MetaDictionary md : mds.getDictionaries()) {
-            String fname = md.getSchemeURI().getAuthority() + md.getSchemeURI().getPath();
+            String fname = md.getSchemeURI().getAuthority() + md.getSchemeURI().getPath().replaceAll("[^a-zA-Z0-9]", "-")
+                            + ".xsd";
+            
+            /* add to master include xsd */
+            
+            masterxsd_import = masterxsd.createElementNS(XMLSCHEMA_NS, "import");
+            
+            masterxsd_import.setAttribute("namespace", md.getSchemeURI().toString());
+            
+            masterxsd_import.setAttribute("schemaLocation", fname);
+            
+            masterxsd_root.appendChild(masterxsd_import);
+            
+            /* create the XSD file */
 
-            File f = new File(args[args.length - 1], fname.replaceAll("[^a-zA-Z0-9]", "-") + ".xsd");
+            File f = new File(args[args.length - 1], fname);
 
             Document doc = sb.xmlSchemaFromDictionary(md);
 
@@ -113,16 +162,19 @@ public class GenerateDictionaryXMLSchema {
                     doc.getDocumentElement()
             );
             
-            Transformer tr = TransformerFactory.newInstance().newTransformer();
-
-            tr.setOutputProperty(OutputKeys.INDENT, "yes");
-
             tr.transform(
                     new DOMSource(doc),
                     new StreamResult(f)
             );
 
         }
+        
+        File includefile = new File(args[args.length - 1], "include.xsd");
+
+                    tr.transform(new DOMSource(masterxsd),
+                    new StreamResult(includefile)
+            );
+        
     }
 
 }

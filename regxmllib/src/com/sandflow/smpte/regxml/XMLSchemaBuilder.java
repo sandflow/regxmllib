@@ -67,7 +67,7 @@ import org.xml.sax.SAXException;
  */
 public class XMLSchemaBuilder {
 
-    private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
+    public static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
 
     private static final String XSD_NS = "http://www.w3.org/2001/XMLSchema";
 

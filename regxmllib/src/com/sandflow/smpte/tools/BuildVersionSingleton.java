@@ -25,8 +25,9 @@
  */
 package com.sandflow.smpte.tools;
 
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  *
@@ -34,7 +35,7 @@ import java.util.ResourceBundle;
  */
 public class BuildVersionSingleton {
 
-    private static final String BUILD_VERSION_PROPFILE = "repoversion";
+    private static final String BUILD_VERSION_PROPFILE = "/config/repoversion.properties";
     private static final String BUILD_VERSION_PROPNAME = "version";
 
 
@@ -49,10 +50,16 @@ public class BuildVersionSingleton {
         String bv = "n/a";
 
         try {
+            
+            Properties prop = new Properties();
+            InputStream in = getClass().getResourceAsStream(BUILD_VERSION_PROPFILE);
+            prop.load(in);
 
-            bv = ResourceBundle.getBundle(BUILD_VERSION_PROPFILE).getString(BUILD_VERSION_PROPNAME);
+            bv = prop.getProperty(BUILD_VERSION_PROPNAME);
+            
+            in.close();
 
-        } catch (MissingResourceException e) {
+        } catch (IOException e) {
             // ignore missing resources
         }
 

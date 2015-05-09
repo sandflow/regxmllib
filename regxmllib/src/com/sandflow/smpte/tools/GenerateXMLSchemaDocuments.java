@@ -27,7 +27,6 @@ package com.sandflow.smpte.tools;
 
 import com.sandflow.smpte.register.exception.DuplicateEntryException;
 import com.sandflow.smpte.register.exception.InvalidEntryException;
-import com.sandflow.smpte.util.ExcelCSVParser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class GenerateXMLSchemaDocuments {
             + "  Usage: GenerateXMLSchemaDocuments -cp classpath -d outdir\n"
             + "         GenerateXMLSchemaDocuments -?";
 
-    public static void main(String[] args) throws FileNotFoundException, ExcelCSVParser.SyntaxException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, Exception {
+    public static void main(String[] args) throws FileNotFoundException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, Exception {
         if (args.length != 4
                 || "-?".equals(args[0])) {
 

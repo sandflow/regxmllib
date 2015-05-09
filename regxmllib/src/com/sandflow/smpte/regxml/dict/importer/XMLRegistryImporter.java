@@ -27,13 +27,11 @@ package com.sandflow.smpte.regxml.dict.importer;
 
 import com.sandflow.smpte.register.ElementEntry;
 import com.sandflow.smpte.register.ElementsRegister;
-import com.sandflow.smpte.register.importer.ExcelElementsRegister;
 import com.sandflow.smpte.register.GroupEntry;
 import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypeEntry;
 import com.sandflow.smpte.register.TypeEntry.Facet;
 import com.sandflow.smpte.register.TypesRegister;
-import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.regxml.definition.CharacterTypeDefinition;
 import com.sandflow.smpte.regxml.definition.ClassDefinition;
 import com.sandflow.smpte.regxml.definition.Definition;
@@ -44,9 +42,9 @@ import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
 import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
 import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
-import com.sandflow.smpte.regxml.definition.PropertyDefinition;
 import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
 import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
+import com.sandflow.smpte.regxml.definition.PropertyDefinition;
 import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
 import com.sandflow.smpte.regxml.definition.RecordTypeDefinition.Member;
 import com.sandflow.smpte.regxml.definition.RenameTypeDefinition;
@@ -57,8 +55,8 @@ import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.DuplicateSymbolException;
-import com.sandflow.smpte.regxml.dict.IllegalDefinitionException;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
+import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -70,7 +68,7 @@ import java.util.logging.Logger;
  */
 public class XMLRegistryImporter {
 
-    private final static Logger LOGGER = Logger.getLogger(ExcelElementsRegister.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(XMLRegistryImporter.class.getName());
 
     public static MetaDictionaryGroup fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
 

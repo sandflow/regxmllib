@@ -1,4 +1,4 @@
 /build/
 /dist/
 /nbproject/private/
-/src/repoversion.properties
+/src/config/repoversion.properties

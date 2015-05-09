@@ -33,15 +33,11 @@ import com.sandflow.smpte.register.exception.InvalidEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import static com.sandflow.smpte.regxml.dict.importer.XMLRegistryImporter.fromRegister;
-import com.sandflow.smpte.util.ExcelCSVParser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -64,7 +60,7 @@ public class XMLRegistersToDict {
             + "                            outputdir\n"
             + "         XMLRegistersToDict -?";
 
-    public static void main(String[] args) throws FileNotFoundException, ExcelCSVParser.SyntaxException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, Exception {
+    public static void main(String[] args) throws FileNotFoundException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, Exception {
         if (args.length != 9
                 || "-?".equals(args[0])
                 || (!"-e".equals(args[0]))

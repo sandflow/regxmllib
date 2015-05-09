@@ -26,7 +26,6 @@
 package com.sandflow.smpte.regxml;
 
 import java.net.URI;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 

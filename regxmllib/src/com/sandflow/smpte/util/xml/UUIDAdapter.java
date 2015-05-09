@@ -25,8 +25,6 @@
  */
 package com.sandflow.smpte.util.xml;
 
-import com.sandflow.smpte.util.AUID;
-import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UUID;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
