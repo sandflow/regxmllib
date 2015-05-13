@@ -23,16 +23,19 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package com.sandflow.smpte.regxml.dict.exceptions;
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+/**
+ *
+ * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ */
+public class IllegalDefinitionException extends Exception {
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+    public IllegalDefinitionException() {
+    }
 
+    public IllegalDefinitionException(String msg) {
+        super(msg);
+    }
+
+}

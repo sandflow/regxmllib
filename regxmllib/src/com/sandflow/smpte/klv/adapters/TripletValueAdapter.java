@@ -23,16 +23,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package com.sandflow.smpte.klv.adapters;
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
-
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
-
+/**
+ *
+ * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ */
+public interface TripletValueAdapter {
+    static <W> W fromValue(byte[] value) { return null;}
+    static <W> byte[] toValue(W obj) {return null;}
+}

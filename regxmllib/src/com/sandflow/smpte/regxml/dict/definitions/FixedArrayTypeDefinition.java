@@ -23,16 +23,50 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package com.sandflow.smpte.regxml.dict.definitions;
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.xml.AUIDAdapter;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+/**
+ *
+ * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ */
+@XmlAccessorType(XmlAccessType.NONE)
+public class FixedArrayTypeDefinition extends Definition {
+    
+    public FixedArrayTypeDefinition() {}
 
+    @XmlElement(name = "ElementCount")
+    private int elementCount;
+
+    @XmlJavaTypeAdapter(value = AUIDAdapter.class)
+    @XmlElement(name = "ElementType")
+    private AUID elementType;
+
+    @Override
+    public void accept(DefinitionVisitor visitor)  throws DefinitionVisitor.VisitorException {
+        visitor.visit(this);
+    }
+
+    public int getElementCount() {
+        return elementCount;
+    }
+
+    public void setElementCount(int elementCount) {
+        this.elementCount = elementCount;
+    }
+
+    public AUID getElementType() {
+        return elementType;
+    }
+
+    public void setElementType(AUID elementType) {
+        this.elementType = elementType;
+    }
+
+}

@@ -27,9 +27,9 @@ package com.sandflow.smpte.mxf;
 
 import com.sandflow.smpte.klv.KLVInputStream;
 import com.sandflow.smpte.klv.Triplet;
-import com.sandflow.smpte.klv.exception.KLVException;
+import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.util.UL;
-import com.sandflow.smpte.klv.adapter.ULValueAdapter;
+import com.sandflow.smpte.klv.adapters.ULValueAdapter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;

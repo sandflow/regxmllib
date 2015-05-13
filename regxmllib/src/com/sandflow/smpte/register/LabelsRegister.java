@@ -25,7 +25,7 @@
  */
 package com.sandflow.smpte.register;
 
-import com.sandflow.smpte.register.exception.DuplicateEntryException;
+import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.util.UL;
 import java.io.IOException;
 import java.io.Reader;

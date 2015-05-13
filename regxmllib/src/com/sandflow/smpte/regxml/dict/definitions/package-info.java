@@ -30,8 +30,9 @@
         @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
         },
         elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+package com.sandflow.smpte.regxml.dict.definitions;
 
+import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlSchema;

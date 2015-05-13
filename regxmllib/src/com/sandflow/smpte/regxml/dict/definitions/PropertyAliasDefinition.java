@@ -24,15 +24,43 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+package com.sandflow.smpte.regxml.dict.definitions;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.xml.AUIDAdapter;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+/**
+ *
+ * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ */
+@XmlAccessorType(XmlAccessType.NONE)
+public class PropertyAliasDefinition extends PropertyDefinition {
+
+    public PropertyAliasDefinition() {
+    }
+    
+    @XmlJavaTypeAdapter(value = AUIDAdapter.class)
+    @XmlElement(name = "OriginalProperty")
+    private AUID originalProperty;
+
+    @Override
+    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
+       visitor.visit(this);
+    }
+
+    public AUID getOriginalProperty() {
+        return originalProperty;
+    }
+
+    public void setOriginalProperty(AUID originalProperty) {
+        this.originalProperty = originalProperty;
+    }
+
+    
+    
+    
+}

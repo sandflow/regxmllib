@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Copyright (c) 2015, pal
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,16 +23,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package com.sandflow.smpte.regxml.dict.exceptions;
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+/**
+ *
+ * @author pal
+ */
+public class DuplicateSymbolException extends IllegalDefinitionException {
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+    public DuplicateSymbolException() {
+        super();
+    }
 
+    public DuplicateSymbolException(String msg) {
+        super(msg);
+    }
+    
+}

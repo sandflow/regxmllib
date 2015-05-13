@@ -25,8 +25,8 @@
  */
 package com.sandflow.smpte.regxml.dict;
 
-import com.sandflow.smpte.regxml.definition.ClassDefinition;
-import com.sandflow.smpte.regxml.definition.Definition;
+import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.Definition;
 import com.sandflow.smpte.util.AUID;
 import java.util.Collection;
 

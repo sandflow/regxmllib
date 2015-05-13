@@ -24,15 +24,56 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+package com.sandflow.smpte.regxml.dict.definitions;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.xml.AUIDAdapter;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+@XmlAccessorType(XmlAccessType.NONE)
+public class ClassDefinition extends Definition {
+    
+    
+    
+    /**
+     * specifies the parent of the class being defined.
+     */
+    @XmlJavaTypeAdapter(value = AUIDAdapter.class)
+    @XmlElement(name = "ParentClass")
+    private AUID    parentClass;
+    
+    /**
+     * specifies if the class is concrete
+     */
+    @XmlElement(name = "IsConcrete")
+    private boolean concrete;
+
+    public ClassDefinition() {}
+
+    public AUID getParentClass() {
+        return parentClass;
+    }
+
+    public void setParentClass(AUID parentClass) {
+        this.parentClass = parentClass;
+    }
+
+    public boolean isConcrete() {
+        return concrete;
+    }
+
+    public void setConcrete(boolean concrete) {
+        this.concrete = concrete;
+    }
+
+    @Override
+    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
+        visitor.visit(this);
+    }
+
+
+    
+}

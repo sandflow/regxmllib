@@ -23,28 +23,66 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sandflow.smpte.mxf;
+package com.sandflow.smpte.regxml.dict.definitions;
 
-import com.sandflow.smpte.klv.exceptions.KLVException;
-import com.sandflow.smpte.klv.Triplet;
-import com.sandflow.smpte.util.UL;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class FillItem {
-    
-    public static final UL LABEL = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x01, 0x01, 0x01, 0x02, 0x03, 0x01, 0x02, 0x10, 0x01, 0x00, 0x00, 0x00});
+@XmlAccessorType(XmlAccessType.NONE)
+public class IntegerTypeDefinition extends Definition {
 
-    public static FillItem fromTriplet(Triplet triplet) throws KLVException {
 
-        FillItem fi = new FillItem();
 
-        if (!LABEL.equalsIgnoreVersion(triplet.getKey())) {
-            return null;
-        }
+    /**
+     * specifies the number of bytes to store the value
+     */
+    @XmlElement(name = "Size")
+    private Size size;
 
-        return fi;
+    /**
+     * specifies whether the integer is signed or unsigned
+     */
+    @XmlElement(name = "IsSigned")
+    private boolean signed;
+
+    public IntegerTypeDefinition() {
     }
+
+    @Override
+    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
+        visitor.visit(this);
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public boolean isSigned() {
+        return signed;
+    }
+
+    public void setSigned(boolean signed) {
+        this.signed = signed;
+    }
+
+    @XmlEnum(Integer.class)
+    public enum Size {
+        @XmlEnumValue("1") ONE, 
+        @XmlEnumValue("2") TWO, 
+        @XmlEnumValue("4") FOUR, 
+        @XmlEnumValue("8") EIGHT
+    }
+
+    
 }

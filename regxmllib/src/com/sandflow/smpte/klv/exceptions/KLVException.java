@@ -23,16 +23,34 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package com.sandflow.smpte.klv.exceptions;
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+/**
+ *
+ * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ */
+public class KLVException extends Exception {
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+    public static String MAX_LENGTH_EXCEEED = "Maximum in-memory KLV size exceeded.";
+    public static String INVALID_BER_LENGTH = "Invalid BER encoding.";
+    public static String MAX_BER_SIZE_EXCEEED = "Maximum BER length exceeded.";
 
+    public KLVException() {
+        super();
+    }
+
+    public KLVException(String msg) {
+        super(msg);
+    }
+
+    public KLVException(Exception e) {
+        super(e);
+    }
+
+    public KLVException(String string, Throwable thrwbl) {
+        super(string, thrwbl);
+    }
+    
+    
+
+}

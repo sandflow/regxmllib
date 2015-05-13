@@ -23,16 +23,27 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package com.sandflow.smpte.regxml.dict.definitions;
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+/**
+ *
+ * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * @deprecated 
+ */
+@XmlAccessorType(XmlAccessType.NONE)
+public class LensSerialFloatTypeDefinition extends Definition {
 
+    public LensSerialFloatTypeDefinition() {
+    }
+
+    @Override
+    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
+        visitor.visit(this);
+    }
+
+
+    
+}

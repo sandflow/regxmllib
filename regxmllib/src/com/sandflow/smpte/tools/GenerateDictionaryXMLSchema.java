@@ -25,11 +25,11 @@
  */
 package com.sandflow.smpte.tools;
 
-import com.sandflow.smpte.klv.exception.KLVException;
+import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.regxml.FragmentBuilder;
 import com.sandflow.smpte.regxml.XMLSchemaBuilder;
-import com.sandflow.smpte.regxml.dict.IllegalDefinitionException;
-import com.sandflow.smpte.regxml.dict.IllegalDictionaryException;
+import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
+import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
 import java.io.EOFException;

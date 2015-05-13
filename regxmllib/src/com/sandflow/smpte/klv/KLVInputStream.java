@@ -25,9 +25,9 @@
  */
 package com.sandflow.smpte.klv;
 
-import com.sandflow.smpte.klv.adapter.TripletValueAdapter;
-import com.sandflow.smpte.klv.exception.KLVException;
-import static com.sandflow.smpte.klv.exception.KLVException.MAX_LENGTH_EXCEEED;
+import com.sandflow.smpte.klv.adapters.TripletValueAdapter;
+import com.sandflow.smpte.klv.exceptions.KLVException;
+import static com.sandflow.smpte.klv.exceptions.KLVException.MAX_LENGTH_EXCEEED;
 import com.sandflow.smpte.util.UL;
 import java.io.DataInputStream;
 import java.io.EOFException;

@@ -25,27 +25,29 @@
  */
 package com.sandflow.smpte.regxml.dict;
 
-import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
-import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
-import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
-import com.sandflow.smpte.regxml.definition.ClassDefinition;
-import com.sandflow.smpte.regxml.definition.RenameTypeDefinition;
-import com.sandflow.smpte.regxml.definition.CharacterTypeDefinition;
-import com.sandflow.smpte.regxml.definition.StreamTypeDefinition;
-import com.sandflow.smpte.regxml.definition.PropertyDefinition;
-import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.definition.StringTypeDefinition;
-import com.sandflow.smpte.regxml.definition.Definition;
-import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.definition.SetTypeDefinition;
-import com.sandflow.smpte.regxml.definition.ExtendibleEnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.definition.EnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
-import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
-import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
-import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
-import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
-import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
+import com.sandflow.smpte.regxml.dict.exceptions.DuplicateSymbolException;
+import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
+import com.sandflow.smpte.regxml.dict.definitions.OpaqueTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.IndirectTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.RenameTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StreamTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.PropertyDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StringTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.Definition;
+import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.SetTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.ExtendibleEnumerationTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.EnumerationTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.PropertyAliasDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.IntegerTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.FixedArrayTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.FloatTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.LensSerialFloatTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.RecordTypeDefinition;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UUID;
@@ -65,7 +67,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
@@ -79,17 +80,11 @@ import org.w3c.dom.Document;
  *
  * @author pal
  */
-@XmlRootElement(name = "Baseline")
+@XmlRootElement(name = "Extension")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MetaDictionary implements DefinitionResolver {
 
-    public final static String ST2001_1_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
-
-    @XmlAttribute(name = "rootElement", required = true)
-    private final static String rootElement = "MXF";
-
-    @XmlAttribute(name = "rootObject", required = true)
-    private final static String rootObject = "Preface";
+    public final static String XML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
 
     @XmlJavaTypeAdapter(value = UUIDAdapter.class)
     @XmlElement(name = "SchemeID", required = true)
@@ -171,14 +166,6 @@ public class MetaDictionary implements DefinitionResolver {
         }
 
         this.definitions.add(def);
-    }
-
-    public static String getRootElement() {
-        return rootElement;
-    }
-
-    public static String getRootObject() {
-        return rootObject;
     }
 
     public UUID getSchemeID() {

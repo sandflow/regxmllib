@@ -23,28 +23,57 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sandflow.smpte.mxf;
+package com.sandflow.smpte.regxml.dict.definitions;
 
-import com.sandflow.smpte.klv.exceptions.KLVException;
-import com.sandflow.smpte.klv.Triplet;
-import com.sandflow.smpte.util.UL;
+import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.xml.AUIDAdapter;
+import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class FillItem {
-    
-    public static final UL LABEL = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x01, 0x01, 0x01, 0x02, 0x03, 0x01, 0x02, 0x10, 0x01, 0x00, 0x00, 0x00});
+@XmlAccessorType(XmlAccessType.NONE)
+public class WeakReferenceTypeDefinition extends Definition {
 
-    public static FillItem fromTriplet(Triplet triplet) throws KLVException {
-
-        FillItem fi = new FillItem();
-
-        if (!LABEL.equalsIgnoreVersion(triplet.getKey())) {
-            return null;
-        }
-
-        return fi;
+    public WeakReferenceTypeDefinition() {
     }
+    
+    
+
+    @XmlJavaTypeAdapter(value = AUIDAdapter.class)
+    @XmlElement(name = "ReferencedType")
+    private AUID referencedType;
+
+    @Override
+    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
+        visitor.visit(this);
+    }
+
+    @XmlElementWrapper(name = "TargetSet")
+    @XmlElement(name = "MetaDefRef")
+    @XmlJavaTypeAdapter(value = AUIDAdapter.class)
+    private ArrayList<AUID> targetSet = new ArrayList<>();
+
+    public AUID getReferencedType() {
+        return referencedType;
+    }
+
+    public void setReferencedType(AUID referencedType) {
+        this.referencedType = referencedType;
+    }
+
+    public ArrayList<AUID> getTargetSet() {
+        return targetSet;
+    }
+
+    public void setTargetSet(ArrayList<AUID> targetSet) {
+        this.targetSet = targetSet;
+    }
+
 }

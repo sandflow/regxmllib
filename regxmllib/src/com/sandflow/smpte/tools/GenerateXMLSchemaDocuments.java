@@ -25,8 +25,8 @@
  */
 package com.sandflow.smpte.tools;
 
-import com.sandflow.smpte.register.exception.DuplicateEntryException;
-import com.sandflow.smpte.register.exception.InvalidEntryException;
+import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
+import com.sandflow.smpte.register.exceptions.InvalidEntryException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -32,9 +32,9 @@
             <include name="*.xml" />
         </fileset>
 		
-		<copy file="${dict.schema.common}" todir="${dict.schema.dir}"/>
+	<copy file="${dict.schemas.common}" todir="${dict.schema.dir}"/>
 		
-		<pathconvert property="dictpaths" refid="dicts" pathsep=" " />
+	<pathconvert property="dictpaths" refid="dicts" pathsep=" " />
         
          <java classname="com.sandflow.smpte.tools.GenerateDictionaryXMLSchema">
             <arg value="-d"/>

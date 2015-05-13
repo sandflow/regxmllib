@@ -25,8 +25,8 @@
  */
 package com.sandflow.smpte.klv;
 
-import com.sandflow.smpte.klv.exception.TripletLengthException;
-import com.sandflow.smpte.klv.exception.KLVException;
+import com.sandflow.smpte.klv.exceptions.TripletLengthException;
+import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.util.CountingInputStream;
 import com.sandflow.smpte.util.UL;
 import java.io.IOException;

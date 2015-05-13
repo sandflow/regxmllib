@@ -25,28 +25,28 @@
  */
 package com.sandflow.smpte.regxml;
 
-import com.sandflow.smpte.klv.exception.KLVException;
-import com.sandflow.smpte.regxml.definition.CharacterTypeDefinition;
-import com.sandflow.smpte.regxml.definition.ClassDefinition;
-import com.sandflow.smpte.regxml.definition.Definition;
-import com.sandflow.smpte.regxml.definition.EnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.definition.ExtendibleEnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
-import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
-import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
-import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
-import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
-import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
-import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
-import com.sandflow.smpte.regxml.definition.PropertyDefinition;
-import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
-import com.sandflow.smpte.regxml.definition.RenameTypeDefinition;
-import com.sandflow.smpte.regxml.definition.SetTypeDefinition;
-import com.sandflow.smpte.regxml.definition.StreamTypeDefinition;
-import com.sandflow.smpte.regxml.definition.StringTypeDefinition;
-import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
-import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
+import com.sandflow.smpte.klv.exceptions.KLVException;
+import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.Definition;
+import com.sandflow.smpte.regxml.dict.definitions.EnumerationTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.ExtendibleEnumerationTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.FixedArrayTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.FloatTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.IndirectTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.IntegerTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.LensSerialFloatTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.OpaqueTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.PropertyAliasDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.PropertyDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.RecordTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.RenameTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.SetTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StreamTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StringTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.DefinitionResolver;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.util.AUID;
@@ -54,6 +54,8 @@ import com.sandflow.smpte.util.UL;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -68,9 +70,11 @@ import org.xml.sax.SAXException;
 public class XMLSchemaBuilder {
 
     public static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
-
+    private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
     private static final String XSD_NS = "http://www.w3.org/2001/XMLSchema";
-
+    private static final String XLINK_NS = "http://www.w3.org/1999/xlink";
+    private static final String XLINK_LOC = "http://www.w3.org/1999/xlink.xsd";
+   
     private static final AUID AUID_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.01.03.01.00.00.00.00.00"));
     private static final AUID UUID_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.01.03.03.00.00.00.00.00"));
     private static final AUID DateStruct_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.05.00.00.00.00.00"));
@@ -79,15 +83,11 @@ public class XMLSchemaBuilder {
     private static final AUID TimeStruct_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.06.00.00.00.00.00"));
     private static final AUID TimeStamp_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.07.00.00.00.00.00"));
     private static final AUID VersionType_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.03.00.00.00.00.00"));
-
     private static final AUID ObjectClass_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.01.01.02.06.01.01.04.01.01.00.00"));
-
     private static final AUID ByteOrder_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.01.01.01.03.01.02.01.02.00.00.00"));
 
     private DefinitionResolver resolver;
     private final NamespacePrefixMapper prefixes = new NamespacePrefixMapper();
-
-    private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
 
     private String createQName(URI uri, String name) {
         return this.prefixes.getPrefixOrCreate(uri) + ":" + name;
@@ -112,14 +112,14 @@ public class XMLSchemaBuilder {
         Element schema = doc.createElementNS(XSD_NS, "xs:schema");
         schema.setAttribute("targetNamespace", dict.getSchemeURI().toString());
         schema.setAttributeNS(XMLNS_NS, "xmlns:reg", REGXML_NS);
-        schema.setAttributeNS(XMLNS_NS, "xmlns:xlink", "http://www.w3.org/1999/xlink");
+        schema.setAttributeNS(XMLNS_NS, "xmlns:xlink", XLINK_NS);
         schema.setAttribute("elementFormDefault", "qualified");
         schema.setAttribute("attributeFormDefault", "unqualified");
         doc.appendChild(schema);
 
         Element importelem = doc.createElementNS(XSD_NS, "xs:import");
-        importelem.setAttribute("namespace", "http://www.w3.org/1999/xlink");
-        importelem.setAttribute("schemaLocation", "http://www.w3.org/1999/xlink.xsd");
+        importelem.setAttribute("namespace", XLINK_NS);
+        importelem.setAttribute("schemaLocation", XLINK_LOC);
         doc.getDocumentElement().appendChild(importelem);
 
         importelem = doc.createElementNS(XSD_NS, "xs:import");
@@ -1266,6 +1266,46 @@ public class XMLSchemaBuilder {
             super(msg);
         }
 
+    }
+
+    public static class NamespacePrefixMapper {
+
+        private final HashMap<URI, String> uris = new HashMap<>();
+        private final HashMap<String, URI> prefixes = new HashMap<>();
+
+        public String getPrefixOrCreate(URI ns) {
+            String prefix = this.uris.get(ns);
+            /* if prefix does not exist, create one */
+            if (prefix == null) {
+                prefix = "r" + this.uris.size();
+                this.uris.put(ns, prefix);
+                this.prefixes.put(prefix, ns);
+            }
+            return prefix;
+        }
+
+        public String putPrefix(URI ns, String suggested) {
+            String np = this.uris.get(ns);
+            URI uri = this.prefixes.get(suggested);
+            /* if the prefix already exists, create a new one */
+            if (uri != null) {
+                np = "r" + this.uris.size();
+            } else {
+                np = suggested;
+            }
+            this.prefixes.put(np, ns);
+            this.uris.put(ns, np);
+            return np;
+        }
+
+        public Set<URI> getURIs() {
+            return uris.keySet();
+        }
+
+        public void clear() {
+            this.uris.clear();
+            this.prefixes.clear();
+        }
     }
 
 }

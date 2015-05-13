@@ -25,7 +25,7 @@
  */
 package com.sandflow.smpte.mxf;
 
-import com.sandflow.smpte.klv.exception.KLVException;
+import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.klv.KLVInputStream;
 import com.sandflow.smpte.klv.LocalSetRegister;
 import com.sandflow.smpte.klv.Triplet;

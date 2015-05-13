@@ -23,16 +23,53 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package com.sandflow.smpte.regxml.dict.definitions;
 
-@XmlSchema(
-        namespace = MetaDictionary.XML_NS,
-        xmlns = { 
-        @XmlNs(prefix = "", namespaceURI = MetaDictionary.XML_NS)
-        },
-        elementFormDefault=XmlNsForm.QUALIFIED)  
-package com.sandflow.smpte.regxml.dict;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
-import javax.xml.bind.annotation.XmlSchema;
+/**
+ *
+ * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ */
+@XmlAccessorType(XmlAccessType.NONE)
+public class FloatTypeDefinition extends Definition {
 
+
+
+    /**
+     * specifies the number of bytes to store the value
+     */
+    @XmlElement(name = "Size")
+    private Size size;
+
+    public FloatTypeDefinition() {
+    }
+
+    @Override
+    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
+        visitor.visit(this);
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    @XmlEnum(Integer.class)
+    @XmlType(name="FloatSize")
+    public enum Size {
+        @XmlEnumValue("2") HALF, 
+        @XmlEnumValue("4") SINGLE, 
+        @XmlEnumValue("8") DOUBLE
+    }
+
+    
+}

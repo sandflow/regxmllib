@@ -26,31 +26,31 @@
 package com.sandflow.smpte.regxml;
 
 import com.sandflow.smpte.klv.Group;
-import com.sandflow.smpte.klv.exception.KLVException;
+import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.klv.LocalSetRegister;
 import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.mxf.MXFInputStream;
-import com.sandflow.smpte.regxml.definition.CharacterTypeDefinition;
-import com.sandflow.smpte.regxml.definition.ClassDefinition;
-import com.sandflow.smpte.regxml.definition.Definition;
-import com.sandflow.smpte.regxml.definition.EnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.definition.ExtendibleEnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.definition.FixedArrayTypeDefinition;
-import com.sandflow.smpte.regxml.definition.FloatTypeDefinition;
-import com.sandflow.smpte.regxml.definition.IndirectTypeDefinition;
-import com.sandflow.smpte.regxml.definition.IntegerTypeDefinition;
-import com.sandflow.smpte.regxml.definition.LensSerialFloatTypeDefinition;
-import com.sandflow.smpte.regxml.definition.OpaqueTypeDefinition;
-import com.sandflow.smpte.regxml.definition.PropertyAliasDefinition;
-import com.sandflow.smpte.regxml.definition.PropertyDefinition;
-import com.sandflow.smpte.regxml.definition.RecordTypeDefinition;
-import com.sandflow.smpte.regxml.definition.RenameTypeDefinition;
-import com.sandflow.smpte.regxml.definition.SetTypeDefinition;
-import com.sandflow.smpte.regxml.definition.StreamTypeDefinition;
-import com.sandflow.smpte.regxml.definition.StringTypeDefinition;
-import com.sandflow.smpte.regxml.definition.StrongReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.definition.VariableArrayTypeDefinition;
-import com.sandflow.smpte.regxml.definition.WeakReferenceTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.Definition;
+import com.sandflow.smpte.regxml.dict.definitions.EnumerationTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.ExtendibleEnumerationTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.FixedArrayTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.FloatTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.IndirectTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.IntegerTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.LensSerialFloatTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.OpaqueTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.PropertyAliasDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.PropertyDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.RecordTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.RenameTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.SetTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StreamTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StringTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
+import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.DefinitionResolver;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
@@ -89,9 +89,7 @@ public class FragmentBuilder {
 
     private final static Logger LOG = Logger.getLogger(FragmentBuilder.class.getName());
 
-    private static final UL INSTANCE_UID_ITEM_UL
-            = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x15, 0x02, 0x00, 0x00, 0x00, 0x00});
-
+    private static final UL INSTANCE_UID_ITEM_UL = UL.fromURN("urn:smpte:ul:060e2b34.01010101.01011502.00000000");
     private static final UL AUID_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.01.03.01.00.00.00.00.00");
     private static final UL UUID_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.01.03.03.00.00.00.00.00");
     private static final UL DateStruct_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.05.00.00.00.00.00");
@@ -101,12 +99,9 @@ public class FragmentBuilder {
     private static final UL TimeStamp_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.07.00.00.00.00.00");
     private static final UL VersionType_UL = UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.03.00.00.00.00.00");
     private static final UL ByteOrder_UL = UL.fromDotValue("06.0E.2B.34.01.01.01.01.03.01.02.01.02.00.00.00");
-
     private static final UL Character_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100100.00000000");
     private static final UL Char_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100300.00000000");
-
     private static final UL ProductReleaseType_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.02010101.00000000");
-
     private static final UL Boolean_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01040100.00000000");
 
     private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
