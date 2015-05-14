@@ -55,7 +55,7 @@ import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.exceptions.DuplicateSymbolException;
-import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
+import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.util.ArrayList;
@@ -66,11 +66,11 @@ import java.util.logging.Logger;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class XMLRegistryImporter {
+public class XMLRegisterImporter {
 
-    private final static Logger LOGGER = Logger.getLogger(XMLRegistryImporter.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(XMLRegisterImporter.class.getName());
 
-    public static MetaDictionaryGroup fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
+    public static MetaDictionaryCollection fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
 
         /* create definition collection */
         ArrayList<Definition> defs = new ArrayList<>();
@@ -428,7 +428,7 @@ public class XMLRegistryImporter {
             }
         }
 
-        MetaDictionaryGroup mds = new MetaDictionaryGroup();
+        MetaDictionaryCollection mds = new MetaDictionaryCollection();
 
         long index = 0;
 

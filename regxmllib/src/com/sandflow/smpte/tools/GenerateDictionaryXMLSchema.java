@@ -31,7 +31,7 @@ import com.sandflow.smpte.regxml.XMLSchemaBuilder;
 import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
 import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
-import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
+import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileReader;
@@ -79,7 +79,7 @@ public class GenerateDictionaryXMLSchema {
         }
 
         /* load the metadictionaries */
-        MetaDictionaryGroup mds = new MetaDictionaryGroup();
+        MetaDictionaryCollection mds = new MetaDictionaryCollection();
 
         for (int i = 1; i < args.length - 2; i++) {
 
@@ -123,9 +123,7 @@ public class GenerateDictionaryXMLSchema {
 
 
         /* create the fragment builder */
-        XMLSchemaBuilder sb = new XMLSchemaBuilder();
-
-        sb.setDefinitionResolver(mds);
+        XMLSchemaBuilder sb = new XMLSchemaBuilder(mds);
 
         for (MetaDictionary md : mds.getDictionaries()) {
             String fname = md.getSchemeURI().getAuthority() + md.getSchemeURI().getPath().replaceAll("[^a-zA-Z0-9]", "-")
@@ -145,7 +143,7 @@ public class GenerateDictionaryXMLSchema {
 
             File f = new File(args[args.length - 1], fname);
 
-            Document doc = sb.xmlSchemaFromDictionary(md);
+            Document doc = sb.fromDictionary(md);
 
             /* date and build version */
             Date now = new java.util.Date();

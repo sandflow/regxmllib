@@ -56,25 +56,31 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Generates XML Schemas from RegXML dictionaries according to the Model Mapping
+ * Rules specified in SMPTE ST 2001-1. These XML Schemas can be used to validate
+ * RegXML fragments, including those generated using
+ * {@link com.sandflow.smpte.regxml.FragmentBuilder}
  */
 public class XMLSchemaBuilder {
+
+    private final static Logger LOG = Logger.getLogger(XMLSchemaBuilder.class.getName());
 
     public static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
     private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
     private static final String XSD_NS = "http://www.w3.org/2001/XMLSchema";
     private static final String XLINK_NS = "http://www.w3.org/1999/xlink";
     private static final String XLINK_LOC = "http://www.w3.org/1999/xlink.xsd";
-   
+
     private static final AUID AUID_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.01.03.01.00.00.00.00.00"));
     private static final AUID UUID_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.01.03.03.00.00.00.00.00"));
     private static final AUID DateStruct_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.05.00.00.00.00.00"));
@@ -89,11 +95,28 @@ public class XMLSchemaBuilder {
     private DefinitionResolver resolver;
     private final NamespacePrefixMapper prefixes = new NamespacePrefixMapper();
 
+    /**
+     * @param resolver Collection of Metadictionary definitions, typically a
+     * {@link com.sandflow.smpte.regxml.dict.MetaDictionaryGroup}
+     */
+    public XMLSchemaBuilder(DefinitionResolver resolver) {
+        this.resolver = resolver;
+    }
+
     private String createQName(URI uri, String name) {
         return this.prefixes.getPrefixOrCreate(uri) + ":" + name;
     }
 
-    public Document xmlSchemaFromDictionary(MetaDictionary dict) throws ParserConfigurationException, KLVException, RuleException, SAXException, IOException, URISyntaxException {
+    /**
+     * Generates a single XML Schema document from a single Metadictionary. A
+     * definition from the latter may reference a definition from another
+     * Metadictionary, i.e. in a different namespace, as long as this second
+     * Metadictionary can be resolved by the {@link DefinitionResolver} provided
+     * a creation-time.
+     *
+     * @param dict Metadictionary for which an XML Schema will be generated.
+     */
+    public Document fromDictionary(MetaDictionary dict) throws ParserConfigurationException, KLVException, RuleException, SAXException, IOException, URISyntaxException {
 
         /* reset namespace prefixes */
         this.prefixes.clear();
@@ -138,18 +161,17 @@ public class XMLSchemaBuilder {
 
             } else if (definition.getClass() == PropertyAliasDefinition.class) {
 
-               /* BUG: need to supress alias declaration since they use the same symbol and AUID as parent */
-
+                /* need to supress alias declaration since they use the same symbol and AUID as parent */
             } else {
                 applyRule6(doc.getDocumentElement(), definition);
             }
         }
 
-        /* TODO: hack to clean-up namespace prefixes */
+        /* hack to clean-up namespace prefixes */
         for (URI uri : prefixes.getURIs()) {
 
             doc.getDocumentElement().setAttributeNS(
-                    "http://www.w3.org/2000/xmlns/",
+                    XMLNS_NS,
                     "xmlns:" + prefixes.getPrefixOrCreate(uri),
                     uri.toString()
             );
@@ -163,14 +185,6 @@ public class XMLSchemaBuilder {
         }
 
         return doc;
-    }
-
-    public DefinitionResolver getDefinitionResolver() {
-        return resolver;
-    }
-
-    public void setDefinitionResolver(DefinitionResolver resolver) {
-        this.resolver = resolver;
     }
 
     void applyRule4(Element root, ClassDefinition definition) throws RuleException {
@@ -187,7 +201,7 @@ public class XMLSchemaBuilder {
          </complexContent>
          </complexType>
          </element>
-
+        
          */
         Element element = root.getOwnerDocument().createElementNS(XSD_NS, "xs:element");
         element.setAttribute("name", definition.getSymbol());
@@ -202,7 +216,6 @@ public class XMLSchemaBuilder {
         Element all = root.getOwnerDocument().createElementNS(XSD_NS, "xs:all");
         complexType.appendChild(all);
 
-        /* TODO: support reg:uid and reg:path */
         boolean hasUID = false;
         ClassDefinition cdef = definition;
 
@@ -235,9 +248,20 @@ public class XMLSchemaBuilder {
 
         }
 
-        Element attribute = root.getOwnerDocument().createElementNS(XSD_NS, "xs:attribute");
-        attribute.setAttribute("ref", "reg:uid");
-        attribute.setAttribute("use", "required");
+        Element attribute = null;
+
+        /* @reg:uid */
+        if (hasUID) {
+            attribute = root.getOwnerDocument().createElementNS(XSD_NS, "xs:attribute");
+            attribute.setAttribute("ref", "reg:uid");
+            attribute.setAttribute("use", "required");
+            complexType.appendChild(attribute);
+        }
+
+        /* @reg:path */
+        attribute = root.getOwnerDocument().createElementNS(XSD_NS, "xs:attribute");
+        attribute.setAttribute("ref", "reg:path");
+        attribute.setAttribute("use", "optional");
         complexType.appendChild(attribute);
 
     }
@@ -253,7 +277,7 @@ public class XMLSchemaBuilder {
             elem.setAttribute("type", "reg:ByteOrderType");
         } else {
             Definition typedef = resolver.getDefinition(definition.getType());
-            
+
             if (typedef == null) {
 
                 throw new RuleException(
@@ -262,9 +286,9 @@ public class XMLSchemaBuilder {
                                 definition.getIdentification().toString()
                         )
                 );
-                
+
             }
-            
+
             elem.setAttribute("type", createQName(typedef.getNamespace(), typedef.getSymbol()));
         }
 
@@ -372,7 +396,7 @@ public class XMLSchemaBuilder {
 
             applyRule6Sub2(element, definition);
 
-        }  else {
+        } else {
 
             throw new RuleException("Illegage Definition in Rule 5.");
 
@@ -426,7 +450,7 @@ public class XMLSchemaBuilder {
          <enumeration value=”{enum name}”/>
          </restriction>
          </simpleType>
-
+        
          */
         Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
         simpleType.setAttribute("name", definition.getSymbol());
@@ -447,7 +471,7 @@ public class XMLSchemaBuilder {
     void applyRule6_3(Element root, ExtendibleEnumerationTypeDefinition definition) throws RuleException {
 
         /*
-         BUG: ST 2001-1 does not allow arbitrary AUIDs
+         SPECIFICATION BUG: ST 2001-1 does not allow arbitrary AUIDs
          */
         Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
         simpleType.setAttribute("name", definition.getSymbol());
@@ -467,18 +491,18 @@ public class XMLSchemaBuilder {
          2.	otherwise rule 6.4.2
          */
         Definition elemdef = resolver.getDefinition(definition.getElementType());
-        
+
         if (definition.getIdentification().equals(UUID_AUID)) {
             /*
              <simpleType name="AUID">
              <restriction base="xs:anyURI">
-             <pattern 
+             <pattern
              value="urn:smpte:ul:([0-9a-fA-F]{8}\.){3}[0-9a-fA-F]{8}"/>
-             <pattern 
+             <pattern
              value="urn:uuid:[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}"/>
              </restriction>
              </simpleType>
-
+            
              */
 
             Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
@@ -492,7 +516,7 @@ public class XMLSchemaBuilder {
             Element pattern = root.getOwnerDocument().createElementNS(XSD_NS, "xs:pattern");
             pattern.setAttribute("value", "urn:uuid:[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}");
             restriction.appendChild(pattern);
-            
+
         } else if (elemdef instanceof StrongReferenceTypeDefinition) {
 
             /* Rule 6.4.1 */
@@ -521,7 +545,30 @@ public class XMLSchemaBuilder {
                             ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
                     );
 
-            applyRule6_4_1a(choice, parent);
+            if (parent == null) {
+
+                LOG.warning(
+                        String.format(
+                                "Cannot resolve reference type %s for definition %s.",
+                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString(),
+                                elemdef.getIdentification().toString()
+                        )
+                );
+
+                Comment comment = root.getOwnerDocument().createComment(
+                        String.format(
+                                "Reference type %s not found.",
+                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
+                        )
+                );
+
+                choice.appendChild(comment);
+
+            } else {
+
+                applyRule6_4_1a(choice, parent);
+
+            }
 
         } else {
 
@@ -552,21 +599,39 @@ public class XMLSchemaBuilder {
 
     void applyRule6_4_1a(Element root, ClassDefinition cdef) throws RuleException {
 
-        if (cdef != null) {
+        if (cdef.isConcrete()) {
+            Element element = root.getOwnerDocument().createElementNS(XSD_NS, "xs:element");
+            element.setAttribute("ref", createQName(cdef.getNamespace(), cdef.getSymbol()));
+            root.appendChild(element);
+        }
 
-            if (cdef.isConcrete()) {
-                Element element = root.getOwnerDocument().createElementNS(XSD_NS, "xs:element");
-                element.setAttribute("ref", createQName(cdef.getNamespace(), cdef.getSymbol()));
-                root.appendChild(element);
-            }
+        for (AUID auid : resolver.getSubclassesOf(cdef)) {
+            ClassDefinition child
+                    = (ClassDefinition) resolver.getDefinition(auid);
 
-            for (AUID auid : resolver.getSubclassesOf(cdef)) {
-                ClassDefinition child
-                        = (ClassDefinition) resolver.getDefinition(auid);
+            if (child == null) {
+
+                LOG.warning(
+                        String.format(
+                                "Cannot resolve subclass %s for class %s.",
+                                auid.toString(),
+                                cdef.getIdentification().toString()
+                        )
+                );
+
+                Comment comment = root.getOwnerDocument().createComment(
+                        String.format(
+                                "Subclass %s not found.",
+                                auid.toString()
+                        )
+                );
+
+                root.appendChild(comment);
+
+            } else {
 
                 applyRule6_4_1a(root, child);
             }
-
         }
 
     }
@@ -585,7 +650,7 @@ public class XMLSchemaBuilder {
          </restriction>
          </complexContent>
          </complexType>
-
+        
          */
         Element complexType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:complexType");
         complexType.setAttribute("name", definition.getSymbol());
@@ -633,7 +698,7 @@ public class XMLSchemaBuilder {
          </simpleType>
          </union>
          </simpleType>
-
+        
          */
         String typename = "ERROR";
         String intpattern = "ERROR";
@@ -719,19 +784,19 @@ public class XMLSchemaBuilder {
          <element name=”{member name}” type=”{member type}”/>
          </sequence>
          </complexType>
-
+        
          */
         if (definition.getIdentification().equals(AUID_AUID)) {
             /*
              <simpleType name="AUID">
              <restriction base="xs:anyURI">
-             <pattern 
+             <pattern
              value="urn:smpte:ul:([0-9a-fA-F]{8}\.){3}[0-9a-fA-F]{8}"/>
-             <pattern 
+             <pattern
              value="urn:uuid:[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}"/>
              </restriction>
              </simpleType>
-
+            
              */
 
             Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
@@ -767,8 +832,8 @@ public class XMLSchemaBuilder {
              </simpleType>
              </union>
              </simpleType>
-
             
+
              */
             Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
             simpleType.setAttribute("name", "DateStruct");
@@ -806,7 +871,7 @@ public class XMLSchemaBuilder {
              <pattern value=" urn:smpte:umid:([0-9a-fA-F]{8}\.){7}[0-9a-fA-F]{8}"/>
              </restriction>
              </simpleType>
-
+            
              */
 
             Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
@@ -920,7 +985,7 @@ public class XMLSchemaBuilder {
              <element name=”{member name}” type=”{member type}”/>
              </sequence>
              </complexType>
-
+            
              */
             Element complexType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:complexType");
             complexType.setAttribute("name", definition.getSymbol());
@@ -932,7 +997,7 @@ public class XMLSchemaBuilder {
             for (RecordTypeDefinition.Member member : definition.getMembers()) {
 
                 Definition typedef = resolver.getDefinition(member.getType());
-                
+
                 if (typedef == null) {
                     throw new RuleException(String.format("Bad type %s at member %s.", member.getType().toString(), member.getName()));
                 }
@@ -1000,7 +1065,30 @@ public class XMLSchemaBuilder {
                             ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
                     );
 
-            applyRule6_4_1a(choice, parent);
+            if (parent == null) {
+
+                LOG.warning(
+                        String.format(
+                                "Cannot resolve reference type %s for definition %s.",
+                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString(),
+                                elemdef.getIdentification().toString()
+                        )
+                );
+
+                Comment comment = root.getOwnerDocument().createComment(
+                        String.format(
+                                "Reference type %s not found.",
+                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
+                        )
+                );
+
+                choice.appendChild(comment);
+
+            } else {
+
+                applyRule6_4_1a(choice, parent);
+
+            }
 
         } else {
 
@@ -1075,12 +1163,30 @@ public class XMLSchemaBuilder {
                         definition.getReferenceType()
                 );
 
-        /* BUG: some SMPTE types reference class 14 groups, e.g. GeographicPolygon */
         if (parent == null) {
-            return;
-        }
 
-        applyRule6_4_1a(choice, parent);
+            LOG.warning(
+                    String.format(
+                            "Cannot resolve reference type %s for definition %s.",
+                            definition.getReferenceType().toString(),
+                            definition.getIdentification().toString()
+                    )
+            );
+
+            Comment comment = root.getOwnerDocument().createComment(
+                    String.format(
+                            "Reference type %s not found.",
+                            definition.getReferenceType()
+                    )
+            );
+
+            choice.appendChild(comment);
+
+        } else {
+
+            applyRule6_4_1a(choice, parent);
+
+        }
 
     }
 
@@ -1092,7 +1198,7 @@ public class XMLSchemaBuilder {
          2.	rule 6.14.2 if the element type is Character or the type name contains StringArray
          3.	rule 6.14.3 if the type name is DataValue
          4.	otherwise rule 6.14.4
-
+        
          */
         Definition elemdef = resolver.getDefinition(definition.getElementType());
 
@@ -1109,7 +1215,7 @@ public class XMLSchemaBuilder {
              <element ref=”{referenced sub-class name}”/>
              </choice>
              </complexType>
-
+            
              */
             Element complexType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:complexType");
             complexType.setAttribute("name", definition.getSymbol());
@@ -1125,11 +1231,33 @@ public class XMLSchemaBuilder {
                             ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
                     );
 
-            applyRule6_4_1a(choice, parent);
+            if (parent == null) {
 
+                LOG.warning(
+                        String.format(
+                                "Cannot resolve reference type %s for definition %s.",
+                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString(),
+                                elemdef.getIdentification().toString()
+                        )
+                );
+
+                Comment comment = root.getOwnerDocument().createComment(
+                        String.format(
+                                "Subclass %s not found.",
+                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
+                        )
+                );
+
+                root.appendChild(comment);
+
+            } else {
+
+                applyRule6_4_1a(choice, parent);
+
+            }
         } else if (elemdef instanceof CharacterTypeDefinition || elemdef.getSymbol().contains("StringArray")) {
 
-            /* Rule 6.14.2 
+            /* Rule 6.14.2
              <complexType name="{name}">
              <sequence>
              <element ref=”{referenced string type}” minOccurs="0" maxOccurs="unbounded"/>
@@ -1155,8 +1283,8 @@ public class XMLSchemaBuilder {
              <simpleType name="DataValue">
              <restriction base="reg:HexByteArrayType"/>
              </simpleType>
-
             
+
              */
             Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
             simpleType.setAttribute("name", "DataValue");
@@ -1175,7 +1303,7 @@ public class XMLSchemaBuilder {
              <element ref=”{type element name}” minOccurs=”0” maxOccurs=”unbounded”/>
              </sequence>
              </complexType>
-
+            
              */
             Element complexType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:complexType");
             complexType.setAttribute("name", definition.getSymbol());
@@ -1203,7 +1331,7 @@ public class XMLSchemaBuilder {
         restriction.setAttribute("base", "reg:TargetType");
         simpleType.appendChild(restriction);
     }
-    
+
     void applyRule6_alpha(Element root, FloatTypeDefinition definition) throws RuleException {
 
         /*
@@ -1215,9 +1343,8 @@ public class XMLSchemaBuilder {
         String typename = "ERROR";
 
         switch (definition.getSize()) {
-            
+
             /* not sure this is right */
-            
             case HALF:
             case SINGLE:
                 typename = "xs:float";
@@ -1236,9 +1363,8 @@ public class XMLSchemaBuilder {
         simpleType.appendChild(restriction);
 
     }
-    
-    void applyRule6_beta(Element root, LensSerialFloatTypeDefinition definition) throws RuleException {
 
+    void applyRule6_beta(Element root, LensSerialFloatTypeDefinition definition) throws RuleException {
         /*
          <simpleType name=”{name}”>
          <restriction base=”decimal”/>
@@ -1253,7 +1379,6 @@ public class XMLSchemaBuilder {
         Element restriction = root.getOwnerDocument().createElementNS(XSD_NS, "xs:restriction");
         restriction.setAttribute("base", "xs:decimal");
         simpleType.appendChild(restriction);
-
     }
 
     public static class RuleException extends Exception {
@@ -1268,7 +1393,7 @@ public class XMLSchemaBuilder {
 
     }
 
-    public static class NamespacePrefixMapper {
+    private static class NamespacePrefixMapper {
 
         private final HashMap<URI, String> uris = new HashMap<>();
         private final HashMap<String, URI> prefixes = new HashMap<>();

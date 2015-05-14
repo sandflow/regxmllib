@@ -31,8 +31,8 @@ import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.register.exceptions.InvalidEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
-import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
-import static com.sandflow.smpte.regxml.dict.importers.XMLRegistryImporter.fromRegister;
+import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
+import static com.sandflow.smpte.regxml.dict.importers.XMLRegisterImporter.fromRegister;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -84,7 +84,7 @@ public class XMLRegistersToDict {
         GroupsRegister greg = GroupsRegister.fromXML(fg);
         TypesRegister treg = TypesRegister.fromXML(ft);
 
-        MetaDictionaryGroup mds = fromRegister(treg, greg, ereg);
+        MetaDictionaryCollection mds = fromRegister(treg, greg, ereg);
 
         Transformer tr = TransformerFactory.newInstance().newTransformer();
 

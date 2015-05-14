@@ -27,9 +27,9 @@ package com.sandflow.smpte.regxml;
 
 import com.sandflow.smpte.klv.Group;
 import com.sandflow.smpte.klv.exceptions.KLVException;
-import com.sandflow.smpte.klv.LocalSetRegister;
 import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.mxf.MXFInputStream;
+import com.sandflow.smpte.mxf.Set;
 import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.Definition;
@@ -105,45 +105,35 @@ public class FragmentBuilder {
     private static final UL Boolean_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01040100.00000000");
 
     private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
+    private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
+
 
     private static final String ACTUALTYPE_ATTR = "actualType";
     private static final String BYTEORDER_ATTR = "byteOrder";
     private static final String BYTEORDER_BE = "BigEndian";
     private static final String UID_ATTR = "uid";
 
-    private DefinitionResolver resolver;
-    private LocalSetRegister localtags;
-    private final HashMap<UUID, Group> groups = new HashMap<>();
+    private final DefinitionResolver defresolver;
+    private final Map<UUID, Set> setresolver;
     private final HashMap<URI, String> nsprefixes = new HashMap<>();
 
-    public DocumentFragment fragmentFromTriplet(Group group, Document document) throws ParserConfigurationException, KLVException, RuleException {
+    public FragmentBuilder(DefinitionResolver defresolver, Map<UUID, Set> setresolver) {
+        this.defresolver = defresolver;
+        this.setresolver = setresolver;
+    }
+
+    public DocumentFragment fromTriplet(Group group, Document document) throws ParserConfigurationException, KLVException, RuleException {
 
         DocumentFragment df = document.createDocumentFragment();
 
         applyRule3(df, group);
 
-        /* TODO: hack to clean-up namespace prefixes */
+        /* Hack to clean-up namespace prefixes */
         for (Map.Entry<URI, String> entry : nsprefixes.entrySet()) {
-            ((Element) df.getFirstChild()).setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:" + entry.getValue(), entry.getKey().toString());
+            ((Element) df.getFirstChild()).setAttributeNS(XMLNS_NS, "xmlns:" + entry.getValue(), entry.getKey().toString());
         }
 
         return df;
-    }
-
-    public DefinitionResolver getDefinitionResolver() {
-        return resolver;
-    }
-
-    public void setDefinitionResolver(DefinitionResolver resolver) {
-        this.resolver = resolver;
-    }
-
-    public LocalSetRegister getLocaltags() {
-        return localtags;
-    }
-
-    public void setLocaltags(LocalSetRegister localtags) {
-        this.localtags = localtags;
     }
 
     private String getPrefix(URI ns) {
@@ -159,27 +149,9 @@ public class FragmentBuilder {
         return prefix;
     }
 
-    public void addGroup(Group obj) {
-
-        for (Triplet t : obj.getItems()) {
-
-            if (INSTANCE_UID_ITEM_UL.equalsIgnoreVersion(t.getKey())) {
-
-                UUID uuid = new UUID(t.getValue());
-
-                groups.put(uuid, obj);
-
-                break;
-            }
-
-        }
-
-        // TODO: detect duplicate groups
-    }
-
     void applyRule3(Node node, Group group) throws RuleException {
 
-        Definition definition = resolver.getDefinition(new AUID(group.getKey()));
+        Definition definition = defresolver.getDefinition(new AUID(group.getKey()));
 
         if (definition == null) {
             LOG.warning(
@@ -268,7 +240,7 @@ public class FragmentBuilder {
 
             } else {
 
-                Definition itemdef = resolver.getDefinition(new AUID(item.getKey()));
+                Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
 
                 if (itemdef == null) {
                     LOG.warning(
@@ -339,10 +311,10 @@ public class FragmentBuilder {
         } else {
 
             if (definition instanceof PropertyAliasDefinition) {
-                definition = resolver.getDefinition(((PropertyAliasDefinition) definition).getOriginalProperty());
+                definition = defresolver.getDefinition(((PropertyAliasDefinition) definition).getOriginalProperty());
             }
 
-            Definition typedef = findBaseDefinition(resolver.getDefinition(((PropertyDefinition) definition).getType()));
+            Definition typedef = findBaseDefinition(defresolver.getDefinition(((PropertyDefinition) definition).getType()));
 
             if (typedef == null) {
                 throw new RuleException(
@@ -451,7 +423,7 @@ public class FragmentBuilder {
 
         try {
 
-            Definition bdef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
+            Definition bdef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
             if (!(bdef instanceof IntegerTypeDefinition)) {
                 throw new RuleException(
@@ -571,7 +543,7 @@ public class FragmentBuilder {
             }
         } else {
 
-            Definition typedef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
+            Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
             applyCoreRule5_4(element, value, typedef, definition.getElementCount());
 
@@ -752,7 +724,7 @@ public class FragmentBuilder {
 
                 for (RecordTypeDefinition.Member member : definition.getMembers()) {
 
-                    Definition itemdef = findBaseDefinition(resolver.getDefinition(member.getType()));
+                    Definition itemdef = findBaseDefinition(defresolver.getDefinition(member.getType()));
 
                     Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), member.getName());
 
@@ -772,7 +744,7 @@ public class FragmentBuilder {
 
     void applyRule5_9(Element element, InputStream value, RenameTypeDefinition definition) throws RuleException {
 
-        Definition rdef = resolver.getDefinition(definition.getRenamedType());
+        Definition rdef = defresolver.getDefinition(definition.getRenamedType());
 
         applyRule5(element, value, rdef);
 
@@ -780,7 +752,7 @@ public class FragmentBuilder {
 
     void applyRule5_10(Element element, InputStream value, SetTypeDefinition definition) throws RuleException {
 
-        Definition typedef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
+        Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
         try {
 
@@ -819,7 +791,7 @@ public class FragmentBuilder {
         /*TODO: handle integer-based strings Rule 5.12.1 */
         /* ASSUMES THAT VALUE TERMINATES ON THE FIELD */
         /*Rule 5.12 */
-        Definition chrdef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
+        Definition chrdef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
         if (!(chrdef instanceof CharacterTypeDefinition)) {
             throw new RuleException(
@@ -844,7 +816,7 @@ public class FragmentBuilder {
 
     void applyRule5_13(Element element, InputStream value, StrongReferenceTypeDefinition definition) throws RuleException {
 
-        Definition typedef = findBaseDefinition(resolver.getDefinition(definition.getReferenceType()));
+        Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getReferenceType()));
 
         if (!(typedef instanceof ClassDefinition)) {
             throw new RuleException("Rule 5.13 applied to non class.");
@@ -856,7 +828,7 @@ public class FragmentBuilder {
 
             UUID uuid = kis.readUUID();
 
-            Group g = groups.get(uuid);
+            Group g = setresolver.get(uuid);
 
             if (g != null) {
 
@@ -925,7 +897,7 @@ public class FragmentBuilder {
     Definition findBaseDefinition(Definition definition) {
 
         while (definition instanceof RenameTypeDefinition) {
-            definition = resolver.getDefinition(((RenameTypeDefinition) definition).getRenamedType());
+            definition = defresolver.getDefinition(((RenameTypeDefinition) definition).getRenamedType());
         }
 
         return definition;
@@ -949,7 +921,7 @@ public class FragmentBuilder {
 
     void applyRule5_14(Element element, InputStream value, VariableArrayTypeDefinition definition) throws RuleException {
 
-        Definition typedef = findBaseDefinition(resolver.getDefinition(definition.getElementType()));
+        Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
         try {
 

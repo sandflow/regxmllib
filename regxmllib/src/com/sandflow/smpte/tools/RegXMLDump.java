@@ -35,21 +35,24 @@ import com.sandflow.smpte.mxf.FillItem;
 import com.sandflow.smpte.mxf.PartitionPack;
 import com.sandflow.smpte.regxml.FragmentBuilder;
 import com.sandflow.smpte.mxf.PrimerPack;
+import com.sandflow.smpte.mxf.Set;
 import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.Definition;
 import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
 import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
-import com.sandflow.smpte.regxml.dict.MetaDictionaryGroup;
+import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.CountingInputStream;
 import com.sandflow.smpte.util.UL;
+import com.sandflow.smpte.util.UUID;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,7 +103,7 @@ public class RegXMLDump {
             return;
         }
 
-        MetaDictionaryGroup mds = new MetaDictionaryGroup();
+        MetaDictionaryCollection mds = new MetaDictionaryCollection();
 
         for (int i = 2; i < args.length - 2; i++) {
 
@@ -112,11 +115,6 @@ public class RegXMLDump {
 
         }
 
-
-        /* create the fragment builder */
-        FragmentBuilder fb = new FragmentBuilder();
-
-        fb.setDefinitionResolver(mds);
 
         /* retrieve the mxf file */
         FileInputStream f = new FileInputStream(args[args.length - 1]);
@@ -160,10 +158,9 @@ public class RegXMLDump {
             System.err.println("No Primer Pack found");
         }
 
-        fb.setLocaltags(localreg);
-
         /* capture all local sets within the header metadata */
         ArrayList<Group> gs = new ArrayList<>();
+        HashMap<UUID, Set> setresolver = new HashMap<>();
 
         for (Triplet t;
                 cis.getCount() < pp.getHeaderByteCount()
@@ -187,12 +184,19 @@ public class RegXMLDump {
             if (g != null) {
 
                 gs.add(g);
+                
+                Set set = Set.fromGroup(g);
+                
+                if (set != null) setresolver.put(set.getInstanceID(), set);
 
-                fb.addGroup(g);
             } else {
                  LOG.log(Level.WARNING, "Failed to read Group: {0}", t.getKey().toString());        
             }
         }
+        
+         /* create the fragment builder */
+        FragmentBuilder fb = new FragmentBuilder(mds, setresolver);
+
 
         /* create dom */
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -253,7 +257,7 @@ public class RegXMLDump {
                 }
 
                 /* generate fragment */
-                DocumentFragment df = fb.fragmentFromTriplet(ed, doc);
+                DocumentFragment df = fb.fromTriplet(ed, doc);
 
                 // root elements
                 doc.appendChild(df);
@@ -261,7 +265,7 @@ public class RegXMLDump {
             } else {
 
                 /* generate fragment */
-                DocumentFragment df = fb.fragmentFromTriplet(gs.get(0), doc);
+                DocumentFragment df = fb.fromTriplet(gs.get(0), doc);
 
                 // root elements
                 doc.appendChild(df);

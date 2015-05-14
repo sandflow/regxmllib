@@ -39,7 +39,7 @@ import java.util.HashMap;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class MetaDictionaryGroup implements DefinitionResolver {
+public class MetaDictionaryCollection implements DefinitionResolver {
 
     final private HashMap<URI, MetaDictionary> dicts = new HashMap<>();
 
