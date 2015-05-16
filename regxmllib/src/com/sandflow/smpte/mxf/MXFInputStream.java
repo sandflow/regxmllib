@@ -26,23 +26,35 @@
 package com.sandflow.smpte.mxf;
 
 import com.sandflow.smpte.klv.KLVInputStream;
+import com.sandflow.smpte.klv.adapters.TripletValueAdapter;
+import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UMID;
 import com.sandflow.smpte.util.UUID;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * MXFInputStream allows MXF data structures to be read from an InputStream
  */
 public class MXFInputStream extends KLVInputStream {
 
+    /**
+     * @param is InputStream to read from
+     */
     public MXFInputStream(InputStream is) {
         super(is);
     }
 
+    /**
+     * Reads a single UUID.
+     * @return UUID
+     * @throws IOException
+     * @throws EOFException 
+     */
     public UUID readUUID() throws IOException, EOFException {
         byte[] uuid = new byte[16];
 
@@ -53,6 +65,12 @@ public class MXFInputStream extends KLVInputStream {
         return new UUID(uuid);
     }
 
+    /**
+     * Reads a single AUID.
+     * @return AUID
+     * @throws IOException
+     * @throws EOFException 
+     */
     public AUID readAUID() throws IOException, EOFException {
         byte[] auid = new byte[16];
 
@@ -62,7 +80,13 @@ public class MXFInputStream extends KLVInputStream {
 
         return new AUID(auid);
     }
-
+    
+    /**
+     * Reads a single UMID.
+     * @return UMID
+     * @throws IOException
+     * @throws EOFException 
+     */
     public UMID readUMID() throws IOException, EOFException {
         byte[] umid = new byte[32];
 
@@ -71,5 +95,41 @@ public class MXFInputStream extends KLVInputStream {
         }
 
         return new UMID(umid);
+    }
+
+    /**
+     * Reads an MXF array into a Java Collection
+     *
+     * @param <T> Type of the collection elements
+     * @param <W> TripletValueAdapter that is used to convert MXF array elements into Java collection elements
+     * @return Collection of elements of type T
+     * @throws KLVException
+     * @throws IOException
+     */
+    public <T, W extends TripletValueAdapter> Collection<T> readArray() throws KLVException, IOException {
+        return readBatch();
+    }
+    
+    /**
+     * Reads an MXF batch into a Java Collection
+     *
+     * @param <T> Type of the collection elements
+     * @param <W> TripletValueAdapter that is used to convert MXF batch elements into Java collection elements
+     * @return Collection of elements of type T
+     * @throws KLVException
+     * @throws IOException
+     */
+    public <T, W extends TripletValueAdapter> Collection<T> readBatch() throws KLVException, IOException {
+        ArrayList<T> batch = new ArrayList<>();
+        long itemcount = readUnsignedInt();
+        long itemlength = readUnsignedInt();
+        if (itemlength > Integer.MAX_VALUE) {
+            throw new KLVException(KLVException.MAX_LENGTH_EXCEEED);
+        }
+        for (int i = 0; i < itemcount; i++) {
+            byte[] value = new byte[(int) itemlength];
+            batch.add(W.<T>fromValue(value));
+        }
+        return batch;
     }
 }

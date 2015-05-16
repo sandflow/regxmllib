@@ -34,31 +34,26 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 @XmlAccessorType(XmlAccessType.NONE)
 public class WeakReferenceTypeDefinition extends Definition {
 
-    public WeakReferenceTypeDefinition() {
-    }
-    
-    
 
     @XmlJavaTypeAdapter(value = AUIDAdapter.class)
     @XmlElement(name = "ReferencedType")
     private AUID referencedType;
 
-    @Override
-    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
-        visitor.visit(this);
-    }
-
     @XmlElementWrapper(name = "TargetSet")
     @XmlElement(name = "MetaDefRef")
     @XmlJavaTypeAdapter(value = AUIDAdapter.class)
     private ArrayList<AUID> targetSet = new ArrayList<>();
+
+    public WeakReferenceTypeDefinition() {
+    }
+
+    @Override
+    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
+        visitor.visit(this);
+    }
 
     public AUID getReferencedType() {
         return referencedType;

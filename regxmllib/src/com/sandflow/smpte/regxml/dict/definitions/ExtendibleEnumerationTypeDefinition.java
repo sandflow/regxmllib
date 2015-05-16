@@ -34,10 +34,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 @XmlAccessorType(XmlAccessType.NONE)
 public class ExtendibleEnumerationTypeDefinition extends Definition {
     

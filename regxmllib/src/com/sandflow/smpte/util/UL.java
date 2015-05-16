@@ -28,6 +28,9 @@ package com.sandflow.smpte.util;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+/**
+ * Represent a SMPTE Universal Label (SMPTE ST 298)
+ */
 public class UL {
 
     private final static Pattern URN_PATTERN = Pattern.compile("urn:smpte:ul:[a-fA-F0-9]{8}\\.[a-fA-F0-9]{8}\\.[a-fA-F0-9]{8}\\.[a-fA-F0-9]{8}");
@@ -35,16 +38,21 @@ public class UL {
     private final static int CATEGORY_DESIGNATOR_BYTE = 4;
     private final static int REGISTRY_DESIGNATOR_BYTE = 5;
 
-    public static UL fromURN(String val) {
-        
-        /* TODO: should this throw an exception */
+    /**
+     * Creates a UL from a URN
+     * (urn:smpte:ul:xxxxxxxx.xxxxxxxx.xxxxxxxx.xxxxxxxx)
+     *
+     * @param urn URN from which the UL will be created
+     * @return UL, or null if the URN is invalid
+     */
+    public static UL fromURN(String urn) {
 
         byte[] ul = new byte[16];
 
-        if (URN_PATTERN.matcher(val).matches()) {
+        if (URN_PATTERN.matcher(urn).matches()) {
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
-                    ul[4 * i + j] = (byte) Integer.parseUnsignedInt(val.substring(13 + i * 9 + 2 * j, 13 + i * 9 + 2 * j + 2), 16);
+                    ul[4 * i + j] = (byte) Integer.parseUnsignedInt(urn.substring(13 + i * 9 + 2 * j, 13 + i * 9 + 2 * j + 2), 16);
                 }
             }
 
@@ -58,9 +66,14 @@ public class UL {
 
     }
 
+    /**
+     * Creates a UL from a dot-value representation
+     * (xx.xx.xx.xx.xx.xx.xx.xx.xx.xx.xx.xx.xx.xx.xx.xx)
+     *
+     * @param val String from which the UL will be created
+     * @return UL UL, or null if the URN is invalid
+     */
     public static UL fromDotValue(String val) {
-        
-        /* TODO: should this throw an exception */
 
         byte[] ul = new byte[16];
 
@@ -79,18 +92,27 @@ public class UL {
 
     }
 
-    private byte[] value;
+    private final byte[] value;
 
+    /**
+     * @return true if the UL is a Key for a KLV Group (see SMPTE ST 336)
+     */
     public boolean isGroup() {
         return getValueOctet(CATEGORY_DESIGNATOR_BYTE) == 2;
     }
 
+    /**
+     * @return true if the UL is a Key for a KLV Local Set (see SMPTE ST 336)
+     */
     public boolean isLocalSet() {
         /* TODO: compare also SMPTE designator */
 
-        return getValueOctet(CATEGORY_DESIGNATOR_BYTE) == 2 && (getValueOctet(REGISTRY_DESIGNATOR_BYTE) & 7) == 3;
+        return isGroup() && (getRegistryDesignator() & 7) == 3;
     }
 
+    /**
+     * @return The value of the Registry Designator byte of the UL
+     */
     public int getRegistryDesignator() {
         return getValueOctet(REGISTRY_DESIGNATOR_BYTE);
     }
@@ -99,10 +121,21 @@ public class UL {
         this.value = new byte[16];
     }
 
+    /**
+     * Instantiates a UL from a sequence of 16 bytes
+     *
+     * @param ul Sequence of 16 bytes
+     */
     public UL(byte[] ul) {
         this.value = java.util.Arrays.copyOf(ul, 16);
     }
 
+    /**
+     * Compares this UL to another UL, ignoring the version byte
+     *
+     * @param ul Other UL to compare
+     * @return true if the ULs are equal
+     */
     public boolean equalsIgnoreVersion(UL ul) {
         for (int i = 0; i < 7; i++) {
             if (this.value[i] != ul.value[i]) {
@@ -118,12 +151,23 @@ public class UL {
 
         return true;
     }
-    
+
+    /**
+     * @return The value of the Version byte of the UL
+     */
     public byte getVersion() {
         return getValueOctet(7);
     }
 
-    public boolean equals(UL ul, int bytemask) {
+    /**
+     * Compares this UL to another UL, ignoring specific bytes based on a mask
+     *
+     * @param ul Other UL to compare
+     * @param bytemask 16-bit mask, where byte[n] is ignored if bit[n] is 0,
+     * with n = 0 is the LSB
+     * @return true if the ULs are equal
+     */
+    public boolean equalsWithMask(UL ul, int bytemask) {
 
         for (int i = 0; i < 15; i++) {
             if ((bytemask & 0x8000) != 0 && this.value[i] != ul.value[i]) {
@@ -136,6 +180,12 @@ public class UL {
         return true;
     }
 
+    /**
+     * Compares this UL to another UL
+     *
+     * @param ul Other UL to compare
+     * @return true if the ULs are equal
+     */
     public boolean equals(UL ul) {
         return Arrays.equals(ul.value, this.value);
     }
@@ -144,6 +194,12 @@ public class UL {
         return value;
     }
 
+    /**
+     * Returns the nth octet of the UL, indexed at 0
+     *
+     * @param i Index of the octet, starting at 0 for the first byte
+     * @return Value of the byte
+     */
     public byte getValueOctet(int i) {
         return value[i];
     }
@@ -167,8 +223,6 @@ public class UL {
         }
         return true;
     }
-    
-    
 
     @Override
     public String toString() {
@@ -192,16 +246,25 @@ public class UL {
                 value[15]
         );
     }
-
+    
+    /**
+     * @return true if the UL is a class 14 UL
+     */
     public boolean isClass14() {
         return getValueOctet(8) == 14;
     }
-    
+
+    /**
+     * @return true if the UL is a class 15 UL
+     */
     public boolean isClass15() {
         return getValueOctet(8) == 15;
     }
-    
-        public boolean isClass13() {
+
+    /**
+     * @return true if the UL is a class 13 UL
+     */
+    public boolean isClass13() {
         return getValueOctet(8) == 13;
     }
 

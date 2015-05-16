@@ -41,8 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Single Entry in a Groups Register (SMPTE ST 395)
  */
 @XmlType(name = "GroupEntry", namespace = GroupsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
@@ -166,7 +165,7 @@ public class GroupEntry {
     }
 
     public void setKlvSyntax(Set<Byte> klvSyntax) {
-        this.klvSyntax = new HashSet<Byte>(klvSyntax);
+        this.klvSyntax = new HashSet<>(klvSyntax);
     }
 
     public List<Record> getContents() {

@@ -31,13 +31,33 @@ import com.sandflow.smpte.util.AUID;
 import java.util.Collection;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * A class that can retrieve Metadictionary definitions.
  */
 public interface DefinitionResolver {
-        public Definition getDefinition(AUID auid);
-        
-        public Collection<AUID> getSubclassesOf(ClassDefinition definition);
-        
-        public Collection<AUID> getMembersOf(ClassDefinition definition);
+
+    /**
+     * Returns a single Metadictionary definitions based on the value of
+     * identification property.
+     *
+     * @param identification Identification of the requested defintion
+     * @return A single definition, or null if none is associated with the
+     * identification value
+     */
+    public Definition getDefinition(AUID identification);
+
+    /**
+     * Return all subclasses of a Class definition.
+     * 
+     * @param definition Class definition for which subclasses are sought
+     * @return Identifications for the definition of all subclasses
+     */
+    public Collection<AUID> getSubclassesOf(ClassDefinition definition);
+
+      /**
+     * Return all members of a Class definition.
+     * 
+     * @param definition Class definition for which members are sought
+     * @return Identifications for the definition of all members
+     */
+    public Collection<AUID> getMembersOf(ClassDefinition definition);
 }

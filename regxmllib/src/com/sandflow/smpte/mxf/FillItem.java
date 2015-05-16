@@ -30,21 +30,34 @@ import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.util.UL;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Represents an MXF Fill Item (see SMPTE ST 377-1)
  */
 public class FillItem {
     
-    public static final UL LABEL = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x01, 0x01, 0x01, 0x02, 0x03, 0x01, 0x02, 0x10, 0x01, 0x00, 0x00, 0x00});
+    static final UL KEY = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x01, 0x01, 0x01, 0x02, 0x03, 0x01, 0x02, 0x10, 0x01, 0x00, 0x00, 0x00});
 
+    /**
+     * Creates a Fill Item from a Triplet
+     * @param triplet Triplet from which to create the Fill Item
+     * @return FillItem or null if the Triplet is not a FillItem
+     * @throws KLVException 
+     */
     public static FillItem fromTriplet(Triplet triplet) throws KLVException {
 
         FillItem fi = new FillItem();
 
-        if (!LABEL.equalsIgnoreVersion(triplet.getKey())) {
+        if (!getKey().equalsIgnoreVersion(triplet.getKey())) {
             return null;
         }
 
         return fi;
+    }
+    
+    /**
+     * Returns the Fill Item Key
+     * @return Key
+     */
+    public static UL getKey() {
+        return KEY;
     }
 }

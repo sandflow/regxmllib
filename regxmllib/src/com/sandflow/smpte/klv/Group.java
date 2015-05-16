@@ -30,13 +30,22 @@ import com.sandflow.smpte.util.UL;
 import java.util.Collection;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Abstract KLV group as specified in SMPTE ST 336
  */
 public interface Group {
 
+    /**
+     * Retrieves the items of the Group
+     * 
+     * @return Ordered collection of all items within the Group
+    */
     Collection<Triplet> getItems();
 
+    /**
+     * Returns the Key of the Group
+     * 
+     * @return Key of the Group
+     */
     UL getKey();
     
 }

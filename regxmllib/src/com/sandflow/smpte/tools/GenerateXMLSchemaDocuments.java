@@ -77,13 +77,11 @@ public class GenerateXMLSchemaDocuments {
 
         File baseDir = new File(args[3]);
 
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-        ArrayList<Document> docs = new ArrayList<>();
+        final DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        final ArrayList<Document> docs = new ArrayList<>();
 
         ctx.generateSchema(new SchemaOutputResolver() {
-
+            
             @Override
             public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
                 Document doc = docBuilder.newDocument();

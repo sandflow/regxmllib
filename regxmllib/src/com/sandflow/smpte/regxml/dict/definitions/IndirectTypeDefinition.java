@@ -28,10 +28,6 @@ package com.sandflow.smpte.regxml.dict.definitions;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 @XmlAccessorType(XmlAccessType.NONE)
 public class IndirectTypeDefinition extends Definition {
 

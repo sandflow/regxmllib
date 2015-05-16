@@ -46,8 +46,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Labels Register as defined in SMPTE ST 400
  */
 @XmlRootElement(name = "LabelsRegister", namespace = LabelsRegister.XML_NAMESPACE)
 @XmlType(name = "")

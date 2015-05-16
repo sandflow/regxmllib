@@ -26,28 +26,8 @@
 
 package com.sandflow.smpte.regxml.dict.definitions;
 
-import com.sandflow.smpte.regxml.dict.definitions.OpaqueTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.IndirectTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.RenameTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.StreamTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.PropertyDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.StringTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.SetTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.ExtendibleEnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.PropertyAliasDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.EnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.FixedArrayTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.IntegerTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.RecordTypeDefinition;
-
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Abstract visitor class (of a Visitor Design Pattern) for MetaDictionary definitions. 
  */
 public interface DefinitionVisitor {
     

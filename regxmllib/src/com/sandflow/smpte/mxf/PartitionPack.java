@@ -25,7 +25,6 @@
  */
 package com.sandflow.smpte.mxf;
 
-import com.sandflow.smpte.klv.KLVInputStream;
 import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.util.UL;
@@ -35,12 +34,106 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Represents a MXF Partition Pack Item (see SMPTE ST 377-1)
  */
 public class PartitionPack {
 
-    static final UL LABEL = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x05, 0x01, 0x01, 0x0d, 0x01, 0x02, 0x01, 0x01, 0x00, 0x00, 0x00});
+    private static final UL KEY = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x05, 0x01, 0x01, 0x0d, 0x01, 0x02, 0x01, 0x01, 0x00, 0x00, 0x00});
+
+    /**
+     * Returns the Partition Pack Key
+     * @return Key
+     */
+    public static UL getKey() {
+        return KEY;
+    }
+    
+    /**
+     * Creates a Partition Pack from a Triplet
+     * @param triplet Triplet from which to create the Partition Pack
+     * @return PartitionPack or null if the Triplet is not a Partition Pack
+     * @throws KLVException 
+     */
+    public static PartitionPack fromTriplet(Triplet triplet) throws KLVException {
+        PartitionPack pp = new PartitionPack();
+        
+        if (!KEY.equalsWithMask(triplet.getKey(), 0xfef9 /*11111110 11111001*/)) {
+            return null;
+        }
+        
+        switch (triplet.getKey().getValueOctet(14)) {
+            case 0x01:
+                pp.setStatus(Status.OPEN_INCOMPLETE);
+                break;
+            case 0x02:
+                pp.setStatus(Status.CLOSED_INCOMPLETE);
+                break;
+            case 0x03:
+                pp.setStatus(Status.OPEN_COMPLETE);
+                break;
+            case 0x04:
+                pp.setStatus(Status.CLOSED_COMPLETE);
+                break;
+            default:
+                return null;
+        }
+        
+        switch (triplet.getKey().getValueOctet(13)) {
+            case 0x02:
+                pp.setKind(Kind.HEADER);
+                
+                break;
+            case 0x03:
+                pp.setKind(Kind.BODY);
+                
+                break;
+            case 0x04:
+                pp.setKind(Kind.FOOTER);
+                if (pp.getStatus() == Status.OPEN_COMPLETE
+                        || pp.getStatus() == Status.OPEN_INCOMPLETE) {
+                    return null;
+                }
+                break;
+            default:
+                return null;
+        }
+        
+        MXFInputStream kis = new MXFInputStream(triplet.getValueAsStream());
+        
+        try {
+            
+            pp.setMajorVersion(kis.readUnsignedShort());
+            
+            pp.setMinorVersion(kis.readUnsignedShort());
+            
+            pp.setKagSize(kis.readUnsignedInt());
+            
+            pp.setThisPartition(kis.readLong());
+            
+            pp.setPreviousPartition(kis.readLong());
+            
+            pp.setFooterPartition(kis.readLong());
+            
+            pp.setHeaderByteCount(kis.readLong());
+            
+            pp.setIndexByteCount(kis.readLong());
+            
+            pp.setIndexSID(kis.readUnsignedInt());
+            
+            pp.setBodyOffset(kis.readLong());
+            
+            pp.setBodySID(kis.readLong());
+            
+            pp.setOperationalPattern(kis.readUL());
+            
+            pp.setEssenceContainers(kis.<UL, ULValueAdapter>readBatch());
+            
+        } catch (IOException e) {
+            throw new KLVException(e);
+        }
+        
+        return pp;
+    }
 
     private int majorVersion;
     private int minorVersion;
@@ -74,20 +167,6 @@ public class PartitionPack {
         this.status = status;
     }
 
-    public enum Kind {
-
-        HEADER,
-        BODY,
-        FOOTER
-    }
-
-    public enum Status {
-
-        OPEN_INCOMPLETE,
-        CLOSED_INCOMPLETE,
-        OPEN_COMPLETE,
-        CLOSED_COMPLETE
-    }
 
     public int getMajorVersion() {
         return majorVersion;
@@ -193,85 +272,12 @@ public class PartitionPack {
         this.essenceContainers = new ArrayList<>(essenceContainers);
     }
 
-    public static PartitionPack fromTriplet(Triplet triplet) throws KLVException {
+    public enum Kind {
+        HEADER, BODY, FOOTER
+    }
 
-        PartitionPack pp = new PartitionPack();
+    public enum Status {
 
-        if (!LABEL.equals(triplet.getKey(), 0xfef9 /*11111110 11111001*/)) {
-            return null;
-        }
-
-        switch (triplet.getKey().getValueOctet(14)) {
-            case 0x01:
-                pp.setStatus(Status.OPEN_INCOMPLETE);
-                break;
-            case 0x02:
-                pp.setStatus(Status.CLOSED_INCOMPLETE);
-                break;
-            case 0x03:
-                pp.setStatus(Status.OPEN_COMPLETE);
-                break;
-            case 0x04:
-                pp.setStatus(Status.CLOSED_COMPLETE);
-                break;
-            default:
-                return null;
-        }
-
-        switch (triplet.getKey().getValueOctet(13)) {
-            case 0x02:
-                pp.setKind(Kind.HEADER);
-
-                break;
-            case 0x03:
-                pp.setKind(Kind.BODY);
-
-                break;
-            case 0x04:
-                pp.setKind(Kind.FOOTER);
-                if (pp.getStatus() == Status.OPEN_COMPLETE
-                        || pp.getStatus() == Status.OPEN_INCOMPLETE) {
-                    return null;
-                }
-                break;
-            default:
-                return null;
-        }
-
-        KLVInputStream kis = new KLVInputStream(triplet.getValueAsStream());
-
-        try {
-
-            pp.setMajorVersion(kis.readUnsignedShort());
-
-            pp.setMinorVersion(kis.readUnsignedShort());
-
-            pp.setKagSize(kis.readUnsignedInt());
-
-            pp.setThisPartition(kis.readLong());
-
-            pp.setPreviousPartition(kis.readLong());
-
-            pp.setFooterPartition(kis.readLong());
-
-            pp.setHeaderByteCount(kis.readLong());
-
-            pp.setIndexByteCount(kis.readLong());
-
-            pp.setIndexSID(kis.readUnsignedInt());
-
-            pp.setBodyOffset(kis.readLong());
-
-            pp.setBodySID(kis.readLong());
-
-            pp.setOperationalPattern(kis.readUL());
-
-            pp.setEssenceContainers(kis.<UL, ULValueAdapter>readBatch());
-
-        } catch (IOException e) {
-            throw new KLVException(e);
-        }
-
-        return pp;
+        OPEN_INCOMPLETE, CLOSED_INCOMPLETE, OPEN_COMPLETE, CLOSED_COMPLETE
     }
 }

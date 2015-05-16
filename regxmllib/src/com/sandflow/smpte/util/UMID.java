@@ -28,19 +28,28 @@ package com.sandflow.smpte.util;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a SMPTE UMID as specified in SMPTE ST 330
+ */
 public class UMID {
 
     private final static Pattern URN_PATTERN = Pattern.compile("urn:smpte:umid:[a-fA-F0-9]{8}(?:\\.[a-fA-F0-9]{8}){7}");
 
-    public static UMID fromURN(String val) {
+    /**
+     * Creates a UMID from a URN
+     * (urn:smpte:umid:060A2B34.01010105.01010D20.13000000.D2C9036C.8F195343.AB7014D2.D718BFDA)
+     *
+     * @param urn URN-representation of the UMID
+     * @return UMID, or null if invalide URN
+     */
+    public static UMID fromURN(String urn) {
 
-        /* TODO: should this throw an exception */
         byte[] umid = new byte[32];
 
-        if (URN_PATTERN.matcher(val).matches()) {
+        if (URN_PATTERN.matcher(urn).matches()) {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 4; j++) {
-                    umid[4 * i + j] = (byte) Integer.parseUnsignedInt(val.substring(13 + i * 9 + 2 * j, 13 + i * 9 + 2 * j + 2), 16);
+                    umid[4 * i + j] = (byte) Integer.parseUnsignedInt(urn.substring(13 + i * 9 + 2 * j, 13 + i * 9 + 2 * j + 2), 16);
                 }
             }
 
@@ -60,8 +69,13 @@ public class UMID {
         this.value = new byte[32];
     }
 
-    public UMID(byte[] ul) {
-        this.value = java.util.Arrays.copyOf(ul, 32);
+    /**
+     * Instantiates a UMID from a sequence of 32 bytes
+     *
+     * @param umid Sequence of 32 bytes
+     */
+    public UMID(byte[] umid) {
+        this.value = java.util.Arrays.copyOf(umid, 32);
     }
 
     public byte[] getValue() {
@@ -98,11 +112,11 @@ public class UMID {
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 4; j++) {
-                
-                int v = value[4*i + j] & 0xFF;
-                out[15 + 9*i + 2*j] = HEXMAP[v >>> 4];
-                out[15 + 9*i + 2*j + 1] = HEXMAP[v & 0x0F];
-                
+
+                int v = value[4 * i + j] & 0xFF;
+                out[15 + 9 * i + 2 * j] = HEXMAP[v >>> 4];
+                out[15 + 9 * i + 2 * j + 1] = HEXMAP[v & 0x0F];
+
             }
         }
 

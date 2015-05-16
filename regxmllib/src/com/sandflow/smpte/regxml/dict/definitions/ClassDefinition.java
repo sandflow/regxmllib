@@ -36,18 +36,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ClassDefinition extends Definition {
     
-    
-    
-    /**
-     * specifies the parent of the class being defined.
-     */
     @XmlJavaTypeAdapter(value = AUIDAdapter.class)
     @XmlElement(name = "ParentClass")
     private AUID    parentClass;
     
-    /**
-     * specifies if the class is concrete
-     */
     @XmlElement(name = "IsConcrete")
     private boolean concrete;
 

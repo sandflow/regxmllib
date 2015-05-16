@@ -46,8 +46,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Elements Register as defined in SMPTE ST 335
  */
 @XmlRootElement(name = "ElementsRegister", namespace = ElementsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)

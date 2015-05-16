@@ -32,10 +32,6 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 @XmlAccessorType(XmlAccessType.NONE)
 public class FloatTypeDefinition extends Definition {
 

@@ -63,13 +63,21 @@ import java.util.HashSet;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Generates MetaDictionaries from SMPTE Metadata Registers.
  */
-public class XMLRegisterImporter {
+public class RegisterImporter {
 
-    private final static Logger LOGGER = Logger.getLogger(XMLRegisterImporter.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(RegisterImporter.class.getName());
 
+    /**
+     * Generates MetaDictionaries from SMPTE Types, Groups and Elements Registers.
+     * 
+     * @param tr Types Register
+     * @param gr Groups Register
+     * @param er Elements Register
+     * @return Collection of Metadictionaries 
+     * @throws Exception 
+     */
     public static MetaDictionaryCollection fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
 
         /* create definition collection */
@@ -77,8 +85,7 @@ public class XMLRegisterImporter {
 
         /* keep track of definitions to prevent duplicates */
         HashSet<AUID> defIDs = new HashSet<>();
-
-
+        
         /* handle groups */
         for (GroupEntry group : gr.getEntries()) {
 
@@ -86,7 +93,7 @@ public class XMLRegisterImporter {
                 continue;
             }
 
-            /* BUG: some groups are broken! Skip class 14 and 15 */
+            /* Skip class 14 and 15 */
             if (group.getUL().isClass14() || group.getUL().isClass15()) {
                 continue;
             }
@@ -459,13 +466,6 @@ public class XMLRegisterImporter {
 
         return mds;
 
-    }
-
-    public static class MissingElementDefinitionException extends Exception {
-
-        public MissingElementDefinitionException(String string) {
-            super(string);
-        }
     }
 
 }

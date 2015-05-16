@@ -29,13 +29,18 @@ import java.net.URI;
 import java.util.Objects;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Qualified Symbol for Register entry. Consists of a namespace and symbol string, with
+ * no two entries with identical namespace having also identical symbols.
  */
 public class QualifiedSymbol {
     private final String symbol;
     private final URI namespace;
     
+    /**
+     * Instantiates a Qualified Symbol.
+     * @param symbol Symbol
+     * @param namespace Namespace
+     */
     public QualifiedSymbol(String symbol, URI namespace) {
         this.symbol = symbol;
         this.namespace = namespace;

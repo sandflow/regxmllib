@@ -46,8 +46,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Groups Register as defined in SMPTE ST 395
  */
 @XmlRootElement(name = "GroupsRegister", namespace = GroupsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)

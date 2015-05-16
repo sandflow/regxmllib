@@ -30,24 +30,28 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Retrieves a string that uniquely identifies the current build of the underlying
+ * source code of regxmllib. Currently looks for build version at the 'version'
+ * property in the /config/repoversion.properties resource.
  */
 public class BuildVersionSingleton {
 
     private static final String BUILD_VERSION_PROPFILE = "/config/repoversion.properties";
     private static final String BUILD_VERSION_PROPNAME = "version";
-
+    private static final String DEFAULT_BUILD_VERSION = "n/a";
 
     private static final BuildVersionSingleton INSTANCE = new BuildVersionSingleton();
 
+    /**
+     * @return Uniquely identifies the current build of the underlying source code of regxmllib
+     */
     public static String getBuildVersion() {
         return INSTANCE.buildVersion;
     }
     private final String buildVersion;
 
     private BuildVersionSingleton() {
-        String bv = "n/a";
+        String bv = DEFAULT_BUILD_VERSION;
 
         try {
             

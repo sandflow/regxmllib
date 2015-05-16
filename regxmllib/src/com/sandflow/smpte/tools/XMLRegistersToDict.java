@@ -32,7 +32,7 @@ import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.register.exceptions.InvalidEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
-import static com.sandflow.smpte.regxml.dict.importers.XMLRegisterImporter.fromRegister;
+import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

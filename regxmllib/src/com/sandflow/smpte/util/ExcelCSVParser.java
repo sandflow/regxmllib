@@ -25,42 +25,41 @@
  */
 package com.sandflow.smpte.util;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Simple Excel CSV parser.
  */
 public class ExcelCSVParser {
 
     Reader reader;
 
-    public static class SyntaxException extends Exception {
-
-        public SyntaxException() {
-        }
-    }
+    public static class SyntaxException extends Exception { }
 
     private enum State {
-
         IN_QFIELD,
         DQ_IN_QFIELD,
         IN_PFIELD,
         EOL
     }
 
+    /**
+     * Instantiates an ExcelCSVParser
+     * @param reader Reader from which CSV lines will be read
+     */
     public ExcelCSVParser(Reader reader) {
         this.reader = reader;
     }
 
+    /**
+     * Reads one line from the CSV file.
+     * @return List of the fields found on the line
+     * @throws com.sandflow.smpte.util.ExcelCSVParser.SyntaxException
+     * @throws IOException 
+     */
     public AbstractList<String> getLine() throws SyntaxException, IOException {
         State s = State.IN_PFIELD;
 
@@ -146,27 +145,6 @@ public class ExcelCSVParser {
             return strs;
         } else {
             return null;
-        }
-    }
-
-    public static void main(String args[]) throws FileNotFoundException, UnsupportedEncodingException, SyntaxException, IOException {
-
-        FileInputStream f = new FileInputStream("\\\\SERVER\\Business\\sandflow-consulting\\projects\\imf\\regxml\\register-format\\input\\smpte-ra-frozen-20140304.2118.elements.csv");
-
-        InputStreamReader isr = new InputStreamReader(f, "US-ASCII");
-
-        BufferedReader br = new BufferedReader(isr);
-
-        ExcelCSVParser p = new ExcelCSVParser(br);
-
-        for (int i = 0; i < 3; i++) {
-            AbstractList<String> fields = p.getLine();
-
-            for (String field : fields) {
-                System.out.print(field + " | ");
-            }
-
-            System.out.print("\r\n");
         }
     }
 

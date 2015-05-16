@@ -28,7 +28,7 @@ package com.sandflow.smpte.tools;
 import com.sandflow.smpte.klv.Group;
 import com.sandflow.smpte.klv.KLVInputStream;
 import com.sandflow.smpte.klv.LocalSet;
-import com.sandflow.smpte.klv.LocalSetRegister;
+import com.sandflow.smpte.klv.LocalTagRegister;
 import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.mxf.FillItem;
@@ -142,13 +142,13 @@ public class RegXMLDump {
          cis.resetCount();
         
         /* look for the primer pack */
-        LocalSetRegister localreg = null;
+        LocalTagRegister localreg = null;
 
         for (Triplet t; (t = kis.readTriplet()) != null; cis.resetCount()) {
             
             /* skip fill items, if any */
-            if (! t.getKey().equalsIgnoreVersion(FillItem.LABEL)) {
-                localreg = PrimerPack.createLocalSetRegister(t);
+            if (! t.getKey().equalsIgnoreVersion(FillItem.getKey())) {
+                localreg = PrimerPack.createLocalTagRegister(t);
                 break;
             }
 
@@ -172,7 +172,7 @@ public class RegXMLDump {
                 
                 LOG.warning("Index Table Segment encountered before Header Byte Count bytes read.");
                 break;
-            } else if (t.getKey().equalsIgnoreVersion(FillItem.LABEL)) {
+            } else if (t.getKey().equalsIgnoreVersion(FillItem.getKey())) {
                 
                 /* skip fill items */
                 
@@ -239,7 +239,7 @@ public class RegXMLDump {
                         /* is this an essence descriptor */
                         UL deful = def.getIdentification().asUL();
 
-                        if (deful.equals(ESSENCE_DESCRIPTOR_UL, 0b1111101011111111 /*11111010 11111111*/)) {
+                        if (deful.equalsWithMask(ESSENCE_DESCRIPTOR_UL, 0b1111101011111111 /*11111010 11111111*/)) {
                             ed = g;
 
                         } else {

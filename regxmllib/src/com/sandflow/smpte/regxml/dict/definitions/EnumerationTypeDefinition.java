@@ -42,10 +42,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import static org.w3c.dom.Node.ELEMENT_NODE;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 @XmlAccessorType(XmlAccessType.NONE)
 public class EnumerationTypeDefinition extends Definition {
 
@@ -85,6 +81,7 @@ public class EnumerationTypeDefinition extends Definition {
             return al;
         }
 
+        @Override
         public Object marshal(ArrayList<Element> v) throws Exception {
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

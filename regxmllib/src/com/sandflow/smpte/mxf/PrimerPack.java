@@ -26,35 +26,40 @@
 package com.sandflow.smpte.mxf;
 
 import com.sandflow.smpte.klv.exceptions.KLVException;
-import com.sandflow.smpte.klv.KLVInputStream;
-import com.sandflow.smpte.klv.LocalSetRegister;
+import com.sandflow.smpte.klv.LocalTagRegister;
 import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.util.UL;
 import java.io.IOException;
 import java.util.HashMap;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Represents a MXF Primer Pack (see SMPTE ST 377-1)
  */
 public class PrimerPack {
 
-    public static final UL LABEL = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x05, 0x01, 0x01, 0x0d, 0x01, 0x02, 0x01, 0x01, 0x05, 0x01, 0x00});
+    private static final UL KEY = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x05, 0x01, 0x01, 0x0d, 0x01, 0x02, 0x01, 0x01, 0x05, 0x01, 0x00});
 
-    public static LocalSetRegister createLocalSetRegister(Triplet triplet) throws KLVException {
+    /**
+     * Creates a LocalTagRegister from a PrimerPack
+     *
+     * @param triplet Triplet representation of the Primer Pack
+     * @return LocalTagRegister or null if the Triplet is not a Primer Pack
+     * @throws KLVException
+     */
+    public static LocalTagRegister createLocalTagRegister(Triplet triplet) throws KLVException {
 
-        if (!PrimerPack.LABEL.equalsIgnoreVersion(triplet.getKey())) {
+        if (!PrimerPack.KEY.equalsIgnoreVersion(triplet.getKey())) {
             return null;
         }
 
         HashMap<Long, UL> reg = new HashMap<>();
 
-        KLVInputStream kis = new KLVInputStream(triplet.getValueAsStream());
+        MXFInputStream kis = new MXFInputStream(triplet.getValueAsStream());
 
         try {
 
             long itemcount = kis.readUnsignedInt();
-            
+
             long itemlength = kis.readUnsignedInt();
 
             for (int i = 0; i < itemcount; i++) {
@@ -66,6 +71,15 @@ public class PrimerPack {
             throw new KLVException(e);
         }
 
-        return new LocalSetRegister(reg);
+        return new LocalTagRegister(reg);
+    }
+
+    /**
+     * Returns the Primer Pack Key
+     *
+     * @return Key
+     */
+    public static UL getKey() {
+        return KEY;
     }
 }

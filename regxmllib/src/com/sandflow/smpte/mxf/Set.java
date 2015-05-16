@@ -30,16 +30,18 @@ import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UUID;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Represents a MXF Set (see SMPTE ST 377-1)
  */
 public class Set implements Group{
     private static final UL INSTANCE_UID_ITEM_UL = UL.fromURN("urn:smpte:ul:060e2b34.01010101.01011502.00000000");
 
+    /**
+     * Creates an MXF Set from a Group
+     * @param group Group from which to create the MXF Set
+     * @return MXF Set or null if the Group does not contain an Instance ID property
+     */
     static public Set fromGroup(Group group) {
         
         for (Triplet t : group.getItems()) {
@@ -74,6 +76,11 @@ public class Set implements Group{
         return group.getKey();
     }
 
+    /**
+     * Returns the Instance ID of the MXF Set
+     *
+     * @return UUID
+     */
     public UUID getInstanceID() {
         return instanceID;
     }

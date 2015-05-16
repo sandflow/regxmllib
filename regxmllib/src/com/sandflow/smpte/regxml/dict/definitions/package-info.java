@@ -24,6 +24,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * MetaDictionary definitions as specified in SMPTE ST 2001-1
+ */
 @XmlSchema(
         namespace = MetaDictionary.XML_NS,
         xmlns = { 

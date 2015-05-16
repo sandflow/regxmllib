@@ -31,24 +31,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 @XmlAccessorType(XmlAccessType.NONE)
 public class IntegerTypeDefinition extends Definition {
 
-
-
-    /**
-     * specifies the number of bytes to store the value
-     */
     @XmlElement(name = "Size")
     private Size size;
 
-    /**
-     * specifies whether the integer is signed or unsigned
-     */
     @XmlElement(name = "IsSigned")
     private boolean signed;
 

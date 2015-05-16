@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Single Entry in a Labels Register (SMPTE ST 400)
  */
 @XmlType(name = "LabelEntry", namespace = LabelsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)

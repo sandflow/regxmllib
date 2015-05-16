@@ -35,6 +35,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+/**
+ * Base type for the MetaDictionary definitions. Each concrete subclass corresponds to 
+ * a particular type of definition allowed in a MetaDictionary, as specified in
+ * SMPTE ST 2001-1. XML Annotations are used to map the subclasses to an XML representation
+ * consistent with that defined in SMPTE ST 2001-1.
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 abstract public class Definition {
     
@@ -94,6 +100,12 @@ abstract public class Definition {
         this.name = name;
     }
     
+    /**
+     * Supports the visitor design pattern.
+     * @see DefinitionVisitor
+     * @param visitor Visitor instance that will process the definition
+     * @throws com.sandflow.smpte.regxml.dict.definitions.DefinitionVisitor.VisitorException 
+     */
     abstract public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException;
     
 }

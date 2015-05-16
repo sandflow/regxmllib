@@ -29,8 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Counts the number of bytes read from an InputStream
  */
 public class CountingInputStream extends InputStream {
     
@@ -38,6 +37,10 @@ public class CountingInputStream extends InputStream {
     long markCount = 0;
     InputStream is;
     
+    /**
+     * Instantiates a CountingInputStream
+     * @param is InputStream from which data will be read
+     */
     public CountingInputStream(InputStream is) {
         this.is = is;
     }
@@ -97,10 +100,17 @@ public class CountingInputStream extends InputStream {
         return is.available();
     }
     
+    /**
+     * @return Returns the number of bytes read since the object was created or
+     * resetCount was called
+     */
     public long getCount() {
         return count;
     }
     
+    /**
+     * Resets the number of bytes read to zero.
+     */
     public void resetCount() {
         count = 0;
     }

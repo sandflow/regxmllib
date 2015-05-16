@@ -25,7 +25,6 @@
  */
 package com.sandflow.smpte.klv;
 
-import com.sandflow.smpte.klv.adapters.TripletValueAdapter;
 import com.sandflow.smpte.klv.exceptions.KLVException;
 import static com.sandflow.smpte.klv.exceptions.KLVException.MAX_LENGTH_EXCEEED;
 import com.sandflow.smpte.util.UL;
@@ -33,15 +32,26 @@ import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
 
+/**
+ * KLVInputStream allows KLV data structures to be read from an InputStream
+ */
 public class KLVInputStream extends DataInputStream {
 
+    /**
+     * @param is InputStream to read from
+     */
     public KLVInputStream(InputStream is) {
         super(is);
     }
 
+    /**
+     * Reads a single UL.
+     * 
+     * @return UL
+     * @throws IOException
+     * @throws EOFException 
+     */
     public UL readUL() throws IOException, EOFException {
         byte[] ul = new byte[16];
 
@@ -52,6 +62,14 @@ public class KLVInputStream extends DataInputStream {
         return new UL(ul);
     }
 
+    /**
+     * Reads a single BER-encoded length. The maximum length of the encoded length is 8 bytes.
+     * 
+     * @return Length
+     * @throws EOFException
+     * @throws IOException
+     * @throws KLVException 
+     */
     public long readBERLength() throws EOFException, IOException, KLVException {
 
         long val = 0;
@@ -90,6 +108,14 @@ public class KLVInputStream extends DataInputStream {
         return val;
     }
 
+    /**
+     * Reads a single KLV triplet.
+     * 
+     * @return KLV Triplet
+     * @throws IOException
+     * @throws EOFException
+     * @throws KLVException 
+     */
     public Triplet readTriplet() throws IOException, EOFException, KLVException {
         UL ul = readUL();
 
@@ -110,29 +136,5 @@ public class KLVInputStream extends DataInputStream {
 
     public long readUnsignedInt() throws IOException, EOFException {
         return ((long) readInt()) & 0xFFFF;
-    }
-
-    public <T, W extends TripletValueAdapter> Collection<T> readArray() throws KLVException, IOException {
-        return readBatch();
-    }
-
-    public <T, W extends TripletValueAdapter> Collection<T> readBatch() throws KLVException, IOException {
-        ArrayList<T> batch = new ArrayList<>();
-
-        long itemcount = readUnsignedInt();
-        long itemlength = readUnsignedInt();
-
-        if (itemlength > Integer.MAX_VALUE) {
-            throw new KLVException(MAX_LENGTH_EXCEEED);
-        }
-
-        for (int i = 0; i < itemcount; i++) {
-
-            byte[] value = new byte[(int) itemlength];
-
-            batch.add(W.<T>fromValue(value));
-        }
-
-        return batch;
     }
 }

@@ -35,14 +35,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 public class RenameTypeDefinition extends Definition {
 
-    public RenameTypeDefinition() {
-    }
-    
-    
-
     @XmlJavaTypeAdapter(value = AUIDAdapter.class)
     @XmlElement(name = "RenamedType")
     private AUID renamedType;
+
+    public RenameTypeDefinition() {
+    }
 
     @Override
     public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {

@@ -25,10 +25,6 @@
  */
 package com.sandflow.smpte.regxml.dict.exceptions;
 
-/**
- *
- * @author pal
- */
 public class DuplicateSymbolException extends IllegalDefinitionException {
 
     public DuplicateSymbolException() {

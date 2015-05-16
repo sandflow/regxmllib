@@ -23,39 +23,59 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
 package com.sandflow.smpte.klv;
 
 import com.sandflow.smpte.util.UL;
-import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Abstract class representing a KLV Triplet per SMPTE ST 336
+ * LocalTagRegister maps Local Tags found in a Local Set to UL Keys
  */
-public interface Triplet {
+public class LocalTagRegister {
+
+    private final HashMap<Long, UL> entries = new HashMap<>();
+    
+    /**
+     * Instantiates an empty LocalTagRegister
+     */
+    public LocalTagRegister() { }
 
     /**
-     * Returns the Key of the KLV Triplet
-     * @return Triplet Key
+     * Instantiates a LocalTagRegister with an initial set of mappings from Local Tag values to UL Keys
+     * @param entries Initial set of mappings
      */
-    UL getKey();
+    public LocalTagRegister(Map<Long, UL> entries) {
+        this.entries.putAll(entries);
+    }
+
+    /**
+     * Returns the Key corresponding to a Local Tag
+     * @param localtag Local Tag
+     * @return Key, or null if no Key exists for the Local Tag
+     */
+    public UL get(long localtag) {
+        return entries.get(localtag);
+    }
     
     /**
-     * Returns the Length of the KLV Triplet
-     * @return Triplet Length
+     * Adds a Local Tag to the registry.
+     * @param localtag Local Tag
+     * @param key Key with which the Local Tag is associated
+     * @return The Key is the Local Tag was already present in the registry, or null otherwise.
      */
-    long getLength();
+    public UL add(long localtag, UL key) {
+        return entries.put(localtag, key);
+    }
     
     /**
-     * Return the Value of the KLV Triplet as a byte array
-     * @return Triplet Value
+     * Adds the Local Tag if not already present.
+     * @param localtag Local tag
+     * @param key Key with which the Local Tag is associated
+     * @return Previous Key associated with the local tag if one existed, or null otherwise. 
      */
-    byte[] getValue();
-    
-    /**
-     * Return the Value of the KLV Triplet as an Input Stream
-     * @return Triplet Value
-     */ 
-    InputStream getValueAsStream();
+    public UL addIfAbsent(long localtag, UL key) {
+        return entries.putIfAbsent(localtag, key);
+    }
 
 }

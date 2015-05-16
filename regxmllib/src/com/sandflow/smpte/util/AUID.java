@@ -28,34 +28,51 @@ package com.sandflow.smpte.util;
 import java.util.Arrays;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * AUID as specified in SMPTE ST 377-1
  */
 public class AUID {
     
-    private AUID() { }
-
-    public static AUID fromURN(String val) {
-        if (val != null && val.startsWith("urn:smpte:ul:")) {
-            return new AUID(UL.fromURN(val));
+    /**
+     * Creates a AUID from a UL or UUID URN. 
+     * @param urn URN from which to create the AUID
+     * @return 
+     */
+    public static AUID fromURN(String urn) {
+        if (urn != null && urn.startsWith("urn:smpte:ul:")) {
+            return new AUID(UL.fromURN(urn));
         } else {
-            return new AUID(UUID.fromURN(val));
+            return new AUID(UUID.fromURN(urn));
         }
 
-        // TODO: handle errors
+        /* TODO: handle errors */
  
     }
 
     private byte[] value;
     
+    private AUID() { }
+    
+    /**
+     * Instantiates a AUID from a 16-byte buffer
+     * @param auid 16-bytes
+     */
     public AUID(byte[] auid) {
         this.value = java.util.Arrays.copyOf(auid, 16);
     }
 
+    
+    /**
+     * Instantiates a AUID from a UL
+     * @param ul UL from which to create the AUID
+     */
     public AUID(UL ul) {
         this.value = ul.getValue();
     }
 
+    /**
+     * Instantiates a AUID from a UUID
+     * @param uuid UUID from which to create the AUID
+     */
     public AUID(UUID uuid) {
         
         value = new byte[16];
@@ -76,12 +93,12 @@ public class AUID {
         return Arrays.equals(ul.getValue(), this.value);
     }
 
+    
     @Override
     public int hashCode() {
         return Arrays.hashCode(value);
     }
 
-    
     @Override
     public String toString() {
         
@@ -95,10 +112,18 @@ public class AUID {
         }
     }
 
+    /**
+     * Is the AUID a UL?
+     * @return true if the AUID is a UL
+     */
     public boolean isUL() {
         return (value[0] & 8) == 0;
     }
 
+    /**
+     * Returns the underlying UL if available
+     * @return Underlying UL, or null if not a UL
+     */
     public UL asUL() {
         return isUL() ? new UL(value) : null;
     }

@@ -82,8 +82,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Builds a RegXML Fragment of a single KLV Group, typically a Header Metadata MXF Set,
+ * using a collection of MetaDictionary definitions
  */
 public class FragmentBuilder {
 
@@ -117,18 +117,32 @@ public class FragmentBuilder {
     private final Map<UUID, Set> setresolver;
     private final HashMap<URI, String> nsprefixes = new HashMap<>();
 
+    /**
+     * Instantiates a FragmentBuilder
+     * @param defresolver Map between Group Keys and MetaDictionary definitions
+     * @param setresolver Allows Strong References to be resolved
+     */
     public FragmentBuilder(DefinitionResolver defresolver, Map<UUID, Set> setresolver) {
         this.defresolver = defresolver;
         this.setresolver = setresolver;
     }
 
+    /**
+     * Creates a RegXML Fragment, represented an XML DOM Document Fragment
+     * @param group KLV Group for which the Fragment will be generated.
+     * @param document Document from which the XML DOM Document Fragment will be created.
+     * @return XML DOM Document Fragment containing a single RegXML Fragment 
+     * @throws ParserConfigurationException
+     * @throws KLVException
+     * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException 
+     */
     public DocumentFragment fromTriplet(Group group, Document document) throws ParserConfigurationException, KLVException, RuleException {
 
         DocumentFragment df = document.createDocumentFragment();
 
         applyRule3(df, group);
 
-        /* Hack to clean-up namespace prefixes */
+        /* NOTE: Hack to clean-up namespace prefixes */
         for (Map.Entry<URI, String> entry : nsprefixes.entrySet()) {
             ((Element) df.getFirstChild()).setAttributeNS(XMLNS_NS, "xmlns:" + entry.getValue(), entry.getKey().toString());
         }

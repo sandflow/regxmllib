@@ -34,13 +34,20 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Represents a UUID as specified in FRC 4122
  */
 public class UUID {
 
     private byte[] value;
 
+    private UUID() {
+    }
+
+    /**
+     * Instantiates a UUID from a sequence of 16 bytes
+     *
+     * @param uuid Sequence of 16 bytes
+     */
     public UUID(byte[] uuid) {
         this.value = java.util.Arrays.copyOf(uuid, 16);
     }
@@ -72,18 +79,26 @@ public class UUID {
     }
 
     private final static Pattern URN_PATTERN = Pattern.compile("urn:uuid:[a-fA-F0-9]{8}-(?:[a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}");
-    
+
+    /**
+     * Generate a Class 4 random UUID
+     * @return Class 4 UUID
+     */
     public static UUID fromRandom() {
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[16];
         random.nextBytes(bytes);
-        
+
         bytes[6] = (byte) ((bytes[6] & 0x0f) | 0x4f);
         bytes[8] = (byte) ((bytes[8] & 0x3f) | 0x7f);
-        
+
         return new UUID(bytes);
     }
-    
+
+    /**
+     * Generate a Class 5 UUID using a URI name
+     * @return Class 5 UUID
+     */
     public static UUID fromURIName(URI uri) {
         MessageDigest digest;
 
@@ -101,49 +116,52 @@ public class UUID {
 
         result[6] = (byte) ((result[6] & 0x0f) | 0x5f);
         result[8] = (byte) ((result[8] & 0x3f) | 0x7f);
-        
+
         return new UUID(result);
     }
 
+    /**
+     * Creates a UUID from a URN
+     * (urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6)
+     *
+     * @param val URN-representation of the UUID
+     * @return UUID, or null if invalid URN
+     */
     public static UUID fromURN(String val) {
 
-        /* TODO: should this throw an exception */
         byte[] uuid = new byte[16];
 
         if (URN_PATTERN.matcher(val).matches()) {
 
-            
-        int inoff = 0;
-        int outoff = 9;
+            int inoff = 0;
+            int outoff = 9;
 
-        for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 4; j++) {
 
-            uuid[inoff++] = (byte) Integer.parseUnsignedInt(val.substring(outoff, outoff + 2), 16);
-            
-            outoff += 2;
-            
-        }
+                uuid[inoff++] = (byte) Integer.parseUnsignedInt(val.substring(outoff, outoff + 2), 16);
 
-        for (int i = 0; i < 3; i++) {
+                outoff += 2;
+
+            }
+
+            for (int i = 0; i < 3; i++) {
+
+                outoff++;
+
+                for (int j = 0; j < 2; j++) {
+
+                    uuid[inoff++] = (byte) Integer.parseUnsignedInt(val.substring(outoff, outoff + 2), 16);
+                    outoff += 2;
+                }
+            }
 
             outoff++;
 
-            for (int j = 0; j < 2; j++) {
+            for (int j = 0; j < 6; j++) {
 
                 uuid[inoff++] = (byte) Integer.parseUnsignedInt(val.substring(outoff, outoff + 2), 16);
                 outoff += 2;
             }
-        }
-
-        outoff++;
-
-        for (int j = 0; j < 6; j++) {
-
-                uuid[inoff++] = (byte) Integer.parseUnsignedInt(val.substring(outoff, outoff + 2), 16);
-                outoff += 2;
-        }
-            
-            
 
             return new UUID(uuid);
 

@@ -23,39 +23,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sandflow.smpte.regxml.dict;
-
-import com.sandflow.smpte.regxml.dict.definitions.DefinitionVisitor;
-import com.sandflow.smpte.regxml.dict.definitions.OpaqueTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.IndirectTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.RenameTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.StreamTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.PropertyDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.StringTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.SetTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.ExtendibleEnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.EnumerationTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.PropertyAliasDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.FixedArrayTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.FloatTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.IntegerTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.LensSerialFloatTypeDefinition;
-import com.sandflow.smpte.regxml.dict.definitions.RecordTypeDefinition;
+package com.sandflow.smpte.regxml.dict.definitions;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Simplifies the creation of Visitor classes for Metadictionay definitions by providing
+ * concrete implementations of all methods of the abstract DefinitionVisitor interface. 
  */
 public class NullDefinitionVisitor implements DefinitionVisitor {
 
     @Override
     public void visit(PropertyAliasDefinition def) throws VisitorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new VisitorException("Not supported yet.");
     }
 
     @Override

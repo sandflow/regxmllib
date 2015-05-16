@@ -24,6 +24,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Allows the import, export and manipulation of SMPTE Metadata Registers.
+ * Java XML annotations are used to bind Java classes with the XML format by SMPTE
+ * for publication and interchange of its metadata registers.
+ */
 @XmlSchema(elementFormDefault=XmlNsForm.QUALIFIED)  
 package com.sandflow.smpte.register;
 

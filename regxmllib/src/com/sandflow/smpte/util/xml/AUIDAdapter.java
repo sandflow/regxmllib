@@ -29,33 +29,31 @@ import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
-    public  class AUIDAdapter extends XmlAdapter<String, AUID> {
+public class AUIDAdapter extends XmlAdapter<String, AUID> {
 
-        public AUID unmarshal(String val) throws Exception {
+    @Override
+    public AUID unmarshal(String val) throws Exception {
 
-            AUID auid = null;
+        AUID auid;
 
-            if (val.charAt(15) == '.') {
-                byte[] ul = new byte[16];
+        if (val.charAt(15) == '.') {
+            byte[] ul = new byte[16];
 
-                for (int i = 0; i < 16; i++) {
-                    ul[i] = (byte) Integer.parseUnsignedInt(val.substring(13 + i * 3, 13 + i * 3 + 2), 16);
-                }
-
-                auid = new AUID(new UL(ul));
-            } else {
-
-                auid = AUID.fromURN(val);
+            for (int i = 0; i < 16; i++) {
+                ul[i] = (byte) Integer.parseUnsignedInt(val.substring(13 + i * 3, 13 + i * 3 + 2), 16);
             }
 
-            return auid;
+            auid = new AUID(new UL(ul));
+        } else {
+
+            auid = AUID.fromURN(val);
         }
 
-        public String marshal(AUID val) throws Exception {
-            return val.toString();
-        }
+        return auid;
     }
+
+    @Override
+    public String marshal(AUID val) throws Exception {
+        return val.toString();
+    }
+}

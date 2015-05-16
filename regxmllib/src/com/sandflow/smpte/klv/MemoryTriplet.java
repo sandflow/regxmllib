@@ -31,14 +31,18 @@ import java.io.InputStream;
 import java.security.InvalidParameterException;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * In-memory KLV Triplet
  */
 public class MemoryTriplet implements Triplet {
 
     final private UL key;
     final private byte[] value;
 
+    /**
+     * Creates a Triplet from a Key and an array of bytes as the Value
+     * @param key Triplet Key
+     * @param value Triplet Value
+     */
     public MemoryTriplet(UL key, byte[] value) {
         
         if (key == null || value == null) throw new InvalidParameterException("Triplet muse have key and value.");

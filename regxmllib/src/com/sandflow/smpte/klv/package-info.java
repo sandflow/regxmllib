@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Copyright (c) 2015, Pierre-Anthony Lemieux (pal@sandflow.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,31 +23,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
+/**
+ * Allows the processing of SMPTE KLV data structures, as specified in SMPTE ST 336.
+ */
 package com.sandflow.smpte.klv;
-
-import com.sandflow.smpte.util.UL;
-import java.util.HashMap;
-import java.util.Map;
-
-
-public class LocalSetRegister {
-
-    private final HashMap<Long, UL> entries = new HashMap<>();
-
-    public LocalSetRegister(Map<Long, UL> entries) {
-        this.entries.putAll(entries);
-    }
-
-    public UL get(long localtag) {
-        return entries.get(localtag);
-    }
-    
-    public UL add(long localtag, UL ul) {
-        return entries.put(localtag, ul);
-    }
-    
-    public UL addIfAbsent(long localtag, UL ul) {
-        return entries.putIfAbsent(localtag, ul);
-    }
-
-}

@@ -23,9 +23,9 @@
         </exec>
     </target>
     
-	<!--Generate RegXML XML Schemas -->
+    
+    <!--Generate RegXML XML Schemas -->
 
-	
     <target name="build-regxml-schema" depends="build-regxml-dict,jar">
         
          <fileset dir="${dict.dir}" id="dicts">
@@ -45,7 +45,6 @@
                 <pathelement location="${dist.jar}"/>
             </classpath>
         </java>
-		
 		
     </target>
         

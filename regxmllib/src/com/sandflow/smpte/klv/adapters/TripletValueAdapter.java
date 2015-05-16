@@ -26,10 +26,24 @@
 package com.sandflow.smpte.klv.adapters;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * TripletValueAdapter is an abstract class defining the conversion of KLV Triplet
+ * values to Java types.
  */
-public interface TripletValueAdapter {
-    static <W> W fromValue(byte[] value) { return null;}
-    static <W> byte[] toValue(W obj) {return null;}
+public class TripletValueAdapter {
+    
+    /**
+     * Converts a KLV Triplet Value to a Java object.
+     * @param <W> Java object type
+     * @param value KLV Triplet Value
+     * @return Java object
+     */
+    public static <W> W fromValue(byte[] value) { return null;}
+    
+    /**
+     * Converts a Java object to a KLV Triplet Value.
+     * @param <W> Java object type
+     * @param obj Java object
+     * @return KLV Triplet Value
+     */
+    public static <W> byte[] toValue(W obj) {return null;}
 }

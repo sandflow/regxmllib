@@ -25,10 +25,6 @@
  */
 package com.sandflow.smpte.regxml.dict.exceptions;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 public class IllegalDefinitionException extends Exception {
 
     public IllegalDefinitionException() {

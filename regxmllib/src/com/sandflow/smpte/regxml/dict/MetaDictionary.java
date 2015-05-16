@@ -77,14 +77,76 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 
 /**
- *
- * @author pal
+ * A single RegXML Metadictionary as specified in SMPTE ST 2001-1
  */
 @XmlRootElement(name = "Extension")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MetaDictionary implements DefinitionResolver {
 
+    /**
+     * XML Schema Namespace for the XML representation of a RegXML Metadictionary 
+     */
     public final static String XML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
+
+    static AUID createNormalizedAUID(AUID auid) {
+        if (auid.isUL()) {
+            
+            return new AUID(createNormalizedUL(auid.asUL()));
+        } else {
+            return auid;
+        }
+    }
+
+    static UL createNormalizedUL(UL ul) {
+        byte[] value = ul.getValue().clone();
+        /* set version to 0 */
+        
+        value[7] = 0;
+        
+        if (ul.isGroup()) {
+            
+            /* set byte 6 to 0x7f */
+            value[5] = 0x7f;
+            
+        }
+        
+        return new UL(value);
+    }
+
+    static String createQualifiedSymbol(String namespace, String symbol) {
+        if (namespace == null || namespace.length() == 0) {
+            return symbol;
+        } else {
+            return namespace + " " + symbol;
+        }
+    }
+    
+    /**
+     * Reads a MetaDictionary from an XML document.
+     * 
+     * @param reader Reader from which a single MetaDictionary in XML form will be read
+     * @return a MetaDictionary
+     * @throws JAXBException
+     * @throws IOException
+     * @throws IllegalDefinitionException 
+     */
+    public static MetaDictionary fromXML(Reader reader) throws JAXBException, IOException, IllegalDefinitionException {
+        JAXBContext ctx = JAXBContext.newInstance(MetaDictionary.class);
+        
+        Unmarshaller m = ctx.createUnmarshaller();
+        MetaDictionary md = (MetaDictionary) m.unmarshal(reader);
+        
+        for (Definition def : md.definitions) {
+            
+            def.setNamespace(md.getSchemeURI());
+            
+            md.indexDefinition(def);
+        }
+
+        return md;
+    }
+
+    
 
     @XmlJavaTypeAdapter(value = UUIDAdapter.class)
     @XmlElement(name = "SchemeID", required = true)
@@ -105,65 +167,79 @@ public class MetaDictionary implements DefinitionResolver {
     private MetaDictionary() {
     }
 
-    public MetaDictionary(URI scheme) {
-        /* BUG: ST 2001-1 does not allow label to be used in multiple enumerations */
+    /**
+     * Instantiates a MetaDictionary.
+     * @param schemeURI Scheme URI of the MetaDictionary
+     */
+    public MetaDictionary(URI schemeURI) {
+        /* NOTE: ST 2001-1 does not allow label to be used in multiple enumerations */
 
-        this.schemeID = UUID.fromURIName(scheme);
-        this.schemeURI = scheme;
+        this.schemeID = UUID.fromURIName(schemeURI);
+        this.schemeURI = schemeURI;
+    }
+    
+    void indexDefinition(Definition def) throws IllegalDefinitionException {
+        AUID defid = createNormalizedAUID(def.getIdentification());
+        
+        if (def.getClass() != PropertyAliasDefinition.class) {
+            
+            if (this.definitionsByAUID.containsKey(defid)) {
+                throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
+            }
+            
+            if (this.definitionsBySymbol.containsKey(def.getSymbol())) {
+                throw new DuplicateSymbolException("Duplicate Symbol: " + def.getSymbol());
+            }
+            
+            this.definitionsByAUID.put(defid, def);
+            this.definitionsBySymbol.put(def.getSymbol(), def);
+            
+        }
+        
+        if (def instanceof PropertyDefinition) {
+            
+            AUID parentauid = createNormalizedAUID(((PropertyDefinition) def).getMemberOf());
+            
+            Set<AUID> hs = this.membersOf.get(parentauid);
+            
+            if (hs == null) {
+                hs = new HashSet<>();
+                this.membersOf.put(parentauid, hs);
+            }
+            
+            hs.add(defid);
+            
+        }
+        
+        if (def instanceof ClassDefinition && ((ClassDefinition) def).getParentClass() != null) {
+            
+            AUID parentauid = createNormalizedAUID(((ClassDefinition) def).getParentClass());
+            
+            Set<AUID> hs = this.subclassesOf.get(parentauid);
+            
+            if (hs == null) {
+                hs = new HashSet<>();
+                this.subclassesOf.put(parentauid, hs);
+            }
+            
+            hs.add(defid);
+            
+        }
     }
 
+    /**
+     * Adds a definition to the MetaDictionary
+     * 
+     * @param def Definition to be added
+     * @throws IllegalDefinitionException 
+     */
     public void add(Definition def) throws IllegalDefinitionException {
 
         if (!def.getNamespace().equals(this.getSchemeURI())) {
             throw new IllegalDefinitionException("Namespace does not match Metadictionary Scheme URI: " + def.getSymbol());
         }
 
-        AUID defid = createNormalizedAUID(def.getIdentification());
-
-        if (def.getClass() != PropertyAliasDefinition.class) {
-
-            /* TODO: do we really want to exclude aliases here? */
-            if (this.definitionsByAUID.containsKey(defid)) {
-                throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
-            }
-
-            if (this.definitionsBySymbol.containsKey(def.getSymbol())) {
-                throw new DuplicateSymbolException("Duplicate Symbol: " + def.getSymbol());
-            }
-
-            this.definitionsByAUID.put(defid, def);
-            this.definitionsBySymbol.put(def.getSymbol(), def);
-        }
-
-        if (def instanceof PropertyDefinition) {
-
-            AUID parentauid = createNormalizedAUID(((PropertyDefinition) def).getMemberOf());
-
-            Set<AUID> hs = this.membersOf.get(parentauid);
-
-            if (hs == null) {
-                hs = new HashSet<>();
-                this.membersOf.put(parentauid, hs);
-            }
-
-            hs.add(defid);
-
-        }
-
-        if (def instanceof ClassDefinition && ((ClassDefinition) def).getParentClass() != null) {
-
-            AUID parentauid = createNormalizedAUID(((ClassDefinition) def).getParentClass());
-
-            Set<AUID> hs = this.subclassesOf.get(parentauid);
-
-            if (hs == null) {
-                hs = new HashSet<>();
-                this.subclassesOf.put(parentauid, hs);
-            }
-
-            hs.add(defid);
-
-        }
+        indexDefinition(def);
 
         this.definitions.add(def);
     }
@@ -232,54 +308,19 @@ public class MetaDictionary implements DefinitionResolver {
         return definitionsByAUID.get(createNormalizedAUID(id));
     }
 
+    /**
+     * Retrieves a Definition based on its symbol 
+     * @param symbol Symbol of the definition to be retrieved
+     * @return Definition, or null if no definition exists with the specified symbol
+     */
     public Definition getDefinition(String symbol) {
         return definitionsBySymbol.get(symbol);
     }
 
-    public static AUID createNormalizedAUID(AUID auid) {
-
-        if (auid.isUL()) {
-
-            return new AUID(createNormalizedUL(auid.asUL()));
-        } else {
-            return auid;
-        }
-    }
-
-    public static UL createNormalizedUL(UL ul) {
-        byte[] value = ul.getValue().clone();
-        /* set version to 0 */
-
-        value[7] = 0;
-
-        if (ul.isGroup()) {
-
-            /* set byte 6 to 0x7f */
-            value[5] = 0x7f;
-
-        }
-
-        return new UL(value);
-    }
-
-    public static String createQualifiedSymbol(String namespace, String symbol) {
-        if (namespace == null || namespace.length() == 0) {
-            return symbol;
-        } else {
-            return namespace + " " + symbol;
-        }
-    }
-
-    public void writeXML(Writer writer) throws JAXBException, IOException {
-
-        JAXBContext ctx = JAXBContext.newInstance(MetaDictionary.class);
-
-        Marshaller m = ctx.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.marshal(this, writer);
-        writer.close();
-    }
-
+    /**
+     * Generates an XML representation of the MetaDictionary according to SMPTE ST 2001-1
+     * @return The XML DOM
+     */
     public Document toXML() {
 
         Document doc = null;
@@ -299,69 +340,6 @@ public class MetaDictionary implements DefinitionResolver {
         return doc;
     }
 
-    public static MetaDictionary fromXML(Reader reader) throws JAXBException, IOException, IllegalDefinitionException {
-
-        JAXBContext ctx = JAXBContext.newInstance(MetaDictionary.class);
-
-        Unmarshaller m = ctx.createUnmarshaller();
-        MetaDictionary md = (MetaDictionary) m.unmarshal(reader);
-
-        for (Definition def : md.definitions) {
-
-            /* TODO: can this be factored out? */
-            def.setNamespace(md.getSchemeURI());
-
-            AUID defid = createNormalizedAUID(def.getIdentification());
-
-            if (def.getClass() != PropertyAliasDefinition.class) {
-
-                if (md.definitionsByAUID.containsKey(defid)) {
-                    throw new IllegalDefinitionException("Duplicate AUID: " + def.getIdentification());
-                }
-
-                if (md.definitionsBySymbol.containsKey(def.getSymbol())) {
-                    throw new DuplicateSymbolException("Duplicate Symbol: " + def.getSymbol());
-                }
-
-                md.definitionsByAUID.put(defid, def);
-                md.definitionsBySymbol.put(def.getSymbol(), def);
-
-            }
-
-            if (def instanceof PropertyDefinition) {
-
-                AUID parentauid = createNormalizedAUID(((PropertyDefinition) def).getMemberOf());
-
-                Set<AUID> hs = md.membersOf.get(parentauid);
-
-                if (hs == null) {
-                    hs = new HashSet<>();
-                    md.membersOf.put(parentauid, hs);
-                }
-
-                hs.add(defid);
-
-            }
-
-            if (def instanceof ClassDefinition && ((ClassDefinition) def).getParentClass() != null) {
-
-                AUID parentauid = createNormalizedAUID(((ClassDefinition) def).getParentClass());
-
-                Set<AUID> hs = md.subclassesOf.get(parentauid);
-
-                if (hs == null) {
-                    hs = new HashSet<>();
-                    md.subclassesOf.put(parentauid, hs);
-                }
-
-                hs.add(defid);
-
-            }
-        }
-
-        return md;
-    }
-
     @Override
     public Collection<AUID> getSubclassesOf(ClassDefinition parent) {
 
@@ -372,5 +350,6 @@ public class MetaDictionary implements DefinitionResolver {
     public Collection<AUID> getMembersOf(ClassDefinition parent) {
         return membersOf.get(createNormalizedAUID(parent.getIdentification()));
     }
+
 
 }

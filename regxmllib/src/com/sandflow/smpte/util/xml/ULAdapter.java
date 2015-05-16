@@ -28,17 +28,13 @@ package com.sandflow.smpte.util.xml;
 import com.sandflow.smpte.util.UL;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
-    public  class ULAdapter extends XmlAdapter<String, UL> {
+public class ULAdapter extends XmlAdapter<String, UL> {
 
-        public UL unmarshal(String val) throws Exception {
-           return UL.fromURN(val);
-        }
-
-        public String marshal(UL val) throws Exception {
-            return val.toString();
-        }
+    public UL unmarshal(String val) throws Exception {
+        return UL.fromURN(val);
     }
+
+    public String marshal(UL val) throws Exception {
+        return val.toString();
+    }
+}

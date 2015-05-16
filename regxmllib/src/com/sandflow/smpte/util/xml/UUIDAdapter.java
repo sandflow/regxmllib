@@ -28,19 +28,15 @@ package com.sandflow.smpte.util.xml;
 import com.sandflow.smpte.util.UUID;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
-    public  class UUIDAdapter extends XmlAdapter<String, UUID> {
+public class UUIDAdapter extends XmlAdapter<String, UUID> {
 
-        @Override
-        public UUID unmarshal(String val) throws Exception {
-            return UUID.fromURN(val);
-        }
-
-        @Override
-        public String marshal(UUID val) throws Exception {
-            return val.toString();
-        }
+    @Override
+    public UUID unmarshal(String val) throws Exception {
+        return UUID.fromURN(val);
     }
+
+    @Override
+    public String marshal(UUID val) throws Exception {
+        return val.toString();
+    }
+}

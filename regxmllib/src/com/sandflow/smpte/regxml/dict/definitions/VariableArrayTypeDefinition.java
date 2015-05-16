@@ -32,21 +32,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 @XmlAccessorType(XmlAccessType.NONE)
 public class VariableArrayTypeDefinition extends Definition {
-
-    public VariableArrayTypeDefinition() {
-    }
-    
-    
 
     @XmlJavaTypeAdapter(value = AUIDAdapter.class)
     @XmlElement(name = "ElementType")
     private AUID elementType;
+
+    public VariableArrayTypeDefinition() {
+    }
 
     @Override
     public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {

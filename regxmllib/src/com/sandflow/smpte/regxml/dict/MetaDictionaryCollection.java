@@ -36,8 +36,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * A collection of multiple RegXML Metadictionary as specified in SMPTE ST 2001-1
  */
 public class MetaDictionaryCollection implements DefinitionResolver {
 
@@ -56,6 +55,12 @@ public class MetaDictionaryCollection implements DefinitionResolver {
         return def;
     }
     
+    /**
+     * Retrieves a definition from the collection based on its symbol
+     * @param namespace Namespace of the definition
+     * @param symbol Symbol of the definition
+     * @return Definition, or null if none found
+     */
     public Definition getDefinition(URI namespace, String symbol) {
         Definition def = null;
         
@@ -68,10 +73,16 @@ public class MetaDictionaryCollection implements DefinitionResolver {
         return def;
     }
 
+    /**
+     * Adds a MetaDictionary to the collection. 
+     * 
+     * @param metadictionary MetaDictionary to be added
+     * @throws IllegalDictionaryException If the MetaDictionary
+     */
     public void addDictionary(MetaDictionary metadictionary) throws IllegalDictionaryException {
-        MetaDictionary md = dicts.get(metadictionary.getSchemeURI());
+        MetaDictionary oldmd = dicts.get(metadictionary.getSchemeURI());
 
-        if (md == null) {
+        if (oldmd == null) {
             dicts.put(metadictionary.getSchemeURI(), metadictionary);
         } else {
             throw new IllegalDictionaryException("Metadictionary already present in group.");
@@ -79,7 +90,13 @@ public class MetaDictionaryCollection implements DefinitionResolver {
 
     }
 
-    /* TODO: not necessarily cool to automatically create a metadictionary */
+    /**
+     * Adds a definition to the collection. Automatically creates a MetaDictionary
+     * if none exists with the namespace of the definition.
+     * 
+     * @param def Definition to be added
+     * @throws IllegalDefinitionException 
+     */
     public void addDefinition(Definition def) throws IllegalDefinitionException {
         MetaDictionary md = dicts.get(def.getNamespace());
 
@@ -92,6 +109,10 @@ public class MetaDictionaryCollection implements DefinitionResolver {
         md.add(def);
     }
 
+    /**
+     * Returns all the members of the collection
+     * @return Collection of MetaDictionaries
+     */
     public Collection<MetaDictionary> getDictionaries() {
         return dicts.values();
     }

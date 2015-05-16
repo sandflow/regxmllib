@@ -28,15 +28,24 @@ package com.sandflow.smpte.klv.adapters;
 import com.sandflow.smpte.util.UL;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * ULValueAdapter converts a UL to and from a KLV Triplet Value
  */
-public class ULValueAdapter implements TripletValueAdapter {
+public class ULValueAdapter extends TripletValueAdapter {
 
+    /**
+     * Converts a KLV Triplet Value to a UL.
+     * @param value KLV Triplet Value
+     * @return UL
+     */
     public static UL fromValue(byte[] value) {
         return new UL(value);
     }
 
+    /**
+     * Converts a UL to a KLV Triplet Value.
+     * @param obj UL
+     * @return KLV Triplet Value
+     */
     public static byte[] toValue(UL obj) {
         return obj.getValue();
     }

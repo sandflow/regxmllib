@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Single Entry in an Elements Register (SMPTE ST 335)
  */
 @XmlType(name = "ElementEntry", namespace = ElementsRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
@@ -215,7 +214,6 @@ public class ElementEntry {
 
     @XmlType(name = "")
     public enum Kind {
-
         NODE, LEAF
     }
 

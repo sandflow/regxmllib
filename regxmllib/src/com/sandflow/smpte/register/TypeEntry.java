@@ -40,8 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Single Entry in a Types Register (SMPTE ST 2003)
  */
 @XmlType(name = "TypeEntry", namespace = TypesRegister.XML_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)

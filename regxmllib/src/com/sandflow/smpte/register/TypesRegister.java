@@ -47,8 +47,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Types Register as defined in SMPTE ST 2003
  */
 @XmlRootElement(name = "TypesRegister", namespace = TypesRegister.XML_NAMESPACE)
 @XmlType(name = "")

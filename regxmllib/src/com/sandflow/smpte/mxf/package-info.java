@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Copyright (c) 2015, Pierre-Anthony Lemieux (pal@sandflow.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,21 +23,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sandflow.smpte.regxml.dict.definitions;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-
-@XmlAccessorType(XmlAccessType.NONE)
-public class OpaqueTypeDefinition extends Definition {
-
-    public OpaqueTypeDefinition() {
-    }
-
-
-    @Override
-    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
-        visitor.visit(this);
-    }
-
-}
+/**
+ * Allows the processing of SMPTE MXF data structures, as specified in SMPTE ST 377-1.
+ */
+package com.sandflow.smpte.mxf;

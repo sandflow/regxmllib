@@ -33,27 +33,37 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * LocalSet implements a Local Set as specified in SMPTE ST 336. 
+ */
 public class LocalSet implements Group {
 
-    public static LocalSet fromTriplet(Triplet triplet, LocalSetRegister reg) throws KLVException {
+    /**
+     * Creates a Group from a Local Set using a LocalTagRegister to map Local Tags to Keys 
+     * @param localset Triplet containing a Group encoded as a Local Set
+     * @param reg LocalTagRegister used to map Local Tags to Keys
+     * @return Local Set, or null if the input Triplet is not a Local Set
+     * @throws KLVException 
+     */
+    public static LocalSet fromTriplet(Triplet localset, LocalTagRegister reg) throws KLVException {
         try {
 
-            if (!triplet.getKey().isLocalSet()) {
+            if (!localset.getKey().isLocalSet()) {
                 return null;
             }
             
-            CountingInputStream cis = new CountingInputStream(triplet.getValueAsStream());
+            CountingInputStream cis = new CountingInputStream(localset.getValueAsStream());
 
             KLVInputStream kis = new KLVInputStream(cis);
 
-            LocalSet set = new LocalSet(triplet.getKey());
+            LocalSet set = new LocalSet(localset.getKey());
 
-            while(cis.getCount() < triplet.getLength()) {
+            while(cis.getCount() < localset.getLength()) {
 
                 long localtag = 0;
 
                 /* read local tag */
-                switch (triplet.getKey().getRegistryDesignator() >> 3 & 3) {
+                switch (localset.getKey().getRegistryDesignator() >> 3 & 3) {
 
                     /* 1 byte length field */
                     case 0:
@@ -79,7 +89,7 @@ public class LocalSet implements Group {
                 long locallen = 0;
 
                 /* read local length */
-                switch (triplet.getKey().getRegistryDesignator() >> 5 & 3) {
+                switch (localset.getKey().getRegistryDesignator() >> 5 & 3) {
 
                     /* 1 byte length field */
                     case 0:
@@ -111,7 +121,7 @@ public class LocalSet implements Group {
                 kis.readFully(localval);
                 
                 if (reg.get(localtag) == null) {
-                    throw new KLVException("Local tag not found: " + localtag + " in Local Set " + triplet.getKey());
+                    throw new KLVException("Local tag not found: " + localtag + " in Local Set " + localset.getKey());
                 }
 
                 set.addItem(new MemoryTriplet(reg.get(localtag), localval));
@@ -121,16 +131,16 @@ public class LocalSet implements Group {
             return set;
                     
         } catch (IOException e) {
-            throw new KLVException("Error parsing Local Set: " + triplet.getKey(), e);
+            throw new KLVException("Error parsing Local Set: " + localset.getKey(), e);
         }
         
     }
 
     private final ArrayList<Triplet> items = new ArrayList<>();
 
-    private UL key;
+    private final UL key;
 
-    public LocalSet(UL key) {
+    private LocalSet(UL key) {
         this.key = key;
     }
 
@@ -144,6 +154,8 @@ public class LocalSet implements Group {
         return items;
     }
 
+    
+    /* TODO: move to constructor */
     private void addItem(Triplet triplet) {
         items.add(triplet);
     }

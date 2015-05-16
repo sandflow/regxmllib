@@ -41,34 +41,42 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import static org.w3c.dom.Node.ELEMENT_NODE;
 
-/**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
- */
 @XmlAccessorType(XmlAccessType.NONE)
 public class RecordTypeDefinition extends Definition {
 
+    @XmlJavaTypeAdapter(value = RecordMemberAdapter.class)
+    @XmlAnyElement(lax = false)
+    ArrayList<Member> members = new ArrayList<>();
+
     public RecordTypeDefinition() {
+    }
+
+    @Override
+    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
+        visitor.visit(this);
+    }
+
+    public void addMember(Member record) {
+        members.add(record);
+    }
+
+    public Collection<Member> getMembers() {
+        return members;
     }
     
   
     @XmlAccessorType(XmlAccessType.NONE)
     public static class Member {
-
         @XmlElement(name = "Name")
         private String name;
-
         @XmlJavaTypeAdapter(value = AUIDAdapter.class)
         @XmlElement(name = "Type")
         private AUID type;
-
         @XmlElement(name = "Description")
         private String description;
-
         public String getName() {
             return name;
         }
-
         public void setName(String name) {
             this.name = name;
         }
@@ -88,27 +96,8 @@ public class RecordTypeDefinition extends Definition {
         public void setDescription(String description) {
             this.description = description;
         }
-
     }
 
-    @XmlJavaTypeAdapter(value = RecordMemberAdapter.class)
-    @XmlAnyElement(lax = false)
-    ArrayList<Member> members = new ArrayList<>();
-
-    @Override
-    public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException {
-        visitor.visit(this);
-    }
-
-    public void addMember(Member record) {
-        members.add(record);
-    }
-
-    public Collection<Member> getMembers() {
-        return members;
-    }
-    
-    
     private static class RecordMemberAdapter extends XmlAdapter<Object, ArrayList<RecordTypeDefinition.Member>> {
 
         public ArrayList<RecordTypeDefinition.Member> unmarshal(Object v) throws Exception {
