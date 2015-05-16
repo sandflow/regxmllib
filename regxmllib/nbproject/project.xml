@@ -6,10 +6,10 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>regxmllib</name>
             <source-roots>
-                <root id="src.dir"/>
+                <root id="src.java.dir"/>
             </source-roots>
             <test-roots>
-                <root id="test.src.dir"/>
+                <root id="test.java.dir"/>
             </test-roots>
         </data>
     </configuration>

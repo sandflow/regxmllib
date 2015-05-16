@@ -26,10 +26,11 @@
 package com.sandflow.smpte.regxml;
 
 import com.sandflow.smpte.klv.Group;
-import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.klv.Triplet;
+import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.mxf.MXFInputStream;
 import com.sandflow.smpte.mxf.Set;
+import com.sandflow.smpte.regxml.dict.DefinitionResolver;
 import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.Definition;
@@ -51,7 +52,6 @@ import com.sandflow.smpte.regxml.dict.definitions.StringTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.dict.DefinitionResolver;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UMID;

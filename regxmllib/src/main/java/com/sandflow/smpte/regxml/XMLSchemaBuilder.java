@@ -26,6 +26,8 @@
 package com.sandflow.smpte.regxml;
 
 import com.sandflow.smpte.klv.exceptions.KLVException;
+import com.sandflow.smpte.regxml.dict.DefinitionResolver;
+import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.Definition;
@@ -47,8 +49,6 @@ import com.sandflow.smpte.regxml.dict.definitions.StringTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
-import com.sandflow.smpte.regxml.dict.DefinitionResolver;
-import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.io.IOException;

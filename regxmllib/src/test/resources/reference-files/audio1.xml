@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Sat May 16 13:45:42 PDT 2015--><!--From: ../input/sample-files/audio1.mxf--><!--By: regxmllib build 48dee3356ebd708de29c22acc46f58b5fabe6bfd--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:ns0="http://sandflow.com/ns/SMPTEST2001-1/baseline" ns0:uid="urn:uuid:afa42131-e099-47fa-493a-f4e0740a3654">
+<r1:FormatVersion>1.3</r1:FormatVersion>
+<r1:ObjectModelVersion>1</r1:ObjectModelVersion>
+<r1:ContentStorageObject>
+<r0:ContentStorage ns0:uid="urn:uuid:27b17ea9-ffed-4e14-d71a-087a7cbee3df">
+<r1:Packages>
+<r0:SourcePackage ns0:uid="urn:uuid:f7a594a5-3b25-4feb-53d7-616dbe008a9c">
+<r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.2d74e41a.176141d2.783ad3e5.ce3e3eb0</r1:PackageID>
+<r1:PackageTracks>
+<r0:TimelineTrack ns0:uid="urn:uuid:2cc258ef-0887-4379-b8c3-7917e4033a63">
+<r1:TrackID>2</r1:TrackID>
+<r1:EssenceTrackNumber>369164800</r1:EssenceTrackNumber>
+<r1:EditRate>48000/1</r1:EditRate>
+<r1:Origin>0</r1:Origin>
+<r1:TrackName>Sound</r1:TrackName>
+<r1:TrackSegment>
+<r0:Sequence ns0:uid="urn:uuid:1fa72736-aa97-479e-9104-4d4f21d043af">
+<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
+<r1:ComponentLength>2002</r1:ComponentLength>
+<r1:ComponentObjects>
+<r0:SourceClip ns0:uid="urn:uuid:c3b24534-0f9d-40e8-3b55-0d8cc260712e">
+<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
+<r1:StartPosition>0</r1:StartPosition>
+<r1:ComponentLength>2002</r1:ComponentLength>
+<r1:SourcePackageID>urn:smpte:umid:00000000.00000000.00000000.00000000.00000000.00000000.00000000.00000000</r1:SourcePackageID>
+<r1:SourceTrackID>0</r1:SourceTrackID>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:SourceClip>
+</r1:ComponentObjects>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:Sequence>
+</r1:TrackSegment>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:TimelineTrack>
+<r0:TimelineTrack ns0:uid="urn:uuid:467056f3-7a0f-4c62-2d4a-d97a5504973f">
+<r1:TrackID>1</r1:TrackID>
+<r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
+<r1:TrackSegment>
+<r0:Sequence ns0:uid="urn:uuid:16489b5f-7986-46a6-550b-2c7ae1af7d08">
+<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
+<r1:ComponentLength>2002</r1:ComponentLength>
+<r1:ComponentObjects>
+<r0:Timecode ns0:uid="urn:uuid:c4a7dcd6-93f3-4ce1-3493-870170debec3">
+<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
+<r1:ComponentLength>2002</r1:ComponentLength>
+<r1:FramesPerSecond>24</r1:FramesPerSecond>
+<r1:StartTimecode>0</r1:StartTimecode>
+<r1:DropFrame>False</r1:DropFrame>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:Timecode>
+</r1:ComponentObjects>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:Sequence>
+</r1:TrackSegment>
+<r1:EditRate>48000/1</r1:EditRate>
+<r1:Origin>0</r1:Origin>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:TimelineTrack>
+</r1:PackageTracks>
+<r1:EssenceDescription>
+<r0:WAVEPCMDescriptor ns0:uid="urn:uuid:f6cbb0fd-16a6-4b4e-e4b8-66b62cb00c3d">
+<r1:ContainerFormat>urn:smpte:ul:060e2b34.04010101.0d010301.02060200</r1:ContainerFormat>
+<r1:LinkedTrackID>2</r1:LinkedTrackID>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+<r1:SampleRate>48000/1</r1:SampleRate>
+<r1:EssenceLength>2002</r1:EssenceLength>
+<r1:AudioSampleRate>48000/1</r1:AudioSampleRate>
+<r1:Locked>True</r1:Locked>
+<r1:ChannelCount>2</r1:ChannelCount>
+<r1:QuantizationBits>24</r1:QuantizationBits>
+<r1:SoundCompression>urn:smpte:ul:060e2b34.04010101.04020201.7f000000</r1:SoundCompression>
+<r1:BlockAlign>6</r1:BlockAlign>
+<r1:AverageBytesPerSecond>288000</r1:AverageBytesPerSecond>
+<r1:ChannelAssignment>urn:smpte:ul:060e2b34.0401010d.04020210.04010000</r1:ChannelAssignment>
+<r1:SubDescriptors>
+<r0:SoundfieldGroupLabelSubDescriptor ns0:uid="urn:uuid:536cee0e-c38b-44d6-b64f-78908abcd645">
+<r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020220.01000000</r1:MCALabelDictionaryID>
+<r1:MCALinkID>urn:uuid:ba6730d5-f1bd-4dfe-bf17-f8af0fa84d70</r1:MCALinkID>
+<r1:MCATagSymbol>sgST</r1:MCATagSymbol>
+<r1:MCATagName>Standard Stereo</r1:MCATagName>
+</r0:SoundfieldGroupLabelSubDescriptor>
+<r0:AudioChannelLabelSubDescriptor ns0:uid="urn:uuid:d7688e0a-24b0-4ac0-c074-8e9a6d7b7fdf">
+<r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020101.00000000</r1:MCALabelDictionaryID>
+<r1:MCALinkID>urn:uuid:49cd52c9-9a55-47d7-3010-05fae1b56134</r1:MCALinkID>
+<r1:MCATagSymbol>chL</r1:MCATagSymbol>
+<r1:MCATagName>Left</r1:MCATagName>
+<r1:MCAChannelID>1</r1:MCAChannelID>
+<r1:SoundfieldGroupLinkID>urn:uuid:ba6730d5-f1bd-4dfe-bf17-f8af0fa84d70</r1:SoundfieldGroupLinkID>
+</r0:AudioChannelLabelSubDescriptor>
+<r0:AudioChannelLabelSubDescriptor ns0:uid="urn:uuid:e6c9f2ae-b4cf-4fc1-3d59-3e915ebb687d">
+<r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020102.00000000</r1:MCALabelDictionaryID>
+<r1:MCALinkID>urn:uuid:57a9c27b-02ab-4f2f-a156-3d9e53b4d648</r1:MCALinkID>
+<r1:MCATagSymbol>chR</r1:MCATagSymbol>
+<r1:MCATagName>Right</r1:MCATagName>
+<r1:MCAChannelID>2</r1:MCAChannelID>
+<r1:SoundfieldGroupLinkID>urn:uuid:ba6730d5-f1bd-4dfe-bf17-f8af0fa84d70</r1:SoundfieldGroupLinkID>
+</r0:AudioChannelLabelSubDescriptor>
+</r1:SubDescriptors>
+</r0:WAVEPCMDescriptor>
+</r1:EssenceDescription>
+<r1:PackageLastModified>2015-05-05T09:01:04.816Z</r1:PackageLastModified>
+<r1:CreationTime>2015-05-05T09:01:04.804Z</r1:CreationTime>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:SourcePackage>
+<r0:MaterialPackage ns0:uid="urn:uuid:48a1a91f-2132-4cb5-94de-287700949a3a">
+<r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.60a7ae3a.f268481b.4862bf2d.4f8d46cb</r1:PackageID>
+<r1:PackageTracks>
+<r0:TimelineTrack ns0:uid="urn:uuid:eb862fa2-e4fa-4987-1c20-81b1894dc34d">
+<r1:TrackID>2</r1:TrackID>
+<r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
+<r1:EditRate>48000/1</r1:EditRate>
+<r1:Origin>0</r1:Origin>
+<r1:TrackSegment>
+<r0:Sequence ns0:uid="urn:uuid:75f5166a-a64e-4e20-819e-c2d0c2a498d0">
+<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
+<r1:ComponentObjects>
+<r0:SourceClip ns0:uid="urn:uuid:2b61221e-1f20-41d3-c242-59878f7d7bfa">
+<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
+<r1:StartPosition>0</r1:StartPosition>
+<r1:ComponentLength>2002</r1:ComponentLength>
+<r1:SourcePackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.2d74e41a.176141d2.783ad3e5.ce3e3eb0</r1:SourcePackageID>
+<r1:SourceTrackID>2</r1:SourceTrackID>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:SourceClip>
+</r1:ComponentObjects>
+<r1:ComponentLength>2002</r1:ComponentLength>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:Sequence>
+</r1:TrackSegment>
+<r1:TrackName>Sound</r1:TrackName>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:TimelineTrack>
+<r0:TimelineTrack ns0:uid="urn:uuid:62ec894b-613e-4ecd-a724-5a7c7c02f8b5">
+<r1:TrackID>1</r1:TrackID>
+<r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
+<r1:TrackSegment>
+<r0:Sequence ns0:uid="urn:uuid:115015a1-87a4-42e7-fa7a-2eb742b9af83">
+<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
+<r1:ComponentLength>2002</r1:ComponentLength>
+<r1:ComponentObjects>
+<r0:Timecode ns0:uid="urn:uuid:baccb2b4-3066-46e4-63dc-17d898c576ec">
+<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
+<r1:ComponentLength>2002</r1:ComponentLength>
+<r1:FramesPerSecond>24</r1:FramesPerSecond>
+<r1:StartTimecode>0</r1:StartTimecode>
+<r1:DropFrame>False</r1:DropFrame>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:Timecode>
+</r1:ComponentObjects>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:Sequence>
+</r1:TrackSegment>
+<r1:EditRate>48000/1</r1:EditRate>
+<r1:Origin>0</r1:Origin>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:TimelineTrack>
+</r1:PackageTracks>
+<r1:PackageLastModified>2015-05-05T09:01:04.816Z</r1:PackageLastModified>
+<r1:CreationTime>2015-05-05T09:01:04.804Z</r1:CreationTime>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:MaterialPackage>
+</r1:Packages>
+<r1:EssenceDataObjects>
+<r0:EssenceData ns0:uid="urn:uuid:7b783464-96bf-4baa-0f9b-a8cb90739ee7">
+<r1:LinkedPackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.2d74e41a.176141d2.783ad3e5.ce3e3eb0</r1:LinkedPackageID>
+<r1:IndexStreamID>2</r1:IndexStreamID>
+<r1:EssenceStreamID>1</r1:EssenceStreamID>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:EssenceData>
+</r1:EssenceDataObjects>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+</r0:ContentStorage>
+</r1:ContentStorageObject>
+<r1:OperationalPattern>urn:smpte:ul:060e2b34.04010101.0d010201.01010100</r1:OperationalPattern>
+<r1:EssenceContainers>
+<r2:AUID>urn:smpte:ul:060e2b34.04010101.0d010301.02060200</r2:AUID>
+</r1:EssenceContainers>
+<r1:DescriptiveSchemes/>
+<r1:IdentificationList>
+<r0:Identification ns0:uid="urn:uuid:32f53cbd-dc41-420c-0f51-b22eb4dd56cb">
+<r1:GenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:GenerationID>
+<r1:ApplicationSupplierName>OpenCube</r1:ApplicationSupplierName>
+<r1:ApplicationName>MXFTk Advanced</r1:ApplicationName>
+<r1:ApplicationProductID>urn:uuid:3a4fe380-0d01-11e4-869f-3cd92b5c1dfc</r1:ApplicationProductID>
+<r1:ApplicationVersionString>2.7.3.20150429</r1:ApplicationVersionString>
+<r1:ApplicationVersion>
+<r2:Major>2</r2:Major>
+<r2:Minor>7</r2:Minor>
+<r2:Tertiary>3</r2:Tertiary>
+<r2:PatchLevel>0</r2:PatchLevel>
+<r2:BuildType>VersionReleased</r2:BuildType>
+</r1:ApplicationVersion>
+<r1:ToolkitVersion>
+<r2:Major>2</r2:Major>
+<r2:Minor>7</r2:Minor>
+<r2:Tertiary>3</r2:Tertiary>
+<r2:PatchLevel>0</r2:PatchLevel>
+<r2:BuildType>VersionReleased</r2:BuildType>
+</r1:ToolkitVersion>
+<r1:ApplicationPlatform>Linux 2.6.32-279.el6.x86_64 x86_64</r1:ApplicationPlatform>
+<r1:FileModificationDate>2015-05-05T09:01:04.816Z</r1:FileModificationDate>
+</r0:Identification>
+</r1:IdentificationList>
+<r1:FileLastModified>2015-05-05T09:01:04.816Z</r1:FileLastModified>
+<r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
+<r1:PrimaryPackage>urn:smpte:ul:f7a594a5.3b254feb.53d7616d.be008a9c</r1:PrimaryPackage>
+</r0:Preface>

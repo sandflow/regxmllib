@@ -25,10 +25,10 @@
  */
 package com.sandflow.smpte.regxml.dict;
 
-import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
-import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
 import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.Definition;
+import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
+import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
 import com.sandflow.smpte.util.AUID;
 import java.net.URI;
 import java.util.ArrayList;
