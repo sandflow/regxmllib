@@ -91,6 +91,7 @@ public class XMLSchemaBuilder {
     private static final AUID VersionType_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.04.01.01.03.01.03.00.00.00.00.00"));
     private static final AUID ObjectClass_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.01.01.02.06.01.01.04.01.01.00.00"));
     private static final AUID ByteOrder_AUID = new AUID(UL.fromDotValue("06.0E.2B.34.01.01.01.01.03.01.02.01.02.00.00.00"));
+    private static final AUID InstanceID_AUID = new AUID(UL.fromURN("urn:smpte:ul:060e2b34.01010101.01011502.00000000"));
 
     private DefinitionResolver resolver;
     private final NamespacePrefixMapper prefixes = new NamespacePrefixMapper();
@@ -233,7 +234,10 @@ public class XMLSchemaBuilder {
                     element.setAttribute("minOccurs", "0");
                 }
 
-                if (hasUID == false && pdef.isUniqueIdentifier()) {
+                /* NOTE: InstanceID property was missing isUnique in some versions of the registers */
+                
+                if (hasUID == false &&
+                        ( pdef.isUniqueIdentifier() || pdef.getIdentification().equals(InstanceID_AUID))) {
                     hasUID = true;
                 }
 
