@@ -8,7 +8,9 @@ INTRODUCTION
 
 regxmllib is a collection of tools and libraries for the creation of 
 RegXML (SMPTE ST 2001-1) representations of MXF header metadata
-(SMPTE ST 377-1). 
+(SMPTE ST 377-1). A RegXML Fragment example can be found at [1]
+
+[1] /regxmllib/src/test/resources/reference-files
 
 regxmllib is implemented in pure Java. Netbeans 8.0 is used for development.
 
@@ -46,8 +48,8 @@ of the header metadata of the MXF file at path PATH_TO_MXF_FILE
     
     run java -cp <PATH_TO_JAR> com.sandflow.smpte.tools.RegXMLDump -all -d <PATH_TO_DICT1> <PATH_TO_DICT2> ...
     -i PATH_TO_MXF_FILE > PATH_TO_FRAGMENT
-
-
+    
+    
 ARCHITECTURE
 ============
 
@@ -175,7 +177,7 @@ DIRECTORIES AND NOTABLE FILES
 
 /regxmllib/nbproject                    Netbeans project files
 
-/regxmllib/src/config/repoversion.properties
+/regxmllib/src/main/config/repoversion.properties
                                         Java properties file containing the 
                                         a unique source code version generated using
                                         git by the build system
@@ -184,12 +186,13 @@ DIRECTORIES AND NOTABLE FILES
                                         Common XML Schema definitions used when generating
                                         XML Schemas for RegXML Fragments
                                         
-/regxmllib/src/test/reference-files     Reference RegXML fragment used for unit testing
+/regxmllib/src/test/resources/reference-files
+                                        Reference RegXML fragment used for unit testing
 
-/regxmllib/src/test/reference-registers
+/regxmllib/src/test/resources/reference-registers
                                         Reference SMPTE registers used for unit testing
 
-/regxmllib/src/test/sample-files
+/regxmllib/src/test/resources/sample-files
                                         Sample MXF files used for unit testing                                       
                                         
 /output/register-schemas                Stub directory containing XML Schemas
