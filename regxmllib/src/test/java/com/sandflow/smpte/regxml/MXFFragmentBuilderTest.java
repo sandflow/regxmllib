@@ -25,11 +25,13 @@
  */
 package com.sandflow.smpte.regxml;
 
+import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.register.ElementsRegister;
 import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -40,18 +42,23 @@ import java.util.Map;
 import java.util.Map.Entry;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import junit.framework.TestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
 public class MXFFragmentBuilderTest extends TestCase {
+
+    private MetaDictionaryCollection mds;
+    private DocumentBuilder db;
 
     public MXFFragmentBuilderTest(String testName) {
         super(testName);
@@ -60,25 +67,6 @@ public class MXFFragmentBuilderTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    /**
-     * Test of fromInputStream method, of class MXFFragmentBuilder.
-     */
-    public void testFromInputStream() throws Exception {
-
-        //System.out.println(MXFFragmentBuilderTest.class.getResource("/resources/sample-files/audio1.mxf"));
-        /* get the sample files */
-        InputStream audio1is = MXFFragmentBuilderTest.class.getResourceAsStream("/resources/sample-files/audio1.mxf");
-        assertNotNull(audio1is);
-
-        InputStream video1is = getClass().getResourceAsStream("/resources/sample-files/video1.mxf");
-        assertNotNull(video1is);
 
         /* load the registers */
         Reader fe = new InputStreamReader(getClass().getResourceAsStream("/resources/reference-registers/Elements.xml"));
@@ -100,52 +88,84 @@ public class MXFFragmentBuilderTest extends TestCase {
         assertNotNull(treg);
 
         /* build the dictionaries */
-        MetaDictionaryCollection mds = fromRegister(treg, greg, ereg);
+        mds = fromRegister(treg, greg, ereg);
 
         assertNotNull(mds);
 
-        /* generate the fragment */
+        /* setup the doc builder */
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
         dbf.setCoalescing(true);
         dbf.setIgnoringElementContentWhitespace(true);
         dbf.setIgnoringComments(true);
-        DocumentBuilder db = dbf.newDocumentBuilder();
+        db = dbf.newDocumentBuilder();
 
-        /* audio fragment */
-        Document audio1doc = db.newDocument();
+        assertNotNull(db);
+    }
 
-        DocumentFragment dfaudio1 = MXFFragmentBuilder.fromInputStream(audio1is, mds, null, audio1doc);
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+    }
 
-        assertNotNull(dfaudio1);
+    private void compareGeneratedVsRef(String spath, String refpath) throws IOException, SAXException, KLVException, MXFFragmentBuilder.MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
 
-        audio1doc.appendChild(dfaudio1);
 
-        /* video fragment */
-        Document video1doc = db.newDocument();
+        /* get the sample files */
+        InputStream sampleis = MXFFragmentBuilderTest.class.getResourceAsStream(spath);
+        assertNotNull(sampleis);
 
-        DocumentFragment dfvideo1 = MXFFragmentBuilder.fromInputStream(video1is, mds, null, video1doc);
+        /* build the regxml fragment */
+        Document gendoc = db.newDocument();
 
-        assertNotNull(dfvideo1);
+        assertNotNull(gendoc);
 
-        video1doc.appendChild(dfvideo1);
+        DocumentFragment gendf = MXFFragmentBuilder.fromInputStream(sampleis, mds, null, gendoc);
+
+        assertNotNull(gendf);
+
+        gendoc.appendChild(gendf);
+
 
         /* load the reference document */
-        InputStream audio1refis = getClass().getResourceAsStream("/resources/reference-files/audio1.xml");
-        assertNotNull(audio1refis);
+        InputStream refis = getClass().getResourceAsStream(refpath);
+        assertNotNull(refis);
 
-        InputStream video1refis = getClass().getResourceAsStream("/resources/reference-files/video1.xml");
-        assertNotNull(video1refis);
+        Document refdoc = db.parse(refis);
+        assertNotNull(refdoc);
 
-        Document audio1ref = db.parse(audio1refis);
-        assertNotNull(audio1ref);
+        /* compare the ref vs the generated */
+        assertTrue(compareDOMElement(gendoc.getDocumentElement(), refdoc.getDocumentElement()));
 
-        Document video1ref = db.parse(video1refis);
-        assertNotNull(video1ref);
+    }
 
-        assertTrue(compareDOMElement(audio1doc.getDocumentElement(), audio1ref.getDocumentElement()));
+    /**
+     * Test of fromInputStream method, of class MXFFragmentBuilder.
+     *
+     * @throws java.lang.Exception
+     */
+    public void testFromInputStreamAudio1() throws Exception {
 
-        assertTrue(compareDOMElement(video1doc.getDocumentElement(), video1ref.getDocumentElement()));
+        compareGeneratedVsRef("/resources/sample-files/audio1.mxf", "/resources/reference-files/audio1.xml");
+
+    }
+
+    public void testFromInputStreamAudio2() throws Exception {
+
+        compareGeneratedVsRef("/resources/sample-files/audio2.mxf", "/resources/reference-files/audio2.xml");
+
+    }
+
+    public void testFromInputStreamVideo1() throws Exception {
+
+        compareGeneratedVsRef("/resources/sample-files/video1.mxf", "/resources/reference-files/video1.xml");
+
+    }
+
+    public void testFromInputStreamVideo2() throws Exception {
+
+        compareGeneratedVsRef("/resources/sample-files/video2.mxf", "/resources/reference-files/video2.xml");
+
     }
 
     static Map<String, String> getAttributes(Element e) {

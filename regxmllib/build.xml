@@ -137,6 +137,8 @@
                 <or>
                     <available file="${video1.ref.file}"/>
                     <available file="${audio1.ref.file}"/>
+                    <available file="${video2.ref.file}"/>
+                    <available file="${audio2.ref.file}"/>
                 </or>
             </condition>
         </fail>
@@ -147,7 +149,7 @@
         
         <pathconvert property="dictpaths" refid="dicts" pathsep=" " />
         
-        <java classname="com.sandflow.smpte.tools.RegXMLDump" output="${video1.ref.file}">
+        <java classname="com.sandflow.smpte.tools.RegXMLDump" output="${video1.ref.file}" logError="true">
             <arg value="-all"/>
             <arg value="-d"/>
             <arg line="${dictpaths}"/>
@@ -158,12 +160,34 @@
             </classpath>
         </java>
         
-        <java classname="com.sandflow.smpte.tools.RegXMLDump" output="${audio1.ref.file}">
+        <java classname="com.sandflow.smpte.tools.RegXMLDump" output="${audio1.ref.file}" logError="true">
             <arg value="-all"/>
             <arg value="-d"/>
             <arg line="${dictpaths}"/>
             <arg value="-i"/>
             <arg value="${audio1.sample}"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+        
+        <java classname="com.sandflow.smpte.tools.RegXMLDump" output="${video2.ref.file}" logError="true">
+            <arg value="-all"/>
+            <arg value="-d"/>
+            <arg line="${dictpaths}"/>
+            <arg value="-i"/>
+            <arg value="${video2.sample}"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+        
+        <java classname="com.sandflow.smpte.tools.RegXMLDump" output="${audio2.ref.file}" logError="true">
+            <arg value="-all"/>
+            <arg value="-d"/>
+            <arg line="${dictpaths}"/>
+            <arg value="-i"/>
+            <arg value="${audio2.sample}"/>
             <classpath>
                 <pathelement location="${dist.jar}"/>
             </classpath>
