@@ -65,7 +65,7 @@ public class GenerateDictionaryXMLSchema {
             + "     GenerateDictionaryXMLSchema -?\n";
 
     private final static String XMLSCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
-    
+
     public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
 
         if (args.length < 4
@@ -92,32 +92,29 @@ public class GenerateDictionaryXMLSchema {
             mds.addDictionary(md);
 
         }
-        
+
 
         /* generate a schema document that includes all registers */
-        
         Document masterxsd = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-        
+
         Element masterxsd_root = masterxsd.createElementNS(XMLSCHEMA_NS, "schema");
-        
+
         masterxsd.appendChild(masterxsd_root);
-        
+
         /* generate the common xsd declarations */
-        
         InputStream regis = GenerateDictionaryXMLSchema.class.getResourceAsStream("/resources/reg.xsd");
-                                
+
         Files.copy(regis, Paths.get(args[args.length - 1], "reg.xsd"), StandardCopyOption.REPLACE_EXISTING);
-        
-                    Element masterxsd_import = masterxsd.createElementNS(XMLSCHEMA_NS, "import");
-            
-            masterxsd_import.setAttribute("namespace", XMLSchemaBuilder.REGXML_NS);
-            
-            masterxsd_import.setAttribute("schemaLocation", "reg.xsd");
-            
-            masterxsd_root.appendChild(masterxsd_import);
-        
+
+        Element masterxsd_import = masterxsd.createElementNS(XMLSCHEMA_NS, "import");
+
+        masterxsd_import.setAttribute("namespace", XMLSchemaBuilder.REGXML_NS);
+
+        masterxsd_import.setAttribute("schemaLocation", "reg.xsd");
+
+        masterxsd_root.appendChild(masterxsd_import);
+
         /* create transformer to ouput a concrete representation of our DOMs */
-        
         Transformer tr = TransformerFactory.newInstance().newTransformer();
         tr.setOutputProperty(OutputKeys.INDENT, "yes");
 
@@ -126,21 +123,20 @@ public class GenerateDictionaryXMLSchema {
         XMLSchemaBuilder sb = new XMLSchemaBuilder(mds);
 
         for (MetaDictionary md : mds.getDictionaries()) {
-            String fname = md.getSchemeURI().getAuthority() + md.getSchemeURI().getPath().replaceAll("[^a-zA-Z0-9]", "-")
-                            + ".xsd";
             
-            /* add to master include xsd */
-            
-            masterxsd_import = masterxsd.createElementNS(XMLSCHEMA_NS, "import");
-            
-            masterxsd_import.setAttribute("namespace", md.getSchemeURI().toString());
-            
-            masterxsd_import.setAttribute("schemaLocation", fname);
-            
-            masterxsd_root.appendChild(masterxsd_import);
-            
-            /* create the XSD file */
+            String fname = (md.getSchemeURI().getAuthority() + md.getSchemeURI().getPath()).replaceAll("[^a-zA-Z0-9]", "-")
+                    + ".xsd";
 
+            /* add to master include xsd */
+            masterxsd_import = masterxsd.createElementNS(XMLSCHEMA_NS, "import");
+
+            masterxsd_import.setAttribute("namespace", md.getSchemeURI().toString());
+
+            masterxsd_import.setAttribute("schemaLocation", fname);
+
+            masterxsd_root.appendChild(masterxsd_import);
+
+            /* create the XSD file */
             File f = new File(args[args.length - 1], fname);
 
             Document doc = sb.fromDictionary(md);
@@ -152,27 +148,27 @@ public class GenerateDictionaryXMLSchema {
                     doc.getDocumentElement()
             );
             doc.insertBefore(
-                   doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()),
+                    doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()),
                     doc.getDocumentElement()
             );
             doc.insertBefore(
                     doc.createComment("See: https://github.com/sandflow/regxmllib"),
                     doc.getDocumentElement()
             );
-            
+
             tr.transform(
                     new DOMSource(doc),
                     new StreamResult(f)
             );
 
         }
-        
+
         File includefile = new File(args[args.length - 1], "include.xsd");
 
-                    tr.transform(new DOMSource(masterxsd),
-                    new StreamResult(includefile)
-            );
-        
+        tr.transform(new DOMSource(masterxsd),
+                new StreamResult(includefile)
+        );
+
     }
 
 }
