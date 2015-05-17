@@ -23,8 +23,19 @@
         </exec>
     </target>
     
+    <!-- Move resources -->
     
-    <!--Generate RegXML XML Schemas -->
+    <target name="-post-compile">
+        <copy todir="${build.classes.dir}/config">
+            <fileset dir="${main.config.dir}"/>
+        </copy>
+        <copy todir="${build.classes.dir}/resources">
+            <fileset dir="${main.resources.dir}"/>
+        </copy>          
+    </target>
+    
+
+    <!-- Generate RegXML XML Schemas -->
 
     <target name="build-regxml-schema" depends="build-regxml-dict,jar">
         
