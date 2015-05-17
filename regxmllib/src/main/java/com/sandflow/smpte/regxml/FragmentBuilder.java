@@ -53,6 +53,7 @@ import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.HalfFloat;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UMID;
 import com.sandflow.smpte.util.UUID;
@@ -82,8 +83,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
- * Builds a RegXML Fragment of a single KLV Group, typically a Header Metadata MXF Set,
- * using a collection of MetaDictionary definitions
+ * Builds a RegXML Fragment of a single KLV Group, typically a Header Metadata
+ * MXF Set, using a collection of MetaDictionary definitions
  */
 public class FragmentBuilder {
 
@@ -107,7 +108,6 @@ public class FragmentBuilder {
     private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
     private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
 
-
     private static final String ACTUALTYPE_ATTR = "actualType";
     private static final String BYTEORDER_ATTR = "byteOrder";
     private static final String BYTEORDER_BE = "BigEndian";
@@ -119,6 +119,7 @@ public class FragmentBuilder {
 
     /**
      * Instantiates a FragmentBuilder
+     *
      * @param defresolver Map between Group Keys and MetaDictionary definitions
      * @param setresolver Allows Strong References to be resolved
      */
@@ -129,12 +130,14 @@ public class FragmentBuilder {
 
     /**
      * Creates a RegXML Fragment, represented an XML DOM Document Fragment
+     *
      * @param group KLV Group for which the Fragment will be generated.
-     * @param document Document from which the XML DOM Document Fragment will be created.
-     * @return XML DOM Document Fragment containing a single RegXML Fragment 
+     * @param document Document from which the XML DOM Document Fragment will be
+     * created.
+     * @return XML DOM Document Fragment containing a single RegXML Fragment
      * @throws ParserConfigurationException
      * @throws KLVException
-     * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException 
+     * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
      */
     public DocumentFragment fromTriplet(Group group, Document document) throws ParserConfigurationException, KLVException, RuleException {
 
@@ -189,7 +192,7 @@ public class FragmentBuilder {
         }
 
         Element elem = node.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
-        
+
         node.appendChild(elem);
 
         elem.setPrefix(getPrefix(definition.getNamespace()));
@@ -206,18 +209,21 @@ public class FragmentBuilder {
                     String uuidstr = uuid.toString();
 
                     /* prevent self-references */
-                    
                     Node parent = node;
-                    
+
                     do {
 
                         NamedNodeMap attrs = parent.getAttributes();
-                        
-                        if (attrs == null) continue;
-                        
+
+                        if (attrs == null) {
+                            continue;
+                        }
+
                         Node attr = attrs.getNamedItemNS(REGXML_NS, UID_ATTR);
-                        
-                        if (attr == null) continue;
+
+                        if (attr == null) {
+                            continue;
+                        }
 
                         if (uuidstr.equals(attr.getTextContent())) {
 
@@ -298,7 +304,7 @@ public class FragmentBuilder {
     void applyRule4(Element element, InputStream value, Definition definition) throws RuleException {
 
         Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
-        
+
         element.appendChild(elem);
 
         elem.setPrefix(getPrefix(definition.getNamespace()));
@@ -530,8 +536,9 @@ public class FragmentBuilder {
 
             UL ul = ki.readUL();
 
-            /* TODO: seek label symbol */
-            /* BUG: must allow ULs */
+            /* NOTE: ST 2001-1 XML Schema does not allow ULs as values for Extendible Enumerations, which
+            defeats the purpose of the type. This issue could be addressed at the next revision opportunity. */
+            
             element.setTextContent(ul.toString());
 
         } catch (UnsupportedEncodingException e) {
@@ -590,19 +597,10 @@ public class FragmentBuilder {
 
     void applyRule5_5(Element element, InputStream value, IndirectTypeDefinition definition) throws RuleException {
 
-        /* BUG: how is indirect type encoded in MXF? */
+        /* INFO: Indirect type is not used in MXF (ST 377-1) */
+        
         throw new RuleException("Indirect type not supported.");
 
-        /* Definition typedef = dict.getDefinition(definition.getIdentification()); */
-
-        /* BUG: do we need a different dictionary per registry namespace? 
-         element.setAttributeNS(
-         REGXML_NS,
-         ACTUALTYPE_ATTR,
-         MetaDictionary.createQualifiedSymbol(null, typedef.getSymbol())
-         );*/
-
-        /* applyRule5(element, value, typedef); */
     }
 
     void applyRule5_6(Element element, InputStream value, IntegerTypeDefinition definition) throws RuleException {
@@ -643,20 +641,10 @@ public class FragmentBuilder {
 
     void applyRule5_7(Element element, InputStream value, OpaqueTypeDefinition definition) throws RuleException {
 
-        element.setAttributeNS(
-                REGXML_NS,
-                ACTUALTYPE_ATTR,
-                ""
-        );
-
-        element.setAttributeNS(
-                REGXML_NS,
-                BYTEORDER_ATTR,
-                BYTEORDER_BE
-        );
-
-        /* BUG: buffer lengths should be int */
-        /* TODO: figure out opaque encoding */
+        /* NOTE: Opaque Types are not used in MXF */
+        
+        throw new RuleException("Opaque types are not supported.");
+        
     }
 
     void applyRule5_8(Element element, InputStream value, RecordTypeDefinition definition) throws RuleException {
@@ -698,7 +686,9 @@ public class FragmentBuilder {
 
             } else if (definition.getIdentification().equals(TimeStruct_UL)) {
 
-                /*BUG: fraction is msec/4 according to 377-1 */
+                /*INFO: ST 2001-1 and ST 377-1 diverge on the meaning of 'fraction'.
+                fraction is msec/4 according to 377-1 */
+                
                 int hour = kis.readUnsignedByte();
                 int minute = kis.readUnsignedByte();
                 int second = kis.readUnsignedByte();
@@ -802,10 +792,13 @@ public class FragmentBuilder {
 
     void applyRule5_12(Element element, InputStream value, StringTypeDefinition definition) throws RuleException {
 
-        /*TODO: handle integer-based strings Rule 5.12.1 */
-        /* ASSUMES THAT VALUE TERMINATES ON THE FIELD */
-        /*Rule 5.12 */
+        /* Rule 5.12 */
+        
         Definition chrdef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
+        
+        /* NOTE: ST 2001-1 implies that integer-based strings are supported, but
+           does not described semantics.
+        */
 
         if (!(chrdef instanceof CharacterTypeDefinition)) {
             throw new RuleException(
@@ -819,7 +812,9 @@ public class FragmentBuilder {
         StringBuilder sb = new StringBuilder();
 
         readCharacters(value, (CharacterTypeDefinition) chrdef, sb);
+        
         /* remove trailing zeroes if any */
+        
         if (sb.length() > 0 && sb.charAt(sb.length() - 1) == 0) {
             sb.deleteCharAt(sb.length() - 1);
         }
@@ -882,8 +877,10 @@ public class FragmentBuilder {
 
             switch (definition.getSize()) {
                 case HALF:
-                    /* TODO: implement or deprecate half-floats */
-                    throw new RuleException("Half floats not supported.");
+
+                    val = HalfFloat.toDouble(dis.readUnsignedShort());
+                    
+                    break;
                 case SINGLE:
                     val = dis.readFloat();
                     break;
@@ -963,18 +960,20 @@ public class FragmentBuilder {
 
             } else {
 
-                long itemcount = dis.readInt() & 0xfffffffL;
-                long itemlength = dis.readInt() & 0xfffffffL;
-
                 Definition base = findBaseDefinition(typedef);
 
                 if (base instanceof CharacterTypeDefinition || base.getName().contains("StringArray")) {
 
                     /* RULE 5.14.1 */
-                    /* BUG: where is StringArray defined? */
+                    
+                    /* INFO: StringArray is not used in MXF (ST 377-1) */
+                    
                     throw new RuleException("StringArray not supported.");
 
                 } else {
+                    
+                    long itemcount = dis.readInt() & 0xfffffffL;
+                    long itemlength = dis.readInt() & 0xfffffffL;
 
                     applyCoreRule5_4(element, value, typedef, (int) itemcount);
                 }
@@ -991,7 +990,8 @@ public class FragmentBuilder {
 
     void applyRule5_15(Element element, InputStream value, WeakReferenceTypeDefinition definition) throws RuleException {
 
-        /* BUG: how does one determine what the weak reference is, e.g. UL, UMID, etc? */
+        /* INFO: assume that the weak reference is a AUID. */
+        
         try {
 
             MXFInputStream kis = new MXFInputStream(value);

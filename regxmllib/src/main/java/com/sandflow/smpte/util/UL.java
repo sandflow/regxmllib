@@ -105,8 +105,6 @@ public class UL {
      * @return true if the UL is a Key for a KLV Local Set (see SMPTE ST 336)
      */
     public boolean isLocalSet() {
-        /* TODO: compare also SMPTE designator */
-
         return isGroup() && (getRegistryDesignator() & 7) == 3;
     }
 

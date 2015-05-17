@@ -67,10 +67,8 @@ public class GenerateXMLSchemaDocuments {
             return;
         }
 
-        /* mute logging */
-        /* TODO: add switch to enable warnings */
-        Logger.getLogger("").setLevel(Level.OFF);
-
+        /* NOTE: to mute logging: Logger.getLogger("").setLevel(Level.OFF); */
+        
         Class c = Class.forName(args[1]);
 
         JAXBContext ctx = JAXBContext.newInstance(c);

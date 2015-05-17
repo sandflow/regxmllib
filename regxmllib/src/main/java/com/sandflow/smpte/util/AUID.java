@@ -35,16 +35,23 @@ public class AUID {
     /**
      * Creates a AUID from a UL or UUID URN. 
      * @param urn URN from which to create the AUID
-     * @return 
+     * @return AUID, or null if invalid URN
      */
     public static AUID fromURN(String urn) {
-        if (urn != null && urn.startsWith("urn:smpte:ul:")) {
+        
+        if (urn == null) return null;
+        
+        if (urn.startsWith("urn:smpte:ul:")) {
+            
             return new AUID(UL.fromURN(urn));
-        } else {
+            
+        } else if (urn.startsWith("urn:uuid:")) {
+            
             return new AUID(UUID.fromURN(urn));
+            
         }
 
-        /* TODO: handle errors */
+        return null;
  
     }
 

@@ -471,7 +471,7 @@ public class XMLSchemaBuilder {
     void applyRule6_3(Element root, ExtendibleEnumerationTypeDefinition definition) throws RuleException {
 
         /*
-         SPECIFICATION BUG: ST 2001-1 does not allow arbitrary AUIDs
+         NOTE: ST 2001-1 does not allow arbitrary AUIDs. This should be corrected.
          */
         Element simpleType = root.getOwnerDocument().createElementNS(XSD_NS, "xs:simpleType");
         simpleType.setAttribute("name", definition.getSymbol());

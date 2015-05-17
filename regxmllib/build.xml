@@ -132,6 +132,15 @@
 
     <target name="build-reference-test-files" depends="build-regxml-dict,jar">
         
+        <fail message="Reference files present already. Delete manually.">
+            <condition>
+                <or>
+                    <available file="${video1.ref.file}"/>
+                    <available file="${audio1.ref.file}"/>
+                </or>
+            </condition>
+        </fail>
+        
         <fileset dir="${dict.dir}" id="dicts">
             <include name="*.xml" />
         </fileset>

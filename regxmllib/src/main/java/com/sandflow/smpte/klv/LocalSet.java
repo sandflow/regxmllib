@@ -154,8 +154,6 @@ public class LocalSet implements Group {
         return items;
     }
 
-    
-    /* TODO: move to constructor */
     private void addItem(Triplet triplet) {
         items.add(triplet);
     }

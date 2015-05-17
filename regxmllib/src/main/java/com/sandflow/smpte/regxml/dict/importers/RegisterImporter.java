@@ -86,7 +86,7 @@ public class RegisterImporter {
         /* keep track of definitions to prevent duplicates */
         HashSet<AUID> defIDs = new HashSet<>();
         
-        /* handle groups */
+        /* Handles Group Entries */
         for (GroupEntry group : gr.getEntries()) {
 
             if (group.getKind().equals(GroupEntry.Kind.NODE)) {
@@ -98,7 +98,7 @@ public class RegisterImporter {
                 continue;
             }
 
-            /* BUG: skip non locat set groups */
+            /* Skip groups that do not have a local set representation locat set groups */
             if (!group.getKlvSyntax().contains((byte) 0x53)) {
                 continue;
             }
@@ -199,8 +199,8 @@ public class RegisterImporter {
             defIDs.add(cdef.getIdentification());
         }
 
-        /* handle types */
-        /* TODO: missing alias */
+        /* Handle Types Entries */
+        
         for (TypeEntry type : tr.getEntries()) {
             if (!type.getKind().equals(TypeEntry.Kind.LEAF)) {
                 continue;
@@ -319,7 +319,10 @@ public class RegisterImporter {
 
                 ((WeakReferenceTypeDefinition) tdef).setReferencedType(new AUID(type.getBaseType()));
 
-                /* BUG: skip Weak Reference target sets due to missing ULs in the registry */
+                /* INFO: skip weak Reference target sets until registers are accurate.
+                *        They are not necessary for encoding.
+                */
+                
                 for (Facet f : type.getFacets()) {
 
                     UL ul = null;
@@ -356,14 +359,18 @@ public class RegisterImporter {
 
                 ((StrongReferenceTypeDefinition) tdef).setReferenceType(new AUID(type.getBaseType()));
 
-                /* BUG: class_of_objects_referenced has wrong UL format */
             } else if (TypeEntry.ENUMERATION_TYPEKIND.equals(type.getTypeKind())) {
 
                 if (type.getBaseType().equals(UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000"))) {
+                    
                     ArrayList<ExtendibleEnumerationTypeDefinition.Element> ecelems = new ArrayList<>();
 
-                    /* TODO: deal with labels */
-                    /* for now, do not import facets */
+                    /* NOTE: Facets of Extendible Enumeration Definitions are not imported since
+                     *       they are, by definition, extendible. In other words, Extendible
+                     *       Enumeration instance are expected to handle UL values that are not
+                     *       listed in the register. 
+                     */
+                    
                     /*
                      for (Facet f : type.getFacets()) {
                      ExtendibleEnumerationTypeDefinition.Element m = new ExtendibleEnumerationTypeDefinition.Element();
@@ -372,6 +379,7 @@ public class RegisterImporter {
 
                      ecelems.add(m);
                      }*/
+                    
                     tdef = new ExtendibleEnumerationTypeDefinition(ecelems);
 
                 } else {
@@ -384,7 +392,6 @@ public class RegisterImporter {
                         m.setName(f.getSymbol());
                         m.setValue(Integer.decode(f.getValue()));
 
-                        // BUG: some enumerations use hex notation
                         celems.add(m);
                     }
 
@@ -413,7 +420,6 @@ public class RegisterImporter {
                 );
 
                 continue;
-                /* todo: error handling */
             }
 
             if (tdef != null) {
