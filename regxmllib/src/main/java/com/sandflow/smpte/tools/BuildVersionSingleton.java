@@ -30,9 +30,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Retrieves a string that uniquely identifies the current build of the underlying
- * source code of regxmllib. Currently looks for build version at the 'version'
- * property in the /config/repoversion.properties resource.
+ * Retrieves a string that uniquely identifies the current build of the
+ * underlying source code of regxmllib. Currently looks for build version at the
+ * 'version' property in the /config/repoversion.properties resource.
  */
 public class BuildVersionSingleton {
 
@@ -43,30 +43,38 @@ public class BuildVersionSingleton {
     private static final BuildVersionSingleton INSTANCE = new BuildVersionSingleton();
 
     /**
-     * @return Uniquely identifies the current build of the underlying source code of regxmllib
+     * @return Uniquely identifies the current build of the underlying source
+     * code of regxmllib
      */
     public static String getBuildVersion() {
         return INSTANCE.buildVersion;
     }
-    private final String buildVersion;
+    private String buildVersion = DEFAULT_BUILD_VERSION;
 
     private BuildVersionSingleton() {
-        String bv = DEFAULT_BUILD_VERSION;
 
         try {
-            
+
             Properties prop = new Properties();
             InputStream in = getClass().getResourceAsStream(BUILD_VERSION_PROPFILE);
-            prop.load(in);
 
-            bv = prop.getProperty(BUILD_VERSION_PROPNAME);
-            
-            in.close();
+            if (in != null) {
+
+                prop.load(in);
+
+                String bv = prop.getProperty(BUILD_VERSION_PROPNAME);
+
+                if (bv != null) {
+                    buildVersion = bv;
+                }
+
+                in.close();
+
+            }
 
         } catch (IOException e) {
             // ignore missing resources
         }
 
-        buildVersion = bv;
     }
 }

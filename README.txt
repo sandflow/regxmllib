@@ -20,9 +20,11 @@ PREREQUISITES
 
 Java 8 SDK
 
+Ant
+
 (recommended) Git
 
-(recommended) Netbeans 8.0 or Ant
+(recommended) Netbeans 8.0
 
 (recommended) SMPTE Metadata Registers (Types, Elements, Groups and Labels) (see [1] for a recent snapshot)
 
