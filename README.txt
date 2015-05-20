@@ -20,15 +20,13 @@ PREREQUISITES
 
 Java 8 SDK
 
-Ant
+(recommended) Ant
 
 (recommended) Git
 
 (recommended) Netbeans 8.0
 
-(recommended) SMPTE Metadata Registers (Types, Elements, Groups and Labels) (see [1] for a recent snapshot)
-
-[1] https://kws.smpte.org/kws/groups/30mr/download/33216
+(recommended) SMPTE Metadata Registers (Types, Elements, Groups and Labels) 
 
 
 QUICK START
@@ -37,21 +35,33 @@ QUICK START
 The following outputs to path PATH_TO_FRAGMENT an XML representation
 of the header metadata of the MXF file at path PATH_TO_MXF_FILE 
 
-* build the jar target using Netbeans or Ant
+* build the 'jar' target using Netbeans or Ant
 
-* retrieve the four SMPTE Metadata Registers
+* choose one of the following:
+
+	* OPTION 1
+
+		* retrieve the four SMPTE Metadata Registers (see [1] for a recent snapshot)
+
+			[1] https://kws.smpte.org/kws/groups/30mr/download/33216
     
-* build the metadictionaries from the SMPTE registers
+		* build the metadictionaries from the SMPTE registers
 
-    java -cp <PATH_TO_JAR> com.sandflow.smpte.tools.XMLRegistersToDict -e <PATH_TO_ELEMENTS_REG>
-    -l <PATH_TO_LABELS_REG> -g <PATH_TO_GROUPS_REG> -t <PATH_TO_TYPES_REG> PATH_TO_DICT_DIR
+			java -cp <PATH_TO_JAR> com.sandflow.smpte.tools.XMLRegistersToDict -e <PATH_TO_ELEMENTS_REG>
+			-l <PATH_TO_LABELS_REG> -g <PATH_TO_GROUPS_REG> -t <PATH_TO_TYPES_REG> PATH_TO_DICT_DIR
+			
+	* OPTION 2
+	
+		* retrieve metadictionaries from [2]
+		
+			[2] https://github.com/sandflow/IMF/tree/master/regxml/dict
   
 * generate the RegXML fragment
     
     run java -cp <PATH_TO_JAR> com.sandflow.smpte.tools.RegXMLDump -all -d <PATH_TO_DICT1> <PATH_TO_DICT2> ...
     -i PATH_TO_MXF_FILE > PATH_TO_FRAGMENT
     
-    
+
 ARCHITECTURE
 ============
 

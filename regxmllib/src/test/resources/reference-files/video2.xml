@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Created: Sun May 17 14:59:06 PDT 2015--><!--From: src/test/resources/sample-files/video2.mxf--><!--By: regxmllib build a10372c61b3bcdf0cacd1b1ffa35a1ac2a082fbc--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:ns0="http://sandflow.com/ns/SMPTEST2001-1/baseline" ns0:uid="urn:uuid:8f6e76e1-7bff-4b06-b74a-646c02df7fbd">
-<r1:FileLastModified>2015-05-06T10:48:48.276Z</r1:FileLastModified>
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Wed May 20 13:19:15 PDT 2015--><!--From: src/test/resources/sample-files/video2.mxf--><!--By: regxmllib build 91c9b00c325d7b74c6df3ddc177471bfaddaed89--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:ns0="http://sandflow.com/ns/SMPTEST2001-1/baseline" ns0:uid="urn:uuid:68ed8c71-4a72-468b-9ed7-752caa2def1c">
+<r1:FileLastModified>2015-05-19T08:52:08.328Z</r1:FileLastModified>
 <r1:FormatVersion>1.3</r1:FormatVersion>
 <r1:IdentificationList>
-<r0:Identification ns0:uid="urn:uuid:03af7de5-4e19-41c2-88a8-89e79bc95568">
+<r0:Identification ns0:uid="urn:uuid:3ae949c9-2d4c-46f1-aeeb-8b9fe3070290">
 <r1:ApplicationSupplierName>Rohde and Schwarz DVS GmbH</r1:ApplicationSupplierName>
 <r1:ApplicationName>Clipster</r1:ApplicationName>
 <r1:ApplicationVersionString>5.10.0.0</r1:ApplicationVersionString>
@@ -20,10 +20,10 @@
 <r2:PatchLevel>19</r2:PatchLevel>
 <r2:BuildType>VersionBeta</r2:BuildType>
 </r1:ToolkitVersion>
-<r1:ApplicationPlatform>Windows Server 2008 R2 S (64-bit)</r1:ApplicationPlatform>
-<r1:FileModificationDate>2015-05-06T10:48:48.276Z</r1:FileModificationDate>
+<r1:ApplicationPlatform>Windows Server 2003 S (64-bit)</r1:ApplicationPlatform>
+<r1:FileModificationDate>2015-05-19T08:52:08.328Z</r1:FileModificationDate>
 <r1:ApplicationProductID>urn:uuid:29bcbbc9-0d33-5653-ace4-685a327d3c50</r1:ApplicationProductID>
-<r1:GenerationID>urn:smpte:ul:65c1af79.cb674cf4.a04ef7b0.6058f299</r1:GenerationID>
+<r1:GenerationID>urn:smpte:ul:b790ec60.0bdb4726.a82fd81b.64ebf744</r1:GenerationID>
 </r0:Identification>
 </r1:IdentificationList>
 <r1:EssenceContainers>
@@ -31,25 +31,25 @@
 </r1:EssenceContainers>
 <r1:DescriptiveSchemes/>
 <r1:ContentStorageObject>
-<r0:ContentStorage ns0:uid="urn:uuid:53e94b7c-648a-4917-8dbb-0895d1549622">
+<r0:ContentStorage ns0:uid="urn:uuid:f291fed3-f579-461e-aeec-a71e34d1e9f4">
 <r1:Packages>
-<r0:MaterialPackage ns0:uid="urn:uuid:5c777664-f790-4ea1-bcdd-9192f761570e">
-<r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.40620e3a.52b84e43.80b4c2eb.d74281fd</r1:PackageID>
-<r1:CreationTime>2015-05-06T10:48:48.276Z</r1:CreationTime>
-<r1:PackageLastModified>2015-05-06T10:48:48.276Z</r1:PackageLastModified>
+<r0:MaterialPackage ns0:uid="urn:uuid:2b9025eb-9bb0-404e-9287-1a1ebd11b27b">
+<r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.9cf44ea7.c45547c1.b90f2a38.d22600f7</r1:PackageID>
+<r1:CreationTime>2015-05-19T08:52:08.328Z</r1:CreationTime>
+<r1:PackageLastModified>2015-05-19T08:52:08.328Z</r1:PackageLastModified>
 <r1:PackageTracks>
-<r0:TimelineTrack ns0:uid="urn:uuid:75bc0dd1-b4e6-4728-850c-f0d6ebffac9c">
+<r0:TimelineTrack ns0:uid="urn:uuid:ee19109a-ecc3-4deb-883a-369dbf603384">
 <r1:TrackName>Timecode track</r1:TrackName>
 <r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
 <r1:Origin>0</r1:Origin>
 <r1:EditRate>24/1</r1:EditRate>
 <r1:TrackID>1</r1:TrackID>
 <r1:TrackSegment>
-<r0:Sequence ns0:uid="urn:uuid:b780ac20-3799-4ec6-a585-acc2314b0286">
+<r0:Sequence ns0:uid="urn:uuid:13a43c94-76e0-427d-b7b9-7691b853eac1">
 <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
 <r1:ComponentLength>1</r1:ComponentLength>
 <r1:ComponentObjects>
-<r0:Timecode ns0:uid="urn:uuid:6007dc69-4063-495e-bd9a-8aea632a2f4a">
+<r0:Timecode ns0:uid="urn:uuid:9a897e7a-cddc-47af-93cc-5f97d805266f">
 <r1:FramesPerSecond>24</r1:FramesPerSecond>
 <r1:DropFrame>False</r1:DropFrame>
 <r1:StartTimecode>0</r1:StartTimecode>
@@ -60,20 +60,20 @@
 </r0:Sequence>
 </r1:TrackSegment>
 </r0:TimelineTrack>
-<r0:TimelineTrack ns0:uid="urn:uuid:5c1e03c2-231a-420c-aa4a-bc5e5402cba2">
+<r0:TimelineTrack ns0:uid="urn:uuid:88b03d81-2db4-471c-bc4b-dfb11ff21694">
 <r1:TrackName>MP Picture track</r1:TrackName>
 <r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
 <r1:Origin>0</r1:Origin>
 <r1:EditRate>24/1</r1:EditRate>
 <r1:TrackID>2</r1:TrackID>
 <r1:TrackSegment>
-<r0:Sequence ns0:uid="urn:uuid:f6e8b03d-2bea-4e0c-a6bf-f157b2ac1aea">
+<r0:Sequence ns0:uid="urn:uuid:8a8659fa-dfcf-4ff2-9ef7-e150897e433d">
 <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.01000000</r1:ComponentDataDefinition>
 <r1:ComponentLength>1</r1:ComponentLength>
 <r1:ComponentObjects>
-<r0:SourceClip ns0:uid="urn:uuid:7979de5b-839c-4fd5-a62f-8c6d14392605">
+<r0:SourceClip ns0:uid="urn:uuid:0c3906da-7e7e-4e72-b590-b41d2c3b29e0">
 <r1:ComponentLength>1</r1:ComponentLength>
-<r1:SourcePackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.efcf8f41.f13541b1.b5bdc814.e45e1e68</r1:SourcePackageID>
+<r1:SourcePackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.483e324f.531f424b.b25fc8bb.39d540ab</r1:SourcePackageID>
 <r1:SourceTrackID>2</r1:SourceTrackID>
 <r1:StartPosition>0</r1:StartPosition>
 <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.01000000</r1:ComponentDataDefinition>
@@ -84,23 +84,23 @@
 </r0:TimelineTrack>
 </r1:PackageTracks>
 </r0:MaterialPackage>
-<r0:SourcePackage ns0:uid="urn:uuid:391e1b8f-7b97-4730-bbd7-9abf30b0228b">
-<r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.efcf8f41.f13541b1.b5bdc814.e45e1e68</r1:PackageID>
-<r1:CreationTime>2015-05-06T10:48:48.276Z</r1:CreationTime>
-<r1:PackageLastModified>2015-05-06T10:48:48.276Z</r1:PackageLastModified>
+<r0:SourcePackage ns0:uid="urn:uuid:a7e42682-bac3-4cdd-993a-75f1e411f0f7">
+<r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.483e324f.531f424b.b25fc8bb.39d540ab</r1:PackageID>
+<r1:CreationTime>2015-05-19T08:52:08.328Z</r1:CreationTime>
+<r1:PackageLastModified>2015-05-19T08:52:08.328Z</r1:PackageLastModified>
 <r1:PackageTracks>
-<r0:TimelineTrack ns0:uid="urn:uuid:51eb00ec-06a8-4888-9f0e-dd6ebf594089">
+<r0:TimelineTrack ns0:uid="urn:uuid:dfd53269-9033-4c66-a394-cc5015f4bc45">
 <r1:TrackName>Timecode track</r1:TrackName>
 <r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
 <r1:Origin>0</r1:Origin>
 <r1:EditRate>24/1</r1:EditRate>
 <r1:TrackID>1</r1:TrackID>
 <r1:TrackSegment>
-<r0:Sequence ns0:uid="urn:uuid:f030b353-2066-497a-b607-8fa01dac921f">
+<r0:Sequence ns0:uid="urn:uuid:f0d6d0ac-f159-4cc8-bb90-1101f20b72e0">
 <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
 <r1:ComponentLength>1</r1:ComponentLength>
 <r1:ComponentObjects>
-<r0:Timecode ns0:uid="urn:uuid:7930f1de-eb7e-47f4-814c-4b6b93863c32">
+<r0:Timecode ns0:uid="urn:uuid:dbeb4e20-6da3-4a5c-b8c8-74eda3a20980">
 <r1:FramesPerSecond>24</r1:FramesPerSecond>
 <r1:DropFrame>False</r1:DropFrame>
 <r1:StartTimecode>0</r1:StartTimecode>
@@ -111,18 +111,18 @@
 </r0:Sequence>
 </r1:TrackSegment>
 </r0:TimelineTrack>
-<r0:TimelineTrack ns0:uid="urn:uuid:047b40c3-9086-4936-b246-dc066d107db5">
+<r0:TimelineTrack ns0:uid="urn:uuid:0d3b1ad9-6588-435e-819a-aa7ed983433c">
 <r1:TrackName>FP Picture track</r1:TrackName>
 <r1:EssenceTrackNumber>352389120</r1:EssenceTrackNumber>
 <r1:Origin>0</r1:Origin>
 <r1:EditRate>24/1</r1:EditRate>
 <r1:TrackID>2</r1:TrackID>
 <r1:TrackSegment>
-<r0:Sequence ns0:uid="urn:uuid:eef9bc54-3e22-4600-b589-59e7e08b9461">
+<r0:Sequence ns0:uid="urn:uuid:b2531312-e2ec-403d-b43d-9c39d76f5da0">
 <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.01000000</r1:ComponentDataDefinition>
 <r1:ComponentLength>1</r1:ComponentLength>
 <r1:ComponentObjects>
-<r0:SourceClip ns0:uid="urn:uuid:29b707fa-7bee-40fa-b154-cd335b7e8aa6">
+<r0:SourceClip ns0:uid="urn:uuid:f9f8435e-6258-4540-a1cf-7acde882c285">
 <r1:ComponentLength>1</r1:ComponentLength>
 <r1:SourcePackageID>urn:smpte:umid:00000000.00000000.00000000.00000000.00000000.00000000.00000000.00000000</r1:SourcePackageID>
 <r1:SourceTrackID>0</r1:SourceTrackID>
@@ -135,8 +135,7 @@
 </r0:TimelineTrack>
 </r1:PackageTracks>
 <r1:EssenceDescription>
-<r0:RGBADescriptor ns0:uid="urn:uuid:3ccdc840-6ac4-4a90-b96b-aa0026b5ac3b">
-<r1:ComponentDepth>10</r1:ComponentDepth>
+<r0:RGBADescriptor ns0:uid="urn:uuid:c060a2b0-b5d7-4cc9-8348-10b330da89fc">
 <r1:PixelLayout>
 <r2:RGBAComponent>
 <r2:Code>CompRed</r2:Code>
@@ -196,7 +195,7 @@
 <r1:TransferCharacteristic>urn:smpte:ul:060e2b34.04010101.04010101.01020000</r1:TransferCharacteristic>
 <r1:ColorPrimaries>urn:smpte:ul:060e2b34.04010106.04010101.03030000</r1:ColorPrimaries>
 <r1:SubDescriptors>
-<r0:JPEG2000SubDescriptor ns0:uid="urn:uuid:ec089856-06f9-44f8-b902-5bdd3500eea7">
+<r0:JPEG2000SubDescriptor ns0:uid="urn:uuid:19d9993c-7306-41dc-93a9-e923423b02de">
 <r1:Rsiz>259</r1:Rsiz>
 <r1:Xsiz>1920</r1:Xsiz>
 <r1:Ysiz>1080</r1:Ysiz>
@@ -267,8 +266,8 @@
 </r0:SourcePackage>
 </r1:Packages>
 <r1:EssenceDataObjects>
-<r0:EssenceData ns0:uid="urn:uuid:9658ab32-6fdc-4a1e-bc3f-bd74a907c3ff">
-<r1:LinkedPackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.efcf8f41.f13541b1.b5bdc814.e45e1e68</r1:LinkedPackageID>
+<r0:EssenceData ns0:uid="urn:uuid:886d0ee6-619d-4ce8-94e9-74e76f44c55e">
+<r1:LinkedPackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.483e324f.531f424b.b25fc8bb.39d540ab</r1:LinkedPackageID>
 <r1:EssenceStreamID>1</r1:EssenceStreamID>
 <r1:IndexStreamID>2</r1:IndexStreamID>
 </r0:EssenceData>
@@ -279,5 +278,5 @@
 Key: urn:smpte:ul:060e2b34.0101010e.04040503.00000000
 Data: 01-->
 <r1:OperationalPattern>urn:smpte:ul:060e2b34.04010101.0d010201.01010100</r1:OperationalPattern>
-<r1:PrimaryPackage>urn:uuid:391e1b8f-7b97-4730-bbd7-9abf30b0228b</r1:PrimaryPackage>
+<r1:PrimaryPackage>urn:smpte:ul:a7e42682.bac34cdd.993a75f1.e411f0f7</r1:PrimaryPackage>
 </r0:Preface>
