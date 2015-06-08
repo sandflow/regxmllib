@@ -40,7 +40,7 @@ public class AUIDAdapter extends XmlAdapter<String, AUID> {
             byte[] ul = new byte[16];
 
             for (int i = 0; i < 16; i++) {
-                ul[i] = (byte) Integer.parseUnsignedInt(val.substring(13 + i * 3, 13 + i * 3 + 2), 16);
+                ul[i] = (byte) Integer.parseInt(val.substring(13 + i * 3, 13 + i * 3 + 2), 16);
             }
 
             auid = new AUID(new UL(ul));

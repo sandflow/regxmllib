@@ -28,8 +28,9 @@ package com.sandflow.smpte.klv.adapters;
 /**
  * TripletValueAdapter is an abstract class defining the conversion of KLV Triplet
  * values to Java types.
+ * @param <W> Type to which the Triplet Value will be converted to/from
  */
-public class TripletValueAdapter {
+public class TripletValueAdapter<W> {
     
     /**
      * Converts a KLV Triplet Value to a Java object.

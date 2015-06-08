@@ -52,7 +52,7 @@ public class UL {
         if (URN_PATTERN.matcher(urn).matches()) {
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
-                    ul[4 * i + j] = (byte) Integer.parseUnsignedInt(urn.substring(13 + i * 9 + 2 * j, 13 + i * 9 + 2 * j + 2), 16);
+                    ul[4 * i + j] = (byte) Integer.parseInt(urn.substring(13 + i * 9 + 2 * j, 13 + i * 9 + 2 * j + 2), 16);
                 }
             }
 
@@ -79,7 +79,7 @@ public class UL {
 
         if (DOTVALUE_PATTERN.matcher(val).matches()) {
             for (int i = 0; i < 16; i++) {
-                ul[i] = (byte) Integer.parseUnsignedInt(val.substring(3 * i, 3 * i + 2), 16);
+                ul[i] = (byte) Integer.parseInt(val.substring(3 * i, 3 * i + 2), 16);
             }
 
             return new UL(ul);

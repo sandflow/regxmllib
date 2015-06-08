@@ -65,14 +65,10 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URI;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.OffsetDateTime;
-import java.time.OffsetTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Comment;
@@ -664,12 +660,8 @@ public class FragmentBuilder {
                 int year = kis.readUnsignedShort();
                 int month = kis.readUnsignedByte();
                 int day = kis.readUnsignedByte();
-
-                LocalDateTime ldt = LocalDateTime.of(year, month, day, 0, 0);
-
-                OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
-
-                element.setTextContent(odt.format(DateTimeFormatter.ISO_DATE));
+                
+                element.setTextContent(String.format("%2d-%2d-%2dZ", year, month, day));
 
             } else if (definition.getIdentification().equals(PackageID_UL)) {
 
@@ -694,11 +686,13 @@ public class FragmentBuilder {
                 int second = kis.readUnsignedByte();
                 int fraction = kis.readUnsignedByte();
 
-                LocalTime lt = LocalTime.of(hour, minute, second, fraction * 4000000);
+                /*LocalTime lt = LocalTime.of(hour, minute, second, fraction * 4000000);
 
                 OffsetTime ot = OffsetTime.of(lt, ZoneOffset.UTC);
 
-                element.setTextContent(ot.toString());
+                element.setTextContent(ot.toString());*/
+                
+                element.setTextContent(String.format("%2d:%2d:%2d.%dZ", hour, minute, second, fraction));
 
             } else if (definition.getIdentification().equals(TimeStamp_UL)) {
 
@@ -710,11 +704,14 @@ public class FragmentBuilder {
                 int second = kis.readUnsignedByte();
                 int fraction = kis.readUnsignedByte();
 
-                LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second, fraction * 4000000);
+                /*LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second, fraction * 4000000);
 
                 OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
 
-                element.setTextContent(odt.toString());
+                element.setTextContent(odt.toString());*/
+   
+                
+                element.setTextContent(String.format("%2d-%2d-%2dT%2d:%2d:%2d.%dZ", year, month, day, hour, minute, second, fraction));
 
             } else if (definition.getIdentification().equals(VersionType_UL)) {
 

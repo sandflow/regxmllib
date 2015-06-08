@@ -68,14 +68,5 @@ public class LocalTagRegister {
         return entries.put(localtag, key);
     }
     
-    /**
-     * Adds the Local Tag if not already present.
-     * @param localtag Local tag
-     * @param key Key with which the Local Tag is associated
-     * @return Previous Key associated with the local tag if one existed, or null otherwise. 
-     */
-    public UL addIfAbsent(long localtag, UL key) {
-        return entries.putIfAbsent(localtag, key);
-    }
 
 }

@@ -138,7 +138,7 @@ public class UUID {
 
             for (int j = 0; j < 4; j++) {
 
-                uuid[inoff++] = (byte) Integer.parseUnsignedInt(val.substring(outoff, outoff + 2), 16);
+                uuid[inoff++] = (byte) Integer.parseInt(val.substring(outoff, outoff + 2), 16);
 
                 outoff += 2;
 
@@ -150,7 +150,7 @@ public class UUID {
 
                 for (int j = 0; j < 2; j++) {
 
-                    uuid[inoff++] = (byte) Integer.parseUnsignedInt(val.substring(outoff, outoff + 2), 16);
+                    uuid[inoff++] = (byte) Integer.parseInt(val.substring(outoff, outoff + 2), 16);
                     outoff += 2;
                 }
             }
@@ -159,7 +159,7 @@ public class UUID {
 
             for (int j = 0; j < 6; j++) {
 
-                uuid[inoff++] = (byte) Integer.parseUnsignedInt(val.substring(outoff, outoff + 2), 16);
+                uuid[inoff++] = (byte) Integer.parseInt(val.substring(outoff, outoff + 2), 16);
                 outoff += 2;
             }
 
