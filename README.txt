@@ -18,7 +18,7 @@ regxmllib is implemented in pure Java. Netbeans 8.0 is used for development.
 PREREQUISITES
 =============
 
-Java 8 SDK
+Java 7 language and SDK
 
 (recommended) Ant
 
