@@ -65,10 +65,8 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URI;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Comment;
@@ -812,9 +810,9 @@ public class FragmentBuilder {
         
         /* remove trailing zeroes if any */
         
-        if (sb.length() > 0 && sb.charAt(sb.length() - 1) == 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
+        int nullpos = sb.indexOf("\0");
+        
+        if (nullpos > -1) sb.setLength(nullpos);
 
         element.setTextContent(sb.toString());
 
