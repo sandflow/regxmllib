@@ -132,6 +132,7 @@ public class RegXMLDump {
         Transformer tr = TransformerFactory.newInstance().newTransformer();
 
         tr.setOutputProperty(OutputKeys.INDENT, "yes");
+        tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
         tr.transform(
                 new DOMSource(doc),
