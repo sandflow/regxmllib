@@ -199,6 +199,16 @@ public class MXFFragmentBuilderTest extends TestCase {
 
         return m;
     }
+    
+    String getFirstTextNodeText(Element e) {
+        for(Node n = e.getFirstChild(); n != null; n = n.getNextSibling()) {
+            if (n.getNodeType() == Node.TEXT_NODE) {
+                return n.getNodeValue();
+            }
+        }
+        
+        return "";
+    }
 
     boolean compareDOMElement(Element el1, Element el2) {
 
@@ -223,6 +233,21 @@ public class MXFFragmentBuilderTest extends TestCase {
             if (!elems1.get(i).getNodeName().equals(elems2.get(i).getNodeName())) {
                 return false;
             }
+            
+            String txt1 = getFirstTextNodeText(elems1.get(i)).trim();
+            String txt2 = getFirstTextNodeText(elems2.get(i)).trim();
+
+            
+            if (!txt1.equals(txt2)) {
+                System.out.println(
+                        String.format(
+                            "Text content at %s ('%s') does not match reference ('%s')",
+                                elems1.get(i).getNodeName(),
+                                txt1,
+                                txt2)
+                );
+                return false;
+            } 
 
             if (!compareDOMElement(elems1.get(i), elems2.get(i))) {
                 return false;

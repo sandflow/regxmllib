@@ -640,6 +640,20 @@ public class FragmentBuilder {
         throw new RuleException("Opaque types are not supported.");
         
     }
+    
+    String generateISO8601Time(int hour, int minutes, int seconds, int millis) {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(String.format("%02d:%02d:%02d", hour, minutes, seconds));
+        
+        if (millis != 0) sb.append(String.format(".%03dZ", millis));
+        
+        return  sb.toString();
+    }
+    
+    String generateISO8601Date(int year, int month, int day) {
+        return String.format("%04d-%02d-%02d", year, month, day);
+    }
 
     void applyRule5_8(Element element, InputStream value, RecordTypeDefinition definition) throws RuleException {
 
@@ -659,7 +673,7 @@ public class FragmentBuilder {
                 int month = kis.readUnsignedByte();
                 int day = kis.readUnsignedByte();
                 
-                element.setTextContent(String.format("%2d-%2d-%2dZ", year, month, day));
+                element.setTextContent(generateISO8601Date(year, month, day));
 
             } else if (definition.getIdentification().equals(PackageID_UL)) {
 
@@ -690,7 +704,7 @@ public class FragmentBuilder {
 
                 element.setTextContent(ot.toString());*/
                 
-                element.setTextContent(String.format("%2d:%2d:%2d.%dZ", hour, minute, second, fraction));
+                element.setTextContent(generateISO8601Time(hour, minute, second, 4 * fraction));
 
             } else if (definition.getIdentification().equals(TimeStamp_UL)) {
 
@@ -707,9 +721,8 @@ public class FragmentBuilder {
                 OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
 
                 element.setTextContent(odt.toString());*/
-   
                 
-                element.setTextContent(String.format("%2d-%2d-%2dT%2d:%2d:%2d.%dZ", year, month, day, hour, minute, second, fraction));
+                element.setTextContent(generateISO8601Date(year, month, day) + "T" + generateISO8601Time(hour, minute, second, 4 * fraction));
 
             } else if (definition.getIdentification().equals(VersionType_UL)) {
 
