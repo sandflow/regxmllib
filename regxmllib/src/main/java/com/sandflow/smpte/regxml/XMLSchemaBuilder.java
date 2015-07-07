@@ -234,14 +234,13 @@ public class XMLSchemaBuilder {
                     element.setAttribute("minOccurs", "0");
                 }
 
-                /* NOTE: InstanceID property was missing isUnique in some versions of the registers */
+                /* NOTE: require reg:uid only if the object has one property
+                         with IsUniqueIdentifier */
                 
-                if (hasUID == false &&
-                        ( pdef.isUniqueIdentifier() || pdef.getIdentification().equals(InstanceID_AUID))) {
-                    hasUID = true;
-                }
-
+                hasUID |= pdef.isUniqueIdentifier();
+                
                 all.appendChild(element);
+                
             }
 
             if (cdef.getParentClass() != null) {

@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000015 -->
+<!-- master_commit_tag=v000000034 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -67,7 +67,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01000000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>IDENTIFIERS AND LOCATORS</Name>
-      <Definition>Class 1 metadata is reserved for abstract Identifiers &amp; locators</Definition>
+      <Definition>Class 1 metadata is reserved for abstract Identifiers and Locators</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -567,7 +567,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01011000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>International Broadcasting Organization Identifiers</Name>
-      <Definition>Internationally recognised identifiers registered by broadcasting organisations</Definition>
+      <Definition>Internationally recognized identifiers registered by broadcasting organizations</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -577,7 +577,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01011001.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Organization ID</Name>
-      <Definition>The broadcasting organisation concerned</Definition>
+      <Definition>The broadcasting organization concerned</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -590,7 +590,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01011001.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Organization ID</Name>
-      <Definition>The internationally recognised unique identifier for a broadcasting organisation</Definition>
+      <Definition>The internationally recognized unique identifier for a broadcasting organization</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
@@ -603,7 +603,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.01011002.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Organization ID Kind</Name>
-      <Definition>Specifies the indentification system in use.  E.g. OUT, ITU, EBU, Callsign etc</Definition>
+      <Definition>Specifies the identification system in use.  E.g. OUT, ITU, EBU, Callsign etc</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -616,7 +616,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.01011002.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Organization ID Kind</Name>
-      <Definition>Specifies the indentification system in use.  E.g. OUT, ITU, EBU, Callsign etc</Definition>
+      <Definition>Specifies the identification system in use.  E.g. OUT, ITU, EBU, Callsign etc</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
@@ -629,7 +629,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01011003.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Program Identifiers</Name>
-      <Definition>Globally Unique programme identifiers</Definition>
+      <Definition>Globally unique program identifiers</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -639,7 +639,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01011003.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>UPID</Name>
-      <Definition>A Unique Program Identifier (ATSC A/57) for a programme as a Work</Definition>
+      <Definition>A Unique Program Identifier (ATSC A/57) for a program as a Work</Definition>
       <DefiningDocument>ATSC standard ATSC A/57</DefiningDocument>
       <IsDeprecated>true</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -663,7 +663,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.01011003.03000000</UL>
       <Kind>LEAF</Kind>
       <Name>Program Number</Name>
-      <Definition>Identifier for a programme project</Definition>
+      <Definition>Identifier for a program project</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -1202,7 +1202,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01012000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Device Identifiers</Name>
-      <Definition>Unique identifiers for any device used in programme production - cameras, microphones, editing, colour grading etc</Definition>
+      <Definition>Unique identifiers for any device used in program production, such as cameras, microphones, editing, color grading, etc</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -1336,7 +1336,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01012100.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Platform Identifiers</Name>
-      <Definition>Organisationally given identifiers for platforms, vehicles, or mounts carrying devices or sensors</Definition>
+      <Definition>Organizationally given identifiers for platforms, vehicles, or mounts carrying devices or sensors</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -1897,7 +1897,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01030200.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Local Physical Media Identifiers</Name>
-      <Definition>Organisationally given identifiers for physical media</Definition>
+      <Definition>Organizationally given identifiers for physical media</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -1907,7 +1907,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01030201.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Local Film ID</Name>
-      <Definition>Organisationally given identifiers for film</Definition>
+      <Definition>Organizationally given identifiers for film</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -1917,7 +1917,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01030201.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Reel or Roll Number</Name>
-      <Definition>An organisationally given number for a film reel or roll.</Definition>
+      <Definition>An organizationally given number for a film reel or roll.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -1944,7 +1944,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01030202.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Local Tape Identifiers</Name>
-      <Definition>Organisationally given identifiers for tape</Definition>
+      <Definition>Organizationally given identifiers for tape</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -1954,7 +1954,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01030202.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Local Tape Number</Name>
-      <Definition>An organisationally given number for a tape.</Definition>
+      <Definition>An organizationally given number for a tape.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -1967,6 +1967,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01030203.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Disk Identifiers</Name>
+      <Definition>Disk identifier information</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -1976,6 +1977,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01030203.01000000</UL>
       <Kind>NODE</Kind>
       <Name>Magnetic Disks</Name>
+      <Definition>Information about magnetic disks.</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -1985,7 +1987,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01030203.01010000</UL>
       <Kind>LEAF</Kind>
       <Name>Magnetic Disk Number</Name>
-      <Definition>An organisationally given number for a magnetic disc or disc pack.</Definition>
+      <Definition>An organizationally given number for a magnetic disc or disc pack.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -1998,6 +2000,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01030203.02000000</UL>
       <Kind>NODE</Kind>
       <Name>Optical Discs</Name>
+      <Definition>Information about optical discs.</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -2007,7 +2010,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01030203.02010000</UL>
       <Kind>LEAF</Kind>
       <Name>Optical Disc Number</Name>
-      <Definition>An organisationally given number for an optical disc or disc pack.</Definition>
+      <Definition>An organizationally given number for an optical disc or disc pack.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -2210,7 +2213,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01030500.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Organizational Program Identifiers</Name>
-      <Definition>Programme identifiers unique within an organisation</Definition>
+      <Definition>Program identifiers unique within an organization</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -2220,7 +2223,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01030501.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Organizational Program Number</Name>
-      <Definition>An Identifier, unique only within an organisation, for a programme</Definition>
+      <Definition>An Identifier, unique only within an organization, for a program</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -2233,7 +2236,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01030501.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Organizational Program Number</Name>
-      <Definition>An Identifier, unique only within an organisation, for a programme</Definition>
+      <Definition>An Identifier, unique only within an organization, for a program</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
@@ -2422,7 +2425,7 @@
       <UL>urn:smpte:ul:060e2b34.0101010e.01030701.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>MCA Tag Symbol</Name>
-      <Definition>Symbol identifying this MCALabelSubDescriptor, which mnemonically reflects the meaning as defined in the MCA Label Dictionary ID, e.g. &#8220;cLs&#8221; for an AudioChannelLabelSubDescriptor Symbol, &#8220;c51&#8221; for a SoundfieldGroupLabelSubDescriptor Symbol.</Definition>
+      <Definition>Symbol identifying this MCALabelSubDescriptor, which mnemonically reflects the meaning as defined in the MCA Label Dictionary ID, e.g. "cLs" for an AudioChannelLabelSubDescriptor Symbol, "c51" for a SoundfieldGroupLabelSubDescriptor Symbol.</Definition>
       <DefiningDocument>SMPTE 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -2436,7 +2439,7 @@
       <UL>urn:smpte:ul:060e2b34.0101010e.01030701.03000000</UL>
       <Kind>LEAF</Kind>
       <Name>MCA Tag Name</Name>
-      <Definition>Optional text string that may be given to the MCALabelSubDescriptor to further describe it in human readable form, e.g. &#8220;Left Surround&#8221; for an AudioChannelLabelSubDescriptor Name, "5.1" for a SoundfieldGroupLabelSubDescriptor Name.</Definition>
+      <Definition>Optional text string that may be given to the MCALabelSubDescriptor to further describe it in human readable form, e.g. "Left Surround" for an AudioChannelLabelSubDescriptor Name, "5.1" for a SoundfieldGroupLabelSubDescriptor Name.</Definition>
       <DefiningDocument>SMPTE 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -2493,7 +2496,7 @@
       <Kind>NODE</Kind>
       <Name>Stereoscopic Channel Identifiers</Name>
       <Definition>Identifiers relating to eye identification (left/right).</Definition>
-      <DefiningDocument>SMPTEST2070-1</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -2503,12 +2506,11 @@
       <UL>urn:smpte:ul:060e2b34.0101010e.01030703.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Stereoscopic Eye ID</Name>
-      <Definition>Universal Label that identifies the eye associated with the picture essence</Definition>
-      <DefiningDocument>SMPTEST2070-1</DefiningDocument>
+      <Definition>Universal Label that identifies the eye</Definition>
+      <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
-      <ValueLength>16 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -2517,12 +2519,11 @@
       <UL>urn:smpte:ul:060e2b34.0101010e.01030703.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>Stereoscopic Data Essence Coding</Name>
-      <Definition>Universal Label that identifies the eye associated with the data essence</Definition>
-      <DefiningDocument>SMPTEST2070-1</DefiningDocument>
+      <Definition>Specifies the data Essence coding type</Definition>
+      <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
-      <ValueLength>16 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -2638,7 +2639,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>PhysicalMediaLocation_ISO7</Symbol>
+      <Symbol>LocationName_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010102.01040102.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Physical Media Location</Name>
@@ -2697,7 +2698,7 @@
       <UL>urn:smpte:ul:060e2b34.0101010e.01040105.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>MCA Partition Kind</Name>
-      <Definition>Partition kind of a complete program such as a &#8220;Part&#8221;, &#8220;Post Production Reel&#8221; or &#8220;Act&#8221;.</Definition>
+      <Definition>Partition kind of a complete program such as a "Part", "Post Production Reel" or "Act".</Definition>
       <DefiningDocument>SMPTE 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -2711,7 +2712,7 @@
       <UL>urn:smpte:ul:060e2b34.0101010e.01040106.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>MCA Partition Number</Name>
-      <Definition>The position of the partition in the sequence of partitions that make up the complete program such as &#8220;3&#8221; for Reel 3.</Definition>
+      <Definition>The position of the partition in the sequence of partitions that make up the complete program such as "3" for Reel 3.</Definition>
       <DefiningDocument>SMPTE 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -2882,7 +2883,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01050100.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Title Kind</Name>
-      <Definition>Kind of title, i.e., project, group of programmes, group of series, series, item, programme, working, original, item, episode, element, scene, shot etc</Definition>
+      <Definition>Kind of title, i.e., project, group of programs, group of series, series, item, program, working, original, item, episode, element, scene, shot etc</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -2895,7 +2896,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.01050101.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Title Kind</Name>
-      <Definition>Kind of title, i.e., project, series, item, programme, working, original, item, episode, element, scene, shot etc</Definition>
+      <Definition>Kind of title, i.e., project, series, item, program, working, original, item, episode, element, scene, shot etc</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
@@ -3010,7 +3011,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>SceneNumber_ISO7</Symbol>
+      <Symbol>SceneNumber</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.01050600.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Scene Number</Name>
@@ -3024,7 +3025,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>SceneNumber</Symbol>
+      <Symbol>SceneNumber_UTF16String</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010103.01050601.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Scene Number</Name>
@@ -3158,7 +3159,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>ClipNumber_ISO7</Symbol>
+      <Symbol>ClipNumber</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010104.01050c00.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Clip Number</Name>
@@ -3172,7 +3173,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>ClipNumber</Symbol>
+      <Symbol>ClipNumber_UTF16String</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010104.01050c01.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Clip Number</Name>
@@ -3243,7 +3244,7 @@
       <UL>urn:smpte:ul:060e2b34.01010105.01050f00.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Framework Title</Name>
-      <Definition>A human readable title for this instance of the Production Framework (e.g. &#8220;Wilco Productions version 3&#8221;)</Definition>
+      <Definition>A human readable title for this instance of the Production Framework (e.g. "Wilco Productions version 3")</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -3256,7 +3257,7 @@
       <UL>urn:smpte:ul:060e2b34.01010105.01050f01.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Framework Title</Name>
-      <Definition>A human readable title for this instance of the Production Framework (e.g. &#8220;Wilco Productions version 3&#8221;)</Definition>
+      <Definition>A human readable title for this instance of the Production Framework (e.g. "Wilco Productions version 3")</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -3483,7 +3484,7 @@
       <UL>urn:smpte:ul:060e2b34.01010105.01070107.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Shot Track IDs</Name>
-      <Definition>Specifies an unordered list of &#8216;n&#8217; track ID values that identify the tracks in the Package to which this set refers</Definition>
+      <Definition>Specifies an unordered list of 'n' track ID values that identify the tracks in the Package to which this set refers</Definition>
       <Applications>DMS-1</Applications>
       <DefiningDocument>SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -3498,7 +3499,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.01080000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Generic Identifiers</Name>
-      <Definition>Unique Identifiers for non-Broadcasting Organisations</Definition>
+      <Definition>Unique Identifiers for non-Broadcasting Organizations</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -3536,7 +3537,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.010a0000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Organization Identifiers</Name>
-      <Definition>Unique Identifiers for non-Broadcasting Organisations</Definition>
+      <Definition>Unique Identifiers for non-Broadcasting Organizations</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -3546,7 +3547,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.010a0100.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Manufacturing Organization Identifiers</Name>
-      <Definition>Unique Identifiers for Manufacturing Organisations</Definition>
+      <Definition>Unique Identifiers for Manufacturing Organizations</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -3634,7 +3635,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.010a0200.00000000</UL>
       <Kind>NODE</Kind>
       <Name>General Organization Identifiers</Name>
-      <Definition>Unique Identifiers for Organisations</Definition>
+      <Definition>Unique Identifiers for Organizations</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -3644,7 +3645,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.010a0201.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Organization Code</Name>
-      <Definition>The identifying Code for an organisation</Definition>
+      <Definition>The identifying Code for an organization</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -3657,7 +3658,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.010a0201.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Organization Code</Name>
-      <Definition>The identifying Code for an organisation</Definition>
+      <Definition>The identifying Code for an organization</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -3671,7 +3672,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.01100000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Intellectual Property Rights Identifiers</Name>
-      <Definition>Unique IDs allocated by IP Rights organisations</Definition>
+      <Definition>Unique IDs allocated by IP Rights organizations</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -3864,7 +3865,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02010000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Supplier</Name>
-      <Definition>Details of the content supplying organisation</Definition>
+      <Definition>Details of the content supplying organization</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -3874,7 +3875,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02010100.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Source Organization</Name>
-      <Definition>The name of the content supplying organisation</Definition>
+      <Definition>The name of the content supplying organization</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -4043,7 +4044,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02020200.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Series in a Series Group Count</Name>
-      <Definition>The total number of series for a related group of series - for example, several series of the same programme may be commissioned over many years.</Definition>
+      <Definition>The total number of series for a related group of series - for example, several series of the same program may be commissioned over many years.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
@@ -4056,7 +4057,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02020300.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Programming Group Kind</Name>
-      <Definition>The kind of programme group of which the programme forms a part - e.g. Anthology, Serial, Series, Themed Cluster, Repeating Series etc.</Definition>
+      <Definition>The kind of program group of which the program forms a part - e.g. Anthology, Serial, Series, Themed Cluster, Repeating Series etc.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -4069,7 +4070,7 @@
       <UL>urn:smpte:ul:060e2b34.01010105.02020301.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Programming Group Kind</Name>
-      <Definition>The kind of programme group of which the programme forms a part - e.g. Anthology, Serial, Series, Themed Cluster, Repeating Series etc.</Definition>
+      <Definition>The kind of program group of which the program forms a part - e.g. Anthology, Serial, Series, Themed Cluster, Repeating Series etc.</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -4138,7 +4139,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02030000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Purchaser</Name>
-      <Definition>Details of the content purchasing organisation</Definition>
+      <Definition>Details of the content purchasing organization</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -4148,7 +4149,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02030100.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Purchasing Organization Name</Name>
-      <Definition>The name of the content purchasing organisation</Definition>
+      <Definition>The name of the content purchasing organization</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -4477,7 +4478,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02050102.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Copyright Owner Name</Name>
-      <Definition>The name of the person/organisation who owns the copyright.</Definition>
+      <Definition>The name of the person/organization who owns the copyright.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -4490,7 +4491,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02050102.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Copyright Owner Name</Name>
-      <Definition>The name of the person/organisation who owns the copyright.</Definition>
+      <Definition>The name of the person/organization who owns the copyright.</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -4527,7 +4528,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02050201.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Intellectual Property Description</Name>
-      <Definition>A definition of the intelllectual property in freeform text</Definition>
+      <Definition>A definition of the intellectual property in freeform text</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -4537,7 +4538,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>IntellectualPropertyRights_ISO7</Symbol>
+      <Symbol>IntellectualPropertyRight_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.02050202.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Intellectual Property Rights</Name>
@@ -4554,7 +4555,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02050202.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Intellectual Property Rights</Name>
-      <Definition>A freeform text definition of what use can be made of an intelllectual property</Definition>
+      <Definition>A freeform text definition of what use can be made of an intellectual property</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -4591,7 +4592,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02050301.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Rightsholder</Name>
-      <Definition>A definition of who or what entity can exercise an intelllectual property right</Definition>
+      <Definition>A definition of who or what entity can exercise an intellectual property right</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -5389,7 +5390,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02090101.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Scrambling Key Kind</Name>
-      <Definition>The programme decryption key type for Film</Definition>
+      <Definition>The program decryption key type for Film</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -5402,7 +5403,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02090101.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>Scrambling Key Value</Name>
-      <Definition>The programme decryption key value for Film</Definition>
+      <Definition>The program decryption key value for Film</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
@@ -5607,7 +5608,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02100101.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Broadcaster</Name>
-      <Definition>The broadcasting organisation</Definition>
+      <Definition>The broadcasting organization</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -5617,7 +5618,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02100101.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Broadcast Organization Name</Name>
-      <Definition>Name of the broadcasting organisation</Definition>
+      <Definition>Name of the broadcasting organization</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -5630,7 +5631,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02100101.01010000</UL>
       <Kind>LEAF</Kind>
       <Name>Broadcast Organization Name</Name>
-      <Definition>Name of the broadcasting organisation as text.</Definition>
+      <Definition>Name of the broadcasting organization as text.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
@@ -6308,7 +6309,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.02200304.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audience Appreciation</Name>
-      <Definition>The appeciation index of the programme, expressed as points out of 100.</Definition>
+      <Definition>The appeciation index of the program, expressed as points out of 100.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
@@ -6440,7 +6441,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02300200.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Organizations and Public Bodies</Name>
-      <Definition>Details of Organisations and Public Bodies contributing to or taking part in the production</Definition>
+      <Definition>Details of Organizations and Public Bodies contributing to or taking part in the production</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -6559,7 +6560,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02300501.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Job Function Name</Name>
-      <Definition>The function of the persons(s), organisation or public body  eg. Editor, Actor</Definition>
+      <Definition>The function of the persons(s), organization or public body  eg. Editor, Actor</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -6572,7 +6573,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02300501.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Job Function Name</Name>
-      <Definition>The function of the persons(s), organisation or public body  eg. Editor, Actor</Definition>
+      <Definition>The function of the persons(s), organization or public body  eg. Editor, Actor</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -6689,7 +6690,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02300602.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Contact Department Name</Name>
-      <Definition>Name information for a department within an organisation where contact can be made</Definition>
+      <Definition>Name information for a department within an organization where contact can be made</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -6702,7 +6703,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02300602.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Contact Department Name</Name>
-      <Definition>Name information for a department within an organisation where contact can be made</Definition>
+      <Definition>Name information for a department within an organization where contact can be made</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -6716,7 +6717,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02300603.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Person or Organization Details</Name>
-      <Definition>The name of  person(s), organisation or public body</Definition>
+      <Definition>The name of  person(s), organization or public body</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -6865,7 +6866,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>HonorsAndQualifications_ISO7</Symbol>
+      <Symbol>HonorsQualifications_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010102.02300603.01060000</UL>
       <Kind>LEAF</Kind>
       <Name>Honors and Qualifications</Name>
@@ -7174,7 +7175,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02300603.03000000</UL>
       <Kind>NODE</Kind>
       <Name>Organization Names</Name>
-      <Definition>Name information for organisations</Definition>
+      <Definition>Name information for organizations</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -7211,7 +7212,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.02300603.03020000</UL>
       <Kind>LEAF</Kind>
       <Name>Supplementary Organization Name</Name>
-      <Definition>Supplementary naming information for an organisation</Definition>
+      <Definition>Supplementary naming information for an organization</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -7224,7 +7225,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.02300603.03020100</UL>
       <Kind>LEAF</Kind>
       <Name>Supplementary Organization Name</Name>
-      <Definition>Supplementary naming information for an organisation</Definition>
+      <Definition>Supplementary naming information for an organization</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
@@ -7515,10 +7516,10 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>EventLanguageCode</Symbol>
-      <UL>urn:smpte:ul:060e2b34.0101010e.03010102.02150000</UL>
+      <Symbol>EventTextLanguageCode</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.03010102.02150000</UL>
       <Kind>LEAF</Kind>
-      <Name>Event Language Code</Name>
+      <Name>Event Text Language Code</Name>
       <Definition>Specifies the language of the event text using RFC 5646 tags</Definition>
       <DefiningDocument>SMPTE ST 2075</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -7543,7 +7544,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>PrimarySpokenLanguageCode</Symbol>
+      <Symbol>SpokenLanguageCodes</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010104.03010102.03000000</UL>
       <Kind>NODE</Kind>
       <Name>Spoken Language Codes</Name>
@@ -7668,10 +7669,10 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>RFC5646AudioLanguageCode</Symbol>
+      <Symbol>RFC5646SpokenLanguage</Symbol>
       <UL>urn:smpte:ul:060e2b34.0101010d.03010102.03150000</UL>
       <Kind>LEAF</Kind>
-      <Name>RFC 5646 Audio Language Code</Name>
+      <Name>RFC 5646 Spoken Language</Name>
       <Definition>RFC 5646 language tag for this channel or Soundfield Group, e.g. "en-US".</Definition>
       <DefiningDocument>SMPTE ST 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -8836,7 +8837,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.03020101.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Content Coding System</Name>
-      <Definition>The system of coding for programme classification eg Escort 2.4</Definition>
+      <Definition>The system of coding for program classification eg Escort 2.4</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -8849,7 +8850,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.03020101.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>Program Kind</Name>
-      <Definition>Type of programme (e.g., cartoon, film, ...)</Definition>
+      <Definition>Type of program (e.g., cartoon, film, ...)</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -9891,7 +9892,6 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
-      <ValueLength>16 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -9900,12 +9900,11 @@
       <UL>urn:smpte:ul:060e2b34.0101010e.03020108.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>STL Line Number</Name>
-      <Definition>The line number on which a specific language is being visible.</Definition>
+      <Definition>The line number on which a specific language is being visible</Definition>
       <DefiningDocument>SMPTE ST 2075</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
-      <ValueLength>1 byte</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -9947,7 +9946,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.03020201.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>Program Award Name</Name>
-      <Definition>Awards granted to programme</Definition>
+      <Definition>Awards granted to program</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -10080,7 +10079,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.03020202.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Asset Value</Name>
-      <Definition>Assessment of the programme quality</Definition>
+      <Definition>Assessment of the program quality</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -10748,7 +10747,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>VersionNumberString_ISO7</Symbol>
+      <Symbol>PluginVersionString_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010102.03030301.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>Version Number String</Name>
@@ -12022,7 +12021,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04010502.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Stored Height</Name>
-      <Definition>Specifies the integer height of the stored imape in pixels</Definition>
+      <Definition>Specifies the integer height of the stored image in pixels</Definition>
       <Applications>AAF</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -13001,7 +13000,7 @@
       <UL>urn:smpte:ul:060e2b34.0101010a.04010603.0b000000</UL>
       <Kind>LEAF</Kind>
       <Name>Picture Component Sizing</Name>
-      <Definition>Array of picture components where each component comprises 3 bytes named Ssizi, XRSizi, YRSizi (as defined in ISO/IEC 15444-1 Annex A.5.1). The array of 3-byte groups is preceded by the array header comprising a 4-byte value of the number of components followed by a 4-byte value of &#8216;3&#8217;.</Definition>
+      <Definition>Array of picture components where each component comprises 3 bytes named Ssizi, XRSizi, YRSizi (as defined in ISO/IEC 15444-1 Annex A.5.1). The array of 3-byte groups is preceded by the array header comprising a 4-byte value of the number of components followed by a 4-byte value of '3'.</Definition>
       <Applications>AAF[1.2:] ASPA</Applications>
       <DefiningDocument>SMPTE 422M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -13230,7 +13229,7 @@
       <UL>urn:smpte:ul:060e2b34.0101010d.04010605.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>TIFF Byte Order</Name>
-      <Definition>Byte order of the essence data. Shall be 'MM' = Big endian or 'II'&#160;=&#160;Little endian</Definition>
+      <Definition>Byte order of the essence data. Shall be 'MM' = Big endian or 'II' = Little endian</Definition>
       <DefiningDocument>SMPTE ST 2055</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -15684,7 +15683,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04050100.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Fundamental Monitoring and Control Characteristics</Name>
-      <Definition>Fundemental Monitoring and Control characteristics</Definition>
+      <Definition>Fundamental Monitoring and Control characteristics</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -15709,7 +15708,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04050200.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Analog Monitoring and Control Coding Characteristics</Name>
-      <Definition>Information about the original analogue coding of the data</Definition>
+      <Definition>Information about the original analog coding of the data</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -15870,30 +15869,30 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>CBEStartOffset</Symbol>
+      <Symbol>ExtStartOffset</Symbol>
       <UL>urn:smpte:ul:060e2b34.0101010a.04060204.00000000</UL>
       <Kind>LEAF</Kind>
-      <Name>CBE Start Offset</Name>
-      <Definition>The byte offset to the first essence data in a CBE (Constant Bytes per Element) essence stream</Definition>
+      <Name>Ext Start Offset</Name>
+      <Definition>The byte offset to the first essence data in an external Essence file</Definition>
       <Applications>MXF[2007:]</Applications>
+      <DefiningDocument>SMPTE ST 377-1, Amd. 2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010400.00000000</Type>
-      <ValueLength>8 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>VBEEndOffset</Symbol>
+      <Symbol>VBEByteCount</Symbol>
       <UL>urn:smpte:ul:060e2b34.0101010a.04060205.00000000</UL>
       <Kind>LEAF</Kind>
-      <Name>VBE End Offset</Name>
-      <Definition>The byte offset to the end of the final essence unit in a VBE (Variable Bytes per Element) essence stream. Used to calculate the size of the final essence unit.</Definition>
+      <Name>VBE Byte Count</Name>
+      <Definition>The count of bytes of the last essence element in the last Edit Unit indexed by the Index Table Segment</Definition>
       <Applications>MXF[2007:]</Applications>
+      <DefiningDocument>SMPTE ST 377-1, Amd. 2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010400.00000000</Type>
-      <ValueLength>8 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -16195,6 +16194,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04080000.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Object Characteristics</Name>
+      <Definition>Object Characteristics</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -16591,7 +16591,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.04100101.10010000</UL>
       <Kind>LEAF</Kind>
       <Name>Tape Partition Capacity</Name>
-      <Definition>The capacity of a tape partition in terms of the maximum number of Megabytes which can be stored.</Definition>
+      <Definition>The capacity of a tape partition in terms of the maximum number of megabytes which can be stored.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010400.00000000</Type>
@@ -16657,7 +16657,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04100103.01010000</UL>
       <Kind>LEAF</Kind>
       <Name>Film Color Process</Name>
-      <Definition>The film colouring process used.  Eg  Pathe Colour,  Hand Colouring,  Berthon Keller Dorian Lenticular Process</Definition>
+      <Definition>The film coloring process used.  Eg  Pathe Color,  Hand Coloring,  Berthon Keller Dorian Lenticular Process</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -16711,7 +16711,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04100103.01040000</UL>
       <Kind>LEAF</Kind>
       <Name>Film Format Name</Name>
-      <Definition>The gauge and format of the film eg  Neg;  Blair Viventoscope</Definition>
+      <Definition>The gauge and format of the film. For example:  Neg;  Blair Viventoscope</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -16724,7 +16724,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.04100103.01040100</UL>
       <Kind>LEAF</Kind>
       <Name>Film Format Name</Name>
-      <Definition>The gauge and format of the film eg  Neg;  Blair Viventoscope</Definition>
+      <Definition>The gauge and format of the film. For example:  Neg;  Blair Viventoscope</Definition>
       <Applications>AAF~FilmGaugeFormat</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -16738,7 +16738,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.04100103.01040200</UL>
       <Kind>LEAF</Kind>
       <Name>Film Format Name</Name>
-      <Definition>The gauge and format of the film eg  Neg;  Blair Viventoscope</Definition>
+      <Definition>The gauge and format of the film. For example:  Neg;  Blair Viventoscope</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0201010d.00000000</Type>
@@ -16751,7 +16751,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04100103.01050000</UL>
       <Kind>LEAF</Kind>
       <Name>Film Stock Kind</Name>
-      <Definition>eg. 5247</Definition>
+      <Definition>Example: 5247</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -16764,7 +16764,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.04100103.01050100</UL>
       <Kind>LEAF</Kind>
       <Name>Film Stock Kind</Name>
-      <Definition>eg. 5247</Definition>
+      <Definition>Example: 5247</Definition>
       <Applications>AAF~Model</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -16778,7 +16778,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04100103.01060000</UL>
       <Kind>LEAF</Kind>
       <Name>Film Stock Manufacturer Name</Name>
-      <Definition>eg Kodak, Ilford</Definition>
+      <Definition>Example: Kodak, Ilford</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -16791,7 +16791,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.04100103.01060100</UL>
       <Kind>LEAF</Kind>
       <Name>Film Stock Manufacturer Name</Name>
-      <Definition>eg Kodak, Ilford</Definition>
+      <Definition>Example: Kodak, Ilford</Definition>
       <Applications>AAF~Manufacturer</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -16832,7 +16832,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.04100103.01080000</UL>
       <Kind>LEAF</Kind>
       <Name>Film Gauge</Name>
-      <Definition>Specifies gauge of film stock in mm  eg  70 mm, 48 mm, 16mm etc</Definition>
+      <Definition>Specifies gauge of film stock in mm. Examples: 70mm, 48mm, 16mm, etc.</Definition>
       <Applications>AAF</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -16883,7 +16883,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04100103.02020000</UL>
       <Kind>LEAF</Kind>
       <Name>Film Capture Aperture</Name>
-      <Definition>eg super 16, academy etc.</Definition>
+      <Definition>Examples: Super 16, Academy etc.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -17101,7 +17101,7 @@
       <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.02020107.00000000</Type>
       <ValueLength>16 bytes</ValueLength>
     </Entry>
     <Entry>
@@ -17115,7 +17115,7 @@
       <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.02010132.00000000</Type>
       <ValueLength>1 byte</ValueLength>
     </Entry>
     <Entry>
@@ -17129,7 +17129,7 @@
       <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.0201012f.00000000</Type>
       <ValueLength>1 byte</ValueLength>
     </Entry>
     <Entry>
@@ -17171,7 +17171,7 @@
       <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
       <ValueLength>2 bytes</ValueLength>
     </Entry>
     <Entry>
@@ -17181,11 +17181,11 @@
       <UL>urn:smpte:ul:060e2b34.0101010d.04200103.01070000</UL>
       <Kind>LEAF</Kind>
       <Name>Image Sensor Readout Mode</Name>
-      <Definition>Imager Readout mode defined as a registered code</Definition>
+      <Definition>Image Readout mode defined as a registered code</Definition>
       <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.02010130.00000000</Type>
       <ValueLength>1 byte</ValueLength>
     </Entry>
     <Entry>
@@ -17266,8 +17266,8 @@
       <Kind>LEAF</Kind>
       <Name>Exposure Index of Photo Meter</Name>
       <Definition>Setting of the photo meter in ISO number.</Definition>
-      <DefiningDocument>RDD-18</DefiningDocument>
-      <IsDeprecated>true</IsDeprecated>
+      <DefiningDocument>RDD 18</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
       <ValueLength>2 bytes</ValueLength>
@@ -17281,8 +17281,8 @@
       <Kind>LEAF</Kind>
       <Name>Color Matrix</Name>
       <Definition>Specifies the setting of the color balance of the camera with the ordered elements (R to R, G to R, B to R, R to G, G to G, B to G, R to B, G to B, B to B).</Definition>
-      <DefiningDocument>RDD-19</DefiningDocument>
-      <IsDeprecated>true</IsDeprecated>
+      <DefiningDocument>RDD 18</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.04020200.00000000</Type>
       <ValueLength>8 + 9 x 8 bytes</ValueLength>
@@ -17309,7 +17309,7 @@
       <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.02010131.00000000</Type>
       <ValueLength>1 byte</ValueLength>
     </Entry>
     <Entry>
@@ -17351,7 +17351,7 @@
       <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
       <ValueLength>2 bytes</ValueLength>
     </Entry>
     <Entry>
@@ -17404,10 +17404,11 @@
       <Kind>LEAF</Kind>
       <Name>ASC CDL V1.2</Name>
       <Definition>10 parameters of ASC Color Decision List V1.2.</Definition>
+      <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.04011300.00000000</Type>
-      <ValueLength>8 + 10 x 2 bytes</ValueLength>
+      <ValueLength>array of 10 items</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -17436,7 +17437,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04200201.01000000</UL>
       <Kind>NODE</Kind>
       <Name>Optical Device Parameters</Name>
-      <Definition>Information about the optical device used (e.g. lens, ice block)</Definition>
+      <Definition>Information about the optical device used (examples: lens, ice block)</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -17446,7 +17447,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.04200201.01010000</UL>
       <Kind>LEAF</Kind>
       <Name>Optical Test Parameter Name</Name>
-      <Definition>The specific parameter under test, e.g. Flare</Definition>
+      <Definition>The specific parameter under test, (example: Flare)</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -17481,7 +17482,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>FocalLength_Int32</Symbol>
+      <Symbol>FocalLength_Float</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010102.04200201.01040000</UL>
       <Kind>LEAF</Kind>
       <Name>Focal Length</Name>
@@ -17512,7 +17513,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.04200201.01050000</UL>
       <Kind>LEAF</Kind>
       <Name>Sensor Size</Name>
-      <Definition>The size of the sensor - eg. 1/2 inch,  2/3 inch etc</Definition>
+      <Definition>The size of the sensor, for example: 1/2 inch,  2/3 inch, etc.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -17551,7 +17552,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.04200201.01080000</UL>
       <Kind>LEAF</Kind>
       <Name>Field of View (FOV-Horizontal)</Name>
-      <Definition>Sensor Horizontal field of view.</Definition>
+      <Definition>Sensor horizontal field of view.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
@@ -17564,7 +17565,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.04200201.01080100</UL>
       <Kind>LEAF</Kind>
       <Name>Field of View (FOV-Horizontal)</Name>
-      <Definition>Sensor Horizontal field of view in degrees</Definition>
+      <Definition>Sensor horizontal field of view in degrees</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
@@ -17578,7 +17579,7 @@
       <UL>urn:smpte:ul:060e2b34.01010102.04200201.01090000</UL>
       <Kind>LEAF</Kind>
       <Name>Anamorphic Lens Characteristic</Name>
-      <Definition>eg Flat, anamorphic</Definition>
+      <Definition>Examples: Flat, anamorphic</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -17591,7 +17592,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.04200201.010a0000</UL>
       <Kind>LEAF</Kind>
       <Name>Field of View (FOV-Vertical)</Name>
-      <Definition>Sensor Vertical field of view in degrees</Definition>
+      <Definition>Sensor vertical field of view in degrees</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
@@ -17605,7 +17606,7 @@
       <UL>urn:smpte:ul:060e2b34.01010107.04200201.010a0100</UL>
       <Kind>LEAF</Kind>
       <Name>Field of View (FOV-Vertical FP-4)</Name>
-      <Definition>Sensor Vertical field of view in degrees</Definition>
+      <Definition>Sensor vertical field of view in degrees</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
@@ -17727,7 +17728,7 @@
       <UL>urn:smpte:ul:060e2b34.0101010e.04200202.08000000</UL>
       <Kind>LEAF</Kind>
       <Name>Iris T-Number</Name>
-      <Definition>Iris position value calculated from the &#8220;T-number&#8221; that is a measure of the amount of light transmitted through the lens in practice</Definition>
+      <Definition>Iris position value calculated from the "T-number" that is a measure of the amount of light transmitted through the lens in practice</Definition>
       <DefiningDocument>RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -17872,7 +17873,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.05010101.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>Integration Indication</Name>
-      <Definition>A term that describes what the essence is as a unit status of the essence.  Terms must be consistent with industry or organizational practices to be useful.  Includes segment, clip, shot, item, programme etc.</Definition>
+      <Definition>A term that describes what the essence is as a unit status of the essence.  Terms must be consistent with industry or organizational practices to be useful.  Includes segment, clip, shot, item, program etc.</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
@@ -17885,7 +17886,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.05010101.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Integration Indication</Name>
-      <Definition>A term that describes what the essence is as a unit status of the essence. Terms must be consistent with industry or organizational practices to be useful. Includes segment, clip, shot, item, programme etc.</Definition>
+      <Definition>A term that describes what the essence is as a unit status of the essence. Terms must be consistent with industry or organizational practices to be useful. Includes segment, clip, shot, item, program etc.</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -19899,7 +19900,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.06010100.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Essence and Metadata Relationships</Name>
-      <Definition>Type of relation (e.g., is part of, is an item of [programme, series], remix, remake, ...)</Definition>
+      <Definition>Type of relation (e.g., is part of, is an item of [program, series], remix, remake, ...)</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -21052,7 +21053,7 @@
       <UL>urn:smpte:ul:060e2b34.01010105.06010104.03401500</UL>
       <Kind>NODE</Kind>
       <Name>Organization Sets</Name>
-      <Definition>An unordered list of generalised weak (global) references to  Organisation sets</Definition>
+      <Definition>An unordered list of generalized weak (global) references to  Organization sets</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -21062,7 +21063,7 @@
       <UL>urn:smpte:ul:060e2b34.01010105.06010104.03401501</UL>
       <Kind>LEAF</Kind>
       <Name>Participant Organization Sets</Name>
-      <Definition>An unordered list of generalized weak (global) references to  Organisation sets for Participant Roles</Definition>
+      <Definition>An unordered list of generalized weak (global) references to  Organization sets for Participant Roles</Definition>
       <Applications>DMS-1</Applications>
       <DefiningDocument>SMPTE 380M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -21077,7 +21078,7 @@
       <UL>urn:smpte:ul:060e2b34.01010105.06010104.03401502</UL>
       <Kind>LEAF</Kind>
       <Name>Person Organization Sets</Name>
-      <Definition>An unordered list of generalized weak (global) references to  Organisation sets for Persons</Definition>
+      <Definition>An unordered list of generalized weak (global) references to  Organization sets for Persons</Definition>
       <Applications>DMS-1</Applications>
       <DefiningDocument>SMPTE 380M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -22755,7 +22756,7 @@
       <UL>urn:smpte:ul:060e2b34.01010103.06030500.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Related Textual Content</Name>
-      <Definition>Related contetn of a textual nature - e.g.scripts and transcripts.</Definition>
+      <Definition>Related contetn of a textual nature - e.g. scripts and transcripts.</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -25284,7 +25285,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>StateOrProvinceOrCountyName_ISO7</Symbol>
+      <Symbol>StateProvinceCounty_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.07012001.04010600</UL>
       <Kind>LEAF</Kind>
       <Name>State or Province or County Name</Name>
@@ -25338,7 +25339,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>PostalCountryName_ISO7</Symbol>
+      <Symbol>Country_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.07012001.04010800</UL>
       <Kind>LEAF</Kind>
       <Name>Country Name</Name>
@@ -25365,7 +25366,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>RoomOrSuiteName_ISO7</Symbol>
+      <Symbol>RoomSuiteName_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010105.07012001.04011100</UL>
       <Kind>LEAF</Kind>
       <Name>Room or Suite Name</Name>
@@ -25769,7 +25770,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>AddressInformationTelephoneNumber</Symbol>
+      <Symbol>TelephoneNumber_UTF16String</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010103.07012001.10030101</UL>
       <Kind>LEAF</Kind>
       <Name>Telephone Number</Name>
@@ -25782,7 +25783,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>FaxNumber_ISO7</Symbol>
+      <Symbol>FaxNumber</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.07012001.10030200</UL>
       <Kind>LEAF</Kind>
       <Name>Fax Number</Name>
@@ -25796,7 +25797,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>FaxNumber</Symbol>
+      <Symbol>FaxNumber_UTF16String</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010103.07012001.10030201</UL>
       <Kind>LEAF</Kind>
       <Name>Fax Number</Name>
@@ -25809,7 +25810,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>EMailAddress_ISO7</Symbol>
+      <Symbol>EmailAddress_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.07012001.10030300</UL>
       <Kind>LEAF</Kind>
       <Name>E-Mail Address</Name>
@@ -25840,7 +25841,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.07012001.10030400</UL>
       <Kind>LEAF</Kind>
       <Name>Central Telephone Number</Name>
-      <Definition>Telephone number of organisation switchboard</Definition>
+      <Definition>Telephone number of organization switchboard</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -25864,7 +25865,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>AddressInformationURL_ISO7</Symbol>
+      <Symbol>ContactWebPage_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010104.07012001.10030600</UL>
       <Kind>LEAF</Kind>
       <Name>URL</Name>
@@ -25881,7 +25882,7 @@
       <UL>urn:smpte:ul:060e2b34.01010105.07012001.10030601</UL>
       <Kind>LEAF</Kind>
       <Name>URL</Name>
-      <Definition>The contact&#8217;s web home page address</Definition>
+      <Definition>The contact's web home page address</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -26261,7 +26262,6 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01012001.00000000</Type>
-      <ValueLength>8 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -26759,7 +26759,7 @@
       <UL>urn:smpte:ul:060e2b34.01010104.07020103.01070000</UL>
       <Kind>LEAF</Kind>
       <Name>Key Time Point</Name>
-      <Definition>The Speciifes the point at which a key event occurs</Definition>
+      <Definition>Specifies the point at which a key event occurs</Definition>
       <Applications>DMS-1</Applications>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -27121,7 +27121,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
-      <Symbol>TimePeriodName_ISO7</Symbol>
+      <Symbol>TimePeriodKeyword_ISO7</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.07020108.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Time Period Name</Name>
@@ -27599,7 +27599,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.07020201.02030000</UL>
       <Kind>LEAF</Kind>
       <Name>Textless Black Duration</Name>
-      <Definition>eg.  1 minutes after end of programme</Definition>
+      <Definition>eg.  1 minutes after end of program</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
@@ -27834,22 +27834,20 @@
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
       <Symbol>ShutterSpeed</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.07020601.01000000</UL>
-      <Kind>LEAF</Kind>
+      <Kind>NODE</Kind>
       <Name>Shutter Speed</Name>
       <Definition>Shutter speed</Definition>
-      <IsDeprecated>true</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
+      <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
       <Symbol>ShutterGating</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.07020601.02000000</UL>
-      <Kind>LEAF</Kind>
+      <Kind>NODE</Kind>
       <Name>Shutter Gating</Name>
       <Definition>Shutter Gating characteristics</Definition>
-      <IsDeprecated>true</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
+      <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -27981,7 +27979,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -27995,7 +27993,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -28009,7 +28007,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -28023,7 +28021,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -39687,7 +39685,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d0b0608.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>EPG Program Synopsis</Name>
-      <Definition>Short synopsis of the programme for use in the EPG</Definition>
+      <Definition>Short synopsis of the program for use in the EPG</Definition>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
@@ -40035,7 +40033,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40049,7 +40047,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>250 characters maximum</ValueLength>
+      <ValueLength>250 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40063,7 +40061,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40090,7 +40088,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40104,7 +40102,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40118,7 +40116,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40132,7 +40130,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40211,7 +40209,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40225,7 +40223,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40239,7 +40237,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40292,7 +40290,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40449,6 +40447,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.03010700.00000000</Type>
+      <ValueRange>All facets of the "Time" facet of this "TimeStamp" are zero</ValueRange>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40501,7 +40500,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40515,7 +40514,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>127 characters maximum</ValueLength>
+      <ValueLength>127 Unicode "code points" maximum</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40535,7 +40534,6 @@
       <Kind>NODE</Kind>
       <Name>Ad-ID Mandatory Metadata</Name>
       <Definition>Identifiers for AD-ID Mandatory Metadata</Definition>
-      <DefiningDocument>SMPTE RDD 17:2009</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>

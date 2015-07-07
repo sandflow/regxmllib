@@ -1,194 +1,214 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Created: Wed May 20 13:19:16 PDT 2015--><!--From: src/test/resources/sample-files/audio2.mxf--><!--By: regxmllib build 91c9b00c325d7b74c6df3ddc177471bfaddaed89--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:ns0="http://sandflow.com/ns/SMPTEST2001-1/baseline" ns0:uid="urn:uuid:d2cfa078-e24d-4d42-825a-6eef5077085d">
-<r1:FileLastModified>2015-05-19T08:52:08.920Z</r1:FileLastModified>
-<r1:FormatVersion>1.3</r1:FormatVersion>
-<r1:IdentificationList>
-<r0:Identification ns0:uid="urn:uuid:40a25420-5843-47e2-be6c-a43df9b8b603">
-<r1:ApplicationSupplierName>Rohde and Schwarz DVS GmbH</r1:ApplicationSupplierName>
-<r1:ApplicationName>Clipster</r1:ApplicationName>
-<r1:ApplicationVersionString>5.10.0.0</r1:ApplicationVersionString>
-<r1:ApplicationVersion>
-<r2:Major>5</r2:Major>
-<r2:Minor>10</r2:Minor>
-<r2:Tertiary>0</r2:Tertiary>
-<r2:PatchLevel>0</r2:PatchLevel>
-<r2:BuildType>VersionReleased</r2:BuildType>
-</r1:ApplicationVersion>
-<r1:ToolkitVersion>
-<r2:Major>1</r2:Major>
-<r2:Minor>2</r2:Minor>
-<r2:Tertiary>0</r2:Tertiary>
-<r2:PatchLevel>19</r2:PatchLevel>
-<r2:BuildType>VersionBeta</r2:BuildType>
-</r1:ToolkitVersion>
-<r1:ApplicationPlatform>Windows Server 2003 Service Pack 2 (64-bit)</r1:ApplicationPlatform>
-<r1:FileModificationDate>2015-05-19T08:52:08.920Z</r1:FileModificationDate>
-<r1:ApplicationProductID>urn:uuid:29bcbbc9-0d33-5653-ace4-685a327d3c50</r1:ApplicationProductID>
-<r1:GenerationID>urn:uuid:8e0ab2d2-a2fc-4a38-97dc-a0d7a56f6181</r1:GenerationID>
-</r0:Identification>
-</r1:IdentificationList>
-<r1:EssenceContainers>
-<r2:AUID>urn:smpte:ul:060e2b34.04010101.0d010301.02060200</r2:AUID>
-</r1:EssenceContainers>
-<r1:DescriptiveSchemes/>
-<r1:ContentStorageObject>
-<r0:ContentStorage ns0:uid="urn:uuid:30d5482e-21a5-486b-b602-6e457333e023">
-<r1:Packages>
-<r0:MaterialPackage ns0:uid="urn:uuid:28688b88-0cfa-4a35-bdc0-45133aacded2">
-<r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.8be435ee.73e74fc1.82535d44.53714ef4</r1:PackageID>
-<r1:CreationTime>2015-05-19T08:52:08.920Z</r1:CreationTime>
-<r1:PackageLastModified>2015-05-19T08:52:08.920Z</r1:PackageLastModified>
-<r1:PackageTracks>
-<r0:TimelineTrack ns0:uid="urn:uuid:79ac34f3-4de0-4cda-b026-c19b741e9288">
-<r1:TrackName>Timecode track</r1:TrackName>
-<r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
-<r1:Origin>0</r1:Origin>
-<r1:EditRate>24/1</r1:EditRate>
-<r1:TrackID>1</r1:TrackID>
-<r1:TrackSegment>
-<r0:Sequence ns0:uid="urn:uuid:e512b9ab-4a4c-4490-ae53-2f2db9e05090">
-<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
-<r1:ComponentLength>1</r1:ComponentLength>
-<r1:ComponentObjects>
-<r0:Timecode ns0:uid="urn:uuid:498bf72e-5f83-4925-aa21-d560fcda5d28">
-<r1:FramesPerSecond>24</r1:FramesPerSecond>
-<r1:DropFrame>False</r1:DropFrame>
-<r1:StartTimecode>0</r1:StartTimecode>
-<r1:ComponentLength>1</r1:ComponentLength>
-<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
-</r0:Timecode>
-</r1:ComponentObjects>
-</r0:Sequence>
-</r1:TrackSegment>
-</r0:TimelineTrack>
-<r0:TimelineTrack ns0:uid="urn:uuid:32a37b51-f724-4d18-a280-13e3190c4619">
-<r1:TrackName>MP sound track</r1:TrackName>
-<r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
-<r1:Origin>0</r1:Origin>
-<r1:EditRate>48000/1</r1:EditRate>
-<r1:TrackID>2</r1:TrackID>
-<r1:TrackSegment>
-<r0:Sequence ns0:uid="urn:uuid:766a1c4a-0fb5-4cb7-97a7-7331e2ab059f">
-<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
-<r1:ComponentLength>2000</r1:ComponentLength>
-<r1:ComponentObjects>
-<r0:SourceClip ns0:uid="urn:uuid:1c308937-9fe5-443f-8cfa-a7f54441dff1">
-<r1:ComponentLength>2000</r1:ComponentLength>
-<r1:SourcePackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.641aff33.c46c4afc.b11b67bd.92a0e719</r1:SourcePackageID>
-<r1:SourceTrackID>2</r1:SourceTrackID>
-<r1:StartPosition>0</r1:StartPosition>
-<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
-</r0:SourceClip>
-</r1:ComponentObjects>
-</r0:Sequence>
-</r1:TrackSegment>
-</r0:TimelineTrack>
-</r1:PackageTracks>
-</r0:MaterialPackage>
-<r0:SourcePackage ns0:uid="urn:uuid:0d844838-8835-44a2-b818-e6680df11059">
-<r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.641aff33.c46c4afc.b11b67bd.92a0e719</r1:PackageID>
-<r1:CreationTime>2015-05-19T08:52:08.920Z</r1:CreationTime>
-<r1:PackageLastModified>2015-05-19T08:52:08.920Z</r1:PackageLastModified>
-<r1:PackageTracks>
-<r0:TimelineTrack ns0:uid="urn:uuid:29aeff57-d36e-4e4c-8513-81b74e30907d">
-<r1:TrackName>Timecode track</r1:TrackName>
-<r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
-<r1:Origin>0</r1:Origin>
-<r1:EditRate>24/1</r1:EditRate>
-<r1:TrackID>1</r1:TrackID>
-<r1:TrackSegment>
-<r0:Sequence ns0:uid="urn:uuid:62380bec-4481-4c9a-a1cd-4e29c74d0e3c">
-<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
-<r1:ComponentLength>1</r1:ComponentLength>
-<r1:ComponentObjects>
-<r0:Timecode ns0:uid="urn:uuid:7df609ad-c79f-489e-aabc-4a8a54a06818">
-<r1:FramesPerSecond>24</r1:FramesPerSecond>
-<r1:DropFrame>False</r1:DropFrame>
-<r1:StartTimecode>0</r1:StartTimecode>
-<r1:ComponentLength>1</r1:ComponentLength>
-<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
-</r0:Timecode>
-</r1:ComponentObjects>
-</r0:Sequence>
-</r1:TrackSegment>
-</r0:TimelineTrack>
-<r0:TimelineTrack ns0:uid="urn:uuid:b2e5ede5-8044-4cd2-acf5-ba3238021548">
-<r1:TrackName>FP Sound track</r1:TrackName>
-<r1:EssenceTrackNumber>369164800</r1:EssenceTrackNumber>
-<r1:Origin>0</r1:Origin>
-<r1:EditRate>48000/1</r1:EditRate>
-<r1:TrackID>2</r1:TrackID>
-<r1:TrackSegment>
-<r0:Sequence ns0:uid="urn:uuid:0bc6d771-188f-44d9-9bf6-db6da92bbae4">
-<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
-<r1:ComponentLength>2000</r1:ComponentLength>
-<r1:ComponentObjects>
-<r0:SourceClip ns0:uid="urn:uuid:68df6d2b-f5d1-4cb2-8a85-6cda2a9561a1">
-<r1:ComponentLength>2000</r1:ComponentLength>
-<r1:SourcePackageID>urn:smpte:umid:00000000.00000000.00000000.00000000.00000000.00000000.00000000.00000000</r1:SourcePackageID>
-<r1:SourceTrackID>0</r1:SourceTrackID>
-<r1:StartPosition>0</r1:StartPosition>
-<r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
-</r0:SourceClip>
-</r1:ComponentObjects>
-</r0:Sequence>
-</r1:TrackSegment>
-</r0:TimelineTrack>
-</r1:PackageTracks>
-<r1:EssenceDescription>
-<r0:WAVEPCMDescriptor ns0:uid="urn:uuid:d124c2f6-943f-43d3-a4a8-f244ce07e3b2">
-<r1:SampleRate>48000/1</r1:SampleRate>
-<r1:AudioSampleRate>48000/1</r1:AudioSampleRate>
-<r1:ChannelCount>2</r1:ChannelCount>
-<r1:QuantizationBits>24</r1:QuantizationBits>
-<r1:Locked>True</r1:Locked>
-<r1:AudioReferenceLevel>0</r1:AudioReferenceLevel>
-<r1:BlockAlign>6</r1:BlockAlign>
-<r1:AverageBytesPerSecond>288000</r1:AverageBytesPerSecond>
-<r1:ContainerFormat>urn:smpte:ul:060e2b34.04010101.0d010301.02060200</r1:ContainerFormat>
-<r1:SubDescriptors>
-<r0:AudioChannelLabelSubDescriptor ns0:uid="urn:uuid:32ad3213-6cad-445d-ab17-39652619644f">
-<r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020101.00000000</r1:MCALabelDictionaryID>
-<r1:MCALinkID>urn:uuid:b7784080-98d8-429a-826b-9c8296967b29</r1:MCALinkID>
-<r1:MCATagSymbol>chL</r1:MCATagSymbol>
-<r1:MCATagName>Left</r1:MCATagName>
-</r0:AudioChannelLabelSubDescriptor>
-<r0:AudioChannelLabelSubDescriptor ns0:uid="urn:uuid:d78a37cb-910e-4f50-b3ec-aa13557dc3eb">
-<r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020102.00000000</r1:MCALabelDictionaryID>
-<r1:MCALinkID>urn:uuid:2fdad693-1c50-4ba3-99c6-0029092d8049</r1:MCALinkID>
-<r1:MCATagSymbol>chR</r1:MCATagSymbol>
-<r1:MCATagName>Right</r1:MCATagName>
-<r1:SoundfieldGroupLinkID>urn:uuid:e5740106-a093-462b-8b59-47a32a843f9f</r1:SoundfieldGroupLinkID>
-</r0:AudioChannelLabelSubDescriptor>
-<r0:SoundfieldGroupLabelSubDescriptor ns0:uid="urn:uuid:5981fda3-e6b3-4ebe-ab52-20ee7ededf6d">
-<r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020220.01000000</r1:MCALabelDictionaryID>
-<r1:MCALinkID>urn:uuid:e5740106-a093-462b-8b59-47a32a843f9f</r1:MCALinkID>
-<r1:MCATagSymbol>sgST</r1:MCATagSymbol>
-<r1:MCATagName>Standard Stereo</r1:MCATagName>
-<r1:MCATitle>MCA Title</r1:MCATitle>
-<r1:MCATitleVersion>MCA Title Version</r1:MCATitleVersion>
-<r1:MCAAudioContentKind>MCA Audio Content Kind</r1:MCAAudioContentKind>
-<r1:MCAAudioElementKind>MCA Audio Element Kind</r1:MCAAudioElementKind>
-</r0:SoundfieldGroupLabelSubDescriptor>
-</r1:SubDescriptors>
-<r1:ChannelAssignment>urn:smpte:ul:060e2b34.0401010d.04020210.04010000</r1:ChannelAssignment>
-<r1:ReferenceImageEditRate>24/1</r1:ReferenceImageEditRate>
-<r1:LinkedTrackID>2</r1:LinkedTrackID>
-</r0:WAVEPCMDescriptor>
-</r1:EssenceDescription>
-</r0:SourcePackage>
-</r1:Packages>
-<r1:EssenceDataObjects>
-<r0:EssenceData ns0:uid="urn:uuid:44ffc89b-b2c4-46a8-b955-dfc8d0a95abd">
-<r1:LinkedPackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.641aff33.c46c4afc.b11b67bd.92a0e719</r1:LinkedPackageID>
-<r1:EssenceStreamID>1</r1:EssenceStreamID>
-<r1:IndexStreamID>2</r1:IndexStreamID>
-</r0:EssenceData>
-</r1:EssenceDataObjects>
-</r0:ContentStorage>
-</r1:ContentStorageObject>
-<!--Unknow Item
-Key: urn:smpte:ul:060e2b34.0101010e.04040503.00000000
-Data: 01-->
-<r1:OperationalPattern>urn:smpte:ul:060e2b34.04010101.0d010201.01010100</r1:OperationalPattern>
-<r1:PrimaryPackage>urn:uuid:0d844838-8835-44a2-b818-e6680df11059</r1:PrimaryPackage>
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Mon Jul 06 22:51:29 PDT 2015--><!--From: src/test/resources/sample-files/audio2.mxf--><!--By: regxmllib build 6b4b09e0a6387c7ff9382f6443a30d20b3e56969--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
+  <r1:InstanceID>urn:uuid:d2cfa078-e24d-4d42-825a-6eef5077085d</r1:InstanceID>
+  <r1:FileLastModified>2015-05-19T08:52:08.920Z</r1:FileLastModified>
+  <r1:FormatVersion>1.3</r1:FormatVersion>
+  <r1:IdentificationList>
+    <r0:Identification>
+      <r1:ApplicationSupplierName>Rohde and Schwarz DVS GmbH</r1:ApplicationSupplierName>
+      <r1:ApplicationName>Clipster</r1:ApplicationName>
+      <r1:ApplicationVersionString>5.10.0.0</r1:ApplicationVersionString>
+      <r1:ApplicationVersion>
+        <r2:Major>5</r2:Major>
+        <r2:Minor>10</r2:Minor>
+        <r2:Tertiary>0</r2:Tertiary>
+        <r2:PatchLevel>0</r2:PatchLevel>
+        <r2:BuildType>VersionReleased</r2:BuildType>
+      </r1:ApplicationVersion>
+      <r1:ToolkitVersion>
+        <r2:Major>1</r2:Major>
+        <r2:Minor>2</r2:Minor>
+        <r2:Tertiary>0</r2:Tertiary>
+        <r2:PatchLevel>19</r2:PatchLevel>
+        <r2:BuildType>VersionBeta</r2:BuildType>
+      </r1:ToolkitVersion>
+      <r1:ApplicationPlatform>Windows Server 2003 Service Pack 2 (64-bit)</r1:ApplicationPlatform>
+      <r1:FileModificationDate>2015-05-19T08:52:08.920Z</r1:FileModificationDate>
+      <r1:ApplicationProductID>urn:uuid:29bcbbc9-0d33-5653-ace4-685a327d3c50</r1:ApplicationProductID>
+      <r1:InstanceID>urn:uuid:40a25420-5843-47e2-be6c-a43df9b8b603</r1:InstanceID>
+      <r1:GenerationID>urn:uuid:8e0ab2d2-a2fc-4a38-97dc-a0d7a56f6181</r1:GenerationID>
+    </r0:Identification>
+  </r1:IdentificationList>
+  <r1:EssenceContainers>
+    <r2:AUID>urn:smpte:ul:060e2b34.04010101.0d010301.02060200</r2:AUID>
+  </r1:EssenceContainers>
+  <r1:DescriptiveSchemes/>
+  <r1:ContentStorageObject>
+    <r0:ContentStorage>
+      <r1:Packages>
+        <r0:MaterialPackage r3:uid="urn:smpte:umid:060a2b34.01010105.01010f20.13000000.8be435ee.73e74fc1.82535d44.53714ef4">
+          <r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.8be435ee.73e74fc1.82535d44.53714ef4</r1:PackageID>
+          <r1:CreationTime>2015-05-19T08:52:08.920Z</r1:CreationTime>
+          <r1:PackageLastModified>2015-05-19T08:52:08.920Z</r1:PackageLastModified>
+          <r1:PackageTracks>
+            <r0:TimelineTrack>
+              <r1:TrackName>Timecode track</r1:TrackName>
+              <r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
+              <r1:Origin>0</r1:Origin>
+              <r1:EditRate>24/1</r1:EditRate>
+              <r1:TrackID>1</r1:TrackID>
+              <r1:TrackSegment>
+                <r0:Sequence>
+                  <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
+                  <r1:ComponentLength>1</r1:ComponentLength>
+                  <r1:ComponentObjects>
+                    <r0:Timecode>
+                      <r1:FramesPerSecond>24</r1:FramesPerSecond>
+                      <r1:DropFrame>False</r1:DropFrame>
+                      <r1:StartTimecode>0</r1:StartTimecode>
+                      <r1:ComponentLength>1</r1:ComponentLength>
+                      <r1:InstanceID>urn:uuid:498bf72e-5f83-4925-aa21-d560fcda5d28</r1:InstanceID>
+                      <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
+                    </r0:Timecode>
+                  </r1:ComponentObjects>
+                  <r1:InstanceID>urn:uuid:e512b9ab-4a4c-4490-ae53-2f2db9e05090</r1:InstanceID>
+                </r0:Sequence>
+              </r1:TrackSegment>
+              <r1:InstanceID>urn:uuid:79ac34f3-4de0-4cda-b026-c19b741e9288</r1:InstanceID>
+            </r0:TimelineTrack>
+            <r0:TimelineTrack>
+              <r1:TrackName>MP sound track</r1:TrackName>
+              <r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
+              <r1:Origin>0</r1:Origin>
+              <r1:EditRate>48000/1</r1:EditRate>
+              <r1:TrackID>2</r1:TrackID>
+              <r1:TrackSegment>
+                <r0:Sequence>
+                  <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
+                  <r1:ComponentLength>2000</r1:ComponentLength>
+                  <r1:ComponentObjects>
+                    <r0:SourceClip>
+                      <r1:ComponentLength>2000</r1:ComponentLength>
+                      <r1:SourcePackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.641aff33.c46c4afc.b11b67bd.92a0e719</r1:SourcePackageID>
+                      <r1:SourceTrackID>2</r1:SourceTrackID>
+                      <r1:StartPosition>0</r1:StartPosition>
+                      <r1:InstanceID>urn:uuid:1c308937-9fe5-443f-8cfa-a7f54441dff1</r1:InstanceID>
+                      <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
+                    </r0:SourceClip>
+                  </r1:ComponentObjects>
+                  <r1:InstanceID>urn:uuid:766a1c4a-0fb5-4cb7-97a7-7331e2ab059f</r1:InstanceID>
+                </r0:Sequence>
+              </r1:TrackSegment>
+              <r1:InstanceID>urn:uuid:32a37b51-f724-4d18-a280-13e3190c4619</r1:InstanceID>
+            </r0:TimelineTrack>
+          </r1:PackageTracks>
+          <r1:InstanceID>urn:uuid:28688b88-0cfa-4a35-bdc0-45133aacded2</r1:InstanceID>
+        </r0:MaterialPackage>
+        <r0:SourcePackage r3:uid="urn:smpte:umid:060a2b34.01010105.01010f20.13000000.641aff33.c46c4afc.b11b67bd.92a0e719">
+          <r1:PackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.641aff33.c46c4afc.b11b67bd.92a0e719</r1:PackageID>
+          <r1:CreationTime>2015-05-19T08:52:08.920Z</r1:CreationTime>
+          <r1:PackageLastModified>2015-05-19T08:52:08.920Z</r1:PackageLastModified>
+          <r1:PackageTracks>
+            <r0:TimelineTrack>
+              <r1:TrackName>Timecode track</r1:TrackName>
+              <r1:EssenceTrackNumber>0</r1:EssenceTrackNumber>
+              <r1:Origin>0</r1:Origin>
+              <r1:EditRate>24/1</r1:EditRate>
+              <r1:TrackID>1</r1:TrackID>
+              <r1:TrackSegment>
+                <r0:Sequence>
+                  <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
+                  <r1:ComponentLength>1</r1:ComponentLength>
+                  <r1:ComponentObjects>
+                    <r0:Timecode>
+                      <r1:FramesPerSecond>24</r1:FramesPerSecond>
+                      <r1:DropFrame>False</r1:DropFrame>
+                      <r1:StartTimecode>0</r1:StartTimecode>
+                      <r1:ComponentLength>1</r1:ComponentLength>
+                      <r1:InstanceID>urn:uuid:7df609ad-c79f-489e-aabc-4a8a54a06818</r1:InstanceID>
+                      <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030201.01000000</r1:ComponentDataDefinition>
+                    </r0:Timecode>
+                  </r1:ComponentObjects>
+                  <r1:InstanceID>urn:uuid:62380bec-4481-4c9a-a1cd-4e29c74d0e3c</r1:InstanceID>
+                </r0:Sequence>
+              </r1:TrackSegment>
+              <r1:InstanceID>urn:uuid:29aeff57-d36e-4e4c-8513-81b74e30907d</r1:InstanceID>
+            </r0:TimelineTrack>
+            <r0:TimelineTrack>
+              <r1:TrackName>FP Sound track</r1:TrackName>
+              <r1:EssenceTrackNumber>369164800</r1:EssenceTrackNumber>
+              <r1:Origin>0</r1:Origin>
+              <r1:EditRate>48000/1</r1:EditRate>
+              <r1:TrackID>2</r1:TrackID>
+              <r1:TrackSegment>
+                <r0:Sequence>
+                  <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
+                  <r1:ComponentLength>2000</r1:ComponentLength>
+                  <r1:ComponentObjects>
+                    <r0:SourceClip>
+                      <r1:ComponentLength>2000</r1:ComponentLength>
+                      <r1:SourcePackageID>urn:smpte:umid:00000000.00000000.00000000.00000000.00000000.00000000.00000000.00000000</r1:SourcePackageID>
+                      <r1:SourceTrackID>0</r1:SourceTrackID>
+                      <r1:StartPosition>0</r1:StartPosition>
+                      <r1:InstanceID>urn:uuid:68df6d2b-f5d1-4cb2-8a85-6cda2a9561a1</r1:InstanceID>
+                      <r1:ComponentDataDefinition>urn:smpte:ul:060e2b34.04010101.01030202.02000000</r1:ComponentDataDefinition>
+                    </r0:SourceClip>
+                  </r1:ComponentObjects>
+                  <r1:InstanceID>urn:uuid:0bc6d771-188f-44d9-9bf6-db6da92bbae4</r1:InstanceID>
+                </r0:Sequence>
+              </r1:TrackSegment>
+              <r1:InstanceID>urn:uuid:b2e5ede5-8044-4cd2-acf5-ba3238021548</r1:InstanceID>
+            </r0:TimelineTrack>
+          </r1:PackageTracks>
+          <r1:InstanceID>urn:uuid:0d844838-8835-44a2-b818-e6680df11059</r1:InstanceID>
+          <r1:EssenceDescription>
+            <r0:WAVEPCMDescriptor>
+              <r1:SampleRate>48000/1</r1:SampleRate>
+              <r1:AudioSampleRate>48000/1</r1:AudioSampleRate>
+              <r1:ChannelCount>2</r1:ChannelCount>
+              <r1:QuantizationBits>24</r1:QuantizationBits>
+              <r1:Locked>True</r1:Locked>
+              <r1:AudioReferenceLevel>0</r1:AudioReferenceLevel>
+              <r1:BlockAlign>6</r1:BlockAlign>
+              <r1:AverageBytesPerSecond>288000</r1:AverageBytesPerSecond>
+              <r1:ContainerFormat>urn:smpte:ul:060e2b34.04010101.0d010301.02060200</r1:ContainerFormat>
+              <r1:SubDescriptors>
+                <r0:AudioChannelLabelSubDescriptor>
+                  <r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020101.00000000</r1:MCALabelDictionaryID>
+                  <r1:MCALinkID>urn:uuid:b7784080-98d8-429a-826b-9c8296967b29</r1:MCALinkID>
+                  <r1:MCATagSymbol>chL</r1:MCATagSymbol>
+                  <r1:MCATagName>Left</r1:MCATagName>
+                  <r1:InstanceID>urn:uuid:32ad3213-6cad-445d-ab17-39652619644f</r1:InstanceID>
+                </r0:AudioChannelLabelSubDescriptor>
+                <r0:AudioChannelLabelSubDescriptor>
+                  <r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020102.00000000</r1:MCALabelDictionaryID>
+                  <r1:MCALinkID>urn:uuid:2fdad693-1c50-4ba3-99c6-0029092d8049</r1:MCALinkID>
+                  <r1:MCATagSymbol>chR</r1:MCATagSymbol>
+                  <r1:MCATagName>Right</r1:MCATagName>
+                  <r1:SoundfieldGroupLinkID>urn:uuid:e5740106-a093-462b-8b59-47a32a843f9f</r1:SoundfieldGroupLinkID>
+                  <r1:InstanceID>urn:uuid:d78a37cb-910e-4f50-b3ec-aa13557dc3eb</r1:InstanceID>
+                </r0:AudioChannelLabelSubDescriptor>
+                <r0:SoundfieldGroupLabelSubDescriptor>
+                  <r1:MCALabelDictionaryID>urn:smpte:ul:060e2b34.0401010d.03020220.01000000</r1:MCALabelDictionaryID>
+                  <r1:MCALinkID>urn:uuid:e5740106-a093-462b-8b59-47a32a843f9f</r1:MCALinkID>
+                  <r1:MCATagSymbol>sgST</r1:MCATagSymbol>
+                  <r1:MCATagName>Standard Stereo</r1:MCATagName>
+                  <r1:MCATitle>MCA Title</r1:MCATitle>
+                  <r1:MCATitleVersion>MCA Title Version</r1:MCATitleVersion>
+                  <r1:MCAAudioContentKind>MCA Audio Content Kind</r1:MCAAudioContentKind>
+                  <r1:MCAAudioElementKind>MCA Audio Element Kind</r1:MCAAudioElementKind>
+                  <r1:InstanceID>urn:uuid:5981fda3-e6b3-4ebe-ab52-20ee7ededf6d</r1:InstanceID>
+                </r0:SoundfieldGroupLabelSubDescriptor>
+              </r1:SubDescriptors>
+              <r1:ChannelAssignment>urn:smpte:ul:060e2b34.0401010d.04020210.04010000</r1:ChannelAssignment>
+              <r1:ReferenceImageEditRate>24/1</r1:ReferenceImageEditRate>
+              <r1:InstanceID>urn:uuid:d124c2f6-943f-43d3-a4a8-f244ce07e3b2</r1:InstanceID>
+              <r1:LinkedTrackID>2</r1:LinkedTrackID>
+            </r0:WAVEPCMDescriptor>
+          </r1:EssenceDescription>
+        </r0:SourcePackage>
+      </r1:Packages>
+      <r1:EssenceDataObjects>
+        <r0:EssenceData r3:uid="urn:smpte:umid:060a2b34.01010105.01010f20.13000000.641aff33.c46c4afc.b11b67bd.92a0e719">
+          <r1:LinkedPackageID>urn:smpte:umid:060a2b34.01010105.01010f20.13000000.641aff33.c46c4afc.b11b67bd.92a0e719</r1:LinkedPackageID>
+          <r1:EssenceStreamID>1</r1:EssenceStreamID>
+          <r1:IndexStreamID>2</r1:IndexStreamID>
+          <r1:InstanceID>urn:uuid:44ffc89b-b2c4-46a8-b955-dfc8d0a95abd</r1:InstanceID>
+        </r0:EssenceData>
+      </r1:EssenceDataObjects>
+      <r1:InstanceID>urn:uuid:30d5482e-21a5-486b-b602-6e457333e023</r1:InstanceID>
+    </r0:ContentStorage>
+  </r1:ContentStorageObject>
+  <r1:IsRIPPresent>True</r1:IsRIPPresent>
+  <r1:OperationalPattern>urn:smpte:ul:060e2b34.04010101.0d010201.01010100</r1:OperationalPattern>
+  <r1:PrimaryPackage>urn:uuid:0d844838-8835-44a2-b818-e6680df11059</r1:PrimaryPackage>
 </r0:Preface>

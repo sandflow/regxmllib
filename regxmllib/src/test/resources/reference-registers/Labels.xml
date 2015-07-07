@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000015 -->
+<!-- master_commit_tag=v000000034 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -2475,7 +2475,7 @@
       <Symbol>TransferCharacteristic_ITU470_PAL</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.04010101.01010000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT470 Transfer Characteristic</Name>
+      <Name>ITU-R BT.470 Transfer Characteristic</Name>
       <Definition>Identifies ITU-R BT.470 PAL transfer characteristic (note: used in B, D, G, H, I, M, N/PAL and B, D, G, H, K, K1, L/SECAM systems)</Definition>
       <DefiningDocument>ITU-R BT.470</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -2486,7 +2486,7 @@
       <Symbol>TransferCharacteristic_ITU709</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.04010101.01020000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT709 Transfer Characteristic</Name>
+      <Name>ITU-R BT.709 Transfer Characteristic</Name>
       <Definition>Identifies ITU-R BT.709 transfer characteristic (also used in SMPTE 170M, 274M and 296M)</Definition>
       <DefiningDocument>ITU-R BT.709</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -2519,7 +2519,7 @@
       <Symbol>TransferCharacteristic_ITU1361</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010106.04010101.01050000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT1361 Transfer Characteristic</Name>
+      <Name>ITU-R BT.1361 Transfer Characteristic</Name>
       <Definition>Identifies ITU-R BT.1361 transfer characterisitic</Definition>
       <DefiningDocument>ITU-R BT.1361</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -2562,8 +2562,8 @@
       <Symbol>TransferCharacteristic_ITU2020</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010e.04010101.01090000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT2020 Transfer Characteristic</Name>
-      <Definition>Identifies ITU-R BT2020 transfer characteristic</Definition>
+      <Name>ITU-R BT.2020 Transfer Characteristic</Name>
+      <Definition>Identifies ITU-R BT.2020 transfer characteristic</Definition>
       <DefiningDocument>ITU-R BT.2020</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -2583,9 +2583,9 @@
       <Symbol>CodingEquations_ITU601</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.04010101.02010000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT601 Coding Equations</Name>
-      <Definition>Identifies ITU BT.601 Coding Equations</Definition>
-      <DefiningDocument>ITU-R BT-601</DefiningDocument>
+      <Name>ITU-R BT.601 Coding Equations</Name>
+      <Definition>Identifies ITU-R BT.601 Coding Equations</Definition>
+      <DefiningDocument>ITU-R BT.601</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -2594,9 +2594,9 @@
       <Symbol>CodingEquations_ITU709</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.04010101.02020000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT709 Coding Equations</Name>
-      <Definition>Identifies ITU BT.709 Coding Equations</Definition>
-      <DefiningDocument>ITU-R BT-709</DefiningDocument>
+      <Name>ITU-R BT.709 Coding Equations</Name>
+      <Definition>Identifies ITU-R BT.709 Coding Equations</Definition>
+      <DefiningDocument>ITU-R BT.709</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -2637,7 +2637,7 @@
       <Symbol>ColorPrimaries_ITU470_PAL</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010106.04010101.03020000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT470 Color Primaries</Name>
+      <Name>ITU-R BT.470 PAL Color Primaries</Name>
       <Definition>Identifies ITU-R BT.470 PAL color primaries and white point (note: used in B, D, G, H, I, N/PAL and B, D, G, H, K, K1, L/SECAM systems)</Definition>
       <DefiningDocument>ITU-R BT.470</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -2648,7 +2648,7 @@
       <Symbol>ColorPrimaries_ITU709</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010106.04010101.03030000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT709 Color Primaries</Name>
+      <Name>ITU-R BT.709 Color Primaries</Name>
       <Definition>Identifies ITU-R BT.709 color primaries and white point</Definition>
       <DefiningDocument>ITU-R BT.709</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -2659,7 +2659,7 @@
       <Symbol>ColorPrimaries_ITU2020</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010d.04010101.03040000</UL>
       <Kind>LEAF</Kind>
-      <Name>ITU-R BT2020 Color Primaries</Name>
+      <Name>ITU-R BT.2020 Color Primaries</Name>
       <Definition>Identifies ITU-R BT.2020 color primaries and white point</Definition>
       <DefiningDocument>ITU-R BT.2020</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
@@ -2678,22 +2678,22 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
-      <Symbol>_43AlternativeCenterCut</Symbol>
+      <Symbol>CenterCut43</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010d.04010101.04010000</UL>
       <Kind>LEAF</Kind>
       <Name>4:3 Alternative Center Cut</Name>
-      <Definition>Indicates that the image essence can accommodate an alternative center cut with a 4:3 aspect ratio.</Definition>
+      <Definition>Indicates that the image essence can accommodate an alternative center cut with a 4:3 aspect ratio</Definition>
       <DefiningDocument>SMPTE ST 2067-2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
-      <Symbol>_169AlternativeCenterCut</Symbol>
+      <Symbol>CenterCut149</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010d.04010101.04020000</UL>
       <Kind>LEAF</Kind>
-      <Name>16:9 Alternative Center Cut</Name>
-      <Definition>Indicates that the image essence can accommodate an alternative center cut with a 14:9 aspect ratio.</Definition>
+      <Name>14:9 Alternative Center Cut</Name>
+      <Definition>Indicates that the image essence can accommodate an alternative center cut with a 14:9 aspect ratio</Definition>
       <DefiningDocument>SMPTE ST 2067-2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -4711,7 +4711,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03010111</UL>
       <Kind>LEAF</Kind>
       <Name>JPEG 2000 Broadcast Contribution Single Tile Profile Level 1</Name>
-      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile</Definition>
+      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile Level 1</Definition>
       <DefiningDocument>ISO/IEC 15444-1:2002 AMD 1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -4722,7 +4722,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03010112</UL>
       <Kind>LEAF</Kind>
       <Name>JPEG 2000 Broadcast Contribution Single Tile Profile Level 2</Name>
-      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile</Definition>
+      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile Level 2</Definition>
       <DefiningDocument>ISO/IEC 15444-1:2002 AMD 1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -4733,7 +4733,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03010113</UL>
       <Kind>LEAF</Kind>
       <Name>JPEG 2000 Broadcast Contribution Single Tile Profile Level 3</Name>
-      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile</Definition>
+      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile Level 3</Definition>
       <DefiningDocument>ISO/IEC 15444-1:2002 AMD 1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -4744,7 +4744,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03010114</UL>
       <Kind>LEAF</Kind>
       <Name>JPEG 2000 Broadcast Contribution Single Tile Profile Level 4</Name>
-      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile</Definition>
+      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile Level 4</Definition>
       <DefiningDocument>ISO/IEC 15444-1:2002 AMD 1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -4755,7 +4755,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03010115</UL>
       <Kind>LEAF</Kind>
       <Name>JPEG 2000 Broadcast Contribution Single Tile Profile Level 5</Name>
-      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile</Definition>
+      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Single Tile Profile Level 5</Definition>
       <DefiningDocument>ISO/IEC 15444-1:2002 AMD 1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -4766,7 +4766,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03010116</UL>
       <Kind>LEAF</Kind>
       <Name>JPEG 2000 Broadcast Contribution Multi-tile Reversible Profile Level 6</Name>
-      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Multi-tile Reversible Profile</Definition>
+      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Multi-tile Reversible Profile Level 6</Definition>
       <DefiningDocument>ISO/IEC 15444-1:2002 AMD 1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -4777,7 +4777,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03010117</UL>
       <Kind>LEAF</Kind>
       <Name>JPEG 2000 Broadcast Contribution Multi-tile Reversible Profile Level 7</Name>
-      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Multi-tile Reversible Profile</Definition>
+      <Definition>Identifies a JPEG 2000 Bitstream with an Broadcast Contribution Multi-tile Reversible Profile Level 7</Definition>
       <DefiningDocument>ISO/IEC 15444-1:2002 AMD 1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -5251,7 +5251,7 @@
       <Kind>NODE</Kind>
       <Name>Picture Track Labeling for SMPTE ST 2070</Name>
       <Definition>Identifies Picture Track Labeling SMPTE ST 2070</Definition>
-      <DefiningDocument>SMPTE ST 2070</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -5262,7 +5262,7 @@
       <Kind>LEAF</Kind>
       <Name>Left Eye Picture Track</Name>
       <Definition>Identifies Picture Track Corresponding to Left Eye</Definition>
-      <DefiningDocument>SMPTE ST 2070</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -5273,7 +5273,7 @@
       <Kind>LEAF</Kind>
       <Name>Right Eye Picture Track</Name>
       <Definition>Identifies Picture Track Corresponding to Right Eye</Definition>
-      <DefiningDocument>SMPTE ST 2070</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -5395,9 +5395,9 @@
       <Symbol>SMPTE338MAudioCoding</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.04020202.03020000</UL>
       <Kind>NODE</Kind>
-      <Name>SMPTE-338M Audio Coding</Name>
-      <Definition>Identifies Compressed audio types identified by SMPTE 338M</Definition>
-      <DefiningDocument>SMPTE ST 338</DefiningDocument>
+      <Name>SMPTE ST 338 Audio per ST 337 Coding</Name>
+      <Definition>Identifies Compressed audio types identified by SMPTE ST 338</Definition>
+      <DefiningDocument>SMPTE ST 337, SMPTE ST 338</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -5471,8 +5471,9 @@
       <Symbol>NonSMPTE338MMPEG2Coding</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010103.04020202.03030000</UL>
       <Kind>NODE</Kind>
-      <Name>Non SMPTE-338M MPEG-2 Coding</Name>
-      <Definition>Identifies MPEG-2 Audio compression schemes not defined by SMPTE 338M-2000</Definition>
+      <Name>Non SMPTE ST 338 MPEG-2 Coding</Name>
+      <Definition>Identifies MPEG-2 Audio compression schemes not defined by SMPTE ST 338</Definition>
+      <DefiningDocument>SMPTE ST 337, SMPTE ST 338</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -5817,22 +5818,22 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
-      <Symbol>SMPTE2035MonoProgramCombo8d</Symbol>
+      <Symbol>SMPTE2035MonoProgramsCombo8d</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010b.04020210.01080400</UL>
       <Kind>LEAF</Kind>
-      <Name>SMPTE-2035 Mono Program Combo 8d</Name>
-      <Definition>Identifies SMPTE-2035 Mono Program Combo 8d</Definition>
+      <Name>SMPTE-2035 Mono Programs Combo 8d</Name>
+      <Definition>Identifies SMPTE-2035 Mono Programs Combo 8d</Definition>
       <DefiningDocument>SMPTE ST 2035</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
-      <Symbol>SMPTE2035MonoProgramCombo8e</Symbol>
+      <Symbol>SMPTE2035MonoProgramsCombo8e</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010b.04020210.01080500</UL>
       <Kind>LEAF</Kind>
-      <Name>SMPTE-2035 Mono Program Combo 8e</Name>
-      <Definition>Identifies SMPTE-2035 Mono Program Combo 8e</Definition>
+      <Name>SMPTE-2035 Mono Programs Combo 8e</Name>
+      <Definition>Identifies SMPTE-2035 Mono Programs Combo 8e</Definition>
       <DefiningDocument>SMPTE ST 2035</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -6114,33 +6115,33 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
-      <Symbol>SMPTE203512TrackStereoDualLanguageProgramsPlusMultiChannelProgram13b</Symbol>
+      <Symbol>SMPTE203512TrackStereoDualLanguageProgramPlusMultiChannelProgram13b</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010b.04020210.010d0200</UL>
       <Kind>LEAF</Kind>
-      <Name>SMPTE-2035 12-Track Stereo Dual-Language Programs Plus Multi-Channel-Program 13b</Name>
-      <Definition>Identifies SMPTE-2035 12-Track Stereo Dual-Language Programs Plus Multi-Channel-Program 13b</Definition>
+      <Name>SMPTE-2035 12-Track Stereo Dual-Language Program Plus Multi-Channel-Program 13b</Name>
+      <Definition>Identifies SMPTE-2035 12-Track Stereo Dual-Language Program Plus Multi-Channel-Program 13b</Definition>
       <DefiningDocument>SMPTE ST 2035</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
-      <Symbol>SMPTE203512TrackStereoDualLanguageProgramsPlusMultiChannelCodedAudio13c</Symbol>
+      <Symbol>SMPTE203512TrackStereoDualLanguageProgramPlusMultiChannelCodedAudio13c</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010b.04020210.010d0300</UL>
       <Kind>LEAF</Kind>
-      <Name>SMPTE-2035 12-Track Stereo Dual-Language Programs Plus Multi-Channel-Coded-Audio 13c</Name>
-      <Definition>Identifies SMPTE-2035 12-Track Stereo Dual-Language Programs Plus Multi-Channel-Coded-Audio 13c</Definition>
+      <Name>SMPTE-2035 12-Track Stereo Dual-Language Program Plus Multi-Channel-Coded-Audio 13c</Name>
+      <Definition>Identifies SMPTE-2035 12-Track Stereo Dual-Language Program Plus Multi-Channel-Coded-Audio 13c</Definition>
       <DefiningDocument>SMPTE ST 2035</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
-      <Symbol>SMPTE203512TrackMultiChannelProgramPlusStereoProgram13d</Symbol>
+      <Symbol>SMPTE203512TrackMultiChannelProgramPlusStereoPrograms13d</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010d.04020210.010d0400</UL>
       <Kind>LEAF</Kind>
-      <Name>SMPTE-2035 12-Track Multi-Channel Program plus Stereo Program 13d</Name>
-      <Definition>Identifies SMPTE-2035 12-Track Multi-Channel Program plus Stereo Program 13d</Definition>
+      <Name>SMPTE-2035 12-Track Multi-Channel Program plus Stereo Programs 13d</Name>
+      <Definition>Identifies SMPTE-2035 12-Track Multi-Channel Program plus Stereo Programs 13d</Definition>
       <DefiningDocument>SMPTE ST 2035</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -6270,7 +6271,7 @@
       <Kind>LEAF</Kind>
       <Name>SMPTE-429-2 D-Cinema Application of the Multichannel Audio Framework</Name>
       <Definition>Identifies SMPTE-429-2 D-Cinema Application of the Multichannel Audio Framework</Definition>
-      <DefiningDocument>SMPTE ST 2067-2</DefiningDocument>
+      <DefiningDocument>SMPTE ST 429-2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -6287,11 +6288,11 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
-      <Symbol>SMPTEST20672ApplicationOfTheMultichannelAudio</Symbol>
+      <Symbol>SMPTEST20672ApplicationOfTheMXFMultichannelAudioFramework</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010d.04020210.04010000</UL>
-      <Kind>NODE</Kind>
-      <Name>SMPTE ST 2067-2 Application of the Multichannel Audio</Name>
-      <Definition>Identifies SMPTE ST 2067-2 Application of the Multichannel Audio</Definition>
+      <Kind>LEAF</Kind>
+      <Name>SMPTE ST 2067-2 Application of the MXF Multichannel Audio Framework</Name>
+      <Definition>Identifies SMPTE ST 2067-2 Application of the MXF Multichannel Audio Framework</Definition>
       <DefiningDocument>SMPTE ST 2067-2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -6388,7 +6389,7 @@
       <Kind>NODE</Kind>
       <Name>Data Track Labeling SMPTE ST 2070</Name>
       <Definition>Identifies Data Track Labeling SMPTE ST 2070</Definition>
-      <DefiningDocument>SMPTE ST 2070</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -6410,7 +6411,7 @@
       <Kind>LEAF</Kind>
       <Name>Right Eye Data Track</Name>
       <Definition>Identifies Data Track Corresponding to Right Eye</Definition>
-      <DefiningDocument>SMPTE ST 2070</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -30588,6 +30589,7 @@
       <Kind>LEAF</Kind>
       <Name>MXF Text-Based Framework</Name>
       <Definition>Identifies the MXF Text-Based Framework</Definition>
+      <DefiningDocument>SMPTE RP 2057 Amendment 1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -30619,7 +30621,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010a.0d010500.00000000</UL>
       <Kind>NODE</Kind>
       <Name>MXF Generic Stream Metadata Mappings</Name>
-      <Definition>Identifier for MXF Generic Stream Metadata Mappings</Definition>
+      <Definition>Identifies MXF Generic Stream Metadata Mappings</Definition>
       <DefiningDocument>SMPTE ST 410</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -30630,18 +30632,30 @@
       <UL>urn:smpte:ul:060e2b34.0401010a.0d010501.00000000</UL>
       <Kind>NODE</Kind>
       <Name>MXF Generic Stream Metadata Version-1 Mappings</Name>
-      <Definition>Identifier for MXF Generic Stream Metadata Version-1 Mappings</Definition>
+      <Definition>Identifies MXF Generic Stream Metadata Version-1 Mappings</Definition>
       <DefiningDocument>SMPTE ST 410</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
-      <Symbol>MXFApplicationMetadataScheme</Symbol>
+      <Symbol>MXFApplicationMetadataSchemes</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010600.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>MXF Application Metadata Schemes</Name>
+      <Definition>Identifies MXF Application Metadata Schemes</Definition>
+      <DefiningDocument>SMPTE ST 377-1 Amendment 2</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>ApplicationMetadataSchemesVersion1</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010d.0d010601.00000000</UL>
       <Kind>NODE</Kind>
-      <Name>MXF Application Metadata Scheme</Name>
-      <Definition>Identifies AAF Operational Patterns</Definition>
+      <Name>Application Metadata Schemes Version 1</Name>
+      <Definition>Identifies Application Metadata Schemes Version 1</Definition>
+      <DefiningDocument>SMPTE ST 377-1 Amendment 2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -30986,7 +31000,7 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/12/as11</NamespaceName>
-      <Symbol>DM_AS_11_UKDPP</Symbol>
+      <Symbol>AS_11_UKDPP</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.0d0c0101.00000000</UL>
       <Kind>NODE</Kind>
       <Name>AS-11 UKDPP</Name>

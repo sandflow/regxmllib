@@ -65,15 +65,16 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
@@ -102,9 +103,9 @@ public class FragmentBuilder {
     private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
     private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
 
-    private static final String ACTUALTYPE_ATTR = "actualType";
-    private static final String BYTEORDER_ATTR = "byteOrder";
+
     private static final String BYTEORDER_BE = "BigEndian";
+    private static final String BYTEORDER_LE = "LittleEndian";
     private static final String UID_ATTR = "uid";
 
     private final DefinitionResolver defresolver;
@@ -140,13 +141,14 @@ public class FragmentBuilder {
         applyRule3(df, group);
 
         /* NOTE: Hack to clean-up namespace prefixes */
+        
         for (Map.Entry<URI, String> entry : nsprefixes.entrySet()) {
             ((Element) df.getFirstChild()).setAttributeNS(XMLNS_NS, "xmlns:" + entry.getValue(), entry.getKey().toString());
         }
 
         return df;
     }
-
+    
     private String getPrefix(URI ns) {
         String prefix = this.nsprefixes.get(ns);
 
@@ -158,6 +160,15 @@ public class FragmentBuilder {
         }
 
         return prefix;
+    }
+    
+    private String getPrefix(String ns) {
+                
+        try {
+            return getPrefix(new URI(ns));
+        } catch (URISyntaxException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     void applyRule3(Node node, Group group) throws RuleException {
@@ -185,54 +196,108 @@ public class FragmentBuilder {
             );
         }
 
-        Element elem = node.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
+        Element objelem = node.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
 
-        node.appendChild(elem);
+        node.appendChild(objelem);
 
-        elem.setPrefix(getPrefix(definition.getNamespace()));
+        objelem.setPrefix(getPrefix(definition.getNamespace()));
 
         for (Triplet item : group.getItems()) {
 
+            /* skip if the property is not defined in the registers */
+            Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
+
+            if (itemdef == null) {
+
+                LOG.warning(
+                        String.format(
+                                "Unknown property UL = %s at group %s",
+                                item.getKey().toString(),
+                                definition.getSymbol()
+                        )
+                );
+
+                objelem.appendChild(
+                        objelem.getOwnerDocument().createComment(
+                                String.format(
+                                        "Unknown Item\nKey: %s\nData: %s",
+                                        item.getKey().toString(),
+                                        bytesToString(item.getValue())
+                                )
+                        )
+                );
+
+                continue;
+
+            }
+
+            /* make sure this is a property definition */
+            if (!(itemdef instanceof PropertyDefinition)) {
+
+                LOG.warning(
+                        String.format(
+                                "Item UL = %s at group %s is not a property",
+                                item.getKey().toString(),
+                                definition.getSymbol()
+                        )
+                );
+
+                objelem.appendChild(
+                        objelem.getOwnerDocument().createComment(
+                                String.format(
+                                        "Item UL = %s is not a property",
+                                        item.getKey().toString()
+                                )
+                        )
+                );
+
+                continue;
+            }
+
+            /* warn if version byte of the property does not match the register version byte  */
+            if (itemdef.getIdentification().asUL().getVersion() != item.getKey().getVersion()) {
+                LOG.warning(
+                        String.format(
+                                "Property UL %s in file does not have the same version as in the register (0x%02x)",
+                                item.getKey().toString(),
+                                itemdef.getIdentification().asUL().getVersion()
+                        )
+                );
+            }
+
+            applyRule4(objelem, item.getValueAsStream(), itemdef);
+
+            /* detect cyclic references  */
             if (item.getKey().equals(INSTANCE_UID_ITEM_UL)) {
 
-                MXFInputStream mis = new MXFInputStream(item.getValueAsStream());
+                String iidns = objelem.getLastChild().getNamespaceURI();
+                String iidname = objelem.getLastChild().getLocalName();
+                String iid = objelem.getLastChild().getTextContent();
 
-                try {
-                    UUID uuid = mis.readUUID();
+                /* look for identical instanceID in parent elements */
+                Node parent = node;
 
-                    String uuidstr = uuid.toString();
+                while (parent.getNodeType() == Node.ELEMENT_NODE) {
 
-                    /* prevent self-references */
-                    Node parent = node;
+                    for (Node n = parent.getFirstChild(); n != null; n = n.getNextSibling()) {
 
-                    do {
-
-                        NamedNodeMap attrs = parent.getAttributes();
-
-                        if (attrs == null) {
-                            continue;
-                        }
-
-                        Node attr = attrs.getNamedItemNS(REGXML_NS, UID_ATTR);
-
-                        if (attr == null) {
-                            continue;
-                        }
-
-                        if (uuidstr.equals(attr.getTextContent())) {
+                        if (n.getNodeType() == Node.ELEMENT_NODE
+                                && iidname.equals(n.getLocalName())
+                                && iidns.equals(n.getNamespaceURI())
+                                && iid.equals(n.getTextContent())) {
 
                             LOG.warning(
                                     String.format(
                                             "Self-referencing Strong Reference at Group %s with UID %s",
                                             definition.getSymbol(),
-                                            uuidstr
+                                            iid
                                     )
                             );
 
                             Comment comment = node.getOwnerDocument().createComment(
                                     String.format(
                                             "Strong Reference %s not found",
-                                            uuid.toString()
+                                            iid
                                     )
                             );
 
@@ -240,66 +305,33 @@ public class FragmentBuilder {
 
                             return;
                         }
-                    } while ((parent = parent.getParentNode()) != null);
-
-                    elem.setAttributeNS(
-                            REGXML_NS,
-                            UID_ATTR,
-                            uuidstr
-                    );
-
-                } catch (IOException ex) {
-                    throw new RuleException(ex);
-                }
-
-            } else {
-
-                Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
-
-                if (itemdef == null) {
-                    LOG.warning(
-                            String.format(
-                                    "Unknown property UL = %s at group %s",
-                                    item.getKey().toString(),
-                                    definition.getSymbol()
-                            )
-                    );
-
-                    elem.appendChild(
-                            elem.getOwnerDocument().createComment(
-                                    String.format(
-                                            "Unknow Item\nKey: %s\nData: %s",
-                                            item.getKey().toString(),
-                                            bytesToString(item.getValue())
-                                    )
-                            )
-                    );
-                } else {
-
-                    if (itemdef.getIdentification().asUL().getVersion() != item.getKey().getVersion()) {
-                        LOG.warning(
-                                String.format(
-                                        "Property UL %s in file does not have the same version as in the register (0x%02x)",
-                                        item.getKey().toString(),
-                                        itemdef.getIdentification().asUL().getVersion()
-                                )
-                        );
                     }
 
-                    applyRule4(elem, item.getValueAsStream(), itemdef);
+                    parent = parent.getParentNode();
                 }
 
+            }
+
+            /* add reg:uid if property is a unique ID */
+            if (((PropertyDefinition) itemdef).isUniqueIdentifier()) {
+                
+                Attr attr = node.getOwnerDocument().createAttributeNS(REGXML_NS, UID_ATTR);
+                
+                attr.setPrefix(getPrefix(REGXML_NS));
+                attr.setTextContent(objelem.getLastChild().getTextContent());
+                
+                objelem.setAttributeNodeNS(attr);
             }
 
         }
 
     }
 
-    void applyRule4(Element element, InputStream value, Definition definition) throws RuleException {
+    void applyRule4(Element parent, InputStream value, Definition definition) throws RuleException {
 
-        Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
+        Element elem = parent.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
 
-        element.appendChild(elem);
+        parent.appendChild(elem);
 
         elem.setPrefix(getPrefix(definition.getNamespace()));
 
@@ -315,9 +347,9 @@ public class FragmentBuilder {
             }
 
             if (byteorder == 0x4949) {
-                elem.setTextContent("BigEndian");
+                elem.setTextContent(BYTEORDER_BE);
             } else if (byteorder == 0x4D4D) {
-                elem.setTextContent("LittleEndian");
+                elem.setTextContent(BYTEORDER_LE);
             } else {
                 throw new RuleException("Unknown ByteOrder value.");
             }
@@ -341,6 +373,7 @@ public class FragmentBuilder {
             }
 
             applyRule5(elem, value, typedef);
+
         }
 
     }
@@ -406,7 +439,7 @@ public class FragmentBuilder {
                 in = new InputStreamReader(value, "US-ASCII");
             } else {
                 throw new RuleException(
-                        String.format("Character  type %s not supported",
+                        String.format("Character type %s not supported",
                                 definition.getIdentification().toString()
                         )
                 );
@@ -531,8 +564,7 @@ public class FragmentBuilder {
             UL ul = ki.readUL();
 
             /* NOTE: ST 2001-1 XML Schema does not allow ULs as values for Extendible Enumerations, which
-            defeats the purpose of the type. This issue could be addressed at the next revision opportunity. */
-            
+             defeats the purpose of the type. This issue could be addressed at the next revision opportunity. */
             element.setTextContent(ul.toString());
 
         } catch (UnsupportedEncodingException e) {
@@ -592,7 +624,6 @@ public class FragmentBuilder {
     void applyRule5_5(Element element, InputStream value, IndirectTypeDefinition definition) throws RuleException {
 
         /* INFO: Indirect type is not used in MXF (ST 377-1) */
-        
         throw new RuleException("Indirect type not supported.");
 
     }
@@ -636,21 +667,22 @@ public class FragmentBuilder {
     void applyRule5_7(Element element, InputStream value, OpaqueTypeDefinition definition) throws RuleException {
 
         /* NOTE: Opaque Types are not used in MXF */
-        
         throw new RuleException("Opaque types are not supported.");
-        
+
     }
-    
+
     String generateISO8601Time(int hour, int minutes, int seconds, int millis) {
         StringBuilder sb = new StringBuilder();
-        
+
         sb.append(String.format("%02d:%02d:%02d", hour, minutes, seconds));
-        
-        if (millis != 0) sb.append(String.format(".%03dZ", millis));
-        
-        return  sb.toString();
+
+        if (millis != 0) {
+            sb.append(String.format(".%03dZ", millis));
+        }
+
+        return sb.toString();
     }
-    
+
     String generateISO8601Date(int year, int month, int day) {
         return String.format("%04d-%02d-%02d", year, month, day);
     }
@@ -672,7 +704,7 @@ public class FragmentBuilder {
                 int year = kis.readUnsignedShort();
                 int month = kis.readUnsignedByte();
                 int day = kis.readUnsignedByte();
-                
+
                 element.setTextContent(generateISO8601Date(year, month, day));
 
             } else if (definition.getIdentification().equals(PackageID_UL)) {
@@ -691,8 +723,7 @@ public class FragmentBuilder {
             } else if (definition.getIdentification().equals(TimeStruct_UL)) {
 
                 /*INFO: ST 2001-1 and ST 377-1 diverge on the meaning of 'fraction'.
-                fraction is msec/4 according to 377-1 */
-                
+                 fraction is msec/4 according to 377-1 */
                 int hour = kis.readUnsignedByte();
                 int minute = kis.readUnsignedByte();
                 int second = kis.readUnsignedByte();
@@ -700,10 +731,9 @@ public class FragmentBuilder {
 
                 /*LocalTime lt = LocalTime.of(hour, minute, second, fraction * 4000000);
 
-                OffsetTime ot = OffsetTime.of(lt, ZoneOffset.UTC);
+                 OffsetTime ot = OffsetTime.of(lt, ZoneOffset.UTC);
 
-                element.setTextContent(ot.toString());*/
-                
+                 element.setTextContent(ot.toString());*/
                 element.setTextContent(generateISO8601Time(hour, minute, second, 4 * fraction));
 
             } else if (definition.getIdentification().equals(TimeStamp_UL)) {
@@ -718,10 +748,9 @@ public class FragmentBuilder {
 
                 /*LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second, fraction * 4000000);
 
-                OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
+                 OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
 
-                element.setTextContent(odt.toString());*/
-                
+                 element.setTextContent(odt.toString());*/
                 element.setTextContent(generateISO8601Date(year, month, day) + "T" + generateISO8601Time(hour, minute, second, 4 * fraction));
 
             } else if (definition.getIdentification().equals(VersionType_UL)) {
@@ -801,13 +830,11 @@ public class FragmentBuilder {
     void applyRule5_12(Element element, InputStream value, StringTypeDefinition definition) throws RuleException {
 
         /* Rule 5.12 */
-        
         Definition chrdef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
-        
-        /* NOTE: ST 2001-1 implies that integer-based strings are supported, but
-           does not described semantics.
-        */
 
+        /* NOTE: ST 2001-1 implies that integer-based strings are supported, but
+         does not described semantics.
+         */
         if (!(chrdef instanceof CharacterTypeDefinition)) {
             throw new RuleException(
                     String.format(
@@ -820,12 +847,13 @@ public class FragmentBuilder {
         StringBuilder sb = new StringBuilder();
 
         readCharacters(value, (CharacterTypeDefinition) chrdef, sb);
-        
+
         /* remove trailing zeroes if any */
-        
         int nullpos = sb.indexOf("\0");
-        
-        if (nullpos > -1) sb.setLength(nullpos);
+
+        if (nullpos > -1) {
+            sb.setLength(nullpos);
+        }
 
         element.setTextContent(sb.toString());
 
@@ -887,7 +915,7 @@ public class FragmentBuilder {
                 case HALF:
 
                     val = HalfFloat.toDouble(dis.readUnsignedShort());
-                    
+
                     break;
                 case SINGLE:
                     val = dis.readFloat();
@@ -973,13 +1001,11 @@ public class FragmentBuilder {
                 if (base instanceof CharacterTypeDefinition || base.getName().contains("StringArray")) {
 
                     /* RULE 5.14.1 */
-                    
                     /* INFO: StringArray is not used in MXF (ST 377-1) */
-                    
                     throw new RuleException("StringArray not supported.");
 
                 } else {
-                    
+
                     long itemcount = dis.readInt() & 0xfffffffL;
                     long itemlength = dis.readInt() & 0xfffffffL;
 
@@ -999,14 +1025,42 @@ public class FragmentBuilder {
     void applyRule5_15(Element element, InputStream value, WeakReferenceTypeDefinition definition) throws RuleException {
 
         /* INFO: assume that the weak reference is a AUID. */
-        
         try {
 
             MXFInputStream kis = new MXFInputStream(value);
 
             AUID auid = kis.readAUID();
 
-            element.setTextContent(auid.toString());
+            /* is this a local reference through Instance ID? */
+            Group g = setresolver.get(auid.asUUID());
+
+            if (g != null) {
+
+                /* find the unique identifier in the group */
+                /* create a temporary element to store the resolved weak reference */
+                Element tmpelem = element.getOwnerDocument().createElement("temp");
+
+                for (Triplet item : g.getItems()) {
+
+                    Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
+
+                    if (itemdef != null
+                            && itemdef instanceof PropertyDefinition
+                            && ((PropertyDefinition) itemdef).isUniqueIdentifier()) {
+
+                        applyRule4(tmpelem, item.getValueAsStream(), itemdef);
+
+                        element.setTextContent(tmpelem.getTextContent());
+                    }
+
+                }
+
+            } else {
+
+                /* otherwise just store the value as-is */
+                element.setTextContent(auid.toString());
+
+            }
 
         } catch (IOException ioe) {
             throw new RuleException(ioe);

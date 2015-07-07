@@ -126,6 +126,30 @@ public class AUID {
     public boolean isUL() {
         return (value[0] & 8) == 0;
     }
+    
+    /**
+     * Is the AUID a UUID?
+     * @return true if the AUID is a UUID
+     */
+    public boolean isUUID() {
+        return ! isUL();
+    }
+    
+    /**
+     * Returns the underlying UUID if available
+     * @return Underlying UUID, or null if not a UUID
+     */
+    public UUID asUUID() {
+        
+        if (isUL()) return null;
+        
+        byte[] uuid = new byte[16];
+        
+        System.arraycopy(this.value, 8, uuid, 0, 8);
+        System.arraycopy(this.value, 0, uuid, 8, 8);
+        
+        return new UUID(uuid);
+    }
 
     /**
      * Returns the underlying UL if available

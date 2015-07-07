@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000015 -->
+<!-- master_commit_tag=v000000034 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -1207,17 +1207,18 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
           <LocalTag>15370</LocalTag>
-		  <IsUnique>true</IsUnique>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01010000</UL>
           <LocalTag>257</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.08000000</UL>
           <LocalTag>258</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -1245,26 +1246,31 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04070100.00000000</UL>
           <LocalTag>513</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020201.01030000</UL>
           <LocalTag>514</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010210.04000000</UL>
           <LocalTag>515</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.03020102.16000000</UL>
           <LocalTag>516</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.03010210.08000000</UL>
           <LocalTag>517</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1296,26 +1302,31 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01040901.00000000</UL>
           <LocalTag>1025</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100103.01090000</UL>
           <LocalTag>1026</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04100103.01020000</UL>
           <LocalTag>1027</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01030201.02000000</UL>
           <LocalTag>1028</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1332,16 +1343,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06010000</UL>
           <LocalTag>1281</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02080000</UL>
           <LocalTag>1282</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1364,11 +1378,13 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020103.03030000</UL>
           <LocalTag>1537</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300404.01000000</UL>
           <LocalTag>1538</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1385,11 +1401,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010600</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300401.00000000</UL>
           <LocalTag>2049</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1406,11 +1424,13 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010600</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.020a0000</UL>
           <LocalTag>2305</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1427,6 +1447,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -1441,31 +1462,37 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300506.00000000</UL>
           <LocalTag>2817</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06020000</UL>
           <LocalTag>2818</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.060a0000</UL>
           <LocalTag>2819</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0530050c.00000000</UL>
           <LocalTag>2820</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02060000</UL>
           <LocalTag>2821</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1482,11 +1509,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06070000</UL>
           <LocalTag>3073</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1503,26 +1532,31 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02070000</UL>
           <LocalTag>3329</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05401001.02000000</UL>
           <LocalTag>3330</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05401001.01000000</UL>
           <LocalTag>3331</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05401001.03000000</UL>
           <LocalTag>3332</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1539,16 +1573,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010103.03000000</UL>
           <LocalTag>3585</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010103.04000000</UL>
           <LocalTag>3586</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1565,16 +1602,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02090000</UL>
           <LocalTag>3841</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06080000</UL>
           <LocalTag>3842</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1591,11 +1631,13 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06090000</UL>
           <LocalTag>4097</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1618,21 +1660,25 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010103.01000000</UL>
           <LocalTag>4353</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010103.02000000</UL>
           <LocalTag>4354</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010103.07000000</UL>
           <LocalTag>4355</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.06010103.08000000</UL>
           <LocalTag>4356</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1649,31 +1695,37 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020103.01040000</UL>
           <LocalTag>4609</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020201.01050200</UL>
           <LocalTag>4610</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300501.00000000</UL>
           <LocalTag>4611</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020201.01050300</UL>
           <LocalTag>4612</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300502.00000000</UL>
           <LocalTag>4613</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1707,16 +1759,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011200</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300601.01000000</UL>
           <LocalTag>5121</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300602.01000000</UL>
           <LocalTag>5122</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1733,21 +1788,25 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020103.01050000</UL>
           <LocalTag>5377</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04040101.02060000</UL>
           <LocalTag>5378</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04040101.05000000</UL>
           <LocalTag>5379</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1770,16 +1829,19 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04040101.02010000</UL>
           <LocalTag>5633</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04070300.00000000</UL>
           <LocalTag>5634</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04040201.00000000</UL>
           <LocalTag>5635</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1796,11 +1858,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011500</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04040101.04000000</UL>
           <LocalTag>5889</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1817,16 +1881,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010200</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02050000</UL>
           <LocalTag>6145</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020103.01060000</UL>
           <LocalTag>6146</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -1843,16 +1910,19 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05010000</UL>
           <LocalTag>6401</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05020000</UL>
           <LocalTag>6402</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1869,21 +1939,25 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0530050d.00000000</UL>
           <LocalTag>6658</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020103.10020100</UL>
           <LocalTag>6659</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300508.00000000</UL>
           <LocalTag>6660</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1912,11 +1986,13 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01070102.03010000</UL>
           <LocalTag>6914</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03020301.02010000</UL>
           <LocalTag>6915</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1933,6 +2009,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -1947,41 +2024,49 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300509.00000000</UL>
           <LocalTag>7681</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300503.00000000</UL>
           <LocalTag>7682</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.04010000</UL>
           <LocalTag>7683</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0530050a.00000000</UL>
           <LocalTag>7686</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300504.00000000</UL>
           <LocalTag>7687</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300505.00000000</UL>
           <LocalTag>7688</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.03020000</UL>
           <LocalTag>7689</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1998,16 +2083,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01060000</UL>
           <LocalTag>7937</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0530050b.01000000</UL>
           <LocalTag>7939</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2024,106 +2112,127 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200901.00000000</UL>
           <LocalTag>8707</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03030301.03000000</UL>
           <LocalTag>8708</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03030301.02010000</UL>
           <LocalTag>8709</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.010a0101.01010000</UL>
           <LocalTag>8710</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.020b0000</UL>
           <LocalTag>8711</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.010a0101.03000000</UL>
           <LocalTag>8712</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200902.00000000</UL>
           <LocalTag>8713</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200903.00000000</UL>
           <LocalTag>8714</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200904.00000000</UL>
           <LocalTag>8715</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200905.00000000</UL>
           <LocalTag>8716</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200906.00000000</UL>
           <LocalTag>8717</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200907.00000000</UL>
           <LocalTag>8718</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200908.00000000</UL>
           <LocalTag>8719</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200909.00000000</UL>
           <LocalTag>8720</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0520090a.00000000</UL>
           <LocalTag>8721</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0520090b.00000000</UL>
           <LocalTag>8722</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0520090c.00000000</UL>
           <LocalTag>8723</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0520090d.00000000</UL>
           <LocalTag>8724</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0520090e.00000000</UL>
           <LocalTag>8725</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0520090f.00000000</UL>
           <LocalTag>8726</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2140,16 +2249,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01070000</UL>
           <LocalTag>8961</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.03010000</UL>
           <LocalTag>8962</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -2166,11 +2278,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.03010201.03000000</UL>
           <LocalTag>9217</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2187,6 +2301,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -2201,51 +2316,61 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05030000</UL>
           <LocalTag>9731</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05040000</UL>
           <LocalTag>9732</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05050000</UL>
           <LocalTag>9733</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05060000</UL>
           <LocalTag>9734</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05070000</UL>
           <LocalTag>9735</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05080000</UL>
           <LocalTag>9736</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.05090000</UL>
           <LocalTag>9737</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010104.050a0000</UL>
           <LocalTag>9738</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010104.050b0000</UL>
           <LocalTag>9739</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2262,6 +2387,7 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
@@ -2273,11 +2399,13 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04070200.00000000</UL>
           <LocalTag>9986</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010102.01000000</UL>
           <LocalTag>11009</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -2288,6 +2416,26 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.01030405.00000000</UL>
           <LocalTag>16134</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04040504.00000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04060207.00000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04040505.00000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04040506.00000000</UL>
+          <LocalTag>0</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2310,6 +2458,7 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06030000</UL>
           <LocalTag>12033</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -2337,26 +2486,31 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04060101.00000000</UL>
           <LocalTag>12289</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04060102.00000000</UL>
           <LocalTag>12290</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01020000</UL>
           <LocalTag>12292</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01030000</UL>
           <LocalTag>12293</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.06010103.05000000</UL>
           <LocalTag>12294</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2373,11 +2527,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012500</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03030302.02000000</UL>
           <LocalTag>12545</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -2400,131 +2556,157 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010601.00000000</UL>
           <LocalTag>12801</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010502.01000000</UL>
           <LocalTag>12802</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010502.02000000</UL>
           <LocalTag>12803</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.07000000</UL>
           <LocalTag>12804</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.08000000</UL>
           <LocalTag>12805</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.09000000</UL>
           <LocalTag>12806</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.0a000000</UL>
           <LocalTag>12807</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.0b000000</UL>
           <LocalTag>12808</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.0c000000</UL>
           <LocalTag>12809</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.0d000000</UL>
           <LocalTag>12810</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.0e000000</UL>
           <LocalTag>12811</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010301.04000000</UL>
           <LocalTag>12812</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010302.05000000</UL>
           <LocalTag>12813</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010101.01000000</UL>
           <LocalTag>12814</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200102.00000000</UL>
           <LocalTag>12815</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010201.01010200</UL>
           <LocalTag>12816</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010109.04010201.01060100</UL>
           <LocalTag>12825</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010201.01030100</UL>
           <LocalTag>12826</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04180101.00000000</UL>
           <LocalTag>12817</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010301.06000000</UL>
           <LocalTag>12818</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04180102.00000000</UL>
           <LocalTag>12819</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04180103.00000000</UL>
           <LocalTag>12820</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04050113.00000000</UL>
           <LocalTag>12821</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010302.08000000</UL>
           <LocalTag>12822</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010302.07000000</UL>
           <LocalTag>12823</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010302.09000000</UL>
           <LocalTag>12824</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -2566,56 +2748,67 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012700</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010503.0a000000</UL>
           <LocalTag>13057</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.05000000</UL>
           <LocalTag>13058</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.06000000</UL>
           <LocalTag>13059</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010503.03000000</UL>
           <LocalTag>13060</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010503.04000000</UL>
           <LocalTag>13061</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010503.05000000</UL>
           <LocalTag>13062</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04180104.00000000</UL>
           <LocalTag>13063</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010501.10000000</UL>
           <LocalTag>13064</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010503.07000000</UL>
           <LocalTag>13065</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.03010201.0a000000</UL>
           <LocalTag>13067</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2632,46 +2825,55 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012700</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010503.06000000</UL>
           <LocalTag>13313</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010503.08000000</UL>
           <LocalTag>13315</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010503.09000000</UL>
           <LocalTag>13316</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010404.01000000</UL>
           <LocalTag>13317</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010503.0b000000</UL>
           <LocalTag>13318</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010503.0c000000</UL>
           <LocalTag>13319</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010503.0d000000</UL>
           <LocalTag>13320</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010503.0e000000</UL>
           <LocalTag>13321</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2689,6 +2891,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012500</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -2704,36 +2907,43 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012500</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05020103.01010000</UL>
           <LocalTag>14081</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.06080201.00000000</UL>
           <LocalTag>14082</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010302.03000000</UL>
           <LocalTag>14083</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010302.04000000</UL>
           <LocalTag>14084</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05020103.01020000</UL>
           <LocalTag>14085</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03030302.03000000</UL>
           <LocalTag>14086</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -2750,11 +2960,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012500</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03030302.01000000</UL>
           <LocalTag>14337</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -2771,46 +2983,55 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012400</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100103.01080000</UL>
           <LocalTag>14593</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010802.03000000</UL>
           <LocalTag>14594</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100103.01030000</UL>
           <LocalTag>14595</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100103.02030000</UL>
           <LocalTag>14596</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100103.01060100</UL>
           <LocalTag>14597</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100103.01050100</UL>
           <LocalTag>14598</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100103.01040100</UL>
           <LocalTag>14599</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100103.01070100</UL>
           <LocalTag>14600</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2827,46 +3048,55 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012400</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.01010000</UL>
           <LocalTag>14849</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010401.01000000</UL>
           <LocalTag>14850</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0d010101.01010100</UL>
           <LocalTag>14851</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.03000000</UL>
           <LocalTag>14852</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.04010000</UL>
           <LocalTag>14853</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.02010000</UL>
           <LocalTag>14854</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.06010000</UL>
           <LocalTag>14855</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.05010000</UL>
           <LocalTag>14856</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2883,41 +3113,49 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.03010201.02000000</UL>
           <LocalTag>15105</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020110.02040000</UL>
           <LocalTag>15106</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02010000</UL>
           <LocalTag>15107</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02020000</UL>
           <LocalTag>15108</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010201.05000000</UL>
           <LocalTag>15109</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06040000</UL>
           <LocalTag>15110</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010201.04000000</UL>
           <LocalTag>15111</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -2928,17 +3166,26 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.01020203.00000000</UL>
           <LocalTag>15113</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.01020210.02010000</UL>
           <LocalTag>15114</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.01020210.02020000</UL>
           <LocalTag>15115</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04040503.00000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
+          <IsOptional>true</IsOptional>
         </Record>
       </Contents>
     </Entry>
@@ -2954,51 +3201,61 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.02010000</UL>
           <LocalTag>15361</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.03010000</UL>
           <LocalTag>15362</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.04000000</UL>
           <LocalTag>15363</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.05010000</UL>
           <LocalTag>15364</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.07000000</UL>
           <LocalTag>15365</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020110.02030000</UL>
           <LocalTag>15366</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.0a000000</UL>
           <LocalTag>15367</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.06010000</UL>
           <LocalTag>15368</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.01000000</UL>
           <LocalTag>15369</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3030,11 +3287,13 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01020101.01000000</UL>
           <LocalTag>16385</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3051,11 +3310,13 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01040102.01000000</UL>
           <LocalTag>16641</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3084,41 +3345,49 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01030302.01000000</UL>
           <LocalTag>17410</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06050000</UL>
           <LocalTag>17411</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020110.02050000</UL>
           <LocalTag>17412</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020110.01030000</UL>
           <LocalTag>17413</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03020102.0c000000</UL>
           <LocalTag>17414</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010210.03000000</UL>
           <LocalTag>17415</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.03010210.07000000</UL>
           <LocalTag>17417</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.05010108.00000000</UL>
           <LocalTag>17416</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3135,26 +3404,31 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013400</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020201.01050100</UL>
           <LocalTag>17665</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300201.00000000</UL>
           <LocalTag>17666</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300403.00000000</UL>
           <LocalTag>17667</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.06010104.010a0000</UL>
           <LocalTag>17668</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3171,6 +3445,7 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013400</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -3185,11 +3460,13 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013400</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02030000</UL>
           <LocalTag>18177</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3212,21 +3489,25 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01070101.00000000</UL>
           <LocalTag>18433</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01070102.01000000</UL>
           <LocalTag>18434</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02040000</UL>
           <LocalTag>18435</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01040103.00000000</UL>
           <LocalTag>18436</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3243,16 +3524,19 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013800</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300402.00000000</UL>
           <LocalTag>18689</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.07020103.010b0000</UL>
           <LocalTag>18690</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3269,6 +3553,7 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013800</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -3283,31 +3568,37 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013800</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300405.00000000</UL>
           <LocalTag>19201</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020103.01030000</UL>
           <LocalTag>19202</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.07020103.010c0000</UL>
           <LocalTag>19203</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.07020103.02030000</UL>
           <LocalTag>19204</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.07020103.010d0000</UL>
           <LocalTag>19205</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -3340,6 +3631,7 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01040000</UL>
           <LocalTag>19457</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3356,11 +3648,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013c00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300507.00000000</UL>
           <LocalTag>19713</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3377,16 +3671,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01013c00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01050000</UL>
           <LocalTag>19969</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06060000</UL>
           <LocalTag>19970</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3403,16 +3700,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03020102.09010000</UL>
           <LocalTag>20481</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03020102.0a010000</UL>
           <LocalTag>20483</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3429,11 +3729,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010210.02000000</UL>
           <LocalTag>20737</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3450,16 +3752,19 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010800</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.01070105.00000000</UL>
           <LocalTag>24834</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.06010104.020c0000</UL>
           <LocalTag>24833</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3476,46 +3781,55 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012500</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020301.01010000</UL>
           <LocalTag>15619</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.04020301.04000000</UL>
           <LocalTag>15618</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04020101.03000000</UL>
           <LocalTag>15620</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04020101.01000000</UL>
           <LocalTag>15621</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020101.04000000</UL>
           <LocalTag>15623</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.04020303.04000000</UL>
           <LocalTag>15617</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020701.00000000</UL>
           <LocalTag>15628</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04020402.00000000</UL>
           <LocalTag>15622</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -3542,11 +3856,13 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012500</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010103.04030302.00000000</UL>
           <LocalTag>15873</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3563,11 +3879,13 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012500</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.06010104.060b0000</UL>
           <LocalTag>16129</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3584,11 +3902,13 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.01070106.00000000</UL>
           <LocalTag>24835</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3640,41 +3960,49 @@
       <DefiningDocument>AAF Object Specification  SMPTE 382M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014800</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.06000000</UL>
           <LocalTag>15629</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.03000000</UL>
           <LocalTag>15631</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.01000000</UL>
           <LocalTag>15624</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.02000000</UL>
           <LocalTag>15632</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.03000000</UL>
           <LocalTag>15633</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.04000000</UL>
           <LocalTag>15634</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.05000000</UL>
           <LocalTag>15635</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3691,71 +4019,85 @@
       <DefiningDocument>AAF Object Specification  SMPTE 382M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014200</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.01000000</UL>
           <LocalTag>15626</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.02000000</UL>
           <LocalTag>15627</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020303.05000000</UL>
           <LocalTag>15625</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.04020101.05000000</UL>
           <LocalTag>15666</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.06000000</UL>
           <LocalTag>15657</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.07000000</UL>
           <LocalTag>15658</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.08000000</UL>
           <LocalTag>15659</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.09000000</UL>
           <LocalTag>15660</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0a000000</UL>
           <LocalTag>15661</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0b000000</UL>
           <LocalTag>15662</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0c000000</UL>
           <LocalTag>15663</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0d000000</UL>
           <LocalTag>15664</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0e000000</UL>
           <LocalTag>15665</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3787,6 +4129,7 @@
       <DefiningDocument>AAF Object Specification  SMPTE 377M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014900</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -3801,6 +4144,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014900</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -3815,6 +4159,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
@@ -3836,6 +4181,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
@@ -3846,6 +4192,7 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010104.01090000</UL>
           <LocalTag>19730</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3862,16 +4209,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014900</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.04090201.00000000</UL>
           <LocalTag>19985</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04090300.00000000</UL>
           <LocalTag>19986</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3888,21 +4238,25 @@
       <DefiningDocument>AAF Object Specification  SMPTE 382M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04060802.00000000</UL>
           <LocalTag>20225</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04060903.00000000</UL>
           <LocalTag>20226</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04070400.00000000</UL>
           <LocalTag>20227</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -3919,61 +4273,73 @@
       <DefiningDocument>AAF Object Specification  SMPTE 382M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.05000000</UL>
           <LocalTag>15637</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.06000000</UL>
           <LocalTag>15638</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.01010000</UL>
           <LocalTag>15649</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.02010000</UL>
           <LocalTag>15650</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.03010000</UL>
           <LocalTag>15651</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.04010000</UL>
           <LocalTag>15652</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.05010000</UL>
           <LocalTag>15653</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.06010000</UL>
           <LocalTag>15654</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.07010000</UL>
           <LocalTag>15655</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.08010000</UL>
           <LocalTag>15656</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.06010104.060f0000</UL>
           <LocalTag>15667</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -3990,56 +4356,67 @@
       <DefiningDocument>AAF Object Specification  SMPTE 381M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012800</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.01020000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.01030000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.01040000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.01050000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.01060000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.01070000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.01080000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.01090000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.010b0000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04010602.010a0000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -4624,10 +5001,9 @@
       <Kind>LEAF</Kind>
       <Name>TIFF Picture Essence Descriptor</Name>
       <Definition>TIFF Picture Essence Descriptor</Definition>
-      <Applications>AAF[2.0:]</Applications>
-      <DefiningDocument>AAF Object Specification</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2055</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01012700</Parent>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -4871,11 +5247,23 @@
       <Kind>LEAF</Kind>
       <Name>Event Text Descriptor</Name>
       <Definition>Event Text Descriptor</Definition>
-      <Applications>AAF[2.0:]</Applications>
       <DefiningDocument>SMPTE ST 2075</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014300</Parent>
+      <IsConcrete>false</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.03020108.01000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.03010102.02150000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -4885,11 +5273,17 @@
       <Kind>LEAF</Kind>
       <Name>STL Descriptor</Name>
       <Definition>STL Descriptor</Definition>
-      <Applications>AAF[2.0:]</Applications>
       <DefiningDocument>SMPTE ST 2075</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01016f00</Parent>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.07020102.02020000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -4899,25 +5293,47 @@
       <Kind>LEAF</Kind>
       <Name>STL Sub-Descriptor</Name>
       <Definition>STL Sub-Descriptor</Definition>
-      <Applications>AAF[2.0:]</Applications>
       <DefiningDocument>SMPTE ST 2075</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</Parent>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.03020108.02000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.03010102.02150000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/aaf</NamespaceName>
-      <Symbol>_3DSubDescriptor</Symbol>
+      <Symbol>OperationsStereoscopicSubDescriptor</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d010101.01017200</UL>
       <Kind>LEAF</Kind>
-      <Name>3D Sub-Descriptor</Name>
-      <Definition>3D Sub-Descriptor</Definition>
-      <Applications>AAF[2.0:]</Applications>
+      <Name>Operations Stereoscopic Sub-Descriptor</Name>
+      <Definition>Operations Stereoscopic Sub-Descriptor</Definition>
       <DefiningDocument>SMPTE ST 2070-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</Parent>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.01030703.01000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.01030703.02000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -4927,10 +5343,9 @@
       <Kind>LEAF</Kind>
       <Name>Aux Data Essence Descriptor</Name>
       <Definition>Aux Data Essence Descriptor</Definition>
-      <Applications>AAF[2.0:]</Applications>
       <DefiningDocument>SMPTE ST 429-14</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01011a00</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014300</Parent>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -5004,21 +5419,25 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02240000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.01000000</UL>
           <LocalTag>8</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.02000000</UL>
           <LocalTag>9</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.03000000</UL>
           <LocalTag>10</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5035,26 +5454,31 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02240000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.04000000</UL>
           <LocalTag>11</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010202.01000000</UL>
           <LocalTag>12</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.05000000</UL>
           <LocalTag>13</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.06000000</UL>
           <LocalTag>14</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -5086,16 +5510,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.01000000</UL>
           <LocalTag>15</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.02000000</UL>
           <LocalTag>16</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5112,11 +5539,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.09000000</UL>
           <LocalTag>17</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5133,16 +5562,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.0a000000</UL>
           <LocalTag>18</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.0b000000</UL>
           <LocalTag>19</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5159,21 +5591,25 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.0b000000</UL>
           <LocalTag>20</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.04000000</UL>
           <LocalTag>21</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.05000000</UL>
           <LocalTag>22</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5190,16 +5626,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.0c000000</UL>
           <LocalTag>23</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.03000000</UL>
           <LocalTag>24</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5216,11 +5655,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.0d000000</UL>
           <LocalTag>25</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5237,11 +5678,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.0e000000</UL>
           <LocalTag>26</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5258,11 +5701,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.0f000000</UL>
           <LocalTag>27</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5279,6 +5724,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -5293,16 +5739,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.11000000</UL>
           <LocalTag>28</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.06000000</UL>
           <LocalTag>29</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5319,11 +5768,13 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.12000000</UL>
           <LocalTag>30</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5340,16 +5791,19 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.07000000</UL>
           <LocalTag>31</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.08000000</UL>
           <LocalTag>32</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5366,6 +5820,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -5380,6 +5835,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02210000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -5394,6 +5850,7 @@
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.02030000</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
@@ -5419,11 +5876,13 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03020401.02010000</UL>
           <LocalTag>6</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.14010000</UL>
           <LocalTag>7</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -5439,16 +5898,19 @@
       <Applications>AAF</Applications>
       <DefiningDocument>AAF Object Specification</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.07000000</UL>
           <LocalTag>3</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.08000000</UL>
           <LocalTag>4</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -5960,6 +6422,21 @@
           <LocalTag>16144</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04040501.00000000</UL>
+          <LocalTag>16145</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04060206.00000000</UL>
+          <LocalTag>16146</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04040502.00000000</UL>
+          <LocalTag>16147</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -5983,9 +6460,8 @@
       <Name>Random Index Pack</Name>
       <Definition>Random Index Pack</Definition>
       <Applications>MXF</Applications>
-      <DefiningDocument>SMPTE 377M</DefiningDocument>
+      <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010201.01110000</Parent>
       <KLVSyntax>5</KLVSyntax>
     </Entry>
     <Entry>
@@ -8156,7 +8632,7 @@
       <Name>Core Metadata</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8255,7 +8731,7 @@
       <Name>Metadata  Schema Information</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8302,7 +8778,7 @@
       <Name>Identifier</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8337,7 +8813,7 @@
       <Name>Title</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8376,7 +8852,7 @@
       <Name>Alternative Title</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8423,7 +8899,7 @@
       <Name>Subject</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8462,7 +8938,7 @@
       <Name>Description</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8513,7 +8989,7 @@
       <Name>Date</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8588,7 +9064,7 @@
       <Name>Date Type</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8619,7 +9095,7 @@
       <Name>Type</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8658,7 +9134,7 @@
       <Name>Object Type</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8677,7 +9153,7 @@
       <Name>Genre</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8700,7 +9176,7 @@
       <Name>Target Audience</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8747,7 +9223,7 @@
       <Name>Language</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8778,7 +9254,7 @@
       <Name>Coverage</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8809,7 +9285,7 @@
       <Name>Spatial</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8828,7 +9304,7 @@
       <Name>Location</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8871,7 +9347,7 @@
       <Name>Coordinates</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8898,7 +9374,7 @@
       <Name>Temporal</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8925,7 +9401,7 @@
       <Name>Period Of Time</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -8972,7 +9448,7 @@
       <Name>Rights</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9047,7 +9523,7 @@
       <Name>Version</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9070,7 +9546,7 @@
       <Name>Rating</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9141,7 +9617,7 @@
       <Name>Publication Event</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9224,7 +9700,7 @@
       <Name>Publication History</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9247,7 +9723,7 @@
       <Name>Publication Channel</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9278,7 +9754,7 @@
       <Name>Publication Medium</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9305,7 +9781,7 @@
       <Name>Publication Service</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9340,7 +9816,7 @@
       <Name>Entity</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9371,7 +9847,7 @@
       <Name>Contact</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9478,7 +9954,7 @@
       <Name>Organization</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9541,7 +10017,7 @@
       <Name>Department</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9564,7 +10040,7 @@
       <Name>Details</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9603,7 +10079,7 @@
       <Name>Address</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9638,7 +10114,7 @@
       <Name>Region</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9661,7 +10137,7 @@
       <Name>Compound Name</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9688,7 +10164,7 @@
       <Name>Role</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9711,7 +10187,7 @@
       <Name>Country Type</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9730,7 +10206,7 @@
       <Name>Custom Relation</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9777,7 +10253,7 @@
       <Name>basicRelation</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9880,7 +10356,7 @@
       <Name>Planning</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9903,7 +10379,7 @@
       <Name>Type Group</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9950,7 +10426,7 @@
       <Name>Format  Group</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -9997,7 +10473,7 @@
       <Name>Status Group</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10044,7 +10520,7 @@
       <Name>Textual Annotation</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10067,7 +10543,7 @@
       <Name>Basic Link</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10086,7 +10562,7 @@
       <Name>Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10253,7 +10729,7 @@
       <Name>Video Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10424,7 +10900,7 @@
       <Name>Image Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10555,7 +11031,7 @@
       <Name>Audio Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10698,7 +11174,7 @@
       <Name>Track</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10729,7 +11205,7 @@
       <Name>Data Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10856,7 +11332,7 @@
       <Name>Captioning</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10911,7 +11387,7 @@
       <Name>Subtitling</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -10966,7 +11442,7 @@
       <Name>Ancillary Data</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11005,7 +11481,7 @@
       <Name>Signing  Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11060,7 +11536,7 @@
       <Name>Technical Attribute String</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11087,7 +11563,7 @@
       <Name>Technical Attribute Int8</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11114,7 +11590,7 @@
       <Name>Technical Attribute Int16</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11141,7 +11617,7 @@
       <Name>Technical Attribute Int32</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11168,7 +11644,7 @@
       <Name>Technical Attribute Int64</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11195,7 +11671,7 @@
       <Name>Technical Attribute UInt8</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11222,7 +11698,7 @@
       <Name>Technical Attribute UInt16</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11249,7 +11725,7 @@
       <Name>Technical Attribute UInt32</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11276,7 +11752,7 @@
       <Name>Technical Attribute UInt64</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11303,7 +11779,7 @@
       <Name>Technical Attribute Float</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11330,7 +11806,7 @@
       <Name>Technical Attribute Rational</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11353,7 +11829,7 @@
       <Name>Technical Attribute AnyURI</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11376,7 +11852,7 @@
       <Name>Technical Attribute Boolean</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11399,7 +11875,7 @@
       <Name>Dimension</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11422,7 +11898,7 @@
       <Name>Package Info</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11457,7 +11933,7 @@
       <Name>Medium</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11480,7 +11956,7 @@
       <Name>Codec</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11515,7 +11991,7 @@
       <Name>Rational</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11542,7 +12018,7 @@
       <Name>Aspect Ratio</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11569,7 +12045,7 @@
       <Name>Height</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11592,7 +12068,7 @@
       <Name>Width</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11615,7 +12091,7 @@
       <Name>Part</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11634,7 +12110,7 @@
       <Name>Part  Metadata</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11685,7 +12161,7 @@
       <Name>Hash</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11708,7 +12184,7 @@
       <Name>Locator</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11731,7 +12207,7 @@
       <Name>Container Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11830,7 +12306,7 @@
       <Name>Audio Format Extended</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11901,7 +12377,7 @@
       <Name>Audio Programme</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11952,7 +12428,7 @@
       <Name>IDRef</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -11971,7 +12447,7 @@
       <Name>Loudness Metadata</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12010,7 +12486,7 @@
       <Name>Audio Content</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12049,7 +12525,7 @@
       <Name>Audio Object</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12104,7 +12580,7 @@
       <Name>Audio Pack Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12147,7 +12623,7 @@
       <Name>Audio Channel Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12182,7 +12658,7 @@
       <Name>Audio Block Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12261,7 +12737,7 @@
       <Name>Audio Block Matrix Coefficient</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12296,7 +12772,7 @@
       <Name>Audio Stream Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12335,7 +12811,7 @@
       <Name>Audio Track Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12366,7 +12842,7 @@
       <Name>Audio Track UID</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12405,7 +12881,7 @@
       <Name>Audio MXF Lookup</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12432,7 +12908,7 @@
       <Name>Audio Block Matrix</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12451,7 +12927,7 @@
       <Name>Time</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12486,7 +12962,7 @@
       <Name>Metadata Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12573,7 +13049,7 @@
       <Name>Timecode Format</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12664,7 +13140,7 @@
       <Name>Video Noise Filter</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
-      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
       <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
@@ -12677,6 +13153,19 @@
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>EBUCoreObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>EBU Core Object</Name>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <IsConcrete>false</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
     </Entry>
     <Entry>
       <Register>Groups</Register>

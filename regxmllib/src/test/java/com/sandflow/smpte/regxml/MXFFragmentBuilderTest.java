@@ -216,6 +216,13 @@ public class MXFFragmentBuilderTest extends TestCase {
         List<Element> elems2 = getElements(el2);
 
         if (elems1.size() != elems2.size()) {
+            
+            System.out.println(
+                        String.format(
+                            "Sub element count of %s does not match reference.",
+                                el1.getLocalName())
+                );
+            
             return false;
         }
 
@@ -224,6 +231,14 @@ public class MXFFragmentBuilderTest extends TestCase {
 
         for (Entry<String, String> entry : attrs1.entrySet()) {
             if (!entry.getValue().equals(attrs2.get(entry.getKey()))) {
+                
+                System.out.println(
+                        String.format(
+                            "Attribute %s with value %s does not match reference.",
+                                entry.getKey(),
+                                entry.getValue())
+                );
+                
                 return false;
             }
         }
@@ -231,6 +246,13 @@ public class MXFFragmentBuilderTest extends TestCase {
         for (int i = 0; i < elems1.size(); i++) {
 
             if (!elems1.get(i).getNodeName().equals(elems2.get(i).getNodeName())) {
+                
+                System.out.println(
+                        String.format(
+                            "Element %s does not match reference.",
+                                elems1.get(i).getNodeName())
+                );
+                
                 return false;
             }
             
