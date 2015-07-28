@@ -103,6 +103,9 @@ public class FragmentBuilder {
     private static final UL ProductReleaseType_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.02010101.00000000");
     private static final UL Boolean_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01040100.00000000");
     private static final UL PrimaryPackage_UL = UL.fromURN("urn:smpte:ul:060e2b34.01010104.06010104.01080000");
+    private static final UL LinkedGenerationID_UL = UL.fromURN("urn:smpte:ul:060e2b34.01010102.05200701.08000000");
+    private static final UL GenerationID_UL = UL.fromURN("urn:smpte:ul:060e2b34.01010102.05200701.01000000");
+    private static final UL ApplicationProductID_UL = UL.fromURN("urn:smpte:ul:060e2b34.01010102.05200701.07000000");
 
     private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
     private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
@@ -374,8 +377,14 @@ public class FragmentBuilder {
                 );
             }
             
-            if (propdef.getIdentification().equals(PrimaryPackage_UL)) { 
-                /* ISSUE: PrimaryPackage property is encoded using UUID */
+            if (propdef.getIdentification().equals(PrimaryPackage_UL) ||
+                    propdef.getIdentification().equals(LinkedGenerationID_UL) ||
+                    propdef.getIdentification().equals(GenerationID_UL) ||
+                    propdef.getIdentification().equals(ApplicationProductID_UL)) { 
+                
+                /* ISSUE: PrimaryPackage, LinkedGenerationID, GenerationID and ApplicationProductID
+                are encoded using UUID */
+                
                 typedef = defresolver.getDefinition(new AUID(UUID_UL));
             } 
                 
