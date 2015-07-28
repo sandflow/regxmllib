@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Created: Mon Jul 06 22:51:28 PDT 2015--><!--From: src/test/resources/sample-files/video2.mxf--><!--By: regxmllib build 6b4b09e0a6387c7ff9382f6443a30d20b3e56969--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Tue Jul 28 22:43:34 CEST 2015--><!--From: src/test/resources/sample-files/video2.mxf--><!--By: regxmllib build f58e95de348fb5d1fda6d65fe25003d990ddb530--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
   <r1:InstanceID>urn:uuid:68ed8c71-4a72-468b-9ed7-752caa2def1c</r1:InstanceID>
   <r1:FileLastModified>2015-05-19T08:52:08.328Z</r1:FileLastModified>
   <r1:FormatVersion>1.3</r1:FormatVersion>
@@ -296,5 +296,5 @@
   </r1:ContentStorageObject>
   <r1:IsRIPPresent>True</r1:IsRIPPresent>
   <r1:OperationalPattern>urn:smpte:ul:060e2b34.04010101.0d010201.01010100</r1:OperationalPattern>
-  <r1:PrimaryPackage>urn:smpte:ul:a7e42682.bac34cdd.993a75f1.e411f0f7</r1:PrimaryPackage>
+  <r1:PrimaryPackage>urn:uuid:a7e42682-bac3-4cdd-993a-75f1e411f0f7</r1:PrimaryPackage>
 </r0:Preface>

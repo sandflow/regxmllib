@@ -58,6 +58,7 @@ import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UMID;
 import com.sandflow.smpte.util.UUID;
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -66,6 +67,8 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -99,10 +102,10 @@ public class FragmentBuilder {
     private static final UL Char_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100300.00000000");
     private static final UL ProductReleaseType_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.02010101.00000000");
     private static final UL Boolean_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01040100.00000000");
+    private static final UL PrimaryPackage_UL = UL.fromURN("urn:smpte:ul:060e2b34.01010104.06010104.01080000");
 
     private static final String REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
     private final static String XMLNS_NS = "http://www.w3.org/2000/xmlns/";
-
 
     private static final String BYTEORDER_BE = "BigEndian";
     private static final String BYTEORDER_LE = "LittleEndian";
@@ -141,14 +144,13 @@ public class FragmentBuilder {
         applyRule3(df, group);
 
         /* NOTE: Hack to clean-up namespace prefixes */
-        
         for (Map.Entry<URI, String> entry : nsprefixes.entrySet()) {
             ((Element) df.getFirstChild()).setAttributeNS(XMLNS_NS, "xmlns:" + entry.getValue(), entry.getKey().toString());
         }
 
         return df;
     }
-    
+
     private String getPrefix(URI ns) {
         String prefix = this.nsprefixes.get(ns);
 
@@ -161,9 +163,9 @@ public class FragmentBuilder {
 
         return prefix;
     }
-    
+
     private String getPrefix(String ns) {
-                
+
         try {
             return getPrefix(new URI(ns));
         } catch (URISyntaxException ex) {
@@ -264,8 +266,14 @@ public class FragmentBuilder {
                         )
                 );
             }
+            
+            Element elem = node.getOwnerDocument().createElementNS(itemdef.getNamespace().toString(), itemdef.getSymbol());
 
-            applyRule4(objelem, item.getValueAsStream(), itemdef);
+            objelem.appendChild(elem);
+
+            elem.setPrefix(getPrefix(itemdef.getNamespace()));
+
+            applyRule4(elem, item.getValueAsStream(), itemdef);
 
             /* detect cyclic references  */
             if (item.getKey().equals(INSTANCE_UID_ITEM_UL)) {
@@ -314,12 +322,12 @@ public class FragmentBuilder {
 
             /* add reg:uid if property is a unique ID */
             if (((PropertyDefinition) itemdef).isUniqueIdentifier()) {
-                
+
                 Attr attr = node.getOwnerDocument().createAttributeNS(REGXML_NS, UID_ATTR);
-                
+
                 attr.setPrefix(getPrefix(REGXML_NS));
                 attr.setTextContent(objelem.getLastChild().getTextContent());
-                
+
                 objelem.setAttributeNodeNS(attr);
             }
 
@@ -327,15 +335,9 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule4(Element parent, InputStream value, Definition definition) throws RuleException {
+    void applyRule4(Element element, InputStream value, Definition propdef) throws RuleException {
 
-        Element elem = parent.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
-
-        parent.appendChild(elem);
-
-        elem.setPrefix(getPrefix(definition.getNamespace()));
-
-        if (definition.getIdentification().equals(ByteOrder_UL)) {
+        if (propdef.getIdentification().equals(ByteOrder_UL)) {
             MXFInputStream kis = new MXFInputStream(value);
 
             int byteorder;
@@ -347,33 +349,37 @@ public class FragmentBuilder {
             }
 
             if (byteorder == 0x4949) {
-                elem.setTextContent(BYTEORDER_BE);
+                element.setTextContent(BYTEORDER_BE);
             } else if (byteorder == 0x4D4D) {
-                elem.setTextContent(BYTEORDER_LE);
+                element.setTextContent(BYTEORDER_LE);
             } else {
                 throw new RuleException("Unknown ByteOrder value.");
             }
 
         } else {
 
-            if (definition instanceof PropertyAliasDefinition) {
-                definition = defresolver.getDefinition(((PropertyAliasDefinition) definition).getOriginalProperty());
+            if (propdef instanceof PropertyAliasDefinition) {
+                propdef = defresolver.getDefinition(((PropertyAliasDefinition) propdef).getOriginalProperty());
             }
 
-            Definition typedef = findBaseDefinition(defresolver.getDefinition(((PropertyDefinition) definition).getType()));
+            Definition typedef = findBaseDefinition(defresolver.getDefinition(((PropertyDefinition) propdef).getType()));
 
             if (typedef == null) {
                 throw new RuleException(
                         String.format(
                                 "Type %s not found at %s.",
-                                ((PropertyDefinition) definition).getType().toString(),
-                                definition.getSymbol()
+                                ((PropertyDefinition) propdef).getType().toString(),
+                                propdef.getSymbol()
                         )
                 );
             }
-
-            applyRule5(elem, value, typedef);
-
+            
+            if (propdef.getIdentification().equals(PrimaryPackage_UL)) { 
+                /* ISSUE: PrimaryPackage property is encoded using UUID */
+                typedef = defresolver.getDefinition(new AUID(UUID_UL));
+            } 
+                
+            applyRule5(element, value, typedef);
         }
 
     }
@@ -677,8 +683,10 @@ public class FragmentBuilder {
         sb.append(String.format("%02d:%02d:%02d", hour, minutes, seconds));
 
         if (millis != 0) {
-            sb.append(String.format(".%03dZ", millis));
+            sb.append(String.format(".%03d", millis));
         }
+        
+        sb.append("Z");
 
         return sb.toString();
     }
@@ -949,6 +957,28 @@ public class FragmentBuilder {
 
         return definition;
     }
+    
+    public Collection<PropertyDefinition> getAllMembersOf(ClassDefinition definition) {
+        ClassDefinition cdef = definition;
+        
+        ArrayList<PropertyDefinition> props = new ArrayList<>();
+        
+         while (cdef != null) {
+
+            for (AUID auid : defresolver.getMembersOf(cdef)) {
+                props.add((PropertyDefinition) defresolver.getDefinition(auid));
+            }
+
+            if (cdef.getParentClass() != null) {
+                cdef = (ClassDefinition) defresolver.getDefinition(cdef.getParentClass());
+            } else {
+                cdef = null;
+            }
+
+        }
+         
+         return props;
+    }
 
     final static char[] HEXMAP = "0123456789abcdef".toCharArray();
 
@@ -1015,56 +1045,51 @@ public class FragmentBuilder {
             }
 
         } catch (UnsupportedEncodingException e) {
+            
             throw new RuntimeException(e);
+            
+        } catch (EOFException eof) {
+            
+            Comment comment = element.getOwnerDocument().createComment(
+                    String.format(
+                            "Value too short for Type %s",
+                            typedef.getSymbol()
+                    )
+            );
+
+            element.appendChild(comment);
+            
         } catch (IOException ioe) {
+            
             throw new RuleException(ioe);
+            
         }
 
     }
 
-    void applyRule5_15(Element element, InputStream value, WeakReferenceTypeDefinition definition) throws RuleException {
+    void applyRule5_15(Element element, InputStream value, WeakReferenceTypeDefinition typedefinition) throws RuleException {
 
-        /* INFO: assume that the weak reference is a AUID. */
-        try {
+        ClassDefinition classdef = (ClassDefinition) defresolver.getDefinition(typedefinition.getReferencedType());
 
-            MXFInputStream kis = new MXFInputStream(value);
+        PropertyDefinition uniquepropdef = null;
 
-            AUID auid = kis.readAUID();
+        for (PropertyDefinition propdef : getAllMembersOf(classdef)) {
 
-            /* is this a local reference through Instance ID? */
-            Group g = setresolver.get(auid.asUUID());
-
-            if (g != null) {
-
-                /* find the unique identifier in the group */
-                /* create a temporary element to store the resolved weak reference */
-                Element tmpelem = element.getOwnerDocument().createElement("temp");
-
-                for (Triplet item : g.getItems()) {
-
-                    Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
-
-                    if (itemdef != null
-                            && itemdef instanceof PropertyDefinition
-                            && ((PropertyDefinition) itemdef).isUniqueIdentifier()) {
-
-                        applyRule4(tmpelem, item.getValueAsStream(), itemdef);
-
-                        element.setTextContent(tmpelem.getTextContent());
-                    }
-
-                }
-
-            } else {
-
-                /* otherwise just store the value as-is */
-                element.setTextContent(auid.toString());
-
+            if (propdef.isUniqueIdentifier()) {
+                uniquepropdef = propdef;
+                break;
             }
-
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
         }
+
+        if (uniquepropdef == null) {
+            throw new RuleException(
+                    String.format("Underlying class of weak reference type %s does not have a unique identifier.",
+                            typedefinition.getIdentification().toString())
+            );
+        }
+
+        applyRule4(element, value, uniquepropdef);
+
     }
 
     public static class RuleException extends Exception {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Created: Mon Jul 06 22:51:27 PDT 2015--><!--From: src/test/resources/sample-files/audio1.mxf--><!--By: regxmllib build 6b4b09e0a6387c7ff9382f6443a30d20b3e56969--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://sandflow.com/ns/SMPTEST2001-1/baseline" xmlns:r3="http://www.smpte-ra.org/reg/2003/2012">
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Tue Jul 28 22:43:33 CEST 2015--><!--From: src/test/resources/sample-files/audio1.mxf--><!--By: regxmllib build f58e95de348fb5d1fda6d65fe25003d990ddb530--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://sandflow.com/ns/SMPTEST2001-1/baseline" xmlns:r3="http://www.smpte-ra.org/reg/2003/2012">
   <r1:InstanceID>urn:uuid:afa42131-e099-47fa-493a-f4e0740a3654</r1:InstanceID>
   <r1:FormatVersion>1.3</r1:FormatVersion>
   <r1:ObjectModelVersion>1</r1:ObjectModelVersion>
@@ -225,5 +225,5 @@
   </r1:IdentificationList>
   <r1:FileLastModified>2015-05-05T09:01:04.816Z</r1:FileLastModified>
   <r1:LinkedGenerationID>urn:uuid:ec362afd-ce4d-4559-b7d4-3aac269805e2</r1:LinkedGenerationID>
-  <r1:PrimaryPackage>urn:smpte:ul:f7a594a5.3b254feb.53d7616d.be008a9c</r1:PrimaryPackage>
+  <r1:PrimaryPackage>urn:uuid:f7a594a5-3b25-4feb-53d7-616dbe008a9c</r1:PrimaryPackage>
 </r0:Preface>
