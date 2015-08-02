@@ -347,11 +347,7 @@ public class FragmentBuilder {
 
                 int byteorder;
 
-                try {
-                    byteorder = kis.readInt();
-                } catch (IOException ex) {
-                    throw new RuleException(ex);
-                }
+                byteorder = kis.readInt();
 
                 if (byteorder == 0x4949) {
                     element.setTextContent(BYTEORDER_BE);
@@ -494,7 +490,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5(Element element, InputStream value, Definition definition) throws RuleException {
+    void applyRule5(Element element, InputStream value, Definition definition) throws RuleException, IOException {
 
         if (definition instanceof CharacterTypeDefinition) {
             applyRule5_1(element, value, (CharacterTypeDefinition) definition);
@@ -543,36 +539,31 @@ public class FragmentBuilder {
 
     }
 
-    private void readCharacters(InputStream value, CharacterTypeDefinition definition, StringBuilder sb) throws RuleException {
+    private void readCharacters(InputStream value, CharacterTypeDefinition definition, StringBuilder sb) throws RuleException, IOException {
 
-        try {
+        Reader in = null;
 
-            Reader in = null;
-
-            if (definition.getIdentification().equals(Character_UL)) {
-                in = new InputStreamReader(value, "UTF-16BE");
-            } else if (definition.getIdentification().equals(Char_UL)) {
-                in = new InputStreamReader(value, "US-ASCII");
-            } else {
-                throw new RuleException(
-                        String.format("Character type %s not supported",
-                                definition.getIdentification().toString()
-                        )
-                );
-            }
-
-            char[] chars = new char[32];
-
-            for (int c; (c = in.read(chars)) != -1;) {
-                sb.append(chars, 0, c);
-            }
-
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
+        if (definition.getIdentification().equals(Character_UL)) {
+            in = new InputStreamReader(value, "UTF-16BE");
+        } else if (definition.getIdentification().equals(Char_UL)) {
+            in = new InputStreamReader(value, "US-ASCII");
+        } else {
+            throw new RuleException(
+                    String.format("Character type %s not supported",
+                            definition.getIdentification().toString()
+                    )
+            );
         }
+
+        char[] chars = new char[32];
+
+        for (int c; (c = in.read(chars)) != -1;) {
+            sb.append(chars, 0, c);
+        }
+
     }
 
-    void applyRule5_1(Element element, InputStream value, CharacterTypeDefinition definition) throws RuleException {
+    void applyRule5_1(Element element, InputStream value, CharacterTypeDefinition definition) throws RuleException, IOException {
 
         StringBuilder sb = new StringBuilder();
 
@@ -582,7 +573,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_2(Element element, InputStream value, EnumerationTypeDefinition definition) throws RuleException {
+    void applyRule5_2(Element element, InputStream value, EnumerationTypeDefinition definition) throws RuleException, IOException {
 
         try {
 
@@ -666,12 +657,10 @@ public class FragmentBuilder {
 
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
         }
     }
 
-    void applyRule5_3(Element element, InputStream value, ExtendibleEnumerationTypeDefinition definition) throws RuleException {
+    void applyRule5_3(Element element, InputStream value, ExtendibleEnumerationTypeDefinition definition) throws RuleException, IOException {
 
         try {
 
@@ -685,25 +674,19 @@ public class FragmentBuilder {
 
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
         }
     }
 
-    void applyRule5_4(Element element, InputStream value, FixedArrayTypeDefinition definition) throws RuleException {
+    void applyRule5_4(Element element, InputStream value, FixedArrayTypeDefinition definition) throws RuleException, IOException {
 
         if (definition.getIdentification().equals(UUID_UL)) {
 
-            try {
-                MXFInputStream kis = new MXFInputStream(value);
+            MXFInputStream kis = new MXFInputStream(value);
 
-                UUID uuid = kis.readUUID();
+            UUID uuid = kis.readUUID();
 
-                element.setTextContent(uuid.toString());
+            element.setTextContent(uuid.toString());
 
-            } catch (IOException e) {
-                throw new RuleException(e);
-            }
         } else {
 
             Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
@@ -713,7 +696,7 @@ public class FragmentBuilder {
         }
     }
 
-    void applyCoreRule5_4(Element element, InputStream value, Definition typedef, int elementcount) throws RuleException {
+    void applyCoreRule5_4(Element element, InputStream value, Definition typedef, int elementcount) throws RuleException, IOException {
 
         for (int i = 0; i < elementcount; i++) {
 
@@ -744,7 +727,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_6(Element element, InputStream value, IntegerTypeDefinition definition) throws RuleException {
+    void applyRule5_6(Element element, InputStream value, IntegerTypeDefinition definition) throws RuleException, IOException {
 
         try {
 
@@ -774,8 +757,6 @@ public class FragmentBuilder {
 
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
         }
 
     }
@@ -805,103 +786,97 @@ public class FragmentBuilder {
         return String.format("%04d-%02d-%02d", year, month, day);
     }
 
-    void applyRule5_8(Element element, InputStream value, RecordTypeDefinition definition) throws RuleException {
+    void applyRule5_8(Element element, InputStream value, RecordTypeDefinition definition) throws RuleException, IOException {
 
-        try {
+        MXFInputStream kis = new MXFInputStream(value);
 
-            MXFInputStream kis = new MXFInputStream(value);
+        if (definition.getIdentification().equals(AUID_UL)) {
 
-            if (definition.getIdentification().equals(AUID_UL)) {
+            AUID auid = kis.readAUID();
 
-                AUID auid = kis.readAUID();
+            element.setTextContent(auid.toString());
 
-                element.setTextContent(auid.toString());
+        } else if (definition.getIdentification().equals(DateStruct_UL)) {
 
-            } else if (definition.getIdentification().equals(DateStruct_UL)) {
+            int year = kis.readUnsignedShort();
+            int month = kis.readUnsignedByte();
+            int day = kis.readUnsignedByte();
 
-                int year = kis.readUnsignedShort();
-                int month = kis.readUnsignedByte();
-                int day = kis.readUnsignedByte();
+            element.setTextContent(generateISO8601Date(year, month, day));
 
-                element.setTextContent(generateISO8601Date(year, month, day));
+        } else if (definition.getIdentification().equals(PackageID_UL)) {
 
-            } else if (definition.getIdentification().equals(PackageID_UL)) {
+            UMID umid = kis.readUMID();
 
-                UMID umid = kis.readUMID();
+            element.setTextContent(umid.toString());
 
-                element.setTextContent(umid.toString());
+        } else if (definition.getIdentification().equals(Rational_UL)) {
 
-            } else if (definition.getIdentification().equals(Rational_UL)) {
+            int numerator = kis.readInt();
+            int denominator = kis.readInt();
 
-                int numerator = kis.readInt();
-                int denominator = kis.readInt();
+            element.setTextContent(String.format("%d/%d", numerator, denominator));
 
-                element.setTextContent(String.format("%d/%d", numerator, denominator));
+        } else if (definition.getIdentification().equals(TimeStruct_UL)) {
 
-            } else if (definition.getIdentification().equals(TimeStruct_UL)) {
+            /*INFO: ST 2001-1 and ST 377-1 diverge on the meaning of 'fraction'.
+             fraction is msec/4 according to 377-1 */
+            int hour = kis.readUnsignedByte();
+            int minute = kis.readUnsignedByte();
+            int second = kis.readUnsignedByte();
+            int fraction = kis.readUnsignedByte();
 
-                /*INFO: ST 2001-1 and ST 377-1 diverge on the meaning of 'fraction'.
-                 fraction is msec/4 according to 377-1 */
-                int hour = kis.readUnsignedByte();
-                int minute = kis.readUnsignedByte();
-                int second = kis.readUnsignedByte();
-                int fraction = kis.readUnsignedByte();
+            /*LocalTime lt = LocalTime.of(hour, minute, second, fraction * 4000000);
 
-                /*LocalTime lt = LocalTime.of(hour, minute, second, fraction * 4000000);
+             OffsetTime ot = OffsetTime.of(lt, ZoneOffset.UTC);
 
-                 OffsetTime ot = OffsetTime.of(lt, ZoneOffset.UTC);
+             element.setTextContent(ot.toString());*/
+            element.setTextContent(generateISO8601Time(hour, minute, second, 4 * fraction));
 
-                 element.setTextContent(ot.toString());*/
-                element.setTextContent(generateISO8601Time(hour, minute, second, 4 * fraction));
+        } else if (definition.getIdentification().equals(TimeStamp_UL)) {
 
-            } else if (definition.getIdentification().equals(TimeStamp_UL)) {
+            int year = kis.readUnsignedShort();
+            int month = kis.readUnsignedByte();
+            int day = kis.readUnsignedByte();
+            int hour = kis.readUnsignedByte();
+            int minute = kis.readUnsignedByte();
+            int second = kis.readUnsignedByte();
+            int fraction = kis.readUnsignedByte();
 
-                int year = kis.readUnsignedShort();
-                int month = kis.readUnsignedByte();
-                int day = kis.readUnsignedByte();
-                int hour = kis.readUnsignedByte();
-                int minute = kis.readUnsignedByte();
-                int second = kis.readUnsignedByte();
-                int fraction = kis.readUnsignedByte();
+            /*LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second, fraction * 4000000);
 
-                /*LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second, fraction * 4000000);
+             OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
 
-                 OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
+             element.setTextContent(odt.toString());*/
+            element.setTextContent(generateISO8601Date(year, month, day) + "T" + generateISO8601Time(hour, minute, second, 4 * fraction));
 
-                 element.setTextContent(odt.toString());*/
-                element.setTextContent(generateISO8601Date(year, month, day) + "T" + generateISO8601Time(hour, minute, second, 4 * fraction));
+        } else if (definition.getIdentification().equals(VersionType_UL)) {
 
-            } else if (definition.getIdentification().equals(VersionType_UL)) {
+            /* EXCEPTION: registers used Int8 but MXF specifies UInt8 */
+            int major = kis.readUnsignedByte();
+            int minor = kis.readUnsignedByte();
 
-                /* EXCEPTION: registers used Int8 but MXF specifies UInt8 */
-                int major = kis.readUnsignedByte();
-                int minor = kis.readUnsignedByte();
+            element.setTextContent(String.format("%d.%d", major, minor));
 
-                element.setTextContent(String.format("%d.%d", major, minor));
+        } else {
 
-            } else {
+            for (RecordTypeDefinition.Member member : definition.getMembers()) {
 
-                for (RecordTypeDefinition.Member member : definition.getMembers()) {
+                Definition itemdef = findBaseDefinition(defresolver.getDefinition(member.getType()));
 
-                    Definition itemdef = findBaseDefinition(defresolver.getDefinition(member.getType()));
+                Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), member.getName());
 
-                    Element elem = element.getOwnerDocument().createElementNS(definition.getNamespace().toString(), member.getName());
+                elem.setPrefix(getPrefix(definition.getNamespace()));
 
-                    elem.setPrefix(getPrefix(definition.getNamespace()));
+                applyRule5(elem, value, itemdef);
 
-                    applyRule5(elem, value, itemdef);
-
-                    element.appendChild(elem);
-                }
+                element.appendChild(elem);
             }
-
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
         }
 
     }
 
-    void applyRule5_9(Element element, InputStream value, RenameTypeDefinition definition) throws RuleException {
+    void applyRule5_9(Element element, InputStream value, RenameTypeDefinition definition) throws RuleException, IOException {
 
         Definition rdef = defresolver.getDefinition(definition.getRenamedType());
 
@@ -909,7 +884,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_10(Element element, InputStream value, SetTypeDefinition definition) throws RuleException {
+    void applyRule5_10(Element element, InputStream value, SetTypeDefinition definition) throws RuleException, IOException {
 
         Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
@@ -924,17 +899,6 @@ public class FragmentBuilder {
 
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
-        } catch (IOException ioe) {
-            /*throw new RuleException(String.format("Value too short for %s", definition.getSymbol()), ioe);*/
-
-            Comment comment = element.getOwnerDocument().createComment(
-                    String.format(
-                            "Value too short for Type %s",
-                            typedef.getSymbol()
-                    )
-            );
-
-            element.appendChild(comment);
         }
 
     }
@@ -945,7 +909,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_12(Element element, InputStream value, StringTypeDefinition definition) throws RuleException {
+    void applyRule5_12(Element element, InputStream value, StringTypeDefinition definition) throws RuleException, IOException {
 
         /* Rule 5.12 */
         Definition chrdef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
@@ -977,7 +941,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_13(Element element, InputStream value, StrongReferenceTypeDefinition definition) throws RuleException {
+    void applyRule5_13(Element element, InputStream value, StrongReferenceTypeDefinition definition) throws RuleException, IOException {
 
         Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getReferenceType()));
 
@@ -985,43 +949,38 @@ public class FragmentBuilder {
             throw new RuleException("Rule 5.13 applied to non class.");
         }
 
-        try {
+        MXFInputStream kis = new MXFInputStream(value);
 
-            MXFInputStream kis = new MXFInputStream(value);
+        UUID uuid = kis.readUUID();
 
-            UUID uuid = kis.readUUID();
+        Group g = setresolver.get(uuid);
 
-            Group g = setresolver.get(uuid);
+        if (g != null) {
 
-            if (g != null) {
+            applyRule3(element, g);
 
-                applyRule3(element, g);
+        } else {
+            LOG.warning(
+                    String.format(
+                            "Strong Reference %s not found at %s",
+                            uuid.toString(),
+                            definition.getSymbol()
+                    )
+            );
 
-            } else {
-                LOG.warning(
-                        String.format(
-                                "Strong Reference %s not found at %s",
-                                uuid.toString(),
-                                definition.getSymbol()
-                        )
-                );
+            Comment comment = element.getOwnerDocument().createComment(
+                    String.format(
+                            "Strong Reference %s not found",
+                            uuid.toString()
+                    )
+            );
 
-                Comment comment = element.getOwnerDocument().createComment(
-                        String.format(
-                                "Strong Reference %s not found",
-                                uuid.toString()
-                        )
-                );
-
-                element.appendChild(comment);
-            }
-
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
+            element.appendChild(comment);
         }
+
     }
 
-    void applyRule5_alpha(Element element, InputStream value, FloatTypeDefinition definition) throws RuleException {
+    void applyRule5_alpha(Element element, InputStream value, FloatTypeDefinition definition) throws RuleException, IOException {
 
         try {
 
@@ -1047,8 +1006,6 @@ public class FragmentBuilder {
 
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
-        } catch (IOException ioe) {
-            throw new RuleException(ioe);
         }
 
     }
@@ -1106,7 +1063,7 @@ public class FragmentBuilder {
         return new String(out);
     }
 
-    void applyRule5_14(Element element, InputStream value, VariableArrayTypeDefinition definition) throws RuleException {
+    void applyRule5_14(Element element, InputStream value, VariableArrayTypeDefinition definition) throws RuleException, IOException {
 
         Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
@@ -1168,10 +1125,6 @@ public class FragmentBuilder {
             );
 
             element.appendChild(comment);
-
-        } catch (IOException ioe) {
-
-            throw new RuleException(ioe);
 
         }
 
