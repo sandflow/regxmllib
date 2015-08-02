@@ -269,7 +269,7 @@ public class FragmentBuilder {
                         )
                 );
             }
-            
+
             Element elem = node.getOwnerDocument().createElementNS(itemdef.getNamespace().toString(), itemdef.getSymbol());
 
             objelem.appendChild(elem);
@@ -340,55 +340,156 @@ public class FragmentBuilder {
 
     void applyRule4(Element element, InputStream value, Definition propdef) throws RuleException {
 
-        if (propdef.getIdentification().equals(ByteOrder_UL)) {
-            MXFInputStream kis = new MXFInputStream(value);
+        try {
 
-            int byteorder;
+            if (propdef.getIdentification().equals(ByteOrder_UL)) {
+                MXFInputStream kis = new MXFInputStream(value);
 
-            try {
-                byteorder = kis.readInt();
-            } catch (IOException ex) {
-                throw new RuleException(ex);
-            }
+                int byteorder;
 
-            if (byteorder == 0x4949) {
-                element.setTextContent(BYTEORDER_BE);
-            } else if (byteorder == 0x4D4D) {
-                element.setTextContent(BYTEORDER_LE);
+                try {
+                    byteorder = kis.readInt();
+                } catch (IOException ex) {
+                    throw new RuleException(ex);
+                }
+
+                if (byteorder == 0x4949) {
+                    element.setTextContent(BYTEORDER_BE);
+                } else if (byteorder == 0x4D4D) {
+                    element.setTextContent(BYTEORDER_LE);
+                } else {
+                    throw new RuleException("Unknown ByteOrder value.");
+                }
+
             } else {
-                throw new RuleException("Unknown ByteOrder value.");
+
+                if (propdef instanceof PropertyAliasDefinition) {
+                    propdef = defresolver.getDefinition(((PropertyAliasDefinition) propdef).getOriginalProperty());
+                }
+
+                Definition typedef = findBaseDefinition(defresolver.getDefinition(((PropertyDefinition) propdef).getType()));
+
+                if (typedef == null) {
+                    throw new RuleException(
+                            String.format(
+                                    "Type %s not found at %s.",
+                                    ((PropertyDefinition) propdef).getType().toString(),
+                                    propdef.getSymbol()
+                            )
+                    );
+                }
+
+                if (propdef.getIdentification().equals(PrimaryPackage_UL)) {
+
+                    /* EXCEPTION: PrimaryPackage is encoded as the Instance UUID of the target set
+                     but needs to be the UMID contained in the unique ID of the target set */
+                    MXFInputStream kis = new MXFInputStream(value);
+
+                    UUID uuid = kis.readUUID();
+
+                    /* is this a local reference through Instance ID? */
+                    Group g = setresolver.get(uuid);
+
+                    if (g != null) {
+
+                        boolean foundUniqueID = false;
+
+                        /* find the unique identifier in the group */
+                        for (Triplet item : g.getItems()) {
+
+                            Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
+
+                            if (itemdef != null
+                                    && itemdef instanceof PropertyDefinition
+                                    && ((PropertyDefinition) itemdef).isUniqueIdentifier()) {
+
+                                applyRule4(element, item.getValueAsStream(), itemdef);
+
+                                foundUniqueID = true;
+
+                                break;
+
+                            }
+
+                        }
+
+                        if (foundUniqueID != true) {
+
+                            LOG.warning(
+                                    String.format(
+                                            "Target Primary Package with Instance UID %s has no IsUnique element.",
+                                            uuid.toString()
+                                    )
+                            );
+
+                            element.appendChild(
+                                    element.getOwnerDocument().createComment(
+                                            String.format(
+                                                    "Target Primary Package with Instance UID %s has no IsUnique element.",
+                                                    uuid.toString()
+                                            )
+                                    )
+                            );
+
+                        }
+
+                    } else {
+
+                        LOG.warning(
+                                String.format(
+                                        "Target Primary Package with Instance UID %s not found.",
+                                        uuid.toString()
+                                )
+                        );
+
+                        element.appendChild(
+                                element.getOwnerDocument().createComment(
+                                        String.format(
+                                                "Target Primary Package with Instance UID %s not found.",
+                                                uuid.toString()
+                                        )
+                                )
+                        );
+
+                    }
+
+                } else {
+
+                    if (propdef.getIdentification().equals(LinkedGenerationID_UL)
+                            || propdef.getIdentification().equals(GenerationID_UL)
+                            || propdef.getIdentification().equals(ApplicationProductID_UL)) {
+
+                        /* EXCEPTION: LinkedGenerationID, GenerationID and ApplicationProductID
+                         are encoded using UUID */
+                        typedef = defresolver.getDefinition(new AUID(UUID_UL));
+                    }
+
+                    applyRule5(element, value, typedef);
+                }
             }
 
-        } else {
+        } catch (EOFException eof) {
 
-            if (propdef instanceof PropertyAliasDefinition) {
-                propdef = defresolver.getDefinition(((PropertyAliasDefinition) propdef).getOriginalProperty());
-            }
+            LOG.warning(
+                    String.format(
+                            "Value too short for element %s",
+                            propdef.getSymbol()
+                    )
+            );
 
-            Definition typedef = findBaseDefinition(defresolver.getDefinition(((PropertyDefinition) propdef).getType()));
+            Comment comment = element.getOwnerDocument().createComment(
+                    String.format(
+                            "Value too short for element %s",
+                            propdef.getSymbol()
+                    )
+            );
 
-            if (typedef == null) {
-                throw new RuleException(
-                        String.format(
-                                "Type %s not found at %s.",
-                                ((PropertyDefinition) propdef).getType().toString(),
-                                propdef.getSymbol()
-                        )
-                );
-            }
-            
-            if (propdef.getIdentification().equals(PrimaryPackage_UL) ||
-                    propdef.getIdentification().equals(LinkedGenerationID_UL) ||
-                    propdef.getIdentification().equals(GenerationID_UL) ||
-                    propdef.getIdentification().equals(ApplicationProductID_UL)) { 
-                
-                /* ISSUE: PrimaryPackage, LinkedGenerationID, GenerationID and ApplicationProductID
-                are encoded using UUID */
-                
-                typedef = defresolver.getDefinition(new AUID(UUID_UL));
-            } 
-                
-            applyRule5(element, value, typedef);
+            element.appendChild(comment);
+
+        } catch (IOException ioe) {
+
+            throw new RuleException(ioe);
+
         }
 
     }
@@ -694,7 +795,7 @@ public class FragmentBuilder {
         if (millis != 0) {
             sb.append(String.format(".%03d", millis));
         }
-        
+
         sb.append("Z");
 
         return sb.toString();
@@ -966,13 +1067,13 @@ public class FragmentBuilder {
 
         return definition;
     }
-    
+
     public Collection<PropertyDefinition> getAllMembersOf(ClassDefinition definition) {
         ClassDefinition cdef = definition;
-        
+
         ArrayList<PropertyDefinition> props = new ArrayList<>();
-        
-         while (cdef != null) {
+
+        while (cdef != null) {
 
             for (AUID auid : defresolver.getMembersOf(cdef)) {
                 props.add((PropertyDefinition) defresolver.getDefinition(auid));
@@ -985,8 +1086,8 @@ public class FragmentBuilder {
             }
 
         }
-         
-         return props;
+
+        return props;
     }
 
     final static char[] HEXMAP = "0123456789abcdef".toCharArray();
@@ -1054,11 +1155,11 @@ public class FragmentBuilder {
             }
 
         } catch (UnsupportedEncodingException e) {
-            
+
             throw new RuntimeException(e);
-            
+
         } catch (EOFException eof) {
-            
+
             Comment comment = element.getOwnerDocument().createComment(
                     String.format(
                             "Value too short for Type %s",
@@ -1067,11 +1168,11 @@ public class FragmentBuilder {
             );
 
             element.appendChild(comment);
-            
+
         } catch (IOException ioe) {
-            
+
             throw new RuleException(ioe);
-            
+
         }
 
     }
