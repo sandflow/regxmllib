@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000034 -->
+<!-- master_commit_tag=v000000039 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -981,7 +981,7 @@
       <Symbol>InstanceID</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
       <Kind>LEAF</Kind>
-      <Name>Instance ID</Name>
+      <Name>Instance UID</Name>
       <Definition>Unique ID of an instance</Definition>
       <Applications>mxflib MXF</Applications>
       <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
@@ -2457,7 +2457,7 @@
       <DefiningDocument>SMPTE 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.04030100.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.04011400.00000000</Type>
       <ValueLength>Variable</ValueLength>
     </Entry>
     <Entry>
@@ -14599,8 +14599,7 @@
       <DefiningDocument>SMPTE 382M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
-      <ValueLength>8 + n*4 bytes</ValueLength>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -15982,11 +15981,10 @@
       <Kind>LEAF</Kind>
       <Name>Descriptive Metadata Scheme</Name>
       <Definition>The Universal Label of the Descriptive Metadata scheme that is referenced by the DM Framework property</Definition>
-      <DefiningDocument>SMPTE 377M-1</DefiningDocument>
+      <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
-      <ValueLength>8 + 16*n</ValueLength>
+      <Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -16010,7 +16008,7 @@
       <Kind>LEAF</Kind>
       <Name>Text-Based Metadata Payload Scheme Identifier</Name>
       <Definition>Unique identifier for text-based payload scheme.</Definition>
-      <DefiningDocument>SMPTE RP2507</DefiningDocument>
+      <DefiningDocument>SMPTE RP2057</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
@@ -20211,11 +20209,10 @@
       <Kind>LEAF</Kind>
       <Name>Timebase Reference Track ID</Name>
       <Definition>Specifies the value of the Track ID of the target Track in the Material Package that provides the Edit Rate.</Definition>
-      <DefiningDocument>377M-1</DefiningDocument>
+      <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.04100300.00000000</Type>
-      <ValueLength>4 bytes</ValueLength>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -20682,7 +20679,7 @@
       <Kind>LEAF</Kind>
       <Name>Package Marker Object</Name>
       <Definition>A strong reference to a Package Marker object</Definition>
-      <DefiningDocument>377M-1</DefiningDocument>
+      <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.05022e00.00000000</Type>
@@ -20695,7 +20692,6 @@
       <Kind>LEAF</Kind>
       <Name>Package Timeline Marker Object</Name>
       <Definition>A strong reference to a Package Marker object</Definition>
-      <DefiningDocument>377M-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.05022e00.00000000</Type>
@@ -20708,7 +20704,7 @@
       <Kind>LEAF</Kind>
       <Name>Register Administration Object</Name>
       <Definition>A strong reference to one concrete class of the Register Administration object base class.</Definition>
-      <DefiningDocument>377M-1</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2045</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.05022c00.00000000</Type>
@@ -20721,7 +20717,7 @@
       <Kind>LEAF</Kind>
       <Name>Register Entry Administration Object</Name>
       <Definition>A strong reference to one concrete subclass of the EntryAdministration base class object.</Definition>
-      <DefiningDocument>377M-1</DefiningDocument>
+      <DefiningDocument>SMPTE ST 2045</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.05022d00.00000000</Type>
@@ -28169,11 +28165,10 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/element</NamespaceName>
-      <Symbol>ebucoreMain</Symbol>
+      <Symbol>EBUCoreMainFramework</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d020101.00000000</UL>
       <Kind>NODE</Kind>
-      <Name>ebucore Main</Name>
-      <Definition>The EBUCore root element</Definition>
+      <Name>EBU Core Main Framework</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>

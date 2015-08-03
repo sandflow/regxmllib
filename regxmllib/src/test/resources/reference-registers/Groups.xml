@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000034 -->
+<!-- master_commit_tag=v000000039 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -3767,6 +3767,24 @@
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010c.05200701.0e000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsUniqueID>true</IsUniqueID>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010c.04060804.00000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010c.05200701.10000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsUniqueID>false</IsUniqueID>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -4836,6 +4854,7 @@
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010c.05200701.0d000000</UL>
           <LocalTag>0</LocalTag>
+          <IsUniqueID>true</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
@@ -7365,7 +7384,8 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.01011540.01010000</UL>
-          <IsOptional>true</IsOptional>
+          <IsUniqueID>true</IsUniqueID>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010103.02300102.01010000</UL>
@@ -8190,6 +8210,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.01011540.01020000</UL>
+          <IsUniqueID>true</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
@@ -8595,10 +8616,10 @@
     <Entry>
       <Register>Groups</Register>
       <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
-      <Symbol>ebucoreMain</Symbol>
+      <Symbol>EBUCoreMainFramework</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020101.00000000</UL>
       <Kind>LEAF</Kind>
-      <Name>ebucore Main</Name>
+      <Name>EBU Core Main Framework</Name>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>

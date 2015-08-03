@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000034 -->
+<!-- master_commit_tag=v000000039 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -5484,7 +5484,7 @@
       <Kind>LEAF</Kind>
       <Name>MPEG-2 AAC Compressed Audio</Name>
       <Definition>Identifies MPEG-2 Advanced Audio Coding</Definition>
-      <DefiningDocument>ISO/IEC 13818-4:1998/Amd-1:1999</DefiningDocument>
+      <DefiningDocument>ISO/IEC 13818-7</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
