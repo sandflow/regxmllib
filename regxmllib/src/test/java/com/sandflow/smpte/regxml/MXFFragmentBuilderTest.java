@@ -69,13 +69,13 @@ public class MXFFragmentBuilderTest extends TestCase {
         super.setUp();
 
         /* load the registers */
-        Reader fe = new InputStreamReader(getClass().getResourceAsStream("/resources/reference-registers/Elements.xml"));
+        Reader fe = new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/reference-registers/Elements.xml"));
         assertNotNull(fe);
 
-        Reader fg = new InputStreamReader(getClass().getResourceAsStream("/resources/reference-registers/Groups.xml"));
+        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/reference-registers/Groups.xml"));
         assertNotNull(fg);
 
-        Reader ft = new InputStreamReader(getClass().getResourceAsStream("/resources/reference-registers/Types.xml"));
+        Reader ft = new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/reference-registers/Types.xml"));
         assertNotNull(ft);
 
         ElementsRegister ereg = ElementsRegister.fromXML(fe);
@@ -112,7 +112,7 @@ public class MXFFragmentBuilderTest extends TestCase {
 
 
         /* get the sample files */
-        InputStream sampleis = MXFFragmentBuilderTest.class.getResourceAsStream(spath);
+        InputStream sampleis = ClassLoader.getSystemResourceAsStream(spath);
         assertNotNull(sampleis);
 
         /* build the regxml fragment */
@@ -128,7 +128,7 @@ public class MXFFragmentBuilderTest extends TestCase {
 
 
         /* load the reference document */
-        InputStream refis = getClass().getResourceAsStream(refpath);
+        InputStream refis = ClassLoader.getSystemResourceAsStream(refpath);
         assertNotNull(refis);
 
         Document refdoc = db.parse(refis);
@@ -146,25 +146,25 @@ public class MXFFragmentBuilderTest extends TestCase {
      */
     public void testFromInputStreamAudio1() throws Exception {
 
-        compareGeneratedVsRef("/resources/sample-files/audio1.mxf", "/resources/reference-files/audio1.xml");
+        compareGeneratedVsRef("resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
 
     }
 
     public void testFromInputStreamAudio2() throws Exception {
 
-        compareGeneratedVsRef("/resources/sample-files/audio2.mxf", "/resources/reference-files/audio2.xml");
+        compareGeneratedVsRef("resources/sample-files/audio2.mxf", "resources/reference-files/audio2.xml");
 
     }
 
     public void testFromInputStreamVideo1() throws Exception {
 
-        compareGeneratedVsRef("/resources/sample-files/video1.mxf", "/resources/reference-files/video1.xml");
+        compareGeneratedVsRef("resources/sample-files/video1.mxf", "resources/reference-files/video1.xml");
 
     }
 
     public void testFromInputStreamVideo2() throws Exception {
 
-        compareGeneratedVsRef("/resources/sample-files/video2.mxf", "/resources/reference-files/video2.xml");
+        compareGeneratedVsRef("resources/sample-files/video2.mxf", "resources/reference-files/video2.xml");
 
     }
 
