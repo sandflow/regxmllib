@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000039 -->
+<!-- master_commit_tag=v000000046 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -3861,7 +3861,7 @@
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>UUIDArray</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.04011400.00000000</UL>
+      <UL>urn:smpte:ul:060e2b34.01040101.04011500.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>UUIDArray</Name>
       <IsDeprecated>false</IsDeprecated>
@@ -7092,7 +7092,7 @@
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>StrongReference</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.027f0101.0d02010c.00000000</BaseType>
+      <BaseType>urn:smpte:ul:060e2b34.027f0101.0d02010d.00000000</BaseType>
     </Entry>
     <Entry>
       <Register>Types</Register>
@@ -7275,19 +7275,6 @@
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>StrongReference</TypeKind>
       <BaseType>urn:smpte:ul:060e2b34.027f0101.0d02012a.00000000</BaseType>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
-      <Symbol>planningEventStrongReference</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0d020101.013d0000</UL>
-      <Kind>LEAF</Kind>
-      <Name>planningEventStrongReference</Name>
-      <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>StrongReference</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.027f0101.0d02011c.00000000</BaseType>
     </Entry>
     <Entry>
       <Register>Types</Register>
@@ -7835,45 +7822,6 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
-      <Symbol>partWeakReference</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0d020101.02010000</UL>
-      <Kind>LEAF</Kind>
-      <Name>partWeakReference</Name>
-      <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>WeakReference</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.027f0101.0d02014b.00000000</BaseType>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
-      <Symbol>formatWeakReference</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0d020101.02020000</UL>
-      <Kind>LEAF</Kind>
-      <Name>formatWeakReference</Name>
-      <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>WeakReference</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.027f0101.0d02014b.00000000</BaseType>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
-      <Symbol>rightsWeakReference</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0d020101.02030000</UL>
-      <Kind>LEAF</Kind>
-      <Name>rightsWeakReference</Name>
-      <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>WeakReference</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.027f0101.0d02014b.00000000</BaseType>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
       <Symbol>StrongReferenceSets</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.0d020101.03000000</UL>
       <Kind>NODE</Kind>
@@ -8359,21 +8307,6 @@
       <TypeKind>Set</TypeKind>
       <TypeSize>0</TypeSize>
       <BaseType>urn:smpte:ul:060e2b34.01040101.0d020101.013c0000</BaseType>
-      <TypeQualifiers>isIdentified</TypeQualifiers>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
-      <Symbol>planningEventStrongReferenceSet</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0d020101.03210000</UL>
-      <Kind>LEAF</Kind>
-      <Name>planningEventStrongReferenceSet</Name>
-      <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Set</TypeKind>
-      <TypeSize>0</TypeSize>
-      <BaseType>urn:smpte:ul:060e2b34.01040101.0d020101.013d0000</BaseType>
       <TypeQualifiers>isIdentified</TypeQualifiers>
     </Entry>
     <Entry>
@@ -8988,51 +8921,6 @@
     </Entry>
     <Entry>
       <Register>Types</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
-      <Symbol>partWeakReferenceSet</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0d020101.04010000</UL>
-      <Kind>LEAF</Kind>
-      <Name>partWeakReferenceSet</Name>
-      <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Set</TypeKind>
-      <TypeSize>0</TypeSize>
-      <BaseType>urn:smpte:ul:060e2b34.01040101.0d020101.02010000</BaseType>
-      <TypeQualifiers>isIdentified</TypeQualifiers>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
-      <Symbol>formatWeakReferenceSet</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0d020101.04020000</UL>
-      <Kind>LEAF</Kind>
-      <Name>formatWeakReferenceSet</Name>
-      <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Set</TypeKind>
-      <TypeSize>0</TypeSize>
-      <BaseType>urn:smpte:ul:060e2b34.01040101.0d020101.02020000</BaseType>
-      <TypeQualifiers>isIdentified</TypeQualifiers>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/type</NamespaceName>
-      <Symbol>rightsWeakReferenceSet</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0d020101.04030000</UL>
-      <Kind>LEAF</Kind>
-      <Name>rightsWeakReferenceSet</Name>
-      <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Set</TypeKind>
-      <TypeSize>0</TypeSize>
-      <BaseType>urn:smpte:ul:060e2b34.01040101.0d020101.02030000</BaseType>
-      <TypeQualifiers>isIdentified</TypeQualifiers>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012/13/3</NamespaceName>
       <Symbol>Pro_MPEGForum</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.0d030000.00000000</UL>
@@ -9623,6 +9511,16 @@
       <Kind>NODE</Kind>
       <Name>HBO</Name>
       <Definition>Metadata registered by Home Box Office, Inc. for private use</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012/15</NamespaceName>
+      <Symbol>Experimental</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.0f000000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Experimental</Name>
+      <Definition>For use in multimedia research or other limited access, experimental environments</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
   </Entries>

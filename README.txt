@@ -15,6 +15,31 @@ RegXML (SMPTE ST 2001-1) representations of MXF header metadata
 regxmllib is implemented in pure Java. Netbeans 8.0 is used for development.
 
 
+KNOWN ISSUES AND LIMITATIONS
+============================
+
+regxmllib relies on SMPTE Metadata Registers that conform to SMPTE ST 335, 
+ST 395, ST 400, ST 2003. Such Register have reached Final Committee Draft, 
+but are not yet published. Specifically regxmllib was tested against 
+version v46 of the draft SMPTE Metadata Registers [1].
+
+[1] https://kws.smpte.org/kws/groups/30mr/download/34617 
+
+regxmllib deviates from ST 2001-1:2013 in a few narrow instances. Such deviations 
+are noted in the source code and are expected to be submitted for consideration at 
+the next revision of ST 2001-1. In particular:
+
+* AUIDs are written when serializing Extendible Enumerations, since the symbol 
+  of the label may not be known
+	
+* no baseline metadictionary is used, instead one extension metadictionary per
+  namespace is used
+
+Bugs are tracked at [1]
+
+[1] https://github.com/sandflow/regxmllib/issues
+
+
 PREREQUISITES
 =============
 
@@ -43,7 +68,7 @@ of the header metadata of the MXF file at path PATH_TO_MXF_FILE
 
 		* retrieve the four SMPTE Metadata Registers (see [1] for a recent snapshot)
 
-			[1] https://kws.smpte.org/kws/groups/30mr/download/33216
+			[1] https://kws.smpte.org/kws/groups/30mr/download/34617
     
 		* build the metadictionaries from the SMPTE registers
 
@@ -97,6 +122,7 @@ com.sandfow.smpte.tools: Application-level tools
     
 com.sandfow.smpte.util: Utilities classes
 
+
 TOOLS
 =====
 
@@ -108,6 +134,7 @@ XMLRegistersToDict: converts XML-based SMPTE metadata registers to a RegXML meta
 GenerateXMLSchemaDocuments: generates XSDs for the SMPTE metadata registers
                             
 GenerateDictionaryXMLSchema: generate XSDs for RegXML Fragments from the RegXML metadictionaries
+
 
 BUILDING METADICTIONARIES
 =========================
@@ -143,6 +170,7 @@ using the build system.
 
     /output/regxml-schemas
 
+		
 BUILDING METADATA REGISTER SCHEMAS
 ==================================
 
@@ -155,6 +183,7 @@ SMPTE Metadata Registers directly from the classes at com.sandflow.smpte.registe
 
     /output/register-schemas 
     
+
 UNIT TEST
 =========
 
@@ -167,14 +196,6 @@ Reference RegXML fragments can regenerated using by building the build-reference
 [1] /regxmllib/src/test/sample-files
 [2] /regxmllib/src/test/reference-registers
 [3] /regxmllib/src/test/reference-files 
-    
-                            
-KNOWN ISSUES
-============
-
-Issues are tracked at [1]
-
-[1] https://github.com/sandflow/regxmllib/issues
 
 
 DIRECTORIES AND NOTABLE FILES

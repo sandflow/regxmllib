@@ -826,11 +826,6 @@ public class FragmentBuilder {
             int second = kis.readUnsignedByte();
             int fraction = kis.readUnsignedByte();
 
-            /*LocalTime lt = LocalTime.of(hour, minute, second, fraction * 4000000);
-
-             OffsetTime ot = OffsetTime.of(lt, ZoneOffset.UTC);
-
-             element.setTextContent(ot.toString());*/
             element.setTextContent(generateISO8601Time(hour, minute, second, 4 * fraction));
 
         } else if (definition.getIdentification().equals(TimeStamp_UL)) {
@@ -843,11 +838,6 @@ public class FragmentBuilder {
             int second = kis.readUnsignedByte();
             int fraction = kis.readUnsignedByte();
 
-            /*LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second, fraction * 4000000);
-
-             OffsetDateTime odt = OffsetDateTime.of(ldt, ZoneOffset.UTC);
-
-             element.setTextContent(odt.toString());*/
             element.setTextContent(generateISO8601Date(year, month, day) + "T" + generateISO8601Time(hour, minute, second, 4 * fraction));
 
         } else if (definition.getIdentification().equals(VersionType_UL)) {

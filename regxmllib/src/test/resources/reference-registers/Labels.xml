@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000039 -->
+<!-- master_commit_tag=v000000046 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -31305,6 +31305,16 @@
       <Kind>NODE</Kind>
       <Name>HBO</Name>
       <Definition>Metadata registered by Home Box Office, Inc. for private use</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/15</NamespaceName>
+      <Symbol>Experimental</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010101.0f000000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Experimental</Name>
+      <Definition>For use in multimedia research or other limited access, experimental environments</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
   </Entries>

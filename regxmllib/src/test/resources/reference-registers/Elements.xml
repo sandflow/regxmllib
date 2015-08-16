@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000039 -->
+<!-- master_commit_tag=v000000046 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -981,7 +981,7 @@
       <Symbol>InstanceID</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
       <Kind>LEAF</Kind>
-      <Name>Instance UID</Name>
+      <Name>Instance ID</Name>
       <Definition>Unique ID of an instance</Definition>
       <Applications>mxflib MXF</Applications>
       <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
@@ -2457,7 +2457,7 @@
       <DefiningDocument>SMPTE 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.04011400.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.04011500.00000000</Type>
       <ValueLength>Variable</ValueLength>
     </Entry>
     <Entry>
@@ -30781,7 +30781,7 @@
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01130000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.010d0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -36302,7 +36302,7 @@
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/element</NamespaceName>
-      <Symbol>packageLocator</Symbol>
+      <Symbol>packageLocatorObject</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d02013c.03000000</UL>
       <Kind>LEAF</Kind>
       <Name>Package Locator</Name>
@@ -36310,7 +36310,7 @@
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.011b0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -37447,7 +37447,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014a.08000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Programme Audio Content IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio content</Definition>
+      <Definition>A batch of references to related audio content</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -37473,7 +37473,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014b.00000000</UL>
       <Kind>NODE</Kind>
       <Name>IDRef</Name>
-      <Definition>A set of attributes to describe and IDRef</Definition>
+      <Definition>A set of attributes to describe an IDRef</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -37649,7 +37649,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014d.05000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Content Audio Object IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio objects</Definition>
+      <Definition>A batch of references to related audio objects</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -37777,7 +37777,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.08000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Object Audio Pack Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio pack formats</Definition>
+      <Definition>A batch of references to related audio pack formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -37790,7 +37790,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.09000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Object Audio Object IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio objects</Definition>
+      <Definition>A batch of references to related audio objects</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -37803,7 +37803,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.0a000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Object Audio Track UIDRef Sets</Name>
-      <Definition>A batch of strong references to related audio track UIDs</Definition>
+      <Definition>A batch of references to related audio track UIDs</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -37892,7 +37892,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014f.06000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Pack Audio Channel Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio channel formats</Definition>
+      <Definition>A batch of references to related audio channel formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -37905,7 +37905,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014f.07000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Pack Audio Pack Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio pack formats</Definition>
+      <Definition>A batch of references to related audio pack formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -37981,7 +37981,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020150.05000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Channel Audio Block Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio block formats</Definition>
+      <Definition>A batch of references to related audio block formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38339,7 +38339,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020153.04000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Stream Audio Channel Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio channel formats</Definition>
+      <Definition>A batch of references to related audio channel formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38352,7 +38352,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020153.05000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Stream Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio stream formats</Definition>
+      <Definition>A batch of references to related audio stream formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38365,7 +38365,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020153.06000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Stream Audio Track Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio track formats</Definition>
+      <Definition>A batch of references to related audio track formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38428,7 +38428,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020154.04000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Track Audio Stream Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio stream formats</Definition>
+      <Definition>A batch of references to related audio stream formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38504,7 +38504,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020155.05000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Track Audio Track Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio track formats</Definition>
+      <Definition>A batch of references to related audio track formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38517,7 +38517,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020155.06000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Track Audio Pack Format IDRef Sets</Name>
-      <Definition>A batch of strong references to related audio pack formats</Definition>
+      <Definition>A batch of references to related audio pack formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38541,7 +38541,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020156.01000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio MXF Lookup Package UIDRef Set</Name>
-      <Definition>A strong reference to a package</Definition>
+      <Definition>A reference to a package</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38554,7 +38554,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020156.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio MXF LookupTrack IDRef Set</Name>
-      <Definition>A strong reference to a track</Definition>
+      <Definition>A reference to a track</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -38567,7 +38567,7 @@
       <UL>urn:smpte:ul:060e2b34.01010101.0d020156.03000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio MXF Lookup Channel IDRef Set</Name>
-      <Definition>A strong reference to a channel</Definition>
+      <Definition>A reference to a channel</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -40809,6 +40809,26 @@
       <Kind>NODE</Kind>
       <Name>HBO</Name>
       <Definition>Metadata registered by Home Box Office, Inc. for private use</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/15</NamespaceName>
+      <Symbol>Experimental</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0f000000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Experimental</Name>
+      <Definition>For use in multimedia research or other limited access, experimental environments</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/67</NamespaceName>
+      <Symbol>Legacy_315M</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.43000000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Legacy (315M)</Name>
+      <Definition>Legacy usage by SMPTE 315M</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
   </Entries>
