@@ -91,14 +91,14 @@ public class LocalSet implements Group {
                 /* read local length */
                 switch (localset.getKey().getRegistryDesignator() >> 5 & 3) {
 
-                    /* 1 byte length field */
+                    /* ASN.1 OID BER length field */
                     case 0:
-                        locallen = kis.readUnsignedByte();
+                        locallen = kis.readBERLength();
                         break;
 
-                    /* ASN.1 OID BER length field */
+                    /* 1 byte length field */
                     case 1:
-                        locallen = kis.readBERLength();
+                        locallen = kis.readUnsignedByte();
                         break;
 
                     /* 2 byte length field */
