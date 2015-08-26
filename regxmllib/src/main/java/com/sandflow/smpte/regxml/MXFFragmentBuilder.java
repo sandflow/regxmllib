@@ -64,9 +64,10 @@ public class MXFFragmentBuilder {
             = UL.fromURN("urn:smpte:ul:060e2b34.02530101.0d010201.01100100");
 
     /**
-     * Returns a DOM Document Fragment containing a RegXML Fragment rooted at the first 
-     * Header Metadata object with the specified class, with a class that descends from
-     * the specified class. 
+     * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
+     * the first Header Metadata object with the specified class, with a class
+     * that descends from the specified class.
+     *
      * @param mxffile MXF file
      * @param defresolver MetaDictionary definitions
      * @param rootclasskey Root class of Fragment
@@ -76,7 +77,7 @@ public class MXFFragmentBuilder {
      * @throws KLVException
      * @throws com.sandflow.smpte.regxml.MXFFragmentBuilder.MXFException
      * @throws ParserConfigurationException
-     * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException 
+     * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
      */
     public static DocumentFragment fromInputStream(InputStream mxffile, DefinitionResolver defresolver, UL rootclasskey, Document document) throws IOException, KLVException, MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
 
@@ -136,77 +137,88 @@ public class MXFFragmentBuilder {
                 /* skip fill items */
                 continue;
             }
+            try {
+                Group g = LocalSet.fromTriplet(t, localreg);
 
-            Group g = LocalSet.fromTriplet(t, localreg);
+                if (g != null) {
 
-            if (g != null) {
+                    gs.add(g);
 
-                gs.add(g);
+                    Set set = Set.fromGroup(g);
 
-                Set set = Set.fromGroup(g);
+                    if (set != null) {
+                        setresolver.put(set.getInstanceID(), set);
+                    }
 
-                if (set != null) {
-                    setresolver.put(set.getInstanceID(), set);
+                } else {
+                    LOG.log(Level.WARNING, "Failed to read Group: {0}", t.getKey().toString());
                 }
-
-            } else {
-                LOG.log(Level.WARNING, "Failed to read Group: {0}", t.getKey().toString());
+            } catch (KLVException ke) {
+                LOG.warning(
+                        String.format(
+                                "Failed to read Group %s with error %s",
+                                 t.getKey().toString(),
+                                ke.getMessage()
+                        )
+                );
             }
         }
 
         /* create the fragment */
         FragmentBuilder fb = new FragmentBuilder(defresolver, setresolver);
-        
-        Group rootgroup = null;
 
-        if (rootclasskey != null) {
+            Group rootgroup = null;
 
-            Iterator<Group> iter = gs.iterator();
+            if (rootclasskey != null) {
 
-            /* find first essence descriptor */
-            while (rootgroup == null && iter.hasNext()) {
+                Iterator<Group> iter = gs.iterator();
 
-                Group g = iter.next();
+                /* find first essence descriptor */
+                while (rootgroup == null && iter.hasNext()) {
 
-                AUID tmpauid = new AUID(g.getKey());
+                    Group g = iter.next();
 
-                /* go up the class hierarchy */
-                while (rootgroup == null && tmpauid != null) {
+                    AUID tmpauid = new AUID(g.getKey());
 
-                    Definition def = defresolver.getDefinition(tmpauid);
+                    /* go up the class hierarchy */
+                    while (rootgroup == null && tmpauid != null) {
 
-                    /* skip if not a class instance */
-                    if (!(def instanceof ClassDefinition)) {
-                        break;
+                        Definition def = defresolver.getDefinition(tmpauid);
+
+                        /* skip if not a class instance */
+                        if (!(def instanceof ClassDefinition)) {
+                            break;
+                        }
+
+                        /* is it an instance of the requested root object */
+                        UL deful = def.getIdentification().asUL();
+
+                        if (deful.equalsIgnoreVersion(rootclasskey)) {
+                            rootgroup = g;
+
+                        } else {
+                            /* get parent class */
+                            tmpauid = ((ClassDefinition) def).getParentClass();
+                        }
                     }
 
-                    /* is it an instance of the requested root object */
-                    UL deful = def.getIdentification().asUL();
-
-                    if (deful.equalsIgnoreVersion(rootclasskey)) {
-                        rootgroup = g;
-
-                    } else {
-                        /* get parent class */
-                        tmpauid = ((ClassDefinition) def).getParentClass();
-                    }
                 }
 
+            } else {
+
+                rootgroup = gs.get(0);
+
             }
 
-        } else {
-
-           rootgroup = gs.get(0) ;
-
-        }
-        
-        if (rootgroup == null) {
+            if (rootgroup == null) {
                 throw new MXFException("Root object not found");
             }
-        
-        return fb.fromTriplet(rootgroup, document);
 
-    }
+            return fb.fromTriplet(rootgroup, document);
+
+        }
+
+    
 
     public static class MXFException extends Exception {
 
