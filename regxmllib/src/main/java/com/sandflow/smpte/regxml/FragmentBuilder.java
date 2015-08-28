@@ -347,11 +347,12 @@ public class FragmentBuilder {
 
                 int byteorder;
 
-                byteorder = kis.readInt();
+                byteorder = kis.readUnsignedShort();
 
-                if (byteorder == 0x4949) {
+                /* ISSUE: ST 2001-1 inverses these constants */
+                if (byteorder == 0x4D4D) {
                     element.setTextContent(BYTEORDER_BE);
-                } else if (byteorder == 0x4D4D) {
+                } else if (byteorder == 0x4949) {
                     element.setTextContent(BYTEORDER_LE);
                 } else {
                     throw new RuleException("Unknown ByteOrder value.");
@@ -615,42 +616,54 @@ public class FragmentBuilder {
 
             byte[] val = new byte[len];
 
-            value.read(val);
+            int br = value.read(val);
+
+            if (br != len) {
+                LOG.warning(
+                        String.format(
+                                "Incorrect field legnth for Enumeration %s: expected %d and parsed %d.",
+                                definition.getIdentification(),
+                                len,
+                                br
+                        )
+                );
+            }
 
             BigInteger bi = idef.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
 
             String str = null;
 
-            for (EnumerationTypeDefinition.Element e : definition.getElements()) {
-                if (e.getValue() == bi.intValue()) {
-                    str = e.getName();
+            if (definition.getElementType().equals(Boolean_UL)) {
+
+                /* find the "true" enum element */
+                /* MXF can encode "true" as any value other than 0 */
+                for (EnumerationTypeDefinition.Element e : definition.getElements()) {
+                    if ((bi.intValue() == 0 && e.getValue() == 0) || (bi.intValue() != 0 && e.getValue() == 1)) {
+                        str = e.getName();
+                    }
                 }
+
+            } else {
+                
+                for (EnumerationTypeDefinition.Element e : definition.getElements()) {
+                    if (e.getValue() == bi.intValue()) {
+                        str = e.getName();
+                    }
+                }
+
             }
 
             if (str == null) {
 
-                if (definition.getElementType().equals(Boolean_UL)) {
+                str = "ERROR";
 
-                    /* find the "true" enum element */
-                    /* MXF can encode "true" as any value other than 0 */
-                    for (EnumerationTypeDefinition.Element e : definition.getElements()) {
-                        if (e.getValue() == 1) {
-                            str = e.getName();
-                        }
-                    }
-
-                } else {
-
-                    str = "ERROR";
-
-                    LOG.warning(
-                            String.format(
-                                    "Undefined value %d for Enumeration %s.",
-                                    bi.intValue(),
-                                    definition.getIdentification()
-                            )
-                    );
-                }
+                LOG.warning(
+                        String.format(
+                                "Undefined value %d for Enumeration %s.",
+                                bi.intValue(),
+                                definition.getIdentification()
+                        )
+                );
             }
 
             element.setTextContent(str);
@@ -750,7 +763,18 @@ public class FragmentBuilder {
 
             byte[] val = new byte[len];
 
-            value.read(val);
+            int br = value.read(val);
+            
+            if (br != len) {
+                LOG.warning(
+                        String.format(
+                                "Incorrect field legnth for Integer %s: expected %d and parsed %d.",
+                                definition.getIdentification(),
+                                len,
+                                br
+                        )
+                );
+            }
 
             BigInteger bi = definition.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
             element.setTextContent(bi.toString());

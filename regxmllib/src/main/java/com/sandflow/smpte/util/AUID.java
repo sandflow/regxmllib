@@ -108,14 +108,10 @@ public class AUID {
 
     @Override
     public String toString() {
-        
         if (isUL()) {
-
             return asUL().toString();
-        } else {
-            UUID uuid = new UUID(value);
-            
-            return uuid.toString();
+        } else {           
+            return asUUID().toString();
         }
     }
 
@@ -124,7 +120,7 @@ public class AUID {
      * @return true if the AUID is a UL
      */
     public boolean isUL() {
-        return (value[0] & 8) == 0;
+        return (value[0] & 0x80) == 0;
     }
     
     /**
