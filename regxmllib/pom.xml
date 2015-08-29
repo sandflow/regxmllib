@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+ 
+    <groupId>com.sandflow</groupId>
+    <artifactId>regxmllib</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+ 
+    <name>regxmllib</name>
+    <url>https://github.com/sandflow/regxmllib</url>
+  
+    <licenses>
+        <license>
+            <name>BSD 2-clause "Simplified" License</name>
+            <url>http://choosealicense.com/licenses/bsd-2-clause/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Pierre-Anthony Lemieux</name>
+            <email>pal@sandflow.com</email>
+            <organization>Sandflow Consulting LLC</organization>
+            <organizationUrl>http://www.sandflow.com</organizationUrl>
+        </developer>
+    </developers>
+  
+    <scm>
+        <connection>scm:git:https://github.com/sandflow/regxmllib.git</connection>
+        <developerConnection>scm:git:https://github.com/sandflow/regxmllib.git</developerConnection>
+        <url>https://github.com/sandflow/regxmllib.git</url>
+    </scm>
+
+    <organization>
+        <name>Sandflow Consulting LLC</name>
+        <url>http://www.sandflow.com</url>
+    </organization>
+
+</project>
