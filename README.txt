@@ -53,6 +53,8 @@ Java 7 language and SDK
 
 (recommended) SMPTE Metadata Registers (Types, Elements, Groups and Labels) 
 
+(optional) GnuPG, Maven and Maven Ant Task to deploy to OSSRH
+
 
 QUICK START
 ===========
@@ -197,6 +199,16 @@ Reference RegXML fragments can regenerated using by building the build-reference
 [2] /regxmllib/src/test/reference-registers
 [3] /regxmllib/src/test/reference-files 
 
+MAVEN ARTIFACTS
+===============
+
+* GroupId        com.sandflow
+* ArtifactId     regxmllib
+
+Snapshots are deployed at https://oss.sonatype.org/content/repositories/snapshots/
+
+Releases are deployed at the central repository
+
 
 DIRECTORIES AND NOTABLE FILES
 =============================
@@ -204,6 +216,8 @@ DIRECTORIES AND NOTABLE FILES
 /regxmllib                              Source code and build artifacts
 
 /regxmllib/build.xml                    Build script (Ant)
+
+/regxmllib/pom.xml                      Maven POM file for deployment to OSSRH
 
 /regxmllib/build.properties             Constants, e.g. directory paths, used
                                         by the build script
@@ -243,6 +257,3 @@ DIRECTORIES AND NOTABLE FILES
 /input/xml-registers                    Stub directory containing the (optional)
                                         SMPTE Metadata Registers used to build
                                         the metadictionaries
-                                        
-
-          

@@ -98,7 +98,7 @@ public class XMLSchemaBuilder {
 
     /**
      * @param resolver Collection of Metadictionary definitions, typically a
-     * {@link com.sandflow.smpte.regxml.dict.MetaDictionaryGroup}
+     * {@link com.sandflow.smpte.regxml.dict.MetaDictionaryCollection}
      */
     public XMLSchemaBuilder(DefinitionResolver resolver) {
         this.resolver = resolver;
