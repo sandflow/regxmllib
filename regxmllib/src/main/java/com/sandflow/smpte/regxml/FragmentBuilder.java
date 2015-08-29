@@ -618,52 +618,70 @@ public class FragmentBuilder {
 
             int br = value.read(val);
 
-            if (br != len) {
-                LOG.warning(
-                        String.format(
-                                "Incorrect field legnth for Enumeration %s: expected %d and parsed %d.",
-                                definition.getIdentification(),
-                                len,
-                                br
-                        )
-                );
-            }
-
-            BigInteger bi = idef.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
-
             String str = null;
 
-            if (definition.getElementType().equals(Boolean_UL)) {
-
-                /* find the "true" enum element */
-                /* MXF can encode "true" as any value other than 0 */
-                for (EnumerationTypeDefinition.Element e : definition.getElements()) {
-                    if ((bi.intValue() == 0 && e.getValue() == 0) || (bi.intValue() != 0 && e.getValue() == 1)) {
-                        str = e.getName();
-                    }
-                }
-
-            } else {
-                
-                for (EnumerationTypeDefinition.Element e : definition.getElements()) {
-                    if (e.getValue() == bi.intValue()) {
-                        str = e.getName();
-                    }
-                }
-
-            }
-
-            if (str == null) {
+            if (br == 0) {
 
                 str = "ERROR";
 
                 LOG.warning(
                         String.format(
-                                "Undefined value %d for Enumeration %s.",
-                                bi.intValue(),
+                                "No data at Enumeration %s.",
                                 definition.getIdentification()
                         )
                 );
+
+            } else {
+
+                if (br != len) {
+
+                    LOG.warning(
+                            String.format(
+                                    "Incorrect field legnth for Enumeration %s: expected %d and parsed %d.",
+                                    definition.getIdentification(),
+                                    len,
+                                    br
+                            )
+                    );
+
+                }
+
+                /* still try to read the value even if the length is not as expected */
+                BigInteger bi = idef.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
+
+                if (definition.getElementType().equals(Boolean_UL)) {
+
+                    /* find the "true" enum element */
+                    /* MXF can encode "true" as any value other than 0 */
+                    for (EnumerationTypeDefinition.Element e : definition.getElements()) {
+                        if ((bi.intValue() == 0 && e.getValue() == 0) || (bi.intValue() != 0 && e.getValue() == 1)) {
+                            str = e.getName();
+                        }
+                    }
+
+                } else {
+
+                    for (EnumerationTypeDefinition.Element e : definition.getElements()) {
+                        if (e.getValue() == bi.intValue()) {
+                            str = e.getName();
+                        }
+                    }
+
+                }
+
+                if (str == null) {
+
+                    str = "UNDEFINED";
+
+                    LOG.warning(
+                            String.format(
+                                    "Undefined value %d for Enumeration %s.",
+                                    bi.intValue(),
+                                    definition.getIdentification()
+                            )
+                    );
+
+                }
             }
 
             element.setTextContent(str);
@@ -764,20 +782,36 @@ public class FragmentBuilder {
             byte[] val = new byte[len];
 
             int br = value.read(val);
-            
-            if (br != len) {
+
+            if (br == 0) {
+
                 LOG.warning(
                         String.format(
-                                "Incorrect field legnth for Integer %s: expected %d and parsed %d.",
-                                definition.getIdentification(),
-                                len,
-                                br
+                                "No data at Integer %s.",
+                                definition.getIdentification()
                         )
                 );
-            }
 
-            BigInteger bi = definition.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
-            element.setTextContent(bi.toString());
+                element.setTextContent("NaN");
+
+            } else {
+
+                if (br != len) {
+                    LOG.warning(
+                            String.format(
+                                    "Incorrect field legnth for Integer %s: expected %d and parsed %d.",
+                                    definition.getIdentification(),
+                                    len,
+                                    br
+                            )
+                    );
+                }
+
+                BigInteger bi = definition.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
+                
+                element.setTextContent(bi.toString());
+
+            }
 
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
