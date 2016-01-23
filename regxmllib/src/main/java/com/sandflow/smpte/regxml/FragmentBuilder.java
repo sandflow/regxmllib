@@ -353,7 +353,10 @@ public class FragmentBuilder {
                 if (byteorder == 0x4D4D) {
                     element.setTextContent(BYTEORDER_BE);
                 } else if (byteorder == 0x4949) {
-                    element.setTextContent(BYTEORDER_LE);
+                    
+                    throw new RuleException("Little endian MXF file not supported.");
+                    
+                    /* element.setTextContent(BYTEORDER_LE); */
                 } else {
                     throw new RuleException("Unknown ByteOrder value.");
                 }
