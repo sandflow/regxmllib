@@ -351,7 +351,9 @@ public class FragmentBuilder {
 
                 /* ISSUE: ST 2001-1 inverses these constants */
                 if (byteorder == 0x4D4D) {
+                    
                     element.setTextContent(BYTEORDER_BE);
+                    
                 } else if (byteorder == 0x4949) {
                     
                     throw new RuleException("Little endian MXF file not supported.");
