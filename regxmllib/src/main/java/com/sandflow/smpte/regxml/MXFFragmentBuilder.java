@@ -62,6 +62,9 @@ public class MXFFragmentBuilder {
 
     private static final UL INDEX_TABLE_SEGMENT_UL
             = UL.fromURN("urn:smpte:ul:060e2b34.02530101.0d010201.01100100");
+    
+    private static final UL PREFACE_KEY
+            = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
     /**
      * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
@@ -149,7 +152,7 @@ public class MXFFragmentBuilder {
                     if (set != null) {
                         setresolver.put(set.getInstanceID(), set);
                     }
-
+                    
                 } else {
                     LOG.log(Level.WARNING, "Failed to read Group: {0}", t.getKey().toString());
                 }
@@ -162,6 +165,21 @@ public class MXFFragmentBuilder {
                         )
                 );
             }
+        }
+        
+        /* in MXF, the first header metadata set should be the 
+                    Preface set according to ST 377-1 Section 9.5.1 */
+        
+        if (gs.size() > 0 &&
+                ! gs.get(0).getKey().equalsWithMask(PREFACE_KEY, 0b1111101011111111 /* ignore version and Group coding */)) {
+            
+            LOG.warning(
+                        String.format(
+                                "Invalid MXF file: first Set %s following the Primer Pack is not the Preface Set.",
+                                gs.get(0).getKey()
+                        )
+                );
+            
         }
 
         /* create the fragment */

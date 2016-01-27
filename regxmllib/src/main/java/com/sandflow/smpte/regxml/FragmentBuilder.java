@@ -184,7 +184,7 @@ public class FragmentBuilder {
         Definition definition = defresolver.getDefinition(new AUID(group.getKey()));
 
         if (definition == null) {
-            LOG.warning(
+            LOG.info(
                     String.format(
                             "Unknown Group UL = %s",
                             group.getKey().toString()
@@ -217,7 +217,7 @@ public class FragmentBuilder {
 
             if (itemdef == null) {
 
-                LOG.warning(
+                LOG.info(
                         String.format(
                                 "Unknown property UL = %s at group %s",
                                 item.getKey().toString(),
@@ -228,7 +228,7 @@ public class FragmentBuilder {
                 objelem.appendChild(
                         objelem.getOwnerDocument().createComment(
                                 String.format(
-                                        "Unknown Item\nKey: %s\nData: %s",
+                                        "Unknown property\nKey: %s\nData: %s",
                                         item.getKey().toString(),
                                         bytesToString(item.getValue())
                                 )

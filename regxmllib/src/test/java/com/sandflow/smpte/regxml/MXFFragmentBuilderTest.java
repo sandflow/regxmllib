@@ -31,6 +31,7 @@ import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
+import com.sandflow.smpte.util.UL;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -56,6 +57,9 @@ import org.xml.sax.SAXException;
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
 public class MXFFragmentBuilderTest extends TestCase {
+    
+    private static final UL PREFACE_KEY
+            = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
     private MetaDictionaryCollection mds;
     private DocumentBuilder db;
@@ -110,7 +114,7 @@ public class MXFFragmentBuilderTest extends TestCase {
 
     private void compareGeneratedVsRef(String spath, String refpath) throws IOException, SAXException, KLVException, MXFFragmentBuilder.MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
 
-
+        
         /* get the sample files */
         InputStream sampleis = ClassLoader.getSystemResourceAsStream(spath);
         assertNotNull(sampleis);
@@ -120,7 +124,7 @@ public class MXFFragmentBuilderTest extends TestCase {
 
         assertNotNull(gendoc);
 
-        DocumentFragment gendf = MXFFragmentBuilder.fromInputStream(sampleis, mds, null, gendoc);
+        DocumentFragment gendf = MXFFragmentBuilder.fromInputStream(sampleis, mds, PREFACE_KEY, gendoc);
 
         assertNotNull(gendf);
 
@@ -165,6 +169,12 @@ public class MXFFragmentBuilderTest extends TestCase {
     public void testFromInputStreamVideo2() throws Exception {
 
         compareGeneratedVsRef("resources/sample-files/video2.mxf", "resources/reference-files/video2.xml");
+
+    }
+    
+    public void testFromInputStreamIndirect() throws Exception {
+
+        compareGeneratedVsRef("resources/sample-files/indirect.mxf", "resources/reference-files/indirect.xml");
 
     }
 
@@ -222,6 +232,11 @@ public class MXFFragmentBuilderTest extends TestCase {
                             "Sub element count of %s does not match reference.",
                                 el1.getLocalName())
                 );
+            
+            System.out.println("Left:");
+            System.out.println(elems1);
+            System.out.println("Right:");
+            System.out.println(elems2);
             
             return false;
         }
