@@ -26,6 +26,7 @@
 package com.sandflow.smpte.regxml;
 
 import com.sandflow.smpte.klv.Group;
+import com.sandflow.smpte.klv.KLVInputStream.ByteOrder;
 import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.mxf.MXFInputStream;
@@ -54,6 +55,7 @@ import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.HalfFloat;
+import com.sandflow.smpte.util.IDAU;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UMID;
 import com.sandflow.smpte.util.UUID;
@@ -113,11 +115,12 @@ public class FragmentBuilder {
     private static final String BYTEORDER_BE = "BigEndian";
     private static final String BYTEORDER_LE = "LittleEndian";
     private static final String UID_ATTR = "uid";
+    private static final String ACTUALTYPE_ATTR = "actualType";
 
     private final DefinitionResolver defresolver;
     private final Map<UUID, Set> setresolver;
     private final HashMap<URI, String> nsprefixes = new HashMap<>();
-
+    
     /**
      * Instantiates a FragmentBuilder
      *
@@ -153,7 +156,7 @@ public class FragmentBuilder {
 
         return df;
     }
-
+    
     private String getPrefix(URI ns) {
         String prefix = this.nsprefixes.get(ns);
 
@@ -275,8 +278,11 @@ public class FragmentBuilder {
             objelem.appendChild(elem);
 
             elem.setPrefix(getPrefix(itemdef.getNamespace()));
+            
+            
+            /* write the property */
 
-            applyRule4(elem, item.getValueAsStream(), itemdef);
+            applyRule4(elem, new MXFInputStream(item.getValueAsStream()), itemdef);
 
             /* detect cyclic references  */
             if (item.getKey().equals(INSTANCE_UID_ITEM_UL)) {
@@ -338,22 +344,35 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule4(Element element, InputStream value, Definition propdef) throws RuleException {
+    void applyRule4(Element element, MXFInputStream value, Definition propdef) throws RuleException {
 
         try {
 
             if (propdef.getIdentification().equals(ByteOrder_UL)) {
-                MXFInputStream kis = new MXFInputStream(value);
 
                 int byteorder;
 
-                byteorder = kis.readUnsignedShort();
+                byteorder = value.readUnsignedShort();
 
                 /* ISSUE: ST 2001-1 inverses these constants */
                 if (byteorder == 0x4D4D) {
+                    
                     element.setTextContent(BYTEORDER_BE);
+                    
                 } else if (byteorder == 0x4949) {
+                                        
                     element.setTextContent(BYTEORDER_LE);
+                    
+                        LOG.warning("ByteOrder property set to little-endian: either the property is set incorrectly"
+                                                + "or the file does not conform to MXF. Processing assumes a big-endian byte order.");
+                        
+                        element.appendChild(
+                                element.getOwnerDocument().createComment(
+                                        String.format("ByteOrder property set to little-endian: either the property is set incorrectly"
+                                                + "or the file does not conform to MXF. Processing assumes a big-endian byte order.")
+                                )
+                        );
+                    
                 } else {
                     throw new RuleException("Unknown ByteOrder value.");
                 }
@@ -380,9 +399,7 @@ public class FragmentBuilder {
 
                     /* EXCEPTION: PrimaryPackage is encoded as the Instance UUID of the target set
                      but needs to be the UMID contained in the unique ID of the target set */
-                    MXFInputStream kis = new MXFInputStream(value);
-
-                    UUID uuid = kis.readUUID();
+                    UUID uuid = value.readUUID();
 
                     /* is this a local reference through Instance ID? */
                     Group g = setresolver.get(uuid);
@@ -400,7 +417,7 @@ public class FragmentBuilder {
                                     && itemdef instanceof PropertyDefinition
                                     && ((PropertyDefinition) itemdef).isUniqueIdentifier()) {
 
-                                applyRule4(element, item.getValueAsStream(), itemdef);
+                                applyRule4(element, new MXFInputStream(item.getValueAsStream()), itemdef);
 
                                 foundUniqueID = true;
 
@@ -464,6 +481,7 @@ public class FragmentBuilder {
                     applyRule5(element, value, typedef);
                 }
             }
+            
 
         } catch (EOFException eof) {
 
@@ -491,7 +509,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5(Element element, InputStream value, Definition definition) throws RuleException, IOException {
+    void applyRule5(Element element, MXFInputStream value, Definition definition) throws RuleException, IOException {
 
         if (definition instanceof CharacterTypeDefinition) {
             applyRule5_1(element, value, (CharacterTypeDefinition) definition);
@@ -564,7 +582,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_1(Element element, InputStream value, CharacterTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_1(Element element, MXFInputStream value, CharacterTypeDefinition definition) throws RuleException, IOException {
 
         StringBuilder sb = new StringBuilder();
 
@@ -574,7 +592,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_2(Element element, InputStream value, EnumerationTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_2(Element element, MXFInputStream value, EnumerationTypeDefinition definition) throws RuleException, IOException {
 
         try {
 
@@ -691,13 +709,11 @@ public class FragmentBuilder {
         }
     }
 
-    void applyRule5_3(Element element, InputStream value, ExtendibleEnumerationTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_3(Element element, MXFInputStream value, ExtendibleEnumerationTypeDefinition definition) throws RuleException, IOException {
 
         try {
 
-            MXFInputStream ki = new MXFInputStream(value);
-
-            UL ul = ki.readUL();
+            UL ul = value.readUL();
 
             /* NOTE: ST 2001-1 XML Schema does not allow ULs as values for Extendible Enumerations, which
              defeats the purpose of the type. This issue could be addressed at the next revision opportunity. */
@@ -708,13 +724,11 @@ public class FragmentBuilder {
         }
     }
 
-    void applyRule5_4(Element element, InputStream value, FixedArrayTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_4(Element element, MXFInputStream value, FixedArrayTypeDefinition definition) throws RuleException, IOException {
 
         if (definition.getIdentification().equals(UUID_UL)) {
 
-            MXFInputStream kis = new MXFInputStream(value);
-
-            UUID uuid = kis.readUUID();
+            UUID uuid = value.readUUID();
 
             element.setTextContent(uuid.toString());
 
@@ -727,7 +741,7 @@ public class FragmentBuilder {
         }
     }
 
-    void applyCoreRule5_4(Element element, InputStream value, Definition typedef, int elementcount) throws RuleException, IOException {
+    void applyCoreRule5_4(Element element, MXFInputStream value, Definition typedef, int elementcount) throws RuleException, IOException {
 
         for (int i = 0; i < elementcount; i++) {
 
@@ -751,14 +765,66 @@ public class FragmentBuilder {
         }
     }
 
-    void applyRule5_5(Element element, InputStream value, IndirectTypeDefinition definition) throws RuleException {
+    void applyRule5_5(Element element, MXFInputStream value, IndirectTypeDefinition definition) throws RuleException, IOException {
+        
+        /* see https://github.com/sandflow/regxmllib/issues/74 for a discussion on Indirect Type */
+                
+        ByteOrder bo;
+        
+        switch (value.readUnsignedByte()) {
+            case 0x4c /* little endian */:
+                bo = ByteOrder.LITTLE_ENDIAN;
+                break;
+            case 0x42 /* big endian */:
+                bo = ByteOrder.BIG_ENDIAN;
+                break;
+            default:
+                throw new RuleException("Unknown Indirect Byte Order value.");
+        }
+                 
+        IDAU idau = value.readIDAU();
+        
+        if (idau == null) {
+            throw new RuleException("Invalid IDAU");
+        }
+        
+        AUID auid = idau.asAUID();
 
-        /* INFO: Indirect type is not used in MXF (ST 377-1) */
-        throw new RuleException("Indirect type not supported.");
+        Definition def = (Definition) defresolver.getDefinition(auid);
+        
+        if (def == null) {
+            LOG.warning(
+                String.format(
+                    "No definition found for indirect type with AUID %s.",
+                    idau.toString()
+                )
+            );
+
+            element.appendChild(
+                element.getOwnerDocument().createComment(
+                    String.format(
+                        "No definition found for indirect type with AUID %s.",
+                        idau.toString()
+                ))
+            );
+
+            return;
+        }
+        
+            // create reg:actualType attribute
+        
+        Attr attr = element.getOwnerDocument().createAttributeNS(REGXML_NS, ACTUALTYPE_ATTR);
+        attr.setPrefix(getPrefix(REGXML_NS));
+        attr.setTextContent(def.getSymbol());
+        element.setAttributeNodeNS(attr);
+        
+        MXFInputStream orderedval = new MXFInputStream(value, bo);
+            
+        applyRule5(element, orderedval, def);
 
     }
 
-    void applyRule5_6(Element element, InputStream value, IntegerTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_6(Element element, MXFInputStream value, IntegerTypeDefinition definition) throws RuleException, IOException {
 
         try {
 
@@ -819,7 +885,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_7(Element element, InputStream value, OpaqueTypeDefinition definition) throws RuleException {
+    void applyRule5_7(Element element, MXFInputStream value, OpaqueTypeDefinition definition) throws RuleException {
 
         /* NOTE: Opaque Types are not used in MXF */
         throw new RuleException("Opaque types are not supported.");
@@ -844,34 +910,32 @@ public class FragmentBuilder {
         return String.format("%04d-%02d-%02d", year, month, day);
     }
 
-    void applyRule5_8(Element element, InputStream value, RecordTypeDefinition definition) throws RuleException, IOException {
-
-        MXFInputStream kis = new MXFInputStream(value);
+    void applyRule5_8(Element element, MXFInputStream value, RecordTypeDefinition definition) throws RuleException, IOException {
 
         if (definition.getIdentification().equals(AUID_UL)) {
 
-            AUID auid = kis.readAUID();
+            AUID auid = value.readAUID();
 
             element.setTextContent(auid.toString());
 
         } else if (definition.getIdentification().equals(DateStruct_UL)) {
 
-            int year = kis.readUnsignedShort();
-            int month = kis.readUnsignedByte();
-            int day = kis.readUnsignedByte();
+            int year = value.readUnsignedShort();
+            int month = value.readUnsignedByte();
+            int day = value.readUnsignedByte();
 
             element.setTextContent(generateISO8601Date(year, month, day));
 
         } else if (definition.getIdentification().equals(PackageID_UL)) {
 
-            UMID umid = kis.readUMID();
+            UMID umid = value.readUMID();
 
             element.setTextContent(umid.toString());
 
         } else if (definition.getIdentification().equals(Rational_UL)) {
 
-            int numerator = kis.readInt();
-            int denominator = kis.readInt();
+            int numerator = value.readInt();
+            int denominator = value.readInt();
 
             element.setTextContent(String.format("%d/%d", numerator, denominator));
 
@@ -879,30 +943,30 @@ public class FragmentBuilder {
 
             /*INFO: ST 2001-1 and ST 377-1 diverge on the meaning of 'fraction'.
              fraction is msec/4 according to 377-1 */
-            int hour = kis.readUnsignedByte();
-            int minute = kis.readUnsignedByte();
-            int second = kis.readUnsignedByte();
-            int fraction = kis.readUnsignedByte();
+            int hour = value.readUnsignedByte();
+            int minute = value.readUnsignedByte();
+            int second = value.readUnsignedByte();
+            int fraction = value.readUnsignedByte();
 
             element.setTextContent(generateISO8601Time(hour, minute, second, 4 * fraction));
 
         } else if (definition.getIdentification().equals(TimeStamp_UL)) {
 
-            int year = kis.readUnsignedShort();
-            int month = kis.readUnsignedByte();
-            int day = kis.readUnsignedByte();
-            int hour = kis.readUnsignedByte();
-            int minute = kis.readUnsignedByte();
-            int second = kis.readUnsignedByte();
-            int fraction = kis.readUnsignedByte();
+            int year = value.readUnsignedShort();
+            int month = value.readUnsignedByte();
+            int day = value.readUnsignedByte();
+            int hour = value.readUnsignedByte();
+            int minute = value.readUnsignedByte();
+            int second = value.readUnsignedByte();
+            int fraction = value.readUnsignedByte();
 
             element.setTextContent(generateISO8601Date(year, month, day) + "T" + generateISO8601Time(hour, minute, second, 4 * fraction));
 
         } else if (definition.getIdentification().equals(VersionType_UL)) {
 
             /* EXCEPTION: registers used Int8 but MXF specifies UInt8 */
-            int major = kis.readUnsignedByte();
-            int minor = kis.readUnsignedByte();
+            int major = value.readUnsignedByte();
+            int minor = value.readUnsignedByte();
 
             element.setTextContent(String.format("%d.%d", major, minor));
 
@@ -924,7 +988,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_9(Element element, InputStream value, RenameTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_9(Element element, MXFInputStream value, RenameTypeDefinition definition) throws RuleException, IOException {
 
         Definition rdef = defresolver.getDefinition(definition.getRenamedType());
 
@@ -932,7 +996,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_10(Element element, InputStream value, SetTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_10(Element element, MXFInputStream value, SetTypeDefinition definition) throws RuleException, IOException {
 
         Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
@@ -951,13 +1015,13 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_11(Element element, InputStream value, StreamTypeDefinition definition) throws RuleException {
+    void applyRule5_11(Element element, MXFInputStream value, StreamTypeDefinition definition) throws RuleException {
 
         throw new RuleException("Rule 5.11 is not supported yet.");
 
     }
 
-    void applyRule5_12(Element element, InputStream value, StringTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_12(Element element, MXFInputStream value, StringTypeDefinition definition) throws RuleException, IOException {
 
         /* Rule 5.12 */
         Definition chrdef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
@@ -989,7 +1053,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_13(Element element, InputStream value, StrongReferenceTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_13(Element element, MXFInputStream value, StrongReferenceTypeDefinition definition) throws RuleException, IOException {
 
         Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getReferenceType()));
 
@@ -997,9 +1061,7 @@ public class FragmentBuilder {
             throw new RuleException("Rule 5.13 applied to non class.");
         }
 
-        MXFInputStream kis = new MXFInputStream(value);
-
-        UUID uuid = kis.readUUID();
+        UUID uuid = value.readUUID();
 
         Group g = setresolver.get(uuid);
 
@@ -1028,7 +1090,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_alpha(Element element, InputStream value, FloatTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_alpha(Element element, MXFInputStream value, FloatTypeDefinition definition) throws RuleException, IOException {
 
         try {
 
@@ -1058,7 +1120,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_beta(Element element, InputStream value, LensSerialFloatTypeDefinition definition) throws RuleException {
+    void applyRule5_beta(Element element, MXFInputStream value, LensSerialFloatTypeDefinition definition) throws RuleException {
 
         throw new RuleException("Lens serial floats not supported.");
 
@@ -1111,7 +1173,7 @@ public class FragmentBuilder {
         return new String(out);
     }
 
-    void applyRule5_14(Element element, InputStream value, VariableArrayTypeDefinition definition) throws RuleException, IOException {
+    void applyRule5_14(Element element, MXFInputStream value, VariableArrayTypeDefinition definition) throws RuleException, IOException {
 
         Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
@@ -1178,7 +1240,7 @@ public class FragmentBuilder {
 
     }
 
-    void applyRule5_15(Element element, InputStream value, WeakReferenceTypeDefinition typedefinition) throws RuleException {
+    void applyRule5_15(Element element, MXFInputStream value, WeakReferenceTypeDefinition typedefinition) throws RuleException {
 
         ClassDefinition classdef = (ClassDefinition) defresolver.getDefinition(typedefinition.getReferencedType());
 

@@ -29,6 +29,7 @@ import com.sandflow.smpte.klv.KLVInputStream;
 import com.sandflow.smpte.klv.adapters.TripletValueAdapter;
 import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.util.AUID;
+import com.sandflow.smpte.util.IDAU;
 import com.sandflow.smpte.util.UMID;
 import com.sandflow.smpte.util.UUID;
 import java.io.EOFException;
@@ -43,10 +44,22 @@ import java.util.Collection;
 public class MXFInputStream extends KLVInputStream {
 
     /**
+     * Assumes big endian byte ordering.
+     * 
      * @param is InputStream to read from
      */
     public MXFInputStream(InputStream is) {
         super(is);
+    }
+    
+    /**
+     * Allows the byte ordering to be specified.
+     * 
+     * @param is InputStream to read from
+     * @param byteorder Byte ordering of the file
+     */
+    public MXFInputStream(InputStream is, ByteOrder byteorder) {
+        super(is, byteorder);
     }
 
     /**
@@ -65,6 +78,22 @@ public class MXFInputStream extends KLVInputStream {
         return new UUID(uuid);
     }
 
+    /**
+     * Reads a single IDAU.
+     * @return IDAU
+     * @throws IOException
+     * @throws EOFException 
+     */
+    public IDAU readIDAU() throws IOException, EOFException {
+        byte[] idau = new byte[16];
+
+        if (read(idau) < idau.length) {
+            throw new EOFException();
+        }
+
+        return new IDAU(idau);
+    }
+    
     /**
      * Reads a single AUID.
      * @return AUID
