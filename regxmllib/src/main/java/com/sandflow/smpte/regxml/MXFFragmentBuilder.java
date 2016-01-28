@@ -167,19 +167,31 @@ public class MXFFragmentBuilder {
             }
         }
         
-        /* in MXF, the first header metadata set should be the 
-                    Preface set according to ST 377-1 Section 9.5.1 */
+        for(Group agroup : gs) {
         
-        if (gs.size() > 0 &&
-                ! gs.get(0).getKey().equalsWithMask(PREFACE_KEY, 0b1111101011111111 /* ignore version and Group coding */)) {
+            /* in MXF, the first header metadata set should be the 
+            Preface set according to ST 377-1 Section 9.5.1, preceded
+            by Class 14 groups
+            */
+
+            if (agroup.getKey().equalsWithMask(PREFACE_KEY, 0b1111101011111111 /* ignore version and Group coding */)) {
+
+                break;
+                
+            } else if (! agroup.getKey().isClass14()) {
             
-            LOG.warning(
-                        String.format(
-                                "Invalid MXF file: first Set %s following the Primer Pack is not the Preface Set.",
-                                gs.get(0).getKey()
-                        )
+                LOG.warning(
+                    String.format(
+                        "Invalid MXF file: at least one non-class 14 Set %s was found between"
+                                + " the Primer Pack and the Preface Set.",
+                        agroup.getKey()
+                    )
                 );
-            
+                
+                break;
+
+            }
+        
         }
 
         /* create the fragment */
