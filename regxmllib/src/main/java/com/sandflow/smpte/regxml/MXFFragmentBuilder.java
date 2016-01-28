@@ -62,6 +62,9 @@ public class MXFFragmentBuilder {
 
     private static final UL INDEX_TABLE_SEGMENT_UL
             = UL.fromURN("urn:smpte:ul:060e2b34.02530101.0d010201.01100100");
+    
+    private static final UL PREFACE_KEY
+            = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
     /**
      * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
@@ -149,7 +152,7 @@ public class MXFFragmentBuilder {
                     if (set != null) {
                         setresolver.put(set.getInstanceID(), set);
                     }
-
+                    
                 } else {
                     LOG.log(Level.WARNING, "Failed to read Group: {0}", t.getKey().toString());
                 }
@@ -162,6 +165,33 @@ public class MXFFragmentBuilder {
                         )
                 );
             }
+        }
+        
+        for(Group agroup : gs) {
+        
+            /* in MXF, the first header metadata set should be the 
+            Preface set according to ST 377-1 Section 9.5.1, preceded
+            by Class 14 groups
+            */
+
+            if (agroup.getKey().equalsWithMask(PREFACE_KEY, 0b1111101011111111 /* ignore version and Group coding */)) {
+
+                break;
+                
+            } else if (! agroup.getKey().isClass14()) {
+            
+                LOG.warning(
+                    String.format(
+                        "Invalid MXF file: at least one non-class 14 Set %s was found between"
+                                + " the Primer Pack and the Preface Set.",
+                        agroup.getKey()
+                    )
+                );
+                
+                break;
+
+            }
+        
         }
 
         /* create the fragment */

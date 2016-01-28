@@ -28,21 +28,44 @@ package com.sandflow.smpte.klv;
 import com.sandflow.smpte.klv.exceptions.KLVException;
 import static com.sandflow.smpte.klv.exceptions.KLVException.MAX_LENGTH_EXCEEED;
 import com.sandflow.smpte.util.UL;
+import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.EOFException;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * KLVInputStream allows KLV data structures to be read from an InputStream
  */
-public class KLVInputStream extends DataInputStream {
+public class KLVInputStream extends InputStream implements DataInput {
+    
+    public enum ByteOrder {
+        LITTLE_ENDIAN,
+        BIG_ENDIAN
+    }
+    
+    private DataInputStream dis;
+    private ByteOrder byteorder;
 
     /**
+     * Assumes big endian byte ordering.
+     * 
      * @param is InputStream to read from
      */
     public KLVInputStream(InputStream is) {
-        super(is);
+        this(is, ByteOrder.BIG_ENDIAN);
+    }
+    
+    /**
+     * Allows the byte ordering to be specified.
+     * 
+     * @param is InputStream to read from
+     * @param byteorder Byte ordering of the file
+     */
+    public KLVInputStream(InputStream is, ByteOrder byteorder) {
+        dis = new DataInputStream(is);
+        this.byteorder = byteorder;
     }
 
     /**
@@ -134,7 +157,204 @@ public class KLVInputStream extends DataInputStream {
         return new MemoryTriplet(ul, value);
     }
 
-    public long readUnsignedInt() throws IOException, EOFException {
-        return ((long) readInt()) & 0xFFFF;
+    @Override
+    public final int read(byte[] bytes) throws IOException {
+        return dis.read(bytes);
     }
+
+    @Override
+    public final int read(byte[] bytes, int i, int i1) throws IOException {
+        return dis.read(bytes, i, i1);
+    }
+
+    @Override
+    public final void readFully(byte[] bytes) throws IOException {
+        dis.readFully(bytes);
+    }
+
+    @Override
+    public final void readFully(byte[] bytes, int i, int i1) throws IOException {
+        dis.readFully(bytes, i, i1);
+    }
+
+    @Override
+    public final int skipBytes(int i) throws IOException {
+        return dis.skipBytes(i);
+    }
+
+    @Override
+    public final boolean readBoolean() throws IOException {
+        return dis.readBoolean();
+    }
+
+    @Override
+    public final byte readByte() throws IOException {
+        return dis.readByte();
+    }
+
+    @Override
+    public final int readUnsignedByte() throws IOException {
+        return dis.readUnsignedByte();
+    }
+
+    @Override
+    public final short readShort() throws IOException {
+        
+        if (byteorder == ByteOrder.BIG_ENDIAN) {
+        
+            return dis.readShort();
+            
+        } else {
+            
+            int lo = readUnsignedByte();
+            int hi = readUnsignedByte();
+            
+            return (short) (lo + (hi << 8));
+            
+        }
+    }
+
+    @Override
+    public final int readUnsignedShort() throws IOException {
+        
+        if (byteorder == ByteOrder.BIG_ENDIAN) {
+        
+            return dis.readUnsignedShort();
+            
+        } else {
+            
+            int lo = readUnsignedByte();
+            int hi = readUnsignedByte();
+            
+            return lo + hi << 8;
+            
+        }
+    }
+
+    @Override
+    public final char readChar() throws IOException {
+        return dis.readChar();
+    }
+
+    @Override
+    public final int readInt() throws IOException {
+        
+        if (byteorder == ByteOrder.BIG_ENDIAN) {
+        
+            return dis.readInt();
+            
+        } else {
+            
+            int b0 = readUnsignedByte();
+            int b1 = readUnsignedByte();
+            int b2 = readUnsignedByte();
+            int b3 = readUnsignedByte();
+            
+            return b0 + (b1 << 8) + (b2 << 16) + (b3 << 24);
+            
+        }
+        
+    }
+    
+    public long readUnsignedInt() throws IOException, EOFException {
+        
+        if (byteorder == ByteOrder.BIG_ENDIAN) {
+        
+            return ((long) dis.readInt()) & 0xFFFF;
+            
+        } else {
+            
+            int b0 = readUnsignedByte();
+            int b1 = readUnsignedByte();
+            int b2 = readUnsignedByte();
+            int b3 = readUnsignedByte();
+            
+            return ((long) b0 + (b1 << 8) + (b2 << 16) + (b3 << 24)) & 0xFFFF;
+            
+        }
+        
+    }
+
+    @Override
+    public final long readLong() throws IOException {
+        
+        if (byteorder == ByteOrder.BIG_ENDIAN) {
+        
+            return dis.readLong();
+            
+        } else {
+            
+            int b0 = readUnsignedByte();
+            int b1 = readUnsignedByte();
+            int b2 = readUnsignedByte();
+            int b3 = readUnsignedByte();
+            int b4 = readUnsignedByte();
+            int b5 = readUnsignedByte();
+            int b6 = readUnsignedByte();
+            int b7 = readUnsignedByte();
+            
+            return b0 + (b1 << 8) + (b2 << 16) + (b3 << 24) + (b4 << 32) + (b5 << 40) + (b6 << 48) + (b7 << 56);
+            
+        }
+    }
+
+    @Override
+    public final float readFloat() throws IOException {
+        return dis.readFloat();
+    }
+
+    @Override
+    public final double readDouble() throws IOException {
+        return dis.readDouble();
+    }
+
+    @Override
+    public final String readLine() throws IOException {
+        return dis.readLine();
+    }
+
+    @Override
+    public final String readUTF() throws IOException {
+        return dis.readUTF();
+    }
+
+    public static final String readUTF(DataInput di) throws IOException {
+        return DataInputStream.readUTF(di);
+    }
+
+    @Override
+    public int read() throws IOException {
+        return dis.read();
+    }
+
+    @Override
+    public long skip(long l) throws IOException {
+        return dis.skip(l);
+    }
+
+    @Override
+    public int available() throws IOException {
+        return dis.available();
+    }
+
+    @Override
+    public void close() throws IOException {
+        dis.close();
+    }
+
+    @Override
+    public synchronized void mark(int i) {
+        dis.mark(i);
+    }
+
+    @Override
+    public synchronized void reset() throws IOException {
+        dis.reset();
+    }
+
+    @Override
+    public boolean markSupported() {
+        return dis.markSupported();
+    }
+    
 }
