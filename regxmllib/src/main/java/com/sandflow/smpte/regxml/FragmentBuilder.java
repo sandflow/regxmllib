@@ -102,6 +102,7 @@ public class FragmentBuilder {
     private static final UL ByteOrder_UL = UL.fromDotValue("06.0E.2B.34.01.01.01.01.03.01.02.01.02.00.00.00");
     private static final UL Character_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100100.00000000");
     private static final UL Char_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100300.00000000");
+    private static final UL UTF8Character_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01100500.00000000");
     private static final UL ProductReleaseType_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.02010101.00000000");
     private static final UL Boolean_UL = UL.fromURN("urn:smpte:ul:060e2b34.01040101.01040100.00000000");
     private static final UL PrimaryPackage_UL = UL.fromURN("urn:smpte:ul:060e2b34.01010104.06010104.01080000");
@@ -566,6 +567,8 @@ public class FragmentBuilder {
             in = new InputStreamReader(value, "UTF-16BE");
         } else if (definition.getIdentification().equals(Char_UL)) {
             in = new InputStreamReader(value, "US-ASCII");
+        } else if (definition.getIdentification().equals(UTF8Character_UL)) {
+            in = new InputStreamReader(value, "UTF-8");
         } else {
             throw new RuleException(
                     String.format("Character type %s not supported",
