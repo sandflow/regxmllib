@@ -568,6 +568,7 @@ public class FragmentBuilder {
         } else if (definition.getIdentification().equals(Char_UL)) {
             in = new InputStreamReader(value, "US-ASCII");
         } else if (definition.getIdentification().equals(UTF8Character_UL)) {
+            /* NOTE: Use of UTF-8 character encoding is specified in RP 2057 */
             in = new InputStreamReader(value, "UTF-8");
         } else {
             throw new RuleException(
