@@ -1,53 +1,26 @@
-<!-- Metadata tags to support XML file editing -->
-<!--  -->
-<!-- Please fill these in if you edit this XML file -->
-<!-- author= -->
-<!-- edit_date= -->
-<!-- summary_of_edit= -->
-<!--  -->
-<!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000046 -->
-<!-- DO NOT EDIT THIS TAG -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- DRAFT - SMPTE METADATA REGISTERS XML -->
-<!-- ##################################### -->
-<!--  -->
-<!-- Latest XML Files + Web Views -->
-<!-- ############################ -->
-<!--  -->
-<!-- See http://vm-1042-user.virt.ch.bbc.co.uk/ for the latest XML files and Web Views (tables, etc) of this data which make it easier -->
-<!-- to explore, browse, manually check etc. Login with: -->
-<!-- username: smpte -->
-<!-- password: smpte -->
-<!-- (N.B. Best viewed with the Chrome browser) -->
-<!--  -->
-<!-- Editing these XML Files -->
-<!-- ####################### -->
-<!--  -->
-<!-- If you wish to edit one of these XML files please first complete the metadata tags at the top of the file. -->
-<!-- Then edit existing entries in the XML or add new entries. -->
-<!-- When editing the XML file you may delete some or all of the original entries - leaving only those that you are -->
-<!-- working on may make editing simpler and less error prone. -->
-<!-- If you think that an entry actually needs to be deleted from the Registers please get in touch. -->
-<!-- You must not edit the UL of an entry - doing so would make it look like you want to create a new entry. -->
-<!-- Please get in touch if you think the UL of an entry in the Registers actually needs to be changed. -->
-<!--  -->
-<!-- Please create a ZIP file containing all of the XML files you have edited. -->
-<!-- This may contain zero or more XML files for each Register. -->
-<!-- Try to only make related edits in the XML files you include in the ZIP - if you have two sets of unrelated changes to make -->
-<!-- please do these in separate XML files that are packaged into two separate ZIP files. All the changes will ultimately be merged into the -->
-<!-- Registers. -->
-<!-- When ready, please send your ZIP file(s) by email (each ZIP file in its own email message). -->
-<!--  -->
-<!-- Contact -->
-<!-- ####### -->
-<!--  -->
-<!-- Please email:  30mr10wg-def@lists.smpte.org -->
-<!--  -->
-<!--  -->
+<!-- Published version (v000000053) edited to fix entries for SMPTE RP 2057 -->
+<!--
+Copyright (c) 2016 SMPTE All rights reserved.
+
+The latest version of this document can be retrieved at
+
+http://smpte-ra.org/smpte-metadata-registry
+
+The document is constructed according to 
+
+ST 395:2014  -  Metadata Groups Register,
+
+which is available at http://dx.doi.org/10.5594/SMPTE.ST395.2014
+
+Use of this file without consulting the corresponding SMPTE Engineering Document is NOT supported.  Interoperability will generally require adherence to additional guidelines and constraints specified in the corresponding prose document.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
 <GroupsRegister xmlns="http://www.smpte-ra.org/schemas/395/2014">
   <Entries>
     <Entry>
@@ -2558,6 +2531,7 @@
           <LocalTag>12801</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010502.01000000</UL>
@@ -3491,6 +3465,7 @@
           <LocalTag>18433</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01070102.01000000</UL>
@@ -3605,11 +3580,13 @@
           <UL>urn:smpte:ul:060e2b34.0101010a.07020103.010e0000</UL>
           <LocalTag>19206</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.07020103.02040000</UL>
           <LocalTag>19207</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
       </Contents>
     </Entry>
@@ -3760,12 +3737,14 @@
           <LocalTag>24834</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.06010104.020c0000</UL>
           <LocalTag>24833</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010c.05200701.0e000000</UL>
@@ -3813,6 +3792,7 @@
           <LocalTag>15618</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04020101.03000000</UL>
@@ -3849,6 +3829,7 @@
           <LocalTag>15622</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010e.04020101.07000000</UL>
@@ -3882,6 +3863,7 @@
           <LocalTag>15873</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
       </Contents>
     </Entry>
@@ -3928,6 +3910,7 @@
           <LocalTag>24835</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
       </Contents>
     </Entry>
@@ -6400,11 +6383,13 @@
           <UL>urn:smpte:ul:060e2b34.01010104.04060201.00000000</UL>
           <LocalTag>16133</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.01030405.00000000</UL>
           <LocalTag>16134</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.01030404.00000000</UL>
@@ -6415,31 +6400,37 @@
           <UL>urn:smpte:ul:060e2b34.01010104.04040401.01000000</UL>
           <LocalTag>16136</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04040401.07000000</UL>
           <LocalTag>16142</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>true</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04040401.06000000</UL>
           <LocalTag>16137</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>true</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04040402.05000000</UL>
           <LocalTag>16138</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04060204.00000000</UL>
           <LocalTag>16143</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04060205.00000000</UL>
           <LocalTag>16144</LocalTag>
           <IsOptional>true</IsOptional>
+          <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010e.04040501.00000000</UL>
@@ -8321,10 +8312,17 @@
       <Name>Text-based Framework</Name>
       <Definition>Text-based Framework</Definition>
       <Applications>DMS-Text</Applications>
-      <DefiningDocument>SMPTE RP 2057 Amendment 1</DefiningDocument>
+      <DefiningDocument>SMPTE RP 2057</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.06010104.05410100</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -8346,10 +8344,17 @@
       <Name>Generic Stream Text-based Set</Name>
       <Definition>Generic Stream Text-based Set</Definition>
       <Applications>DMS-Text</Applications>
-      <DefiningDocument>SMPTE RP 2057 Amendment 1</DefiningDocument>
+      <DefiningDocument>SMPTE RP 2057</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.04030100</Parent>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.01030408.00000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -8360,10 +8365,17 @@
       <Name>UTF-8 Text-based Set</Name>
       <Definition>UTF-8 Text-based Set</Definition>
       <Applications>DMS-Text</Applications>
-      <DefiningDocument>SMPTE RP 2057 Amendment 1</DefiningDocument>
+      <DefiningDocument>SMPTE RP 2057</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.04030100</Parent>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.03010220.03010000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -8374,10 +8386,17 @@
       <Name>UTF-16 Text-based Set</Name>
       <Definition>UTF-16 Text-based Set</Definition>
       <Applications>DMS-Text</Applications>
-      <DefiningDocument>SMPTE RP 2057 Amendment 1</DefiningDocument>
+      <DefiningDocument>SMPTE RP 2057</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.04030100</Parent>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.03010220.03020000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -8399,10 +8418,32 @@
       <Name>Text-based Object</Name>
       <Definition>Text-based Object</Definition>
       <Applications>DMS-Text</Applications>
-      <DefiningDocument>SMPTE RP 2057 Amendment 1</DefiningDocument>
+      <DefiningDocument>SMPTE RP 2057</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
       <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.04060806.00000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.04090202.00000000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.03010102.02140000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.03020106.03020000</UL>
+          <LocalTag>0</LocalTag>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -8594,7 +8635,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/2</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/smpte/class13/group</NamespaceName>
       <Symbol>EBU_UER</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020000.00000000</UL>
       <Kind>NODE</Kind>
@@ -8604,7 +8645,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>EBUCore</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020100.00000000</UL>
       <Kind>NODE</Kind>
@@ -8615,7 +8656,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>EBUCoreMainFramework</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020101.00000000</UL>
       <Kind>LEAF</Kind>
@@ -8646,7 +8687,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>coreMetadata</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020102.00000000</UL>
       <Kind>LEAF</Kind>
@@ -8745,7 +8786,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>metadataSchemaInformation</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020103.00000000</UL>
       <Kind>LEAF</Kind>
@@ -8792,7 +8833,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>identifier</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020104.00000000</UL>
       <Kind>LEAF</Kind>
@@ -8827,7 +8868,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>title</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020105.00000000</UL>
       <Kind>LEAF</Kind>
@@ -8866,7 +8907,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>alternativeTitle</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020106.00000000</UL>
       <Kind>LEAF</Kind>
@@ -8913,7 +8954,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>subject</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020108.00000000</UL>
       <Kind>LEAF</Kind>
@@ -8952,7 +8993,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>description</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020109.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9003,7 +9044,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>date</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02010c.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9078,7 +9119,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>dateType</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02010d.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9109,7 +9150,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>type</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02010e.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9148,7 +9189,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>objectType</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02010f.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9167,7 +9208,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>genre</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020110.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9190,7 +9231,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>targetAudience</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020111.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9237,7 +9278,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>language</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020112.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9268,7 +9309,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>coverage</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020113.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9299,7 +9340,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>spatial</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020114.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9318,7 +9359,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>location</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020115.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9361,7 +9402,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>coordinates</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020116.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9388,7 +9429,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>temporal</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020117.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9415,7 +9456,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>periodOfTime</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020118.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9462,7 +9503,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>rights</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020119.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9537,7 +9578,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>version</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02011a.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9560,7 +9601,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>rating</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02011b.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9631,7 +9672,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>publicationEvent</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02011c.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9714,7 +9755,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>publicationHistory</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02011d.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9737,7 +9778,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>publicationChannel</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02011e.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9768,7 +9809,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>publicationMedium</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02011f.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9795,7 +9836,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>publicationService</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020120.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9830,7 +9871,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>entity</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020121.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9861,7 +9902,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>contact</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020122.00000000</UL>
       <Kind>LEAF</Kind>
@@ -9968,7 +10009,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>organization</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020123.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10031,7 +10072,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>department</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020124.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10054,7 +10095,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>details</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020125.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10093,7 +10134,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>address</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020126.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10128,7 +10169,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>region</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020127.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10151,7 +10192,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>compoundName</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020128.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10178,7 +10219,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>role</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020129.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10201,7 +10242,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>countryType</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012a.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10220,7 +10261,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>customRelation</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012b.01000000</UL>
       <Kind>LEAF</Kind>
@@ -10267,7 +10308,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>basicRelation</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012b.02000000</UL>
       <Kind>LEAF</Kind>
@@ -10370,7 +10411,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>planning</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012c.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10393,7 +10434,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>typeGroup</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012d.01000000</UL>
       <Kind>LEAF</Kind>
@@ -10440,7 +10481,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>formatGroup</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012d.02000000</UL>
       <Kind>LEAF</Kind>
@@ -10487,7 +10528,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>statusGroup</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012d.03000000</UL>
       <Kind>LEAF</Kind>
@@ -10534,7 +10575,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>textualAnnotation</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012e.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10557,7 +10598,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>basicLink</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02012f.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10576,7 +10617,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>format</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020130.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10743,7 +10784,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>videoFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020131.00000000</UL>
       <Kind>LEAF</Kind>
@@ -10914,7 +10955,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>imageFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020132.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11045,7 +11086,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020133.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11188,7 +11229,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>track</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020134.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11219,7 +11260,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>dataFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020135.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11346,7 +11387,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>captioning</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020136.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11401,7 +11442,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>subtitling</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020137.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11456,7 +11497,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>ancillaryData</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020138.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11495,7 +11536,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>signingFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020139.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11550,7 +11591,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeString</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.01000000</UL>
       <Kind>LEAF</Kind>
@@ -11577,7 +11618,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeInt8</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.02000000</UL>
       <Kind>LEAF</Kind>
@@ -11604,7 +11645,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeInt16</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.03000000</UL>
       <Kind>LEAF</Kind>
@@ -11631,7 +11672,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeInt32</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.04000000</UL>
       <Kind>LEAF</Kind>
@@ -11658,7 +11699,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeInt64</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.05000000</UL>
       <Kind>LEAF</Kind>
@@ -11685,7 +11726,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeUInt8</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.06000000</UL>
       <Kind>LEAF</Kind>
@@ -11712,7 +11753,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeUInt16</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.07000000</UL>
       <Kind>LEAF</Kind>
@@ -11739,7 +11780,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeUInt32</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.08000000</UL>
       <Kind>LEAF</Kind>
@@ -11766,7 +11807,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeUInt64</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.09000000</UL>
       <Kind>LEAF</Kind>
@@ -11793,7 +11834,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeFloat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.0a000000</UL>
       <Kind>LEAF</Kind>
@@ -11820,7 +11861,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeRational</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.0b000000</UL>
       <Kind>LEAF</Kind>
@@ -11843,7 +11884,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeAnyURI</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.0c000000</UL>
       <Kind>LEAF</Kind>
@@ -11866,7 +11907,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>technicalAttributeBoolean</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013a.0d000000</UL>
       <Kind>LEAF</Kind>
@@ -11889,7 +11930,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>dimension</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013b.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11912,7 +11953,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>packageInfo</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013c.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11947,7 +11988,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>medium</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013d.00000000</UL>
       <Kind>LEAF</Kind>
@@ -11970,7 +12011,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>codec</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013e.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12005,7 +12046,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>rational</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02013f.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12032,7 +12073,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>aspectRatio</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020140.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12059,7 +12100,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>height</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020141.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12082,7 +12123,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>width</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020142.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12105,7 +12146,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>part</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020143.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12124,7 +12165,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>partMetadata</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020144.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12175,7 +12216,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>hash</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020146.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12198,7 +12239,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>locator</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020147.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12221,7 +12262,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>containerFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020148.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12320,7 +12361,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioFormatExtended</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020149.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12391,7 +12432,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioProgramme</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02014a.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12442,7 +12483,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>IDRef</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02014b.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12461,7 +12502,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>loudnessMetadata</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02014c.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12500,7 +12541,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioContent</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02014d.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12539,7 +12580,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioObject</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02014e.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12594,7 +12635,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioPackFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02014f.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12637,7 +12678,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioChannelFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020150.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12672,7 +12713,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioBlockFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020151.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12751,7 +12792,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioBlockMatrixCoefficient</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020152.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12786,7 +12827,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioStreamFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020153.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12825,7 +12866,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioTrackFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020154.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12856,7 +12897,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioTrackUID</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020155.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12895,7 +12936,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioMXFLookup</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020156.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12922,7 +12963,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>audioBlockMatrix</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020157.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12941,7 +12982,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>time</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020158.00000000</UL>
       <Kind>LEAF</Kind>
@@ -12976,7 +13017,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>metadataFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020159.00000000</UL>
       <Kind>LEAF</Kind>
@@ -13063,7 +13104,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>timecodeFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02015a.00000000</UL>
       <Kind>LEAF</Kind>
@@ -13154,7 +13195,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>videoNoiseFilter</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02015b.00000000</UL>
       <Kind>LEAF</Kind>
@@ -13177,7 +13218,7 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
-      <NamespaceName>http://www.ebu.ch/ebucore/smpte/class13/group</NamespaceName>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
       <Symbol>EBUCoreObject</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</UL>
       <Kind>LEAF</Kind>
