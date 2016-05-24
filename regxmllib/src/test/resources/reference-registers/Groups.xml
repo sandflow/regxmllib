@@ -1,26 +1,53 @@
-<!-- Published version (v000000053) edited to fix entries for SMPTE RP 2057 -->
-<!--
-Copyright (c) 2016 SMPTE All rights reserved.
-
-The latest version of this document can be retrieved at
-
-http://smpte-ra.org/smpte-metadata-registry
-
-The document is constructed according to 
-
-ST 395:2014  -  Metadata Groups Register,
-
-which is available at http://dx.doi.org/10.5594/SMPTE.ST395.2014
-
-Use of this file without consulting the corresponding SMPTE Engineering Document is NOT supported.  Interoperability will generally require adherence to additional guidelines and constraints specified in the corresponding prose document.
-
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
+<!-- Metadata tags to support XML file editing -->
+<!--  -->
+<!-- Please fill these in if you edit this XML file -->
+<!-- author= -->
+<!-- edit_date= -->
+<!-- summary_of_edit= -->
+<!--  -->
+<!-- DO NOT EDIT THIS TAG -->
+<!-- master_commit_tag=v000000060 -->
+<!-- DO NOT EDIT THIS TAG -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!-- DRAFT - SMPTE METADATA REGISTERS XML -->
+<!-- ##################################### -->
+<!--  -->
+<!-- Latest XML Files + Web Views -->
+<!-- ############################ -->
+<!--  -->
+<!-- See http://vm-1042-user.virt.ch.bbc.co.uk/ for the latest XML files and Web Views (tables, etc) of this data which make it easier -->
+<!-- to explore, browse, manually check etc. Login with: -->
+<!-- username: smpte -->
+<!-- password: smpte -->
+<!-- (N.B. Best viewed with the Chrome browser) -->
+<!--  -->
+<!-- Editing these XML Files -->
+<!-- ####################### -->
+<!--  -->
+<!-- If you wish to edit one of these XML files please first complete the metadata tags at the top of the file. -->
+<!-- Then edit existing entries in the XML or add new entries. -->
+<!-- When editing the XML file you may delete some or all of the original entries - leaving only those that you are -->
+<!-- working on may make editing simpler and less error prone. -->
+<!-- If you think that an entry actually needs to be deleted from the Registers please get in touch. -->
+<!-- You must not edit the UL of an entry - doing so would make it look like you want to create a new entry. -->
+<!-- Please get in touch if you think the UL of an entry in the Registers actually needs to be changed. -->
+<!--  -->
+<!-- Please create a ZIP file containing all of the XML files you have edited. -->
+<!-- This may contain zero or more XML files for each Register. -->
+<!-- Try to only make related edits in the XML files you include in the ZIP - if you have two sets of unrelated changes to make -->
+<!-- please do these in separate XML files that are packaged into two separate ZIP files. All the changes will ultimately be merged into the -->
+<!-- Registers. -->
+<!-- When ready, please send your ZIP file(s) by email (each ZIP file in its own email message). -->
+<!--  -->
+<!-- Contact -->
+<!-- ####### -->
+<!--  -->
+<!-- Please email:  30mr10wg-def@lists.smpte.org -->
+<!--  -->
+<!--  -->
 <GroupsRegister xmlns="http://www.smpte-ra.org/schemas/395/2014">
   <Entries>
     <Entry>
@@ -1100,6 +1127,87 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.0101010d.04060805.00000000</UL>
           <LocalTag>57344</LocalTag>
           <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014</NamespaceName>
+      <Symbol>Messages</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0c030000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Messages</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014</NamespaceName>
+      <Symbol>AuxDataTransferProtocol</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0c030100.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Aux Data Transfer Protocol</Name>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014</NamespaceName>
+      <Symbol>AuxDataBlockTransferHeader</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0c030101.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block Transfer Header</Name>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <KLVSyntax>4</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400101.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400102.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014</NamespaceName>
+      <Symbol>AuxDataBlock</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0c030102.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block</Name>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <KLVSyntax>4</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400103.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400104.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400105.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400106.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400107.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400108.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.02400109.00000000</UL>
+          <IsOptional>false</IsOptional>
         </Record>
       </Contents>
     </Entry>
@@ -4895,7 +5003,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>DC Timed Text Descriptor</Name>
       <Definition>DC Timed Text Descriptor</Definition>
       <Applications>MXF</Applications>
-      <DefiningDocument>SMPTE 429-5</DefiningDocument>
+      <DefiningDocument>SMPTE ST 429-5</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014300</Parent>
       <KLVSyntax>6 83</KLVSyntax>
@@ -4926,9 +5034,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>DC Timed Text Resource Sub-Descriptor</Name>
       <Definition>DC Timed Text Resource Sub-Descriptor</Definition>
       <Applications>MXF</Applications>
-      <DefiningDocument>SMPTE 429-5</DefiningDocument>
+      <DefiningDocument>SMPTE ST 429-5</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>6 83</KLVSyntax>
       <Contents>
         <Record>
@@ -8635,6 +8744,62 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     </Entry>
     <Entry>
       <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as12</NamespaceName>
+      <Symbol>AS_12</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010701.0c000000</UL>
+      <Kind>NODE</Kind>
+      <Name>AS-12</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as12</NamespaceName>
+      <Symbol>DMS_AS_12</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010701.0c010000</UL>
+      <Kind>NODE</Kind>
+      <Name>DMS_AS_12</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as12</NamespaceName>
+      <Symbol>DMS_AS_12_Framework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010701.0c010100</UL>
+      <Kind>LEAF</Kind>
+      <Name>DMS_AS_12_Framework</Name>
+      <Definition>AS_12 content provider independent metadata framework</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0c010101</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0c010102</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as12</NamespaceName>
+      <Symbol>AS_12_DescriptiveObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010701.0c010200</UL>
+      <Kind>LEAF</Kind>
+      <Name>AS_12_DescriptiveObject</Name>
+      <Definition>AS_12 Commercial Distribution Slate Metadata</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
+      <IsConcrete>false</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
       <NamespaceName>http://www.ebu.ch/metadata/smpte/class13/group</NamespaceName>
       <Symbol>EBU_UER</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d020000.00000000</UL>
@@ -8782,6 +8947,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d020102.15000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020102.16000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020102.17000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -8901,6 +9074,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020105.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020105.07000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -9183,6 +9360,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d02010e.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02010e.07000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -9543,10 +9724,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
-          <UL>urn:smpte:ul:060e2b34.01010101.0d020119.08000000</UL>
-          <IsOptional>true</IsOptional>
-        </Record>
-        <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020119.09000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
@@ -9572,6 +9749,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020119.0f000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020119.10000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -9653,10 +9834,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
-          <UL>urn:smpte:ul:060e2b34.01010101.0d02011b.0b000000</UL>
-          <IsOptional>true</IsOptional>
-        </Record>
-        <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d02011b.0c000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
@@ -9666,6 +9843,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d02011b.0e000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02011b.0f000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02011b.10000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -9898,6 +10083,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d020121.04000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020121.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020121.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -10003,6 +10196,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020122.17000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020122.18000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020122.19000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -10407,6 +10608,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d02012b.02160000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02012b.02170000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02012b.02180000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -10665,10 +10874,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
-          <UL>urn:smpte:ul:060e2b34.01010101.0d020130.0a000000</UL>
-          <IsOptional>true</IsOptional>
-        </Record>
-        <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020130.0b000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
@@ -10778,6 +10983,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020130.26000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020130.27000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -10949,6 +11158,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020131.27000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020131.28000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -11225,6 +11438,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d020133.20000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020133.21000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020133.22000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -11438,6 +11659,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d020136.0a000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020136.0b000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -11493,6 +11718,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d020137.0a000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020137.0b000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -11530,6 +11759,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020138.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020138.07000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -11984,6 +12217,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d02013c.05000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02013c.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -12040,6 +12277,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d02013e.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02013e.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02013e.07000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -12479,6 +12724,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d02014a.09000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014a.0a000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014a.0b000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -12537,6 +12790,18 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <UL>urn:smpte:ul:060e2b34.01010101.0d02014c.06000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014c.07000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014c.08000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014c.09000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -12574,6 +12839,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d02014d.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014d.07000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -12629,6 +12898,18 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.0a000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.0b000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.0c000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.0d000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -12741,10 +13022,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
-          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.05000000</UL>
-          <IsOptional>true</IsOptional>
-        </Record>
-        <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020151.06000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
@@ -12773,10 +13050,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
-          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.0d000000</UL>
-          <IsOptional>true</IsOptional>
-        </Record>
-        <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020151.0e000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
@@ -12786,6 +13059,34 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020151.10000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.11000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.12000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.13000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.14000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.15000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.16000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020151.17000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -12821,6 +13122,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.0d020152.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020152.06000000</UL>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -13231,6 +13536,646 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     </Entry>
     <Entry>
       <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>audience</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02015d.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience</Name>
+      <Definition>To describe an audience.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.07000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.08000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>filter</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02015e.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter</Name>
+      <Definition>To define the characteristics of a filter.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>filterSetting</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02015f.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting</Name>
+      <Definition>To describe the settings of a filter.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.07000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.08000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.09000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0a000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0b000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0c000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0d000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0e000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0f000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>referenceScreen</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020160.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference screen</Name>
+      <Definition>To define a reference screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020160.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020160.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020160.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>referenceScreenCentrePosition</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020161.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Centre Position</Name>
+      <Definition>To define the centre position of a reference screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020161.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020161.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020161.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020161.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020161.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020161.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020161.07000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>referenceScreenWidth</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020162.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Width</Name>
+      <Definition>To define the width of a reference screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020162.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020162.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020162.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>audioContentDialogue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020163.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Content Dialogue</Name>
+      <Definition>To define an audio content dialogue.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020163.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020163.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020163.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020163.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>audioObjectInteraction</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020164.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Content Interaction</Name>
+      <Definition>To define the interaction parameters of an audio object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020164.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020164.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020164.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020164.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020164.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>gainInteractionRange</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020165.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Gain Interaction Range</Name>
+      <Definition>To define a gain interaction range.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020165.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020165.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>positionInteractionRange</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020166.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Position Interaction Range</Name>
+      <Definition>To define a position interaction range.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020166.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020166.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020166.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>audioBlockPosition</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020167.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Position</Name>
+      <Definition>To define the position of an audio object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020167.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020167.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020167.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020167.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>audioBlockDivergence</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020168.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Divergence</Name>
+      <Definition>To define the divergence of an audio object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020168.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020168.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>audioBlockZoneExclusion</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d020169.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Exclusion</Name>
+      <Definition>To define the exclusion zone of an audio object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d020169.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>audioBlockZone</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02016a.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone</Name>
+      <Definition>To define a zone of an audio object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.07000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>audioBlockJumpPosition</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02016b.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Jump Position</Name>
+      <Definition>To define a jump position of an audio object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016b.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016b.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>event</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02016c.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event</Name>
+      <Definition>To define an event.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.07000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.08000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>award</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02016d.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Award</Name>
+      <Definition>To define an award.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.03000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.04000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.07000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</NamespaceName>
+      <Symbol>affiliation</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d02016e.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Affiliation</Name>
+      <Definition>To define an affiliation.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016e.01000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d02016e.02000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/3</NamespaceName>
       <Symbol>Pro_MPEGForum</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d030000.00000000</UL>
@@ -13529,6 +14474,66 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Ad-ID</Name>
       <Definition>Metadata registered by Ad-ID, LLC for public use</Definition>
       <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/13</NamespaceName>
+      <Symbol>DMS_AS_12_AdID_Slate</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>DMS_AS_12_AdID_Slate</Name>
+      <Definition>AS_12 Ad-ID advertisement identification metadata framework</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010701.0c010200</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>6 83</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0101.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0102.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0103.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0104.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0105.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0106.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0107.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0108.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0109.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d010a.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010d.0d0d010b.00000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+      </Contents>
     </Entry>
     <Entry>
       <Register>Groups</Register>

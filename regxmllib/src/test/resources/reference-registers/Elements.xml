@@ -1,26 +1,53 @@
-<!-- Published version (v000000053) edited to fix entries for SMPTE RP 2057 -->
-<!--
-Copyright (c) 2016 SMPTE All rights reserved.
-
-The latest version of this document can be retrieved at
-
-http://smpte-ra.org/smpte-metadata-registry
-
-The document is constructed according to 
-
-ST 335:2012  -  Metadata Element Dictionary Structure,
-
-which is available at http://dx.doi.org/10.5594/SMPTE.ST335.2012
-
-Use of this file without consulting the corresponding SMPTE Engineering Document is NOT supported.  Interoperability will generally require adherence to additional guidelines and constraints specified in the corresponding prose document.
-
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
+<!-- Metadata tags to support XML file editing -->
+<!--  -->
+<!-- Please fill these in if you edit this XML file -->
+<!-- author= -->
+<!-- edit_date= -->
+<!-- summary_of_edit= -->
+<!--  -->
+<!-- DO NOT EDIT THIS TAG -->
+<!-- master_commit_tag=v000000060 -->
+<!-- DO NOT EDIT THIS TAG -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!-- DRAFT - SMPTE METADATA REGISTERS XML -->
+<!-- ##################################### -->
+<!--  -->
+<!-- Latest XML Files + Web Views -->
+<!-- ############################ -->
+<!--  -->
+<!-- See http://vm-1042-user.virt.ch.bbc.co.uk/ for the latest XML files and Web Views (tables, etc) of this data which make it easier -->
+<!-- to explore, browse, manually check etc. Login with: -->
+<!-- username: smpte -->
+<!-- password: smpte -->
+<!-- (N.B. Best viewed with the Chrome browser) -->
+<!--  -->
+<!-- Editing these XML Files -->
+<!-- ####################### -->
+<!--  -->
+<!-- If you wish to edit one of these XML files please first complete the metadata tags at the top of the file. -->
+<!-- Then edit existing entries in the XML or add new entries. -->
+<!-- When editing the XML file you may delete some or all of the original entries - leaving only those that you are -->
+<!-- working on may make editing simpler and less error prone. -->
+<!-- If you think that an entry actually needs to be deleted from the Registers please get in touch. -->
+<!-- You must not edit the UL of an entry - doing so would make it look like you want to create a new entry. -->
+<!-- Please get in touch if you think the UL of an entry in the Registers actually needs to be changed. -->
+<!--  -->
+<!-- Please create a ZIP file containing all of the XML files you have edited. -->
+<!-- This may contain zero or more XML files for each Register. -->
+<!-- Try to only make related edits in the XML files you include in the ZIP - if you have two sets of unrelated changes to make -->
+<!-- please do these in separate XML files that are packaged into two separate ZIP files. All the changes will ultimately be merged into the -->
+<!-- Registers. -->
+<!-- When ready, please send your ZIP file(s) by email (each ZIP file in its own email message). -->
+<!--  -->
+<!-- Contact -->
+<!-- ####### -->
+<!--  -->
+<!-- Please email:  30mr10wg-def@lists.smpte.org -->
+<!--  -->
+<!--  -->
 <ElementsRegister xmlns="http://www.smpte-ra.org/schemas/335/2012">
   <Entries>
     <Entry>
@@ -1085,10 +1112,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Resource ID</Name>
       <Definition>A UUID that identifies a resource.</Definition>
       <Applications>MXF</Applications>
+      <DefiningDocument>SMPTE ST 429-5</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01030300.00000000</Type>
-      <ValueLength>16 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -1099,10 +1126,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Ancillary Resource ID</Name>
       <Definition>A UUID value that identifies the ancillary resource.</Definition>
       <Applications>MXF</Applications>
+      <DefiningDocument>SMPTE ST 429-5</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01030300.00000000</Type>
-      <ValueLength>16 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -1492,12 +1519,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Kind>LEAF</Kind>
       <Name>Namespace URI</Name>
       <Definition>A URI associated with a Namespace Prefix used in Qnames in an XML document</Definition>
-      <Applications>AAF MXF</Applications>
-      <DefiningDocument>http://www.w3.org/TR/1999/REC-xml-names-19990114</DefiningDocument>
+      <Applications>MXF</Applications>
+      <Notes>http://www.w3.org/TR/1999/REC-xml-names-19990114</Notes>
+      <DefiningDocument>SMPTE ST 429-5</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>Variable</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -2105,7 +2132,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
-      <ValueLength>4 bytes</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -7206,6 +7232,144 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>Protocols</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Protocols</Name>
+      <Definition>Elements defined as part of a protocol</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataTransferProtocol</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400100.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Aux Data Transfer Protocol</Name>
+      <Definition>Elements defined as part of the Aux Data Transfer protocol</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataEditUnitRangeStartIndex</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400101.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Edit Unit Range Start Index</Name>
+      <Definition>Index of the first Edit Unit of the timeline interval covered by the transfer</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxEditUnitRangeCount</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400102.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Edit Unit Range Count</Name>
+      <Definition>Number of Edit Units of the timeline interval covered by the transfer</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataBlockEditUnitIndex</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400103.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block Edit Unit Index</Name>
+      <Definition>Index of the timeline Edit Unit</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataBlockEditUnitEditRate</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400104.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block Edit Unit Edit Rate</Name>
+      <Definition>Edit rate of the timeline Edit Unit</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.03010100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataBlockSourceDataEssenceCodingUL</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400105.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block Source Data Essence Coding UL</Name>
+      <Definition>Data Essence Coding UL of the source Aux Data Track File</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataBlockSourceDataItemLength</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400106.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block Source Data Item Length</Name>
+      <Definition>Length in bytes of the Source Data Item element</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010400.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataBlockSourceDataItem</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400107.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block Source Data Item</Name>
+      <Definition>Data Item of the source Aux Data Track File</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.04100100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataBlockSourceCryptographicContextLength</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400108.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block Source Cryptographic Context Length</Name>
+      <Definition>Length in bytes of the Cryptographic Context Set</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010400.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
+      <Symbol>AuxDataBlockSourceCryptographicContext</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010e.02400109.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Aux Data Block Source Cryptographic Context</Name>
+      <Definition>Cryptographic Context Set, if any, associated with the Elements of the Data Item contained in Source Data Item element</Definition>
+      <DefiningDocument>SMPTE ST 430-14</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.04100100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012</NamespaceName>
       <Symbol>Interpretive</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.03000000.00000000</UL>
       <Kind>NODE</Kind>
@@ -7510,7 +7674,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>Variable</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -16207,11 +16370,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Kind>LEAF</Kind>
       <Name>MIME Media Type</Name>
       <Definition>Specifies the MIME media type as defined by IETF</Definition>
-      <DefiningDocument>RFC 2048</DefiningDocument>
+      <Notes>RFC 2048</Notes>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100400.00000000</Type>
-      <ValueLength>variable</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -16222,11 +16384,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>MIME Media Type</Name>
       <Definition>Specifies the MIME media type as defined by IETF</Definition>
       <Applications>AAF[1.1:]~MimeType MXF</Applications>
-      <DefiningDocument>RFC 2048</DefiningDocument>
+      <Notes>RFC 2048</Notes>
+      <DefiningDocument>AAF Object Specification, SMPTE ST 429-5</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>variable</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -16308,10 +16470,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>UCS Encoding</Name>
       <Definition>A text string giving the ISO/IEC 10646-1 encoding of the essence data.</Definition>
       <Applications>MXF</Applications>
+      <DefiningDocument>SMPTE ST 429-5</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
-      <ValueLength>variable</ValueLength>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -28091,6 +28253,59 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     </Entry>
     <Entry>
       <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/1/amwa/as12</NamespaceName>
+      <Symbol>AS_12</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0c000000</UL>
+      <Kind>NODE</Kind>
+      <Name>AS-12</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/1/amwa/as12</NamespaceName>
+      <Symbol>DMS_AS_12</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0c010000</UL>
+      <Kind>NODE</Kind>
+      <Name>DMS_AS_12</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/1/amwa/as12</NamespaceName>
+      <Symbol>DMS_AS_12_Framework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0c010100</UL>
+      <Kind>NODE</Kind>
+      <Name>DMS_AS_12_Framework</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/1/amwa/as12</NamespaceName>
+      <Symbol>AS_12_ShimName</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0c010101</UL>
+      <Kind>LEAF</Kind>
+      <Name>AS_12_ShimName</Name>
+      <Definition>An informative shim name that identifies the specification for provider dependent metadata that may be shimmed into this file. E.g. "Ad-ID Digital Identification". Note, this string is informative therefore should not be considered to be a definitive indication that additional, shimmed, metadata is present in the file. The definitive indication is the presence of a shim's concrete subclass of "AS_12_DescriptiveObject".</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/1/amwa/as12</NamespaceName>
+      <Symbol>AS_12_Slate</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0c010102</UL>
+      <Kind>LEAF</Kind>
+      <Name>AS_12_Slate</Name>
+      <Definition>A Strong Reference to the provider dependent metadata contained in a Descriptive Object as defined by the provider dependent shim</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d010701.0c010100</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/smpte/class13/element</NamespaceName>
       <Symbol>EBU_UER</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010105.0d020000.00000000</UL>
@@ -28449,12 +28664,38 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Symbol>partObjects</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d020102.15000000</UL>
       <Kind>LEAF</Kind>
-      <Name>Part  Sets</Name>
+      <Name>Part Sets</Name>
       <Definition>A batch of strong references to one or more parts/segments (editorial, technical parameter timeline...) within the resource</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03100000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceRatingObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020102.16000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Rating Sets</Name>
+      <Definition>The audience rating for a media resource.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034a0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020102.17000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event Sets</Name>
+      <Definition>Events related to the media resource.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034b0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -28735,6 +28976,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>titleTypeGroupObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020105.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Title Type Group Set</Name>
+      <Definition>To specify a custom kind of title</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -29338,7 +29592,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <UL>urn:smpte:ul:060e2b34.01010101.0d02010d.02000000</UL>
       <Kind>LEAF</Kind>
       <Name>Textual Date Sets</Name>
-      <Definition>A batch of strong references to dates in free text e.g. "April 18th, 2014)</Definition>
+      <Definition>A batch of strong references to dates in free text e.g. "April 18th, 2014"</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -29458,6 +29712,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceLevelObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02010e.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Level Sets</Name>
+      <Definition>To define the level of destined audience.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034a0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -30213,7 +30480,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Rights Coverage Set</Name>
       <Definition>A strong reference to  a coverage object to define temporal and spatial scope within which rights apply</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
+      <IsDeprecated>true</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.010c0000</Type>
     </Entry>
@@ -30307,6 +30574,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03110000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>rightsCoverageObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020119.10000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Rights Coverage Sets</Name>
+      <Definition>To specify the temporal and spatial coverage of rights.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.030a0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -30495,7 +30775,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Rating Region Set</Name>
       <Definition>A strong reference to a region object</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
+      <IsDeprecated>true</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01320000</Type>
     </Entry>
@@ -30532,11 +30812,37 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <UL>urn:smpte:ul:060e2b34.01010101.0d02011b.0e000000</UL>
       <Kind>LEAF</Kind>
       <Name>Rating Link</Name>
-      <Definition>A link to point e.g. to a web resource providin information on the rating</Definition>
+      <Definition>A link to point e.g. to a web resource providing information on the rating</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>ratingExclusionRegionObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02011b.0f000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Rating Exclusion Region Sets</Name>
+      <Definition>To specify regions where rating doesn't apply.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03160000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>ratingRegionObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02011b.10000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Rating Region Sets</Name>
+      <Definition>To specify regions where rating applies.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03160000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -31062,6 +31368,32 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>entityAwardObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020121.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Entity Award Sets</Name>
+      <Definition>To list awards received by a person or organization.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034c0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>entityEventObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020121.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Entity Event Sets</Name>
+      <Definition>To list events related to an Entity.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034b0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>contact</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d020122.00000000</UL>
       <Kind>NODE</Kind>
@@ -31368,6 +31700,32 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.03010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>deathPlace</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020122.18000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Death Place</Name>
+      <Definition>To specify the place of death.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>affiliationObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020122.19000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Affiliation Sets</Name>
+      <Definition>To provide a list of present and past affiliations.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034d0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -32312,6 +32670,32 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>hasSeries</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02012b.02170000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Has Series</Name>
+      <Definition>To identify series e.g. in a season.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>isSeriesOf</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02012b.02180000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Is Series Of</Name>
+      <Definition>To identify a parent season or brand.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>planning</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d02012c.00000000</UL>
       <Kind>NODE</Kind>
@@ -32770,7 +33154,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <UL>urn:smpte:ul:060e2b34.01010101.0d020130.00000000</UL>
       <Kind>NODE</Kind>
       <Name>Format</Name>
-      <Definition>A set of attributes to provide structural metadata defining the format of material associated witha resource</Definition>
+      <Definition>A set of attributes to provide structural metadata defining the format of material associated with a resource</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -32900,7 +33284,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Format Medium Set</Name>
       <Definition>A strong reference to a medium object</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
+      <IsDeprecated>true</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01130000</Type>
     </Entry>
@@ -33267,6 +33651,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03490000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>formatMediumObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020130.27000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Format Medium Sets</Name>
+      <Definition>To list the different medium in which the media resource is available.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034e0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -33785,6 +34182,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03330000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>videoFilterObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020131.28000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Video Filter Sets</Name>
+      <Definition>To identify filters that have been applied to the video resource.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034f0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -34604,6 +35014,32 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioDescriptionPresenceFlag</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020133.21000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Description Presence Flag</Name>
+      <Definition>To signal the presence of audioDescription</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioFilterObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020133.22000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Filter Sets</Name>
+      <Definition>To describe a filter applied to audio</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.034f0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>track</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d020134.00000000</UL>
       <Kind>NODE</Kind>
@@ -35183,6 +35619,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>captioningFormatProfile</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020136.0b000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Captioning Format Profile</Name>
+      <Definition>To specify an encoding profile</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>subtitling</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d020137.00000000</UL>
       <Kind>NODE</Kind>
@@ -35324,6 +35773,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>subtitlingFormatProfile</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020137.0b000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Subtitling Format Profile</Name>
+      <Definition>To specify an encoding profile</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>ancillaryData</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d020138.00000000</UL>
       <Kind>NODE</Kind>
@@ -35409,6 +35871,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>ancillaryDataFormatProfile</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020138.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Ancillary Data Format Profile</Name>
+      <Definition>To specify an encoding profile</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -36289,6 +36764,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>packageOverallBitRateObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02013c.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Package Overall Bitrate Set</Name>
+      <Definition>To specify the overall bitrate of a mixed package composed of e.g. audio, video and data.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01160000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>medium</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d02013d.00000000</UL>
       <Kind>NODE</Kind>
@@ -36398,6 +36886,32 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>codecUrl</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02013e.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Codec URL</Name>
+      <Definition>A URL where more information can be found about the codec.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>codecTypeGroupObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02013e.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Codec Type Group Set</Name>
+      <Definition>To specify a kind of codec.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -37417,6 +37931,32 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioProgrammeMaxDuckingDepth</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014a.0a000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Programme Max Ducking Depth</Name>
+      <Definition>The maximum level (in dB) any audio object in the programme can be reduced by when ducking is invoked.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioProgrammeReferenceScreenObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014a.0b000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Programme Reference Screen Set</Name>
+      <Definition>To define the coordinates of a reference screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.016c0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>IDRef</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014b.00000000</UL>
       <Kind>NODE</Kind>
@@ -37530,6 +38070,45 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>loudnessRecType</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014c.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Loudness Recommendation Type</Name>
+      <Definition>Regional recommendend practice for correcting loudness levels.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>loudnessCorrectionType</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014c.08000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Loudness Correction Type</Name>
+      <Definition>Correction type for the audio, e.g. file-based or real-time.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>dialogueLoudness</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014c.09000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Dialogue Loudness</Name>
+      <Definition>Dialogue loudness.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>audioContent</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d02014d.00000000</UL>
       <Kind>NODE</Kind>
@@ -37615,6 +38194,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01190000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioContentDialogueObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014d.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Content Dialogue Set</Name>
+      <Definition>A set of values to categorise the presence of dialogue and its type.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.016d0000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -37756,6 +38348,45 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03450000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioObjectInteractionObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.0b000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Object Interaction Sets</Name>
+      <Definition>Set of parameters for limiting the amount of interaction of an object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03500000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioComplementaryObjectIDRefObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.0c000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Complementary Object IDREF Sets</Name>
+      <Definition>A set of reference to complementary audio objects</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03450000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioObjectDisableDucking</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02014e.0d000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Object Disable Ducking</Name>
+      <Definition>A flag to disable ducking.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -38007,7 +38638,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Audio Block Position</Name>
       <Definition>A location in space</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
+      <IsDeprecated>true</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
     </Entry>
@@ -38111,7 +38742,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Audio Block Jump Position</Name>
       <Definition>If set to 1 the position will not be interpolated with the previous block</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
+      <IsDeprecated>true</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
     </Entry>
@@ -38153,6 +38784,97 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockCartesian</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020151.11000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Cartesian</Name>
+      <Definition>A flag set to true if cartesian coordinates used, false (default) for spherical.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockDivergenceObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020151.12000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Object Divergence Set</Name>
+      <Definition>Sets the divergence of an object where 0.0 means all sound in the direction of the object and 1.0 means all sound from the virtual objects placed at an angle set by the azimuthRange attribute value.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.016f0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneExclusionObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020151.13000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Exclusion Set</Name>
+      <Definition>Allows 3D zones to be excluded from rendering. So any speakers that exist within the excluded zone will not be used.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01700000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockScreenReferenceFlag</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020151.14000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Screen reference Flag</Name>
+      <Definition>A flag set to true if the object is related to the screen. false otherwise.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockImportance</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020151.15000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Importance</Name>
+      <Definition>A value from 0 to 10 (most) to indicate the importance of the object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockPositionObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020151.16000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Position Sets</Name>
+      <Definition>A set of user defined parameters to define a location in space.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03510000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockJumpPositionObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020151.17000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Blcok Jump Position Set</Name>
+      <Definition>If set to 1 the position will be interpolated over a period set by the attribute interpolationLength. If set to 0 then interpolation will take the entire length of the block. An interpolationLength value of zero will mean the object jumps without interpolation.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01720000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -38233,6 +38955,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <Entry>
       <Register>Elements</Register>
       <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockMatrixCoefficientChannelFormatIDRefObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020152.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Matrix Coefficient Channel Format IDRef Set</Name>
+      <Definition>Sets a multiplication coefficient (value attrib) with the ID of another channel.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01610000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
       <Symbol>audioStreamFormat</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d020153.00000000</UL>
       <Kind>NODE</Kind>
@@ -38273,12 +39008,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Symbol>audioStreamFormatFormatGroupObject</Symbol>
       <UL>urn:smpte:ul:060e2b34.01010101.0d020153.03000000</UL>
       <Kind>LEAF</Kind>
-      <Name>Audio Stream Format Type Group Set</Name>
-      <Definition>A strong reference to a type group to define the type of audio stream format</Definition>
+      <Name>Audio Stream Format Group Set</Name>
+      <Definition>A strong reference to a format group to define the type of audio stream format</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01070000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -38300,7 +39035,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <UL>urn:smpte:ul:060e2b34.01010101.0d020153.05000000</UL>
       <Kind>LEAF</Kind>
       <Name>Audio Stream Format IDRef Sets</Name>
-      <Definition>A batch of references to related audio pack formats</Definition>
+      <Definition>A batch of references to related audio stream formats</Definition>
       <DefiningDocument>EBU Tech 3293</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
@@ -39160,6 +39895,1348 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audience</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audience</Name>
+      <Definition>To define an audience.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceReason</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Reason</Name>
+      <Definition>The reason hy this audience has been selected.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceLinkToLogo</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Link To Logo</Name>
+      <Definition>To provide a link to a logo associated with the audience.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceNotRatedFlag</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Not rated Flag</Name>
+      <Definition>A flag to indicate that content was not rated.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceAdultContentFlag</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Adult Content Flag</Name>
+      <Definition>A flag to indicate that the media resource contains adult content.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceTypeGroupObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Type Group Set</Name>
+      <Definition>To define the audience definition system used.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceRegionObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Region Sets</Name>
+      <Definition>To define regions where the defined audience applies.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03160000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceExclusionRegionObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Exclusion Region Sets</Name>
+      <Definition>To define regions where the defined audience doesn't apply</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03160000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audienceFormatGroupObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015d.08000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audience Format group Set</Name>
+      <Definition>To define the audience definition system used.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01070000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filter</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Filter</Name>
+      <Definition>To define the characteristics of a filter.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterOrder</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Order</Name>
+      <Definition>To define the order of a filter.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterTypeGroupObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Type Group Set</Name>
+      <Definition>To define a tyoe of filter.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterTrackIDRefObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Track IDRef Sets</Name>
+      <Definition>A set of reference to track to shich the filter applies.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03450000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterProfileTypeGroupObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Profile Type Group Set</Name>
+      <Definition>To define the profile of a filter.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015e.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Sets</Name>
+      <Definition>A set of filter settings</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03520000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSetting</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Filter Setting</Name>
+      <Definition>To define filter settings.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingAttributeOrder</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Attribute Order</Name>
+      <Definition>To specify the order of an attribute filter.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTypeGroupObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Type group Set</Name>
+      <Definition>To define a type of filter setting.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeStringObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical String Sets</Name>
+      <Definition>A technical attribute of type string.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03270000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeInt8Objects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Byte Sets</Name>
+      <Definition>A technical attribute of type byte.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03280000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeInt16Objects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Short Sets</Name>
+      <Definition>A technical attribute of type short.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03290000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeInt32Objects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Integer Sets</Name>
+      <Definition>A technical attribute of type integer.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.032a0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeInt64Objects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Long Sets</Name>
+      <Definition>A technical attribute of type long.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.032b0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeUInt8Objects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.08000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Unsigned Byte Sets</Name>
+      <Definition>A technical attribute of type unsigned byte.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.032c0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeUInt16Objects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.09000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Unsigned Short Sets</Name>
+      <Definition>A technical attribute of type unsigned short.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.032d0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeUInt32Objects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0a000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Unsigned Integer Sets</Name>
+      <Definition>A technical attribute of type unsigned integer.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.032e0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeUInt64Objects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0b000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Unsigned Long Sets</Name>
+      <Definition>A technical attribute of type unsigned long.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.032f0000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeFloatObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0c000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Float Sets</Name>
+      <Definition>A technical attribute of type float.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03300000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeRationalObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0d000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Rational Sets</Name>
+      <Definition>A technical attribute of type rational.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03310000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeAnyURIObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0e000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical anyURI Sets</Name>
+      <Definition>A technical attribute of type anyURI.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03320000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>filterSettingTechnicalAttributeBooleanObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02015f.0f000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Filter Setting Technical Boolean Sets</Name>
+      <Definition>A technical attribute of type boolean.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03330000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreen</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020160.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Reference Screen</Name>
+      <Definition>Specification of a reference/production/monitoring screen size for the audioProgramme. If the reference screen-size is not given, a default screen-size is implicitly defined.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenAspectRatio</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020160.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Aspect Ratio</Name>
+      <Definition>To specify the aspect ration of the reference screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenCentrePositionObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020160.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Reference Centre Set</Name>
+      <Definition>To define the position of the centre reference screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01740000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenWidthObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020160.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Wiidth Set</Name>
+      <Definition>To define the width of the reference screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01750000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenCentrePosition</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020161.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Reference Screen Centre Position</Name>
+      <Definition>To define the centre position of a reference screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenCentrePositionValue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020161.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Centre Position Value</Name>
+      <Definition>To provide the centre coordinates as a single value.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenAzimuth</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020161.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Azimuth</Name>
+      <Definition>To provide the azimuth.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenElevation</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020161.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Elevation</Name>
+      <Definition>To provide the elevation.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenDistance</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020161.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Distance</Name>
+      <Definition>To provide the distance.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenX</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020161.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen X</Name>
+      <Definition>To provide the X axis coordinate.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenY</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020161.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Y</Name>
+      <Definition>To provide the Y axis coordinate.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenZ</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020161.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Z</Name>
+      <Definition>To provide the Z axis coordinate.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenWidth</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020162.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Reference Screen Width</Name>
+      <Definition>To define the width of a screen.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenWidthValue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020162.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Width Value</Name>
+      <Definition>To provide the width as a single value.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenWidthAzimuth</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020162.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Width Azimuth</Name>
+      <Definition>To provide the width as an azimuth.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>referenceScreenWidthX</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020162.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Reference Screen Width X</Name>
+      <Definition>To define the width as an X axis coordinate.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioContentDialogue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020163.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audio Content Dialogue</Name>
+      <Definition>To characterise the presence of a dialogue in a media resource and its type.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioContentDialogueValue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020163.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Content Dialogue Value</Name>
+      <Definition>A element to define the dialogue.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>nonDialogueContentKind</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020163.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Non Dialogue Content Kind</Name>
+      <Definition>Numerical ID for the kind of non-dialogue content: 0 - undefined, 1 - music, 2 - effect.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>dialogueContentKind</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020163.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Dialogue Content Kind</Name>
+      <Definition>Numerical ID for the kind of dialogue content: 0 - undefined, 1 - (storyline) dialogue, 2 - voiceover, 3 - spoken subtitle, 4 - audio description/visually impaired, 5 - commentary, 6 - emergency</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>mixedContentkind</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020163.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Mixed Content Kind</Name>
+      <Definition>Numerical ID for the kind of mixed content: 0 - undefined, 1 - complete main, 2 - mixed, 3 - hearing impaired.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioObjectInteraction</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020164.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audio Object Interaction</Name>
+      <Definition>Set of parameters for limiting the amount of interaction of an object.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>onOffInteract</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020164.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>On Off Interact</Name>
+      <Definition>Set to true to allow interaction.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>gainInteract</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020164.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Gain Interact</Name>
+      <Definition>Set to true to allow gain interaction.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>positionInteract</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020164.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Position Interact</Name>
+      <Definition>Set to true to allow position interaction.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>gainInteractionRangeObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020164.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Gain Interact Range Sets</Name>
+      <Definition>Set the range of gain values allowed for interaction.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03530000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>positionInteractionRangeObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020164.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Position Interaction Range Sets</Name>
+      <Definition>Set the range of position values allowed for interaction.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03540000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>gainInteractionRange</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020165.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Gain Interaction Range</Name>
+      <Definition>To specify the supported range of gain interaction.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>gainInteractionRangeValue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020165.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Gain Interaction Range Value</Name>
+      <Definition>Value defining the range of gain.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>gainInteractionRangeBound</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020165.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Gain Interaction Range Bound</Name>
+      <Definition>Set attribute to "min" to provide minimum gain factor of possible user gain interaction (gainMin = gain (or 1.0 if not defined) * gainInteractionRangeMin) Set attribute to "max" to provide maximum gain factor of possible user gain interaction gainMax = gain (or 1.0 if not defined) * gainInteractionRangeMin)</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>positionInteractionRange</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020166.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Position Interaction Range</Name>
+      <Definition>To specify the supportes range of supported position interaction.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>positionInteractionRangeValue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020166.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Position Interaction Range Value</Name>
+      <Definition>Value defnining the range of position.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>positionInteractionRangeCoordinate</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020166.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Position Interaction Range Coordinate</Name>
+      <Definition>Set attribute to either "X", "Y", "Z", "azimuth", "elevation" or "distance" to set which axis requires limiting.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>positionInteractionRangeBound</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020166.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Position Interaction Range Bound</Name>
+      <Definition>Set attribute to either "min" or "max" to set whether the axis needs a minimum or maximum range for positioning limiting.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockPos</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020167.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audio Block Position</Name>
+      <Definition>A set of user defined parameters to define a block location in space.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockPositionValue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020167.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Position Value</Name>
+      <Definition>The position as a single value.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockPositionCoordinate</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020167.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Position Coordinate</Name>
+      <Definition>The axis used, either azimuth, elevation or distance (for polar); or X, Y or Z (for Cartesian).</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockPositionBound</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020167.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Position Bound</Name>
+      <Definition>Set to "min" or "max" to set the bound of the position.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockPositionScreenEdgeLock</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020167.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Position Edge Lock</Name>
+      <Definition>Set to "left", "right", "top" or "bottom" to indicate which edge of the screen to lock the position to.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockDivergence</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020168.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audio Block Divergence</Name>
+      <Definition>Sets the divergence of an object where 0.0 means all sound in the direction of the object and 1.0 means all sound from the virtual objects placed at an angle set by the azimuthRange attribute value.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockDivergenceValue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020168.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Divergence Value</Name>
+      <Definition>The value of divergence.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockDivergenceAzimuthRange</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020168.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Divergence Azimuth Range</Name>
+      <Definition>Set the azimuth angle from the actual object's position to the two virtual positions each side of it.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneExclusion</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020169.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audio Block Zone Exclusion</Name>
+      <Definition>Allows 3D zones to be exluded from rendering. So any speakers that exist within the excluded zone will not be used.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d020169.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Sets</Name>
+      <Definition>Specifies the corner points of a cuboid in the 3D space that will be excluded from rendering. Multiple zone elements can be used to specify more complex exclusion shapes.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03550000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZone</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audio Block Zone</Name>
+      <Definition>Specifies the corner points of a cuboid in the 3D space that will be excluded from rendering. Multiple zone elements can be used to specify more complex exclusion shapes.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneValue</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Value</Name>
+      <Definition>The definition of a zone.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneMinX</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Min X</Name>
+      <Definition>Min X</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneMaxX</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Max X</Name>
+      <Definition>Max X</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneMinY</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Min Y</Name>
+      <Definition>Min Y</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneMaxY</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Max Y</Name>
+      <Definition>Max Y</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneMinZ</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Min Z</Name>
+      <Definition>Min Z</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockZoneMaxZ</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016a.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Zone Max Z</Name>
+      <Definition>Max Z</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockJumpPos</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016b.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audio Block Jump Position</Name>
+      <Definition>If set to 1 the position will be interpolated over a period set by the attribute interpolationLength. If set to 0 then interpolation will take the entire length of the block. An interpolationLength value of zero will mean the object jumps without interpolation.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockJumPositionFlag</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016b.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Jump Position Flag</Name>
+      <Definition>Jump position flag value.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>audioBlockJumPositionInterpolationLength</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016b.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Block Jump Position Interpolation Length</Name>
+      <Definition>The interpolation length in seconds.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01020100.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>event</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Event</Name>
+      <Definition>To describe an event related to the media resource.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventId</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event ID</Name>
+      <Definition>An identifer associated with an event.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventTypeGroupObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event Type Group Set</Name>
+      <Definition>To specify a kind of event.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventNote</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event Note</Name>
+      <Definition>To provide additional contextual information about the event.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventNameObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event Name Sets</Name>
+      <Definition>To provide the names by which the event is known, possibly in different languages.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03110000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventDescriptionObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event Description Sets</Name>
+      <Definition>To provide description of the event, possibly in different languages.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03110000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventLocationObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event Location Sets</Name>
+      <Definition>To provide information on the locations related to the event.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03170000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventStart</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event Start</Name>
+      <Definition>To give a start date for an Event.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.03010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>eventEnd</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016c.08000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Event End</Name>
+      <Definition>To give an end date for an Event.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.03010500.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>award</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Award</Name>
+      <Definition>To describe an award.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>awardId</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Award ID</Name>
+      <Definition>An identifier associated with an award.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>awardNameObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Award Name Sets</Name>
+      <Definition>To provide the names by which the award is known.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03110000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>awardDescriptionObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.03000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Award Description Sets</Name>
+      <Definition>To provide a set of descriptions of the award.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03110000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>awardCategoryObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.04000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Award Category Sets</Name>
+      <Definition>The category of the award.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01060000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>awardCeremonyObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.05000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Award Ceremony Sets</Name>
+      <Definition>The ceremony of the award.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03110000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>awardOfficialObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.06000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Award Official Sets</Name>
+      <Definition>The personalities involved in the award ceremony.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03040000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>awardDateObjects</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016d.07000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Award Date Sets</Name>
+      <Definition>A set of dates associated with the award.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.03070000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>affiliation</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016e.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Affiliation</Name>
+      <Definition>To provideo information about the affiliation of a contact/person.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>affiliationOrganizationObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016e.01000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Affiliation Organization Set</Name>
+      <Definition>The organization of the affiliation.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01370000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/element</NamespaceName>
+      <Symbol>affiliationPeriodOfTimeObject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01010101.0d02016e.02000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Affiliation Period Of Time Set</Name>
+      <Definition>The period of time during which the affiliation was valid.</Definition>
+      <DefiningDocument>EBU Tech 3293</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.0d020101.01340000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
@@ -40468,6 +42545,158 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <Name>Ad-ID</Name>
       <Definition>Metadata registered by Ad-ID, LLC for public use</Definition>
       <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>DMS_AS_12_AdID_Slate</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0100.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>DMS_AS_12_AdID_Slate</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>adid_prefix</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0101.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>adid_prefix</Name>
+      <Definition>The four character prefix of the advertising asset encoded in the file</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>adid_code</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0102.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>adid_code</Name>
+      <Definition>The unique identifier for the advertising asset encoded in the file</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>ad_title</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0103.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>ad_title</Name>
+      <Definition>Alpha-numeric combination that follows the prefix</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>brand</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0104.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Brand</Name>
+      <Definition>The advertiser brand that is associated to this product</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>product</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0105.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Product</Name>
+      <Definition>The product that is the extension of the brand</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>advertiser</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0106.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Advertiser</Name>
+      <Definition>The company or the agency's client that is advertising</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>agency_office_location</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0107.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>agency_office_location</Name>
+      <Definition>The agency working with the advertiser and their office location</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>length</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0108.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Length</Name>
+      <Definition>The intended length of the advertisement between SOM and EOM</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>medium</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d0109.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Medium</Name>
+      <Definition>Medium - Television/Radio/Print etc</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>sd_flag</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d010a.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>sd_flag</Name>
+      <Definition>SD Flag - CDC Flag for SD Code (video only)</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+    </Entry>
+    <Entry>
+      <Register>Elements</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/335/2012/13/13</NamespaceName>
+      <Symbol>parent</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0101010d.0d0d010b.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Parent</Name>
+      <Definition>Parent - the parent company of the advertiser</Definition>
+      <DefiningDocument>AMWA Application Specification AS-12 Commercial Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
     </Entry>
     <Entry>
       <Register>Elements</Register>
