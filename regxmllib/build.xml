@@ -143,6 +143,7 @@
                     <available file="${video2.ref.file}"/>
                     <available file="${audio2.ref.file}"/>
                     <available file="${indirect.ref.file}"/>
+                    <available file="${utf8.ref.file}"/>
                 </or>
             </condition>
         </fail>
@@ -203,6 +204,17 @@
             <arg line="${dictpaths}"/>
             <arg value="-i"/>
             <arg value="${indirect.sample}"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+        
+        <java classname="com.sandflow.smpte.tools.RegXMLDump" output="${utf8.ref.file}" logError="true">
+            <arg value="-all"/>
+            <arg value="-d"/>
+            <arg line="${dictpaths}"/>
+            <arg value="-i"/>
+            <arg value="${utf8.sample}"/>
             <classpath>
                 <pathelement location="${dist.jar}"/>
             </classpath>

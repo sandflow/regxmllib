@@ -177,6 +177,12 @@ public class MXFFragmentBuilderTest extends TestCase {
         compareGeneratedVsRef("resources/sample-files/indirect.mxf", "resources/reference-files/indirect.xml");
 
     }
+    
+    public void testFromInputStreamUTF8() throws Exception {
+
+        compareGeneratedVsRef("resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
+
+    }
 
     static Map<String, String> getAttributes(Element e) {
 
