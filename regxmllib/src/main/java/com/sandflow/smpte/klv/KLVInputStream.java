@@ -389,8 +389,6 @@ public class KLVInputStream extends InputStream implements DataInput {
             /* swap the second 16-bit word of the UUID */
         swap(uuid, 6, 7);
 
-            /* swap the third 16-bit word of the UUID */
-        swap(uuid, 8, 9);
     }
     
 }

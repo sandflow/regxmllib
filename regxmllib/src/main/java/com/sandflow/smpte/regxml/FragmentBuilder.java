@@ -559,12 +559,22 @@ public class FragmentBuilder {
 
     }
 
-    private void readCharacters(InputStream value, CharacterTypeDefinition definition, StringBuilder sb) throws RuleException, IOException {
+    private void readCharacters(MXFInputStream value, CharacterTypeDefinition definition, StringBuilder sb) throws RuleException, IOException {
 
         Reader in = null;
 
         if (definition.getIdentification().equals(Character_UL)) {
-            in = new InputStreamReader(value, "UTF-16BE");
+            
+            if (value.getByteorder() == ByteOrder.BIG_ENDIAN) {
+                
+                in = new InputStreamReader(value, "UTF-16BE");
+                
+            } else {
+                
+                in = new InputStreamReader(value, "UTF-16LE");
+                
+            }
+            
         } else if (definition.getIdentification().equals(Char_UL)) {
             in = new InputStreamReader(value, "US-ASCII");
         } else if (definition.getIdentification().equals(UTF8Character_UL)) {
