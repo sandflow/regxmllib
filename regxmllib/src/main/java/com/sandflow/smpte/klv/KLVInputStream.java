@@ -69,6 +69,15 @@ public class KLVInputStream extends InputStream implements DataInput {
     }
 
     /**
+     * Byte order of the stream.
+     * 
+     * @return Byte order of the stream
+     */
+    public ByteOrder getByteorder() {
+        return byteorder;
+    }
+    
+    /**
      * Reads a single UL.
      * 
      * @return UL
@@ -80,6 +89,12 @@ public class KLVInputStream extends InputStream implements DataInput {
 
         if (read(ul) < ul.length) {
             throw new EOFException();
+        }
+        
+        if (getByteorder() == ByteOrder.LITTLE_ENDIAN) {
+
+           uuidLEtoBE(ul);
+            
         }
 
         return new UL(ul);
@@ -355,6 +370,27 @@ public class KLVInputStream extends InputStream implements DataInput {
     @Override
     public boolean markSupported() {
         return dis.markSupported();
+    }
+    
+    protected static final void swap(byte[] array, int i, int j) {
+        byte tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
+    }
+    
+    protected static final void uuidLEtoBE(byte[] uuid) {
+            /* swap the 32-bit word of the UUID */
+        swap(uuid, 0, 3);
+        swap(uuid, 1, 2);
+
+            /* swap the first 16-bit word of the UUID */
+        swap(uuid, 4, 5);
+
+            /* swap the second 16-bit word of the UUID */
+        swap(uuid, 6, 7);
+
+            /* swap the third 16-bit word of the UUID */
+        swap(uuid, 8, 9);
     }
     
 }

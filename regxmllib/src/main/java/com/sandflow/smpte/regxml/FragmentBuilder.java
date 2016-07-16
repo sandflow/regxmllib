@@ -785,8 +785,10 @@ public class FragmentBuilder {
             default:
                 throw new RuleException("Unknown Indirect Byte Order value.");
         }
+        
+        MXFInputStream orderedval = new MXFInputStream(value, bo);
                  
-        IDAU idau = value.readIDAU();
+        IDAU idau = orderedval.readIDAU();
         
         if (idau == null) {
             throw new RuleException("Invalid IDAU");
@@ -822,8 +824,6 @@ public class FragmentBuilder {
         attr.setTextContent(def.getSymbol());
         element.setAttributeNodeNS(attr);
         
-        MXFInputStream orderedval = new MXFInputStream(value, bo);
-            
         applyRule5(element, orderedval, def);
 
     }
