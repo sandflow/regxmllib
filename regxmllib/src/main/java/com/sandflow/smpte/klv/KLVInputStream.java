@@ -91,12 +91,6 @@ public class KLVInputStream extends InputStream implements DataInput {
             throw new EOFException();
         }
         
-        if (getByteorder() == ByteOrder.LITTLE_ENDIAN) {
-
-           uuidLEtoBE(ul);
-            
-        }
-
         return new UL(ul);
     }
 

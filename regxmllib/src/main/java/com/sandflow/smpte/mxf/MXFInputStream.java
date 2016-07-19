@@ -119,12 +119,6 @@ public class MXFInputStream extends KLVInputStream {
             throw new EOFException();
         }
         
-        if (getByteorder() == ByteOrder.LITTLE_ENDIAN) {
-
-           uuidLEtoBE(auid);
-            
-        }
-
         return new AUID(auid);
     }
     
