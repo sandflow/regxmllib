@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Created: Tue May 24 10:53:18 PDT 2016--><!--From: src/test/resources/sample-files/indirect.mxf--><!--By: regxmllib build 272eecc6acaf7cb728ab22ab92680a06ce5e22cc--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Tue Jul 26 21:37:21 CEST 2016--><!--From: src/test/resources/sample-files/indirect.mxf--><!--By: regxmllib build a20fbf9aa068e872930f525cf109ddd69b5c8d71--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
   <r1:InstanceID>urn:uuid:39e564bf-93fb-4750-baed-64c720ce0474</r1:InstanceID>
   <!--Unknown property
 Key: urn:smpte:ul:ae5878e0.41454179.ffdd41e1.ae2c49c6
@@ -941,9 +941,7 @@ Data: 000000010000001098022eb425c1406394bc683fe0b20e73-->
           <r1:PackageUserComments>
             <r0:TaggedValue>
               <r1:InstanceID>urn:uuid:37f9325e-a216-47c0-adaa-91649ce61b25</r1:InstanceID>
-              <r1:IndirectValue>
-                <!--No definition found for indirect type with AUID urn:smpte:ul:060e2b34.01040101.00021001.00000000.-->
-              </r1:IndirectValue>
+              <r1:IndirectValue r3:actualType="UTF16String">C:\Users\akharkev\Desktop\1920x1080-red.tif</r1:IndirectValue>
               <r1:Tag>UNC Path</r1:Tag>
             </r0:TaggedValue>
           </r1:PackageUserComments>

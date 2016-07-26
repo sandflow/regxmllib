@@ -559,12 +559,22 @@ public class FragmentBuilder {
 
     }
 
-    private void readCharacters(InputStream value, CharacterTypeDefinition definition, StringBuilder sb) throws RuleException, IOException {
+    private void readCharacters(MXFInputStream value, CharacterTypeDefinition definition, StringBuilder sb) throws RuleException, IOException {
 
         Reader in = null;
 
         if (definition.getIdentification().equals(Character_UL)) {
-            in = new InputStreamReader(value, "UTF-16BE");
+            
+            if (value.getByteorder() == ByteOrder.BIG_ENDIAN) {
+                
+                in = new InputStreamReader(value, "UTF-16BE");
+                
+            } else {
+                
+                in = new InputStreamReader(value, "UTF-16LE");
+                
+            }
+            
         } else if (definition.getIdentification().equals(Char_UL)) {
             in = new InputStreamReader(value, "US-ASCII");
         } else if (definition.getIdentification().equals(UTF8Character_UL)) {
@@ -785,8 +795,10 @@ public class FragmentBuilder {
             default:
                 throw new RuleException("Unknown Indirect Byte Order value.");
         }
+        
+        MXFInputStream orderedval = new MXFInputStream(value, bo);
                  
-        IDAU idau = value.readIDAU();
+        IDAU idau = orderedval.readIDAU();
         
         if (idau == null) {
             throw new RuleException("Invalid IDAU");
@@ -822,8 +834,6 @@ public class FragmentBuilder {
         attr.setTextContent(def.getSymbol());
         element.setAttributeNodeNS(attr);
         
-        MXFInputStream orderedval = new MXFInputStream(value, bo);
-            
         applyRule5(element, orderedval, def);
 
     }

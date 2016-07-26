@@ -148,7 +148,31 @@
             </condition>
         </fail>
         
-        <fileset dir="${dict.dir}" id="dicts">
+        <!-- Generate temporary dictionaries from the reference registers -->
+        
+        <tempfile property="dict.temp.dir" destDir="${java.io.tmpdir}"/>
+        
+        <mkdir dir="${dict.temp.dir}"/>
+        
+        <java classname="com.sandflow.smpte.tools.XMLRegistersToDict">
+            <arg value="-e"/>
+            <arg value="${ref.elements.register}"/>
+            <arg value="-l"/>
+            <arg value="${ref.labels.register}"/>
+            <arg value="-g"/>
+            <arg value="${ref.groups.register}"/>
+            <arg value="-t"/>
+            <arg value="${ref.types.register}"/>
+            <arg value="${dict.temp.dir}"/>
+
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+        
+        <!-- create the reference files -->
+        
+        <fileset dir="${dict.temp.dir}" id="dicts">
             <include name="*.xml" />
         </fileset>
         
@@ -219,6 +243,12 @@
                 <pathelement location="${dist.jar}"/>
             </classpath>
         </java>
+        
+        <!-- Delete the temp dir -->
+        
+        <delete>
+            <fileset dir="${dict.temp.dir}" includes="*.xml"/>
+        </delete>
     </target>
 
     <!-- generate distribution, including java doc and sources -->
