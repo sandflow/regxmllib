@@ -92,7 +92,7 @@
     <target name="build-register-schemas" depends="jar">
         <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
             <arg value="-cp"/>
-            <arg value="com.sandflow.smpte.register.TypesRegister"/>
+            <arg value="com.sandflow.smpte.register.model2015.TypesRegisterModel"/>
             <arg value="-d"/>
             <arg value="${register.schema.dir}"/>
             <classpath>
@@ -102,7 +102,7 @@
         
                 <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
             <arg value="-cp"/>
-            <arg value="com.sandflow.smpte.register.LabelsRegister"/>
+            <arg value="com.sandflow.smpte.register.model2015.LabelsRegisterModel"/>
             <arg value="-d"/>
             <arg value="${register.schema.dir}"/>
             <classpath>
@@ -112,7 +112,7 @@
         
                 <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
             <arg value="-cp"/>
-            <arg value="com.sandflow.smpte.register.ElementsRegister"/>
+            <arg value="com.sandflow.smpte.register.model2015.ElementsRegisterModel"/>
             <arg value="-d"/>
             <arg value="${register.schema.dir}"/>
             <classpath>
@@ -122,7 +122,17 @@
         
                 <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
             <arg value="-cp"/>
-            <arg value="com.sandflow.smpte.register.GroupsRegister"/>
+            <arg value="com.sandflow.smpte.register.model2015.GroupsRegisterModel"/>
+            <arg value="-d"/>
+            <arg value="${register.schema.dir}"/>
+            <classpath>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+        </java>
+        
+         <java classname="com.sandflow.smpte.tools.GenerateXMLSchemaDocuments">
+            <arg value="-cp"/>
+            <arg value="com.sandflow.smpte.register.model2016.GroupsRegisterModel"/>
             <arg value="-d"/>
             <arg value="${register.schema.dir}"/>
             <classpath>
