@@ -25,12 +25,8 @@
  */
 package com.sandflow.smpte.regxml.dict.importers;
 
-import com.sandflow.smpte.register.ElementEntry;
 import com.sandflow.smpte.register.ElementsRegister;
-import com.sandflow.smpte.register.GroupEntry;
 import com.sandflow.smpte.register.GroupsRegister;
-import com.sandflow.smpte.register.TypeEntry;
-import com.sandflow.smpte.register.TypeEntry.Facet;
 import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import com.sandflow.smpte.regxml.dict.definitions.CharacterTypeDefinition;
@@ -87,9 +83,9 @@ public class RegisterImporter {
         HashSet<AUID> defIDs = new HashSet<>();
         
         /* Handles Group Entries */
-        for (GroupEntry group : gr.getEntries()) {
+        for (GroupsRegister.Entry group : gr.getEntries()) {
 
-            if (group.getKind().equals(GroupEntry.Kind.NODE)) {
+            if (group.getKind().equals(GroupsRegister.Entry.Kind.NODE)) {
                 continue;
             }
 
@@ -125,7 +121,7 @@ public class RegisterImporter {
 
             cdef.setIdentification(new AUID(group.getUL()));
 
-            for (GroupEntry.Record child : group.getContents()) {
+            for (GroupsRegister.Entry.Record child : group.getContents()) {
 
                 AUID id = new AUID(child.getItem());
 
@@ -155,7 +151,7 @@ public class RegisterImporter {
                 pdef.setLocalIdentification((int) (child.getLocalTag() == null ? 0 : child.getLocalTag()));
 
                 /* retrieve the element */
-                ElementEntry element = er.getEntryByUL(child.getItem());
+                ElementsRegister.Entry element = er.getEntryByUL(child.getItem());
 
                 if (element == null) {
                     LOGGER.warning(String.format(
@@ -201,24 +197,24 @@ public class RegisterImporter {
 
         /* Handle Types Entries */
         
-        for (TypeEntry type : tr.getEntries()) {
-            if (!type.getKind().equals(TypeEntry.Kind.LEAF)) {
+        for (com.sandflow.smpte.register.TypesRegister.Entry type : tr.getEntries()) {
+            if (!type.getKind().equals(com.sandflow.smpte.register.TypesRegister.Entry.Kind.LEAF)) {
                 continue;
             }
 
             Definition tdef = null;
 
-            if (TypeEntry.RENAME_TYPEKIND.equals(type.getTypeKind())) {
+            if (com.sandflow.smpte.register.TypesRegister.Entry.RENAME_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new RenameTypeDefinition();
 
                 ((RenameTypeDefinition) tdef).setRenamedType(new AUID(type.getBaseType()));
 
-            } else if (TypeEntry.INTEGER_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.INTEGER_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new IntegerTypeDefinition();
 
-                ((IntegerTypeDefinition) tdef).setSigned(type.getTypeQualifiers().contains(TypeEntry.TypeQualifiers.isSigned));
+                ((IntegerTypeDefinition) tdef).setSigned(type.getTypeQualifiers().contains(com.sandflow.smpte.register.TypesRegister.Entry.TypeQualifiers.isSigned));
 
                 switch (type.getTypeSize().intValue()) {
                     case 1:
@@ -238,7 +234,7 @@ public class RegisterImporter {
 
                 }
 
-            } else if (TypeEntry.FLOAT_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.FLOAT_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new FloatTypeDefinition();
 
@@ -257,15 +253,15 @@ public class RegisterImporter {
 
                 }
 
-            } else if (TypeEntry.LENSSERIALFLOAT_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.LENSSERIALFLOAT_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new LensSerialFloatTypeDefinition();
 
-            } else if (TypeEntry.RECORD_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.RECORD_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new RecordTypeDefinition();
 
-                for (TypeEntry.Facet tchild : type.getFacets()) {
+                for (com.sandflow.smpte.register.TypesRegister.Entry.Facet tchild : type.getFacets()) {
                     Member m = new Member();
 
                     m.setName(tchild.getSymbol());
@@ -274,7 +270,7 @@ public class RegisterImporter {
                     ((RecordTypeDefinition) tdef).addMember(m);
                 }
 
-            } else if (TypeEntry.FIXEDARRAY_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.FIXEDARRAY_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new FixedArrayTypeDefinition();
 
@@ -282,29 +278,29 @@ public class RegisterImporter {
 
                 ((FixedArrayTypeDefinition) tdef).setElementCount(type.getTypeSize().intValue());
 
-            } else if (TypeEntry.ARRAY_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.ARRAY_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new VariableArrayTypeDefinition();
                 ((VariableArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
-            } else if (TypeEntry.SET_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.SET_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new SetTypeDefinition();
                 ((SetTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
-            } else if (TypeEntry.INDIRECT_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.INDIRECT_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new IndirectTypeDefinition();
 
-            } else if (TypeEntry.OPAQUE_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.OPAQUE_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new OpaqueTypeDefinition();
 
-            } else if (TypeEntry.STREAM_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.STREAM_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new StreamTypeDefinition();
 
-            } else if (TypeEntry.WEAKREF_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.WEAKREF_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new WeakReferenceTypeDefinition();
 
@@ -323,7 +319,7 @@ public class RegisterImporter {
                 *        They are not necessary for encoding.
                 */
                 
-                for (Facet f : type.getFacets()) {
+                for (TypesRegister.Entry.Facet f : type.getFacets()) {
 
                     UL ul = null;
 
@@ -353,13 +349,13 @@ public class RegisterImporter {
                     }
                 }
 
-            } else if (TypeEntry.STRONGREF_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.STRONGREF_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new StrongReferenceTypeDefinition();
 
                 ((StrongReferenceTypeDefinition) tdef).setReferenceType(new AUID(type.getBaseType()));
 
-            } else if (TypeEntry.ENUMERATION_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.ENUMERATION_TYPEKIND.equals(type.getTypeKind())) {
 
                 if (type.getBaseType().equals(UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000"))) {
                     
@@ -386,7 +382,7 @@ public class RegisterImporter {
 
                     ArrayList<EnumerationTypeDefinition.Element> celems = new ArrayList<>();
 
-                    for (Facet f : type.getFacets()) {
+                    for (TypesRegister.Entry.Facet f : type.getFacets()) {
                         EnumerationTypeDefinition.Element m = new EnumerationTypeDefinition.Element();
 
                         m.setName(f.getSymbol());
@@ -400,11 +396,11 @@ public class RegisterImporter {
                     ((EnumerationTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
                 }
 
-            } else if (TypeEntry.CHARACTER_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.CHARACTER_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new CharacterTypeDefinition();
 
-            } else if (TypeEntry.STRING_TYPEKIND.equals(type.getTypeKind())) {
+            } else if (com.sandflow.smpte.register.TypesRegister.Entry.STRING_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new StringTypeDefinition();
 

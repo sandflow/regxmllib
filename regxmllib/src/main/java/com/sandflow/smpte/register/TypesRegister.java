@@ -31,88 +31,43 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
  * Types Register as defined in SMPTE ST 2003
  */
-@XmlRootElement(name = "TypesRegister", namespace = TypesRegister.XML_NAMESPACE)
-@XmlType(name = "")
-@XmlSeeAlso(value = TypeEntry.class)
-@XmlAccessorType(XmlAccessType.NONE)
-public class TypesRegister {
+@XmlTransient
+public abstract class TypesRegister {
     
-    public final static String XML_NAMESPACE = "http://www.smpte-ra.org/schemas/2003/2012";
+    private final HashMap<QualifiedSymbol, Entry> entriesBySymbol = new HashMap<>();
 
-    private final HashMap<QualifiedSymbol, TypeEntry> entriesBySymbol = new HashMap<>();
-
-    private final HashMap<UL, TypeEntry> entriesByUL = new HashMap<>();
-
-    @XmlElement(name="Entry", namespace = XML_NAMESPACE)
-    @XmlElementWrapper(name = "Entries", namespace = XML_NAMESPACE)
-    private final ArrayList<TypeEntry> entries = new ArrayList<>();
+    private final HashMap<UL, Entry> entriesByUL = new HashMap<>();
 
     public TypesRegister() {
     }
-    
-    public TypeEntry getEntryByUL(UL ul) {
+
+    public Entry getEntryByUL(UL ul) {
         return entriesByUL.get(ul);
     }
-    
-    public TypeEntry getEntryBySymbol(String symbol, URI namespace) {
-        return entriesBySymbol.get(new QualifiedSymbol(symbol, namespace));
+
+    public Entry getEntryBySymbol(QualifiedSymbol qs) {
+        return entriesBySymbol.get(qs);
     }
 
-    public void addEntry(TypeEntry entry) throws DuplicateEntryException {
+    public abstract Collection<? extends Entry> getEntries();
 
-        QualifiedSymbol sym = new QualifiedSymbol(entry.getSymbol(), entry.getNamespaceName());
-
-        if (entriesByUL.containsKey(entry.getUL())) {
-            throw new DuplicateEntryException(
-                    String.format("UL = %s is already present (symbol = %s).",
-                            entry.getUL(),
-                            entry.getSymbol()
-                    )
-            );
-        }
-
-        if (entriesBySymbol.containsKey(sym)) {
-            throw new DuplicateEntryException(
-                    String.format(
-                            "Symbol = %s  is already present (UL = %s).",
-                            entry.getSymbol(),
-                            entry.getUL()
-                    )
-            );
-        }
-
-        entries.add(entry);
-        entriesByUL.put(entry.getUL(), entry);
-        entriesBySymbol.put(sym, entry);
-    }
-
-    
-    public Collection<TypeEntry> getEntries() {
-        return entries;
-    }
-    
-    
     public void toXML(Writer writer) throws JAXBException, IOException {
 
-        JAXBContext ctx = JAXBContext.newInstance(TypesRegister.class);
+        JAXBContext ctx = JAXBContext.newInstance(this.getClass());
 
         Marshaller m = ctx.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -120,20 +75,142 @@ public class TypesRegister {
         writer.close();
     }
 
-    public static TypesRegister fromXML(Reader reader) throws JAXBException, IOException {
+    public static TypesRegister fromXML(Reader reader) throws JAXBException, IOException, DuplicateEntryException {
 
-        JAXBContext ctx = JAXBContext.newInstance(TypesRegister.class);
+        JAXBContext ctx = JAXBContext.newInstance(com.sandflow.smpte.register.catsup.TypesRegisterModel.class);
 
         Unmarshaller m = ctx.createUnmarshaller();
         TypesRegister reg = (TypesRegister) m.unmarshal(reader);
-        
-        for (TypeEntry te : reg.entries) {
+
+        for (Entry te : reg.getEntries()) {
             QualifiedSymbol sym = new QualifiedSymbol(te.getSymbol(), te.getNamespaceName());
+
+            if (reg.getEntryByUL(te.getUL()) != null) {
+                throw new DuplicateEntryException(
+                        String.format("UL = %s is already present (symbol = %s).",
+                                te.getUL(),
+                                te.getSymbol()
+                        )
+                );
+            }
+
+            if (reg.entriesBySymbol.get(sym) != null) {
+                throw new DuplicateEntryException(
+                        String.format(
+                                "Symbol = %s  is already present (UL = %s).",
+                                te.getSymbol(),
+                                te.getUL()
+                        )
+                );
+            }
+
             reg.entriesByUL.put(te.getUL(), te);
             reg.entriesBySymbol.put(sym, te);
         }
 
         return reg;
+
     }
+
+    /**
+     *
+     * @author pal
+     */
+    public static interface Entry {
+
+        String ARRAY_TYPEKIND = "VariableArray";
+        String CHARACTER_TYPEKIND = "Character";
+        String ENUMERATION_TYPEKIND = "Enumeration";
+        String FIXEDARRAY_TYPEKIND = "FixedArray";
+        String FLOAT_TYPEKIND = "Float";
+        String INDIRECT_TYPEKIND = "Indirect";
+        String INTEGER_TYPEKIND = "Integer";
+        /**
+         * @deprecated
+         */
+        String LENSSERIALFLOAT_TYPEKIND = "LensSerialFloat";
+        String OPAQUE_TYPEKIND = "Opaque";
+        String RECORD_TYPEKIND = "Record";
+        String RENAME_TYPEKIND = "Rename";
+        String SET_TYPEKIND = "Set";
+        String STREAM_TYPEKIND = "Stream";
+        String STRING_TYPEKIND = "String";
+        String STRONGREF_TYPEKIND = "StrongReference";
+        String WEAKREF_TYPEKIND = "WeakReference";
+
+        String getApplications();
+
+        UL getBaseType();
+
+        ContextScope getContextScope();
+
+        String getDefiningDocument();
+
+        String getDefinition();
+
+        Collection<? extends Facet> getFacets();
+
+        Kind getKind();
+
+        String getName();
+
+        URI getNamespaceName();
+
+        String getNotes();
+
+        String getSymbol();
+
+        String getTypeKind();
+
+        EnumSet<TypeQualifiers> getTypeQualifiers();
+
+        Long getTypeSize();
+
+        UL getUL();
+
+        boolean isDeprecated();
+
+        /**
+         *
+         * @author pal
+         */
+        public static interface Facet {
+
+            String getApplications();
+
+            String getDefinition();
+
+            String getName();
+
+            String getNotes();
+
+            String getSymbol();
+
+            UL getType();
+
+            UL getUL();
+
+            String getValue();
+
+            boolean isDeprecated();
+        }
+
+        @XmlType(name = "")
+        public static enum TypeQualifiers {
+            isNumeric, isSigned, isIdentified, isOrdered, isCountImplicit, isSizeImplicit
+        }
+
+        @XmlType(name = "")
+        public static enum Kind {
+            NODE, LEAF
+        }
+
+        @XmlType(name = "")
+        public static enum ContextScope {
+            DefinedContext, AbstractContext, UnknownContext
+        }
+    }
+
+    
 
 }

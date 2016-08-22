@@ -32,8 +32,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
@@ -100,7 +98,7 @@ public class GenerateXMLSchemaDocuments {
             
            tr.transform(
                     new DOMSource(docs.get(i)),
-                    new StreamResult(new File(baseDir, c.getSimpleName() + (i == 0 ? "" : "." + i) + ".xsd"))
+                    new StreamResult(new File(baseDir, c.getName()+ (i == 0 ? "" : "." + i) + ".xsd"))
             );
         }
 
