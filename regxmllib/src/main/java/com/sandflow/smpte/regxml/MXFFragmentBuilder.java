@@ -208,12 +208,12 @@ public class MXFFragmentBuilder {
 
                     Group g = iter.next();
 
-                    AUID tmpauid = new AUID(g.getKey());
+                    AUID gid = new AUID(g.getKey());
 
                     /* go up the class hierarchy */
-                    while (rootgroup == null && tmpauid != null) {
+                    while (rootgroup == null && gid != null) {
 
-                        Definition def = defresolver.getDefinition(tmpauid);
+                        Definition def = defresolver.getDefinition(gid);
 
                         /* skip if not a class instance */
                         if (!(def instanceof ClassDefinition)) {
@@ -221,14 +221,14 @@ public class MXFFragmentBuilder {
                         }
 
                         /* is it an instance of the requested root object */
-                        UL deful = def.getIdentification().asUL();
+                        UL gul = def.getIdentification().asUL();
 
-                        if (deful.equalsIgnoreVersion(rootclasskey)) {
+                        if (gul.equalsWithMask(rootclasskey, 0b1111101011111111 /* ignore version and Group coding */)) {
                             rootgroup = g;
 
                         } else {
                             /* get parent class */
-                            tmpauid = ((ClassDefinition) def).getParentClass();
+                            gid = ((ClassDefinition) def).getParentClass();
                         }
                     }
 
