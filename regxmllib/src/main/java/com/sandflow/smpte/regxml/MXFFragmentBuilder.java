@@ -73,15 +73,15 @@ public class MXFFragmentBuilder {
             = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
     /**
-     * Finds the offset of the first partition from the current position of the
-     * channel, skipping over any run-in (SMPTE ST 377-1 Section 6.5)
+     * Seeks to the first byte of the Header partition, assuming the current position of the
+     * channel is within the run-in (SMPTE ST 377-1 Section 6.5)
      *
      * @param mxffile Channel containing an MXF file
-     * @return Offset of the Header Partition from the current position of the
-     * channel, or -1 if no header was found
+     * @return Offset of the first byte of the Header Partition, or -1 if 
+     * the Header Partition was not found
      * @throws IOException
      */
-    public static long findHeaderPartitionOffset(SeekableByteChannel mxffile) throws IOException {
+    public static long seekHeaderPartition(SeekableByteChannel mxffile) throws IOException {
 
         ByteBuffer ulbytes = ByteBuffer.allocate(16);
 
@@ -105,22 +105,23 @@ public class MXFFragmentBuilder {
     }
 
     /**
-     * Seeks to the footer partition from the current position of the channel,
-     * using the over any run-in (SMPTE ST 377-1 Section 6.5)
+     * Seeks to the footer partition, assuming the current position of the
+     * channel is within the run-in (SMPTE ST 377-1 Section 6.5), the footer partition
+     * offset is listed in the Header Partition Pack or a Random Index Pack is 
+     * present.
      *
      * @param mxffile Channel containing an MXF file
-     * @return Offset of the Header Partition from the current position of the
-     * channel, or -1 if no header was found
+     * @return Offset of the Footer Partition, or -1 if a Footer Partition was not found
      * @throws IOException
      * @throws com.sandflow.smpte.klv.exceptions.KLVException
      */
-    public static long findFooterPartitionOffset(SeekableByteChannel mxffile) throws IOException, KLVException {
+    public static long seekFooterPartition(SeekableByteChannel mxffile) throws IOException, KLVException {
 
-        long offset = findHeaderPartitionOffset(mxffile);
+        long headeroffset = seekHeaderPartition(mxffile);
 
         KLVInputStream kis = new KLVInputStream(Channels.newInputStream(mxffile));
 
-        kis.skip(offset);
+        kis.skip(headeroffset);
 
         Triplet t = kis.readTriplet();
 
@@ -137,7 +138,7 @@ public class MXFFragmentBuilder {
         /* read the footer partition straight from the header partition, if available */
         if (pp.getFooterPartition() != 0) {
 
-            mxffile.position(offset + pp.getFooterPartition());
+            mxffile.position(headeroffset + pp.getFooterPartition());
 
             return mxffile.position();
         }
@@ -147,7 +148,9 @@ public class MXFFragmentBuilder {
 
         ByteBuffer bytes = ByteBuffer.allocate(4);
 
-        mxffile.read(bytes);
+        if (mxffile.read(bytes) != bytes.limit()) {
+            return -1;
+        }
 
         long ripoffset = bytes.getInt(0);
 

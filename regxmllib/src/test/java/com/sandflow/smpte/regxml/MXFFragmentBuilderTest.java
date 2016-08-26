@@ -32,10 +32,19 @@ import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
 import com.sandflow.smpte.util.UL;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.io.Reader;
+import java.net.URI;
+import java.net.URL;
+import java.nio.channels.ByteChannel;
+import java.nio.channels.FileChannel;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -181,6 +190,19 @@ public class MXFFragmentBuilderTest extends TestCase {
     public void testFromInputStreamUTF8() throws Exception {
 
         compareGeneratedVsRef("resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
+
+    }
+    
+    public void testSeekFooterPartition() throws Exception {
+        
+            /* get the sample files */
+        URI uri = ClassLoader.getSystemResource("resources/sample-files/audio1.mxf").toURI();
+               
+        assertNotNull(uri);
+        
+        SeekableByteChannel faf = Files.newByteChannel(Paths.get(uri));
+  
+        assertEquals(0x6258, MXFFragmentBuilder.seekFooterPartition(faf));
 
     }
 
