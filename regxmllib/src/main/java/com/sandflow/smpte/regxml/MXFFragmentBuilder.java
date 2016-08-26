@@ -34,6 +34,7 @@ import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.mxf.FillItem;
 import com.sandflow.smpte.mxf.PartitionPack;
 import com.sandflow.smpte.mxf.PrimerPack;
+import com.sandflow.smpte.mxf.RandomIndexPack;
 import com.sandflow.smpte.mxf.Set;
 import com.sandflow.smpte.regxml.dict.DefinitionResolver;
 import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
@@ -44,6 +45,11 @@ import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UUID;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channel;
+import java.nio.channels.Channels;
+import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -62,16 +68,116 @@ public class MXFFragmentBuilder {
 
     private static final UL INDEX_TABLE_SEGMENT_UL
             = UL.fromURN("urn:smpte:ul:060e2b34.02530101.0d010201.01100100");
-    
+
     private static final UL PREFACE_KEY
             = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
+
+    /**
+     * Finds the offset of the first partition from the current position of the
+     * channel, skipping over any run-in (SMPTE ST 377-1 Section 6.5)
+     *
+     * @param mxffile Channel containing an MXF file
+     * @return Offset of the Header Partition from the current position of the
+     * channel, or -1 if no header was found
+     * @throws IOException
+     */
+    public static long findHeaderPartitionOffset(SeekableByteChannel mxffile) throws IOException {
+
+        ByteBuffer ulbytes = ByteBuffer.allocate(16);
+
+        long offset = mxffile.position();
+
+        while (mxffile.read(ulbytes) == ulbytes.limit() && offset <= 65536) {
+
+            UL ul = new UL(ulbytes.array());
+
+            if (ul.equalsWithMask(PartitionPack.getKey(), 0b1111111011100000 /* first eleven bytes minus the version byte */)) {
+                mxffile.position(offset);
+
+                return offset;
+            }
+
+            mxffile.position(++offset);
+
+        }
+
+        return -1;
+    }
+
+    /**
+     * Seeks to the footer partition from the current position of the channel,
+     * using the over any run-in (SMPTE ST 377-1 Section 6.5)
+     *
+     * @param mxffile Channel containing an MXF file
+     * @return Offset of the Header Partition from the current position of the
+     * channel, or -1 if no header was found
+     * @throws IOException
+     * @throws com.sandflow.smpte.klv.exceptions.KLVException
+     */
+    public static long findFooterPartitionOffset(SeekableByteChannel mxffile) throws IOException, KLVException {
+
+        long offset = findHeaderPartitionOffset(mxffile);
+
+        KLVInputStream kis = new KLVInputStream(Channels.newInputStream(mxffile));
+
+        kis.skip(offset);
+
+        Triplet t = kis.readTriplet();
+
+        if (t == null) {
+            return -1;
+        }
+
+        PartitionPack pp = PartitionPack.fromTriplet(t);
+
+        if (pp == null) {
+            return -1;
+        }
+
+        /* read the footer partition straight from the header partition, if available */
+        if (pp.getFooterPartition() != 0) {
+
+            mxffile.position(offset + pp.getFooterPartition());
+
+            return mxffile.position();
+        }
+
+        /* look for a RIP */
+        mxffile.position(mxffile.size() - 4);
+
+        ByteBuffer bytes = ByteBuffer.allocate(4);
+
+        mxffile.read(bytes);
+
+        long ripoffset = bytes.getInt(0);
+
+        kis = new KLVInputStream(Channels.newInputStream(mxffile));
+
+        kis.skip(ripoffset);
+
+        t = kis.readTriplet();
+
+        if (t == null) {
+            return -1;
+        }
+
+        RandomIndexPack rip = RandomIndexPack.fromTriplet(t);
+
+        if (rip == null) {
+            return -1;
+        }
+
+        mxffile.position(rip.getOffsets().get(rip.getOffsets().size() - 1).getOffset());
+
+        return mxffile.position();
+    }
 
     /**
      * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
      * the first Header Metadata object with the specified class, with a class
      * that descends from the specified class.
      *
-     * @param mxffile MXF file
+     * @param mxfpartition MXF file
      * @param defresolver MetaDictionary definitions
      * @param rootclasskey Root class of Fragment
      * @param document DOM for which the Document Fragment is created
@@ -82,9 +188,9 @@ public class MXFFragmentBuilder {
      * @throws ParserConfigurationException
      * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
      */
-    public static DocumentFragment fromInputStream(InputStream mxffile, DefinitionResolver defresolver, UL rootclasskey, Document document) throws IOException, KLVException, MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
+    public static DocumentFragment fromInputStream(InputStream mxfpartition, DefinitionResolver defresolver, UL rootclasskey, Document document) throws IOException, KLVException, MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
 
-        CountingInputStream cis = new CountingInputStream(mxffile);
+        CountingInputStream cis = new CountingInputStream(mxfpartition);
 
         /* look for the partition pack */
         KLVInputStream kis = new KLVInputStream(cis);
@@ -152,7 +258,7 @@ public class MXFFragmentBuilder {
                     if (set != null) {
                         setresolver.put(set.getInstanceID(), set);
                     }
-                    
+
                 } else {
                     LOG.log(Level.WARNING, "Failed to read Group: {0}", t.getKey().toString());
                 }
@@ -160,95 +266,92 @@ public class MXFFragmentBuilder {
                 LOG.warning(
                         String.format(
                                 "Failed to read Group %s with error %s",
-                                 t.getKey().toString(),
+                                t.getKey().toString(),
                                 ke.getMessage()
                         )
                 );
             }
         }
-        
-        for(Group agroup : gs) {
-        
-            /* in MXF, the first header metadata set should be the 
-            Preface set according to ST 377-1 Section 9.5.1, preceded
-            by Class 14 groups
-            */
 
+        for (Group agroup : gs) {
+
+            /* in MXF, the first header metadata set should be the 
+             Preface set according to ST 377-1 Section 9.5.1, preceded
+             by Class 14 groups
+             */
             if (agroup.getKey().equalsWithMask(PREFACE_KEY, 0b1111101011111111 /* ignore version and Group coding */)) {
 
                 break;
-                
-            } else if (! agroup.getKey().isClass14()) {
-            
+
+            } else if (!agroup.getKey().isClass14()) {
+
                 LOG.warning(
-                    String.format(
-                        "Invalid MXF file: at least one non-class 14 Set %s was found between"
+                        String.format(
+                                "Invalid MXF file: at least one non-class 14 Set %s was found between"
                                 + " the Primer Pack and the Preface Set.",
-                        agroup.getKey()
-                    )
+                                agroup.getKey()
+                        )
                 );
-                
+
                 break;
 
             }
-        
+
         }
 
         /* create the fragment */
         FragmentBuilder fb = new FragmentBuilder(defresolver, setresolver);
 
-            Group rootgroup = null;
+        Group rootgroup = null;
 
-            if (rootclasskey != null) {
+        if (rootclasskey != null) {
 
-                Iterator<Group> iter = gs.iterator();
+            Iterator<Group> iter = gs.iterator();
 
-                /* find first essence descriptor */
-                while (rootgroup == null && iter.hasNext()) {
+            /* find first essence descriptor */
+            while (rootgroup == null && iter.hasNext()) {
 
-                    Group g = iter.next();
+                Group g = iter.next();
 
-                    AUID gid = new AUID(g.getKey());
+                AUID gid = new AUID(g.getKey());
 
-                    /* go up the class hierarchy */
-                    while (rootgroup == null && gid != null) {
+                /* go up the class hierarchy */
+                while (rootgroup == null && gid != null) {
 
-                        Definition def = defresolver.getDefinition(gid);
+                    Definition def = defresolver.getDefinition(gid);
 
-                        /* skip if not a class instance */
-                        if (!(def instanceof ClassDefinition)) {
-                            break;
-                        }
-
-                        /* is it an instance of the requested root object */
-                        UL gul = def.getIdentification().asUL();
-
-                        if (gul.equalsWithMask(rootclasskey, 0b1111101011111111 /* ignore version and Group coding */)) {
-                            rootgroup = g;
-
-                        } else {
-                            /* get parent class */
-                            gid = ((ClassDefinition) def).getParentClass();
-                        }
+                    /* skip if not a class instance */
+                    if (!(def instanceof ClassDefinition)) {
+                        break;
                     }
 
+                    /* is it an instance of the requested root object */
+                    UL gul = def.getIdentification().asUL();
+
+                    if (gul.equalsWithMask(rootclasskey, 0b1111101011111111 /* ignore version and Group coding */)) {
+                        rootgroup = g;
+
+                    } else {
+                        /* get parent class */
+                        gid = ((ClassDefinition) def).getParentClass();
+                    }
                 }
 
-            } else {
-
-                rootgroup = gs.get(0);
-
             }
 
-            if (rootgroup == null) {
-                throw new MXFException("Root object not found");
-            }
+        } else {
 
-            return fb.fromTriplet(rootgroup, document);
+            rootgroup = gs.get(0);
 
         }
 
-    
+        if (rootgroup == null) {
+            throw new MXFException("Root object not found");
+        }
+
+        return fb.fromTriplet(rootgroup, document);
+
+    }
 
     public static class MXFException extends Exception {
 
