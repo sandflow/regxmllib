@@ -37,7 +37,15 @@ import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
@@ -69,38 +77,139 @@ public class RegXMLDump {
 
     private final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
             + "  Usage:\n"
-            + "     RegXMLDump ( -all | -ed ) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
+            + "     RegXMLDump ( -all | -ed ) ( -header | -footer ) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
             + "     RegXMLDump -?\n"
             + "  Where:\n"
-            + "     -all: dumps all header metadata\n"
-            + "     -ed: dumps only the first essence descriptor found\n";
+            + "     -all: dumps all header metadata (default) \n"
+            + "     -ed: dumps only the first essence descriptor found\n"
+            + "     -header: dumps metadata from the header partition\n"
+            + "     -footer: dumps metadata from the footer partition\n";
 
     public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException {
+        
+        boolean error = false;
+        Boolean isFooterPartition = null;
+        Boolean isEssenceDescriptorOnly = null;
+        MetaDictionaryCollection mds = null;
+        SeekableByteChannel f = null;
+        
+        for(int i = 0; i < args.length;) {
+            
+            if ( "-?".equals(args[i]) ) {
+                
+                    error = true;
+                    break;
+                
+            } else if ("-ed".equals(args[i])) {
+                
+                if(isEssenceDescriptorOnly != null) {
+                    error = true;
+                    break;
+                }
+                
+                isEssenceDescriptorOnly = true;
+                
+                i++;
+                
+            } else if ("-all".equals(args[i])) {
+                
+                if(isEssenceDescriptorOnly != null) {
+                    error = true;
+                    break;
 
-        if (args.length < 5
-                || "-?".equals(args[0])
-                || (!"-d".equals(args[1]))
-                || (!"-i".equals(args[args.length - 2]))) {
+                }
+                
+                isEssenceDescriptorOnly = false;
+                
+                i++;
+                
+            } else if ("-footer".equals(args[i])) {
+                
+                if(isFooterPartition != null) {
+                    error = true;
+                    break;
+                }
+                
+                isFooterPartition = true;
+                
+                i++;
+                
+            } else if ("-header".equals(args[i])) {
+                
+                if(isFooterPartition != null) {
+                    error = true;
+                    break;
+                }
+                
+                isFooterPartition = false;   
+                
+                i++;
+                
+            } else if ("-d".equals(args[i])) {
+                
+                if (mds != null) {
+                    error = true;
+                    break;
+                }
+                
+                i++;
+                
+                mds = new MetaDictionaryCollection();
 
+                for (; i < args.length && args[i].charAt(0) != '-' ; i++) {
+                    
+                    /* load the regxml metadictionary */
+                    FileReader fr = new FileReader(args[i]);
+
+                    /* add it to the dictionary group */
+                    mds.addDictionary(MetaDictionary.fromXML(fr));
+
+                }
+                
+                if (mds.getDictionaries().isEmpty()) {
+                    error = true;
+                    break;
+                }
+                                
+            } else if ("-i".equals(args[i])) {
+                
+                i++;
+                
+                if (f != null || i >= args.length || args[i].charAt(0) == '-') {
+                    
+                    error = true;
+                    break;
+                    
+                }
+                
+                /* retrieve the mxf file */
+                
+                f = Files.newByteChannel(Paths.get(args[i++]));
+                
+                
+            } else {
+                
+                error = true;
+                break;
+                
+            }
+            
+            
+        }
+        
+        if (isFooterPartition == null) {
+            isFooterPartition = false;
+        }
+        
+        if (isEssenceDescriptorOnly == null) {
+            isEssenceDescriptorOnly = false;
+        }
+        
+        if (error || f == null || mds == null) {
             System.out.println(USAGE);
-
-            return;
+            return;   
         }
 
-        MetaDictionaryCollection mds = new MetaDictionaryCollection();
-
-        for (int i = 2; i < args.length - 2; i++) {
-
-            /* load the regxml metadictionary */
-            FileReader fr = new FileReader(args[i]);
-
-            /* add it to the dictionary group */
-            mds.addDictionary(MetaDictionary.fromXML(fr));
-
-        }
-
-        /* retrieve the mxf file */
-        FileInputStream f = new FileInputStream(args[args.length - 1]);
         
         /* create dom */
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -118,9 +227,21 @@ public class RegXMLDump {
         
         try {
             
-            UL root = "-ed".equals(args[0]) ? ESSENCE_DESCRIPTOR_KEY : PREFACE_KEY;
+            UL root = isEssenceDescriptorOnly ? ESSENCE_DESCRIPTOR_KEY : PREFACE_KEY;
+                        
+            if (isFooterPartition) {
+               
+                MXFFragmentBuilder.seekFooterPartition(f);
             
-            DocumentFragment df = MXFFragmentBuilder.fromInputStream(f, mds, root, doc);
+            } else {
+                
+                MXFFragmentBuilder.seekHeaderPartition(f);
+                
+            }
+                        
+            InputStream is = Channels.newInputStream(f);
+                        
+            DocumentFragment df = MXFFragmentBuilder.fromInputStream(is, mds, root, doc);
             
             doc.appendChild(df);
 
