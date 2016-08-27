@@ -121,8 +121,6 @@ public class MXFFragmentBuilder {
 
         KLVInputStream kis = new KLVInputStream(Channels.newInputStream(mxffile));
 
-        kis.skip(headeroffset);
-
         Triplet t = kis.readTriplet();
 
         if (t == null) {
@@ -150,13 +148,11 @@ public class MXFFragmentBuilder {
 
         if (mxffile.read(bytes) != bytes.limit()) {
             return -1;
-        }
-
-        long ripoffset = bytes.getInt(0);
-
+        }        
+        
+        mxffile.position(bytes.getInt(0));
+        
         kis = new KLVInputStream(Channels.newInputStream(mxffile));
-
-        kis.skip(ripoffset);
 
         t = kis.readTriplet();
 
