@@ -26,6 +26,7 @@
 package com.sandflow.smpte.regxml;
 
 import com.sandflow.smpte.klv.exceptions.KLVException;
+import com.sandflow.smpte.mxf.MXFFiles;
 import com.sandflow.smpte.register.ElementsRegister;
 import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypesRegister;
@@ -152,11 +153,6 @@ public class MXFFragmentBuilderTest extends TestCase {
 
     }
 
-    /**
-     * Test of fromInputStream method, of class MXFFragmentBuilder.
-     *
-     * @throws java.lang.Exception
-     */
     public void testFromInputStreamAudio1() throws Exception {
 
         compareGeneratedVsRef("resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
@@ -190,19 +186,6 @@ public class MXFFragmentBuilderTest extends TestCase {
     public void testFromInputStreamUTF8() throws Exception {
 
         compareGeneratedVsRef("resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
-
-    }
-    
-    public void testSeekFooterPartition() throws Exception {
-        
-            /* get the sample files */
-        URI uri = ClassLoader.getSystemResource("resources/sample-files/audio1.mxf").toURI();
-               
-        assertNotNull(uri);
-        
-        SeekableByteChannel faf = Files.newByteChannel(Paths.get(uri));
-  
-        assertEquals(0x6258, MXFFragmentBuilder.seekFooterPartition(faf));
 
     }
 

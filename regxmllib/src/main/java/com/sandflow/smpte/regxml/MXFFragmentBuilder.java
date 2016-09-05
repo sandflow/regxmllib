@@ -34,7 +34,6 @@ import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.mxf.FillItem;
 import com.sandflow.smpte.mxf.PartitionPack;
 import com.sandflow.smpte.mxf.PrimerPack;
-import com.sandflow.smpte.mxf.RandomIndexPack;
 import com.sandflow.smpte.mxf.Set;
 import com.sandflow.smpte.regxml.dict.DefinitionResolver;
 import com.sandflow.smpte.regxml.dict.definitions.ClassDefinition;
@@ -45,11 +44,6 @@ import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UUID;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channel;
-import java.nio.channels.Channels;
-import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -72,104 +66,6 @@ public class MXFFragmentBuilder {
     private static final UL PREFACE_KEY
             = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
-    /**
-     * Seeks to the first byte of the Header partition, assuming the current position of the
-     * channel is within the run-in (SMPTE ST 377-1 Section 6.5)
-     *
-     * @param mxffile Channel containing an MXF file
-     * @return Offset of the first byte of the Header Partition, or -1 if 
-     * the Header Partition was not found
-     * @throws IOException
-     */
-    public static long seekHeaderPartition(SeekableByteChannel mxffile) throws IOException {
-
-        ByteBuffer ulbytes = ByteBuffer.allocate(16);
-
-        long offset = mxffile.position();
-
-        while (mxffile.read(ulbytes) == ulbytes.limit() && offset <= 65536) {
-
-            UL ul = new UL(ulbytes.array());
-
-            if (ul.equalsWithMask(PartitionPack.getKey(), 0b1111111011100000 /* first eleven bytes minus the version byte */)) {
-                mxffile.position(offset);
-
-                return offset;
-            }
-
-            mxffile.position(++offset);
-
-        }
-
-        return -1;
-    }
-
-    /**
-     * Seeks to the footer partition, assuming the current position of the
-     * channel is within the run-in (SMPTE ST 377-1 Section 6.5), the footer partition
-     * offset is listed in the Header Partition Pack or a Random Index Pack is 
-     * present.
-     *
-     * @param mxffile Channel containing an MXF file
-     * @return Offset of the Footer Partition, or -1 if a Footer Partition was not found
-     * @throws IOException
-     * @throws com.sandflow.smpte.klv.exceptions.KLVException
-     */
-    public static long seekFooterPartition(SeekableByteChannel mxffile) throws IOException, KLVException {
-
-        long headeroffset = seekHeaderPartition(mxffile);
-
-        KLVInputStream kis = new KLVInputStream(Channels.newInputStream(mxffile));
-
-        Triplet t = kis.readTriplet();
-
-        if (t == null) {
-            return -1;
-        }
-
-        PartitionPack pp = PartitionPack.fromTriplet(t);
-
-        if (pp == null) {
-            return -1;
-        }
-
-        /* read the footer partition straight from the header partition, if available */
-        if (pp.getFooterPartition() != 0) {
-
-            mxffile.position(headeroffset + pp.getFooterPartition());
-
-            return mxffile.position();
-        }
-
-        /* look for a RIP */
-        mxffile.position(mxffile.size() - 4);
-
-        ByteBuffer bytes = ByteBuffer.allocate(4);
-
-        if (mxffile.read(bytes) != bytes.limit()) {
-            return -1;
-        }        
-        
-        mxffile.position(bytes.getInt(0));
-        
-        kis = new KLVInputStream(Channels.newInputStream(mxffile));
-
-        t = kis.readTriplet();
-
-        if (t == null) {
-            return -1;
-        }
-
-        RandomIndexPack rip = RandomIndexPack.fromTriplet(t);
-
-        if (rip == null) {
-            return -1;
-        }
-
-        mxffile.position(rip.getOffsets().get(rip.getOffsets().size() - 1).getOffset());
-
-        return mxffile.position();
-    }
 
     /**
      * Returns a DOM Document Fragment containing a RegXML Fragment rooted at

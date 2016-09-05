@@ -26,6 +26,7 @@
 package com.sandflow.smpte.tools;
 
 import com.sandflow.smpte.klv.exceptions.KLVException;
+import com.sandflow.smpte.mxf.MXFFiles;
 import com.sandflow.smpte.regxml.FragmentBuilder;
 import com.sandflow.smpte.regxml.MXFFragmentBuilder;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
@@ -34,18 +35,14 @@ import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
 import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
 import com.sandflow.smpte.util.UL;
 import java.io.EOFException;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
@@ -231,11 +228,11 @@ public class RegXMLDump {
                         
             if (isFooterPartition) {
                
-                MXFFragmentBuilder.seekFooterPartition(f);
+                MXFFiles.seekFooterPartition(f);
             
             } else {
                 
-                MXFFragmentBuilder.seekHeaderPartition(f);
+                MXFFiles.seekHeaderPartition(f);
                 
             }
                         
