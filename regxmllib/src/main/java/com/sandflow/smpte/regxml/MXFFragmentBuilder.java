@@ -69,10 +69,10 @@ public class MXFFragmentBuilder {
 
     /**
      * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
-     * the first Header Metadata object with the specified class, with a class
-     * that descends from the specified class.
+     * the first Header Metadata object with a class that descends from
+     * the specified class.
      *
-     * @param mxfpartition MXF file
+     * @param mxfpartition MXF partition, including the Partition Pack
      * @param defresolver MetaDictionary definitions
      * @param rootclasskey Root class of Fragment
      * @param document DOM for which the Document Fragment is created

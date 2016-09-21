@@ -41,6 +41,7 @@ import java.io.InputStream;
 import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -70,7 +71,6 @@ public class RegXMLDump {
 
     private static final UL PREFACE_KEY
             = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
-    
 
     private final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
             + "  Usage:\n"
@@ -82,79 +82,85 @@ public class RegXMLDump {
             + "     -header: dumps metadata from the header partition\n"
             + "     -footer: dumps metadata from the footer partition\n";
 
+    private enum TargetPartition {
+        HEADER,
+        FOOTER,
+    }
+
     public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException {
-        
+
         boolean error = false;
-        Boolean isFooterPartition = null;
+        TargetPartition source = null;
         Boolean isEssenceDescriptorOnly = null;
         MetaDictionaryCollection mds = null;
         SeekableByteChannel f = null;
-        
-        for(int i = 0; i < args.length;) {
-            
-            if ( "-?".equals(args[i]) ) {
-                
-                    error = true;
-                    break;
-                
+        Path p = null;
+
+        for (int i = 0; i < args.length;) {
+
+            if ("-?".equals(args[i])) {
+
+                error = true;
+                break;
+
             } else if ("-ed".equals(args[i])) {
-                
-                if(isEssenceDescriptorOnly != null) {
+
+                if (isEssenceDescriptorOnly != null) {
                     error = true;
                     break;
                 }
-                
+
                 isEssenceDescriptorOnly = true;
-                
+
                 i++;
-                
+
             } else if ("-all".equals(args[i])) {
-                
-                if(isEssenceDescriptorOnly != null) {
+
+                if (isEssenceDescriptorOnly != null) {
                     error = true;
                     break;
 
                 }
-                
+
                 isEssenceDescriptorOnly = false;
-                
+
                 i++;
-                
+
             } else if ("-footer".equals(args[i])) {
-                
-                if(isFooterPartition != null) {
+
+                if (source != null) {
                     error = true;
                     break;
                 }
-                
-                isFooterPartition = true;
-                
+
+                source = TargetPartition.FOOTER;
+
                 i++;
-                
+
             } else if ("-header".equals(args[i])) {
-                
-                if(isFooterPartition != null) {
+
+                if (source != null) {
                     error = true;
                     break;
                 }
-                
-                isFooterPartition = false;   
-                
+
+                source = TargetPartition.HEADER;
+
                 i++;
-                
+
             } else if ("-d".equals(args[i])) {
-                
+
                 if (mds != null) {
                     error = true;
                     break;
                 }
-                
+
                 i++;
-                
+
                 mds = new MetaDictionaryCollection();
 
-                for (; i < args.length && args[i].charAt(0) != '-' ; i++) {
-                    
+                for (; i < args.length && args[i].charAt(0) != '-'; i++) {
+
                     /* load the regxml metadictionary */
                     FileReader fr = new FileReader(args[i]);
 
@@ -162,52 +168,55 @@ public class RegXMLDump {
                     mds.addDictionary(MetaDictionary.fromXML(fr));
 
                 }
-                
+
                 if (mds.getDictionaries().isEmpty()) {
                     error = true;
                     break;
                 }
-                                
+
             } else if ("-i".equals(args[i])) {
-                
+
                 i++;
-                
+
                 if (f != null || i >= args.length || args[i].charAt(0) == '-') {
-                    
+
                     error = true;
                     break;
-                    
+
                 }
-                
+
                 /* retrieve the mxf file */
-                
-                f = Files.newByteChannel(Paths.get(args[i++]));
-                
-                
+                p = Paths.get(args[i++]);
+
+                if (p == null) {
+                    error = true;
+                    break;
+                }
+
+                f = Files.newByteChannel(p);
+
             } else {
-                
+
                 error = true;
                 break;
-                
+
             }
-            
-            
+
         }
-        
-        if (isFooterPartition == null) {
-            isFooterPartition = false;
+
+        if (source == null) {
+            source = TargetPartition.HEADER;
         }
-        
+
         if (isEssenceDescriptorOnly == null) {
             isEssenceDescriptorOnly = false;
         }
-        
+
         if (error || f == null || mds == null) {
             System.out.println(USAGE);
-            return;   
+            return;
         }
 
-        
         /* create dom */
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -218,34 +227,39 @@ public class RegXMLDump {
         /* date and build version */
         Date now = new java.util.Date();
         doc.appendChild(doc.createComment("Created: " + now.toString()));
-        doc.appendChild(doc.createComment("From: " + args[args.length - 1]));
-        doc.appendChild(doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()));
+        doc.appendChild(doc.createComment("From: " + p.getFileName().toString()));
         doc.appendChild(doc.createComment("See: https://github.com/sandflow/regxmllib"));
-        
+
         try {
-            
+
             UL root = isEssenceDescriptorOnly ? ESSENCE_DESCRIPTOR_KEY : PREFACE_KEY;
-                        
-            if (isFooterPartition) {
-               
-                MXFFiles.seekFooterPartition(f);
+
+            /* seek to Header metadata */
             
+            if (TargetPartition.FOOTER.equals(source)) {
+
+                if (MXFFiles.seekFooterPartition(f) < 0) {
+                    throw new Exception("Footer partition not found");
+                }
+
             } else {
-                
-                MXFFiles.seekHeaderPartition(f);
+
+                if (MXFFiles.seekHeaderPartition(f) < 0) {
+                    throw new Exception("Header partition not found");
+                }
                 
             }
-                        
+
             InputStream is = Channels.newInputStream(f);
-                        
+
             DocumentFragment df = MXFFragmentBuilder.fromInputStream(is, mds, root, doc);
-            
+
             doc.appendChild(df);
 
-        } catch (MXFFragmentBuilder.MXFException | FragmentBuilder.RuleException | KLVException | ParserConfigurationException e) {
+        } catch (Exception e) {
             LOG.severe(e.getMessage());
         }
-        
+
         /* write DOM to file */
         Transformer tr = TransformerFactory.newInstance().newTransformer();
 
