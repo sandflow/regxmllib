@@ -25,18 +25,12 @@
  */
 package com.sandflow.smpte.tools;
 
-import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.mxf.MXFFiles;
-import com.sandflow.smpte.regxml.FragmentBuilder;
 import com.sandflow.smpte.regxml.MXFFragmentBuilder;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
-import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
-import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
 import com.sandflow.smpte.util.UL;
-import java.io.EOFException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
@@ -45,13 +39,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -74,23 +65,26 @@ public class RegXMLDump {
 
     private final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
             + "  Usage:\n"
-            + "     RegXMLDump ( -all | -ed ) ( -header | -footer ) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
+            + "     RegXMLDump ( -all | -ed ) ( -header | -footer | -auto ) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
             + "     RegXMLDump -?\n"
             + "  Where:\n"
-            + "     -all: dumps all header metadata (default) \n"
+            + "     -all: dumps all header metadata (default)\n"
             + "     -ed: dumps only the first essence descriptor found\n"
-            + "     -header: dumps metadata from the header partition\n"
-            + "     -footer: dumps metadata from the footer partition\n";
+            + "     -header: dumps metadata from the header partition (default)\n"
+            + "     -footer: dumps metadata from the footer partition\n"
+            + "     -auto: dumps metadata from the footer partition if available and from the header if not\n";
 
     private enum TargetPartition {
+
         HEADER,
         FOOTER,
+        AUTO
     }
 
-    public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException {
+    public static void main(String[] args) throws Exception {
 
         boolean error = false;
-        TargetPartition source = null;
+        TargetPartition selectedpartition = null;
         Boolean isEssenceDescriptorOnly = null;
         MetaDictionaryCollection mds = null;
         SeekableByteChannel f = null;
@@ -128,23 +122,34 @@ public class RegXMLDump {
 
             } else if ("-footer".equals(args[i])) {
 
-                if (source != null) {
+                if (selectedpartition != null) {
                     error = true;
                     break;
                 }
 
-                source = TargetPartition.FOOTER;
+                selectedpartition = TargetPartition.FOOTER;
+
+                i++;
+
+            } else if ("-auto".equals(args[i])) {
+
+                if (selectedpartition != null) {
+                    error = true;
+                    break;
+                }
+
+                selectedpartition = TargetPartition.AUTO;
 
                 i++;
 
             } else if ("-header".equals(args[i])) {
 
-                if (source != null) {
+                if (selectedpartition != null) {
                     error = true;
                     break;
                 }
 
-                source = TargetPartition.HEADER;
+                selectedpartition = TargetPartition.HEADER;
 
                 i++;
 
@@ -204,61 +209,106 @@ public class RegXMLDump {
 
         }
 
-        if (source == null) {
-            source = TargetPartition.HEADER;
+        if (selectedpartition == null) {
+            selectedpartition = TargetPartition.HEADER;
         }
 
         if (isEssenceDescriptorOnly == null) {
             isEssenceDescriptorOnly = false;
         }
 
-        if (error || f == null || mds == null) {
+        if (error || f == null || mds == null || p == null) {
             System.out.println(USAGE);
             return;
         }
 
-        /* create dom */
+        /* create DOM */
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
 
         doc.setXmlStandalone(true);
 
+        UL root = isEssenceDescriptorOnly ? ESSENCE_DESCRIPTOR_KEY : PREFACE_KEY;
+
+        DocumentFragment df = null;
+
+        TargetPartition actualpartition
+                = TargetPartition.AUTO.equals(selectedpartition)
+                        ? TargetPartition.FOOTER : selectedpartition;
+
+        boolean retry = true;
+        
+        /*
+           if selectedpartition is AUTO, then try FOOTER first and then HEADER 
+           if any exceptions occur
+        */
+
+        while (retry) {
+
+            try {
+
+                switch (actualpartition) {
+                    case FOOTER:
+
+                        if (MXFFiles.seekFooterPartition(f) < 0) {
+                            throw new Exception("Footer partition not found");
+                        }
+
+                        break;
+
+                    case HEADER:
+
+                        if (MXFFiles.seekHeaderPartition(f) < 0) {
+                            throw new Exception("Header partition not found");
+                        }
+
+                        break;
+
+                }
+
+                InputStream is = Channels.newInputStream(f);
+
+                df = MXFFragmentBuilder.fromInputStream(is, mds, root, doc);
+
+            } catch (Exception e) {
+
+                if (TargetPartition.AUTO.equals(selectedpartition)) {
+
+                    /* if an exception occurred and the target partition is AUTO,
+                     try again with the header partition */
+                    
+                    actualpartition = TargetPartition.HEADER;
+                    
+                    f.position(0);
+
+                } else {
+                    
+                    /* otherwise give up */
+                    
+                    LOG.severe(e.getMessage());
+
+                    throw e;
+                }
+
+            } finally {
+                
+                retry = false;
+                
+            }
+
+        }
+
         /* date and build version */
         Date now = new java.util.Date();
         doc.appendChild(doc.createComment("Created: " + now.toString()));
         doc.appendChild(doc.createComment("From: " + p.getFileName().toString()));
+        doc.appendChild(doc.createComment("Partition: " + actualpartition.name()));
+        doc.appendChild(doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()));
         doc.appendChild(doc.createComment("See: https://github.com/sandflow/regxmllib"));
 
-        try {
-
-            UL root = isEssenceDescriptorOnly ? ESSENCE_DESCRIPTOR_KEY : PREFACE_KEY;
-
-            /* seek to Header metadata */
-            
-            if (TargetPartition.FOOTER.equals(source)) {
-
-                if (MXFFiles.seekFooterPartition(f) < 0) {
-                    throw new Exception("Footer partition not found");
-                }
-
-            } else {
-
-                if (MXFFiles.seekHeaderPartition(f) < 0) {
-                    throw new Exception("Header partition not found");
-                }
-                
-            }
-
-            InputStream is = Channels.newInputStream(f);
-
-            DocumentFragment df = MXFFragmentBuilder.fromInputStream(is, mds, root, doc);
-
-            doc.appendChild(df);
-
-        } catch (Exception e) {
-            LOG.severe(e.getMessage());
-        }
+        /* add regxml fragment */
+        doc.appendChild(df);
 
         /* write DOM to file */
         Transformer tr = TransformerFactory.newInstance().newTransformer();
