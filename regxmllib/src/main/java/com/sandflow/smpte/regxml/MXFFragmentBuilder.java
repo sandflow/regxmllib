@@ -66,7 +66,6 @@ public class MXFFragmentBuilder {
     private static final UL PREFACE_KEY
             = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
-
     /**
      * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
      * the first Header Metadata object with a class that descends from
@@ -83,7 +82,41 @@ public class MXFFragmentBuilder {
      * @throws ParserConfigurationException
      * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
      */
-    public static DocumentFragment fromInputStream(InputStream mxfpartition, DefinitionResolver defresolver, UL rootclasskey, Document document) throws IOException, KLVException, MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
+    public static DocumentFragment fromInputStream(InputStream mxfpartition,
+            DefinitionResolver defresolver,
+            UL rootclasskey,
+            Document document) throws IOException, KLVException, MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
+        
+        return fromInputStream(mxfpartition,
+            defresolver,
+            null,
+            rootclasskey,
+            document);
+    }
+
+    /**
+     * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
+     * the first Header Metadata object with a class that descends from
+     * the specified class.
+     *
+     * @param mxfpartition MXF partition, including the Partition Pack
+     * @param defresolver MetaDictionary definitions
+     * @param enumnameresolver Allows the local name of extendible enumeration values
+     *                         to be inserted as comments
+     * @param rootclasskey Root class of Fragment
+     * @param document DOM for which the Document Fragment is created
+     * @return Document Fragment containing a single RegXML Fragment
+     * @throws IOException
+     * @throws KLVException
+     * @throws com.sandflow.smpte.regxml.MXFFragmentBuilder.MXFException
+     * @throws ParserConfigurationException
+     * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
+     */
+    public static DocumentFragment fromInputStream(InputStream mxfpartition,
+            DefinitionResolver defresolver,
+            FragmentBuilder.AUIDNameResolver enumnameresolver,
+            UL rootclasskey,
+            Document document) throws IOException, KLVException, MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
 
         CountingInputStream cis = new CountingInputStream(mxfpartition);
 
@@ -195,7 +228,7 @@ public class MXFFragmentBuilder {
         }
 
         /* create the fragment */
-        FragmentBuilder fb = new FragmentBuilder(defresolver, setresolver);
+        FragmentBuilder fb = new FragmentBuilder(defresolver, setresolver, enumnameresolver);
 
         Group rootgroup = null;
 
