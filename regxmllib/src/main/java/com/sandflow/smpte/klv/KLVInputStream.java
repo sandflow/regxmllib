@@ -64,6 +64,9 @@ public class KLVInputStream extends InputStream implements DataInput {
      * @param byteorder Byte ordering of the file
      */
     public KLVInputStream(InputStream is, ByteOrder byteorder) {
+        
+        if (is == null) throw new NullPointerException();
+        
         dis = new DataInputStream(is);
         this.byteorder = byteorder;
     }
@@ -87,9 +90,7 @@ public class KLVInputStream extends InputStream implements DataInput {
     public UL readUL() throws IOException, EOFException {
         byte[] ul = new byte[16];
 
-        if (read(ul) < ul.length) {
-            throw new EOFException();
-        }
+        readFully(ul);
         
         return new UL(ul);
     }
