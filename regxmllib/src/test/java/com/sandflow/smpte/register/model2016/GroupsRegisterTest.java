@@ -49,7 +49,7 @@ public class GroupsRegisterTest extends TestCase {
         super.setUp();
         
         /* load the registers */
-        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/registers/2016/groups.xml"));
+        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/registers/brown_sauce/Groups.xml"));
         assertNotNull(fg);
         
         groups = GroupsRegister.fromXML(fg);

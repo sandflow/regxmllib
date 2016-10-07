@@ -1,7 +1,52 @@
+<!-- Metadata tags to support XML file editing -->
+<!--  -->
+<!-- Please fill these in if you edit this XML file -->
+<!-- author= -->
+<!-- edit_date= -->
+<!-- summary_of_edit= -->
+<!--  -->
+<!-- DO NOT EDIT THIS TAG -->
+<!-- master_commit_tag=v000000075 -->
+<!-- DO NOT EDIT THIS TAG -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!-- DRAFT - SMPTE METADATA REGISTERS XML -->
 <!-- ##################################### -->
-<!-- TEMPORARY XML FOR TESTING PURPOSES -->
-<!-- ********DO NOT EDIT THIS XML********* -->
-<!-- ##################################### -->
+<!--  -->
+<!-- Latest XML Files + Web Views -->
+<!-- ############################ -->
+<!--  -->
+<!-- See http://vm-1042-user.virt.ch.bbc.co.uk/ for the latest XML files and Web Views (tables, etc) of this data which make it easier -->
+<!-- to explore, browse, manually check etc. Login with: -->
+<!-- username: smpte -->
+<!-- password: smpte -->
+<!-- (N.B. Best viewed with the Chrome browser) -->
+<!--  -->
+<!-- Editing these XML Files -->
+<!-- ####################### -->
+<!--  -->
+<!-- If you wish to edit one of these XML files please first complete the metadata tags at the top of the file. -->
+<!-- Then edit existing entries in the XML or add new entries. -->
+<!-- When editing the XML file you may delete some or all of the original entries - leaving only those that you are -->
+<!-- working on may make editing simpler and less error prone. -->
+<!-- If you think that an entry actually needs to be deleted from the Registers please get in touch. -->
+<!-- You must not edit the UL of an entry - doing so would make it look like you want to create a new entry. -->
+<!-- Please get in touch if you think the UL of an entry in the Registers actually needs to be changed. -->
+<!--  -->
+<!-- Please create a ZIP file containing all of the XML files you have edited. -->
+<!-- This may contain zero or more XML files for each Register. -->
+<!-- Try to only make related edits in the XML files you include in the ZIP - if you have two sets of unrelated changes to make -->
+<!-- please do these in separate XML files that are packaged into two separate ZIP files. All the changes will ultimately be merged into the -->
+<!-- Registers. -->
+<!-- When ready, please send your ZIP file(s) by email (each ZIP file in its own email message). -->
+<!--  -->
+<!-- Contact -->
+<!-- ####### -->
+<!--  -->
+<!-- Please email:  30mr10wg-def@lists.smpte.org -->
+<!--  -->
 <!--  -->
 <GroupsRegister xmlns="http://www.smpte-ra.org/ns/395/2016">
   <Entries>
@@ -845,7 +890,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
-          <LocalTag>3C0A</LocalTag>
+          <LocalTag>3c0a</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -875,7 +920,7 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010e.04200202.0a000000</UL>
-          <LocalTag>800A</LocalTag>
+          <LocalTag>800a</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -895,7 +940,7 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010e.04200202.0b000000</UL>
-          <LocalTag>800B</LocalTag>
+          <LocalTag>800b</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -925,7 +970,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
-          <LocalTag>3C0A</LocalTag>
+          <LocalTag>3c0a</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -985,12 +1030,12 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010d.04200103.01090000</UL>
-          <LocalTag>810A</LocalTag>
+          <LocalTag>810a</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010d.04200103.010a0000</UL>
-          <LocalTag>810B</LocalTag>
+          <LocalTag>810b</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -1000,22 +1045,22 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010d.04200103.010b0000</UL>
-          <LocalTag>810C</LocalTag>
+          <LocalTag>810c</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010d.04200103.02010000</UL>
-          <LocalTag>810D</LocalTag>
+          <LocalTag>810d</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010d.04200103.02020000</UL>
-          <LocalTag>810E</LocalTag>
+          <LocalTag>810e</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010d.04200103.02030000</UL>
-          <LocalTag>810F</LocalTag>
+          <LocalTag>810f</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -1075,12 +1120,12 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
-          <LocalTag>3C0A</LocalTag>
+          <LocalTag>3c0a</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010d.04060805.00000000</UL>
-          <LocalTag>E000</LocalTag>
+          <LocalTag>e000</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -1242,7 +1287,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
-          <LocalTag>3C0A</LocalTag>
+          <LocalTag>3c0a</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -1502,31 +1547,31 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300506.00000000</UL>
-          <LocalTag>0B01</LocalTag>
+          <LocalTag>0b01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06020000</UL>
-          <LocalTag>0B02</LocalTag>
+          <LocalTag>0b02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.060a0000</UL>
-          <LocalTag>0B03</LocalTag>
+          <LocalTag>0b03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0530050c.00000000</UL>
-          <LocalTag>0B04</LocalTag>
+          <LocalTag>0b04</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02060000</UL>
-          <LocalTag>0B05</LocalTag>
+          <LocalTag>0b05</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -1549,7 +1594,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06070000</UL>
-          <LocalTag>0C01</LocalTag>
+          <LocalTag>0c01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -1572,25 +1617,25 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02070000</UL>
-          <LocalTag>0D01</LocalTag>
+          <LocalTag>0d01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05401001.02000000</UL>
-          <LocalTag>0D02</LocalTag>
+          <LocalTag>0d02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05401001.01000000</UL>
-          <LocalTag>0D03</LocalTag>
+          <LocalTag>0d03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05401001.03000000</UL>
-          <LocalTag>0D04</LocalTag>
+          <LocalTag>0d04</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -1613,13 +1658,13 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010103.03000000</UL>
-          <LocalTag>0E01</LocalTag>
+          <LocalTag>0e01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010103.04000000</UL>
-          <LocalTag>0E02</LocalTag>
+          <LocalTag>0e02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -1642,13 +1687,13 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02090000</UL>
-          <LocalTag>0F01</LocalTag>
+          <LocalTag>0f01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06080000</UL>
-          <LocalTag>0F02</LocalTag>
+          <LocalTag>0f02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -1979,19 +2024,19 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0530050d.00000000</UL>
-          <LocalTag>1A02</LocalTag>
+          <LocalTag>1a02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020103.10020100</UL>
-          <LocalTag>1A03</LocalTag>
+          <LocalTag>1a03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300508.00000000</UL>
-          <LocalTag>1A04</LocalTag>
+          <LocalTag>1a04</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -2014,19 +2059,19 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01011503.00000000</UL>
-          <LocalTag>1B01</LocalTag>
+          <LocalTag>1b01</LocalTag>
           <IsUniqueID>true</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.01070102.03010000</UL>
-          <LocalTag>1B02</LocalTag>
+          <LocalTag>1b02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03020301.02010000</UL>
-          <LocalTag>1B03</LocalTag>
+          <LocalTag>1b03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -2064,43 +2109,43 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300509.00000000</UL>
-          <LocalTag>1E01</LocalTag>
+          <LocalTag>1e01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300503.00000000</UL>
-          <LocalTag>1E02</LocalTag>
+          <LocalTag>1e02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.04010000</UL>
-          <LocalTag>1E03</LocalTag>
+          <LocalTag>1e03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0530050a.00000000</UL>
-          <LocalTag>1E06</LocalTag>
+          <LocalTag>1e06</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300504.00000000</UL>
-          <LocalTag>1E07</LocalTag>
+          <LocalTag>1e07</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.05300505.00000000</UL>
-          <LocalTag>1E08</LocalTag>
+          <LocalTag>1e08</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.03020000</UL>
-          <LocalTag>1E09</LocalTag>
+          <LocalTag>1e09</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -2123,13 +2168,13 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01060000</UL>
-          <LocalTag>1F01</LocalTag>
+          <LocalTag>1f01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0530050b.01000000</UL>
-          <LocalTag>1F03</LocalTag>
+          <LocalTag>1f03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -2194,37 +2239,37 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200903.00000000</UL>
-          <LocalTag>220A</LocalTag>
+          <LocalTag>220a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200904.00000000</UL>
-          <LocalTag>220B</LocalTag>
+          <LocalTag>220b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200905.00000000</UL>
-          <LocalTag>220C</LocalTag>
+          <LocalTag>220c</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200906.00000000</UL>
-          <LocalTag>220D</LocalTag>
+          <LocalTag>220d</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200907.00000000</UL>
-          <LocalTag>220E</LocalTag>
+          <LocalTag>220e</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200908.00000000</UL>
-          <LocalTag>220F</LocalTag>
+          <LocalTag>220f</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -2398,13 +2443,13 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010104.050a0000</UL>
-          <LocalTag>260A</LocalTag>
+          <LocalTag>260a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010104.050b0000</UL>
-          <LocalTag>260B</LocalTag>
+          <LocalTag>260b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -2439,18 +2484,18 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010102.01000000</UL>
-          <LocalTag>2B01</LocalTag>
+          <LocalTag>2b01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.01030404.00000000</UL>
-          <LocalTag>3F07</LocalTag>
+          <LocalTag>3f07</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.01030405.00000000</UL>
-          <LocalTag>3F06</LocalTag>
+          <LocalTag>3f06</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
@@ -2488,13 +2533,13 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06030000</UL>
-          <LocalTag>2F01</LocalTag>
+          <LocalTag>2f01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010109.06010104.06100000</UL>
-          <LocalTag>2F02</LocalTag>
+          <LocalTag>2f02</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -2641,37 +2686,37 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.0d000000</UL>
-          <LocalTag>320A</LocalTag>
+          <LocalTag>320a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010501.0e000000</UL>
-          <LocalTag>320B</LocalTag>
+          <LocalTag>320b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010301.04000000</UL>
-          <LocalTag>320C</LocalTag>
+          <LocalTag>320c</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010302.05000000</UL>
-          <LocalTag>320D</LocalTag>
+          <LocalTag>320d</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04010101.01000000</UL>
-          <LocalTag>320E</LocalTag>
+          <LocalTag>320e</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200102.00000000</UL>
-          <LocalTag>320F</LocalTag>
+          <LocalTag>320f</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -2689,7 +2734,7 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010201.01030100</UL>
-          <LocalTag>321A</LocalTag>
+          <LocalTag>321a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -2850,7 +2895,7 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.03010201.0a000000</UL>
-          <LocalTag>330B</LocalTag>
+          <LocalTag>330b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -3096,49 +3141,49 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.01010000</UL>
-          <LocalTag>3A01</LocalTag>
+          <LocalTag>3a01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04010401.01000000</UL>
-          <LocalTag>3A02</LocalTag>
+          <LocalTag>3a02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.0d010101.01010100</UL>
-          <LocalTag>3A03</LocalTag>
+          <LocalTag>3a03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.03000000</UL>
-          <LocalTag>3A04</LocalTag>
+          <LocalTag>3a04</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.04010000</UL>
-          <LocalTag>3A05</LocalTag>
+          <LocalTag>3a05</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.02010000</UL>
-          <LocalTag>3A06</LocalTag>
+          <LocalTag>3a06</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.06010000</UL>
-          <LocalTag>3A07</LocalTag>
+          <LocalTag>3a07</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04100101.05010000</UL>
-          <LocalTag>3A08</LocalTag>
+          <LocalTag>3a08</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -3161,71 +3206,96 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.03010201.02000000</UL>
-          <LocalTag>3B01</LocalTag>
+          <LocalTag>3b01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020110.02040000</UL>
-          <LocalTag>3B02</LocalTag>
+          <LocalTag>3b02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02010000</UL>
-          <LocalTag>3B03</LocalTag>
+          <LocalTag>3b03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.02020000</UL>
-          <LocalTag>3B04</LocalTag>
+          <LocalTag>3b04</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010201.05000000</UL>
-          <LocalTag>3B05</LocalTag>
+          <LocalTag>3b05</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06040000</UL>
-          <LocalTag>3B06</LocalTag>
+          <LocalTag>3b06</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010201.04000000</UL>
-          <LocalTag>3B07</LocalTag>
+          <LocalTag>3b07</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.06010104.01080000</UL>
-          <LocalTag>3B08</LocalTag>
+          <LocalTag>3b08</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.01020203.00000000</UL>
-          <LocalTag>3B09</LocalTag>
+          <LocalTag>3b09</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.01020210.02010000</UL>
-          <LocalTag>3B0A</LocalTag>
+          <LocalTag>3b0a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.01020210.02020000</UL>
-          <LocalTag>3B0B</LocalTag>
+          <LocalTag>3b0b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010e.04040503.00000000</UL>
+          <IsUniqueID>false</IsUniqueID>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.40010100</UL>
+          <IsUniqueID>false</IsUniqueID>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.40010200</UL>
+          <IsUniqueID>false</IsUniqueID>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.40010300</UL>
+          <IsUniqueID>false</IsUniqueID>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.40010400</UL>
+          <IsUniqueID>false</IsUniqueID>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010801.01010000</UL>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -3248,55 +3318,55 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.02010000</UL>
-          <LocalTag>3C01</LocalTag>
+          <LocalTag>3c01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.03010000</UL>
-          <LocalTag>3C02</LocalTag>
+          <LocalTag>3c02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.04000000</UL>
-          <LocalTag>3C03</LocalTag>
+          <LocalTag>3c03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.05010000</UL>
-          <LocalTag>3C04</LocalTag>
+          <LocalTag>3c04</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.07000000</UL>
-          <LocalTag>3C05</LocalTag>
+          <LocalTag>3c05</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020110.02030000</UL>
-          <LocalTag>3C06</LocalTag>
+          <LocalTag>3c06</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.0a000000</UL>
-          <LocalTag>3C07</LocalTag>
+          <LocalTag>3c07</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.06010000</UL>
-          <LocalTag>3C08</LocalTag>
+          <LocalTag>3c08</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05200701.01000000</UL>
-          <LocalTag>3C09</LocalTag>
+          <LocalTag>3c09</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -3616,43 +3686,43 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300405.00000000</UL>
-          <LocalTag>4B01</LocalTag>
+          <LocalTag>4b01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.07020103.01030000</UL>
-          <LocalTag>4B02</LocalTag>
+          <LocalTag>4b02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.07020103.010c0000</UL>
-          <LocalTag>4B03</LocalTag>
+          <LocalTag>4b03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.07020103.02030000</UL>
-          <LocalTag>4B04</LocalTag>
+          <LocalTag>4b04</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.07020103.010d0000</UL>
-          <LocalTag>4B05</LocalTag>
+          <LocalTag>4b05</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.07020103.010e0000</UL>
-          <LocalTag>4B06</LocalTag>
+          <LocalTag>4b06</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.07020103.02040000</UL>
-          <LocalTag>4B07</LocalTag>
+          <LocalTag>4b07</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
@@ -3675,7 +3745,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01040000</UL>
-          <LocalTag>4C01</LocalTag>
+          <LocalTag>4c01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -3698,7 +3768,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.05300507.00000000</UL>
-          <LocalTag>4D01</LocalTag>
+          <LocalTag>4d01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -3721,13 +3791,13 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.01050000</UL>
-          <LocalTag>4E01</LocalTag>
+          <LocalTag>4e01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010104.06060000</UL>
-          <LocalTag>4E02</LocalTag>
+          <LocalTag>4e02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -3848,50 +3918,50 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020301.01010000</UL>
-          <LocalTag>3D03</LocalTag>
+          <LocalTag>3d03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.04020301.04000000</UL>
-          <LocalTag>3D02</LocalTag>
+          <LocalTag>3d02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04020101.03000000</UL>
-          <LocalTag>3D04</LocalTag>
+          <LocalTag>3d04</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.04020101.01000000</UL>
-          <LocalTag>3D05</LocalTag>
+          <LocalTag>3d05</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020101.04000000</UL>
-          <LocalTag>3D07</LocalTag>
+          <LocalTag>3d07</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.04020303.04000000</UL>
-          <LocalTag>3D01</LocalTag>
+          <LocalTag>3d01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020701.00000000</UL>
-          <LocalTag>3D0C</LocalTag>
+          <LocalTag>3d0c</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.04020402.00000000</UL>
-          <LocalTag>3D06</LocalTag>
+          <LocalTag>3d06</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
@@ -3923,7 +3993,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010103.04030302.00000000</UL>
-          <LocalTag>3E01</LocalTag>
+          <LocalTag>3e01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
@@ -3947,7 +4017,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.06010104.060b0000</UL>
-          <LocalTag>3F01</LocalTag>
+          <LocalTag>3f01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -4029,43 +4099,43 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.06000000</UL>
-          <LocalTag>3D0D</LocalTag>
+          <LocalTag>3d0d</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.03000000</UL>
-          <LocalTag>3D0F</LocalTag>
+          <LocalTag>3d0f</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.01000000</UL>
-          <LocalTag>3D08</LocalTag>
+          <LocalTag>3d08</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.02000000</UL>
-          <LocalTag>3D10</LocalTag>
+          <LocalTag>3d10</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.03000000</UL>
-          <LocalTag>3D11</LocalTag>
+          <LocalTag>3d11</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.04000000</UL>
-          <LocalTag>3D12</LocalTag>
+          <LocalTag>3d12</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020501.05000000</UL>
-          <LocalTag>3D13</LocalTag>
+          <LocalTag>3d13</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -4088,79 +4158,79 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.01000000</UL>
-          <LocalTag>3D0A</LocalTag>
+          <LocalTag>3d0a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.02000000</UL>
-          <LocalTag>3D0B</LocalTag>
+          <LocalTag>3d0b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020303.05000000</UL>
-          <LocalTag>3D09</LocalTag>
+          <LocalTag>3d09</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.04020101.05000000</UL>
-          <LocalTag>3D32</LocalTag>
+          <LocalTag>3d32</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.06000000</UL>
-          <LocalTag>3D29</LocalTag>
+          <LocalTag>3d29</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.07000000</UL>
-          <LocalTag>3D2A</LocalTag>
+          <LocalTag>3d2a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.08000000</UL>
-          <LocalTag>3D2B</LocalTag>
+          <LocalTag>3d2b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.09000000</UL>
-          <LocalTag>3D2C</LocalTag>
+          <LocalTag>3d2c</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0a000000</UL>
-          <LocalTag>3D2D</LocalTag>
+          <LocalTag>3d2d</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0b000000</UL>
-          <LocalTag>3D2E</LocalTag>
+          <LocalTag>3d2e</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0c000000</UL>
-          <LocalTag>3D2F</LocalTag>
+          <LocalTag>3d2f</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0d000000</UL>
-          <LocalTag>3D30</LocalTag>
+          <LocalTag>3d30</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04020301.0e000000</UL>
-          <LocalTag>3D31</LocalTag>
+          <LocalTag>3d31</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -4228,7 +4298,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010104.03050000</UL>
-          <LocalTag>4C11</LocalTag>
+          <LocalTag>4c11</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -4250,12 +4320,12 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010104.03040000</UL>
-          <LocalTag>4D11</LocalTag>
+          <LocalTag>4d11</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.06010104.01090000</UL>
-          <LocalTag>4D12</LocalTag>
+          <LocalTag>4d12</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -4278,13 +4348,13 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010107.04090201.00000000</UL>
-          <LocalTag>4E11</LocalTag>
+          <LocalTag>4e11</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04090300.00000000</UL>
-          <LocalTag>4E12</LocalTag>
+          <LocalTag>4e12</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -4307,19 +4377,19 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04060802.00000000</UL>
-          <LocalTag>4F01</LocalTag>
+          <LocalTag>4f01</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04060903.00000000</UL>
-          <LocalTag>4F02</LocalTag>
+          <LocalTag>4f02</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.04070400.00000000</UL>
-          <LocalTag>4F03</LocalTag>
+          <LocalTag>4f03</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -4342,67 +4412,67 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.05000000</UL>
-          <LocalTag>3D15</LocalTag>
+          <LocalTag>3d15</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020302.06000000</UL>
-          <LocalTag>3D16</LocalTag>
+          <LocalTag>3d16</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.01010000</UL>
-          <LocalTag>3D21</LocalTag>
+          <LocalTag>3d21</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.02010000</UL>
-          <LocalTag>3D22</LocalTag>
+          <LocalTag>3d22</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.03010000</UL>
-          <LocalTag>3D23</LocalTag>
+          <LocalTag>3d23</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.04010000</UL>
-          <LocalTag>3D24</LocalTag>
+          <LocalTag>3d24</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.05010000</UL>
-          <LocalTag>3D25</LocalTag>
+          <LocalTag>3d25</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.06010000</UL>
-          <LocalTag>3D26</LocalTag>
+          <LocalTag>3d26</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.07010000</UL>
-          <LocalTag>3D27</LocalTag>
+          <LocalTag>3d27</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04020502.08010000</UL>
-          <LocalTag>3D28</LocalTag>
+          <LocalTag>3d28</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010108.06010104.060f0000</UL>
-          <LocalTag>3D33</LocalTag>
+          <LocalTag>3d33</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -4961,6 +5031,10 @@
           <UL>urn:smpte:ul:060e2b34.01010108.01020105.01000000</UL>
           <IsOptional>false</IsOptional>
         </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.03010102.02160000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
       </Contents>
     </Entry>
     <Entry>
@@ -5358,6 +5432,50 @@
     <Entry>
       <Register>Groups</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/aaf</NamespaceName>
+      <Symbol>VC2SubDescriptor</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010101.01017400</UL>
+      <Kind>LEAF</Kind>
+      <Name>VC-2 Sub-Descriptor</Name>
+      <Definition>VC-2 Sub-Descriptor</Definition>
+      <Applications>MXF</Applications>
+      <DefiningDocument>SMPTE ST 2042-4</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</Parent>
+      <KLVSyntax>06 53</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04010607.01000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04010607.02000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04010607.03000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04010607.04000000</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04010607.05000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04010607.06000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.0101010e.04010607.07000000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/aaf</NamespaceName>
       <Symbol>OPDefinition</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d010101.01017d00</UL>
       <Kind>LEAF</Kind>
@@ -5398,7 +5516,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
-          <LocalTag>3C0A</LocalTag>
+          <LocalTag>3c0a</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
       </Contents>
@@ -5443,7 +5561,7 @@
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.03000000</UL>
-          <LocalTag>0A</LocalTag>
+          <LocalTag>0a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -5466,25 +5584,25 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.04000000</UL>
-          <LocalTag>0B</LocalTag>
+          <LocalTag>0b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010202.01000000</UL>
-          <LocalTag>0C</LocalTag>
+          <LocalTag>0c</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.05000000</UL>
-          <LocalTag>0D</LocalTag>
+          <LocalTag>0d</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.06000000</UL>
-          <LocalTag>0E</LocalTag>
+          <LocalTag>0e</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>true</IsOptional>
         </Record>
@@ -5522,7 +5640,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.01000000</UL>
-          <LocalTag>0F</LocalTag>
+          <LocalTag>0f</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -5690,7 +5808,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.0e000000</UL>
-          <LocalTag>1A</LocalTag>
+          <LocalTag>1a</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -5713,7 +5831,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.0f000000</UL>
-          <LocalTag>1B</LocalTag>
+          <LocalTag>1b</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -5751,13 +5869,13 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.11000000</UL>
-          <LocalTag>1C</LocalTag>
+          <LocalTag>1c</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.06000000</UL>
-          <LocalTag>1D</LocalTag>
+          <LocalTag>1d</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -5780,7 +5898,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.06010107.12000000</UL>
-          <LocalTag>1E</LocalTag>
+          <LocalTag>1e</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -5803,7 +5921,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010102.03010203.07000000</UL>
-          <LocalTag>1F</LocalTag>
+          <LocalTag>1f</LocalTag>
           <IsUniqueID>false</IsUniqueID>
           <IsOptional>false</IsOptional>
         </Record>
@@ -5935,7 +6053,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
-          <LocalTag>3C0A</LocalTag>
+          <LocalTag>3c0a</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
@@ -5980,7 +6098,7 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
-          <LocalTag>3C0A</LocalTag>
+          <LocalTag>3c0a</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
@@ -6366,90 +6484,90 @@
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010101.01011502.00000000</UL>
-          <LocalTag>3C0A</LocalTag>
+          <LocalTag>3c0a</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.05300406.00000000</UL>
-          <LocalTag>3F0B</LocalTag>
+          <LocalTag>3f0b</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.07020103.010a0000</UL>
-          <LocalTag>3F0C</LocalTag>
+          <LocalTag>3f0c</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.07020201.01020000</UL>
-          <LocalTag>3F0D</LocalTag>
+          <LocalTag>3f0d</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.04060201.00000000</UL>
-          <LocalTag>3F05</LocalTag>
+          <LocalTag>3f05</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.01030405.00000000</UL>
-          <LocalTag>3F06</LocalTag>
+          <LocalTag>3f06</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.01030404.00000000</UL>
-          <LocalTag>3F07</LocalTag>
+          <LocalTag>3f07</LocalTag>
           <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010104.04040401.01000000</UL>
-          <LocalTag>3F08</LocalTag>
+          <LocalTag>3f08</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04040401.07000000</UL>
-          <LocalTag>3F0E</LocalTag>
+          <LocalTag>3f0e</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>true</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04040401.06000000</UL>
-          <LocalTag>3F09</LocalTag>
+          <LocalTag>3f09</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>true</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.01010105.04040402.05000000</UL>
-          <LocalTag>3F0A</LocalTag>
+          <LocalTag>3f0a</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04060204.00000000</UL>
-          <LocalTag>3F0F</LocalTag>
+          <LocalTag>3f0f</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04060205.00000000</UL>
-          <LocalTag>3F10</LocalTag>
+          <LocalTag>3f10</LocalTag>
           <IsOptional>true</IsOptional>
           <IsIgnorable>false</IsIgnorable>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010e.04040501.00000000</UL>
-          <LocalTag>3F11</LocalTag>
+          <LocalTag>3f11</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010e.04060206.00000000</UL>
-          <LocalTag>3F12</LocalTag>
+          <LocalTag>3f12</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010e.04040502.00000000</UL>
-          <LocalTag>3F13</LocalTag>
+          <LocalTag>3f13</LocalTag>
           <IsOptional>true</IsOptional>
         </Record>
       </Contents>
@@ -8289,6 +8407,67 @@
     <Entry>
       <Register>Groups</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/aaf</NamespaceName>
+      <Symbol>DMS_AS_03</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010401.03000000</UL>
+      <Kind>NODE</Kind>
+      <Name>DMS AS-03</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/aaf</NamespaceName>
+      <Symbol>DMS_AS_03_Framework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010401.03010000</UL>
+      <Kind>LEAF</Kind>
+      <Name>DMS AS-03 Framework</Name>
+      <Definition>AS_03 Descriptive Metadata</Definition>
+      <DefiningDocument>AMWA Application Specification AS-03 MXF Program Delivery</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>53</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010200</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010100</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010300</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010400</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010500</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010600</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010700</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010800</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010401.03010900</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/aaf</NamespaceName>
       <Symbol>TextBasedDescriptiveMetadataScheme</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d010401.04000000</UL>
       <Kind>NODE</Kind>
@@ -8525,6 +8704,84 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as10</NamespaceName>
+      <Symbol>AS_10</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010701.0a000000</UL>
+      <Kind>NODE</Kind>
+      <Name>AS-10</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as10</NamespaceName>
+      <Symbol>DMS_AS_10_Core</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010701.0a010000</UL>
+      <Kind>NODE</Kind>
+      <Name>DMS AS-10 Core</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as10</NamespaceName>
+      <Symbol>DMS_AS_10_Core_Framework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010701.0a010100</UL>
+      <Kind>LEAF</Kind>
+      <Name>DMS AS-10 Core Framework</Name>
+      <Definition>AS-10 Metadata Framework set</Definition>
+      <DefiningDocument>AMWA Application Specification AS-10 MXF for Production</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>53</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010101</UL>
+          <IsOptional>false</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010102</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010103</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010104</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010105</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010106</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010107</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010108</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a010109</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a01010a</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d010701.0a01010b</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as11</NamespaceName>
       <Symbol>AS_11</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d010701.0b000000</UL>
@@ -8685,6 +8942,24 @@
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</Parent>
       <IsConcrete>false</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/rules</NamespaceName>
+      <Symbol>AMWARulesBasedSpecifications</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010800.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>AMWA Rules Based Specifications</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/rules</NamespaceName>
+      <Symbol>RulesBasedSpecificationsVersion1</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d010801.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Rules Based Specifications Version 1</Name>
+      <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -14084,6 +14359,205 @@
     </Entry>
     <Entry>
       <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/4/archive</NamespaceName>
+      <Symbol>ArchivePreservationProject</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d040100.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Archive Preservation Project</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/4/archive</NamespaceName>
+      <Symbol>ArchivePreservationProjectVersion1</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d040101.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Archive Preservation Project Version 1</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/4/archive</NamespaceName>
+      <Symbol>APP_DescriptiveFrameworks</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d040101.01000000</UL>
+      <Kind>NODE</Kind>
+      <Name>APP Descriptive Frameworks</Name>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/4/archive</NamespaceName>
+      <Symbol>APP_InfaxFramework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</UL>
+      <Kind>LEAF</Kind>
+      <Name>APP Infax Framework</Name>
+      <Definition>APP Infax Framework</Definition>
+      <DefiningDocument>BBC Research White Paper WHP 167 D3 Preservation File Format</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>53</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010100</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010200</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010300</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010400</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010500</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010600</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010700</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010800</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010900</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010a00</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010b00</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010c00</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010d00</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010e00</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01010f00</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01011000</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/4/archive</NamespaceName>
+      <Symbol>APP_PSEAnalysisFramework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d040101.01020000</UL>
+      <Kind>LEAF</Kind>
+      <Name>APP PSE Analysis Framework</Name>
+      <Definition>APP PSE Analysis Framework</Definition>
+      <DefiningDocument>BBC Research White Paper WHP 167 D3 Preservation File Format</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>53</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01020100</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01020300</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01020200</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01020400</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/4/archive</NamespaceName>
+      <Symbol>APP_VTRReplayErrorFramework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d040101.01030000</UL>
+      <Kind>LEAF</Kind>
+      <Name>APP VTR Replay Error Framework</Name>
+      <Definition>APP VTR Replay Error Framework</Definition>
+      <DefiningDocument>BBC Research White Paper WHP 167 D3 Preservation File Format</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>53</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01030100</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/4/archive</NamespaceName>
+      <Symbol>APP_DigiBetaDropoutFramework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d040101.01040000</UL>
+      <Kind>LEAF</Kind>
+      <Name>APP DigiBeta Dropout Framework</Name>
+      <Definition>APP DigiBeta Dropout Framework</Definition>
+      <DefiningDocument>BBC Research White Paper WHP 233 Archive Preservation File Format: DigiBeta System</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>53</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01040100</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/4/archive</NamespaceName>
+      <Symbol>APP_TimecodeBreakFramework</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0d040101.01050000</UL>
+      <Kind>LEAF</Kind>
+      <Name>APP Timecode Break Framework</Name>
+      <Definition>APP Timecode Break Framework</Definition>
+      <DefiningDocument>BBC Research White Paper WHP 233 Archive Preservation File Format: DigiBeta System</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <Parent>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</Parent>
+      <IsConcrete>true</IsConcrete>
+      <KLVSyntax>53</KLVSyntax>
+      <Contents>
+        <Record>
+          <UL>urn:smpte:ul:060e2b34.01010101.0d040101.01050100</UL>
+          <IsOptional>true</IsOptional>
+        </Record>
+      </Contents>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/395/2014/13/5</NamespaceName>
       <Symbol>IRT</Symbol>
       <UL>urn:smpte:ul:060e2b34.027f0101.0d050000.00000000</UL>
@@ -14701,6 +15175,46 @@
       <Kind>NODE</Kind>
       <Name>HBO</Name>
       <Definition>Metadata registered by Home Box Office, Inc. for private use</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/14/29</NamespaceName>
+      <Symbol>DTS</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0e1d0000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>DTS, Inc.</Name>
+      <Definition>Metadata registered by DTS, Inc. for private use</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/14/30</NamespaceName>
+      <Symbol>FLIR</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0e1e0000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>FLIR Systems, Inc.</Name>
+      <Definition>Metadata registered by FLIR Systems, Inc. for private use</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/14/31</NamespaceName>
+      <Symbol>Barco</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0e1f0000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Barco</Name>
+      <Definition>Metadata registered by Barco, Inc. for private use</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Groups</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/395/2014/14/32</NamespaceName>
+      <Symbol>Apple_Inc</Symbol>
+      <UL>urn:smpte:ul:060e2b34.027f0101.0e200000.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Apple Inc.</Name>
+      <Definition>Metadata registered by Apple Inc. for private use</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>

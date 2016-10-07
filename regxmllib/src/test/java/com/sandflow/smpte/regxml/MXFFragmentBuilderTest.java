@@ -30,6 +30,7 @@ import com.sandflow.smpte.mxf.MXFFiles;
 import com.sandflow.smpte.register.ElementsRegister;
 import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypesRegister;
+import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
 import com.sandflow.smpte.util.UL;
@@ -51,6 +52,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -71,25 +73,28 @@ public class MXFFragmentBuilderTest extends TestCase {
     private static final UL PREFACE_KEY
             = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
-    private MetaDictionaryCollection mds;
+    private MetaDictionaryCollection mds_catsup;
+    private MetaDictionaryCollection mds_brown_sauce;
     private DocumentBuilder db;
 
     public MXFFragmentBuilderTest(String testName) {
         super(testName);
     }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
-        /* load the registers */
-        Reader fe = new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/reference-registers/Elements.xml"));
+    
+    private MetaDictionaryCollection buildDictionaryCollection(
+            String er_path,
+            String gr_path,
+            String tr_path
+            ) throws JAXBException, IOException, DuplicateEntryException, Exception {
+        
+         /* load the registers */
+        Reader fe = new InputStreamReader(ClassLoader.getSystemResourceAsStream(er_path));
         assertNotNull(fe);
 
-        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/reference-registers/Groups.xml"));
+        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream(gr_path));
         assertNotNull(fg);
 
-        Reader ft = new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/reference-registers/Types.xml"));
+        Reader ft = new InputStreamReader(ClassLoader.getSystemResourceAsStream(tr_path));
         assertNotNull(ft);
 
         ElementsRegister ereg = ElementsRegister.fromXML(fe);
@@ -102,9 +107,32 @@ public class MXFFragmentBuilderTest extends TestCase {
         assertNotNull(treg);
 
         /* build the dictionaries */
-        mds = fromRegister(treg, greg, ereg);
+        return fromRegister(treg, greg, ereg);
+        
+    }
 
-        assertNotNull(mds);
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        
+        /* build the dictionaries */
+        
+        mds_catsup = buildDictionaryCollection(
+                "resources/registers/catsup/Elements.xml",
+                "resources/registers/catsup/Groups.xml",
+                "resources/registers/catsup/Types.xml"
+        );
+
+        assertNotNull(mds_catsup);
+        
+                /* build the dictionaries */
+        mds_brown_sauce = buildDictionaryCollection(
+                "resources/registers/brown_sauce/Elements.xml",
+                "resources/registers/brown_sauce/Groups.xml",
+                "resources/registers/brown_sauce/Types.xml"
+        );
+
+        assertNotNull(mds_brown_sauce);
 
         /* setup the doc builder */
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -122,7 +150,7 @@ public class MXFFragmentBuilderTest extends TestCase {
         super.tearDown();
     }
 
-    private void compareGeneratedVsRef(String spath, String refpath) throws IOException, SAXException, KLVException, MXFFragmentBuilder.MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
+    private void compareGeneratedVsRef(MetaDictionaryCollection mds, String spath, String refpath) throws IOException, SAXException, KLVException, MXFFragmentBuilder.MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
 
         
         /* get the sample files */
@@ -153,42 +181,78 @@ public class MXFFragmentBuilderTest extends TestCase {
 
     }
 
-    public void testFromInputStreamAudio1() throws Exception {
+    public void testAudio1AgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef("resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
-
-    }
-
-    public void testFromInputStreamAudio2() throws Exception {
-
-        compareGeneratedVsRef("resources/sample-files/audio2.mxf", "resources/reference-files/audio2.xml");
+        compareGeneratedVsRef(mds_catsup, "resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
 
     }
 
-    public void testFromInputStreamVideo1() throws Exception {
+    public void testAudio2AgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef("resources/sample-files/video1.mxf", "resources/reference-files/video1.xml");
+        compareGeneratedVsRef(mds_catsup, "resources/sample-files/audio2.mxf", "resources/reference-files/audio2.xml");
+
+    }
+
+    public void testVideo1AgainstCatsup() throws Exception {
+
+        compareGeneratedVsRef(mds_catsup, "resources/sample-files/video1.mxf", "resources/reference-files/video1.xml");
 
     }
 
-    public void testFromInputStreamVideo2() throws Exception {
+    public void testVideo2AgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef("resources/sample-files/video2.mxf", "resources/reference-files/video2.xml");
-
-    }
-    
-    public void testFromInputStreamIndirect() throws Exception {
-
-        compareGeneratedVsRef("resources/sample-files/indirect.mxf", "resources/reference-files/indirect.xml");
+        compareGeneratedVsRef(mds_catsup, "resources/sample-files/video2.mxf", "resources/reference-files/video2.xml");
 
     }
     
-    public void testFromInputStreamUTF8() throws Exception {
+    public void testIndirectAgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef("resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
+        compareGeneratedVsRef(mds_catsup, "resources/sample-files/indirect.mxf", "resources/reference-files/indirect.xml");
+
+    }
+    
+    public void testUTF8AgainstCatsup() throws Exception {
+
+        compareGeneratedVsRef(mds_catsup, "resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
 
     }
 
+        public void testAudio1AgainstBrownSauce() throws Exception {
+
+        compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
+
+    }
+
+    public void testAudio2AgainstBrownSauce() throws Exception {
+
+        compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/audio2.mxf", "resources/reference-files/audio2.xml");
+
+    }
+
+    public void testVideo1AgainstBrownSauce() throws Exception {
+
+        compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/video1.mxf", "resources/reference-files/video1.xml");
+
+    }
+
+    public void testVideo2AgainstBrownSauce() throws Exception {
+
+        compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/video2.mxf", "resources/reference-files/video2.xml");
+
+    }
+    
+    public void testIndirectAgainstBrownSauce() throws Exception {
+
+        compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/indirect.mxf", "resources/reference-files/indirect.xml");
+
+    }
+    
+    public void testUTF8AgainstBrownSauce() throws Exception {
+
+        compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
+
+    }
+    
     static Map<String, String> getAttributes(Element e) {
 
         NodeList nl = e.getChildNodes();
