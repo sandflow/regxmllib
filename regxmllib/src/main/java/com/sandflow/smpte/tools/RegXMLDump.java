@@ -26,9 +26,12 @@
 package com.sandflow.smpte.tools;
 
 import com.sandflow.smpte.mxf.MXFFiles;
+import com.sandflow.smpte.register.LabelsRegister;
+import com.sandflow.smpte.regxml.FragmentBuilder;
 import com.sandflow.smpte.regxml.MXFFragmentBuilder;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
+import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.io.FileReader;
 import java.io.InputStream;
@@ -65,11 +68,12 @@ public class RegXMLDump {
 
     private final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
             + "  Usage:\n"
-            + "     RegXMLDump ( -all | -ed ) ( -header | -footer | -auto ) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
+            + "     RegXMLDump ( -all | -ed ) ( -header | -footer | -auto ) (-l labelsregister) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
             + "     RegXMLDump -?\n"
             + "  Where:\n"
             + "     -all: dumps all header metadata (default)\n"
             + "     -ed: dumps only the first essence descriptor found\n"
+            + "     -l labelsregister: given a SMPTE labels register, inserts the symbol of labels as XML comment\n"
             + "     -header: dumps metadata from the header partition (default)\n"
             + "     -footer: dumps metadata from the footer partition\n"
             + "     -auto: dumps metadata from the footer partition if available and from the header if not\n";
@@ -88,6 +92,7 @@ public class RegXMLDump {
         Boolean isEssenceDescriptorOnly = null;
         MetaDictionaryCollection mds = null;
         SeekableByteChannel f = null;
+        FileReader labelreader = null;
         Path p = null;
 
         for (int i = 0; i < args.length;) {
@@ -179,6 +184,19 @@ public class RegXMLDump {
                     break;
                 }
 
+            } else if ("-l".equals(args[i])) {
+
+                if (labelreader != null) {
+                    error = true;
+                    break;
+                }
+
+                i++;
+
+                labelreader = new FileReader(args[i]);
+
+                i++;
+
             } else if ("-i".equals(args[i])) {
 
                 i++;
@@ -220,6 +238,36 @@ public class RegXMLDump {
         if (error || f == null || mds == null || p == null) {
             System.out.println(USAGE);
             return;
+        }
+        
+        /* create an enum name resolver, if available */
+        
+        final LabelsRegister lr;
+        
+        if (labelreader != null) {
+        
+            lr = LabelsRegister.fromXML(labelreader);
+        
+        } else {
+            
+            lr = null;
+            
+        }
+        
+        FragmentBuilder.AUIDNameResolver anr = null;
+              
+        if (lr != null) {
+
+            anr = new FragmentBuilder.AUIDNameResolver() {
+
+                @Override
+                public String getLocalName(AUID enumid) {
+                    LabelsRegister.Entry e = lr.getEntryByUL(enumid.asUL());
+                    
+                    return e == null ? null : e.getSymbol();
+                }
+
+            };
         }
 
         /* create DOM */
@@ -268,8 +316,8 @@ public class RegXMLDump {
                 }
 
                 InputStream is = Channels.newInputStream(f);
-
-                df = MXFFragmentBuilder.fromInputStream(is, mds, root, doc);
+               
+                df = MXFFragmentBuilder.fromInputStream(is, mds, anr, root, doc);
 
             } catch (Exception e) {
 

@@ -121,6 +121,36 @@ public class FragmentBuilder {
     private final DefinitionResolver defresolver;
     private final Map<UUID, Set> setresolver;
     private final HashMap<URI, String> nsprefixes = new HashMap<>();
+    private final AUIDNameResolver anameresolver;
+    
+    /**
+     * Resolves a AUID into a local name
+     */
+    public static interface AUIDNameResolver {
+        
+        /**
+         * Retrieves a local name for the provided AUID
+         * 
+         * @param enumid AUID
+         * @return Local name of the AUID
+         */
+        String getLocalName(AUID enumid);
+    }
+    
+    /**
+     * Instantiates a FragmentBuilder
+     *
+     * @param defresolver Map between Group Keys and MetaDictionary definitions
+     * @param setresolver Allows Strong References to be resolved
+     * @param anameresolver Allows the local name of AUIDs to be inserted as comments.
+     */
+    public FragmentBuilder(DefinitionResolver defresolver,
+                                Map<UUID, Set> setresolver,
+                                AUIDNameResolver anameresolver) {
+        this.defresolver = defresolver;
+        this.setresolver = setresolver;
+        this.anameresolver = anameresolver;
+    }    
     
     /**
      * Instantiates a FragmentBuilder
@@ -129,8 +159,7 @@ public class FragmentBuilder {
      * @param setresolver Allows Strong References to be resolved
      */
     public FragmentBuilder(DefinitionResolver defresolver, Map<UUID, Set> setresolver) {
-        this.defresolver = defresolver;
-        this.setresolver = setresolver;
+        this(defresolver, setresolver, null);
     }
 
     /**
@@ -722,6 +751,18 @@ public class FragmentBuilder {
             throw new RuntimeException(e);
         }
     }
+    
+    void appendCommentWithAUIDName(AUIDNameResolver anr, AUID auid, Element elem) {
+        if (this.anameresolver != null) {
+
+            String ename = this.anameresolver.getLocalName(auid);
+
+            if (ename != null) {
+                elem.appendChild(elem.getOwnerDocument().createComment(ename));
+            }
+
+        }
+    }
 
     void applyRule5_3(Element element, MXFInputStream value, ExtendibleEnumerationTypeDefinition definition) throws RuleException, IOException {
 
@@ -733,6 +774,8 @@ public class FragmentBuilder {
              defeats the purpose of the type. This issue could be addressed at the next revision opportunity. */
             element.setTextContent(ul.toString());
 
+            appendCommentWithAUIDName(anameresolver, new AUID(ul), element);
+            
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -931,6 +974,8 @@ public class FragmentBuilder {
             AUID auid = value.readAUID();
 
             element.setTextContent(auid.toString());
+            
+            appendCommentWithAUIDName(anameresolver, auid, element);
 
         } else if (definition.getIdentification().equals(DateStruct_UL)) {
 
