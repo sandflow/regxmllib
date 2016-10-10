@@ -55,7 +55,10 @@ import com.sandflow.smpte.regxml.dict.exceptions.DuplicateSymbolException;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -66,22 +69,25 @@ public class RegisterImporter {
     private final static Logger LOGGER = Logger.getLogger(RegisterImporter.class.getName());
 
     /**
-     * Generates MetaDictionaries from SMPTE Types, Groups and Elements Registers.
-     * 
+     * Generates MetaDictionaries from SMPTE Types, Groups and Elements
+     * Registers.
+     *
      * @param tr Types Register
      * @param gr Groups Register
      * @param er Elements Register
-     * @return Collection of Metadictionaries 
-     * @throws Exception 
+     * @return Collection of Metadictionaries
+     * @throws Exception
      */
     public static MetaDictionaryCollection fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
 
-        /* create definition collection */
-        ArrayList<Definition> defs = new ArrayList<>();
+        /* definition collection */
+        LinkedHashMap<AUID, ArrayList<Definition>> defs = new LinkedHashMap<>();
 
-        /* keep track of definitions to prevent duplicates */
-        HashSet<AUID> defIDs = new HashSet<>();
-        
+        /* some types may refer to groups that have been excluded since they
+           did not have a local set representation. This variable keep track of
+           references in order to prune dangling references later */
+        HashMap<AUID, HashSet<AUID>> isReferencedBy = new HashMap<>();
+
         /* Handles Group Entries */
         for (GroupsRegister.Entry group : gr.getEntries()) {
 
@@ -127,7 +133,7 @@ public class RegisterImporter {
 
                 PropertyDefinition pdef = null;
 
-                if (defIDs.contains(id)) {
+                if (defs.containsKey(id)) {
 
                     /* if the property has already been added, e.g. BodySID, create an alias */
                     PropertyAliasDefinition padef = new PropertyAliasDefinition();
@@ -187,28 +193,31 @@ public class RegisterImporter {
 
                 pdef.setNamespace(element.getNamespaceName());
 
-                defs.add(pdef);
-                defIDs.add(pdef.getIdentification());
-            }
+                _add(defs, pdef);
 
-            defs.add(cdef);
-            defIDs.add(cdef.getIdentification());
+            }
+            
+            _add(defs, cdef);
+
         }
 
         /* Handle Types Entries */
-        
         for (com.sandflow.smpte.register.TypesRegister.Entry type : tr.getEntries()) {
             if (!type.getKind().equals(com.sandflow.smpte.register.TypesRegister.Entry.Kind.LEAF)) {
                 continue;
             }
 
             Definition tdef = null;
+            
+            HashSet<AUID> references = new HashSet<>();
 
             if (com.sandflow.smpte.register.TypesRegister.Entry.RENAME_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new RenameTypeDefinition();
 
                 ((RenameTypeDefinition) tdef).setRenamedType(new AUID(type.getBaseType()));
+
+                references.add(((RenameTypeDefinition) tdef).getRenamedType());
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.INTEGER_TYPEKIND.equals(type.getTypeKind())) {
 
@@ -268,6 +277,8 @@ public class RegisterImporter {
                     m.setType(new AUID(tchild.getType()));
 
                     ((RecordTypeDefinition) tdef).addMember(m);
+
+                    references.add(m.getType());
                 }
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.FIXEDARRAY_TYPEKIND.equals(type.getTypeKind())) {
@@ -278,15 +289,21 @@ public class RegisterImporter {
 
                 ((FixedArrayTypeDefinition) tdef).setElementCount(type.getTypeSize().intValue());
 
+                references.add(((FixedArrayTypeDefinition) tdef).getElementType());
+
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.ARRAY_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new VariableArrayTypeDefinition();
                 ((VariableArrayTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
+                references.add(((VariableArrayTypeDefinition) tdef).getElementType());
+
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.SET_TYPEKIND.equals(type.getTypeKind())) {
 
                 tdef = new SetTypeDefinition();
                 ((SetTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
+
+                references.add(((SetTypeDefinition) tdef).getElementType());
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.INDIRECT_TYPEKIND.equals(type.getTypeKind())) {
 
@@ -315,10 +332,8 @@ public class RegisterImporter {
 
                 ((WeakReferenceTypeDefinition) tdef).setReferencedType(new AUID(type.getBaseType()));
 
-                /* INFO: skip weak Reference target sets until registers are accurate.
-                *        They are not necessary for encoding.
-                */
-                
+                references.add(((WeakReferenceTypeDefinition) tdef).getReferencedType());
+
                 for (TypesRegister.Entry.Facet f : type.getFacets()) {
 
                     UL ul = null;
@@ -347,6 +362,8 @@ public class RegisterImporter {
                                 )
                         );
                     }
+
+                    references.add(new AUID(ul));
                 }
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.STRONGREF_TYPEKIND.equals(type.getTypeKind())) {
@@ -355,10 +372,12 @@ public class RegisterImporter {
 
                 ((StrongReferenceTypeDefinition) tdef).setReferenceType(new AUID(type.getBaseType()));
 
+                references.add(((StrongReferenceTypeDefinition) tdef).getReferenceType());
+
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.ENUMERATION_TYPEKIND.equals(type.getTypeKind())) {
 
                 if (type.getBaseType().equals(UL.fromURN("urn:smpte:ul:060E2B34.01040101.01030100.00000000"))) {
-                    
+
                     ArrayList<ExtendibleEnumerationTypeDefinition.Element> ecelems = new ArrayList<>();
 
                     /* NOTE: Facets of Extendible Enumeration Definitions are not imported since
@@ -366,7 +385,6 @@ public class RegisterImporter {
                      *       Enumeration instance are expected to handle UL values that are not
                      *       listed in the register. 
                      */
-                    
                     /*
                      for (Facet f : type.getFacets()) {
                      ExtendibleEnumerationTypeDefinition.Element m = new ExtendibleEnumerationTypeDefinition.Element();
@@ -375,7 +393,6 @@ public class RegisterImporter {
 
                      ecelems.add(m);
                      }*/
-                    
                     tdef = new ExtendibleEnumerationTypeDefinition(ecelems);
 
                 } else {
@@ -394,6 +411,8 @@ public class RegisterImporter {
                     tdef = new EnumerationTypeDefinition(celems);
 
                     ((EnumerationTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
+
+                    references.add(((EnumerationTypeDefinition) tdef).getElementType());
                 }
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.CHARACTER_TYPEKIND.equals(type.getTypeKind())) {
@@ -405,6 +424,8 @@ public class RegisterImporter {
                 tdef = new StringTypeDefinition();
 
                 ((StringTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
+
+                references.add(((StringTypeDefinition) tdef).getElementType());
 
             } else {
                 LOGGER.warning(
@@ -419,30 +440,63 @@ public class RegisterImporter {
             }
 
             if (tdef != null) {
+
                 tdef.setIdentification(new AUID(type.getUL()));
                 tdef.setSymbol(type.getSymbol());
                 tdef.setName(type.getName());
                 tdef.setDescription(type.getDefinition());
                 tdef.setNamespace(type.getNamespaceName());
 
-                defs.add(tdef);
-                defIDs.add(tdef.getIdentification());
+                _add(defs, tdef);
+
+                /* adds any entry that the entry references */
+                for (AUID aref : references) {
+
+                    HashSet<AUID> hs = isReferencedBy.get(aref);
+
+                    if (hs == null) {
+
+                        hs = new HashSet<>();
+
+                        isReferencedBy.put(aref, hs);
+
+                    }
+
+                    hs.add(tdef.getIdentification());
+                }
+
             } else {
                 LOGGER.warning(
                         String.format(
-                                "Byte Type UL %s.",
+                                "Bad Type UL %s.",
                                 type.getUL().toString()
                         )
                 );
             }
         }
 
+        /* prune all dangling entries */
+        for (AUID aref : isReferencedBy.keySet()) {
+
+            if (!defs.containsKey(aref)) {
+
+                /* if the referenced entry does not exist prune all entries that
+                 reference it, directly or indirectly */
+                _prune(defs, isReferencedBy, aref);
+
+            }
+
+        }
+
+        /* create the metadictionaries */
         MetaDictionaryCollection mds = new MetaDictionaryCollection();
 
         long index = 0;
 
-        for (Definition def : defs) {
-
+        for (ArrayList<Definition> defarray : defs.values()) {
+            
+            for (Definition def : defarray) {
+            
             try {
                 mds.addDefinition(def);
             } catch (DuplicateSymbolException dse) {
@@ -463,11 +517,40 @@ public class RegisterImporter {
 
                 mds.addDefinition(def);
             }
-
+            }
         }
 
         return mds;
 
+    }
+
+    private static void _add(Map<AUID, ArrayList<Definition>> defs, Definition def) {
+        ArrayList<Definition> ad = defs.get(def.getIdentification());
+
+        if (ad == null) {
+            ad = new ArrayList<>();
+            defs.put(def.getIdentification(), ad);
+        }
+
+        ad.add(def);
+
+    }
+
+    private static void _prune(Map<AUID,ArrayList<Definition>> defs,
+                        HashMap<AUID, HashSet<AUID>> isReferencedBy,
+                        AUID aref) {
+
+        if (isReferencedBy.containsKey(aref)) {
+
+            for (AUID entry : isReferencedBy.get(aref)) {
+
+                _prune(defs, isReferencedBy, entry);
+
+            }
+
+        }
+
+        defs.remove(aref);
     }
 
 }
