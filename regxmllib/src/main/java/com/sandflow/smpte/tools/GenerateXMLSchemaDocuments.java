@@ -98,7 +98,7 @@ public class GenerateXMLSchemaDocuments {
             
            tr.transform(
                     new DOMSource(docs.get(i)),
-                    new StreamResult(new File(baseDir, c.getName()+ (i == 0 ? "" : "." + i) + ".xsd"))
+                    new StreamResult(new File(baseDir, c.getSimpleName() + (i == 0 ? "" : "." + i) + ".xsd"))
             );
         }
 
