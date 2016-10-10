@@ -26,16 +26,26 @@
 package com.sandflow.smpte.regxml;
 
 import com.sandflow.smpte.klv.exceptions.KLVException;
+import com.sandflow.smpte.mxf.MXFFiles;
 import com.sandflow.smpte.register.ElementsRegister;
 import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
 import com.sandflow.smpte.util.UL;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.io.Reader;
+import java.net.URI;
+import java.net.URL;
+import java.nio.channels.ByteChannel;
+import java.nio.channels.FileChannel;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -143,11 +153,6 @@ public class MXFFragmentBuilderTest extends TestCase {
 
     }
 
-    /**
-     * Test of fromInputStream method, of class MXFFragmentBuilder.
-     *
-     * @throws java.lang.Exception
-     */
     public void testFromInputStreamAudio1() throws Exception {
 
         compareGeneratedVsRef("resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
