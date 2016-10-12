@@ -19,25 +19,20 @@ KNOWN ISSUES AND LIMITATIONS
 ============================
 
 regxmllib relies on SMPTE Metadata Registers that conform to SMPTE ST 335, 
-ST 395, ST 400, ST 2003. Such Register have reached Final Committee Draft, 
-but are not yet published. Specifically regxmllib was tested against 
-version v46 of the draft SMPTE Metadata Registers [1].
+ST 395, ST 400, ST 2003. These registers are published at [1].
 
-[1] https://kws.smpte.org/kws/groups/30mr/download/34617 
+[1] https://smpte-ra.org/smpte-metadata-registry
 
 regxmllib deviates from ST 2001-1:2013 in a few narrow instances. Such deviations 
 are noted in the source code and are expected to be submitted for consideration at 
 the next revision of ST 2001-1. In particular:
-
-* AUIDs are written when serializing Extendible Enumerations, since the symbol 
-  of the label may not be known
-	
+  
 * no baseline metadictionary is used, instead one extension metadictionary per
   namespace is used
 
-Bugs are tracked at [1]
+Bugs are tracked at [2]
 
-[1] https://github.com/sandflow/regxmllib/issues
+[2] https://github.com/sandflow/regxmllib/issues
 
 
 PREREQUISITES
@@ -68,9 +63,7 @@ of the header metadata of the MXF file at path PATH_TO_MXF_FILE
 
 	* OPTION 1
 
-		* retrieve the four SMPTE Metadata Registers (see [1] for a recent snapshot)
-
-			[1] https://kws.smpte.org/kws/groups/30mr/download/34617
+		* retrieve the four SMPTE Metadata Registers (see [2] above)
     
 		* build the metadictionaries from the SMPTE registers
 
@@ -79,9 +72,9 @@ of the header metadata of the MXF file at path PATH_TO_MXF_FILE
 			
 	* OPTION 2
 	
-		* retrieve metadictionaries from [2]
+		* retrieve metadictionaries from [3]
 		
-			[2] https://github.com/sandflow/IMF/tree/master/regxml/dict
+			[3] https://github.com/sandflow/IMF/tree/master/regxml/dict
   
 * generate the RegXML fragment
     
@@ -196,7 +189,7 @@ to reference RegXML fragments located at [3].
 Reference RegXML fragments can regenerated using by building the build-reference-test-files target.
 
 [1] /regxmllib/src/test/sample-files
-[2] /regxmllib/src/test/reference-registers
+[2] /regxmllib/src/test/registers
 [3] /regxmllib/src/test/reference-files 
 
 MAVEN ARTIFACTS
@@ -236,7 +229,7 @@ DIRECTORIES AND NOTABLE FILES
 /regxmllib/src/test/resources/reference-files
                                         Reference RegXML fragment used for unit testing
 
-/regxmllib/src/test/resources/reference-registers
+/regxmllib/src/test/resources/registers
                                         Reference SMPTE registers used for unit testing
 
 /regxmllib/src/test/resources/sample-files
