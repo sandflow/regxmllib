@@ -54,6 +54,7 @@ import com.sandflow.smpte.regxml.dict.definitions.StrongReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.util.AUID;
+import com.sandflow.util.EventHandler;
 import com.sandflow.smpte.util.HalfFloat;
 import com.sandflow.smpte.util.IDAU;
 import com.sandflow.smpte.util.UL;
@@ -62,7 +63,6 @@ import com.sandflow.smpte.util.UUID;
 import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
@@ -76,7 +76,6 @@ import java.util.Map;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Attr;
-import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
@@ -87,6 +86,138 @@ import org.w3c.dom.Node;
  * MXF Set, using a collection of MetaDictionary definitions
  */
 public class FragmentBuilder {
+
+    public static enum EventKind {
+
+        /**
+         * Raised when a Group Key cannot be matched to a group definition
+         */
+        UNKNOWN_GROUP(EventHandler.Severity.INFO),
+        /**
+         * Raised when a Property Key cannot be matched to a property definition
+         */
+        UNKNOWN_PROPERTY(EventHandler.Severity.INFO),
+        /**
+         * Raised when the version byte of a UL does not match that listed in
+         * the metadictionary
+         */
+        VERSION_BYTE_MISMATCH(EventHandler.Severity.WARN),
+        /**
+         * Raised when the definition associated with a UL does not match the
+         * kind of definition that was expected
+         */
+        UNEXPECTED_DEFINITION(EventHandler.Severity.ERROR),
+        /**
+         * Raised when a circular reference is found between Sets
+         */
+        CIRCULAR_STRONG_REFERENCE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the byte order indicated in the file does not match the
+         * specification.
+         */
+        UNEXPECTED_BYTE_ORDER(EventHandler.Severity.ERROR),
+        /**
+         * Raised when a type definition is not found.
+         */
+        UNKNOWN_TYPE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the target of a weak reference does not have a unique
+         * property.
+         */
+        MISSING_UNIQUE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the referenced primary package is not found.
+         */
+        MISSING_PRIMARY_PACKAGE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the size of data read does not match expectations.
+         */
+        VALUE_LENGTH_MISMATCH(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the type of a Character definition is not supported.
+         */
+        UNSUPPORTED_CHAR_TYPE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the type of an enum definition is not supported.
+         */
+        UNSUPPORTED_ENUM_TYPE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when an enum value is not supported.
+         */
+        UNKNOWN_ENUM_VALUE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when an IDAU is invalid.
+         */
+        INVALID_IDAU(EventHandler.Severity.ERROR),
+        /**
+         * Raised when an enum value is not supported.
+         */
+        INVALID_INTEGER_VALUE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the type of a String definition is not supported.
+         */
+        UNSUPPORTED_STRING_TYPE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the target of a Strong Reference Type is not a class.
+         */
+        INVALID_STRONG_REFERENCE_TYPE(EventHandler.Severity.ERROR),
+        /**
+         * Raised when the target of a Strong Reference is not found
+         */
+        STRONG_REFERENCE_NOT_FOUND(EventHandler.Severity.ERROR);
+
+        public final EventHandler.Severity severity;
+
+        private EventKind(EventHandler.Severity severity) {
+            this.severity = severity;
+        }
+
+    }
+
+    public static class Event implements EventHandler.Event {
+
+        private final EventKind kind;
+        private final String reason;
+        private final String where;
+
+        public Event(EventKind kind, String reason) {
+            this(kind, reason, null);
+        }
+
+        public Event(EventKind kind, String reason, String where) {
+            this.reason = reason;
+            this.where = where;
+            this.kind = kind;
+        }
+
+        public EventKind getKind() {
+            return kind;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+        public String getWhere() {
+            return where;
+        }
+
+        @Override
+        public String getMessage() {
+            return this.reason + (this.where != null ? " at " + this.where : "");
+        }
+
+        @Override
+        public String getOrigin() {
+            return FragmentBuilder.class.getSimpleName();
+        }
+
+        @Override
+        public EventHandler.Severity getSeverity() {
+            return kind.severity;
+        }
+
+    }
 
     private final static Logger LOG = Logger.getLogger(FragmentBuilder.class.getName());
 
@@ -122,41 +253,113 @@ public class FragmentBuilder {
     private final Map<UUID, Set> setresolver;
     private final HashMap<URI, String> nsprefixes = new HashMap<>();
     private final AUIDNameResolver anameresolver;
-    
+    private final EventHandler evthandler;
+
     /**
      * Resolves a AUID into a local name
      */
     public static interface AUIDNameResolver {
-        
+
         /**
          * Retrieves a local name for the provided AUID
-         * 
+         *
          * @param enumid AUID
+         *
          * @return Local name of the AUID
          */
         String getLocalName(AUID enumid);
     }
-    
+
     /**
-     * Instantiates a FragmentBuilder
+     * Instantiates a FragmentBuilder. If the anamresolver argument is not null,
+     * the FragmentBuilder will attempt to resolve the name of each AUID it
+     * writes to the output and add it as an XML comment. If the evthandler
+     * argument is not null, the Fragment builder will call back the caller with
+     * events it encounters as it transforms a Triplet.
      *
-     * @param defresolver Map between Group Keys and MetaDictionary definitions
-     * @param setresolver Allows Strong References to be resolved
-     * @param anameresolver Allows the local name of AUIDs to be inserted as comments.
+     * @param defresolver Maps Group Keys to MetaDictionary definitions. Must
+     * not be null;
+     * @param setresolver Resolves Strong References to groups. Must not be
+     * null.
+     * @param anameresolver Resolves a AUID to a human-readable symbol. May be
+     * null.
+     * @param evthandler Calls back the caller when an event occurs. May be
+     * null.
      */
     public FragmentBuilder(DefinitionResolver defresolver,
-                                Map<UUID, Set> setresolver,
-                                AUIDNameResolver anameresolver) {
+        Map<UUID, Set> setresolver,
+        AUIDNameResolver anameresolver,
+        EventHandler evthandler) {
+
+        if (defresolver == null || setresolver == null) {
+            throw new IllegalArgumentException();
+
+        }
+
         this.defresolver = defresolver;
         this.setresolver = setresolver;
         this.anameresolver = anameresolver;
-    }    
-    
+        this.evthandler = evthandler;
+    }
+
     /**
      * Instantiates a FragmentBuilder
      *
-     * @param defresolver Map between Group Keys and MetaDictionary definitions
-     * @param setresolver Allows Strong References to be resolved
+     * @deprecated Replaced by
+     * {@link FragmentBuilder(DefinitionResolver, Map<UUID, Set>,
+     * AUIDNameResolver, EventHandler)}. This constructor does not allow the
+     * caller to provide an event handler, and instead uses java.util.logging to
+     * output events.
+     *
+     * @param defresolver Maps Group Keys to MetaDictionary definitions. Must
+     * not be null;
+     * @param setresolver Resolves Strong References to groups. Must not be
+     * null.
+     * @param anameresolver Resolves a AUID to a human-readable symbol. May be
+     * null.
+     */
+    public FragmentBuilder(DefinitionResolver defresolver,
+        Map<UUID, Set> setresolver,
+        AUIDNameResolver anameresolver) {
+
+        this(defresolver,
+            setresolver,
+            null,
+            new EventHandler() {
+
+                @Override
+                public boolean handle(EventHandler.Event evt) {
+                    switch (evt.getSeverity()) {
+                        case ERROR:
+                        case FATAL:
+                            LOG.severe(evt.getMessage());
+                            break;
+                        case INFO:
+                            LOG.info(evt.getMessage());
+                            break;
+                        case WARN:
+                            LOG.warning(evt.getMessage());
+                    }
+
+                    return true;
+                }
+            }
+        );
+    }
+
+    /**
+     * Instantiates a FragmentBuilder.
+     *
+     * @deprecated Replaced by
+     * {@link FragmentBuilder(DefinitionResolver, Map<UUID, Set>,
+     * AUIDNameResolver, EventHandler)}. This constructor does not allow the
+     * caller to provide an event handler, and instead uses java.util.logging to
+     * output events.
+     *
+     * @param defresolver Maps Group Keys to MetaDictionary definitions. Must
+     * not be null;
+     * @param setresolver Resolves Strong References to groups. Must not be
+     * null.
      */
     public FragmentBuilder(DefinitionResolver defresolver, Map<UUID, Set> setresolver) {
         this(defresolver, setresolver, null);
@@ -168,7 +371,9 @@ public class FragmentBuilder {
      * @param group KLV Group for which the Fragment will be generated.
      * @param document Document from which the XML DOM Document Fragment will be
      * created.
+     *
      * @return XML DOM Document Fragment containing a single RegXML Fragment
+     *
      * @throws ParserConfigurationException
      * @throws KLVException
      * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
@@ -186,7 +391,7 @@ public class FragmentBuilder {
 
         return df;
     }
-    
+
     private String getPrefix(URI ns) {
         String prefix = this.nsprefixes.get(ns);
 
@@ -200,7 +405,7 @@ public class FragmentBuilder {
         return prefix;
     }
 
-    private String getPrefix(String ns) {
+    String getPrefix(String ns) {
 
         try {
             return getPrefix(new URI(ns));
@@ -209,29 +414,56 @@ public class FragmentBuilder {
         }
     }
 
+    void addInformativeComment(Element element, String fmt, Object... args) {
+        element.appendChild(element.getOwnerDocument().createComment(String.format(fmt, args)));
+    }
+
+    void addInformativeComment(Element element, String comment) {
+        element.appendChild(element.getOwnerDocument().createComment(comment));
+    }
+
+    void logEvent(EventHandler.Event evt) throws RuleException {
+
+        if (evthandler != null) {
+
+            if (!evthandler.handle(evt)) {
+
+                throw new RuleException(evt.getMessage());
+
+            }
+        }
+    }
+
     void applyRule3(Node node, Group group) throws RuleException {
 
         Definition definition = defresolver.getDefinition(new AUID(group.getKey()));
 
         if (definition == null) {
-            LOG.info(
-                    String.format(
-                            "Unknown Group UL = %s",
-                            group.getKey().toString()
-                    )
+
+            logEvent(new Event(
+                EventKind.UNKNOWN_GROUP,
+                String.format(
+                    "Unknown Group UL %s",
+                    group.getKey().toString()
+                )
+            )
             );
 
             return;
         }
 
         if (definition.getIdentification().asUL().getVersion() != group.getKey().getVersion()) {
-            LOG.warning(
-                    String.format(
-                            "Group UL %s in file does not have the same version as in the register (0x%02x)",
-                            group.getKey(),
-                            definition.getIdentification().asUL().getVersion()
-                    )
+
+            logEvent(new Event(
+                EventKind.VERSION_BYTE_MISMATCH,
+                String.format(
+                    "Group UL %s in file does not have the same version as in the register (0x%02x)",
+                    group.getKey(),
+                    definition.getIdentification().asUL().getVersion()
+                )
+            )
             );
+
         }
 
         Element objelem = node.getOwnerDocument().createElementNS(definition.getNamespace().toString(), definition.getSymbol());
@@ -247,22 +479,21 @@ public class FragmentBuilder {
 
             if (itemdef == null) {
 
-                LOG.info(
-                        String.format(
-                                "Unknown property UL = %s at group %s",
-                                item.getKey().toString(),
-                                definition.getSymbol()
-                        )
+                logEvent(new Event(
+                    EventKind.UNKNOWN_PROPERTY,
+                    String.format(
+                        "Unknown property %s at group %s",
+                        item.getKey().toString(),
+                        definition.getSymbol()
+                    )
+                )
                 );
 
-                objelem.appendChild(
-                        objelem.getOwnerDocument().createComment(
-                                String.format(
-                                        "Unknown property\nKey: %s\nData: %s",
-                                        item.getKey().toString(),
-                                        bytesToString(item.getValue())
-                                )
-                        )
+                addInformativeComment(
+                    objelem,
+                    "Unknown property\nKey: %s\nData: %s",
+                    item.getKey().toString(),
+                    bytesToString(item.getValue())
                 );
 
                 continue;
@@ -272,21 +503,20 @@ public class FragmentBuilder {
             /* make sure this is a property definition */
             if (!(itemdef instanceof PropertyDefinition)) {
 
-                LOG.warning(
-                        String.format(
-                                "Item UL = %s at group %s is not a property",
-                                item.getKey().toString(),
-                                definition.getSymbol()
-                        )
+                logEvent(new Event(
+                    EventKind.UNEXPECTED_DEFINITION,
+                    String.format(
+                        "Item %s at group %s is not a property",
+                        item.getKey().toString(),
+                        definition.getSymbol()
+                    )
+                )
                 );
 
-                objelem.appendChild(
-                        objelem.getOwnerDocument().createComment(
-                                String.format(
-                                        "Item UL = %s is not a property",
-                                        item.getKey().toString()
-                                )
-                        )
+                addInformativeComment(
+                    objelem,
+                    "Item %s is not a property",
+                    item.getKey().toString()
                 );
 
                 continue;
@@ -294,13 +524,17 @@ public class FragmentBuilder {
 
             /* warn if version byte of the property does not match the register version byte  */
             if (itemdef.getIdentification().asUL().getVersion() != item.getKey().getVersion()) {
-                LOG.warning(
-                        String.format(
-                                "Property UL %s in file does not have the same version as in the register (0x%02x)",
-                                item.getKey().toString(),
-                                itemdef.getIdentification().asUL().getVersion()
-                        )
+
+                logEvent(new Event(
+                    EventKind.VERSION_BYTE_MISMATCH,
+                    String.format(
+                        "Property UL %s in file does not have the same version as in the register (0x%02x)",
+                        item.getKey().toString(),
+                        itemdef.getIdentification().asUL().getVersion()
+                    )
+                )
                 );
+
             }
 
             Element elem = node.getOwnerDocument().createElementNS(itemdef.getNamespace().toString(), itemdef.getSymbol());
@@ -308,10 +542,8 @@ public class FragmentBuilder {
             objelem.appendChild(elem);
 
             elem.setPrefix(getPrefix(itemdef.getNamespace()));
-            
-            
-            /* write the property */
 
+            /* write the property */
             applyRule4(elem, new MXFInputStream(item.getValueAsStream()), itemdef);
 
             /* detect cyclic references  */
@@ -329,26 +561,28 @@ public class FragmentBuilder {
                     for (Node n = parent.getFirstChild(); n != null; n = n.getNextSibling()) {
 
                         if (n.getNodeType() == Node.ELEMENT_NODE
-                                && iidname.equals(n.getLocalName())
-                                && iidns.equals(n.getNamespaceURI())
-                                && iid.equals(n.getTextContent())) {
+                            && iidname.equals(n.getLocalName())
+                            && iidns.equals(n.getNamespaceURI())
+                            && iid.equals(n.getTextContent())) {
 
-                            LOG.warning(
-                                    String.format(
-                                            "Self-referencing Strong Reference at Group %s with UID %s",
-                                            definition.getSymbol(),
-                                            iid
-                                    )
+                            Event evt = new Event(
+                                EventKind.CIRCULAR_STRONG_REFERENCE,
+                                String.format(
+                                    "Circular Strong Reference to Set UID %s",
+                                    iid
+                                ),
+                                String.format(
+                                    "Group %s",
+                                    definition.getSymbol()
+                                )
                             );
 
-                            Comment comment = node.getOwnerDocument().createComment(
-                                    String.format(
-                                            "Strong Reference %s not found",
-                                            iid
-                                    )
-                            );
+                            logEvent(evt);
 
-                            node.appendChild(comment);
+                            addInformativeComment(
+                                (Element) node,
+                                evt.getReason()
+                            );
 
                             return;
                         }
@@ -386,23 +620,24 @@ public class FragmentBuilder {
 
                 /* ISSUE: ST 2001-1 inverses these constants */
                 if (byteorder == 0x4D4D) {
-                    
+
                     element.setTextContent(BYTEORDER_BE);
-                    
+
                 } else if (byteorder == 0x4949) {
-                                        
+
                     element.setTextContent(BYTEORDER_LE);
-                    
-                        LOG.warning("ByteOrder property set to little-endian: either the property is set incorrectly"
-                                                + "or the file does not conform to MXF. Processing assumes a big-endian byte order.");
-                        
-                        element.appendChild(
-                                element.getOwnerDocument().createComment(
-                                        String.format("ByteOrder property set to little-endian: either the property is set incorrectly"
-                                                + "or the file does not conform to MXF. Processing assumes a big-endian byte order.")
-                                )
-                        );
-                    
+
+                    Event evt = new Event(
+                        EventKind.UNEXPECTED_BYTE_ORDER,
+                        "ByteOrder property set to little-endian: either the property is set"
+                        + "incorrectly or the file does not conform to MXF. Processing will"
+                        + "assume a big-endian byte order going forward."
+                    );
+
+                    logEvent(evt);
+
+                    addInformativeComment(element, evt.getReason());
+
                 } else {
                     throw new RuleException("Unknown ByteOrder value.");
                 }
@@ -415,14 +650,27 @@ public class FragmentBuilder {
 
                 Definition typedef = findBaseDefinition(defresolver.getDefinition(((PropertyDefinition) propdef).getType()));
 
+                /* return if no type definition is found */
                 if (typedef == null) {
-                    throw new RuleException(
-                            String.format(
-                                    "Type %s not found at %s.",
-                                    ((PropertyDefinition) propdef).getType().toString(),
-                                    propdef.getSymbol()
-                            )
+
+                    Event evt = new Event(
+                        EventKind.UNKNOWN_TYPE,
+                        String.format(
+                            "Type %s not found",
+                            ((PropertyDefinition) propdef).getType().toString()
+                        ),
+                        String.format(
+                            "Property %s",
+                            propdef.getSymbol()
+                        )
                     );
+
+                    logEvent(evt);
+
+                    addInformativeComment(element, evt.getReason());
+
+                    return;
+
                 }
 
                 if (propdef.getIdentification().equals(PrimaryPackage_UL)) {
@@ -444,8 +692,8 @@ public class FragmentBuilder {
                             Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
 
                             if (itemdef != null
-                                    && itemdef instanceof PropertyDefinition
-                                    && ((PropertyDefinition) itemdef).isUniqueIdentifier()) {
+                                && itemdef instanceof PropertyDefinition
+                                && ((PropertyDefinition) itemdef).isUniqueIdentifier()) {
 
                                 applyRule4(element, new MXFInputStream(item.getValueAsStream()), itemdef);
 
@@ -459,49 +707,49 @@ public class FragmentBuilder {
 
                         if (foundUniqueID != true) {
 
-                            LOG.warning(
-                                    String.format(
-                                            "Target Primary Package with Instance UID %s has no IsUnique element.",
-                                            uuid.toString()
-                                    )
+                            Event evt = new Event(
+                                EventKind.MISSING_UNIQUE,
+                                String.format(
+                                    "Target Primary Package with Instance UID %s has no IsUnique element.",
+                                    uuid.toString()
+                                ),
+                                String.format(
+                                    "Property %s",
+                                    propdef.getSymbol()
+                                )
                             );
 
-                            element.appendChild(
-                                    element.getOwnerDocument().createComment(
-                                            String.format(
-                                                    "Target Primary Package with Instance UID %s has no IsUnique element.",
-                                                    uuid.toString()
-                                            )
-                                    )
-                            );
+                            logEvent(evt);
+
+                            addInformativeComment(element, evt.getReason());
 
                         }
 
                     } else {
 
-                        LOG.warning(
-                                String.format(
-                                        "Target Primary Package with Instance UID %s not found.",
-                                        uuid.toString()
-                                )
+                        Event evt = new Event(
+                            EventKind.MISSING_PRIMARY_PACKAGE,
+                            String.format(
+                                "Target Primary Package with Instance UID %s not found",
+                                uuid.toString()
+                            ),
+                            String.format(
+                                "Property %s",
+                                propdef.getSymbol()
+                            )
                         );
 
-                        element.appendChild(
-                                element.getOwnerDocument().createComment(
-                                        String.format(
-                                                "Target Primary Package with Instance UID %s not found.",
-                                                uuid.toString()
-                                        )
-                                )
-                        );
+                        logEvent(evt);
+
+                        addInformativeComment(element, evt.getReason());
 
                     }
 
                 } else {
 
                     if (propdef.getIdentification().equals(LinkedGenerationID_UL)
-                            || propdef.getIdentification().equals(GenerationID_UL)
-                            || propdef.getIdentification().equals(ApplicationProductID_UL)) {
+                        || propdef.getIdentification().equals(GenerationID_UL)
+                        || propdef.getIdentification().equals(ApplicationProductID_UL)) {
 
                         /* EXCEPTION: LinkedGenerationID, GenerationID and ApplicationProductID
                          are encoded using UUID */
@@ -511,25 +759,21 @@ public class FragmentBuilder {
                     applyRule5(element, value, typedef);
                 }
             }
-            
 
         } catch (EOFException eof) {
 
-            LOG.warning(
-                    String.format(
-                            "Value too short for element %s",
-                            propdef.getSymbol()
-                    )
+            Event evt = new Event(
+                EventKind.VALUE_LENGTH_MISMATCH,
+                "Value too short",
+                String.format(
+                    "Property %s",
+                    propdef.getSymbol()
+                )
             );
 
-            Comment comment = element.getOwnerDocument().createComment(
-                    String.format(
-                            "Value too short for element %s",
-                            propdef.getSymbol()
-                    )
-            );
+            logEvent(evt);
 
-            element.appendChild(comment);
+            addInformativeComment(element, evt.getReason());
 
         } catch (IOException ioe) {
 
@@ -578,43 +822,59 @@ public class FragmentBuilder {
         } else {
 
             throw new RuleException(
-                    String.format(
-                            "Illegal Definition %s in Rule 5.",
-                            definition.getClass().toString()
-                    )
+                String.format(
+                    "Unknown Definition %s in Rule 5.",
+                    definition.getClass().toString()
+                )
             );
 
         }
 
     }
 
-    private void readCharacters(MXFInputStream value, CharacterTypeDefinition definition, StringBuilder sb) throws RuleException, IOException {
+    private void readCharacters(Element element, MXFInputStream value, CharacterTypeDefinition definition, boolean removeTrailingZeroes) throws RuleException, IOException {
+
+        StringBuilder sb = new StringBuilder();
 
         Reader in = null;
 
         if (definition.getIdentification().equals(Character_UL)) {
-            
+
             if (value.getByteorder() == ByteOrder.BIG_ENDIAN) {
-                
+
                 in = new InputStreamReader(value, "UTF-16BE");
-                
+
             } else {
-                
+
                 in = new InputStreamReader(value, "UTF-16LE");
-                
+
             }
-            
+
         } else if (definition.getIdentification().equals(Char_UL)) {
+
             in = new InputStreamReader(value, "US-ASCII");
+
         } else if (definition.getIdentification().equals(UTF8Character_UL)) {
+
             /* NOTE: Use of UTF-8 character encoding is specified in RP 2057 */
             in = new InputStreamReader(value, "UTF-8");
+
         } else {
-            throw new RuleException(
-                    String.format("Character type %s not supported",
-                            definition.getIdentification().toString()
-                    )
+
+            Event evt = new Event(
+                EventKind.UNSUPPORTED_CHAR_TYPE,
+                String.format(
+                    "Character type %s is not supported",
+                    definition.getSymbol()
+                )
             );
+
+            logEvent(evt);
+
+            addInformativeComment(element, evt.getReason());
+
+            return;
+
         }
 
         char[] chars = new char[32];
@@ -623,15 +883,22 @@ public class FragmentBuilder {
             sb.append(chars, 0, c);
         }
 
+        if (removeTrailingZeroes) {
+
+            /* remove trailing zeroes if any */
+            int nullpos = sb.indexOf("\0");
+
+            if (nullpos > -1) {
+                sb.setLength(nullpos);
+            }
+        }
+
+        element.setTextContent(sb.toString());
     }
 
     void applyRule5_1(Element element, MXFInputStream value, CharacterTypeDefinition definition) throws RuleException, IOException {
 
-        StringBuilder sb = new StringBuilder();
-
-        readCharacters(value, definition, sb);
-
-        element.setTextContent(sb.toString());
+        readCharacters(element, value, definition, false /* do not remove trailing zeroes for a single char */);
 
     }
 
@@ -642,10 +909,21 @@ public class FragmentBuilder {
             Definition bdef = findBaseDefinition(defresolver.getDefinition(definition.getElementType()));
 
             if (!(bdef instanceof IntegerTypeDefinition)) {
-                throw new RuleException(
-                        String.format("Enum %s does not have an Integer base type.",
-                                definition.getIdentification().toString()
-                        ));
+
+                Event evt = new Event(
+                    EventKind.UNSUPPORTED_ENUM_TYPE,
+                    "Enum does not have an Integer base type.",
+                    String.format(
+                        "Enum %s",
+                        definition.getSymbol()
+                    )
+                );
+
+                logEvent(evt);
+
+                addInformativeComment(element, evt.getReason());
+
+                return;
             }
 
             IntegerTypeDefinition idef = (IntegerTypeDefinition) bdef;
@@ -654,7 +932,7 @@ public class FragmentBuilder {
 
             if (definition.getIdentification().equals(ProductReleaseType_UL)) {
 
-                /* EXCEPTION: ProductReleaseType_UL is listed as 
+                /* EXCEPTION: ProductReleaseType_UL is listed as
                  a UInt8 enum but encoded as a UInt16 */
                 len = 2;
 
@@ -685,29 +963,22 @@ public class FragmentBuilder {
 
                 str = "ERROR";
 
-                LOG.warning(
-                        String.format(
-                                "No data at Enumeration %s.",
-                                definition.getIdentification()
-                        )
+                Event evt = new Event(
+                    EventKind.VALUE_LENGTH_MISMATCH,
+                    "No data",
+                    String.format(
+                        "Enum %s",
+                        definition.getSymbol()
+                    )
                 );
+
+                logEvent(evt);
+
+                addInformativeComment(element, evt.getReason());
 
             } else {
 
-                if (br != len) {
-
-                    LOG.warning(
-                            String.format(
-                                    "Incorrect field legnth for Enumeration %s: expected %d and parsed %d.",
-                                    definition.getIdentification(),
-                                    len,
-                                    br
-                            )
-                    );
-
-                }
-
-                /* still try to read the value even if the length is not as expected */
+                /* always try to read the value even if the length is not as expected */
                 BigInteger bi = idef.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
 
                 if (definition.getElementType().equals(Boolean_UL)) {
@@ -734,13 +1005,40 @@ public class FragmentBuilder {
 
                     str = "UNDEFINED";
 
-                    LOG.warning(
-                            String.format(
-                                    "Undefined value %d for Enumeration %s.",
-                                    bi.intValue(),
-                                    definition.getIdentification()
-                            )
+                    Event evt = new Event(
+                        EventKind.UNKNOWN_ENUM_VALUE,
+                        String.format(
+                            "Undefined value %d",
+                            bi.intValue()
+                        ),
+                        String.format(
+                            "Enum %s",
+                            definition.getSymbol()
+                        )
                     );
+
+                    logEvent(evt);
+
+                    addInformativeComment(element, evt.getReason());
+
+                } else if (br != len) {
+
+                    Event evt = new Event(
+                        EventKind.VALUE_LENGTH_MISMATCH,
+                        String.format(
+                            "Incorrect length: expected %d and received %d",
+                            len,
+                            br
+                        ),
+                        String.format(
+                            "Enumeration %s",
+                            definition.getSymbol()
+                        )
+                    );
+
+                    logEvent(evt);
+
+                    addInformativeComment(element, evt.getReason());
 
                 }
             }
@@ -751,7 +1049,7 @@ public class FragmentBuilder {
             throw new RuntimeException(e);
         }
     }
-    
+
     void appendCommentWithAUIDName(AUIDNameResolver anr, AUID auid, Element elem) {
         if (this.anameresolver != null) {
 
@@ -775,7 +1073,7 @@ public class FragmentBuilder {
             element.setTextContent(ul.toString());
 
             appendCommentWithAUIDName(anameresolver, new AUID(ul), element);
-            
+
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -823,11 +1121,10 @@ public class FragmentBuilder {
     }
 
     void applyRule5_5(Element element, MXFInputStream value, IndirectTypeDefinition definition) throws RuleException, IOException {
-        
+
         /* see https://github.com/sandflow/regxmllib/issues/74 for a discussion on Indirect Type */
-                
         ByteOrder bo;
-        
+
         switch (value.readUnsignedByte()) {
             case 0x4c /* little endian */:
                 bo = ByteOrder.LITTLE_ENDIAN;
@@ -838,45 +1135,60 @@ public class FragmentBuilder {
             default:
                 throw new RuleException("Unknown Indirect Byte Order value.");
         }
-        
-        MXFInputStream orderedval = new MXFInputStream(value, bo);
-                 
-        IDAU idau = orderedval.readIDAU();
-        
-        if (idau == null) {
-            throw new RuleException("Invalid IDAU");
-        }
-        
-        AUID auid = idau.asAUID();
 
-        Definition def = (Definition) defresolver.getDefinition(auid);
-        
-        if (def == null) {
-            LOG.warning(
+        MXFInputStream orderedval = new MXFInputStream(value, bo);
+
+        IDAU idau = orderedval.readIDAU();
+
+        if (idau == null) {
+
+            Event evt = new Event(
+                EventKind.INVALID_IDAU,
+                "Invalid IDAU",
                 String.format(
-                    "No definition found for indirect type with AUID %s.",
-                    idau.toString()
+                    "Indirect Type %s",
+                    definition.getSymbol()
                 )
             );
 
-            element.appendChild(
-                element.getOwnerDocument().createComment(
-                    String.format(
-                        "No definition found for indirect type with AUID %s.",
-                        idau.toString()
-                ))
-            );
+            logEvent(evt);
+
+            addInformativeComment(element, evt.getReason());
 
             return;
         }
-        
-            // create reg:actualType attribute
-        
+
+        AUID auid = idau.asAUID();
+
+        Definition def = (Definition) defresolver.getDefinition(auid);
+
+        if (def == null) {
+
+            Event evt = new Event(
+                EventKind.UNKNOWN_TYPE,
+                String.format(
+                    "No definition found for indirect type %s.",
+                    auid.toString()
+                ),
+                String.format(
+                    "Indirect Type %s",
+                    definition.getSymbol()
+                )
+            );
+
+            logEvent(evt);
+
+            addInformativeComment(element, evt.getReason());
+
+            return;
+        }
+
+        // create reg:actualType attribute
         Attr attr = element.getOwnerDocument().createAttributeNS(REGXML_NS, ACTUALTYPE_ATTR);
         attr.setPrefix(getPrefix(REGXML_NS));
         attr.setTextContent(def.getSymbol());
         element.setAttributeNodeNS(attr);
-        
+
         applyRule5(element, orderedval, def);
 
     }
@@ -908,31 +1220,65 @@ public class FragmentBuilder {
 
             if (br == 0) {
 
-                LOG.warning(
-                        String.format(
-                                "No data at Integer %s.",
-                                definition.getIdentification()
-                        )
+                element.setTextContent("NaN");
+
+                Event evt = new Event(
+                    EventKind.VALUE_LENGTH_MISMATCH,
+                    "No data",
+                    String.format(
+                        "Integer %s",
+                        definition.getSymbol()
+                    )
                 );
 
-                element.setTextContent("NaN");
+                logEvent(evt);
+
+                addInformativeComment(element, evt.getReason());
 
             } else {
 
-                if (br != len) {
-                    LOG.warning(
-                            String.format(
-                                    "Incorrect field legnth for Integer %s: expected %d and parsed %d.",
-                                    definition.getIdentification(),
-                                    len,
-                                    br
-                            )
-                    );
-                }
+                try {
 
-                BigInteger bi = definition.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
-                
-                element.setTextContent(bi.toString());
+                    BigInteger bi = definition.isSigned() ? new BigInteger(val) : new BigInteger(1, val);
+
+                    element.setTextContent(bi.toString());
+
+                    if (br != len) {
+
+                        Event evt = new Event(
+                            EventKind.VALUE_LENGTH_MISMATCH,
+                            String.format(
+                                "Incorrect field length: expected %d and parsed %d.",
+                                len,
+                                br
+                            ),
+                            String.format(
+                                "Integer %s",
+                                definition.getSymbol()
+                            )
+                        );
+
+                        logEvent(evt);
+
+                        addInformativeComment(element, evt.getReason());
+
+                    }
+
+                } catch (NumberFormatException e) {
+
+                    Event evt = new Event(
+                        EventKind.INVALID_INTEGER_VALUE,
+                        "Invalid integer value",
+                        String.format(
+                            "Integer %s",
+                            definition.getSymbol()
+                        )
+                    );
+
+                    logEvent(evt);
+
+                    addInformativeComment(element, evt.getReason());
+                }
 
             }
 
@@ -974,7 +1320,7 @@ public class FragmentBuilder {
             AUID auid = value.readAUID();
 
             element.setTextContent(auid.toString());
-            
+
             appendCommentWithAUIDName(anameresolver, auid, element);
 
         } else if (definition.getIdentification().equals(DateStruct_UL)) {
@@ -1089,26 +1435,32 @@ public class FragmentBuilder {
          does not described semantics.
          */
         if (!(chrdef instanceof CharacterTypeDefinition)) {
-            throw new RuleException(
-                    String.format(
-                            "String type %s does not have a Character Type as element.",
-                            definition.getIdentification().toString()
-                    )
+
+            Event evt = new Event(
+                EventKind.UNSUPPORTED_STRING_TYPE,
+                String.format(
+                    "Unsupported String with Element %s",
+                    chrdef.getSymbol()
+                ),
+                String.format(
+                    "String %s",
+                    definition.getSymbol()
+                )
             );
+
+            logEvent(evt);
+
+            addInformativeComment(element, evt.getReason());
+
+            return;
         }
 
-        StringBuilder sb = new StringBuilder();
-
-        readCharacters(value, (CharacterTypeDefinition) chrdef, sb);
-
-        /* remove trailing zeroes if any */
-        int nullpos = sb.indexOf("\0");
-
-        if (nullpos > -1) {
-            sb.setLength(nullpos);
-        }
-
-        element.setTextContent(sb.toString());
+        readCharacters(
+            element,
+            value,
+            (CharacterTypeDefinition) chrdef,
+            true /* remove trailing zeroes */
+        );
 
     }
 
@@ -1117,7 +1469,25 @@ public class FragmentBuilder {
         Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getReferenceType()));
 
         if (!(typedef instanceof ClassDefinition)) {
-            throw new RuleException("Rule 5.13 applied to non class.");
+
+            Event evt = new Event(
+                EventKind.INVALID_STRONG_REFERENCE_TYPE,
+                String.format(
+                    "Target %s of Strong Reference Type is not a class",
+                    typedef.getSymbol()
+                ),
+                String.format(
+                    "Type %s",
+                    definition.getSymbol()
+                )
+            );
+
+            logEvent(evt);
+
+            addInformativeComment(element, evt.getReason());
+
+            return;
+
         }
 
         UUID uuid = value.readUUID();
@@ -1129,22 +1499,23 @@ public class FragmentBuilder {
             applyRule3(element, g);
 
         } else {
-            LOG.warning(
-                    String.format(
-                            "Strong Reference %s not found at %s",
-                            uuid.toString(),
-                            definition.getSymbol()
-                    )
+
+            Event evt = new Event(
+                EventKind.STRONG_REFERENCE_NOT_FOUND,
+                String.format(
+                    "Strong Reference target %s is not found",
+                    uuid.toString()
+                ),
+                String.format(
+                    "Type %s",
+                    definition.getSymbol()
+                )
             );
 
-            Comment comment = element.getOwnerDocument().createComment(
-                    String.format(
-                            "Strong Reference %s not found",
-                            uuid.toString()
-                    )
-            );
+            logEvent(evt);
 
-            element.appendChild(comment);
+            addInformativeComment(element, evt.getReason());
+
         }
 
     }
@@ -1194,7 +1565,7 @@ public class FragmentBuilder {
         return definition;
     }
 
-    public Collection<PropertyDefinition> getAllMembersOf(ClassDefinition definition) {
+    private Collection<PropertyDefinition> getAllMembersOf(ClassDefinition definition) {
         ClassDefinition cdef = definition;
 
         ArrayList<PropertyDefinition> props = new ArrayList<>();
@@ -1286,14 +1657,18 @@ public class FragmentBuilder {
 
         } catch (EOFException eof) {
 
-            Comment comment = element.getOwnerDocument().createComment(
-                    String.format(
-                            "Value too short for Type %s",
-                            typedef.getSymbol()
-                    )
+            Event evt = new Event(
+                EventKind.VALUE_LENGTH_MISMATCH,
+                "Value too short",
+                String.format(
+                    "Array %s",
+                    definition.getSymbol()
+                )
             );
 
-            element.appendChild(comment);
+            logEvent(evt);
+
+            addInformativeComment(element, evt.getReason());
 
         }
 
@@ -1314,10 +1689,24 @@ public class FragmentBuilder {
         }
 
         if (uniquepropdef == null) {
-            throw new RuleException(
-                    String.format("Underlying class of weak reference type %s does not have a unique identifier.",
-                            typedefinition.getIdentification().toString())
+
+            Event evt = new Event(
+                EventKind.MISSING_UNIQUE,
+                String.format(
+                    "Weak reference target %s has no IsUnique element.",
+                    classdef.getSymbol()
+                ),
+                String.format(
+                    "Type %s",
+                    typedefinition.getSymbol()
+                )
             );
+
+            logEvent(evt);
+
+            addInformativeComment(element, evt.getReason());
+
+            return;
         }
 
         applyRule4(element, value, uniquepropdef);

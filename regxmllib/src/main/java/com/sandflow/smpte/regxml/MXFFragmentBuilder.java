@@ -105,7 +105,9 @@ public class MXFFragmentBuilder {
      *                         to be inserted as comments
      * @param rootclasskey Root class of Fragment
      * @param document DOM for which the Document Fragment is created
+     * 
      * @return Document Fragment containing a single RegXML Fragment
+     * 
      * @throws IOException
      * @throws KLVException
      * @throws com.sandflow.smpte.regxml.MXFFragmentBuilder.MXFException
