@@ -26,7 +26,6 @@
 package com.sandflow.smpte.regxml;
 
 import com.sandflow.smpte.klv.exceptions.KLVException;
-import com.sandflow.smpte.mxf.MXFFiles;
 import com.sandflow.smpte.register.ElementsRegister;
 import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypesRegister;
@@ -34,24 +33,18 @@ import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
 import com.sandflow.smpte.util.UL;
-import java.io.File;
+import com.sandflow.util.EventHandler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.net.URI;
-import java.net.URL;
-import java.nio.channels.ByteChannel;
-import java.nio.channels.FileChannel;
-import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -69,6 +62,9 @@ import org.xml.sax.SAXException;
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
 public class MXFFragmentBuilderTest extends TestCase {
+    
+    private final static Logger LOG = Logger.getLogger(MXFFragmentBuilderTest.class.getName());
+
     
     private static final UL PREFACE_KEY
             = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
@@ -161,8 +157,27 @@ public class MXFFragmentBuilderTest extends TestCase {
         Document gendoc = db.newDocument();
 
         assertNotNull(gendoc);
+        
+        EventHandler evthandler = new EventHandler() {
 
-        DocumentFragment gendf = MXFFragmentBuilder.fromInputStream(sampleis, mds, PREFACE_KEY, gendoc);
+                    @Override
+                    public boolean handle(EventHandler.Event evt) {
+                        switch (evt.getSeverity()) {
+                            case ERROR:
+                            case FATAL:
+                                LOG.log(Level.SEVERE, "{0}: {1}", new Object[]{evt.getClass().getCanonicalName(), evt.getMessage()});
+                                break;
+                            case INFO:
+                                LOG.info(evt.getMessage());
+                                break;
+                            case WARN:
+                                LOG.warning(evt.getMessage());
+                        }
+                        return true;
+                    }
+                };
+
+        DocumentFragment gendf = MXFFragmentBuilder.fromInputStream(sampleis, mds, null, evthandler, PREFACE_KEY, gendoc);
 
         assertNotNull(gendf);
 

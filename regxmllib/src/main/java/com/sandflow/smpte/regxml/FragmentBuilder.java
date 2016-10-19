@@ -74,7 +74,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
-import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
@@ -374,11 +373,10 @@ public class FragmentBuilder {
      *
      * @return XML DOM Document Fragment containing a single RegXML Fragment
      *
-     * @throws ParserConfigurationException
      * @throws KLVException
      * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
      */
-    public DocumentFragment fromTriplet(Group group, Document document) throws ParserConfigurationException, KLVException, RuleException {
+    public DocumentFragment fromTriplet(Group group, Document document) throws KLVException, RuleException {
 
         DocumentFragment df = document.createDocumentFragment();
 
@@ -414,24 +412,31 @@ public class FragmentBuilder {
         }
     }
 
-    void addInformativeComment(Element element, String fmt, Object... args) {
-        element.appendChild(element.getOwnerDocument().createComment(String.format(fmt, args)));
-    }
-
     void addInformativeComment(Element element, String comment) {
         element.appendChild(element.getOwnerDocument().createComment(comment));
     }
 
-    void logEvent(EventHandler.Event evt) throws RuleException {
+    void handleEvent(EventHandler.Event evt) throws RuleException {
 
         if (evthandler != null) {
 
-            if (!evthandler.handle(evt)) {
+            if (! evthandler.handle(evt) || evt.getSeverity() == EventHandler.Severity.FATAL) {
+                
+                /* die on FATAL events or if requested by the handler */
 
                 throw new RuleException(evt.getMessage());
 
             }
+            
+        } else if (evt.getSeverity() == EventHandler.Severity.ERROR ||
+            evt.getSeverity() == EventHandler.Severity.FATAL) {
+            
+            /* if no event handler was provided, die on FATAL and ERROR events */
+            
+            throw new RuleException(evt.getMessage());
+            
         }
+        
     }
 
     void applyRule3(Node node, Group group) throws RuleException {
@@ -440,7 +445,7 @@ public class FragmentBuilder {
 
         if (definition == null) {
 
-            logEvent(new Event(
+            handleEvent(new Event(
                 EventKind.UNKNOWN_GROUP,
                 String.format(
                     "Unknown Group UL %s",
@@ -454,7 +459,7 @@ public class FragmentBuilder {
 
         if (definition.getIdentification().asUL().getVersion() != group.getKey().getVersion()) {
 
-            logEvent(new Event(
+            handleEvent(new Event(
                 EventKind.VERSION_BYTE_MISMATCH,
                 String.format(
                     "Group UL %s in file does not have the same version as in the register (0x%02x)",
@@ -479,21 +484,28 @@ public class FragmentBuilder {
 
             if (itemdef == null) {
 
-                logEvent(new Event(
-                    EventKind.UNKNOWN_PROPERTY,
-                    String.format(
-                        "Unknown property %s at group %s",
-                        item.getKey().toString(),
-                        definition.getSymbol()
+                handleEvent(
+                    new Event(
+                        EventKind.UNKNOWN_PROPERTY,
+                        String.format(
+                            "Unknown property %s",
+                            item.getKey().toString()
+                        ),
+                        String.format(
+                            "Group %s",
+                            definition.getSymbol()
+                        )
                     )
-                )
                 );
 
+                /* inserts the full value of the dark property as a comment */
                 addInformativeComment(
                     objelem,
-                    "Unknown property\nKey: %s\nData: %s",
-                    item.getKey().toString(),
-                    bytesToString(item.getValue())
+                    String.format(
+                        "Unknown property\nKey: %s\nData: %s",
+                        item.getKey().toString(),
+                        bytesToString(item.getValue())
+                    )
                 );
 
                 continue;
@@ -503,21 +515,21 @@ public class FragmentBuilder {
             /* make sure this is a property definition */
             if (!(itemdef instanceof PropertyDefinition)) {
 
-                logEvent(new Event(
+                Event evt = new Event(
                     EventKind.UNEXPECTED_DEFINITION,
                     String.format(
-                        "Item %s at group %s is not a property",
-                        item.getKey().toString(),
+                        "Item %s is not a property",
+                        item.getKey().toString()
+                    ),
+                    String.format(
+                        "Group %s",
                         definition.getSymbol()
                     )
-                )
                 );
 
-                addInformativeComment(
-                    objelem,
-                    "Item %s is not a property",
-                    item.getKey().toString()
-                );
+                handleEvent(evt);
+
+                addInformativeComment(objelem, evt.getReason());
 
                 continue;
             }
@@ -525,7 +537,7 @@ public class FragmentBuilder {
             /* warn if version byte of the property does not match the register version byte  */
             if (itemdef.getIdentification().asUL().getVersion() != item.getKey().getVersion()) {
 
-                logEvent(new Event(
+                handleEvent(new Event(
                     EventKind.VERSION_BYTE_MISMATCH,
                     String.format(
                         "Property UL %s in file does not have the same version as in the register (0x%02x)",
@@ -577,7 +589,7 @@ public class FragmentBuilder {
                                 )
                             );
 
-                            logEvent(evt);
+                            handleEvent(evt);
 
                             addInformativeComment(
                                 (Element) node,
@@ -634,7 +646,7 @@ public class FragmentBuilder {
                         + "assume a big-endian byte order going forward."
                     );
 
-                    logEvent(evt);
+                    handleEvent(evt);
 
                     addInformativeComment(element, evt.getReason());
 
@@ -665,7 +677,7 @@ public class FragmentBuilder {
                         )
                     );
 
-                    logEvent(evt);
+                    handleEvent(evt);
 
                     addInformativeComment(element, evt.getReason());
 
@@ -719,7 +731,7 @@ public class FragmentBuilder {
                                 )
                             );
 
-                            logEvent(evt);
+                            handleEvent(evt);
 
                             addInformativeComment(element, evt.getReason());
 
@@ -739,7 +751,7 @@ public class FragmentBuilder {
                             )
                         );
 
-                        logEvent(evt);
+                        handleEvent(evt);
 
                         addInformativeComment(element, evt.getReason());
 
@@ -771,7 +783,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 
@@ -869,7 +881,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 
@@ -919,7 +931,7 @@ public class FragmentBuilder {
                     )
                 );
 
-                logEvent(evt);
+                handleEvent(evt);
 
                 addInformativeComment(element, evt.getReason());
 
@@ -972,7 +984,7 @@ public class FragmentBuilder {
                     )
                 );
 
-                logEvent(evt);
+                handleEvent(evt);
 
                 addInformativeComment(element, evt.getReason());
 
@@ -1017,7 +1029,7 @@ public class FragmentBuilder {
                         )
                     );
 
-                    logEvent(evt);
+                    handleEvent(evt);
 
                     addInformativeComment(element, evt.getReason());
 
@@ -1036,7 +1048,7 @@ public class FragmentBuilder {
                         )
                     );
 
-                    logEvent(evt);
+                    handleEvent(evt);
 
                     addInformativeComment(element, evt.getReason());
 
@@ -1151,7 +1163,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 
@@ -1176,7 +1188,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 
@@ -1231,7 +1243,7 @@ public class FragmentBuilder {
                     )
                 );
 
-                logEvent(evt);
+                handleEvent(evt);
 
                 addInformativeComment(element, evt.getReason());
 
@@ -1258,7 +1270,7 @@ public class FragmentBuilder {
                             )
                         );
 
-                        logEvent(evt);
+                        handleEvent(evt);
 
                         addInformativeComment(element, evt.getReason());
 
@@ -1275,7 +1287,7 @@ public class FragmentBuilder {
                         )
                     );
 
-                    logEvent(evt);
+                    handleEvent(evt);
 
                     addInformativeComment(element, evt.getReason());
                 }
@@ -1448,7 +1460,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 
@@ -1482,7 +1494,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 
@@ -1512,7 +1524,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 
@@ -1666,7 +1678,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 
@@ -1702,7 +1714,7 @@ public class FragmentBuilder {
                 )
             );
 
-            logEvent(evt);
+            handleEvent(evt);
 
             addInformativeComment(element, evt.getReason());
 

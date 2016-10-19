@@ -33,11 +33,13 @@ import com.sandflow.smpte.register.exceptions.InvalidEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
+import com.sandflow.util.EventHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -52,21 +54,23 @@ import org.w3c.dom.Document;
  */
 public class XMLRegistersToDict {
 
+    private final static Logger LOG = Logger.getLogger(XMLRegistersToDict.class.getName());
+
     private final static String USAGE = "Converts XML Registers to RegXML metadictionary.\n"
-            + "  Usage: XMLRegistersToDict -e elementsregspath\n"
-            + "                            -l labelsregpath\n"
-            + "                            -g groupsregpath\n"
-            + "                            -t typesregpath\n"
-            + "                            outputdir\n"
-            + "         XMLRegistersToDict -?";
+        + "  Usage: XMLRegistersToDict -e elementsregspath\n"
+        + "                            -l labelsregpath\n"
+        + "                            -g groupsregpath\n"
+        + "                            -t typesregpath\n"
+        + "                            outputdir\n"
+        + "         XMLRegistersToDict -?";
 
     public static void main(String[] args) throws FileNotFoundException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, Exception {
         if (args.length != 9
-                || "-?".equals(args[0])
-                || (!"-e".equals(args[0]))
-                || (!"-l".equals(args[2]))
-                || (!"-g".equals(args[4]))
-                || (!"-t".equals(args[6]))) {
+            || "-?".equals(args[0])
+            || (!"-e".equals(args[0]))
+            || (!"-l".equals(args[2]))
+            || (!"-g".equals(args[4]))
+            || (!"-t".equals(args[6]))) {
 
             System.out.println(USAGE);
 
@@ -74,7 +78,6 @@ public class XMLRegistersToDict {
         }
 
         /* NOTE: to mute logging: Logger.getLogger("").setLevel(Level.OFF); */
-        
         FileReader fe = new FileReader(args[1]);
         FileReader fg = new FileReader(args[5]);
         FileReader ft = new FileReader(args[7]);
@@ -83,7 +86,26 @@ public class XMLRegistersToDict {
         GroupsRegister greg = GroupsRegister.fromXML(fg);
         TypesRegister treg = TypesRegister.fromXML(ft);
 
-        MetaDictionaryCollection mds = fromRegister(treg, greg, ereg);
+        EventHandler evthandler = new EventHandler() {
+
+            @Override
+            public boolean handle(EventHandler.Event evt) {
+                switch (evt.getSeverity()) {
+                    case ERROR:
+                    case FATAL:
+                        LOG.severe(evt.getMessage());
+                        break;
+                    case INFO:
+                        LOG.info(evt.getMessage());
+                        break;
+                    case WARN:
+                        LOG.warning(evt.getMessage());
+                }
+                return true;
+            }
+        };
+
+        MetaDictionaryCollection mds = fromRegister(treg, greg, ereg, evthandler);
 
         Transformer tr = TransformerFactory.newInstance().newTransformer();
 
@@ -101,21 +123,21 @@ public class XMLRegistersToDict {
             /* date and build version */
             Date now = new java.util.Date();
             doc.insertBefore(
-                    doc.createComment("Created: " + now.toString()),
-                    doc.getDocumentElement()
+                doc.createComment("Created: " + now.toString()),
+                doc.getDocumentElement()
             );
             doc.insertBefore(
-                    doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()),
-                    doc.getDocumentElement()
+                doc.createComment("By: regxmllib build " + BuildVersionSingleton.getBuildVersion()),
+                doc.getDocumentElement()
             );
             doc.insertBefore(
-                    doc.createComment("See: https://github.com/sandflow/regxmllib"),
-                    doc.getDocumentElement()
+                doc.createComment("See: https://github.com/sandflow/regxmllib"),
+                doc.getDocumentElement()
             );
 
             tr.transform(
-                    new DOMSource(doc),
-                    new StreamResult(f)
+                new DOMSource(doc),
+                new StreamResult(f)
             );
         }
 
