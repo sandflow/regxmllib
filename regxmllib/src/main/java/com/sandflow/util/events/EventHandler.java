@@ -23,58 +23,26 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sandflow.util;
+package com.sandflow.util.events;
 
 /**
- *
+ * A generic interface for handling events generated, for instance, by parsing
+ * operations.
  *
  * @author Pierre-Anthony Lemieux
  */
 public interface EventHandler {
-
-    public static enum Severity {
-            INFO,
-            WARN,
-            ERROR,
-            FATAL
-    }
     
-    public static interface Event {
-
-        public String getMessage();
-        public String getOrigin();
-        public Severity getSeverity();
-    }
-
-    public static class BasicEvent implements Event {
-
-        String message;
-        Severity severity;
-        String origin;
-
-        public BasicEvent(Severity severity, String origin, String message) {
-            this.message = message;
-            this.severity = severity;
-            this.origin = origin;
-        }
-
-        @Override
-        public String getMessage() {
-            return this.message;
-        }
-
-        @Override
-        public Severity getSeverity() {
-            return this.severity;
-        }
-
-        @Override
-        public String getOrigin() {
-            return this.origin;
-        }
-
-    }
-
+    /**
+     * Callback to give an opportunity for the client to process an event. The 
+     * return value indicates whether the caller should continue or stop 
+     * processing.
+     * 
+     * @param evt Event to process
+     * 
+     * @return true if the caller should continue or false if the caller
+     * should stop.
+     */
     public boolean handle(Event evt);
 
 }

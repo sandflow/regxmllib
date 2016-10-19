@@ -42,7 +42,9 @@ import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.CountingInputStream;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UUID;
-import com.sandflow.util.EventHandler;
+import com.sandflow.util.events.BasicEvent;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -65,58 +67,51 @@ public class MXFFragmentBuilder {
     private static final UL PREFACE_KEY
         = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
-    public static enum EventKind {
+    public static enum EventCodes {
 
         /**
          * No root object found
          */
-        MISSING_ROOT_OBJECT(EventHandler.Severity.FATAL),
+        MISSING_ROOT_OBJECT(Event.Severity.FATAL),
         /**
          * No partition pack found in the MXF file
          */
-        MISSING_PARTITION_PACK(EventHandler.Severity.FATAL),
+        MISSING_PARTITION_PACK(Event.Severity.FATAL),
         /**
          * No primer pack found in the MXF file
          */
-        MISSING_PRIMER_PACK(EventHandler.Severity.FATAL),
+        MISSING_PRIMER_PACK(Event.Severity.FATAL),
         /**
          * Unexpected group sequence encountered
          */
-        UNEXPECTED_STRUCTURE(EventHandler.Severity.ERROR),
+        UNEXPECTED_STRUCTURE(Event.Severity.ERROR),
         /**
          * Failed to read Group
          */
-        GROUP_READ_FAILED(EventHandler.Severity.ERROR);
+        GROUP_READ_FAILED(Event.Severity.ERROR);
 
-        public final EventHandler.Severity severity;
+        public final Event.Severity severity;
 
-        private EventKind(EventHandler.Severity severity) {
+        private EventCodes(Event.Severity severity) {
             this.severity = severity;
         }
 
     }
 
-    public static class Event extends EventHandler.BasicEvent {
+    public static class MXFEvent extends BasicEvent {
 
-        private final EventKind kind;
-
-        public Event(EventKind kind, String message) {
-            super(kind.severity, Event.class.getCanonicalName(), message);
-
-            this.kind = kind;
-        }
-
-        public EventKind getKind() {
-            return kind;
+        public MXFEvent(EventCodes kind, String message) {
+            super(kind.severity, kind, message);
         }
 
     }
 
-    static void handleEvent(EventHandler handler, EventHandler.Event evt) throws MXFException {
+    static void handleEvent(EventHandler handler, com.sandflow.util.events.Event evt) throws MXFException {
 
         if (handler != null) {
 
-            if (! handler.handle(evt) || evt.getSeverity() == EventHandler.Severity.FATAL) {
+            if (! handler.handle(evt) ||
+                evt.getSeverity() == Event.Severity.FATAL) {
                 
                 /* die on FATAL events or if requested by the handler */
 
@@ -124,8 +119,8 @@ public class MXFFragmentBuilder {
 
             }
             
-        } else if (evt.getSeverity() == EventHandler.Severity.ERROR ||
-            evt.getSeverity() == EventHandler.Severity.FATAL) {
+        } else if (evt.getSeverity() == Event.Severity.ERROR ||
+            evt.getSeverity() == Event.Severity.FATAL) {
             
             /* if no event handler was provided, die on FATAL and ERROR events */
             
@@ -193,7 +188,7 @@ public class MXFFragmentBuilder {
         EventHandler handler = new EventHandler() {
 
                 @Override
-                public boolean handle(EventHandler.Event evt) {
+                public boolean handle(Event evt) {
                     switch (evt.getSeverity()) {
                         case ERROR:
                         case FATAL:
@@ -263,8 +258,8 @@ public class MXFFragmentBuilder {
 
         if (pp == null) {
 
-            Event evt = new Event(
-                EventKind.MISSING_PARTITION_PACK,
+            MXFEvent evt = new MXFEvent(
+                EventCodes.MISSING_PARTITION_PACK,
                 "No Partition Pack found"
             );
 
@@ -290,8 +285,8 @@ public class MXFFragmentBuilder {
 
         if (localreg == null) {
 
-            Event evt = new Event(
-                EventKind.MISSING_PRIMER_PACK,
+            MXFEvent evt = new MXFEvent(
+                EventCodes.MISSING_PRIMER_PACK,
                 "No Primer Pack found"
             );
 
@@ -309,8 +304,8 @@ public class MXFFragmentBuilder {
             if (t.getKey().equalsIgnoreVersion(INDEX_TABLE_SEGMENT_UL)) {
 
                 /* stop if Index Table reached */
-                Event evt = new Event(
-                    EventKind.UNEXPECTED_STRUCTURE,
+                MXFEvent evt = new MXFEvent(
+                    EventCodes.UNEXPECTED_STRUCTURE,
                     "Index Table Segment encountered before Header Byte Count bytes read"
                 );
 
@@ -339,8 +334,8 @@ public class MXFFragmentBuilder {
 
                 } else {
 
-                    Event evt = new Event(
-                        EventKind.GROUP_READ_FAILED,
+                    MXFEvent evt = new MXFEvent(
+                        EventCodes.GROUP_READ_FAILED,
                         String.format(
                             "Failed to read Group: {0}",
                             t.getKey().toString()
@@ -352,8 +347,8 @@ public class MXFFragmentBuilder {
                 }
             } catch (KLVException ke) {
 
-                Event evt = new Event(
-                    EventKind.GROUP_READ_FAILED,
+                MXFEvent evt = new MXFEvent(
+                    EventCodes.GROUP_READ_FAILED,
                     String.format(
                         "Failed to read Group %s with error %s",
                         t.getKey().toString(),
@@ -378,8 +373,8 @@ public class MXFFragmentBuilder {
 
             } else if (!agroup.getKey().isClass14()) {
 
-                Event evt = new Event(
-                    EventKind.UNEXPECTED_STRUCTURE,
+                MXFEvent evt = new MXFEvent(
+                    EventCodes.UNEXPECTED_STRUCTURE,
                     String.format(
                         "At least one non-class 14 Set %s was found between"
                         + " the Primer Pack and the Preface Set.",
@@ -443,8 +438,8 @@ public class MXFFragmentBuilder {
 
         if (rootgroup == null) {
 
-            Event evt = new Event(
-                EventKind.MISSING_ROOT_OBJECT,
+            MXFEvent evt = new MXFEvent(
+                EventCodes.MISSING_ROOT_OBJECT,
                 "No Root Object found"
             );
 

@@ -54,7 +54,8 @@ import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.exceptions.DuplicateSymbolException;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
-import com.sandflow.util.EventHandler;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -73,72 +74,63 @@ public class RegisterImporter {
 
         /**
          * Element definition cannot be found
-         *//**
-         * Element definition cannot be found
          */
-        UNKNOWN_ELEMENT(EventHandler.Severity.WARN),
+        UNKNOWN_ELEMENT(Event.Severity.WARN),
         /**
          * Type definition cannot be found.
          */
-        UNKNOWN_TYPE(EventHandler.Severity.WARN),
+        UNKNOWN_TYPE(Event.Severity.WARN),
         /**
          * Weak Reference Target Set cannot be found.
          */
-        UNKNOWN_TARGET_SET(EventHandler.Severity.WARN),
+        UNKNOWN_TARGET_SET(Event.Severity.WARN),
         /**
          * Weak Reference Target Set duplicated
          */
-        DUP_TARGET_SET(EventHandler.Severity.WARN),
+        DUP_TARGET_SET(Event.Severity.WARN),
         /**
          * Unknown type kind encountered.
          */
-        UNKNOWN_TYPE_KIND(EventHandler.Severity.ERROR),
+        UNKNOWN_TYPE_KIND(Event.Severity.ERROR),
         /**
          * Type Definition import failed
          */
-        TYPE_IMPORT_FAILED(EventHandler.Severity.ERROR),
+        TYPE_IMPORT_FAILED(Event.Severity.ERROR),
         /**
          * Duplicate symbol found
          */
-        DUPLICATE_SYMBOL(EventHandler.Severity.ERROR);
+        DUPLICATE_SYMBOL(Event.Severity.ERROR);
 
-        public final EventHandler.Severity severity;
+        public final Event.Severity severity;
 
-        private EventKind(EventHandler.Severity severity) {
+        private EventKind(Event.Severity severity) {
             this.severity = severity;
         }
 
     }
 
-    public static class Event extends EventHandler.BasicEvent {
+    public static class RegisterEvent extends com.sandflow.util.events.BasicEvent {
 
-        private final EventKind kind;
-
-        public Event(EventKind kind, String message) {
-            super(kind.severity, Event.class.getCanonicalName(), message);
-
-            this.kind = kind;
-        }
-
-        public EventKind getKind() {
-            return kind;
+        public RegisterEvent(EventKind kind, String message) {
+            super(kind.severity, kind, message);
         }
 
     }
 
-    static void handleEvent(EventHandler handler, EventHandler.Event evt) throws Exception {
+    static void handleEvent(EventHandler handler, com.sandflow.util.events.Event evt) throws Exception {
 
         if (handler != null) {
 
-            if (!handler.handle(evt) || evt.getSeverity() == EventHandler.Severity.FATAL) {
+            if (!handler.handle(evt) ||
+                evt.getSeverity() == Event.Severity.FATAL) {
 
                 /* die on FATAL events or if requested by the handler */
                 throw new Exception(evt.getMessage());
 
             }
 
-        } else if (evt.getSeverity() == EventHandler.Severity.ERROR
-            || evt.getSeverity() == EventHandler.Severity.FATAL) {
+        } else if (evt.getSeverity() == Event.Severity.ERROR
+            || evt.getSeverity() == Event.Severity.FATAL) {
 
             /* if no event handler was provided, die on FATAL and ERROR events */
             throw new Exception(evt.getMessage());
@@ -168,7 +160,7 @@ public class RegisterImporter {
         EventHandler handler = new EventHandler() {
 
             @Override
-            public boolean handle(EventHandler.Event evt) {
+            public boolean handle(com.sandflow.util.events.Event evt) {
                 switch (evt.getSeverity()) {
                     case ERROR:
                     case FATAL:
@@ -185,7 +177,7 @@ public class RegisterImporter {
             }
         };
 
-        return fromRegister(tr, gr, er, null);
+        return fromRegister(tr, gr, er, handler);
     }
 
     /**
@@ -288,7 +280,7 @@ public class RegisterImporter {
 
                 if (element == null) {
 
-                    Event evt = new Event(
+                    RegisterEvent evt = new RegisterEvent(
                         EventKind.UNKNOWN_ELEMENT,
                         String.format(
                             "Undefined Element %s for Group %s",
@@ -310,7 +302,7 @@ public class RegisterImporter {
 
                 if (element.getTypeUL() == null) {
 
-                    Event evt = new Event(
+                    RegisterEvent evt = new RegisterEvent(
                         EventKind.UNKNOWN_TYPE,
                         String.format(
                             "Missing Type UL at Element %s for Group %s",
@@ -481,7 +473,7 @@ public class RegisterImporter {
 
                     if (ul == null) {
 
-                        Event evt = new Event(
+                        RegisterEvent evt = new RegisterEvent(
                             EventKind.UNKNOWN_TARGET_SET,
                             String.format(
                                 "Missing Target Set UL at Type %s",
@@ -496,7 +488,7 @@ public class RegisterImporter {
 
                     if (!((WeakReferenceTypeDefinition) tdef).getTargetSet().add(new AUID(ul))) {
 
-                        Event evt = new Event(
+                        RegisterEvent evt = new RegisterEvent(
                             EventKind.DUP_TARGET_SET,
                             String.format(
                                 "Duplicate Target Set UL at Type %s",
@@ -574,7 +566,7 @@ public class RegisterImporter {
 
             } else {
 
-                Event evt = new Event(
+                RegisterEvent evt = new RegisterEvent(
                     EventKind.UNKNOWN_TYPE_KIND,
                     String.format(
                         "Unknown type kind of %s for Type UL %s.",
@@ -616,7 +608,7 @@ public class RegisterImporter {
 
             } else {
 
-                Event evt = new Event(
+                RegisterEvent evt = new RegisterEvent(
                     EventKind.TYPE_IMPORT_FAILED,
                     String.format(
                         "Type UL %s import failed",
@@ -658,7 +650,7 @@ public class RegisterImporter {
                     /* attempt to generate an ad hoc symbol instead of dying */
                     String newsym = "dup" + def.getSymbol() + (index++);
 
-                    Event evt = new Event(
+                    RegisterEvent evt = new RegisterEvent(
                         EventKind.DUPLICATE_SYMBOL,
                         String.format(
                             "Duplicate symbol %s (%s) renamed %s",

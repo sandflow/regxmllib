@@ -32,8 +32,9 @@ import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.register.exceptions.InvalidEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
+import com.sandflow.util.events.Event;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
-import com.sandflow.util.EventHandler;
+import com.sandflow.util.events.EventHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -89,17 +90,20 @@ public class XMLRegistersToDict {
         EventHandler evthandler = new EventHandler() {
 
             @Override
-            public boolean handle(EventHandler.Event evt) {
+            public boolean handle(Event evt) {
+                String msg = evt.getCode().getClass().getCanonicalName() + "::" + evt.getCode().toString() + " " + evt.getMessage();
+
                 switch (evt.getSeverity()) {
                     case ERROR:
                     case FATAL:
-                        LOG.severe(evt.getMessage());
+                        LOG.severe(msg);
                         break;
                     case INFO:
-                        LOG.info(evt.getMessage());
+                        LOG.info(msg);
                         break;
                     case WARN:
-                        LOG.warning(evt.getMessage());
+                        LOG.warning(msg);
+                        break;
                 }
                 return true;
             }

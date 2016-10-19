@@ -51,10 +51,11 @@ import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
-import com.sandflow.util.EventHandler;
+import com.sandflow.util.events.BasicEvent;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Set;
@@ -98,39 +99,35 @@ public class XMLSchemaBuilder {
     private final NamespacePrefixMapper prefixes = new NamespacePrefixMapper();
     private final EventHandler evthandler;
 
-    public static enum EventKind {
+    public static enum EventCodes {
 
         /**
          * Raised when a type definition is not found.
          */
-        UNKNOWN_TYPE(EventHandler.Severity.ERROR);
+        UNKNOWN_TYPE(Event.Severity.ERROR);
 
-        public final EventHandler.Severity severity;
+        public final Event.Severity severity;
 
-        private EventKind(EventHandler.Severity severity) {
+        private EventCodes(Event.Severity severity) {
             this.severity = severity;
         }
 
     }
 
-    public static class Event implements EventHandler.Event {
+    public static class SchemaEvent extends BasicEvent {
 
-        private final EventKind kind;
-        private final String reason;
-        private final String where;
+        final String reason;
+        final String where;
 
-        public Event(EventKind kind, String reason) {
+        public SchemaEvent(EventCodes kind, String reason) {
             this(kind, reason, null);
         }
 
-        public Event(EventKind kind, String reason, String where) {
+        public SchemaEvent(EventCodes kind, String reason, String where) {
+            super(kind.severity, kind, reason + (where != null ? " at " + where : ""));
+
             this.reason = reason;
             this.where = where;
-            this.kind = kind;
-        }
-
-        public EventKind getKind() {
-            return kind;
         }
 
         public String getReason() {
@@ -141,63 +138,48 @@ public class XMLSchemaBuilder {
             return where;
         }
 
-        @Override
-        public String getMessage() {
-            return this.reason + (this.where != null ? " at " + this.where : "");
-        }
-
-        @Override
-        public String getOrigin() {
-            return FragmentBuilder.class.getSimpleName();
-        }
-
-        @Override
-        public EventHandler.Severity getSeverity() {
-            return kind.severity;
-        }
-
     }
 
     void addInformativeComment(Element element, String comment) {
         element.appendChild(element.getOwnerDocument().createComment(comment));
     }
 
-    void handleEvent(EventHandler.Event evt) throws RuleException {
+    void handleEvent(SchemaEvent evt) throws RuleException {
 
         if (evthandler != null) {
 
-            if (! evthandler.handle(evt) || evt.getSeverity() == EventHandler.Severity.FATAL) {
-                
-                /* die on FATAL events or if requested by the handler */
+            if (!evthandler.handle(evt) || evt.getSeverity() == Event.Severity.FATAL) {
 
+                /* die on FATAL events or if requested by the handler */
                 throw new RuleException(evt.getMessage());
 
             }
-            
-        } else if (evt.getSeverity() == EventHandler.Severity.ERROR ||
-            evt.getSeverity() == EventHandler.Severity.FATAL) {
-            
+
+        } else if (evt.getSeverity() == Event.Severity.ERROR
+            || evt.getSeverity() == Event.Severity.FATAL) {
+
             /* if no event handler was provided, die on FATAL and ERROR events */
-            
             throw new RuleException(evt.getMessage());
-            
+
         }
-        
+
     }
-    
+
     /**
      * Creates an XMLSchemaBuilder that can be used to generate XML Schemas for
      * any metadictionary covered by the resolver. The caller can optionally
-     * provide an EventHandler to receive notifications of events encountered 
-     * in the process.
-     * 
+     * provide an EventHandler to receive notifications of events encountered in
+     * the process.
+     *
      * @param resolver Collection of Metadictionary definitions, typically a
      * {@link com.sandflow.smpte.regxml.dict.MetaDictionaryCollection}
      * @param handler Event handler provided by the caller. May be null.
      */
     public XMLSchemaBuilder(DefinitionResolver resolver, EventHandler handler) {
-        if (resolver == null) throw new InvalidParameterException("A resolver must be provided");
-        
+        if (resolver == null) {
+            throw new InvalidParameterException("A resolver must be provided");
+        }
+
         this.resolver = resolver;
         this.evthandler = handler;
     }
@@ -205,22 +187,21 @@ public class XMLSchemaBuilder {
     /**
      * Creates an XMLSchemaBuilder that can be used to generate XML Schemas for
      * any metadictionary covered by the resolver.
-     * 
-     * @deprecated Replaced by 
+     *
+     * @deprecated Replaced by
      * {@link XMLSchemaBuilder(DefinitionResolver resolver, EventHandler handler)}
      * This constructor does not allow the caller to provide an event handler,
      * and instead uses java.util.logging to output events.
-     * 
+     *
      * @param resolver Collection of Metadictionary definitions, typically a
      * {@link com.sandflow.smpte.regxml.dict.MetaDictionaryCollection}
      */
     public XMLSchemaBuilder(DefinitionResolver resolver) {
-        this(
-            resolver,
+        this(resolver,
             new EventHandler() {
 
                 @Override
-                public boolean handle(EventHandler.Event evt) {
+                public boolean handle(Event evt) {
                     switch (evt.getSeverity()) {
                         case ERROR:
                         case FATAL:
@@ -693,8 +674,8 @@ public class XMLSchemaBuilder {
 
             if (parent == null) {
 
-                Event evt = new Event(
-                    EventKind.UNKNOWN_TYPE,
+                SchemaEvent evt = new SchemaEvent(
+                    EventCodes.UNKNOWN_TYPE,
                     String.format(
                         "Cannot resolve referenced type %s",
                         ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
@@ -756,8 +737,8 @@ public class XMLSchemaBuilder {
 
             if (child == null) {
 
-                Event evt = new Event(
-                    EventKind.UNKNOWN_TYPE,
+                SchemaEvent evt = new SchemaEvent(
+                    EventCodes.UNKNOWN_TYPE,
                     String.format(
                         "Cannot resolve subclass %s",
                         auid.toString()
@@ -1211,8 +1192,8 @@ public class XMLSchemaBuilder {
 
             if (parent == null) {
 
-                Event evt = new Event(
-                    EventKind.UNKNOWN_TYPE,
+                SchemaEvent evt = new SchemaEvent(
+                    EventCodes.UNKNOWN_TYPE,
                     String.format(
                         "Cannot resolve referenced type %s",
                         ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
@@ -1308,8 +1289,8 @@ public class XMLSchemaBuilder {
 
         if (parent == null) {
 
-            Event evt = new Event(
-                EventKind.UNKNOWN_TYPE,
+            SchemaEvent evt = new SchemaEvent(
+                EventCodes.UNKNOWN_TYPE,
                 String.format(
                     "Cannot resolve referenced type %s",
                     definition.getReferenceType().toString()
@@ -1375,8 +1356,8 @@ public class XMLSchemaBuilder {
 
             if (parent == null) {
 
-                Event evt = new Event(
-                    EventKind.UNKNOWN_TYPE,
+                SchemaEvent evt = new SchemaEvent(
+                    EventCodes.UNKNOWN_TYPE,
                     String.format(
                         "Cannot resolve referenced type %s",
                         ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()

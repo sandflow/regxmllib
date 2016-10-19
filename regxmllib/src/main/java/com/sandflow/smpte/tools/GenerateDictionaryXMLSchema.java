@@ -32,7 +32,8 @@ import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
 import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
-import com.sandflow.util.EventHandler;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileReader;
@@ -129,17 +130,20 @@ public class GenerateDictionaryXMLSchema {
             new EventHandler() {
 
                 @Override
-                public boolean handle(EventHandler.Event evt) {
+                public boolean handle(Event evt) {
+                    String msg = evt.getCode().getClass().getCanonicalName() + "::" + evt.getCode().toString() + " " + evt.getMessage();
+
                     switch (evt.getSeverity()) {
                         case ERROR:
                         case FATAL:
-                            LOG.severe(evt.getMessage());
+                            LOG.severe(msg);
                             break;
                         case INFO:
-                            LOG.info(evt.getMessage());
+                            LOG.info(msg);
                             break;
                         case WARN:
-                            LOG.warning(evt.getMessage());
+                            LOG.warning(msg);
+                            break;
                     }
                     return true;
                 }

@@ -33,7 +33,8 @@ import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
 import com.sandflow.smpte.util.UL;
-import com.sandflow.util.EventHandler;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,7 +44,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
@@ -62,12 +62,11 @@ import org.xml.sax.SAXException;
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
 public class MXFFragmentBuilderTest extends TestCase {
-    
+
     private final static Logger LOG = Logger.getLogger(MXFFragmentBuilderTest.class.getName());
 
-    
     private static final UL PREFACE_KEY
-            = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
+        = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
     private MetaDictionaryCollection mds_catsup;
     private MetaDictionaryCollection mds_brown_sauce;
@@ -76,14 +75,14 @@ public class MXFFragmentBuilderTest extends TestCase {
     public MXFFragmentBuilderTest(String testName) {
         super(testName);
     }
-    
+
     private MetaDictionaryCollection buildDictionaryCollection(
-            String er_path,
-            String gr_path,
-            String tr_path
-            ) throws JAXBException, IOException, DuplicateEntryException, Exception {
-        
-         /* load the registers */
+        String er_path,
+        String gr_path,
+        String tr_path
+    ) throws JAXBException, IOException, DuplicateEntryException, Exception {
+
+        /* load the registers */
         Reader fe = new InputStreamReader(ClassLoader.getSystemResourceAsStream(er_path));
         assertNotNull(fe);
 
@@ -103,29 +102,50 @@ public class MXFFragmentBuilderTest extends TestCase {
         assertNotNull(treg);
 
         /* build the dictionaries */
-        return fromRegister(treg, greg, ereg);
+        EventHandler evthandler = new EventHandler() {
+
+            @Override
+            public boolean handle(Event evt) {
+
+                String msg = evt.getCode().getClass().getCanonicalName() + "::" + evt.getCode().toString() + " " + evt.getMessage();
+
+                switch (evt.getSeverity()) {
+                    case ERROR:
+                    case FATAL:
+                        LOG.severe(msg);
+                        break;
+                    case INFO:
+                        LOG.info(msg);
+                        break;
+                    case WARN:
+                        LOG.warning(msg);
+                }
+                return true;
+            }
+        };
         
+        return fromRegister(treg, greg, ereg, evthandler);
+
     }
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        
+
         /* build the dictionaries */
-        
         mds_catsup = buildDictionaryCollection(
-                "resources/registers/catsup/Elements.xml",
-                "resources/registers/catsup/Groups.xml",
-                "resources/registers/catsup/Types.xml"
+            "resources/registers/catsup/Elements.xml",
+            "resources/registers/catsup/Groups.xml",
+            "resources/registers/catsup/Types.xml"
         );
 
         assertNotNull(mds_catsup);
-        
-                /* build the dictionaries */
+
+        /* build the dictionaries */
         mds_brown_sauce = buildDictionaryCollection(
-                "resources/registers/brown_sauce/Elements.xml",
-                "resources/registers/brown_sauce/Groups.xml",
-                "resources/registers/brown_sauce/Types.xml"
+            "resources/registers/brown_sauce/Elements.xml",
+            "resources/registers/brown_sauce/Groups.xml",
+            "resources/registers/brown_sauce/Types.xml"
         );
 
         assertNotNull(mds_brown_sauce);
@@ -148,7 +168,6 @@ public class MXFFragmentBuilderTest extends TestCase {
 
     private void compareGeneratedVsRef(MetaDictionaryCollection mds, String spath, String refpath) throws IOException, SAXException, KLVException, MXFFragmentBuilder.MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
 
-        
         /* get the sample files */
         InputStream sampleis = ClassLoader.getSystemResourceAsStream(spath);
         assertNotNull(sampleis);
@@ -157,25 +176,28 @@ public class MXFFragmentBuilderTest extends TestCase {
         Document gendoc = db.newDocument();
 
         assertNotNull(gendoc);
-        
+
         EventHandler evthandler = new EventHandler() {
 
-                    @Override
-                    public boolean handle(EventHandler.Event evt) {
-                        switch (evt.getSeverity()) {
-                            case ERROR:
-                            case FATAL:
-                                LOG.log(Level.SEVERE, "{0}: {1}", new Object[]{evt.getClass().getCanonicalName(), evt.getMessage()});
-                                break;
-                            case INFO:
-                                LOG.info(evt.getMessage());
-                                break;
-                            case WARN:
-                                LOG.warning(evt.getMessage());
-                        }
-                        return true;
-                    }
-                };
+            @Override
+            public boolean handle(Event evt) {
+
+                String msg = evt.getCode().getClass().getCanonicalName() + "::" + evt.getCode().toString() + " " + evt.getMessage();
+
+                switch (evt.getSeverity()) {
+                    case ERROR:
+                    case FATAL:
+                        LOG.severe(msg);
+                        break;
+                    case INFO:
+                        LOG.info(msg);
+                        break;
+                    case WARN:
+                        LOG.warning(msg);
+                }
+                return true;
+            }
+        };
 
         DocumentFragment gendf = MXFFragmentBuilder.fromInputStream(sampleis, mds, null, evthandler, PREFACE_KEY, gendoc);
 
@@ -219,20 +241,20 @@ public class MXFFragmentBuilderTest extends TestCase {
         compareGeneratedVsRef(mds_catsup, "resources/sample-files/video2.mxf", "resources/reference-files/video2.xml");
 
     }
-    
+
     public void testIndirectAgainstCatsup() throws Exception {
 
         compareGeneratedVsRef(mds_catsup, "resources/sample-files/indirect.mxf", "resources/reference-files/indirect.xml");
 
     }
-    
+
     public void testUTF8AgainstCatsup() throws Exception {
 
         compareGeneratedVsRef(mds_catsup, "resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
 
     }
 
-        public void testAudio1AgainstBrownSauce() throws Exception {
+    public void testAudio1AgainstBrownSauce() throws Exception {
 
         compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
 
@@ -255,19 +277,19 @@ public class MXFFragmentBuilderTest extends TestCase {
         compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/video2.mxf", "resources/reference-files/video2.xml");
 
     }
-    
+
     public void testIndirectAgainstBrownSauce() throws Exception {
 
         compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/indirect.mxf", "resources/reference-files/indirect.xml");
 
     }
-    
+
     public void testUTF8AgainstBrownSauce() throws Exception {
 
         compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
 
     }
-    
+
     static Map<String, String> getAttributes(Element e) {
 
         NodeList nl = e.getChildNodes();
@@ -299,14 +321,14 @@ public class MXFFragmentBuilderTest extends TestCase {
 
         return m;
     }
-    
+
     String getFirstTextNodeText(Element e) {
-        for(Node n = e.getFirstChild(); n != null; n = n.getNextSibling()) {
+        for (Node n = e.getFirstChild(); n != null; n = n.getNextSibling()) {
             if (n.getNodeType() == Node.TEXT_NODE) {
                 return n.getNodeValue();
             }
         }
-        
+
         return "";
     }
 
@@ -316,18 +338,18 @@ public class MXFFragmentBuilderTest extends TestCase {
         List<Element> elems2 = getElements(el2);
 
         if (elems1.size() != elems2.size()) {
-            
+
             System.out.println(
-                        String.format(
-                            "Sub element count of %s does not match reference.",
-                                el1.getLocalName())
-                );
-            
+                String.format(
+                    "Sub element count of %s does not match reference.",
+                    el1.getLocalName())
+            );
+
             System.out.println("Left:");
             System.out.println(elems1);
             System.out.println("Right:");
             System.out.println(elems2);
-            
+
             return false;
         }
 
@@ -336,14 +358,14 @@ public class MXFFragmentBuilderTest extends TestCase {
 
         for (Entry<String, String> entry : attrs1.entrySet()) {
             if (!entry.getValue().equals(attrs2.get(entry.getKey()))) {
-                
+
                 System.out.println(
-                        String.format(
-                            "Attribute %s with value %s does not match reference.",
-                                entry.getKey(),
-                                entry.getValue())
+                    String.format(
+                        "Attribute %s with value %s does not match reference.",
+                        entry.getKey(),
+                        entry.getValue())
                 );
-                
+
                 return false;
             }
         }
@@ -351,30 +373,29 @@ public class MXFFragmentBuilderTest extends TestCase {
         for (int i = 0; i < elems1.size(); i++) {
 
             if (!elems1.get(i).getNodeName().equals(elems2.get(i).getNodeName())) {
-                
+
                 System.out.println(
-                        String.format(
-                            "Element %s does not match reference.",
-                                elems1.get(i).getNodeName())
+                    String.format(
+                        "Element %s does not match reference.",
+                        elems1.get(i).getNodeName())
                 );
-                
+
                 return false;
             }
-            
+
             String txt1 = getFirstTextNodeText(elems1.get(i)).trim();
             String txt2 = getFirstTextNodeText(elems2.get(i)).trim();
 
-            
             if (!txt1.equals(txt2)) {
                 System.out.println(
-                        String.format(
-                            "Text content at %s ('%s') does not match reference ('%s')",
-                                elems1.get(i).getNodeName(),
-                                txt1,
-                                txt2)
+                    String.format(
+                        "Text content at %s ('%s') does not match reference ('%s')",
+                        elems1.get(i).getNodeName(),
+                        txt1,
+                        txt2)
                 );
                 return false;
-            } 
+            }
 
             if (!compareDOMElement(elems1.get(i), elems2.get(i))) {
                 return false;
