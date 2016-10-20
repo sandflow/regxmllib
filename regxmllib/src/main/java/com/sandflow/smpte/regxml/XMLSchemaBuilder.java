@@ -51,16 +51,18 @@ import com.sandflow.smpte.regxml.dict.definitions.VariableArrayTypeDefinition;
 import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
+import com.sandflow.util.events.BasicEvent;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -95,13 +97,127 @@ public class XMLSchemaBuilder {
 
     private DefinitionResolver resolver;
     private final NamespacePrefixMapper prefixes = new NamespacePrefixMapper();
+    private final EventHandler evthandler;
+
+    public static enum EventCodes {
+
+        /**
+         * Raised when a type definition is not found.
+         */
+        UNKNOWN_TYPE(Event.Severity.ERROR);
+
+        public final Event.Severity severity;
+
+        private EventCodes(Event.Severity severity) {
+            this.severity = severity;
+        }
+
+    }
+
+    public static class SchemaEvent extends BasicEvent {
+
+        final String reason;
+        final String where;
+
+        public SchemaEvent(EventCodes kind, String reason) {
+            this(kind, reason, null);
+        }
+
+        public SchemaEvent(EventCodes kind, String reason, String where) {
+            super(kind.severity, kind, reason + (where != null ? " at " + where : ""));
+
+            this.reason = reason;
+            this.where = where;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+        public String getWhere() {
+            return where;
+        }
+
+    }
+
+    void addInformativeComment(Element element, String comment) {
+        element.appendChild(element.getOwnerDocument().createComment(comment));
+    }
+
+    void handleEvent(SchemaEvent evt) throws RuleException {
+
+        if (evthandler != null) {
+
+            if (!evthandler.handle(evt) || evt.getSeverity() == Event.Severity.FATAL) {
+
+                /* die on FATAL events or if requested by the handler */
+                throw new RuleException(evt.getMessage());
+
+            }
+
+        } else if (evt.getSeverity() == Event.Severity.ERROR
+            || evt.getSeverity() == Event.Severity.FATAL) {
+
+            /* if no event handler was provided, die on FATAL and ERROR events */
+            throw new RuleException(evt.getMessage());
+
+        }
+
+    }
 
     /**
+     * Creates an XMLSchemaBuilder that can be used to generate XML Schemas for
+     * any metadictionary covered by the resolver. The caller can optionally
+     * provide an EventHandler to receive notifications of events encountered in
+     * the process.
+     *
+     * @param resolver Collection of Metadictionary definitions, typically a
+     * {@link com.sandflow.smpte.regxml.dict.MetaDictionaryCollection}
+     * @param handler Event handler provided by the caller. May be null.
+     */
+    public XMLSchemaBuilder(DefinitionResolver resolver, EventHandler handler) {
+        if (resolver == null) {
+            throw new InvalidParameterException("A resolver must be provided");
+        }
+
+        this.resolver = resolver;
+        this.evthandler = handler;
+    }
+
+    /**
+     * Creates an XMLSchemaBuilder that can be used to generate XML Schemas for
+     * any metadictionary covered by the resolver.
+     *
+     * @deprecated Replaced by
+     * {@link XMLSchemaBuilder(DefinitionResolver resolver, EventHandler handler)}
+     * This constructor does not allow the caller to provide an event handler,
+     * and instead uses java.util.logging to output events.
+     *
      * @param resolver Collection of Metadictionary definitions, typically a
      * {@link com.sandflow.smpte.regxml.dict.MetaDictionaryCollection}
      */
     public XMLSchemaBuilder(DefinitionResolver resolver) {
-        this.resolver = resolver;
+        this(resolver,
+            new EventHandler() {
+
+                @Override
+                public boolean handle(Event evt) {
+                    switch (evt.getSeverity()) {
+                        case ERROR:
+                        case FATAL:
+                            LOG.severe(evt.getMessage());
+                            break;
+                        case INFO:
+                            LOG.info(evt.getMessage());
+                            break;
+                        case WARN:
+                            LOG.warning(evt.getMessage());
+                    }
+
+                    return true;
+                }
+            }
+        );
     }
 
     private String createQName(URI uri, String name) {
@@ -116,8 +232,17 @@ public class XMLSchemaBuilder {
      * a creation-time.
      *
      * @param dict Metadictionary for which an XML Schema will be generated.
+     *
+     * @return XML Schema document
+     *
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws com.sandflow.smpte.klv.exceptions.KLVException
+     * @throws com.sandflow.smpte.regxml.XMLSchemaBuilder.RuleException
+     * @throws org.xml.sax.SAXException
+     * @throws java.io.IOException
+     * @throws java.net.URISyntaxException
      */
-    public Document fromDictionary(MetaDictionary dict) throws ParserConfigurationException, KLVException, RuleException, SAXException, IOException, URISyntaxException {
+    public Document fromDictionary(MetaDictionary dict) throws ParserConfigurationException, KLVException, RuleException, SAXException, IOException {
 
         /* reset namespace prefixes */
         this.prefixes.clear();
@@ -172,9 +297,9 @@ public class XMLSchemaBuilder {
         for (URI uri : prefixes.getURIs()) {
 
             doc.getDocumentElement().setAttributeNS(
-                    XMLNS_NS,
-                    "xmlns:" + prefixes.getPrefixOrCreate(uri),
-                    uri.toString()
+                XMLNS_NS,
+                "xmlns:" + prefixes.getPrefixOrCreate(uri),
+                uri.toString()
             );
 
             if (!uri.equals(dict.getSchemeURI())) {
@@ -225,7 +350,7 @@ public class XMLSchemaBuilder {
             for (AUID auid : resolver.getMembersOf(cdef)) {
 
                 PropertyDefinition pdef
-                        = (PropertyDefinition) resolver.getDefinition(auid);
+                    = (PropertyDefinition) resolver.getDefinition(auid);
 
                 element = root.getOwnerDocument().createElementNS(XSD_NS, "xs:element");
                 element.setAttribute("ref", createQName(pdef.getNamespace(), pdef.getSymbol()));
@@ -235,12 +360,11 @@ public class XMLSchemaBuilder {
                 }
 
                 /* NOTE: require reg:uid only if the object has one property
-                         with IsUniqueIdentifier */
-                
+                 with IsUniqueIdentifier */
                 hasUID |= pdef.isUniqueIdentifier();
-                
+
                 all.appendChild(element);
-                
+
             }
 
             if (cdef.getParentClass() != null) {
@@ -284,10 +408,10 @@ public class XMLSchemaBuilder {
             if (typedef == null) {
 
                 throw new RuleException(
-                        String.format(
-                                "Type UL does not resolve at Element %s ",
-                                definition.getIdentification().toString()
-                        )
+                    String.format(
+                        "Type UL does not resolve at Element %s ",
+                        definition.getIdentification().toString()
+                    )
                 );
 
             }
@@ -401,7 +525,7 @@ public class XMLSchemaBuilder {
 
         } else {
 
-            throw new RuleException("Illegage Definition in Rule 5.");
+            throw new RuleException("Illegal Definition in Rule 5.");
 
         }
 
@@ -544,28 +668,27 @@ public class XMLSchemaBuilder {
             complexType.appendChild(choice);
 
             ClassDefinition parent
-                    = (ClassDefinition) resolver.getDefinition(
-                            ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
-                    );
+                = (ClassDefinition) resolver.getDefinition(
+                    ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
+                );
 
             if (parent == null) {
 
-                LOG.warning(
-                        String.format(
-                                "Cannot resolve reference type %s for definition %s.",
-                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString(),
-                                elemdef.getIdentification().toString()
-                        )
+                SchemaEvent evt = new SchemaEvent(
+                    EventCodes.UNKNOWN_TYPE,
+                    String.format(
+                        "Cannot resolve referenced type %s",
+                        ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
+                    ),
+                    String.format(
+                        "Definition %s",
+                        elemdef.getSymbol()
+                    )
                 );
 
-                Comment comment = root.getOwnerDocument().createComment(
-                        String.format(
-                                "Reference type %s not found.",
-                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
-                        )
-                );
+                handleEvent(evt);
 
-                choice.appendChild(comment);
+                addInformativeComment(choice, evt.getReason());
 
             } else {
 
@@ -610,26 +733,25 @@ public class XMLSchemaBuilder {
 
         for (AUID auid : resolver.getSubclassesOf(cdef)) {
             ClassDefinition child
-                    = (ClassDefinition) resolver.getDefinition(auid);
+                = (ClassDefinition) resolver.getDefinition(auid);
 
             if (child == null) {
 
-                LOG.warning(
-                        String.format(
-                                "Cannot resolve subclass %s for class %s.",
-                                auid.toString(),
-                                cdef.getIdentification().toString()
-                        )
+                SchemaEvent evt = new SchemaEvent(
+                    EventCodes.UNKNOWN_TYPE,
+                    String.format(
+                        "Cannot resolve subclass %s",
+                        auid.toString()
+                    ),
+                    String.format(
+                        "Class %s",
+                        cdef.getIdentification().toString()
+                    )
                 );
 
-                Comment comment = root.getOwnerDocument().createComment(
-                        String.format(
-                                "Subclass %s not found.",
-                                auid.toString()
-                        )
-                );
+                handleEvent(evt);
 
-                root.appendChild(comment);
+                addInformativeComment(root, evt.getReason());
 
             } else {
 
@@ -1064,28 +1186,27 @@ public class XMLSchemaBuilder {
             complexType.appendChild(choice);
 
             ClassDefinition parent
-                    = (ClassDefinition) resolver.getDefinition(
-                            ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
-                    );
+                = (ClassDefinition) resolver.getDefinition(
+                    ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
+                );
 
             if (parent == null) {
 
-                LOG.warning(
-                        String.format(
-                                "Cannot resolve reference type %s for definition %s.",
-                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString(),
-                                elemdef.getIdentification().toString()
-                        )
+                SchemaEvent evt = new SchemaEvent(
+                    EventCodes.UNKNOWN_TYPE,
+                    String.format(
+                        "Cannot resolve referenced type %s",
+                        ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
+                    ),
+                    String.format(
+                        "Definition %s",
+                        elemdef.getSymbol()
+                    )
                 );
 
-                Comment comment = root.getOwnerDocument().createComment(
-                        String.format(
-                                "Reference type %s not found.",
-                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
-                        )
-                );
+                handleEvent(evt);
 
-                choice.appendChild(comment);
+                addInformativeComment(choice, evt.getReason());
 
             } else {
 
@@ -1162,28 +1283,27 @@ public class XMLSchemaBuilder {
         complexType.appendChild(choice);
 
         ClassDefinition parent
-                = (ClassDefinition) resolver.getDefinition(
-                        definition.getReferenceType()
-                );
+            = (ClassDefinition) resolver.getDefinition(
+                definition.getReferenceType()
+            );
 
         if (parent == null) {
 
-            LOG.warning(
-                    String.format(
-                            "Cannot resolve reference type %s for definition %s.",
-                            definition.getReferenceType().toString(),
-                            definition.getIdentification().toString()
-                    )
+            SchemaEvent evt = new SchemaEvent(
+                EventCodes.UNKNOWN_TYPE,
+                String.format(
+                    "Cannot resolve referenced type %s",
+                    definition.getReferenceType().toString()
+                ),
+                String.format(
+                    "Definition %s",
+                    definition.getSymbol()
+                )
             );
 
-            Comment comment = root.getOwnerDocument().createComment(
-                    String.format(
-                            "Reference type %s not found.",
-                            definition.getReferenceType()
-                    )
-            );
+            handleEvent(evt);
 
-            choice.appendChild(comment);
+            addInformativeComment(choice, evt.getReason());
 
         } else {
 
@@ -1230,28 +1350,27 @@ public class XMLSchemaBuilder {
             complexType.appendChild(choice);
 
             ClassDefinition parent
-                    = (ClassDefinition) resolver.getDefinition(
-                            ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
-                    );
+                = (ClassDefinition) resolver.getDefinition(
+                    ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
+                );
 
             if (parent == null) {
 
-                LOG.warning(
-                        String.format(
-                                "Cannot resolve reference type %s for definition %s.",
-                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString(),
-                                elemdef.getIdentification().toString()
-                        )
+                SchemaEvent evt = new SchemaEvent(
+                    EventCodes.UNKNOWN_TYPE,
+                    String.format(
+                        "Cannot resolve referenced type %s",
+                        ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
+                    ),
+                    String.format(
+                        "Definition %s",
+                        elemdef.getSymbol()
+                    )
                 );
 
-                Comment comment = root.getOwnerDocument().createComment(
-                        String.format(
-                                "Subclass %s not found.",
-                                ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
-                        )
-                );
+                handleEvent(evt);
 
-                root.appendChild(comment);
+                addInformativeComment(root, evt.getReason());
 
             } else {
 

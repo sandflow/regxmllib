@@ -54,6 +54,8 @@ import com.sandflow.smpte.regxml.dict.definitions.WeakReferenceTypeDefinition;
 import com.sandflow.smpte.regxml.dict.exceptions.DuplicateSymbolException;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -68,6 +70,116 @@ public class RegisterImporter {
 
     private final static Logger LOGGER = Logger.getLogger(RegisterImporter.class.getName());
 
+    public static enum EventKind {
+
+        /**
+         * Element definition cannot be found
+         */
+        UNKNOWN_ELEMENT(Event.Severity.WARN),
+        /**
+         * Type definition cannot be found.
+         */
+        UNKNOWN_TYPE(Event.Severity.WARN),
+        /**
+         * Weak Reference Target Set cannot be found.
+         */
+        UNKNOWN_TARGET_SET(Event.Severity.WARN),
+        /**
+         * Weak Reference Target Set duplicated
+         */
+        DUP_TARGET_SET(Event.Severity.WARN),
+        /**
+         * Unknown type kind encountered.
+         */
+        UNKNOWN_TYPE_KIND(Event.Severity.ERROR),
+        /**
+         * Type Definition import failed
+         */
+        TYPE_IMPORT_FAILED(Event.Severity.ERROR),
+        /**
+         * Duplicate symbol found
+         */
+        DUPLICATE_SYMBOL(Event.Severity.ERROR);
+
+        public final Event.Severity severity;
+
+        private EventKind(Event.Severity severity) {
+            this.severity = severity;
+        }
+
+    }
+
+    public static class RegisterEvent extends com.sandflow.util.events.BasicEvent {
+
+        public RegisterEvent(EventKind kind, String message) {
+            super(kind.severity, kind, message);
+        }
+
+    }
+
+    static void handleEvent(EventHandler handler, com.sandflow.util.events.Event evt) throws Exception {
+
+        if (handler != null) {
+
+            if (!handler.handle(evt) ||
+                evt.getSeverity() == Event.Severity.FATAL) {
+
+                /* die on FATAL events or if requested by the handler */
+                throw new Exception(evt.getMessage());
+
+            }
+
+        } else if (evt.getSeverity() == Event.Severity.ERROR
+            || evt.getSeverity() == Event.Severity.FATAL) {
+
+            /* if no event handler was provided, die on FATAL and ERROR events */
+            throw new Exception(evt.getMessage());
+
+        }
+    }
+
+    /**
+     * @deprecated Replaced by {@link MetaDictionaryCollection fromRegister(TypesRegister,
+     * GroupsRegister,ElementsRegister,EventHandler)}. This constructor does not allow the
+     * caller to provide an event handler, and instead uses java.util.logging to
+     * output events.
+     *
+     * @param tr Types Register
+     * @param gr Groups Register
+     * @param er Elements Register
+     *
+     * @return Collection of Metadictionaries
+     *
+     * @throws Exception
+     */
+    public static MetaDictionaryCollection fromRegister(TypesRegister tr,
+        GroupsRegister gr,
+        ElementsRegister er
+    ) throws Exception {
+
+        EventHandler handler = new EventHandler() {
+
+            @Override
+            public boolean handle(com.sandflow.util.events.Event evt) {
+                switch (evt.getSeverity()) {
+                    case ERROR:
+                    case FATAL:
+                        LOGGER.severe(evt.getMessage());
+                        break;
+                    case INFO:
+                        LOGGER.info(evt.getMessage());
+                        break;
+                    case WARN:
+                        LOGGER.warning(evt.getMessage());
+                }
+
+                return true;
+            }
+        };
+
+        return fromRegister(tr, gr, er, handler);
+    }
+
     /**
      * Generates MetaDictionaries from SMPTE Types, Groups and Elements
      * Registers.
@@ -75,17 +187,24 @@ public class RegisterImporter {
      * @param tr Types Register
      * @param gr Groups Register
      * @param er Elements Register
+     * @param evthandler Event Handler. May be null.
+     *
      * @return Collection of Metadictionaries
+     *
      * @throws Exception
      */
-    public static MetaDictionaryCollection fromRegister(TypesRegister tr, GroupsRegister gr, ElementsRegister er) throws Exception {
+    public static MetaDictionaryCollection fromRegister(TypesRegister tr,
+        GroupsRegister gr,
+        ElementsRegister er,
+        EventHandler evthandler
+    ) throws Exception {
 
         /* definition collection */
         LinkedHashMap<AUID, ArrayList<Definition>> defs = new LinkedHashMap<>();
 
         /* some types may refer to groups that have been excluded since they
-           did not have a local set representation. This variable keep track of
-           references in order to prune dangling references later */
+         did not have a local set representation. This variable keep track of
+         references in order to prune dangling references later */
         HashMap<AUID, HashSet<AUID>> isReferencedBy = new HashMap<>();
 
         /* Handles Group Entries */
@@ -160,12 +279,17 @@ public class RegisterImporter {
                 ElementsRegister.Entry element = er.getEntryByUL(child.getItem());
 
                 if (element == null) {
-                    LOGGER.warning(String.format(
+
+                    RegisterEvent evt = new RegisterEvent(
+                        EventKind.UNKNOWN_ELEMENT,
+                        String.format(
                             "Undefined Element %s for Group %s",
                             child.getItem(),
                             group.getUL()
-                    )
+                        )
                     );
+
+                    handleEvent(evthandler, evt);
 
                     continue;
                 }
@@ -177,12 +301,17 @@ public class RegisterImporter {
                 pdef.setSymbol(element.getSymbol());
 
                 if (element.getTypeUL() == null) {
-                    LOGGER.warning(String.format(
+
+                    RegisterEvent evt = new RegisterEvent(
+                        EventKind.UNKNOWN_TYPE,
+                        String.format(
                             "Missing Type UL at Element %s for Group %s",
                             child.getItem(),
                             group.getUL()
-                    )
+                        )
                     );
+
+                    handleEvent(evthandler, evt);
 
                     continue;
                 }
@@ -196,7 +325,7 @@ public class RegisterImporter {
                 _add(defs, pdef);
 
             }
-            
+
             _add(defs, cdef);
 
         }
@@ -208,7 +337,7 @@ public class RegisterImporter {
             }
 
             Definition tdef = null;
-            
+
             HashSet<AUID> references = new HashSet<>();
 
             if (com.sandflow.smpte.register.TypesRegister.Entry.RENAME_TYPEKIND.equals(type.getTypeKind())) {
@@ -323,10 +452,10 @@ public class RegisterImporter {
 
                 if (type.getBaseType() == null) {
                     throw new Exception(
-                            String.format(
-                                    "Missing base type for Type %s",
-                                    type.getUL()
-                            )
+                        String.format(
+                            "Missing base type for Type %s",
+                            type.getUL()
+                        )
                     );
                 }
 
@@ -343,24 +472,32 @@ public class RegisterImporter {
                     }
 
                     if (ul == null) {
-                        LOGGER.warning(
-                                String.format(
-                                        "Missing Target Set UL at Type %s",
-                                        type.getUL().toString()
-                                )
+
+                        RegisterEvent evt = new RegisterEvent(
+                            EventKind.UNKNOWN_TARGET_SET,
+                            String.format(
+                                "Missing Target Set UL at Type %s",
+                                type.getUL().toString()
+                            )
                         );
+
+                        handleEvent(evthandler, evt);
 
                         continue;
                     }
 
                     if (!((WeakReferenceTypeDefinition) tdef).getTargetSet().add(new AUID(ul))) {
 
-                        LOGGER.warning(
-                                String.format(
-                                        "Duplicate Target Set UL at Type %s",
-                                        type.getUL().toString()
-                                )
+                        RegisterEvent evt = new RegisterEvent(
+                            EventKind.DUP_TARGET_SET,
+                            String.format(
+                                "Duplicate Target Set UL at Type %s",
+                                type.getUL().toString()
+                            )
                         );
+
+                        handleEvent(evthandler, evt);
+
                     }
 
                     references.add(new AUID(ul));
@@ -428,13 +565,17 @@ public class RegisterImporter {
                 references.add(((StringTypeDefinition) tdef).getElementType());
 
             } else {
-                LOGGER.warning(
-                        String.format(
-                                "Unknown type kind of %s for Type UL %s.",
-                                type.getTypeKind(),
-                                type.getUL().toString()
-                        )
+
+                RegisterEvent evt = new RegisterEvent(
+                    EventKind.UNKNOWN_TYPE_KIND,
+                    String.format(
+                        "Unknown type kind of %s for Type UL %s.",
+                        type.getTypeKind(),
+                        type.getUL().toString()
+                    )
                 );
+
+                handleEvent(evthandler, evt);
 
                 continue;
             }
@@ -466,12 +607,17 @@ public class RegisterImporter {
                 }
 
             } else {
-                LOGGER.warning(
-                        String.format(
-                                "Bad Type UL %s.",
-                                type.getUL().toString()
-                        )
+
+                RegisterEvent evt = new RegisterEvent(
+                    EventKind.TYPE_IMPORT_FAILED,
+                    String.format(
+                        "Type UL %s import failed",
+                        type.getUL().toString()
+                    )
                 );
+
+                handleEvent(evthandler, evt);
+
             }
         }
 
@@ -494,29 +640,32 @@ public class RegisterImporter {
         long index = 0;
 
         for (ArrayList<Definition> defarray : defs.values()) {
-            
+
             for (Definition def : defarray) {
-            
-            try {
-                mds.addDefinition(def);
-            } catch (DuplicateSymbolException dse) {
 
-                /* attempt to generate an ad hoc symbol instead of dying */
-                String newsym = "dup" + def.getSymbol() + (index++);
+                try {
+                    mds.addDefinition(def);
+                } catch (DuplicateSymbolException dse) {
 
-                LOGGER.warning(
+                    /* attempt to generate an ad hoc symbol instead of dying */
+                    String newsym = "dup" + def.getSymbol() + (index++);
+
+                    RegisterEvent evt = new RegisterEvent(
+                        EventKind.DUPLICATE_SYMBOL,
                         String.format(
-                                "Duplicate symbol %s (%s) renamed %s",
-                                def.getSymbol(),
-                                def.getNamespace().toASCIIString(),
-                                newsym
+                            "Duplicate symbol %s (%s) renamed %s",
+                            def.getSymbol(),
+                            def.getNamespace().toASCIIString(),
+                            newsym
                         )
-                );
+                    );
 
-                def.setSymbol(newsym);
+                    handleEvent(evthandler, evt);
 
-                mds.addDefinition(def);
-            }
+                    def.setSymbol(newsym);
+
+                    mds.addDefinition(def);
+                }
             }
         }
 
@@ -536,9 +685,9 @@ public class RegisterImporter {
 
     }
 
-    private static void _prune(Map<AUID,ArrayList<Definition>> defs,
-                        HashMap<AUID, HashSet<AUID>> isReferencedBy,
-                        AUID aref) {
+    private static void _prune(Map<AUID, ArrayList<Definition>> defs,
+        HashMap<AUID, HashSet<AUID>> isReferencedBy,
+        AUID aref) {
 
         if (isReferencedBy.containsKey(aref)) {
 

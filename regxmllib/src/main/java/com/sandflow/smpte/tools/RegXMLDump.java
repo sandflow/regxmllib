@@ -33,6 +33,8 @@ import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.nio.channels.Channels;
@@ -61,22 +63,22 @@ public class RegXMLDump {
     private final static Logger LOG = Logger.getLogger(RegXMLDump.class.getName());
 
     private static final UL ESSENCE_DESCRIPTOR_KEY
-            = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x01, 0x01, 0x01, 0x0D, 0x01, 0x01, 0x01, 0x01, 0x01, 0x24, 0x00});
+        = new UL(new byte[]{0x06, 0x0e, 0x2b, 0x34, 0x02, 0x01, 0x01, 0x01, 0x0D, 0x01, 0x01, 0x01, 0x01, 0x01, 0x24, 0x00});
 
     private static final UL PREFACE_KEY
-            = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
+        = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
     private final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
-            + "  Usage:\n"
-            + "     RegXMLDump ( -all | -ed ) ( -header | -footer | -auto ) (-l labelsregister) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
-            + "     RegXMLDump -?\n"
-            + "  Where:\n"
-            + "     -all: dumps all header metadata (default)\n"
-            + "     -ed: dumps only the first essence descriptor found\n"
-            + "     -l labelsregister: given a SMPTE labels register, inserts the symbol of labels as XML comment\n"
-            + "     -header: dumps metadata from the header partition (default)\n"
-            + "     -footer: dumps metadata from the footer partition\n"
-            + "     -auto: dumps metadata from the footer partition if available and from the header if not\n";
+        + "  Usage:\n"
+        + "     RegXMLDump ( -all | -ed ) ( -header | -footer | -auto ) (-l labelsregister) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
+        + "     RegXMLDump -?\n"
+        + "  Where:\n"
+        + "     -all: dumps all header metadata (default)\n"
+        + "     -ed: dumps only the first essence descriptor found\n"
+        + "     -l labelsregister: given a SMPTE labels register, inserts the symbol of labels as XML comment\n"
+        + "     -header: dumps metadata from the header partition (default)\n"
+        + "     -footer: dumps metadata from the footer partition\n"
+        + "     -auto: dumps metadata from the footer partition if available and from the header if not\n";
 
     private enum TargetPartition {
 
@@ -239,23 +241,22 @@ public class RegXMLDump {
             System.out.println(USAGE);
             return;
         }
-        
+
         /* create an enum name resolver, if available */
-        
         final LabelsRegister lr;
-        
+
         if (labelreader != null) {
-        
+
             lr = LabelsRegister.fromXML(labelreader);
-        
+
         } else {
-            
+
             lr = null;
-            
+
         }
-        
+
         FragmentBuilder.AUIDNameResolver anr = null;
-              
+
         if (lr != null) {
 
             anr = new FragmentBuilder.AUIDNameResolver() {
@@ -263,7 +264,7 @@ public class RegXMLDump {
                 @Override
                 public String getLocalName(AUID enumid) {
                     LabelsRegister.Entry e = lr.getEntryByUL(enumid.asUL());
-                    
+
                     return e == null ? null : e.getSymbol();
                 }
 
@@ -282,16 +283,15 @@ public class RegXMLDump {
         DocumentFragment df = null;
 
         TargetPartition actualpartition
-                = TargetPartition.AUTO.equals(selectedpartition)
-                        ? TargetPartition.FOOTER : selectedpartition;
+            = TargetPartition.AUTO.equals(selectedpartition)
+                ? TargetPartition.FOOTER : selectedpartition;
 
         boolean retry = true;
-        
-        /*
-           if selectedpartition is AUTO, then try FOOTER first and then HEADER 
-           if any exceptions occur
-        */
 
+        /*
+         if selectedpartition is AUTO, then try FOOTER first and then HEADER 
+         if any exceptions occur
+         */
         while (retry) {
 
             try {
@@ -316,8 +316,30 @@ public class RegXMLDump {
                 }
 
                 InputStream is = Channels.newInputStream(f);
-               
-                df = MXFFragmentBuilder.fromInputStream(is, mds, anr, root, doc);
+
+                EventHandler evthandler = new EventHandler() {
+
+                    @Override
+                    public boolean handle(Event evt) {
+                        String msg = evt.getCode().getClass().getCanonicalName() + "::" + evt.getCode().toString() + " " + evt.getMessage();
+
+                        switch (evt.getSeverity()) {
+                            case ERROR:
+                            case FATAL:
+                                LOG.severe(msg);
+                                break;
+                            case INFO:
+                                LOG.info(msg);
+                                break;
+                            case WARN:
+                                LOG.warning(msg);
+                                break;
+                        }
+                        return true;
+                    }
+                };
+
+                df = MXFFragmentBuilder.fromInputStream(is, mds, anr, evthandler, root, doc);
 
             } catch (Exception e) {
 
@@ -325,24 +347,22 @@ public class RegXMLDump {
 
                     /* if an exception occurred and the target partition is AUTO,
                      try again with the header partition */
-                    
                     actualpartition = TargetPartition.HEADER;
-                    
+
                     f.position(0);
 
                 } else {
-                    
+
                     /* otherwise give up */
-                    
                     LOG.severe(e.getMessage());
 
                     throw e;
                 }
 
             } finally {
-                
+
                 retry = false;
-                
+
             }
 
         }
@@ -365,8 +385,8 @@ public class RegXMLDump {
         tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
         tr.transform(
-                new DOMSource(doc),
-                new StreamResult(System.out)
+            new DOMSource(doc),
+            new StreamResult(System.out)
         );
 
     }

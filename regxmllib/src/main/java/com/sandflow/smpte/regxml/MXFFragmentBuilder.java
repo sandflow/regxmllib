@@ -42,14 +42,15 @@ import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.CountingInputStream;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.smpte.util.UUID;
+import com.sandflow.util.events.BasicEvent;
+import com.sandflow.util.events.Event;
+import com.sandflow.util.events.EventHandler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 
@@ -61,62 +62,185 @@ public class MXFFragmentBuilder {
     private final static Logger LOG = Logger.getLogger(MXFFragmentBuilder.class.getName());
 
     private static final UL INDEX_TABLE_SEGMENT_UL
-            = UL.fromURN("urn:smpte:ul:060e2b34.02530101.0d010201.01100100");
+        = UL.fromURN("urn:smpte:ul:060e2b34.02530101.0d010201.01100100");
 
     private static final UL PREFACE_KEY
-            = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
+        = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
+
+    public static enum EventCodes {
+
+        /**
+         * No root object found
+         */
+        MISSING_ROOT_OBJECT(Event.Severity.FATAL),
+        /**
+         * No partition pack found in the MXF file
+         */
+        MISSING_PARTITION_PACK(Event.Severity.FATAL),
+        /**
+         * No primer pack found in the MXF file
+         */
+        MISSING_PRIMER_PACK(Event.Severity.FATAL),
+        /**
+         * Unexpected group sequence encountered
+         */
+        UNEXPECTED_STRUCTURE(Event.Severity.ERROR),
+        /**
+         * Failed to read Group
+         */
+        GROUP_READ_FAILED(Event.Severity.ERROR);
+
+        public final Event.Severity severity;
+
+        private EventCodes(Event.Severity severity) {
+            this.severity = severity;
+        }
+
+    }
+
+    public static class MXFEvent extends BasicEvent {
+
+        public MXFEvent(EventCodes kind, String message) {
+            super(kind.severity, kind, message);
+        }
+
+    }
+
+    static void handleEvent(EventHandler handler, com.sandflow.util.events.Event evt) throws MXFException {
+
+        if (handler != null) {
+
+            if (! handler.handle(evt) ||
+                evt.getSeverity() == Event.Severity.FATAL) {
+                
+                /* die on FATAL events or if requested by the handler */
+
+                throw new MXFException(evt.getMessage());
+
+            }
+            
+        } else if (evt.getSeverity() == Event.Severity.ERROR ||
+            evt.getSeverity() == Event.Severity.FATAL) {
+            
+            /* if no event handler was provided, die on FATAL and ERROR events */
+            
+            throw new MXFException(evt.getMessage());
+            
+        }
+    }
 
     /**
-     * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
-     * the first Header Metadata object with a class that descends from
-     * the specified class.
+     * @deprecated Replaced by {@link fromInputStreamfromInputStream(InputStream,DefinitionResolver,
+     * FragmentBuilder.AUIDNameResolver,UL,Document)}. This constructor does not allow the
+     * caller to provide an event handler, and instead uses java.util.logging to
+     * output events.
+     * 
+     * @param mxfpartition MXF partition, including the Partition Pack. Must not be null.
+     * @param defresolver MetaDictionary definitions. Must not be null.
+     * @param rootclasskey Root class of Fragment. The Preface class is used if null.
+     * @param document DOM for which the Document Fragment is created. Must not be null.
      *
-     * @param mxfpartition MXF partition, including the Partition Pack
-     * @param defresolver MetaDictionary definitions
-     * @param rootclasskey Root class of Fragment
-     * @param document DOM for which the Document Fragment is created
      * @return Document Fragment containing a single RegXML Fragment
+     *
      * @throws IOException
      * @throws KLVException
      * @throws com.sandflow.smpte.regxml.MXFFragmentBuilder.MXFException
-     * @throws ParserConfigurationException
      * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
      */
     public static DocumentFragment fromInputStream(InputStream mxfpartition,
-            DefinitionResolver defresolver,
-            UL rootclasskey,
-            Document document) throws IOException, KLVException, MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
-        
+        DefinitionResolver defresolver,
+        UL rootclasskey,
+        Document document) throws IOException, KLVException, MXFException, FragmentBuilder.RuleException {
+
         return fromInputStream(mxfpartition,
             defresolver,
             null,
             rootclasskey,
             document);
     }
-
+    
     /**
-     * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
-     * the first Header Metadata object with a class that descends from
-     * the specified class.
+     * @deprecated Replaced by {@link fromInputStreamfromInputStream(InputStream,DefinitionResolver,
+     * FragmentBuilder.AUIDNameResolver,UL,Document)}. This constructor does not allow the
+     * caller to provide an event handler, and instead uses java.util.logging to
+     * output events.
+     * 
+     * @param mxfpartition MXF partition, including the Partition Pack. Must not be null.
+     * @param defresolver MetaDictionary definitions. Must not be null.
+     * @param enumnameresolver Allows the local name of extendible enumeration
+     * values to be inserted as comments. May be null.
+     * @param rootclasskey Root class of Fragment. The Preface class is used if null.
+     * @param document DOM for which the Document Fragment is created. Must not be null.
      *
-     * @param mxfpartition MXF partition, including the Partition Pack
-     * @param defresolver MetaDictionary definitions
-     * @param enumnameresolver Allows the local name of extendible enumeration values
-     *                         to be inserted as comments
-     * @param rootclasskey Root class of Fragment
-     * @param document DOM for which the Document Fragment is created
      * @return Document Fragment containing a single RegXML Fragment
+     *
      * @throws IOException
      * @throws KLVException
      * @throws com.sandflow.smpte.regxml.MXFFragmentBuilder.MXFException
-     * @throws ParserConfigurationException
      * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
      */
     public static DocumentFragment fromInputStream(InputStream mxfpartition,
-            DefinitionResolver defresolver,
-            FragmentBuilder.AUIDNameResolver enumnameresolver,
-            UL rootclasskey,
-            Document document) throws IOException, KLVException, MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
+        DefinitionResolver defresolver,
+        FragmentBuilder.AUIDNameResolver enumnameresolver,
+        UL rootclasskey,
+        Document document) throws IOException, KLVException, MXFException, FragmentBuilder.RuleException {
+        
+        EventHandler handler = new EventHandler() {
+
+                @Override
+                public boolean handle(Event evt) {
+                    switch (evt.getSeverity()) {
+                        case ERROR:
+                        case FATAL:
+                            LOG.severe(evt.getMessage());
+                            break;
+                        case INFO:
+                            LOG.info(evt.getMessage());
+                            break;
+                        case WARN:
+                            LOG.warning(evt.getMessage());
+                    }
+
+                    return true;
+                }
+            };
+
+        return fromInputStream(mxfpartition,
+            defresolver,
+            enumnameresolver,
+            handler,
+            rootclasskey,
+            document);
+    }
+
+    /**
+     * Returns a DOM Document Fragment containing a RegXML Fragment rooted at
+     * the first Header Metadata object with a class that descends from the
+     * specified class.
+     *
+     * @param mxfpartition MXF partition, including the Partition Pack. Must not be null.
+     * @param defresolver MetaDictionary definitions. Must not be null.
+     * @param enumnameresolver Allows the local name of extendible enumeration
+     * values to be inserted as comments. May be null.
+     * @param evthandler Calls back the caller when an event occurs. Must not be null.
+     * @param rootclasskey Root class of Fragment. The Preface class is used if null.
+     * @param document DOM for which the Document Fragment is created. Must not be null.
+     *
+     * @return Document Fragment containing a single RegXML Fragment
+     *
+     * @throws IOException
+     * @throws KLVException
+     * @throws com.sandflow.smpte.regxml.MXFFragmentBuilder.MXFException
+     * @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
+     */
+    public static DocumentFragment fromInputStream(
+        InputStream mxfpartition,
+        DefinitionResolver defresolver,
+        FragmentBuilder.AUIDNameResolver enumnameresolver,
+        EventHandler evthandler,
+        UL rootclasskey,
+        Document document
+    ) throws IOException, KLVException, MXFException, FragmentBuilder.RuleException {
 
         CountingInputStream cis = new CountingInputStream(mxfpartition);
 
@@ -133,7 +257,14 @@ public class MXFFragmentBuilder {
         }
 
         if (pp == null) {
-            throw new MXFException("No Partition Pack found.");
+
+            MXFEvent evt = new MXFEvent(
+                EventCodes.MISSING_PARTITION_PACK,
+                "No Partition Pack found"
+            );
+
+            handleEvent(evthandler, evt);
+
         }
 
         /* start counting header metadata bytes */
@@ -153,7 +284,13 @@ public class MXFFragmentBuilder {
         }
 
         if (localreg == null) {
-            System.err.println("No Primer Pack found");
+
+            MXFEvent evt = new MXFEvent(
+                EventCodes.MISSING_PRIMER_PACK,
+                "No Primer Pack found"
+            );
+
+            handleEvent(evthandler, evt);
         }
 
         /* capture all local sets within the header metadata */
@@ -161,19 +298,27 @@ public class MXFFragmentBuilder {
         HashMap<UUID, Set> setresolver = new HashMap<>();
 
         for (Triplet t;
-                cis.getCount() < pp.getHeaderByteCount()
-                && (t = kis.readTriplet()) != null;) {
+            cis.getCount() < pp.getHeaderByteCount()
+            && (t = kis.readTriplet()) != null;) {
 
             if (t.getKey().equalsIgnoreVersion(INDEX_TABLE_SEGMENT_UL)) {
 
                 /* stop if Index Table reached */
-                LOG.warning("Index Table Segment encountered before Header Byte Count bytes read.");
+                MXFEvent evt = new MXFEvent(
+                    EventCodes.UNEXPECTED_STRUCTURE,
+                    "Index Table Segment encountered before Header Byte Count bytes read"
+                );
+
+                handleEvent(evthandler, evt);
+
                 break;
+
             } else if (t.getKey().equalsIgnoreVersion(FillItem.getKey())) {
 
                 /* skip fill items */
                 continue;
             }
+
             try {
                 Group g = LocalSet.fromTriplet(t, localreg);
 
@@ -188,16 +333,31 @@ public class MXFFragmentBuilder {
                     }
 
                 } else {
-                    LOG.log(Level.WARNING, "Failed to read Group: {0}", t.getKey().toString());
+
+                    MXFEvent evt = new MXFEvent(
+                        EventCodes.GROUP_READ_FAILED,
+                        String.format(
+                            "Failed to read Group: {0}",
+                            t.getKey().toString()
+                        )
+                    );
+
+                    handleEvent(evthandler, evt);
+
                 }
             } catch (KLVException ke) {
-                LOG.warning(
-                        String.format(
-                                "Failed to read Group %s with error %s",
-                                t.getKey().toString(),
-                                ke.getMessage()
-                        )
+
+                MXFEvent evt = new MXFEvent(
+                    EventCodes.GROUP_READ_FAILED,
+                    String.format(
+                        "Failed to read Group %s with error %s",
+                        t.getKey().toString(),
+                        ke.getMessage()
+                    )
                 );
+
+                handleEvent(evthandler, evt);
+
             }
         }
 
@@ -213,13 +373,16 @@ public class MXFFragmentBuilder {
 
             } else if (!agroup.getKey().isClass14()) {
 
-                LOG.warning(
-                        String.format(
-                                "Invalid MXF file: at least one non-class 14 Set %s was found between"
-                                + " the Primer Pack and the Preface Set.",
-                                agroup.getKey()
-                        )
+                MXFEvent evt = new MXFEvent(
+                    EventCodes.UNEXPECTED_STRUCTURE,
+                    String.format(
+                        "At least one non-class 14 Set %s was found between"
+                        + " the Primer Pack and the Preface Set.",
+                        agroup.getKey()
+                    )
                 );
+
+                handleEvent(evthandler, evt);
 
                 break;
 
@@ -228,7 +391,7 @@ public class MXFFragmentBuilder {
         }
 
         /* create the fragment */
-        FragmentBuilder fb = new FragmentBuilder(defresolver, setresolver, enumnameresolver);
+        FragmentBuilder fb = new FragmentBuilder(defresolver, setresolver, enumnameresolver, evthandler);
 
         Group rootgroup = null;
 
@@ -274,7 +437,14 @@ public class MXFFragmentBuilder {
         }
 
         if (rootgroup == null) {
-            throw new MXFException("Root object not found");
+
+            MXFEvent evt = new MXFEvent(
+                EventCodes.MISSING_ROOT_OBJECT,
+                "No Root Object found"
+            );
+
+            handleEvent(evthandler, evt);
+
         }
 
         return fb.fromTriplet(rootgroup, document);
