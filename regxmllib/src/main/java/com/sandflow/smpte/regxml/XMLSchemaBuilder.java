@@ -681,8 +681,9 @@ public class XMLSchemaBuilder {
                         ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
                     ),
                     String.format(
-                        "Definition %s",
-                        elemdef.getSymbol()
+                        "Definition %s at ComplexType %s",
+                        elemdef.getSymbol(),
+                        complexType.getLocalName()
                     )
                 );
 
@@ -1199,8 +1200,9 @@ public class XMLSchemaBuilder {
                         ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
                     ),
                     String.format(
-                        "Definition %s",
-                        elemdef.getSymbol()
+                        "Definition %s at ComplexType %s",
+                        elemdef.getSymbol(),
+                        complexType.getLocalName()
                     )
                 );
 
@@ -1296,8 +1298,9 @@ public class XMLSchemaBuilder {
                     definition.getReferenceType().toString()
                 ),
                 String.format(
-                    "Definition %s",
-                    definition.getSymbol()
+                    "Definition %s at ComplexType %s",
+                    definition.getSymbol(),
+                    complexType.getLocalName()
                 )
             );
 
@@ -1363,8 +1366,9 @@ public class XMLSchemaBuilder {
                         ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
                     ),
                     String.format(
-                        "Definition %s",
-                        elemdef.getSymbol()
+                        "Definition %s at ComplextType %s",
+                        elemdef.getSymbol(),
+                        complexType.getLocalName()
                     )
                 );
 
