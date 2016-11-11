@@ -174,16 +174,16 @@ public class FragmentBuilder {
 
     }
 
-    public static class FragmnetEvent extends com.sandflow.util.events.BasicEvent {
+    public static class FragmentEvent extends com.sandflow.util.events.BasicEvent {
 
         final String reason;
         final String where;
 
-        public FragmnetEvent(EventCodes kind, String reason) {
+        public FragmentEvent(EventCodes kind, String reason) {
             this(kind, reason, null);
         }
 
-        public FragmnetEvent(EventCodes kind, String reason, String where) {
+        public FragmentEvent(EventCodes kind, String reason, String where) {
             super(kind.severity, kind, reason + (where != null ? " at " + where : ""));
             
             this.reason = reason;
@@ -398,7 +398,7 @@ public class FragmentBuilder {
         element.appendChild(element.getOwnerDocument().createComment(comment));
     }
 
-    void handleEvent(FragmnetEvent evt) throws RuleException {
+    void handleEvent(FragmentEvent evt) throws RuleException {
 
         if (evthandler != null) {
 
@@ -428,7 +428,7 @@ public class FragmentBuilder {
 
         if (definition == null) {
 
-            handleEvent(new FragmnetEvent(
+            handleEvent(new FragmentEvent(
                 EventCodes.UNKNOWN_GROUP,
                 String.format(
                     "Unknown Group UL %s",
@@ -442,7 +442,7 @@ public class FragmentBuilder {
 
         if (definition.getIdentification().asUL().getVersion() != group.getKey().getVersion()) {
 
-            handleEvent(new FragmnetEvent(
+            handleEvent(new FragmentEvent(
                 EventCodes.VERSION_BYTE_MISMATCH,
                 String.format(
                     "Group UL %s in file does not have the same version as in the register (0x%02x)",
@@ -467,7 +467,7 @@ public class FragmentBuilder {
 
             if (itemdef == null) {
 
-                handleEvent(new FragmnetEvent(
+                handleEvent(new FragmentEvent(
                         EventCodes.UNKNOWN_PROPERTY,
                         String.format(
                             "Unknown property %s",
@@ -497,7 +497,7 @@ public class FragmentBuilder {
             /* make sure this is a property definition */
             if (!(itemdef instanceof PropertyDefinition)) {
 
-                FragmnetEvent evt = new FragmnetEvent(
+                FragmentEvent evt = new FragmentEvent(
                     EventCodes.UNEXPECTED_DEFINITION,
                     String.format(
                         "Item %s is not a property",
@@ -519,12 +519,16 @@ public class FragmentBuilder {
             /* warn if version byte of the property does not match the register version byte  */
             if (itemdef.getIdentification().asUL().getVersion() != item.getKey().getVersion()) {
 
-                handleEvent(new FragmnetEvent(
+                handleEvent(new FragmentEvent(
                     EventCodes.VERSION_BYTE_MISMATCH,
                     String.format(
                         "Property UL %s in file does not have the same version as in the register (0x%02x)",
                         item.getKey().toString(),
                         itemdef.getIdentification().asUL().getVersion()
+                    ),
+                    String.format(
+                        "Group %s",
+                        definition.getSymbol()
                     )
                 )
                 );
@@ -559,7 +563,7 @@ public class FragmentBuilder {
                             && iidns.equals(n.getNamespaceURI())
                             && iid.equals(n.getTextContent())) {
 
-                            FragmnetEvent evt = new FragmnetEvent(
+                            FragmentEvent evt = new FragmentEvent(
                                 EventCodes.CIRCULAR_STRONG_REFERENCE,
                                 String.format(
                                     "Circular Strong Reference to Set UID %s",
@@ -621,7 +625,7 @@ public class FragmentBuilder {
 
                     element.setTextContent(BYTEORDER_LE);
 
-                    FragmnetEvent evt = new FragmnetEvent(
+                    FragmentEvent evt = new FragmentEvent(
                         EventCodes.UNEXPECTED_BYTE_ORDER,
                         "ByteOrder property set to little-endian: either the property is set"
                         + "incorrectly or the file does not conform to MXF. Processing will"
@@ -647,15 +651,16 @@ public class FragmentBuilder {
                 /* return if no type definition is found */
                 if (typedef == null) {
 
-                    FragmnetEvent evt = new FragmnetEvent(
+                    FragmentEvent evt = new FragmentEvent(
                         EventCodes.UNKNOWN_TYPE,
                         String.format(
                             "Type %s not found",
                             ((PropertyDefinition) propdef).getType().toString()
                         ),
                         String.format(
-                            "Property %s",
-                            propdef.getSymbol()
+                            "Property %s at Element %s",
+                            propdef.getSymbol(),
+                            element.getLocalName()
                         )
                     );
 
@@ -701,15 +706,16 @@ public class FragmentBuilder {
 
                         if (foundUniqueID != true) {
 
-                            FragmnetEvent evt = new FragmnetEvent(
+                            FragmentEvent evt = new FragmentEvent(
                                 EventCodes.MISSING_UNIQUE,
                                 String.format(
                                     "Target Primary Package with Instance UID %s has no IsUnique element.",
                                     uuid.toString()
                                 ),
                                 String.format(
-                                    "Property %s",
-                                    propdef.getSymbol()
+                                    "Property %s at Element %s",
+                                    propdef.getSymbol(),
+                                    element.getLocalName()
                                 )
                             );
 
@@ -721,15 +727,16 @@ public class FragmentBuilder {
 
                     } else {
 
-                        FragmnetEvent evt = new FragmnetEvent(
+                        FragmentEvent evt = new FragmentEvent(
                             EventCodes.MISSING_PRIMARY_PACKAGE,
                             String.format(
                                 "Target Primary Package with Instance UID %s not found",
                                 uuid.toString()
                             ),
                             String.format(
-                                "Property %s",
-                                propdef.getSymbol()
+                                "Property %s at Element %s",
+                                propdef.getSymbol(),
+                                element.getLocalName()
                             )
                         );
 
@@ -756,12 +763,13 @@ public class FragmentBuilder {
 
         } catch (EOFException eof) {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.VALUE_LENGTH_MISMATCH,
                 "Value too short",
                 String.format(
-                    "Property %s",
-                    propdef.getSymbol()
+                    "Property %s at Element %s",
+                    propdef.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
@@ -855,11 +863,12 @@ public class FragmentBuilder {
 
         } else {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.UNSUPPORTED_CHAR_TYPE,
                 String.format(
-                    "Character type %s is not supported",
-                    definition.getSymbol()
+                    "Character type %s is not supported at Element %s",
+                    definition.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
@@ -904,12 +913,13 @@ public class FragmentBuilder {
 
             if (!(bdef instanceof IntegerTypeDefinition)) {
 
-                FragmnetEvent evt = new FragmnetEvent(
+                FragmentEvent evt = new FragmentEvent(
                     EventCodes.UNSUPPORTED_ENUM_TYPE,
                     "Enum does not have an Integer base type.",
                     String.format(
-                        "Enum %s",
-                        definition.getSymbol()
+                        "Enum %s at Element %s",
+                        definition.getSymbol(),
+                        element.getLocalName()
                     )
                 );
 
@@ -957,12 +967,13 @@ public class FragmentBuilder {
 
                 str = "ERROR";
 
-                FragmnetEvent evt = new FragmnetEvent(
+                FragmentEvent evt = new FragmentEvent(
                     EventCodes.VALUE_LENGTH_MISMATCH,
                     "No data",
                     String.format(
-                        "Enum %s",
-                        definition.getSymbol()
+                        "Enum %s at Element %s",
+                        definition.getSymbol(),
+                        element.getLocalName()
                     )
                 );
 
@@ -999,15 +1010,16 @@ public class FragmentBuilder {
 
                     str = "UNDEFINED";
 
-                    FragmnetEvent evt = new FragmnetEvent(
+                    FragmentEvent evt = new FragmentEvent(
                         EventCodes.UNKNOWN_ENUM_VALUE,
                         String.format(
                             "Undefined value %d",
                             bi.intValue()
                         ),
                         String.format(
-                            "Enum %s",
-                            definition.getSymbol()
+                            "Enum %s at Element %s",
+                            definition.getSymbol(),
+                            element.getLocalName()
                         )
                     );
 
@@ -1017,7 +1029,7 @@ public class FragmentBuilder {
 
                 } else if (br != len) {
 
-                    FragmnetEvent evt = new FragmnetEvent(
+                    FragmentEvent evt = new FragmentEvent(
                         EventCodes.VALUE_LENGTH_MISMATCH,
                         String.format(
                             "Incorrect length: expected %d and received %d",
@@ -1025,8 +1037,9 @@ public class FragmentBuilder {
                             br
                         ),
                         String.format(
-                            "Enumeration %s",
-                            definition.getSymbol()
+                            "Enumeration %s at Element %s",
+                            definition.getSymbol(),
+                            element.getLocalName()
                         )
                     );
 
@@ -1136,12 +1149,13 @@ public class FragmentBuilder {
 
         if (idau == null) {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.INVALID_IDAU,
                 "Invalid IDAU",
                 String.format(
-                    "Indirect Type %s",
-                    definition.getSymbol()
+                    "Indirect Type %s at Element %s",
+                    definition.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
@@ -1158,15 +1172,16 @@ public class FragmentBuilder {
 
         if (def == null) {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.UNKNOWN_TYPE,
                 String.format(
                     "No definition found for indirect type %s.",
                     auid.toString()
                 ),
                 String.format(
-                    "Indirect Type %s",
-                    definition.getSymbol()
+                    "Indirect Type %s at Element %s",
+                    definition.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
@@ -1216,12 +1231,13 @@ public class FragmentBuilder {
 
                 element.setTextContent("NaN");
 
-                FragmnetEvent evt = new FragmnetEvent(
+                FragmentEvent evt = new FragmentEvent(
                     EventCodes.VALUE_LENGTH_MISMATCH,
                     "No data",
                     String.format(
-                        "Integer %s",
-                        definition.getSymbol()
+                        "Integer %s at Element %s",
+                        definition.getSymbol(),
+                        element.getLocalName()
                     )
                 );
 
@@ -1239,7 +1255,7 @@ public class FragmentBuilder {
 
                     if (br != len) {
 
-                        FragmnetEvent evt = new FragmnetEvent(
+                        FragmentEvent evt = new FragmentEvent(
                             EventCodes.VALUE_LENGTH_MISMATCH,
                             String.format(
                                 "Incorrect field length: expected %d and parsed %d.",
@@ -1247,8 +1263,9 @@ public class FragmentBuilder {
                                 br
                             ),
                             String.format(
-                                "Integer %s",
-                                definition.getSymbol()
+                                "Integer %s at Element %s",
+                                definition.getSymbol(),
+                                element.getLocalName()
                             )
                         );
 
@@ -1260,12 +1277,13 @@ public class FragmentBuilder {
 
                 } catch (NumberFormatException e) {
 
-                    FragmnetEvent evt = new FragmnetEvent(
+                    FragmentEvent evt = new FragmentEvent(
                         EventCodes.INVALID_INTEGER_VALUE,
                         "Invalid integer value",
                         String.format(
-                            "Integer %s",
-                            definition.getSymbol()
+                            "Integer %s at Element %s",
+                            definition.getSymbol(),
+                            element.getLocalName()
                         )
                     );
 
@@ -1430,15 +1448,16 @@ public class FragmentBuilder {
          */
         if (!(chrdef instanceof CharacterTypeDefinition)) {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.UNSUPPORTED_STRING_TYPE,
                 String.format(
                     "Unsupported String with Element %s",
                     chrdef.getSymbol()
                 ),
                 String.format(
-                    "String %s",
-                    definition.getSymbol()
+                    "String %s at Element %s",
+                    definition.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
@@ -1464,15 +1483,16 @@ public class FragmentBuilder {
 
         if (!(typedef instanceof ClassDefinition)) {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.INVALID_STRONG_REFERENCE_TYPE,
                 String.format(
                     "Target %s of Strong Reference Type is not a class",
                     typedef.getSymbol()
                 ),
                 String.format(
-                    "Type %s",
-                    definition.getSymbol()
+                    "Type %s at Element %s",
+                    definition.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
@@ -1494,15 +1514,16 @@ public class FragmentBuilder {
 
         } else {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.STRONG_REFERENCE_NOT_FOUND,
                 String.format(
                     "Strong Reference target %s is not found",
                     uuid.toString()
                 ),
                 String.format(
-                    "Type %s",
-                    definition.getSymbol()
+                    "Type %s at Element %s",
+                    definition.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
@@ -1651,12 +1672,13 @@ public class FragmentBuilder {
 
         } catch (EOFException eof) {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.VALUE_LENGTH_MISMATCH,
                 "Value too short",
                 String.format(
-                    "Array %s",
-                    definition.getSymbol()
+                    "Array %s at Element %s",
+                    definition.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
@@ -1684,15 +1706,16 @@ public class FragmentBuilder {
 
         if (uniquepropdef == null) {
 
-            FragmnetEvent evt = new FragmnetEvent(
+            FragmentEvent evt = new FragmentEvent(
                 EventCodes.MISSING_UNIQUE,
                 String.format(
                     "Weak reference target %s has no IsUnique element.",
                     classdef.getSymbol()
                 ),
                 String.format(
-                    "Type %s",
-                    typedefinition.getSymbol()
+                    "Type %s at Element %s",
+                    typedefinition.getSymbol(),
+                    element.getLocalName()
                 )
             );
 
