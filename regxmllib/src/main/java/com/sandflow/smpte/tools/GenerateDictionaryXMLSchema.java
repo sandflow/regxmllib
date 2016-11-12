@@ -64,13 +64,16 @@ public class GenerateDictionaryXMLSchema {
 
     private final static Logger LOG = Logger.getLogger(GenerateDictionaryXMLSchema.class.getName());
 
-    private final static String USAGE = "Generate XML Schema for RegXML Metadictionaries.\n"
+    protected final static String USAGE = "Generate XML Schema for RegXML Metadictionaries.\n"
         + "  Usage:\n"
         + "     GenerateDictionaryXMLSchema -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -o outputdir\n"
         + "     GenerateDictionaryXMLSchema -?\n";
 
     private final static String XMLSCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
 
+    /**
+     * Usage is specified at {@link #USAGE}
+     */
     public static void main(String[] args) throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
 
         if (args.length < 4

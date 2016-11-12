@@ -68,7 +68,7 @@ public class RegXMLDump {
     private static final UL PREFACE_KEY
         = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
-    private final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
+    protected final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
         + "  Usage:\n"
         + "     RegXMLDump ( -all | -ed ) ( -header | -footer | -auto ) (-l labelsregister) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
         + "     RegXMLDump -?\n"
@@ -81,12 +81,14 @@ public class RegXMLDump {
         + "     -auto: dumps metadata from the footer partition if available and from the header if not\n";
 
     private enum TargetPartition {
-
         HEADER,
         FOOTER,
         AUTO
     }
 
+    /**
+     * Usage is specified at {@link #USAGE}
+     */
     public static void main(String[] args) throws Exception {
 
         boolean error = false;

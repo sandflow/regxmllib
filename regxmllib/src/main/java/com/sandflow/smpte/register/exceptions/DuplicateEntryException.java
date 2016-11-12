@@ -26,8 +26,7 @@
 package com.sandflow.smpte.register.exceptions;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Raised when two entries have identical ULs and/or symbols
  */
 public class DuplicateEntryException extends Exception {
 

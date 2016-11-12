@@ -26,8 +26,7 @@
 package com.sandflow.smpte.register.exceptions;
 
 /**
- *
- * @author Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Raised when an entry is not valid
  */
 public class InvalidEntryException extends Exception {
 

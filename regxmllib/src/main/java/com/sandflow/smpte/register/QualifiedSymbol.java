@@ -46,10 +46,17 @@ public class QualifiedSymbol {
         this.namespace = namespace;
     }
 
+    /**
+     * @return Namespace component of the Qualified Symbol
+     */
     public String getSymbol() {
         return symbol;
     }
 
+    /**
+     *
+     * @return Namespace component of the Qualified Symbol
+     */
     public URI getNamespace() {
         return namespace;
     }

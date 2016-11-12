@@ -36,6 +36,13 @@ public class BasicEvent implements Event {
     Severity severity;
     Enum code;
 
+    /**
+     * Creates an immutable BasicEvent instance
+     * 
+     * @param severity Severity of the event
+     * @param code Uniquely identifies the event
+     * @param message Describes the event
+     */
     public BasicEvent(Severity severity, Enum code, String message) {
         this.message = message;
         this.severity = severity;

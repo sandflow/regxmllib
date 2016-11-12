@@ -40,6 +40,9 @@ import java.io.InputStream;
  */
 public class KLVInputStream extends InputStream implements DataInput {
     
+    /**
+     * Possible byte ordering of a KLV packet
+     */
     public enum ByteOrder {
         LITTLE_ENDIAN,
         BIG_ENDIAN

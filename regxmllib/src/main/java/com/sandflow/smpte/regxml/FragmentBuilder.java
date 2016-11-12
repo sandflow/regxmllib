@@ -87,6 +87,9 @@ import org.w3c.dom.Node;
  */
 public class FragmentBuilder {
 
+    /**
+     * Defines all events raised by this class
+     */
     public static enum EventCodes {
 
         /**
@@ -173,7 +176,10 @@ public class FragmentBuilder {
         }
 
     }
-
+    
+    /**
+     * All events raised by this class are instances of this class
+     */
     public static class FragmentEvent extends com.sandflow.util.events.BasicEvent {
 
         final String reason;
@@ -287,8 +293,8 @@ public class FragmentBuilder {
      * Instantiates a FragmentBuilder
      *
      * @deprecated Replaced by
-     * {@link FragmentBuilder(DefinitionResolver, Map<UUID, Set>,
-     * AUIDNameResolver, EventHandler)}. This constructor does not allow the
+     * {@link #FragmentBuilder(com.sandflow.smpte.regxml.dict.DefinitionResolver, java.util.Map, com.sandflow.smpte.regxml.FragmentBuilder.AUIDNameResolver, com.sandflow.util.events.EventHandler)}.
+     * This constructor does not allow the
      * caller to provide an event handler, and instead uses java.util.logging to
      * output events.
      *
@@ -332,8 +338,7 @@ public class FragmentBuilder {
      * Instantiates a FragmentBuilder.
      *
      * @deprecated Replaced by
-     * {@link FragmentBuilder(DefinitionResolver, Map<UUID, Set>,
-     * AUIDNameResolver, EventHandler)}. This constructor does not allow the
+     * {@link #FragmentBuilder(com.sandflow.smpte.regxml.dict.DefinitionResolver, java.util.Map, com.sandflow.smpte.regxml.FragmentBuilder.AUIDNameResolver, com.sandflow.util.events.EventHandler) }. This constructor does not allow the
      * caller to provide an event handler, and instead uses java.util.logging to
      * output events.
      *

@@ -28,6 +28,9 @@ package com.sandflow.smpte.regxml.dict.definitions;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
+/**
+ * Stream Type Definition as defined in ST 2001-1
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class StreamTypeDefinition extends Definition {
 

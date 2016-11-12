@@ -37,6 +37,9 @@ public class ExcelCSVParser {
 
     Reader reader;
 
+    /**
+     * Indicates an error has been encountered when parsing a CSV file
+     */
     public static class SyntaxException extends Exception { }
 
     private enum State {

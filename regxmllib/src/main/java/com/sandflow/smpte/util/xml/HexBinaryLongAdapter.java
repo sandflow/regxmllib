@@ -29,6 +29,9 @@ import java.util.Arrays;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+/**
+ * Unmarshals/marshals a hexadecimal integer from/to an xsd:string value
+ */
 public class HexBinaryLongAdapter extends XmlAdapter<String, Long> {
 
     @Override

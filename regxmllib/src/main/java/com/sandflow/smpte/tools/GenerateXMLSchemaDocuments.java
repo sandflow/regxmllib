@@ -52,10 +52,13 @@ import org.w3c.dom.Document;
  */
 public class GenerateXMLSchemaDocuments {
 
-    private final static String USAGE = "Generates XML Schema documents for JAXB-annotated classes.\n"
+    protected final static String USAGE = "Generates XML Schema documents for JAXB-annotated classes.\n"
             + "  Usage: GenerateXMLSchemaDocuments -cp classpath -d outdir\n"
             + "         GenerateXMLSchemaDocuments -?";
 
+    /**
+     * Usage is specified at {@link #USAGE}
+     */
     public static void main(String[] args) throws FileNotFoundException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, Exception {
         if (args.length != 4
                 || "-?".equals(args[0])) {

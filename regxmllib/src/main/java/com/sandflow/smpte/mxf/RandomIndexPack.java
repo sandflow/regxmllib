@@ -88,13 +88,19 @@ public class RandomIndexPack {
         return pp;
     }
 
+    /**
+     * @return Ordered array containing the offsets stored in the RIP
+     */
     public ArrayList<PartitionOffset> getOffsets() {
         return offsets;
     }
     
     private final ArrayList<PartitionOffset> offsets = new ArrayList<>();
 
-   static public class PartitionOffset {
+    /**
+     * Represents one partition offset entry stored in the RIP
+     */
+    static public class PartitionOffset {
        private final long bodySID;
        private final long offset;
 
@@ -103,10 +109,18 @@ public class RandomIndexPack {
             this.offset = offset;
         }
 
+        /**
+         *
+         * @return Identifies the partition
+         */
         public long getBodySID() {
             return bodySID;
         }
 
+        /**
+         *
+         * @return Offset (in bytes) of the partition
+         */
         public long getOffset() {
             return offset;
         }

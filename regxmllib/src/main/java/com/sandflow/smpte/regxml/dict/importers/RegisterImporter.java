@@ -70,6 +70,9 @@ public class RegisterImporter {
 
     private final static Logger LOGGER = Logger.getLogger(RegisterImporter.class.getName());
 
+    /**
+     * Defines all events raised by the class
+     */
     public static enum EventKind {
 
         /**
@@ -109,6 +112,9 @@ public class RegisterImporter {
 
     }
 
+    /**
+     * All events raised by this class are instances of this class
+     */
     public static class RegisterEvent extends com.sandflow.util.events.BasicEvent {
 
         public RegisterEvent(EventKind kind, String message) {

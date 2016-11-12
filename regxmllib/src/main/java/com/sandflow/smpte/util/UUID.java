@@ -52,6 +52,11 @@ public class UUID {
         this.value = java.util.Arrays.copyOf(uuid, 16);
     }
 
+    /**
+     * Returns the sequence of bytes that make up the UUID (in the order specified by RFC 4122)
+     * 
+     * @return Sequence of 16 bytes
+     */
     public byte[] getValue() {
         return this.value;
     }
@@ -96,7 +101,8 @@ public class UUID {
     }
 
     /**
-     * Generate a Class 5 UUID using a URI name
+     * Generate a Class 5 UUID from a URI
+     * @param uri URI
      * @return Class 5 UUID
      */
     public static UUID fromURIName(URI uri) {

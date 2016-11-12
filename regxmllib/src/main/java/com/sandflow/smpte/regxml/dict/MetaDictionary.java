@@ -243,14 +243,23 @@ public class MetaDictionary implements DefinitionResolver {
         this.definitions.add(def);
     }
 
+    /**
+     * @return SchemeID field of the MetaDictionay
+     */
     public UUID getSchemeID() {
         return schemeID;
     }
 
+    /**
+     * @return SchemeURI field of the MetaDictionay
+     */
     public URI getSchemeURI() {
         return schemeURI;
     }
 
+    /**
+     * @return Description field of the MetaDictionay
+     */
     public String getDescription() {
         return description;
     }

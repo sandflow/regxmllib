@@ -67,6 +67,9 @@ public class MXFFragmentBuilder {
     private static final UL PREFACE_KEY
         = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
+    /**
+     * Defines all events raised by this class
+     */
     public static enum EventCodes {
 
         /**
@@ -97,7 +100,10 @@ public class MXFFragmentBuilder {
         }
 
     }
-
+    
+    /**
+     * All events raised by this class are instance of this class
+     */
     public static class MXFEvent extends BasicEvent {
 
         public MXFEvent(EventCodes kind, String message) {
@@ -130,8 +136,7 @@ public class MXFFragmentBuilder {
     }
 
     /**
-     * @deprecated Replaced by {@link fromInputStreamfromInputStream(InputStream,DefinitionResolver,
-     * FragmentBuilder.AUIDNameResolver,UL,Document)}. This constructor does not allow the
+     * @deprecated Replaced by {@link #fromInputStream(java.io.InputStream, com.sandflow.smpte.regxml.dict.DefinitionResolver, com.sandflow.smpte.regxml.FragmentBuilder.AUIDNameResolver, com.sandflow.util.events.EventHandler, com.sandflow.smpte.util.UL, org.w3c.dom.Document) }. This constructor does not allow the
      * caller to provide an event handler, and instead uses java.util.logging to
      * output events.
      * 
@@ -160,8 +165,10 @@ public class MXFFragmentBuilder {
     }
     
     /**
-     * @deprecated Replaced by {@link fromInputStreamfromInputStream(InputStream,DefinitionResolver,
-     * FragmentBuilder.AUIDNameResolver,UL,Document)}. This constructor does not allow the
+     * @deprecated Replaced by {@link #fromInputStream(java.io.InputStream, com.sandflow.smpte.regxml.dict.DefinitionResolver, 
+     * com.sandflow.smpte.regxml.FragmentBuilder.AUIDNameResolver, com.sandflow.util.events.EventHandler, 
+     * com.sandflow.smpte.util.UL, org.w3c.dom.Document)}
+     * This constructor does not allow the
      * caller to provide an event handler, and instead uses java.util.logging to
      * output events.
      * 

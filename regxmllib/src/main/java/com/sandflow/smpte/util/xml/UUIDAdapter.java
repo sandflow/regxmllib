@@ -28,6 +28,9 @@ package com.sandflow.smpte.util.xml;
 import com.sandflow.smpte.util.UUID;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+/**
+ * Unmarshals/marshals an xsd:string to/from a UUID
+ */
 public class UUIDAdapter extends XmlAdapter<String, UUID> {
 
     @Override

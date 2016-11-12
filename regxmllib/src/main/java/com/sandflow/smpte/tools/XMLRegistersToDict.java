@@ -57,7 +57,7 @@ public class XMLRegistersToDict {
 
     private final static Logger LOG = Logger.getLogger(XMLRegistersToDict.class.getName());
 
-    private final static String USAGE = "Converts XML Registers to RegXML metadictionary.\n"
+    protected final static String USAGE = "Converts XML Registers to RegXML metadictionary.\n"
         + "  Usage: XMLRegistersToDict -e elementsregspath\n"
         + "                            -l labelsregpath\n"
         + "                            -g groupsregpath\n"
@@ -65,6 +65,9 @@ public class XMLRegistersToDict {
         + "                            outputdir\n"
         + "         XMLRegistersToDict -?";
 
+    /**
+     * Usage is specified at {@link #USAGE}
+     */
     public static void main(String[] args) throws FileNotFoundException, JAXBException, IOException, InvalidEntryException, DuplicateEntryException, Exception {
         if (args.length != 9
             || "-?".equals(args[0])

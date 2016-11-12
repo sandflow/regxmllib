@@ -42,11 +42,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import static org.w3c.dom.Node.ELEMENT_NODE;
 
+/**
+ * Enumeration Type Definition as defined in ST 2001-1
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class EnumerationTypeDefinition extends Definition {
 
     private static class EnumerationElementAdapter extends XmlAdapter<Object, ArrayList<Element>> {
 
+        @Override
         public ArrayList<Element> unmarshal(Object v) throws Exception {
 
             ArrayList<Element> al = new ArrayList<>();

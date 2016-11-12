@@ -32,6 +32,9 @@ package com.sandflow.util.events;
  */
 public interface Event {
 
+    /**
+     * Defines the four potential severity of an event
+     */
     public static enum Severity {
 
         /**

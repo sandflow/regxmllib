@@ -41,6 +41,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import static org.w3c.dom.Node.ELEMENT_NODE;
 
+/**
+ * Record Type Definition as defined in ST 2001-1
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class RecordTypeDefinition extends Definition {
 

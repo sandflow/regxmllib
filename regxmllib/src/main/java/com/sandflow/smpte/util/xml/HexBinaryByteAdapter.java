@@ -29,6 +29,9 @@ import static javax.xml.bind.DatatypeConverter.parseHexBinary;
 import static javax.xml.bind.DatatypeConverter.printHexBinary;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+/**
+ * Unmarshals/marshals a byte from/to an xsd:string
+ */
 public class HexBinaryByteAdapter extends XmlAdapter<String, Byte> {
 
     @Override

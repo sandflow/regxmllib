@@ -99,6 +99,9 @@ public class XMLSchemaBuilder {
     private final NamespacePrefixMapper prefixes = new NamespacePrefixMapper();
     private final EventHandler evthandler;
 
+    /**
+     * Defines the events returned by this class
+     */
     public static enum EventCodes {
 
         /**
@@ -114,6 +117,9 @@ public class XMLSchemaBuilder {
 
     }
 
+    /**
+     * All events raised by this class are instances of this class.
+     */
     public static class SchemaEvent extends BasicEvent {
 
         final String reason;
@@ -189,7 +195,7 @@ public class XMLSchemaBuilder {
      * any metadictionary covered by the resolver.
      *
      * @deprecated Replaced by
-     * {@link XMLSchemaBuilder(DefinitionResolver resolver, EventHandler handler)}
+     * {@link #XMLSchemaBuilder(com.sandflow.smpte.regxml.dict.DefinitionResolver, com.sandflow.util.events.EventHandler) }
      * This constructor does not allow the caller to provide an event handler,
      * and instead uses java.util.logging to output events.
      *
@@ -240,7 +246,6 @@ public class XMLSchemaBuilder {
      * @throws com.sandflow.smpte.regxml.XMLSchemaBuilder.RuleException
      * @throws org.xml.sax.SAXException
      * @throws java.io.IOException
-     * @throws java.net.URISyntaxException
      */
     public Document fromDictionary(MetaDictionary dict) throws ParserConfigurationException, KLVException, RuleException, SAXException, IOException {
 

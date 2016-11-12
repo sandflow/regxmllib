@@ -30,6 +30,12 @@ package com.sandflow.smpte.util;
  */
 public class HalfFloat {
 
+    /**
+     * Converts a half-float stored in an int into a double
+     * 
+     * @param hf half-float stored in an int
+     * @return Half-float value as a double
+     */
     public static double toDouble(int hf) {
         double val;
 

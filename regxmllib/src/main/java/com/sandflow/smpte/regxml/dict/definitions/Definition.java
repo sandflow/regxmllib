@@ -104,7 +104,6 @@ abstract public class Definition {
      * Supports the visitor design pattern.
      * @see DefinitionVisitor
      * @param visitor Visitor instance that will process the definition
-     * @throws com.sandflow.smpte.regxml.dict.definitions.DefinitionVisitor.VisitorException 
      */
     abstract public void accept(DefinitionVisitor visitor) throws DefinitionVisitor.VisitorException;
     

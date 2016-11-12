@@ -32,6 +32,9 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Float Type Definition as defined in ST 2001-1
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class FloatTypeDefinition extends Definition {
 

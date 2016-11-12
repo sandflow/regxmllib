@@ -31,6 +31,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
+/**
+ * Integer Type Definition as defined in ST 2001-1
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class IntegerTypeDefinition extends Definition {
 

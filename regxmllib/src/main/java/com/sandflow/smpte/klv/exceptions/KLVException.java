@@ -25,6 +25,9 @@
  */
 package com.sandflow.smpte.klv.exceptions;
 
+/**
+ * Exceptions raised when processing KLV packets
+ */
 public class KLVException extends Exception {
 
     public static String MAX_LENGTH_EXCEEED = "Maximum in-memory KLV size exceeded.";

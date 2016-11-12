@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
- * Corresponds to a type defined in RDD 18 and erroneously added to Class 13.
+ * Corresponds to a type defined in RDD 18.
  * @deprecated 
  */
 @XmlAccessorType(XmlAccessType.NONE)

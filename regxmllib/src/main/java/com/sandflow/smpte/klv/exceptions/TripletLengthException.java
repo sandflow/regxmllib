@@ -26,6 +26,9 @@
 
 package com.sandflow.smpte.klv.exceptions;
 
+/**
+ * Raised when the length of a KLV triplet is not valid
+ */
 public class TripletLengthException extends RuntimeException {
 
     public TripletLengthException() {

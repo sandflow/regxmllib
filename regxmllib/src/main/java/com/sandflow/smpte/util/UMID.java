@@ -78,6 +78,11 @@ public class UMID {
         this.value = java.util.Arrays.copyOf(umid, 32);
     }
 
+    /**
+     * Returns the sequence of bytes that make up the UMID (as specified in SMPTE ST 330)
+     * 
+     * @return sequence of 32 bytes
+     */
     public byte[] getValue() {
         return value;
     }

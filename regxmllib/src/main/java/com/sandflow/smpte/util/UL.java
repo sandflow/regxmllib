@@ -187,7 +187,12 @@ public class UL {
     public boolean equals(UL ul) {
         return Arrays.equals(ul.value, this.value);
     }
-
+    
+    /**
+     * Returns the sequence of bytes that make up the UL (in the order specified by ST 298 4122)
+     * 
+     * @return Sequence of 16 bytes
+     */
     public byte[] getValue() {
         return value;
     }
