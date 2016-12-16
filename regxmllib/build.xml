@@ -16,10 +16,8 @@
     <property file="build.properties"/>
     
     <target name="-post-init">
-		<mkdir dir="${repoversion.dir}"/>
-        <echo file="${repoversion.dir}/${repoversion.name}">version=</echo>
         <exec executable="git"
-              output="${repoversion.dir}/${repoversion.name}" append="true">
+              outputproperty="repo_version">
             <arg value="show"/>
             <arg value="-s"/>
             <arg value="--pretty=format:%H"/>
@@ -31,6 +29,9 @@
     <target name="-post-compile">
         <copy todir="${build.classes.dir}/config">
             <fileset dir="${main.config.dir}"/>
+              <filterset>
+                <filter token="buildNumber" value="${repo_version}"/>
+            </filterset>
         </copy>
         <copy todir="${build.classes.dir}/resources">
             <fileset dir="${main.resources.dir}"/>

@@ -57,7 +57,7 @@ QUICK START
 The following outputs to path PATH_TO_FRAGMENT an XML representation
 of the header metadata of the MXF file at path PATH_TO_MXF_FILE 
 
-* build the 'jar' target using Netbeans or Ant
+* build the 'jar' target using Netbeans or Ant, or run the Maven 'install' goal
 
 * choose one of the following:
 
@@ -69,7 +69,7 @@ of the header metadata of the MXF file at path PATH_TO_MXF_FILE
 
 			java -cp <PATH_TO_JAR> com.sandflow.smpte.tools.XMLRegistersToDict -e <PATH_TO_ELEMENTS_REG>
 			-l <PATH_TO_LABELS_REG> -g <PATH_TO_GROUPS_REG> -t <PATH_TO_TYPES_REG> PATH_TO_DICT_DIR
-			
+            	
 	* OPTION 2
 	
 		* retrieve metadictionaries from [3]
@@ -80,6 +80,9 @@ of the header metadata of the MXF file at path PATH_TO_MXF_FILE
     
     run java -cp <PATH_TO_JAR> com.sandflow.smpte.tools.RegXMLDump -all -d <PATH_TO_DICT1> <PATH_TO_DICT2> ...
     -i PATH_TO_MXF_FILE > PATH_TO_FRAGMENT
+    
+NOTE: Maven is only supported for testing and building the main project artifact, i.e. the JAR. Building
+other artifacts requires Ant. 
     
 
 ARCHITECTURE
@@ -217,8 +220,16 @@ DIRECTORIES AND NOTABLE FILES
 
 /regxmllib/nbproject                    Netbeans project files
 
+/regxmllib/build                        Output of the Ant build process
+
+/regxmllib/dist                         Location of the JAR output from the Ant build
+                                        process
+
+/regxmllib/target                       Output of the Maven build process, including the
+                                        JAR
+
 /regxmllib/src/main/config/repoversion.properties
-                                        Java properties file containing the 
+                                        Template Java properties file used to host the 
                                         a unique source code version generated using
                                         git by the build system
 
