@@ -6,6 +6,12 @@
     <artifactId>regxmllib</artifactId>
     <version>1.1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
  
     <name>regxmllib</name>
     <url>https://github.com/sandflow/regxmllib</url>
@@ -38,5 +44,48 @@
         <name>Sandflow Consulting LLC</name>
         <url>http://www.sandflow.com</url>
     </organization>
+    
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <targetPath>config</targetPath>
+                <directory>${basedir}/src/main/config</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <targetPath>resources</targetPath>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <targetPath>resources</targetPath>
+                <directory>${basedir}/src/test/resources</directory>
+            </testResource>
+        </testResources>
+    </build>
 
 </project>
