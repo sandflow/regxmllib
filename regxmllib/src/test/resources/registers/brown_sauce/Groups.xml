@@ -6,7 +6,7 @@
 <!-- summary_of_edit= -->
 <!--  -->
 <!-- DO NOT EDIT THIS TAG -->
-<!-- master_commit_tag=v000000075 -->
+<!-- master_commit_tag=v000000077 -->
 <!-- DO NOT EDIT THIS TAG -->
 <!--  -->
 <!--  -->
@@ -18,7 +18,7 @@
 <!-- Latest XML Files + Web Views -->
 <!-- ############################ -->
 <!--  -->
-<!-- See http://vm-1042-user.virt.ch.bbc.co.uk/ for the latest XML files and Web Views (tables, etc) of this data which make it easier -->
+<!-- See https://registry.smpte-ra.org for the latest XML files and Web Views (tables, etc) of this data which make it easier -->
 <!-- to explore, browse, manually check etc. Login with: -->
 <!-- username: smpte -->
 <!-- password: smpte -->
@@ -58,6 +58,7 @@
       <Kind>NODE</Kind>
       <Name>GROUPS</Name>
       <Definition>Register of Packs and Sets of Metadata Elements</Definition>
+      <DefiningDocument>SMPTE ST 395</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -1528,7 +1529,7 @@
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010300</Parent>
       <IsConcrete>true</IsConcrete>
-      <KLVSyntax>06 53</KLVSyntax>
+      <KLVSyntax>06 53 13</KLVSyntax>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -4754,51 +4755,52 @@
       <DefiningDocument>AAF Object Specification  SMPTE 422M</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.01000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.02000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.03000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.04000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.05000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.06000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.07000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.08000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.09000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.0a000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.0b000000</UL>
-          <IsOptional>true</IsOptional>
+          <IsOptional>false</IsOptional>
         </Record>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010a.04010603.0c000000</UL>
@@ -4823,9 +4825,10 @@
       <Name>VBI Data Descriptor</Name>
       <Definition>VBI Data Descriptor</Definition>
       <Applications>MXF</Applications>
-      <DefiningDocument>SMPTE 436M</DefiningDocument>
+      <DefiningDocument>SMPTE ST 436-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
     </Entry>
     <Entry>
@@ -4837,9 +4840,10 @@
       <Name>ANC Data Descriptor</Name>
       <Definition>ANC Data Descriptor</Definition>
       <Applications>MXF</Applications>
-      <DefiningDocument>SMPTE 436M</DefiningDocument>
+      <DefiningDocument>SMPTE ST 436-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014300</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
     </Entry>
     <Entry>
@@ -4865,9 +4869,10 @@
       <Name>MPEG Audio Descriptor</Name>
       <Definition>MPEG Audio Descriptor</Definition>
       <Applications>AAF[1.2:]</Applications>
-      <DefiningDocument>AAF Object Specification</DefiningDocument>
+      <DefiningDocument>SMPTE ST 381-2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01014200</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
       <Contents>
         <Record>
@@ -4940,9 +4945,10 @@
       <Name>Package Marker</Name>
       <Definition>Package Marker</Definition>
       <Applications>MXF</Applications>
+      <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01010100</Parent>
-      <KLVSyntax>06 53</KLVSyntax>
+      <KLVSyntax>06 53 13</KLVSyntax>
     </Entry>
     <Entry>
       <Register>Groups</Register>
@@ -4953,9 +4959,10 @@
       <Name>Application Plug-In Object</Name>
       <Definition>Application Plug-In Object</Definition>
       <Applications>MXF</Applications>
+      <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01016600</Parent>
-      <KLVSyntax>06 53</KLVSyntax>
+      <KLVSyntax>06 53 13</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010c.05200701.0d000000</UL>
@@ -4981,9 +4988,10 @@
       <Name>Application Referenced Object</Name>
       <Definition>Application Referenced Object</Definition>
       <Applications>MXF</Applications>
+      <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01016600</Parent>
-      <KLVSyntax>06 53</KLVSyntax>
+      <KLVSyntax>06 53 13</KLVSyntax>
       <Contents>
         <Record>
           <UL>urn:smpte:ul:060e2b34.0101010c.05200701.0b000000</UL>
@@ -5107,9 +5115,10 @@
       <Name>MPEG-4 Visual Sub-Descriptor</Name>
       <Definition>MPEG-4 Visual Sub-Descriptor</Definition>
       <Applications>MXF</Applications>
-      <DefiningDocument>SMPTE 382-2</DefiningDocument>
+      <DefiningDocument>SMPTE ST 381-2</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
     </Entry>
     <Entry>
@@ -5134,9 +5143,10 @@
       <Name>MCA Label Sub-Descriptor</Name>
       <Definition>MCA Label Sub-Descriptor</Definition>
       <Applications>AAF[2.0:]</Applications>
-      <DefiningDocument>SMPTE 377-4</DefiningDocument>
+      <DefiningDocument>SMPTE ST 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</Parent>
+      <IsConcrete>false</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
       <Contents>
         <Record>
@@ -5206,9 +5216,10 @@
       <Name>Audio Channel Label Sub-Descriptor</Name>
       <Definition>Audio Channel Label Sub-Descriptor</Definition>
       <Applications>AAF[2.0:]</Applications>
-      <DefiningDocument>SMPTE 377-4</DefiningDocument>
+      <DefiningDocument>SMPTE ST 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01016a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
       <Contents>
         <Record>
@@ -5226,9 +5237,10 @@
       <Name>Soundfield Group Label Sub-Descriptor</Name>
       <Definition>Soundfield Group Label Sub-Descriptor</Definition>
       <Applications>AAF[2.0:]</Applications>
-      <DefiningDocument>SMPTE 377-4</DefiningDocument>
+      <DefiningDocument>SMPTE ST 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01016a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
       <Contents>
         <Record>
@@ -5246,9 +5258,10 @@
       <Name>Group Of Soundfield Groups Label Sub-Descriptor</Name>
       <Definition>Group Of Soundfield Groups Label Sub-Descriptor</Definition>
       <Applications>AAF[2.0:]</Applications>
-      <DefiningDocument>SMPTE 377-4</DefiningDocument>
+      <DefiningDocument>SMPTE ST 377-4</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01016a00</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
     </Entry>
     <Entry>
@@ -5263,6 +5276,7 @@
       <DefiningDocument>SMPTE ST 381-3</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <Parent>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</Parent>
+      <IsConcrete>true</IsConcrete>
       <KLVSyntax>06 53</KLVSyntax>
       <Contents>
         <Record>
