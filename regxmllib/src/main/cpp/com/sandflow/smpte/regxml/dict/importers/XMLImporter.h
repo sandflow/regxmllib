@@ -41,8 +41,8 @@ public:
 	class Exception : public std::runtime_error
 	{
 	public:
-		Exception(std::string const& message) : std::runtime_error(message) {}
-		Exception(const char* message) : std::runtime_error(message) {}
+		Exception(std::string const& reason) : std::runtime_error(reason) {}
+		Exception(const char* reason) : std::runtime_error(reason) {}
 	};
 
 	static void fromDOM(DOMDocument &dom, MetaDictionary& md, EventHandler *ev = &NULL_EVENTHANDLER);

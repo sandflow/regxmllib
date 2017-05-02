@@ -34,8 +34,8 @@
 class KLVException : public std::runtime_error
 {
 public:
-	KLVException(std::string const& message) : std::runtime_error(message) {}
-	KLVException(const char* message) : std::runtime_error(message) {}
+	KLVException(std::string const& reason) : std::runtime_error(reason) {}
+	KLVException(const char* reason) : std::runtime_error(reason) {}
 };
 
 

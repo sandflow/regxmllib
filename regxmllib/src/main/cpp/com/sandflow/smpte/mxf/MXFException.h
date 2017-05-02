@@ -34,8 +34,8 @@
 class MXFException : public std::runtime_error
 {
 public:
-	MXFException(std::string const& message) : std::runtime_error(message) {}
-	MXFException(const char* message) : std::runtime_error(message) {}
+	MXFException(std::string const& reason) : std::runtime_error(reason) {}
+	MXFException(const char* reason) : std::runtime_error(reason) {}
 };
 
 

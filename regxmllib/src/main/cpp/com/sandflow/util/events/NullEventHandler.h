@@ -33,10 +33,21 @@ class NullEventHandler: public EventHandler {
 
 public:
 
-	virtual bool info(std::string code, std::string message) { return true; };
-	virtual bool warn(std::string code, std::string message) { return true; };
-	virtual bool error(std::string code, std::string message) { return true; };
-	virtual bool fatal(std::string code, std::string message) { return true; };
+	virtual bool info(const std::string &code, const std::string &reason, const std::string &where) {
+		return true;
+	}
+
+	virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) {
+		return true;
+	}
+
+	virtual bool error(const std::string &code, const std::string &reason, const std::string &where) {
+		return true;
+	}
+
+	virtual bool fatal(const std::string &code, const std::string &reason, const std::string &where) {
+		return true;
+	}
 
 };
 

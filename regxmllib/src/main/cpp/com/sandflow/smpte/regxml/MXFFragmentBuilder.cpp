@@ -280,7 +280,7 @@ DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 
 	}
 
-	FragmentBuilder fb(defresolver, setresolver);
+	FragmentBuilder fb(defresolver, setresolver, NULL, ev);
 
 	return fb.fromTriplet(setresolver[rootid], document);
 }

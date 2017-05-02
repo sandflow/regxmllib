@@ -23,7 +23,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef COM_SANDFLOW_SMPTE_REGXML_FRAGMENTBUILDER_H
 #define COM_SANDFLOW_SMPTE_REGXML_FRAGMENTBUILDER_H
 
@@ -71,38 +71,231 @@ class FragmentBuilder {
 
 public:
 
-	static const std::string UNKNOWN_GROUP_ERROR_CODE;
-	static const std::string UNKNOWN_PROPERTY_ERROR_CODE;
-	static const std::string VERSION_BYTE_MISMATCH_ERROR_CODE;
-	static const std::string UNEXPECTED_DEFINITION_ERROR_CODE;
-	static const std::string CIRCULAR_STRONG_REFERENCE_ERROR_CODE;
-	static const std::string UNEXPECTED_BYTE_ORDER_ERROR_CODE;
-	static const std::string UNKNOWN_TYPE_ERROR_CODE;
-	static const std::string MISSING_UNIQUE_ERROR_CODE;
-	static const std::string MISSING_PRIMARY_PACKAGE_ERROR_CODE;
-	static const std::string VALUE_LENGTH_MISMATCH_ERROR_CODE;
-	static const std::string UNSUPPORTED_CHAR_TYPE_ERROR_CODE;
-	static const std::string UNSUPPORTED_ENUM_TYPE_ERROR_CODE;
-	static const std::string UNKNOWN_ENUM_VALUE_ERROR_CODE;
-	static const std::string INVALID_IDAU_ERROR_CODE;
-	static const std::string INVALID_INTEGER_VALUE_ERROR_CODE;
-	static const std::string UNSUPPORTED_STRING_TYPE_ERROR_CODE;
-	static const std::string INVALID_STRONG_REFERENCE_TYPE_ERROR_CODE;
-	static const std::string STRONG_REFERENCE_NOT_FOUND_ERROR_CODE;
+	/* EVENTS AND ERRORS */
 
-	class Exception : public std::runtime_error
-	{
+	class UnknownGroupError : public Event {
 	public:
-		Exception(std::string const& message) : std::runtime_error(message) {}
-		Exception(const char* message) : std::runtime_error(message) {}
+		UnknownGroupError(const AUID &key, const std::string &where) :
+			Event(
+				"FragmentBuilder::UnknownGroupError",
+				"Unknown Group ID " + key.to_string() + " encountered",
+		where
+			) {}
 	};
 
+
+	class UnknownPropertyError : public Event {
+	public:
+		UnknownPropertyError(const AUID &key, const std::string &where) :
+			Event(
+				"FragmentBuilder::UnknownPropertyError",
+				"Unknown Property ID " + key.to_string() + " encountered",
+		where
+			) {}
+	};
+
+	class UnknownTypeError : public Event {
+	public:
+		UnknownTypeError(const AUID &key, const std::string &where) :
+			Event(
+				"FragmentBuilder::UnknownTypeError",
+				"Unknown Type ID " + key.to_string() + " encountered",
+		where
+			) {}
+	};
+
+	class VersionByteMismatchError : public Event {
+	public:
+		VersionByteMismatchError(const AUID &actual_key, const AUID &dict_key, const std::string &where) :
+			Event(
+				"FragmentBuilder::VersionByteMismatchError",
+				strf::fmt(
+					"The version byte of UL {} does not match the register value ({})",
+					actual_key.to_string(),
+					strf::to_string(dict_key.asUL().getVersion())
+				),
+		where
+			) {}
+	};
+
+	class UnexpectedDefinitionError : public Event {
+	public:
+		UnexpectedDefinitionError(const AUID &key, const std::string &expecteddef, const std::string &where) :
+			Event(
+				"FragmentBuilder::UnexpectedDefinitionError",
+				"Definition ID " + key.to_string() + " is not a " + expecteddef + " definition",
+		where
+			) {}
+	};
+
+	class CircularStrongReferenceError : public Event {
+	public:
+		CircularStrongReferenceError(const std::string &setid, const std::string &where) :
+			Event(
+				"FragmentBuilder::CircularStrongReferenceError",
+				"Circular Strong Reference to Set UID " + setid,
+		where
+			) {}
+	};
+
+	class MissingUniquePropertyError : public Event {
+	public:
+		MissingUniquePropertyError(const AUID &defid, const std::string &where) :
+			Event(
+				"FragmentBuilder::MissingUniquePropertyError",
+				strf::fmt(
+					"Group definition {} has no IsUnique element.",
+					defid.to_string()
+				),
+		where
+			) {}
+	};
+
+	class MissingStrongReferenceError : public Event {
+	public:
+		MissingStrongReferenceError(const UUID &ref, const std::string &where) :
+			Event(
+				"FragmentBuilder::MissingStrongReferenceError",
+				strf::fmt(
+					"Strong Reference target {} not found",
+					ref.to_string()
+				),
+		where
+			) {}
+	};
+
+	class MissingPrimaryPackageError : public Event {
+	public:
+		MissingPrimaryPackageError(const UUID &instanceid, const std::string &where) :
+			Event(
+				"FragmentBuilder::MissingPrimaryPackageError",
+				strf::fmt(
+					"Target Primary Package with Instance UID {} not found.",
+					instanceid.to_string()
+				),
+		where
+			) {}
+	};
+
+	class UnknownEnumValueError : public Event {
+	public:
+		UnknownEnumValueError(long long value, const std::string &where) :
+			Event(
+				"FragmentBuilder::UnknownEnumValueError",
+				"Undefined enumeration value: " + strf::to_string(value),
+		where
+			) {}
+	};
+
+	class IOError : public Event {
+	public:
+		IOError(const std::ios::failure &failure, const std::string &where) :
+			Event(
+				"FragmentBuilder::IOError",
+				failure.what(),
+		where
+			) {}
+	};
+
+	class UncaughtExceptionError : public Event {
+	public:
+		UncaughtExceptionError(const std::exception &e, const std::string &where) :
+			Event(
+				"FragmentBuilder::UncaughtExceptionError",
+				e.what(),
+		where
+			) {}
+
+		UncaughtExceptionError(const std::string &where) :
+			Event(
+				"FragmentBuilder::UncaughtExceptionError",
+				"Unknown error",
+		where
+			) {}
+	};
+
+	class UnexpectedByteOrderError : public Event {
+	public:
+		UnexpectedByteOrderError(const std::string &where) :
+			Event(
+				"FragmentBuilder::UnexpectedByteOrderError",
+				"ByteOrder set to little-endian: either the property is set"
+				"incorrectly or the file does not conform to MXF. Processing will"
+				"assume a big-endian byte order going forward.",
+				where
+			) {}
+	};
+
+
+	class UnknownByteOrderError : public Event {
+	public:
+		UnknownByteOrderError(const std::string &where) :
+			Event(
+				"FragmentBuilder::UnknownByteOrderError",
+				"Unknown Byte Order value",
+				where
+			) {}
+	};
+
+	class UnsupportedCharTypeError : public Event {
+	public:
+		UnsupportedCharTypeError(const std::string &typesymbol, const std::string &where) :
+			Event(
+				"FragmentBuilder::UnsupportedCharTypeError",
+				strf::fmt(
+						"Character type {} is not supported",
+					typesymbol),
+		where
+			) {}
+	};
+
+	class UnsupportedStringTypeError : public Event {
+	public:
+		UnsupportedStringTypeError(const std::string &typesymbol, const std::string &where) :
+			Event(
+				"FragmentBuilder::UnsupportedStringTypeError",
+				strf::fmt(
+					"String with element type {} is not supported",
+					typesymbol),
+		where
+			) {}
+	};
+	
+	class InvalidStrongReferenceTypeError : public Event {
+		public:
+			InvalidStrongReferenceTypeError(const std::string &typesymbol, const std::string &where) :
+				Event(
+					"FragmentBuilder::InvalidStrongReferenceTypeError",
+					strf::fmt(
+						"Target {} of Strong Reference Type is not a class",
+						typesymbol),
+			where
+				) {}
+	};
+	
+	class UnsupportedEnumTypeError : public Event {
+	public:
+		UnsupportedEnumTypeError(const std::string &typesymbol, const std::string &where) :
+			Event(
+				"FragmentBuilder::UnsupportedEnumTypeError",
+				strf::fmt(
+					"Enum type {} is not supported",
+					typesymbol),
+		where
+			) {}
+	};
+
+	class Exception : public std::runtime_error {
+	public:
+		Exception(const char* what) : std::runtime_error(what) {}
+		Exception(const std::string& what) : std::runtime_error(what) {}
+	};
 
 	class AUIDNameResolver {
 
 	public:
 
-		std::string getLocalName(const AUID &enumid) { return ""; };
+		virtual const std::string *getLocalName(const AUID &enumid) const = 0;
 
 	};
 
@@ -189,7 +382,11 @@ private:
 
 	static std::string generateISO8601Date(int year, int month, int day);
 
-	static void readCharacters(DOMElement *element, MXFInputStream &value, const CharacterTypeDefinition *definition, bool removeTrailingZeroes);
+	void readCharacters(DOMElement *element, MXFInputStream &value, const CharacterTypeDefinition *definition, bool removeTrailingZeroes);
+
+	static void addInformativeComment(DOMElement * element, std::string comment);
+
+	void appendCommentWithAUIDName(AUID auid, DOMElement * elem);
 
 	void applyRule3(DOMNode *node, const Group &group);
 

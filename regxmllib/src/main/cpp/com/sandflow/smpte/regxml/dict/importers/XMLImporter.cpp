@@ -392,7 +392,7 @@ void XMLImporter::fromDOM(DOMDocument & dom, MetaDictionary &md, EventHandler * 
 	);
 
 	if (!schemeIDElement) {
-		ev->fatal("SCHEME_ID_MISSING", "SchemeID element missing from the MetaDictionary");
+		ev->fatal("SCHEME_ID_MISSING", "SchemeID element missing from the MetaDictionary", "");
 
 		return;
 	}
@@ -410,7 +410,7 @@ void XMLImporter::fromDOM(DOMDocument & dom, MetaDictionary &md, EventHandler * 
 	);
 
 	if (!schemeURIElement) {
-		ev->fatal("SCHEME_URI_MISSING", "SchemeURI element missing from the MetaDictionary");
+		ev->fatal("SCHEME_URI_MISSING", "SchemeURI element missing from the MetaDictionary", "");
 
 		return;
 	}
@@ -428,7 +428,7 @@ void XMLImporter::fromDOM(DOMDocument & dom, MetaDictionary &md, EventHandler * 
 	);
 
 	if (!definitions) {
-		ev->fatal("METADEFINITIONS_MISSING", "MetaDefinitions element missing from the MetaDictionary");
+		ev->fatal("METADEFINITIONS_MISSING", "MetaDefinitions element missing from the MetaDictionary", "");
 
 		return;
 	}

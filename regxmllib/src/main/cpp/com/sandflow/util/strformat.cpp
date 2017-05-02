@@ -157,6 +157,21 @@ std::string strf::fmt(const std::string & fmt, const std::string & s1, const std
 	return ss.str();
 }
 
+std::string strf::bytesToString(const unsigned char * data, size_t len) {
+	std::stringstream ss;
+
+	ss << std::hex;
+
+	for (size_t i = 0; i < len; ++i) {
+
+		ss << std::setw(2) << std::setfill('0') << (int)data[i];
+
+	}
+
+
+	return ss.str();
+}
+
 std::string operator+(const std::string& s1, const char *s2) {
 	return s1 + std::string(s2);
 }

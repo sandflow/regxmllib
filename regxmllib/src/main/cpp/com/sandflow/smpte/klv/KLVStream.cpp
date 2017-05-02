@@ -52,7 +52,7 @@ AUID basic_klvistream<CharT, Traits>::readAUID() {
 
 	} else {
 
-		return AUID();
+		throw std::ios_base::failure("AUID read failed");
 
 	}
 
@@ -71,7 +71,7 @@ UL basic_klvistream<CharT, Traits>::readUL()
 
 	} else {
 
-		return UL();
+		throw std::ios_base::failure("UL read failed");
 
 	}
 }
@@ -86,7 +86,7 @@ unsigned long int basic_klvistream<CharT, Traits>::readBERLength()
 
 	this->read((char*) &b, 1);
 
-	if (! this->good()) return 0;
+	if (! this->good()) throw std::ios_base::failure("BER read failed");
 
 	if ((b & 0x80) == 0) {
 		return b;
@@ -97,7 +97,7 @@ unsigned long int basic_klvistream<CharT, Traits>::readBERLength()
 	if (bersz > 8) {
 		this->setstate(std::ios_base::failbit);
 
-		return 0;
+		throw std::ios_base::failure("Max BER length exceeded");
 	}
 
 	unsigned char *buf = new unsigned char[bersz];
@@ -115,7 +115,7 @@ unsigned long int basic_klvistream<CharT, Traits>::readBERLength()
 		if (val > ULONG_MAX) {
 			this->setstate(std::ios_base::failbit);
 
-			return 0;
+			throw std::ios_base::failure("Max BER value exceeded");
 		}
 	}
 
@@ -130,6 +130,8 @@ unsigned char basic_klvistream<CharT, Traits>::readUnsignedByte()
 
 	this->read((char*)&c, 1);
 
+	if (!this->good()) throw std::ios_base::failure("Unsigned byte read failed");
+
 	return c;
 }
 
@@ -139,6 +141,8 @@ char basic_klvistream<CharT, Traits>::readByte()
 	char c;
 
 	this->read(&c, 1);
+
+	if (!this->good()) throw std::ios_base::failure("Byte read failed");
 
 	return c;
 }
@@ -150,7 +154,7 @@ unsigned short basic_klvistream<CharT, Traits>::readUnsignedShort()
 
 	this->read((char*)&c, 2);
 
-	if (! this->good()) return 0;
+	if (!this->good()) throw std::ios_base::failure("Unsigned short read failed");
 
 	if (byteorder == KLVStream::BIG_ENDIAN_BYTE_ORDER) {
 
@@ -171,7 +175,7 @@ short basic_klvistream<CharT, Traits>::readShort()
 
 	this->read((char*)&c, 2);
 
-	if (!this->good()) return 0;
+	if (!this->good()) throw std::ios_base::failure("Short read failed");
 
 	if (byteorder == BIG_ENDIAN_BYTE_ORDER) {
 
@@ -193,7 +197,7 @@ unsigned long basic_klvistream<CharT, Traits>::readUnsignedLong()
 
 	this->read((char*)&c, 4);
 
-	if (!this->good()) return 0;
+	if (!this->good()) throw std::ios_base::failure("Unsigned long read failed");
 
 	if (byteorder == KLVStream::BIG_ENDIAN_BYTE_ORDER) {
 
@@ -213,7 +217,7 @@ long basic_klvistream<CharT, Traits>::readLong()
 
 	this->read((char*)&c, 4);
 
-	if (!this->good()) return 0;
+	if (!this->good()) throw std::ios_base::failure("Long read failed");
 
 	if (byteorder == KLVStream::BIG_ENDIAN_BYTE_ORDER) {
 
@@ -233,7 +237,7 @@ long long basic_klvistream<CharT, Traits>::readLongLong()
 
 	this->read((char*)&c, 8);
 
-	if (!this->good()) return 0;
+	if (!this->good()) throw std::ios_base::failure("Long long read failed");
 
 	if (byteorder == KLVStream::BIG_ENDIAN_BYTE_ORDER) {
 

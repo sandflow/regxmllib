@@ -58,7 +58,7 @@ public:
 
 		if (meta_dictionary.getDefinition(defid) != NULL) {
 
-			if (event_handler) event_handler->error("Duplicate definition AUID: ", def->identification.to_string());
+			if (event_handler) event_handler->error("Duplicate definition AUID: ", def->identification.to_string(), "");
 
 			return false;
 
@@ -66,7 +66,7 @@ public:
 
 		if (meta_dictionary.getDefinition(def->symbol) != NULL) {
 
-			if (event_handler) event_handler->error("Duplicate definition Symbol: ", def->symbol);
+			if (event_handler) event_handler->error("Duplicate definition Symbol: ", def->symbol, "");
 
 			return false;
 

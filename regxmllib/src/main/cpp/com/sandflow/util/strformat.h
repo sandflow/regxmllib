@@ -31,6 +31,7 @@
 #include <string>
 #include <sstream>
 #include <stdarg.h>  
+#include <iomanip>
 
 namespace strf {
 
@@ -73,13 +74,13 @@ namespace strf {
 
 	static const std::string EMPTY_STRING;
 
-	
-
 	std::string fmt(const std::string &fmt,
 		const std::string &s1,
 		const std::string &s2 = EMPTY_STRING,
 		const std::string &s3 = EMPTY_STRING,
 		const std::string &s4 = EMPTY_STRING);
+
+	std::string bytesToString(const unsigned char *data, size_t len);
 
 }
 

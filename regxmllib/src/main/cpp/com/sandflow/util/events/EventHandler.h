@@ -28,21 +28,21 @@
 #define COM_SANDFLOW_UTIL_EVENTS_EVENTHANDLER
 
 #include <string>
+#include "Event.h"
 
 class EventHandler {
 
 public:
 
-	class Event {
+	virtual bool info(const std::string &code, const std::string &reason, const std::string &where) = 0;
+	virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) = 0;
+	virtual bool error(const std::string &code, const std::string &reason, const std::string &where) = 0;
+	virtual bool fatal(const std::string &code, const std::string &reason, const std::string &where) = 0;
 
-	public:
-
-	};
-
-	virtual bool info(std::string code, std::string message) { return true; };
-	virtual bool warn(std::string code, std::string message) { return true; };
-	virtual bool error(std::string code, std::string message) { return true; };
-	virtual bool fatal(std::string code, std::string message) { return true; };
+	virtual bool info(const Event &evt) { return this->info(evt.getCode(), evt.getReason(), evt.getWhere()); };
+	virtual bool warn(const Event &evt) { return this->warn(evt.getCode(), evt.getReason(), evt.getWhere()); };
+	virtual bool error(const Event &evt) { return this->error(evt.getCode(), evt.getReason(), evt.getWhere()); };
+	virtual bool fatal(const Event &evt) { return this->fatal(evt.getCode(), evt.getReason(), evt.getWhere()); };
 
 };
 

@@ -27,11 +27,6 @@
 #include "FragmentBuilder.h"
 #include "com/sandflow/smpte/util/IDAU.h"
 
-const std::string FragmentBuilder::UNKNOWN_GROUP_ERROR_CODE = "FragmentBuilder::UNKNOWN_GROUP"; 
-const std::string FragmentBuilder::UNKNOWN_PROPERTY_ERROR_CODE = "FragmentBuilder::UNKNOWN_PROPERTY";
-const std::string FragmentBuilder::VERSION_BYTE_MISMATCH_ERROR_CODE = "FragmentBuilder::VERSION_BYTE_MISMATCH";
-const std::string FragmentBuilder::UNEXPECTED_DEFINITION_ERROR_CODE = "FragmentBuilder::UNEXPECTED_DEFINITION";
-
 const UL FragmentBuilder::INSTANCE_UID_ITEM_UL = "urn:smpte:ul:060e2b34.01010101.01011502.00000000";
 const UL FragmentBuilder::AUID_UL = "urn:smpte:ul:060e2b34.01040101.01030100.00000000";
 const UL FragmentBuilder::UUID_UL = "urn:smpte:ul:060e2b34.01040101.01030300.00000000";
@@ -115,19 +110,51 @@ FragmentBuilder::FragmentBuilder(const DefinitionResolver & defresolver, const s
 
 DOMDocumentFragment * FragmentBuilder::fromTriplet(const Group & group, DOMDocument & document) {
 
-	nsprefixes.clear();
+	DOMDocumentFragment *df = NULL;
 
-	DOMDocumentFragment *df = document.createDocumentFragment();
+	try {
 
-	applyRule3(df, group);
+		nsprefixes.clear();
 
-	/* NOTE: Hack to clean-up namespace prefixes */
-	for (std::map<std::string, std::string>::const_iterator it = this->nsprefixes.begin(); it != this->nsprefixes.end(); it++) {
+		df = document.createDocumentFragment();
 
-		((DOMElement*)df->getFirstChild())->setAttributeNS(DOMHelper::fromUTF8(XMLNS_NS), DOMHelper::fromUTF8("xmlns:" + it->second), DOMHelper::fromUTF8(it->first));
+		applyRule3(df, group);
+
+		/* NOTE: Hack to clean-up namespace prefixes */
+		for (std::map<std::string, std::string>::const_iterator it = this->nsprefixes.begin(); it != this->nsprefixes.end(); it++) {
+
+			((DOMElement*)df->getFirstChild())->setAttributeNS(DOMHelper::fromUTF8(XMLNS_NS), DOMHelper::fromUTF8("xmlns:" + it->second), DOMHelper::fromUTF8(it->first));
+		}
+
+
+
+	} catch (const std::exception &e) {
+
+		UncaughtExceptionError err(
+			e,
+			strf::fmt(
+				"Group key {}",
+				group.getKey().to_string()
+			)
+		);
+
+		evthandler->fatal(err);
+
+	} catch (...) {
+
+		UncaughtExceptionError err(
+			strf::fmt(
+				"Group key {}",
+				group.getKey().to_string()
+			)
+		);
+
+		evthandler->fatal(err);
+
 	}
 
 	return df;
+
 }
 
 std::string FragmentBuilder::getElementNSPrefix(const std::string & ns) {
@@ -146,13 +173,30 @@ std::string FragmentBuilder::getElementNSPrefix(const std::string & ns) {
 	}
 }
 
+
+void FragmentBuilder::addInformativeComment(DOMElement *element, std::string comment) {
+	element->appendChild(element->getOwnerDocument()->createComment(DOMHelper::fromUTF8(comment)));
+}
+
+void FragmentBuilder::appendCommentWithAUIDName(AUID auid, DOMElement* elem) {
+	if (this->anameresolver != NULL) {
+
+		const std::string *ename = this->anameresolver->getLocalName(auid);
+
+		if (ename != NULL) {
+			elem->appendChild(elem->getOwnerDocument()->createComment(DOMHelper::fromUTF8(*ename)));
+		}
+
+	}
+}
+
 void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
 
 	const Definition *definition = defresolver.getDefinition(group.getKey());
 
 	if (definition == NULL) {
 
-		evthandler->info(UNKNOWN_GROUP_ERROR_CODE, "Unknown Group UL " + group.getKey().to_string());
+		evthandler->info(UnknownGroupError(group.getKey(), ""));
 
 		return;
 	}
@@ -160,13 +204,17 @@ void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
 	if (definition->identification.isUL() &&
 		definition->identification.asUL().getVersion() != group.getKey().getVersion()) {
 
+
+
 		evthandler->info(
-			VERSION_BYTE_MISMATCH_ERROR_CODE,
-			"Group UL " +
-			group.getKey().to_string() +
-			" in file does not have the same version as in the register (" +
-			strf::to_string(definition->identification.asUL().getVersion()) +
-			")"
+			VersionByteMismatchError(
+				group.getKey(),
+				definition->identification.asUL(),
+				strf::fmt(
+					"Group UL {} in file does not have the same version byte as in the register",
+					group.getKey().to_string()
+				)
+			)
 		);
 
 	}
@@ -175,7 +223,9 @@ void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
 
 	if (!instance_of<ClassDefinition>(*definition)) {
 
-		evthandler->info(UNEXPECTED_DEFINITION_ERROR_CODE, "Definition other than class associated with Group UL " + group.getKey().to_string());
+		UnexpectedDefinitionError err(group.getKey(), "Class Definition", group.getKey().to_string());
+
+		evthandler->error(err);
 
 		return;
 
@@ -201,24 +251,18 @@ void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
 
 		if (itemdef == NULL) {
 
-			evthandler->info(
-				UNKNOWN_PROPERTY_ERROR_CODE,
+			UnknownPropertyError err((*item)->getKey(), "Group " + group.getKey().to_string());
+
+			evthandler->info(err);
+
+			addInformativeComment(
+				objelem,
 				strf::fmt(
-					"Unknown property {} at Group {}",
+					"Unknown property\nKey: {}\nData: {}",
 					(*item)->getKey().to_string(),
-					definition->symbol
+					strf::bytesToString((*item)->getValue(), (*item)->getLength())
 				)
 			);
-
-			/* TODO: inserts the full value of the dark property as a comment */
-			/*addInformativeComment(
-			objelem,
-			String.format(
-			"Unknown property\nKey: %s\nData: %s",
-			item.getKey().toString(),
-			bytesToString(item.getValue())
-			)
-			);*/
 
 			continue;
 
@@ -227,9 +271,11 @@ void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
 		/* make sure this is a property definition */
 		if (!instance_of<PropertyDefinition>(*itemdef) && !instance_of<PropertyAliasDefinition>(*itemdef)) {
 
-			evthandler->warn(UNEXPECTED_DEFINITION_ERROR_CODE, "Definition other than Property Definition associated with item UL " + itemdef->identification.to_string());
+			UnexpectedDefinitionError err(itemdef->identification, "Property", "Group " + group.getKey().to_string());
 
-			/*addInformativeComment(objelem, evt.getReason());*/
+			evthandler->warn(err);
+
+			addInformativeComment(objelem, err.getReason());
 
 			continue;
 		}
@@ -237,14 +283,9 @@ void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
 		/* warn if version byte of the property does not match the register version byte  */
 		if (itemdef->identification.isUL() && itemdef->identification.asUL().getVersion() != (*item)->getKey().asUL().getVersion()) {
 
-			evthandler->info(
-				VERSION_BYTE_MISMATCH_ERROR_CODE,
-				"UL " +
-				(*item)->getKey().to_string() +
-				" in file does not have the same version as in the register (" +
-				strf::to_string(itemdef->identification.asUL().getVersion()) +
-				")"
-			);
+			VersionByteMismatchError err((*item)->getKey(), itemdef->identification, "Group " + group.getKey().to_string());
+
+			evthandler->info(err);
 
 		}
 
@@ -284,26 +325,11 @@ void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
 						&& XMLString::compareIString(iidns, n->getNamespaceURI()) == 0
 						&& XMLString::compareIString(iid, n->getTextContent()) == 0) {
 
-						/* TODO */
+						CircularStrongReferenceError err(std::string(DOMHelper::toUTF8(iid)), "Group " + definition->symbol);
 
-						/*FragmentEvent evt = new FragmentEvent(
-						EventCodes.CIRCULAR_STRONG_REFERENCE,
-						String.format(
-						"Circular Strong Reference to Set UID %s",
-						iid
-						),
-						String.format(
-						"Group %s",
-						definition.getSymbol()
-						)
-						);
+						evthandler->info(err);
 
-						handleEvent(evt);
-
-						addInformativeComment(
-						(Element)node,
-						evt.getReason()
-						);*/
+						addInformativeComment((DOMElement*)n, err.getReason());
 
 						return;
 					}
@@ -330,285 +356,304 @@ void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
 
 	}
 
+
 }
 
 void FragmentBuilder::applyRule4(DOMElement * element, MXFInputStream & value, const PropertyDefinition * propdef) {
 
-	/*try {*/
+	try {
 
-	if (propdef->identification.equals(ByteOrder_UL)) {
+		if (propdef->identification.equals(ByteOrder_UL)) {
 
-		int byteorder;
+			int byteorder;
 
-		byteorder = value.readUnsignedShort();
+			byteorder = value.readUnsignedShort();
 
-		/* ISSUE: ST 2001-1 inverses these constants */
-		if (byteorder == 0x4D4D) {
+			/* ISSUE: ST 2001-1 inverses these constants */
+			if (byteorder == 0x4D4D) {
 
-			element->setTextContent(DOMHelper::fromUTF8(BYTEORDER_BE));
+				element->setTextContent(DOMHelper::fromUTF8(BYTEORDER_BE));
 
-		} else if (byteorder == 0x4949) {
+			} else if (byteorder == 0x4949) {
 
-			element->setTextContent(DOMHelper::fromUTF8(BYTEORDER_LE));
+				element->setTextContent(DOMHelper::fromUTF8(BYTEORDER_LE));
 
-			/* TODO: error */
+				UnexpectedByteOrderError err(ByteOrder_UL.to_string());
 
-			/*FragmentEvent evt = new FragmentEvent(
-			EventCodes.UNEXPECTED_BYTE_ORDER,
-			"ByteOrder property set to little-endian: either the property is set"
-			+ "incorrectly or the file does not conform to MXF. Processing will"
-			+ "assume a big-endian byte order going forward."
-			);
+				evthandler->error(err);
 
-			handleEvent(evt);
+				addInformativeComment(element, err.getReason());
 
-			addInformativeComment(element, evt.getReason());*/
+			} else {
+				throw new FragmentBuilder::UnknownByteOrderError(ByteOrder_UL.to_string());
+			}
 
 		} else {
-			throw new FragmentBuilder::Exception("Unknown ByteOrder value.");
-		}
 
-	} else {
+			/*if (propdef instanceof PropertyAliasDefinition) {
+			propdef = defresolver.getDefinition(((PropertyAliasDefinition)propdef).getOriginalProperty());
+			}*/
 
-		/*if (propdef instanceof PropertyAliasDefinition) {
-		propdef = defresolver.getDefinition(((PropertyAliasDefinition)propdef).getOriginalProperty());
-		}*/
+			const Definition *tdef = findBaseTypeDefinition(defresolver.getDefinition(propdef->type), this->defresolver);
 
-		const Definition *tdef = findBaseTypeDefinition(defresolver.getDefinition(propdef->type), this->defresolver);
+			/* return if no type definition is found */
+			if (tdef == NULL) {
 
-		/* return if no type definition is found */
-		if (tdef == NULL) {
-
-			/* TODO: ERROR */
-
-			/*FragmentEvent evt = new FragmentEvent(
-			EventCodes.UNKNOWN_TYPE,
-			String.format(
-			"Type %s not found",
-			((PropertyDefinition)propdef).getType().toString()
-			),
-			String.format(
-			"Property %s at Element %s",
-			propdef.getSymbol(),
-			element.getLocalName()
-			)
-			);
-
-			handleEvent(evt);
-
-			addInformativeComment(element, evt.getReason());*/
-
-			return;
-
-		}
-
-		if (propdef->identification.equals(PrimaryPackage_UL)) {
-
-			/* EXCEPTION: PrimaryPackage is encoded as the Instance UUID of the target set
-			but needs to be the UMID contained in the unique ID of the target set */
-			UUID uuid = value.readUUID();
-
-			/* is this a local reference through Instance ID? */
-
-			std::map<UUID, Set>::const_iterator iset = setresolver.find(uuid);
-
-			if (iset != setresolver.end()) {
-
-				bool foundUniqueID = false;
-
-				const std::vector<Triplet*> &items = iset->second.getItems();
-
-				/* find the unique identifier in the group */
-				for (std::vector<Triplet*>::const_iterator item = items.begin(); item != items.end(); item++) {
-
-					const Definition *itemdef = defresolver.getDefinition((*item)->getKey());
-
-					if (itemdef == NULL) {
-						continue;
-					}
-
-					if (! (instance_of<PropertyDefinition>(*itemdef) || instance_of<PropertyAliasDefinition>(*itemdef))) {
-						continue;
-					}
-
-					if (((PropertyDefinition*)itemdef)->uniqueIdentifier.is_valid() && ((PropertyDefinition*)itemdef)->uniqueIdentifier.get()) {
-
-						membuf mb((char*)(*item)->getValue(), (*item)->getLength());
-
-						MXFInputStream mis(&mb);
-
-						applyRule4(element, mis, (PropertyDefinition*)itemdef);
-
-						foundUniqueID = true;
-
-						break;
-
-					}
-
-				}
-
-				if (foundUniqueID != true) {
-
-					/* TODO: Error */
-
-					/*FragmentEvent evt = new FragmentEvent(
-					EventCodes.MISSING_UNIQUE,
-					String.format(
-					"Target Primary Package with Instance UID %s has no IsUnique element.",
-					uuid.toString()
-					),
-					String.format(
-					"Property %s at Element %s",
-					propdef.getSymbol(),
-					element.getLocalName()
+				throw UnknownTypeError(
+					propdef->type,
+					strf::fmt(
+						"Property {} at Element {}",
+						propdef->symbol,
+						DOMHelper::toUTF8(element->getLocalName()).c_str()
 					)
+				);
+
+
+			}
+
+			if (propdef->identification.equals(PrimaryPackage_UL)) {
+
+				/* EXCEPTION: PrimaryPackage is encoded as the Instance UUID of the target set
+				but needs to be the UMID contained in the unique ID of the target set */
+				UUID uuid = value.readUUID();
+
+				/* is this a local reference through Instance ID? */
+
+				std::map<UUID, Set>::const_iterator iset = setresolver.find(uuid);
+
+				if (iset != setresolver.end()) {
+
+					bool foundUniqueID = false;
+
+					const std::vector<Triplet*> &items = iset->second.getItems();
+
+					/* find the unique identifier in the group */
+					for (std::vector<Triplet*>::const_iterator item = items.begin(); item != items.end(); item++) {
+
+						const Definition *itemdef = defresolver.getDefinition((*item)->getKey());
+
+						if (itemdef == NULL) {
+							continue;
+						}
+
+						if (!(instance_of<PropertyDefinition>(*itemdef) || instance_of<PropertyAliasDefinition>(*itemdef))) {
+							continue;
+						}
+
+						if (((PropertyDefinition*)itemdef)->uniqueIdentifier.is_valid() && ((PropertyDefinition*)itemdef)->uniqueIdentifier.get()) {
+
+							membuf mb((char*)(*item)->getValue(), (*item)->getLength());
+
+							MXFInputStream mis(&mb);
+
+							applyRule4(element, mis, (PropertyDefinition*)itemdef);
+
+							foundUniqueID = true;
+
+							break;
+
+						}
+
+					}
+
+					if (foundUniqueID != true) {
+
+						throw MissingUniquePropertyError(
+							PrimaryPackage_UL,
+							strf::fmt(
+								"Element {}",
+								DOMHelper::toUTF8(element->getLocalName()).c_str()
+							)
+						);
+
+					}
+
+				} else {
+
+					throw MissingPrimaryPackageError(
+						uuid,
+						strf::fmt(
+							"Property {} at Element {}",
+							propdef->symbol,
+							DOMHelper::toUTF8(element->getLocalName()).c_str()
+						)
 					);
 
-					handleEvent(evt);
-
-					addInformativeComment(element, evt.getReason());*/
 
 				}
 
 			} else {
 
-				/* TODO: Error */
+				if (propdef->identification.equals(LinkedGenerationID_UL)
+					|| propdef->identification.equals(GenerationID_UL)
+					|| propdef->identification.equals(ApplicationProductID_UL)) {
 
-				/*
-				FragmentEvent evt = new FragmentEvent(
-				EventCodes.MISSING_PRIMARY_PACKAGE,
-				String.format(
-				"Target Primary Package with Instance UID %s not found",
-				uuid.toString()
-				),
-				String.format(
-				"Property %s at Element %s",
-				propdef.getSymbol(),
-				element.getLocalName()
-				)
-				);
+					/* EXCEPTION: LinkedGenerationID, GenerationID and ApplicationProductID
+					are encoded using UUID */
+					tdef = defresolver.getDefinition(UUID_UL);
+				}
 
-				handleEvent(evt);
-
-				addInformativeComment(element, evt.getReason());
-
-				*/
-
+				applyRule5(element, value, tdef);
 			}
-
-		} else {
-
-			if (propdef->identification.equals(LinkedGenerationID_UL)
-				|| propdef->identification.equals(GenerationID_UL)
-				|| propdef->identification.equals(ApplicationProductID_UL)) {
-
-				/* EXCEPTION: LinkedGenerationID, GenerationID and ApplicationProductID
-				are encoded using UUID */
-				tdef = defresolver.getDefinition(UUID_UL);
-			}
-
-			applyRule5(element, value, tdef);
 		}
+
+	} catch (const std::ios_base::failure &e) {
+
+		IOError err(
+			e,
+			strf::fmt(
+				"Property {} at Element {}",
+				propdef->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			));
+
+
+		evthandler->error(err);
+
+		addInformativeComment(element, err.getReason());
+
+	} catch (const Event &e) {
+
+		evthandler->error(e);
+
+		addInformativeComment(element, e.getReason());
+
+	} catch (const std::exception &e) {
+
+		UncaughtExceptionError err(
+			e,
+			strf::fmt(
+				"Property {} at Element {}",
+				propdef->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
+		);
+
+		evthandler->error(err);
+
+		addInformativeComment(element, err.getReason());
+
+	} catch (...) {
+
+		UncaughtExceptionError err(
+			strf::fmt(
+				"Property {} at Element {}",
+				propdef->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
+		);
+
+		evthandler->error(err);
+
+		addInformativeComment(element, err.getReason());
+
 	}
-
-	/*} catch (EOFException eof) {
-
-	FragmentEvent evt = new FragmentEvent(
-	EventCodes.VALUE_LENGTH_MISMATCH,
-	"Value too short",
-	String.format(
-	"Property %s at Element %s",
-	propdef.getSymbol(),
-	element.getLocalName()
-	)
-	);
-
-	handleEvent(evt);
-
-	addInformativeComment(element, evt.getReason());
-
-	}*/
 
 }
 
 void FragmentBuilder::applyRule5(DOMElement * element, MXFInputStream & value, const Definition * definition) {
 
-	if (instance_of<CharacterTypeDefinition>(*definition)) {
+	try {
 
-		applyRule5_1(element, value, (CharacterTypeDefinition*)definition);
+		if (instance_of<CharacterTypeDefinition>(*definition)) {
 
-	} else if (instance_of<EnumerationTypeDefinition>(*definition)) {
+			applyRule5_1(element, value, (CharacterTypeDefinition*)definition);
 
-		applyRule5_2(element, value, (EnumerationTypeDefinition*)definition);
+		} else if (instance_of<EnumerationTypeDefinition>(*definition)) {
 
-	} else if (instance_of<ExtendibleEnumerationTypeDefinition>(*definition)) {
+			applyRule5_2(element, value, (EnumerationTypeDefinition*)definition);
 
-		applyRule5_3(element, value, (ExtendibleEnumerationTypeDefinition*)definition);
+		} else if (instance_of<ExtendibleEnumerationTypeDefinition>(*definition)) {
 
-	} else if (instance_of<FixedArrayTypeDefinition>(*definition)) {
+			applyRule5_3(element, value, (ExtendibleEnumerationTypeDefinition*)definition);
 
-		applyRule5_4(element, value, (FixedArrayTypeDefinition*)definition);
+		} else if (instance_of<FixedArrayTypeDefinition>(*definition)) {
 
-	} else if (instance_of<IndirectTypeDefinition>(*definition)) {
+			applyRule5_4(element, value, (FixedArrayTypeDefinition*)definition);
 
-		applyRule5_5(element, value, (IndirectTypeDefinition*)definition);
+		} else if (instance_of<IndirectTypeDefinition>(*definition)) {
 
-	} else if (instance_of<IntegerTypeDefinition>(*definition)) {
+			applyRule5_5(element, value, (IndirectTypeDefinition*)definition);
 
-		applyRule5_6(element, value, (IntegerTypeDefinition*)definition);
+		} else if (instance_of<IntegerTypeDefinition>(*definition)) {
 
-	} else if (instance_of<OpaqueTypeDefinition>(*definition)) {
+			applyRule5_6(element, value, (IntegerTypeDefinition*)definition);
 
-		applyRule5_7(element, value, (OpaqueTypeDefinition*)definition);
+		} else if (instance_of<OpaqueTypeDefinition>(*definition)) {
 
-	} else if (instance_of<RecordTypeDefinition>(*definition)) {
+			applyRule5_7(element, value, (OpaqueTypeDefinition*)definition);
 
-		applyRule5_8(element, value, (RecordTypeDefinition*)definition);
+		} else if (instance_of<RecordTypeDefinition>(*definition)) {
 
-	} else if (instance_of<RenameTypeDefinition>(*definition)) {
+			applyRule5_8(element, value, (RecordTypeDefinition*)definition);
 
-		applyRule5_9(element, value, (RenameTypeDefinition*)definition);
+		} else if (instance_of<RenameTypeDefinition>(*definition)) {
 
-	} else if (instance_of<SetTypeDefinition>(*definition)) {
+			applyRule5_9(element, value, (RenameTypeDefinition*)definition);
 
-		applyRule5_10(element, value, (SetTypeDefinition*)definition);
+		} else if (instance_of<SetTypeDefinition>(*definition)) {
 
-	} else if (instance_of<StreamTypeDefinition>(*definition)) {
+			applyRule5_10(element, value, (SetTypeDefinition*)definition);
 
-		applyRule5_11(element, value, (StreamTypeDefinition*)definition);
+		} else if (instance_of<StreamTypeDefinition>(*definition)) {
 
-	} else if (instance_of<StringTypeDefinition>(*definition)) {
+			applyRule5_11(element, value, (StreamTypeDefinition*)definition);
 
-		applyRule5_12(element, value, (StringTypeDefinition*)definition);
+		} else if (instance_of<StringTypeDefinition>(*definition)) {
 
-	} else if (instance_of<StrongReferenceTypeDefinition>(*definition)) {
+			applyRule5_12(element, value, (StringTypeDefinition*)definition);
 
-		applyRule5_13(element, value, (StrongReferenceTypeDefinition*)definition);
+		} else if (instance_of<StrongReferenceTypeDefinition>(*definition)) {
 
-	} else if (instance_of<VariableArrayTypeDefinition>(*definition)) {
+			applyRule5_13(element, value, (StrongReferenceTypeDefinition*)definition);
 
-		applyRule5_14(element, value, (VariableArrayTypeDefinition*)definition);
+		} else if (instance_of<VariableArrayTypeDefinition>(*definition)) {
 
-	} else if (instance_of<WeakReferenceTypeDefinition>(*definition)) {
+			applyRule5_14(element, value, (VariableArrayTypeDefinition*)definition);
 
-		applyRule5_15(element, value, (WeakReferenceTypeDefinition*)definition);
+		} else if (instance_of<WeakReferenceTypeDefinition>(*definition)) {
 
-		/*} else if (instance_of<FloatTypeDefinition>(*definition)) {
+			applyRule5_15(element, value, (WeakReferenceTypeDefinition*)definition);
 
-		applyRule5_alpha(element, value, (FloatTypeDefinition*)definition);*/
+			/*} else if (instance_of<FloatTypeDefinition>(*definition)) {
 
-	} else if (instance_of<LensSerialFloatTypeDefinition>(*definition)) {
+			applyRule5_alpha(element, value, (FloatTypeDefinition*)definition);*/
 
-		applyRule5_beta(element, value, (LensSerialFloatTypeDefinition*)definition);
+		} else if (instance_of<LensSerialFloatTypeDefinition>(*definition)) {
 
-	} else {
+			applyRule5_beta(element, value, (LensSerialFloatTypeDefinition*)definition);
 
-		throw FragmentBuilder::Exception(
+		} else {
+
+			throw FragmentBuilder::Exception(
+				strf::fmt(
+					"Unknown Kind for Definition {} in Rule 5.",
+					definition->symbol
+				)
+			);
+
+		}
+
+	} catch (const std::ios_base::failure &e) {
+
+		IOError err(
+			e,
 			strf::fmt(
-				"Unknown Kind for Definition {} in Rule 5.",
-				definition->symbol
-			)
-		);
+				"Definition {} at Element {}",
+				definition->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			));
+
+
+		evthandler->error(err);
+
+		addInformativeComment(element, err.getReason());
+
+	} catch (const Event &e) {
+
+		evthandler->error(e);
+
+		addInformativeComment(element, e.getReason());
 
 	}
 
@@ -661,22 +706,19 @@ void FragmentBuilder::readCharacters(DOMElement * element, MXFInputStream & valu
 
 	} else {
 
-		/*
-		FragmentEvent evt = new FragmentEvent(
-		EventCodes.UNSUPPORTED_CHAR_TYPE,
-		String.format(
-		"Character type %s is not supported at Element %s",
-		definition.getSymbol(),
-		element.getLocalName()
-		)
+		throw UnsupportedCharTypeError(definition->symbol,
+			strf::fmt(
+				"Element {}",
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
 		);
 
-		handleEvent(evt);
+		/*evthandler->error(err);
 
-		addInformativeComment(element, evt.getReason());
-		*/
+		addInformativeComment(element, err.getReason());
 
-		return;
+
+		return;*/
 
 	}
 
@@ -702,21 +744,19 @@ void FragmentBuilder::applyRule5_2(DOMElement * element, MXFInputStream & value,
 
 	if (!instance_of<IntegerTypeDefinition>(*bdef)) {
 
-		/*FragmentEvent evt = new FragmentEvent(
-		EventCodes.UNSUPPORTED_ENUM_TYPE,
-		"Enum does not have an Integer base type.",
-		String.format(
-		"Enum %s at Element %s",
-		definition.getSymbol(),
-		element.getLocalName()
-		)
+		throw UnsupportedEnumTypeError(definition->symbol,
+			strf::fmt(
+				"Enum {} at Element {}",
+				definition->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
 		);
 
-		handleEvent(evt);
+		/*evthandler->error(err);
 
-		addInformativeComment(element, evt.getReason());*/
+		addInformativeComment(element, err.getReason());
 
-		return;
+		return;*/
 	}
 
 	IntegerTypeDefinition* idef = (IntegerTypeDefinition*)bdef;
@@ -757,104 +797,56 @@ void FragmentBuilder::applyRule5_2(DOMElement * element, MXFInputStream & value,
 		break;
 
 	default:
-		throw FragmentBuilder::Exception("Cannot handle Enumerations Definitions wider than 4 bytes");
+		throw FragmentBuilder::Exception("Enumerations Definitions wider than 4 bytes are not supported");
 
 	}
 
 
 	std::string str;
 
-	if (!value.good()) {
+	if (definition->elementType.equals(Boolean_UL)) {
 
-		str = "ERROR";
+		/* find the "true" enum element */
+		/* MXF can encode "true" as any value other than 0 */
 
-		/*FragmentEvent evt = new FragmentEvent(
-		EventCodes.VALUE_LENGTH_MISMATCH,
-		"No data",
-		String.format(
-		"Enum %s at Element %s",
-		definition.getSymbol(),
-		element.getLocalName()
-		)
-		);
+		for (std::vector<EnumerationTypeDefinition::Element>::const_iterator it = definition->elements.begin();
+			it != definition->elements.end();
+			it++) {
 
-		handleEvent(evt);
-
-		addInformativeComment(element, evt.getReason());*/
+			if (bi == 0 && it->value == 0 || bi != 0 && it->value == 1) {
+				str = it->name;
+			}
+		}
 
 	} else {
 
-		/* always try to read the value even if the length is not as expected */
+		for (std::vector<EnumerationTypeDefinition::Element>::const_iterator it = definition->elements.begin();
+			it != definition->elements.end();
+			it++) {
 
-		if (definition->elementType.equals(Boolean_UL)) {
-
-			/* find the "true" enum element */
-			/* MXF can encode "true" as any value other than 0 */
-
-			for (std::vector<EnumerationTypeDefinition::Element>::const_iterator it = definition->elements.begin();
-				it != definition->elements.end();
-				it++) {
-
-				if (bi == 0 && it->value == 0 || bi != 0 && it->value == 1) {
-					str = it->name;
-				}
+			if (it->value == bi) {
+				str = it->name;
 			}
-
-		} else {
-
-			for (std::vector<EnumerationTypeDefinition::Element>::const_iterator it = definition->elements.begin();
-				it != definition->elements.end();
-				it++) {
-
-				if (it->value == bi) {
-					str = it->name;
-				}
-			}
-
 		}
 
-		if (str.size() == 0) {
+	}
 
-			str = "UNDEFINED";
+	if (str.size() == 0) {
 
-			/*FragmentEvent evt = new FragmentEvent(
-			EventCodes.UNKNOWN_ENUM_VALUE,
-			String.format(
-			"Undefined value %d",
-			bi.intValue()
-			),
-			String.format(
-			"Enum %s at Element %s",
-			definition.getSymbol(),
-			element.getLocalName()
+		str = "UNDEFINED";
+
+		UnknownEnumValueError err(bi,
+			strf::fmt(
+				"Enum {} at Element {}",
+				definition->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
 			)
-			);
+		);
 
-			handleEvent(evt);
+		evthandler->error(err);
 
-			addInformativeComment(element, evt.getReason());*/
+		addInformativeComment(element, err.getReason());
 
-			/*} else if (br != len) {
-
-			FragmentEvent evt = new FragmentEvent(
-			EventCodes.VALUE_LENGTH_MISMATCH,
-			String.format(
-			"Incorrect length: expected %d and received %d",
-			len,
-			br
-			),
-			String.format(
-			"Enumeration %s at Element %s",
-			definition.getSymbol(),
-			element.getLocalName()
-			)
-			);
-
-			handleEvent(evt);
-
-			addInformativeComment(element, evt.getReason());*/
-
-		}
 	}
 
 	element->setTextContent(DOMHelper::fromUTF8(str));
@@ -870,7 +862,7 @@ void FragmentBuilder::applyRule5_3(DOMElement * element, MXFInputStream & value,
 	defeats the purpose of the type. This issue could be addressed at the next revision opportunity. */
 	element->setTextContent(DOMHelper::fromUTF8(ul.to_string()));
 
-	/*appendCommentWithAUIDName(anameresolver, new AUID(ul), element);*/
+	this->appendCommentWithAUIDName(ul, element);
 
 }
 
@@ -931,31 +923,18 @@ void FragmentBuilder::applyRule5_5(DOMElement * element, MXFInputStream & value,
 		bo = KLVStream::BIG_ENDIAN_BYTE_ORDER;
 		break;
 	default:
-		throw new FragmentBuilder::Exception("Unknown Indirect Byte Order value.");
+		throw UnknownByteOrderError(
+			strf::fmt(
+				"Indirect Definition {} at Element {}",
+				definition->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
+		);
 	}
 
 	MXFInputStream orderedval(value.rdbuf(), bo);
 
 	IDAU idau = orderedval.readIDAU();
-
-	/*if (idau == null) {
-
-		FragmentEvent evt = new FragmentEvent(
-			EventCodes.INVALID_IDAU,
-			"Invalid IDAU",
-			String.format(
-				"Indirect Type %s at Element %s",
-				definition.getSymbol(),
-				element.getLocalName()
-			)
-		);
-
-		handleEvent(evt);
-
-		addInformativeComment(element, evt.getReason());
-
-		return;
-	}*/
 
 	AUID auid = idau.asAUID();
 
@@ -963,24 +942,20 @@ void FragmentBuilder::applyRule5_5(DOMElement * element, MXFInputStream & value,
 
 	if (def == NULL) {
 
-		/*FragmentEvent evt = new FragmentEvent(
-			EventCodes.UNKNOWN_TYPE,
-			String.format(
-				"No definition found for indirect type %s.",
-				auid.toString()
-			),
-			String.format(
-				"Indirect Type %s at Element %s",
-				definition.getSymbol(),
-				element.getLocalName()
+		throw UnknownTypeError(
+			auid.to_string(),
+			strf::fmt(
+				"Indirect Type {} at Element {}",
+				definition->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
 			)
 		);
 
-		handleEvent(evt);
+		/*evthandler->error(err);
 
-		addInformativeComment(element, evt.getReason());*/
+		addInformativeComment(element, err.getReason());
 
-		return;
+		return;*/
 	}
 
 	// create reg:actualType attribute
@@ -1068,11 +1043,11 @@ void FragmentBuilder::applyRule5_6(DOMElement * element, MXFInputStream & value,
 		throw FragmentBuilder::Exception("Unsupported Integer type");
 	}
 
-	if (value.gcount() == 0 || (!value.good())) {
+	/*if (value.gcount() == 0 || (!value.good())) {
 
 		element->setTextContent(DOMHelper::fromUTF8("Nan"));
 
-		/*FragmentEvent evt = new FragmentEvent(
+		FragmentEvent evt = new FragmentEvent(
 		EventCodes.VALUE_LENGTH_MISMATCH,
 		"No data",
 		String.format(
@@ -1084,9 +1059,9 @@ void FragmentBuilder::applyRule5_6(DOMElement * element, MXFInputStream & value,
 
 		handleEvent(evt);
 
-		addInformativeComment(element, evt.getReason());*/
+		addInformativeComment(element, evt.getReason());
 
-	}
+	}*/
 
 
 }
@@ -1136,7 +1111,7 @@ void FragmentBuilder::applyRule5_8(DOMElement * element, MXFInputStream & value,
 
 		element->setTextContent(DOMHelper::fromUTF8(auid.to_string()));
 
-		/*appendCommentWithAUIDName(anameresolver, auid, element);*/
+		this->appendCommentWithAUIDName(auid, element);
 
 	} else if (definition->identification.equals(DateStruct_UL)) {
 
@@ -1259,6 +1234,13 @@ void FragmentBuilder::applyRule5_12(DOMElement * element, MXFInputStream & value
 	*/
 	if (!instance_of<CharacterTypeDefinition>(*chrdef)) {
 
+		throw UnsupportedStringTypeError(definition->symbol,
+			strf::fmt(
+				"Element {}",
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
+		);
+
 		/*FragmentEvent evt = new FragmentEvent(
 		EventCodes.UNSUPPORTED_STRING_TYPE,
 		String.format(
@@ -1294,6 +1276,14 @@ void FragmentBuilder::applyRule5_13(DOMElement * element, MXFInputStream & value
 
 	if (!instance_of<ClassDefinition>(*tdef)) {
 
+		throw InvalidStrongReferenceTypeError(
+			definition->symbol,
+			strf::fmt(
+				"Element {}",
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
+		);
+
 		/*FragmentEvent evt = new FragmentEvent(
 		EventCodes.INVALID_STRONG_REFERENCE_TYPE,
 		String.format(
@@ -1309,9 +1299,9 @@ void FragmentBuilder::applyRule5_13(DOMElement * element, MXFInputStream & value
 
 		handleEvent(evt);
 
-		addInformativeComment(element, evt.getReason());*/
+		addInformativeComment(element, evt.getReason());
 
-		return;
+		return;*/
 
 	}
 
@@ -1324,6 +1314,14 @@ void FragmentBuilder::applyRule5_13(DOMElement * element, MXFInputStream & value
 		applyRule3(element, it->second);
 
 	} else {
+
+		throw MissingStrongReferenceError(
+			uuid,
+			strf::fmt(
+				"Element {}",
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
+		);
 
 		/*FragmentEvent evt = new FragmentEvent(
 		EventCodes.STRONG_REFERENCE_NOT_FOUND,
@@ -1340,7 +1338,10 @@ void FragmentBuilder::applyRule5_13(DOMElement * element, MXFInputStream & value
 
 		handleEvent(evt);
 
-		addInformativeComment(element, evt.getReason());*/
+		addInformativeComment(element, evt.getReason());
+
+		return;
+		*/
 
 	}
 
@@ -1379,9 +1380,6 @@ void FragmentBuilder::applyRule5_14(DOMElement * element, MXFInputStream & value
 
 	const Definition *tdef = findBaseDefinition(defresolver.getDefinition(definition->elementType));
 
-	/*try {*/
-
-
 	if (definition->symbol == "DataValue") {
 
 		/* RULE 5.14.2 */
@@ -1392,7 +1390,7 @@ void FragmentBuilder::applyRule5_14(DOMElement * element, MXFInputStream & value
 		char c;
 
 		while (value.get(c)) {
-			ss << std::hex << std::setw(2) << std::setfill('0') << ((unsigned int) c & 0xFF);
+			ss << std::hex << std::setw(2) << std::setfill('0') << ((unsigned int)c & 0xFF);
 		}
 
 		element->setTextContent(DOMHelper::fromUTF8(ss.str()));
@@ -1417,28 +1415,6 @@ void FragmentBuilder::applyRule5_14(DOMElement * element, MXFInputStream & value
 
 	}
 
-	/*} catch (UnsupportedEncodingException e) {
-
-	throw new RuntimeException(e);
-
-	} catch (EOFException eof) {
-
-	FragmentEvent evt = new FragmentEvent(
-	EventCodes.VALUE_LENGTH_MISMATCH,
-	"Value too short",
-	String.format(
-	"Array %s at Element %s",
-	definition.getSymbol(),
-	element.getLocalName()
-	)
-	);
-
-	handleEvent(evt);
-
-	addInformativeComment(element, evt.getReason());
-
-	}
-	*/
 }
 
 void FragmentBuilder::applyRule5_15(DOMElement * element, MXFInputStream & value, const WeakReferenceTypeDefinition * typedefinition) {
@@ -1458,25 +1434,15 @@ void FragmentBuilder::applyRule5_15(DOMElement * element, MXFInputStream & value
 
 	if (uniquepropdef == NULL) {
 
-		/*
-		FragmentEvent evt = new FragmentEvent(
-		EventCodes.MISSING_UNIQUE,
-		String.format(
-		"Weak reference target %s has no IsUnique element.",
-		classdef.getSymbol()
-		),
-		String.format(
-		"Type %s at Element %s",
-		typedefinition.getSymbol(),
-		element.getLocalName()
-		)
+		throw MissingUniquePropertyError(
+			classdef->identification,
+			strf::fmt(
+				"Definition {} at Element {}",
+				typedefinition->symbol,
+				DOMHelper::toUTF8(element->getLocalName()).c_str()
+			)
 		);
 
-		handleEvent(evt);
-
-		addInformativeComment(element, evt.getReason());*/
-
-		return;
 	}
 
 	applyRule4(element, value, uniquepropdef);

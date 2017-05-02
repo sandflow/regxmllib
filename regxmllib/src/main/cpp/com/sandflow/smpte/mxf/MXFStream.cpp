@@ -47,6 +47,8 @@ UUID basic_mxfistream<CharT, Traits>::readUUID()
 
 	this->read((char*)buf, 16);
 
+	if (!this->good()) throw std::ios_base::failure("UUID read failed");
+
 	if (this->getByteOrder() == KLVStream::LITTLE_ENDIAN_BYTE_ORDER) {
 
 		uuidLEtoBE(buf);
@@ -59,7 +61,7 @@ UUID basic_mxfistream<CharT, Traits>::readUUID()
 
 	} else {
 
-		return UUID();
+		throw std::ios_base::failure("UUID read failed");
 
 	}
 }
@@ -71,13 +73,15 @@ UMID basic_mxfistream<CharT, Traits>::readUMID()
 
 	this->read((char*)buf, sizeof(buf));
 
+	if (!this->good()) throw std::ios_base::failure("UUID read failed");
+
 	if (this->good()) {
 
 		return UMID(buf);
 
 	} else {
 
-		return UMID();
+		throw std::ios_base::failure("UMID read failed");
 
 	}
 }
@@ -88,6 +92,8 @@ IDAU basic_mxfistream<CharT, Traits>::readIDAU()
 	unsigned char buf[16];
 
 	this->read((char*)buf, sizeof(buf));
+
+	if (!this->good()) throw std::ios_base::failure("IDAU read failed");
 
 	if (this->getByteOrder() == KLVStream::LITTLE_ENDIAN_BYTE_ORDER) {
 
@@ -101,7 +107,7 @@ IDAU basic_mxfistream<CharT, Traits>::readIDAU()
 
 	} else {
 
-		return IDAU();
+		throw std::ios_base::failure("IDAU read failed");
 
 	}
 }

@@ -37,8 +37,6 @@
 #include "xercesc/dom/DOMErrorHandler.hpp"
 #include <string>
 #include <fstream>
-//#include <unistd.h>
-//#include <direct.h>
 
 XERCES_CPP_NAMESPACE_USE
 
@@ -60,6 +58,30 @@ public:
 	}
 
 	virtual void resetErrors() {}
+
+};
+
+class MyEventHandler : public EventHandler {
+public:
+	virtual bool info(const std::string &code, const std::string &reason, const std::string &where) {
+		std::cerr << code << ": " << reason << " at " << where << std::endl;
+		return true;
+	}
+
+	virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) {
+		std::cerr << code << ": " << reason << " at " << where << std::endl;
+		return true;
+	}
+
+	virtual bool error(const std::string &code, const std::string &reason, const std::string &where) {
+		std::cerr << code << ": " << reason << " at " << where << std::endl;
+		return true;
+	}
+
+	virtual bool fatal(const std::string &code, const std::string &reason, const std::string &where) {
+		std::cerr << code << ": " << reason << " at " << where << std::endl;
+		return true;
+	}
 
 };
 
@@ -103,6 +125,8 @@ int main(int argc, void **argv) {
 
 	MetaDictionaryCollection mds;
 
+	MyEventHandler evthandler;
+
 	for (int i = 0; i < 26; i++) {
 
 		std::string dict_path = "resources/regxml-dicts/";
@@ -117,7 +141,7 @@ int main(int argc, void **argv) {
 
 		MetaDictionary *md = new MetaDictionary();
 
-		XMLImporter::fromDOM(*doc, *md);
+		XMLImporter::fromDOM(*doc, *md, &evthandler);
 
 		mds.addDictionary(md);
 
@@ -130,7 +154,7 @@ int main(int argc, void **argv) {
 	
 	/*XMLFormatTarget *ft = new StdOutFormatTarget();*/
 	
-	LocalFileFormatTarget *ft = new LocalFileFormatTarget("audio1.mxf.xml");
+	LocalFileFormatTarget *ft = new LocalFileFormatTarget("indirect.mxf.xml");
 
 
 	output->setByteStream(ft);
@@ -140,13 +164,13 @@ int main(int argc, void **argv) {
 
 	DOMDocument *doc = impl->createDocument();
 
-	std::ifstream f("resources/sample-files/audio1.mxf", std::ifstream::in | std::ifstream::binary);
+	std::ifstream f("resources/sample-files/indirect.mxf", std::ifstream::in | std::ifstream::binary);
 
 	if (!f.good()) exit(1);
 
 	AUID rootclasskey = "urn:smpte:ul:060e2b34.027f0101.0d010101.01012400";
 
-	DOMDocumentFragment* frag = MXFFragmentBuilder::fromInputStream(f, mds, NULL, &rootclasskey, *doc);
+	DOMDocumentFragment* frag = MXFFragmentBuilder::fromInputStream(f, mds, NULL, NULL, *doc, &evthandler);
 
 	doc->appendChild(frag);
 
