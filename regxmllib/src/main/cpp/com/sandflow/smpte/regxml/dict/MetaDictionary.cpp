@@ -52,8 +52,6 @@ public:
 
 	bool _visit(Definition* def) {
 
-		// TODO: normalize this 
-
 		const AUID defid = MetaDictionary::createNormalizedAUID(def->identification);
 
 		if (meta_dictionary.getDefinition(defid) != NULL) {
@@ -88,17 +86,11 @@ public:
 
 			/* add to member index */
 
-			/* TODO: normalize this */
+			if (def.parentClass.is_valid()) {
 
-			const AUID *parentauid = &(def.parentClass);
+				const AUID parentauid = MetaDictionary::createNormalizedAUID(def.parentClass.get());
 
-			if (parentauid) {
-
-				/* TODO: normalize this */
-
-				AUID defid = def.identification;
-
-				meta_dictionary.subclassesOf[*parentauid].insert(defid);
+				meta_dictionary.subclassesOf[parentauid].insert(def.identification);
 			}
 
 		}
@@ -114,15 +106,9 @@ public:
 
 			/* add to member index */
 
-			/* TODO: normalize this */
+			const AUID parentauid = MetaDictionary::createNormalizedAUID(def.memberOf);
 
-			AUID parentauid = def.memberOf;
-
-			/* TODO: normalize this */
-
-			AUID defid = def.identification;
-
-			meta_dictionary.membersOf[parentauid].insert(defid);
+			meta_dictionary.membersOf[parentauid].insert(def.identification);
 		}
 
 
@@ -131,16 +117,10 @@ public:
 
 	virtual void visit(const PropertyAliasDefinition & def) {
 		Definition *def_copy = new PropertyAliasDefinition(def);
+		
+		const AUID parentauid = MetaDictionary::createNormalizedAUID(def.memberOf);
 
-		/* TODO: check if present */
-
-		AUID parentauid = def.memberOf;
-
-		/* TODO: normalize this */
-
-		AUID defid = def.identification;
-
-		meta_dictionary.membersOf[parentauid].insert(defid);
+		meta_dictionary.membersOf[parentauid].insert(def.identification);
 
 	}
 
@@ -277,15 +257,21 @@ const Definition *  MetaDictionary::getDefinition(const std::string & symbol) co
 }
 
 std::set<AUID> MetaDictionary::getSubclassesOf(const AUID & identification) const {
-	if (subclassesOf.find(identification) == subclassesOf.end()) return std::set<AUID>();
 
-	return subclassesOf.at(identification);
+	const AUID norm_auid = MetaDictionary::createNormalizedAUID(identification);
+
+	if (subclassesOf.find(norm_auid) == subclassesOf.end()) return std::set<AUID>();
+
+	return subclassesOf.at(norm_auid);
 }
 
 std::set<AUID> MetaDictionary::getMembersOf(const AUID & identification) const {
-	if (membersOf.find(identification) == membersOf.end()) return std::set<AUID>();
 
-	return membersOf.at(identification);
+	const AUID norm_auid = MetaDictionary::createNormalizedAUID(identification);
+
+	if (membersOf.find(norm_auid) == membersOf.end()) return std::set<AUID>();
+
+	return membersOf.at(norm_auid);
 }
 
 void MetaDictionary::setSchemeID(const AUID & pSchemeID) {

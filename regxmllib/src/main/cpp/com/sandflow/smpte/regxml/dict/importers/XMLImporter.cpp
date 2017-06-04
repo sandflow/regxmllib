@@ -634,12 +634,14 @@ void XMLImporter::fromDOM(DOMDocument & dom, MetaDictionary &md, EventHandler * 
 
 			} else {
 
-				/* TODO : error, unknown type */
+				ev->error("UNKNOW_TYPE", "Unknow type: " + localname, "");
 
 			}
 
 		} catch (XMLImporter::Exception e) {
-			std::cout << e.what() << std::endl;
+
+			ev->error("EXCEPTION", "Message: " + std::string(e.what()), "");
+
 		}
 
 		curelement = curelement->getNextElementSibling();

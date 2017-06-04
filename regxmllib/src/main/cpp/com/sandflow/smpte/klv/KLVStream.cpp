@@ -258,5 +258,12 @@ unsigned long long basic_klvistream<CharT, Traits>::readUnsignedLongLong()
 	return (uint64_t) basic_klvistream<CharT, Traits>::readLongLong();
 }
 
+template<class CharT, class Traits>
+void basic_klvistream<CharT, Traits>::readBytes(unsigned char * buffer, size_t length) {
+	this->read((char*)buffer, length);
+
+	if (!this->good()) throw std::ios_base::failure("Read bytes failed");
+}
+
 
 template class basic_klvistream<char>;

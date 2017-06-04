@@ -70,27 +70,10 @@ void MemoryTriplet::fromStream(std::istream &is) {
 
 	this->key = kis.readAUID();
 
-	if (! kis.good()) {
-
-		/* THROW ERROR !!!!! */
-
-		return;
-	}
-
 	size_t len = kis.readBERLength();
-
-	if (! kis.good()) {
-		return;
-	}
-
-	/* TODO: catch exception */
 
 	value.resize(len);
 
-	kis.read((char*) this->value.data(), value.size());
+	kis.readBytes(this->value.data(), value.size());
 
-	if (value.size() != kis.gcount()) {
-		kis.setstate(std::ios::failbit);
-		return;
-	}
 }

@@ -40,6 +40,86 @@
 
 XERCES_CPP_NAMESPACE_USE
 
+const XMLCh* _getFirstTextNodeText(DOMElement *e) {
+
+	for (DOMNode *n = e->getFirstChild(); n != NULL; n = n->getNextSibling()) {
+
+		if (n->getNodeType() == DOMNode::TEXT_NODE) {
+
+			return n->getNodeValue();
+
+		}
+
+	}
+
+	return NULL;
+
+}
+
+bool _compareDOMElements(DOMElement *e1, DOMElement *e2) {
+
+	if (XMLString::compareIString(e1->getNamespaceURI(), e2->getNamespaceURI()) != 0) {
+		return false;
+	}
+
+	if (XMLString::compareIString(e1->getLocalName(), e2->getLocalName()) != 0) {
+		return false;
+	}
+
+	DOMNamedNodeMap *attrs1 = e1->getAttributes();
+	DOMNamedNodeMap *attrs2 = e2->getAttributes();
+
+	if (attrs1->getLength() != attrs2->getLength()) {
+		return false;
+	}
+
+	for (XMLSize_t i = 0; i < attrs1->getLength(); i++) {
+
+		DOMAttr* a1 = (DOMAttr*) attrs1->item(i);
+
+		DOMAttr* a2 = (DOMAttr*)attrs2->getNamedItemNS(a1->getNamespaceURI(), a1->getLocalName());
+
+		if (a2 == NULL) {
+			return false;
+		}
+
+		if (XMLString::compareIString(a1->getValue(), a2->getValue()) != 0) {
+			return false;
+		}
+
+	}
+
+	DOMElement *c1 = e1->getFirstElementChild();
+	DOMElement *c2 = e2->getFirstElementChild();
+
+	/* TODO: detect mixed contents */
+
+	if (c1 == NULL && c2 == NULL) {
+
+		if (XMLString::compareIString(e1->getTextContent(), e2->getTextContent()) != 0) {
+			return false;
+		}
+
+	} else {
+
+		while (c1 || c2) {
+
+			if (c1 && (!c2)) return false;
+
+			if ((!c1) && c2) return false;
+
+			if (!_compareDOMElements(c1, c2)) return false;
+
+			c1 = c1->getNextElementSibling();
+			c2 = c2->getNextElementSibling();
+		}
+
+	}
+
+	return true;
+		 
+}
+
 class MyErrorHandler : public ErrorHandler {
 public:
 
@@ -87,32 +167,34 @@ public:
 
 int main(int argc, void **argv) {
 
+	int ret_val = 0;
+
 	char const *dicts_fname[] = { "www-smpte-ra-org-reg-335-2012-13-1-amwa-as12.xml"
-,"www-smpte-ra-org-reg-335-2012-13-1-amwa-rules.xml"
-,"www-smpte-ra-org-reg-335-2012-13-4-archive.xml"
-,"www-smpte-ra-org-reg-335-2012-13-12-as11.xml"
-,"www-smpte-ra-org-reg-335-2012-13-13.xml"
-,"www-smpte-ra-org-reg-395-2014.xml"
-,"www-smpte-ra-org-reg-395-2014-13-1-aaf.xml"
-,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as10.xml"
-,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as11.xml"
-,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as12.xml"
-,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as-common.xml"
-,"www-smpte-ra-org-reg-395-2014-13-4-archive.xml"
-,"www-smpte-ra-org-reg-395-2014-13-12-as11.xml"
-,"www-smpte-ra-org-reg-395-2014-13-13.xml"
-,"www-smpte-ra-org-reg-2003-2012.xml"
-,"www-smpte-ra-org-reg-2003-2012-13-1-amwa-as11.xml"
-,"www-smpte-ra-org-reg-2003-2012-13-1-amwa-as12.xml"
-,"www-smpte-ra-org-reg-2003-2012-13-4-archive.xml"
-,"www-smpte-ra-org-reg-2003-2012-13-12-as11.xml"
-,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-element.xml"
-,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-group.xml"
-,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-type.xml"
-,"www-smpte-ra-org-reg-335-2012.xml"
-,"www-smpte-ra-org-reg-335-2012-13-1-aaf.xml"
-,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as10.xml"
-,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as11.xml" };
+		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-rules.xml"
+		,"www-smpte-ra-org-reg-335-2012-13-4-archive.xml"
+		,"www-smpte-ra-org-reg-335-2012-13-12-as11.xml"
+		,"www-smpte-ra-org-reg-335-2012-13-13.xml"
+		,"www-smpte-ra-org-reg-395-2014.xml"
+		,"www-smpte-ra-org-reg-395-2014-13-1-aaf.xml"
+		,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as10.xml"
+		,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as11.xml"
+		,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as12.xml"
+		,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as-common.xml"
+		,"www-smpte-ra-org-reg-395-2014-13-4-archive.xml"
+		,"www-smpte-ra-org-reg-395-2014-13-12-as11.xml"
+		,"www-smpte-ra-org-reg-395-2014-13-13.xml"
+		,"www-smpte-ra-org-reg-2003-2012.xml"
+		,"www-smpte-ra-org-reg-2003-2012-13-1-amwa-as11.xml"
+		,"www-smpte-ra-org-reg-2003-2012-13-1-amwa-as12.xml"
+		,"www-smpte-ra-org-reg-2003-2012-13-4-archive.xml"
+		,"www-smpte-ra-org-reg-2003-2012-13-12-as11.xml"
+		,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-element.xml"
+		,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-group.xml"
+		,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-type.xml"
+		,"www-smpte-ra-org-reg-335-2012.xml"
+		,"www-smpte-ra-org-reg-335-2012-13-1-aaf.xml"
+		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as10.xml"
+		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as11.xml" };
 
 	XMLPlatformUtils::Initialize();
 
@@ -156,7 +238,6 @@ int main(int argc, void **argv) {
 	
 	LocalFileFormatTarget *ft = new LocalFileFormatTarget("indirect.mxf.xml");
 
-
 	output->setByteStream(ft);
 
 	if (ser->getDomConfig()->canSetParameter(XMLUni::fgDOMWRTFormatPrettyPrint, true))
@@ -168,13 +249,31 @@ int main(int argc, void **argv) {
 
 	if (!f.good()) exit(1);
 
-	AUID rootclasskey = "urn:smpte:ul:060e2b34.027f0101.0d010101.01012400";
-
 	DOMDocumentFragment* frag = MXFFragmentBuilder::fromInputStream(f, mds, NULL, NULL, *doc, &evthandler);
 
 	doc->appendChild(frag);
 
+	/* write genearated fragment */
+
 	ser->write(doc, output);
+
+	/* compare to reference file */
+
+	std::string dict_path = "resources/reference-files/indirect.xml";
+
+	parser->parse(dict_path.c_str());
+
+	DOMDocument *ref_doc = parser->getDocument();
+
+	if (!_compareDOMElements(ref_doc->getDocumentElement(), doc->getDocumentElement())) {
+
+		std::cout << "Comparison failed!" << std::endl;
+
+		ret_val = 1;
+
+	}
+
+	/* free heap */
 	
 	for (std::map<std::string, MetaDictionary*>::const_iterator it = mds.getDictionatries().begin();
 		it != mds.getDictionatries().end();
@@ -187,4 +286,6 @@ int main(int argc, void **argv) {
 	doc->release();
 	
 	XMLPlatformUtils::Terminate();
+
+	return ret_val;
 }

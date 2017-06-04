@@ -951,11 +951,7 @@ void FragmentBuilder::applyRule5_5(DOMElement * element, MXFInputStream & value,
 			)
 		);
 
-		/*evthandler->error(err);
 
-		addInformativeComment(element, err.getReason());
-
-		return;*/
 	}
 
 	// create reg:actualType attribute
@@ -1241,23 +1237,6 @@ void FragmentBuilder::applyRule5_12(DOMElement * element, MXFInputStream & value
 			)
 		);
 
-		/*FragmentEvent evt = new FragmentEvent(
-		EventCodes.UNSUPPORTED_STRING_TYPE,
-		String.format(
-		"Unsupported String with Element %s",
-		chrdef.getSymbol()
-		),
-		String.format(
-		"String %s at Element %s",
-		definition.getSymbol(),
-		element.getLocalName()
-		)
-		);
-
-		handleEvent(evt);
-
-		addInformativeComment(element, evt.getReason());*/
-
 		return;
 	}
 
@@ -1284,25 +1263,6 @@ void FragmentBuilder::applyRule5_13(DOMElement * element, MXFInputStream & value
 			)
 		);
 
-		/*FragmentEvent evt = new FragmentEvent(
-		EventCodes.INVALID_STRONG_REFERENCE_TYPE,
-		String.format(
-		"Target %s of Strong Reference Type is not a class",
-		typedef.getSymbol()
-		),
-		String.format(
-		"Type %s at Element %s",
-		definition.getSymbol(),
-		element.getLocalName()
-		)
-		);
-
-		handleEvent(evt);
-
-		addInformativeComment(element, evt.getReason());
-
-		return;*/
-
 	}
 
 	UUID uuid = value.readUUID();
@@ -1322,26 +1282,6 @@ void FragmentBuilder::applyRule5_13(DOMElement * element, MXFInputStream & value
 				DOMHelper::toUTF8(element->getLocalName()).c_str()
 			)
 		);
-
-		/*FragmentEvent evt = new FragmentEvent(
-		EventCodes.STRONG_REFERENCE_NOT_FOUND,
-		String.format(
-		"Strong Reference target %s is not found",
-		uuid.toString()
-		),
-		String.format(
-		"Type %s at Element %s",
-		definition.getSymbol(),
-		element.getLocalName()
-		)
-		);
-
-		handleEvent(evt);
-
-		addInformativeComment(element, evt.getReason());
-
-		return;
-		*/
 
 	}
 

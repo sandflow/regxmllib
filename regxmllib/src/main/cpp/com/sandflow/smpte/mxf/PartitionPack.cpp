@@ -77,8 +77,6 @@ void PartitionPack::fromTriplet(const Triplet & t) {
 		throw MXFException("Illegal Partition Pack");
 	}
 
-	/* TODO : rename MXFInputStream */
-
 	membuf mb((char*)t.getValue(), t.getLength());
 
 	MXFInputStream kis(&mb);

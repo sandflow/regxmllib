@@ -57,6 +57,8 @@ public:
 	long long readLongLong();
 	unsigned long long readUnsignedLongLong();
 
+	void readBytes(unsigned char* buffer, size_t length);
+
 	ByteOrder getByteOrder() const { return this->byteorder; };
 
 private:

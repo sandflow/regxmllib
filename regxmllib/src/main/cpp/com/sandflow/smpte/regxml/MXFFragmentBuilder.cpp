@@ -77,9 +77,9 @@ bool _findPrimerPack(std::istream &is, PrimerPack& pp) {
 	return false;
 }
 
-bool _findPrefaceSet(const std::map<UUID, Set> &setresolver, UUID &rootid) {
+static const UL PREFACE_KEY = "urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00";
 
-	static const UL PREFACE_KEY = "urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00";
+bool _findPrefaceSet(const std::map<UUID, Set> &setresolver, UUID &rootid) {
 
 	for (std::map<UUID, Set>::const_iterator it = setresolver.begin(); it != setresolver.end(); it++) {
 
@@ -163,9 +163,22 @@ DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 
 	PartitionPack pp;
 
-	if (!_findPartitionPack(cis, pp)) {
+	try {
 
-		/* ERROR ABORT */
+		if (!_findPartitionPack(cis, pp)) {
+
+			ev->fatal(MisingHeaderPartitionPackError());
+
+			return NULL;
+
+		}
+
+
+	} catch (const std::exception &e) {
+
+		ev->fatal(BadHeaderPartitionPackError(e));
+
+		return NULL;
 
 	}
 
@@ -179,9 +192,21 @@ DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 
 	PrimerPack primer;
 
-	if (!_findPrimerPack(cis, primer)) {
+	try {
 
-		/* ERROR ABORT */
+		if (!_findPrimerPack(cis, primer)) {
+
+			ev->fatal(MissingPrimerPackError());
+
+			return NULL;
+
+		}
+
+	} catch (const std::exception &e) {
+
+		ev->fatal(BadPrimerPackError(e));
+
+		return NULL;
 
 	}
 
@@ -191,46 +216,62 @@ DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 
 	while (csb.getCount() < pp.headerByteCount) {
 
-		MemoryTriplet t(cis);
+		unsigned long long position = csb.getCount();
 
-		if (!t.getKey().isUL()) {
+		MemoryTriplet t;
 
-			/* skip all non MXF groups */
+		try { /* reading triplet */
 
-			continue;
+			t.fromStream(cis);
 
-		} else if (INDEX_TABLE_SEGMENT_UL.equals(t.getKey().asUL(), UL::IGNORE_VERSION)) {
+		} catch (const std::exception &e) {
 
-			/* stop if Index Table reached */
+			ev->fatal(InvalidTriplet(e, position));
 
-			/*MXFEvent evt = new MXFEvent(
-				EventCodes.UNEXPECTED_STRUCTURE,
-				"Index Table Segment encountered before Header Byte Count bytes read"
-			);
+			return NULL;
 
-			handleEvent(evthandler, evt);*/
-
-			break;
-
-		} else if (FillItem::isFillItem(t.getKey())) {
-
-			/* skip fill items */
-			continue;
-
-		} else if (!LocalSet::isLocalSet(t)) {
-
-			/* TODO: error, not a local set */
-
-			continue;
 		}
 
 		try {
+
+			if (!t.getKey().isUL()) {
+
+				/* skip all non MXF groups */
+
+				ev->info(NonMXFSetError(t.getKey(), position));
+
+				continue;
+
+			} else if (INDEX_TABLE_SEGMENT_UL.equals(t.getKey().asUL(), UL::IGNORE_VERSION)) {
+
+				/* stop if Index Table reached */
+
+				ev->warn(IndexTableReachedEarlyError(position));
+
+				break;
+
+			} else if (FillItem::isFillItem(t.getKey())) {
+
+				/* skip fill items */
+				continue;
+
+			} else if (!LocalSet::isLocalSet(t)) {
+
+				/* Group is not a Local Set */
+
+				ev->info(NonMXFSetError(t.getKey(), position));
+
+				continue;
+
+			}
 
 			LocalSet ls(t, primer);
 
 			if (!Set::hasInstanceUID(ls)) {
 
-				/* TODO: ERROR not a MXF Set */
+				/* Group is missing Instance UID */
+
+				ev->warn(NonMXFSetError(t.getKey(), position));
 
 				continue;
 
@@ -240,7 +281,9 @@ DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 
 			if (setresolver.find(set.getInstanceID()) != setresolver.end()) {
 
-				/* TODO: ERROR duplicate Set in header metadata */
+				/* skip over sets with duplicate instance IDs */
+
+				ev->error(DuplicateMXFSetsError(set.getInstanceID(), position));
 
 				continue;
 
@@ -248,9 +291,9 @@ DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 
 			setresolver[set.getInstanceID()] = set;
 
-		} catch (KLVException ke) {
+		} catch (const std::exception &e) {
 
-			/* TODO: report error */
+			ev->error(InvalidMXFSet(e, position));
 
 		}
 
@@ -262,7 +305,7 @@ DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 
 		if (!_findPrefaceSet(setresolver, rootid)) {
 
-			/* TODO: ERROR no preface set found */
+			ev->fatal(RootSetNotFoundError(PREFACE_KEY));
 
 			return NULL;
 
@@ -272,7 +315,7 @@ DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 
 		if (!_findFirstInstanceOfClass(setresolver, defresolver, *rootclasskey, rootid)) {
 
-			/* TODO: ERROR no preface set found */
+			ev->fatal(RootSetNotFoundError(*rootclasskey));
 
 			return NULL;
 
