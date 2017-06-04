@@ -235,41 +235,68 @@ int main(int argc, void **argv) {
 	DOMLSOutput       *output = ((DOMImplementationLS*)impl)->createLSOutput();
 	
 	/*XMLFormatTarget *ft = new StdOutFormatTarget();*/
-	
-	LocalFileFormatTarget *ft = new LocalFileFormatTarget("indirect.mxf.xml");
 
-	output->setByteStream(ft);
+	char const *test_names[] = {
+		"audio1",
+		"audio2",
+		"video1",
+		"video2",
+		"indirect",
+		"utf8_embedded_text"
+	};
 
-	if (ser->getDomConfig()->canSetParameter(XMLUni::fgDOMWRTFormatPrettyPrint, true))
-		ser->getDomConfig()->setParameter(XMLUni::fgDOMWRTFormatPrettyPrint, true);
+	for (size_t i = 0; i < sizeof(test_names) / sizeof(char*); i++) {
 
-	DOMDocument *doc = impl->createDocument();
+		std::cout << "Processing input file: " << test_names[i] << std::endl;
 
-	std::ifstream f("resources/sample-files/indirect.mxf", std::ifstream::in | std::ifstream::binary);
+		std::string out_fname = std::string(test_names[i]) + ".mxf.xml";
+		std::string ref_fname = "resources/reference-files/" + std::string(test_names[i]) + ".xml";
+		std::string in_fname = "resources/sample-files/" + std::string(test_names[i]) + ".mxf";
 
-	if (!f.good()) exit(1);
 
-	DOMDocumentFragment* frag = MXFFragmentBuilder::fromInputStream(f, mds, NULL, NULL, *doc, &evthandler);
+		LocalFileFormatTarget *ft = new LocalFileFormatTarget(out_fname.c_str());
 
-	doc->appendChild(frag);
+		output->setByteStream(ft);
 
-	/* write genearated fragment */
+		if (ser->getDomConfig()->canSetParameter(XMLUni::fgDOMWRTFormatPrettyPrint, true))
+			ser->getDomConfig()->setParameter(XMLUni::fgDOMWRTFormatPrettyPrint, true);
 
-	ser->write(doc, output);
+		DOMDocument *doc = impl->createDocument();
 
-	/* compare to reference file */
+		std::ifstream f(in_fname, std::ifstream::in | std::ifstream::binary);
 
-	std::string dict_path = "resources/reference-files/indirect.xml";
+		if (!f.good()) {
 
-	parser->parse(dict_path.c_str());
+			std::cout << "Cannot read input file: " << test_names[i] << std::endl;
 
-	DOMDocument *ref_doc = parser->getDocument();
+			ret_val |= 1;
 
-	if (!_compareDOMElements(ref_doc->getDocumentElement(), doc->getDocumentElement())) {
+			continue;
+		}
 
-		std::cout << "Comparison failed!" << std::endl;
+		DOMDocumentFragment* frag = MXFFragmentBuilder::fromInputStream(f, mds, NULL, NULL, *doc, &evthandler);
 
-		ret_val = 1;
+		doc->appendChild(frag);
+
+		/* write genearated fragment */
+
+		ser->write(doc, output);
+
+		/* compare to reference file */
+
+		parser->parse(ref_fname.c_str());
+
+		DOMDocument *ref_doc = parser->getDocument();
+
+		if (!_compareDOMElements(ref_doc->getDocumentElement(), doc->getDocumentElement())) {
+
+			std::cout << "Comparison failed: " << test_names[i] << std::endl;
+
+			ret_val |= 1;
+
+		}
+
+		doc->release();
 
 	}
 
@@ -283,7 +310,7 @@ int main(int argc, void **argv) {
 	
 	output->release();
 	ser->release();
-	doc->release();
+	
 	
 	XMLPlatformUtils::Terminate();
 
