@@ -36,7 +36,7 @@ void basic_klvistream<CharT, Traits>::readTriplet(MemoryTriplet &t)
 }
 
 
-template void basic_klvistream<char>::readTriplet(MemoryTriplet &t);
+// template void basic_klvistream<char>::readTriplet(MemoryTriplet &t);
 
 
 template<class CharT, class Traits>

@@ -813,7 +813,7 @@ void FragmentBuilder::applyRule5_2(DOMElement * element, MXFInputStream & value,
 			it != definition->elements.end();
 			it++) {
 
-			if (bi == 0 && it->value == 0 || bi != 0 && it->value == 1) {
+			if ((bi == 0 && it->value == 0) || (bi != 0 && it->value == 1)) {
 				str = it->name;
 			}
 		}

@@ -53,6 +53,9 @@ public:
 	virtual const char* getCode() const {
 		return this->code.c_str();
 	}
+	
+	virtual ~Event() throw() {
+	}
 
 };
 

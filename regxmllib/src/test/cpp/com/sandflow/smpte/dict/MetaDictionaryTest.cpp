@@ -165,7 +165,7 @@ public:
 
 };
 
-int main(int argc, void **argv) {
+int main(int argc, char **argv) {
 
 	int ret_val = 0;
 
@@ -263,7 +263,7 @@ int main(int argc, void **argv) {
 
 		DOMDocument *doc = impl->createDocument();
 
-		std::ifstream f(in_fname, std::ifstream::in | std::ifstream::binary);
+		std::ifstream f(in_fname.c_str(), std::ifstream::in | std::ifstream::binary);
 
 		if (!f.good()) {
 
