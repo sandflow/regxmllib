@@ -29,44 +29,47 @@
 
 #include <iostream>
 
-class CountingStreamBuf : public std::streambuf {
+namespace rxml {
 
-public:
+	class CountingStreamBuf : public std::streambuf {
 
-	CountingStreamBuf(std::streambuf *buf) : rdbuf(buf), count(0) {};
+	public:
 
-	unsigned long long getCount() const {
-		return count;
-	}
+		CountingStreamBuf(std::streambuf *buf) : rdbuf(buf), count(0) {};
 
-	void resetCount() {
-		count = 0;
-	}
-
-protected:
-
-	int_type underflow() {
-		int_type c = rdbuf->sbumpc();
-
-		if (c != CountingStreamBuf::traits_type::eof()) {
-			count++;
-		
-			buf = c;
-
-			setg(&buf, &buf, &buf + 1);
-
+		unsigned long long getCount() const {
+			return count;
 		}
 
-		return c;
-	}
+		void resetCount() {
+			count = 0;
+		}
+
+	protected:
+
+		int_type underflow() {
+			int_type c = rdbuf->sbumpc();
+
+			if (c != CountingStreamBuf::traits_type::eof()) {
+				count++;
+
+				buf = c;
+
+				setg(&buf, &buf, &buf + 1);
+
+			}
+
+			return c;
+		}
 
 
-private:
+	private:
 
-	std::streambuf *rdbuf;
-	unsigned long long count;
-	char buf;
+		std::streambuf *rdbuf;
+		unsigned long long count;
+		char buf;
 
-};
+	};
 
+}
 #endif

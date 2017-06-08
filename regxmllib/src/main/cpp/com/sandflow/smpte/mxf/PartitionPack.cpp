@@ -28,103 +28,106 @@
 #include "MXFException.h"
 #include "com/sandflow/util/strformat.h"
 
-void PartitionPack::fromTriplet(const Triplet & t) {
+namespace rxml {
 
-	if (!t.getKey().isUL()) {
+	void PartitionPack::fromTriplet(const Triplet & t) {
 
-		throw new MXFException("Triplet key " + strf::to_string(t.getKey()) + " is not a UL");
-	}
+		if (!t.getKey().isUL()) {
 
-	UL ul = t.getKey().asUL();
-
-	switch (ul.getValueOctet(14)) {
-
-	case 0x01:
-		status = OPEN_INCOMPLETE;
-		break;
-	case 0x02:
-		status = CLOSED_INCOMPLETE;
-		break;
-	case 0x03:
-		status = OPEN_COMPLETE;
-		break;
-	case 0x04:
-		status = CLOSED_COMPLETE;
-		break;
-	default:
-		throw MXFException("Illegal Partition Pack");
-	}
-
-	switch (ul.getValueOctet(13)) {
-	case 0x02:
-		kind = HEADER;
-
-		break;
-	case 0x03:
-		kind = BODY;
-
-		break;
-	case 0x04:
-		kind = FOOTER;
-
-		if (this->status == OPEN_COMPLETE
-			|| this->status == OPEN_INCOMPLETE) {
-			throw MXFException("Open Footer Partition");
+			throw new MXFException("Triplet key " + rxml::to_string(t.getKey()) + " is not a UL");
 		}
 
-		break;
-	default:
-		throw MXFException("Illegal Partition Pack");
+		UL ul = t.getKey().asUL();
+
+		switch (ul.getValueOctet(14)) {
+
+		case 0x01:
+			status = OPEN_INCOMPLETE;
+			break;
+		case 0x02:
+			status = CLOSED_INCOMPLETE;
+			break;
+		case 0x03:
+			status = OPEN_COMPLETE;
+			break;
+		case 0x04:
+			status = CLOSED_COMPLETE;
+			break;
+		default:
+			throw MXFException("Illegal Partition Pack");
+		}
+
+		switch (ul.getValueOctet(13)) {
+		case 0x02:
+			kind = HEADER;
+
+			break;
+		case 0x03:
+			kind = BODY;
+
+			break;
+		case 0x04:
+			kind = FOOTER;
+
+			if (this->status == OPEN_COMPLETE
+				|| this->status == OPEN_INCOMPLETE) {
+				throw MXFException("Open Footer Partition");
+			}
+
+			break;
+		default:
+			throw MXFException("Illegal Partition Pack");
+		}
+
+		membuf mb((char*)t.getValue(), t.getLength());
+
+		MXFInputStream kis(&mb);
+
+		try {
+
+			this->majorVersion = kis.readUnsignedShort();
+
+			this->minorVersion = kis.readUnsignedShort();
+
+			this->kagSize = kis.readUnsignedLong();
+
+			this->thisPartition = kis.readUnsignedLongLong();
+
+			this->previousPartition = kis.readUnsignedLongLong();
+
+			this->footerPartition = kis.readUnsignedLongLong();
+
+			this->headerByteCount = kis.readUnsignedLongLong();
+
+			this->indexByteCount = kis.readUnsignedLongLong();
+
+			this->indexSID = kis.readUnsignedLong();
+
+			this->bodyOffset = kis.readUnsignedLongLong();
+
+			this->bodySID = kis.readUnsignedLong();
+
+			this->operationalPattern = kis.readUL();
+
+			this->essenceContainers = kis.readBatch<ULAdapter, UL>();
+
+		} catch (std::exception e) {
+			throw new MXFException("Error reading partition pack");
+		}
+
 	}
 
-	membuf mb((char*)t.getValue(), t.getLength());
+	const UL PartitionPack::KEY = "urn:smpte:ul:060e2b34.02050101.0d010201.01010000";
 
-	MXFInputStream kis(&mb);
 
-	try {
+	bool PartitionPack::isPartitionPack(const UL & key) {
 
-		this->majorVersion = kis.readUnsignedShort();
 
-		this->minorVersion = kis.readUnsignedShort();
-
-		this->kagSize = kis.readUnsignedLong();
-
-		this->thisPartition = kis.readUnsignedLongLong();
-
-		this->previousPartition = kis.readUnsignedLongLong();
-
-		this->footerPartition = kis.readUnsignedLongLong();
-
-		this->headerByteCount = kis.readUnsignedLongLong();
-
-		this->indexByteCount = kis.readUnsignedLongLong();
-
-		this->indexSID = kis.readUnsignedLong();
-
-		this->bodyOffset = kis.readUnsignedLongLong();
-
-		this->bodySID = kis.readUnsignedLong();
-
-		this->operationalPattern = kis.readUL();
-
-		this->essenceContainers = kis.readBatch<ULAdapter, UL>();
-
-	} catch (std::exception e) {
-		throw new MXFException("Error reading partition pack");
+		return KEY.equals(key, 0xfef9);
 	}
 
-}
+	bool PartitionPack::isPartitionPack(const AUID & key) {
 
-const UL PartitionPack::KEY = "urn:smpte:ul:060e2b34.02050101.0d010201.01010000";
-
-
-bool PartitionPack::isPartitionPack(const UL & key) {
-
-
-	return KEY.equals(key, 0xfef9);
-}
-
-bool PartitionPack::isPartitionPack(const AUID & key) {
-
-	return key.isUL() && KEY.equals(key.asUL(), 0xfef9);
+		return key.isUL() && KEY.equals(key.asUL(), 0xfef9);
+	}
 }

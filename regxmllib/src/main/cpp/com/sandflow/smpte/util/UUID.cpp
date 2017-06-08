@@ -31,54 +31,57 @@
 #include <cstdio>
 #include <stdexcept>
 
-static const std::string UUID_URN_PREFIX = "urn:uuid:";
+namespace rxml {
 
-bool lowerCmp(char i, char j) {
-	return (::towlower(i) == ::towlower(j));
-}
+	static const std::string UUID_URN_PREFIX = "urn:uuid:";
 
-bool UUID::urnToBytes(const std::string &urn, unsigned char(&uuid)[16]) {
+	bool lowerCmp(char i, char j) {
+		return (::towlower(i) == ::towlower(j));
+	}
 
-	if (urn.size() != 45) return false;
+	bool UUID::urnToBytes(const std::string &urn, unsigned char(&uuid)[16]) {
 
-	if (std::equal(urn.begin(),
-		urn.begin() + UUID_URN_PREFIX.size(),
-		UUID_URN_PREFIX.begin(), lowerCmp) != true) return false;
+		if (urn.size() != 45) return false;
 
-	/* process as UUID (urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6) */
+		if (std::equal(urn.begin(),
+			urn.begin() + UUID_URN_PREFIX.size(),
+			UUID_URN_PREFIX.begin(), lowerCmp) != true) return false;
 
-	int pos = 9;
+		/* process as UUID (urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6) */
 
-	for (int i = 0; i < 16; i++) {
+		int pos = 9;
 
-		uuid[i] = std::strtol(urn.substr(pos, 2).c_str(), NULL, 16) & 0xff;
+		for (int i = 0; i < 16; i++) {
 
-		if (i == 3 || i == 5 || i == 7 || i == 9) {
-			pos += 3;
-		} else {
-			pos += 2;
+			uuid[i] = std::strtol(urn.substr(pos, 2).c_str(), NULL, 16) & 0xff;
+
+			if (i == 3 || i == 5 || i == 7 || i == 9) {
+				pos += 3;
+			} else {
+				pos += 2;
+			}
+
 		}
+
+		return true;
 
 	}
 
-	return true;
 
-}
+	std::string UUID::bytesToString(const unsigned char uuid[16]) {
 
+		char str[128];
 
-std::string UUID::bytesToString(const unsigned char uuid[16]) {
+		int r = snprintf(str, sizeof(str), "urn:uuid:%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x",
+			uuid[0], uuid[1], uuid[2], uuid[3],
+			uuid[4], uuid[5], uuid[6], uuid[7],
+			uuid[8], uuid[9], uuid[10], uuid[11],
+			uuid[12], uuid[13], uuid[14], uuid[15]
+		);
 
-	char str[128];
+		if (r < 0) throw std::runtime_error("UUID::bytesToString failed.");
 
-	int r = snprintf(str, sizeof(str), "urn:uuid:%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x",
-		uuid[0], uuid[1], uuid[2], uuid[3],
-		uuid[4], uuid[5], uuid[6], uuid[7],
-		uuid[8], uuid[9], uuid[10], uuid[11],
-		uuid[12], uuid[13], uuid[14], uuid[15]
-	);
+		return str;
 
-	if (r < 0) throw std::runtime_error("UUID::bytesToString failed.");
-
-	return str;
-
+	}
 }

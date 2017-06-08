@@ -26,93 +26,97 @@
 
 #include "MetaDictionaryCollection.h"
 
-const Definition * MetaDictionaryCollection::getDefinition(const AUID & auid) const {
+namespace rxml {
 
-	for (std::map<std::string, MetaDictionary*>::const_iterator it = dicts.begin(); it != dicts.end(); it++) {
-		const Definition *def = it->second->getDefinition(auid);
+	const Definition * MetaDictionaryCollection::getDefinition(const AUID & auid) const {
 
-		if (def != NULL) {
-			return def;
+		for (std::map<std::string, MetaDictionary*>::const_iterator it = dicts.begin(); it != dicts.end(); it++) {
+			const Definition *def = it->second->getDefinition(auid);
+
+			if (def != NULL) {
+				return def;
+			}
 		}
+
+		return NULL;
 	}
 
-	return NULL;
-}
+	/**
+	* Retrieves a definition from the collection based on its symbol
+	* @param namespace Namespace of the definition
+	* @param symbol Symbol of the definition
+	* @return Definition, or null if none found
+	*/
 
-/**
-* Retrieves a definition from the collection based on its symbol
-* @param namespace Namespace of the definition
-* @param symbol Symbol of the definition
-* @return Definition, or null if none found
-*/
+	const Definition * MetaDictionaryCollection::getDefinition(std::string ns, const std::string & symbol) const {
 
-const Definition * MetaDictionaryCollection::getDefinition(std::string ns, const std::string & symbol) const {
+		std::map<std::string, MetaDictionary*>::const_iterator it = dicts.find(ns);
 
-	std::map<std::string, MetaDictionary*>::const_iterator it = dicts.find(ns);
+		if (it != dicts.end()) {
+			return it->second->getDefinition(symbol);
+		}
 
-	if (it != dicts.end()) {
-		return it->second->getDefinition(symbol);
+		return NULL;
 	}
 
-	return NULL;
-}
+	/**
+	* Adds a MetaDictionary to the collection.
+	*
+	* @param metadictionary MetaDictionary to be added
+	*/
 
-/**
-* Adds a MetaDictionary to the collection.
-*
-* @param metadictionary MetaDictionary to be added
-*/
+	void MetaDictionaryCollection::addDictionary(MetaDictionary * metadictionary) {
 
-void MetaDictionaryCollection::addDictionary(MetaDictionary * metadictionary) {
+		std::map<std::string, MetaDictionary*>::const_iterator it = dicts.find(metadictionary->getSchemeURI());
 
-	std::map<std::string, MetaDictionary*>::const_iterator it = dicts.find(metadictionary->getSchemeURI());
+		if (it == dicts.end()) {
+			dicts[metadictionary->getSchemeURI()] = metadictionary;
+		}
 
-	if (it == dicts.end()) {
-		dicts[metadictionary->getSchemeURI()] = metadictionary;
 	}
 
-}
-
-const std::map<std::string, MetaDictionary*>& MetaDictionaryCollection::getDictionatries() const
-{
-	return this->dicts;
-}
-
-
-/**
-* Determines whether a meta dictionary with the specified namespace exists
-*
-* @param namespace Namespace sought
-* @return true if namespace is covered
-*/
-
-bool MetaDictionaryCollection::hasNamespace(const std::string & ns) const {
-	return dicts.find(ns) != dicts.end();
-}
-
-std::set<AUID> MetaDictionaryCollection::getSubclassesOf(const AUID & identification) const {
-
-	std::set<AUID> subclasses;
-
-	for (std::map<std::string, MetaDictionary*>::const_iterator it = dicts.begin(); it != dicts.end(); it++) {
-
-		std::set<AUID> defs = it->second->getSubclassesOf(identification);
-
-		subclasses.insert(defs.begin(), defs.end());
+	const std::map<std::string, MetaDictionary*>& MetaDictionaryCollection::getDictionatries() const
+	{
+		return this->dicts;
 	}
 
-	return subclasses;
-}
 
-std::set<AUID> MetaDictionaryCollection::getMembersOf(const AUID & identification) const {
-	std::set<AUID> members;
+	/**
+	* Determines whether a meta dictionary with the specified namespace exists
+	*
+	* @param namespace Namespace sought
+	* @return true if namespace is covered
+	*/
 
-	for (std::map<std::string, MetaDictionary*>::const_iterator it = dicts.begin(); it != dicts.end(); it++) {
-
-		std::set<AUID> defs = it->second->getMembersOf(identification);
-
-		members.insert(defs.begin(), defs.end());
+	bool MetaDictionaryCollection::hasNamespace(const std::string & ns) const {
+		return dicts.find(ns) != dicts.end();
 	}
 
-	return members;
+	std::set<AUID> MetaDictionaryCollection::getSubclassesOf(const AUID & identification) const {
+
+		std::set<AUID> subclasses;
+
+		for (std::map<std::string, MetaDictionary*>::const_iterator it = dicts.begin(); it != dicts.end(); it++) {
+
+			std::set<AUID> defs = it->second->getSubclassesOf(identification);
+
+			subclasses.insert(defs.begin(), defs.end());
+		}
+
+		return subclasses;
+	}
+
+	std::set<AUID> MetaDictionaryCollection::getMembersOf(const AUID & identification) const {
+		std::set<AUID> members;
+
+		for (std::map<std::string, MetaDictionary*>::const_iterator it = dicts.begin(); it != dicts.end(); it++) {
+
+			std::set<AUID> defs = it->second->getMembersOf(identification);
+
+			members.insert(defs.begin(), defs.end());
+		}
+
+		return members;
+	}
+
 }

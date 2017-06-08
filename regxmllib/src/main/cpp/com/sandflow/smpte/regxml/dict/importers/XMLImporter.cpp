@@ -50,603 +50,606 @@
 #include "com/sandflow/util/strformat.h"
 
 
-const std::string XML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
-const std::string NAME = "Extension";
+namespace rxml {
+
+	const std::string XML_NS = "http://www.smpte-ra.org/schemas/2001-1b/2013/metadict";
+	const std::string NAME = "Extension";
 
 
-void xmlAdapter(const char *str, int &num) {
-	num = strtol(str, NULL, 10);
-}
-
-void xmlAdapter(const char *str, bool &b) {
-	static const std::string TRUE = "true";
-
-	b = (TRUE == str);
-}
-
-void xmlAdapter(const char *str, unsigned int &num) {
-	num = (unsigned int)strtol(str, NULL, 10);
-}
-
-void xmlAdapter(const char *str, unsigned char &num) {
-	num = (unsigned char)strtol(str, NULL, 10);
-}
-
-void xmlAdapter(const char *str, AUID &t) {
-	t = AUID(str);
-}
-
-template<typename T> void xmlAdapter(const char *str, T &t) {
-	t = str;
-}
-
-template<typename T> void xmlAdapter(const char *str, Optional<T> &t) {
-	T tmp;
-
-	xmlAdapter(str, tmp);
-
-	t.set(tmp);
-}
-
-/**
- *
- * @throws XMLImporter::Exception
- */
-template<typename T> void _readPropertyOfElement(
-	DOMElement *parent,
-	const char *namespaceURI,
-	const char *localName,
-	T& field,
-	void(*xmladapter)(const char *, T&) = &xmlAdapter) {
-
-	const XMLCh *text = DOMHelper::getElementTextContentByTagNameNS(
-		parent,
-		DOMHelper::fromUTF8(namespaceURI),
-		DOMHelper::fromUTF8(localName)
-	);
-
-	if (!text) {
-
-		throw XMLImporter::Exception(strf::fmt("Required property {} is missing", std::string(localName)));
-
+	void xmlAdapter(const char *str, int &num) {
+		num = strtol(str, NULL, 10);
 	}
 
-	xmladapter(DOMHelper::toUTF8(text), field);
+	void xmlAdapter(const char *str, bool &b) {
+		static const std::string TRUE = "true";
 
-}
+		b = (TRUE == str);
+	}
 
-template<typename T> void _readPropertyOfElement(
-	DOMElement *parent,
-	const char *namespaceURI,
-	const char *localName,
-	Optional<T>& field,
-	void(*xmladapter)(const char *, Optional<T>&) = &xmlAdapter) {
+	void xmlAdapter(const char *str, unsigned int &num) {
+		num = (unsigned int)strtol(str, NULL, 10);
+	}
 
-	const XMLCh *text = DOMHelper::getElementTextContentByTagNameNS(
-		parent,
-		DOMHelper::fromUTF8(XML_NS),
-		DOMHelper::fromUTF8(localName));
+	void xmlAdapter(const char *str, unsigned char &num) {
+		num = (unsigned char)strtol(str, NULL, 10);
+	}
 
-	if (text) {
+	void xmlAdapter(const char *str, AUID &t) {
+		t = AUID(str);
+	}
+
+	template<typename T> void xmlAdapter(const char *str, T &t) {
+		t = str;
+	}
+
+	template<typename T> void xmlAdapter(const char *str, Optional<T> &t) {
+		T tmp;
+
+		xmlAdapter(str, tmp);
+
+		t.set(tmp);
+	}
+
+	/**
+	 *
+	 * @throws XMLImporter::Exception
+	 */
+	template<typename T> void _readPropertyOfElement(
+		DOMElement *parent,
+		const char *namespaceURI,
+		const char *localName,
+		T& field,
+		void(*xmladapter)(const char *, T&) = &xmlAdapter) {
+
+		const XMLCh *text = DOMHelper::getElementTextContentByTagNameNS(
+			parent,
+			DOMHelper::fromUTF8(namespaceURI),
+			DOMHelper::fromUTF8(localName)
+		);
+
+		if (!text) {
+
+			throw XMLImporter::Exception(rxml::fmt("Required property {} is missing", std::string(localName)));
+
+		}
 
 		xmladapter(DOMHelper::toUTF8(text), field);
 
-	} else {
-		field.clear();
 	}
 
-}
+	template<typename T> void _readPropertyOfElement(
+		DOMElement *parent,
+		const char *namespaceURI,
+		const char *localName,
+		Optional<T>& field,
+		void(*xmladapter)(const char *, Optional<T>&) = &xmlAdapter) {
 
-void _readDefinition(DOMElement *element, Definition &def) {
+		const XMLCh *text = DOMHelper::getElementTextContentByTagNameNS(
+			parent,
+			DOMHelper::fromUTF8(XML_NS),
+			DOMHelper::fromUTF8(localName));
 
+		if (text) {
 
-	_readPropertyOfElement(element, XML_NS.c_str(), "Identification", def.identification);
-	_readPropertyOfElement(element, XML_NS.c_str(), "Symbol", def.symbol);
-	_readPropertyOfElement(element, XML_NS.c_str(), "Description", def.description);
-	_readPropertyOfElement(element, XML_NS.c_str(), "Name", def.name);
+			xmladapter(DOMHelper::toUTF8(text), field);
 
-}
-
-void _readClassDefinition(DOMElement *element, ClassDefinition &def) {
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "ParentClass", def.parentClass);
-	_readPropertyOfElement(element, XML_NS.c_str(), "IsConcrete", def.concrete);
-
-}
-
-void _readPropertyDefinition(DOMElement *element, PropertyDefinition &def) {
-
-	_readDefinition(element, def);
-
-	if (def.symbol == "FormatVersion") {
-		int b = 0;
-	}
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "Type", def.type);
-	_readPropertyOfElement(element, XML_NS.c_str(), "MemberOf", def.memberOf);
-	_readPropertyOfElement(element, XML_NS.c_str(), "LocalIdentification", def.localIdentification);
-	_readPropertyOfElement(element, XML_NS.c_str(), "IsUniqueIdentifier", def.uniqueIdentifier);
-	_readPropertyOfElement(element, XML_NS.c_str(), "IsOptional", def.optional);
-
-}
-
-void _readPropertyAliasDefinition(DOMElement *element, PropertyAliasDefinition &def) {
-
-	_readPropertyDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "OriginalProperty", def.originalProperty);
-
-}
-
-void _readIntegerTypeDefinition(DOMElement *element, IntegerTypeDefinition &def) {
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "Size", def.size);
-	_readPropertyOfElement(element, XML_NS.c_str(), "IsSigned", def.isSigned);
-
-}
-
-
-void _readRenameTypeDefinition(DOMElement *element, RenameTypeDefinition &def) {
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "RenamedType", def.renamedType);
-
-}
-
-void _readSetTypeDefinition(DOMElement *element, SetTypeDefinition &def) {
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
-
-}
-
-void _readStringTypeDefinition(DOMElement *element, StringTypeDefinition &def) {
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
-
-}
-
-
-void _readStrongReferenceTypeDefinition(DOMElement *element, StrongReferenceTypeDefinition &def) {
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "ReferencedType", def.referencedType);
-
-}
-
-void _readVariableTypeDefinition(DOMElement *element, VariableArrayTypeDefinition &def) {
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
-
-}
-
-void _readTypeDefinitionCharacter(DOMElement *element, CharacterTypeDefinition &def) {
-
-	_readDefinition(element, def);
-
-}
-
-void _readFixedArrayTypeDefinition(DOMElement *element, FixedArrayTypeDefinition &def) {
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
-	_readPropertyOfElement(element, XML_NS.c_str(), "ElementCount", def.elementCount);
-
-}
-
-void _readRecordTypeDefinition(DOMElement *element, RecordTypeDefinition &def) {
-
-
-	_readDefinition(element, def);
-
-	/* read Members */
-
-	DOMElement *membersElem = DOMHelper::getElementByTagNameNS(
-		element,
-		DOMHelper::fromUTF8(XML_NS),
-		DOMHelper::fromUTF8("Members")
-	);
-
-	if (!membersElem) {
-
-		throw new XMLImporter::Exception("Elements property missing");
+		} else {
+			field.clear();
+		}
 
 	}
 
-	DOMElement *memberElem = membersElem->getFirstElementChild();
-
-	while (memberElem) {
+	void _readDefinition(DOMElement *element, Definition &def) {
 
 
+		_readPropertyOfElement(element, XML_NS.c_str(), "Identification", def.identification);
+		_readPropertyOfElement(element, XML_NS.c_str(), "Symbol", def.symbol);
+		_readPropertyOfElement(element, XML_NS.c_str(), "Description", def.description);
+		_readPropertyOfElement(element, XML_NS.c_str(), "Name", def.name);
 
-		if (XMLString::compareIString(DOMHelper::fromUTF8("Name"), memberElem->getLocalName()) == 0) {
+	}
 
-			def.members.resize(def.members.size() + 1);
+	void _readClassDefinition(DOMElement *element, ClassDefinition &def) {
 
-			xmlAdapter(DOMHelper::toUTF8(memberElem->getTextContent()), def.members.back().name);
+		_readDefinition(element, def);
 
-		} else if (XMLString::compareIString(DOMHelper::fromUTF8("Type"), memberElem->getLocalName()) == 0) {
+		_readPropertyOfElement(element, XML_NS.c_str(), "ParentClass", def.parentClass);
+		_readPropertyOfElement(element, XML_NS.c_str(), "IsConcrete", def.concrete);
 
-			xmlAdapter(DOMHelper::toUTF8(memberElem->getTextContent()), def.members.back().type);
+	}
+
+	void _readPropertyDefinition(DOMElement *element, PropertyDefinition &def) {
+
+		_readDefinition(element, def);
+
+		if (def.symbol == "FormatVersion") {
+			int b = 0;
+		}
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "Type", def.type);
+		_readPropertyOfElement(element, XML_NS.c_str(), "MemberOf", def.memberOf);
+		_readPropertyOfElement(element, XML_NS.c_str(), "LocalIdentification", def.localIdentification);
+		_readPropertyOfElement(element, XML_NS.c_str(), "IsUniqueIdentifier", def.uniqueIdentifier);
+		_readPropertyOfElement(element, XML_NS.c_str(), "IsOptional", def.optional);
+
+	}
+
+	void _readPropertyAliasDefinition(DOMElement *element, PropertyAliasDefinition &def) {
+
+		_readPropertyDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "OriginalProperty", def.originalProperty);
+
+	}
+
+	void _readIntegerTypeDefinition(DOMElement *element, IntegerTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "Size", def.size);
+		_readPropertyOfElement(element, XML_NS.c_str(), "IsSigned", def.isSigned);
+
+	}
+
+
+	void _readRenameTypeDefinition(DOMElement *element, RenameTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "RenamedType", def.renamedType);
+
+	}
+
+	void _readSetTypeDefinition(DOMElement *element, SetTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
+
+	}
+
+	void _readStringTypeDefinition(DOMElement *element, StringTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
+
+	}
+
+
+	void _readStrongReferenceTypeDefinition(DOMElement *element, StrongReferenceTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "ReferencedType", def.referencedType);
+
+	}
+
+	void _readVariableTypeDefinition(DOMElement *element, VariableArrayTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
+
+	}
+
+	void _readTypeDefinitionCharacter(DOMElement *element, CharacterTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+	}
+
+	void _readFixedArrayTypeDefinition(DOMElement *element, FixedArrayTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
+		_readPropertyOfElement(element, XML_NS.c_str(), "ElementCount", def.elementCount);
+
+	}
+
+	void _readRecordTypeDefinition(DOMElement *element, RecordTypeDefinition &def) {
+
+
+		_readDefinition(element, def);
+
+		/* read Members */
+
+		DOMElement *membersElem = DOMHelper::getElementByTagNameNS(
+			element,
+			DOMHelper::fromUTF8(XML_NS),
+			DOMHelper::fromUTF8("Members")
+		);
+
+		if (!membersElem) {
+
+			throw new XMLImporter::Exception("Elements property missing");
 
 		}
 
+		DOMElement *memberElem = membersElem->getFirstElementChild();
 
+		while (memberElem) {
 
-		memberElem = memberElem->getNextElementSibling();
-	}
 
-}
 
-void _readWeakReferenceTypeDefinition(DOMElement *element, WeakReferenceTypeDefinition &def) {
+			if (XMLString::compareIString(DOMHelper::fromUTF8("Name"), memberElem->getLocalName()) == 0) {
 
-	_readDefinition(element, def);
+				def.members.resize(def.members.size() + 1);
 
-	_readPropertyOfElement(element, XML_NS.c_str(), "ReferencedType", def.referencedType);
+				xmlAdapter(DOMHelper::toUTF8(memberElem->getTextContent()), def.members.back().name);
 
-	DOMElement *tsetelem = DOMHelper::getElementByTagNameNS(
-		element,
-		DOMHelper::fromUTF8(XML_NS),
-		DOMHelper::fromUTF8("TargetSet")
-	);
+			} else if (XMLString::compareIString(DOMHelper::fromUTF8("Type"), memberElem->getLocalName()) == 0) {
 
-	if (!tsetelem) {
-
-		throw XMLImporter::Exception("TargetSet property missing");
-
-	}
-
-	/* check if there is any text content */
-	/* xerces fails on transcoding zero-length streams in some versions */
-
-	if (XMLString::stringLen(tsetelem->getTextContent()) != 0) {
-
-		std::istringstream ss(DOMHelper::toUTF8(tsetelem->getTextContent()).c_str());
-
-		std::string auid_str;
-
-		while (ss >> auid_str)
-			def.targetSet.push_back(AUID(auid_str));
-		
-	}
-
-}
-
-
-void _readEnumerationTypeDefinition(DOMElement *element, EnumerationTypeDefinition &def) {
-
-
-	_readDefinition(element, def);
-
-	_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
-
-	/* read Elements */
-
-	DOMElement *elementsElem = DOMHelper::getElementByTagNameNS(
-		element,
-		DOMHelper::fromUTF8(XML_NS),
-		DOMHelper::fromUTF8("Elements")
-	);
-
-	if (!elementsElem) {
-
-		throw new XMLImporter::Exception("Elements property missing");
-
-	}
-
-	DOMElement *elementElem = elementsElem->getFirstElementChild();
-
-	while (elementElem) {
-
-
-
-		if (XMLString::compareIString(DOMHelper::fromUTF8("Name"), elementElem->getLocalName()) == 0) {
-
-			def.elements.resize(def.elements.size() + 1);
-
-			xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().name);
-
-		} else if (XMLString::compareIString(DOMHelper::fromUTF8("Value"), elementElem->getLocalName()) == 0) {
-
-			xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().value);
-
-		} else if (XMLString::compareIString(DOMHelper::fromUTF8("Description"), elementElem->getLocalName()) == 0) {
-
-			xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().description);
-
-		}
-
-
-
-		elementElem = elementElem->getNextElementSibling();
-	}
-
-}
-
-void XMLImporter::fromDOM(DOMDocument & dom, MetaDictionary &md, EventHandler * ev)
-{
-	DOMElement *root = dom.getDocumentElement();
-
-	if (NAME != DOMHelper::toUTF8(root->getLocalName()).c_str() ||
-		XML_NS != DOMHelper::toUTF8(root->getNamespaceURI()).c_str()) {
-		// FATAL
-	}
-
-	/* read SchemeID */
-
-	DOMElement *schemeIDElement = DOMHelper::getElementByTagNameNS(root,
-		DOMHelper::fromUTF8(XML_NS),
-		DOMHelper::fromUTF8("SchemeID")
-	);
-
-	if (!schemeIDElement) {
-		ev->fatal("SCHEME_ID_MISSING", "SchemeID element missing from the MetaDictionary", "");
-
-		return;
-	}
-
-	AUID schemeID = TranscodeToStr(schemeIDElement->getTextContent(), "utf-8").str();
-
-	md.setSchemeID(schemeID);
-
-	/* read SchemeURI */
-
-	DOMElement *schemeURIElement = DOMHelper::getElementByTagNameNS(
-		root,
-		DOMHelper::fromUTF8(XML_NS),
-		DOMHelper::fromUTF8("SchemeURI")
-	);
-
-	if (!schemeURIElement) {
-		ev->fatal("SCHEME_URI_MISSING", "SchemeURI element missing from the MetaDictionary", "");
-
-		return;
-	}
-
-	std::string schemeURI = DOMHelper::toUTF8(schemeURIElement->getTextContent()).c_str();
-
-	md.setSchemeURI(schemeURI);
-
-	/* read and index definitions */
-
-	DOMElement *definitions = DOMHelper::getElementByTagNameNS(
-		root,
-		DOMHelper::fromUTF8(XML_NS),
-		DOMHelper::fromUTF8("MetaDefinitions")
-	);
-
-	if (!definitions) {
-		ev->fatal("METADEFINITIONS_MISSING", "MetaDefinitions element missing from the MetaDictionary", "");
-
-		return;
-	}
-
-	DOMElement *curelement = definitions->getFirstElementChild();
-
-	while (curelement) {
-
-		try {
-
-			std::string localname = DOMHelper::toUTF8(curelement->getLocalName()).c_str();
-
-			if (localname == "ClassDefinition") {
-
-				ClassDefinition def;
-
-				_readClassDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "PropertyDefinition") {
-
-				PropertyDefinition def;
-
-				_readPropertyDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "PropertyAliasDefinition") {
-
-				PropertyAliasDefinition def;
-
-				_readPropertyAliasDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionCharacter") {
-
-				CharacterTypeDefinition def;
-
-				_readDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionEnumeration") {
-
-				EnumerationTypeDefinition def;
-
-				_readEnumerationTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionExtendibleEnumeration") {
-
-				ExtendibleEnumerationTypeDefinition def;
-
-				_readDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionFixedArray") {
-
-				FixedArrayTypeDefinition def;
-
-				_readFixedArrayTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionIndirect") {
-
-				IndirectTypeDefinition def;
-
-				_readDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionInteger") {
-
-				IntegerTypeDefinition def;
-
-				_readIntegerTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionOpaque") {
-
-				OpaqueTypeDefinition def;
-
-				_readDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionRecord") {
-
-				RecordTypeDefinition def;
-
-				_readRecordTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionRename") {
-
-				RenameTypeDefinition def;
-
-				_readRenameTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionSet") {
-
-				SetTypeDefinition def;
-
-				_readSetTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionStream") {
-
-				StreamTypeDefinition def;
-
-				_readDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionString") {
-
-				StringTypeDefinition def;
-
-				_readStringTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionStrongObjectReference") {
-
-				StrongReferenceTypeDefinition def;
-
-				_readStrongReferenceTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionVariableArray") {
-
-				VariableArrayTypeDefinition def;
-
-				_readVariableTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else if (localname == "TypeDefinitionWeakObjectReference") {
-
-				WeakReferenceTypeDefinition def;
-
-				_readWeakReferenceTypeDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-
-			} else if (localname == "TypeDefinitionLenseSerialFloat") {
-
-				LensSerialFloatTypeDefinition def;
-
-				_readDefinition(curelement, def);
-
-				def.ns = schemeURI;
-
-				md.addDefinition(def);
-
-			} else {
-
-				ev->error("UNKNOW_TYPE", "Unknow type: " + localname, "");
+				xmlAdapter(DOMHelper::toUTF8(memberElem->getTextContent()), def.members.back().type);
 
 			}
 
-		} catch (XMLImporter::Exception e) {
 
-			ev->error("EXCEPTION", "Message: " + std::string(e.what()), "");
+
+			memberElem = memberElem->getNextElementSibling();
+		}
+
+	}
+
+	void _readWeakReferenceTypeDefinition(DOMElement *element, WeakReferenceTypeDefinition &def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "ReferencedType", def.referencedType);
+
+		DOMElement *tsetelem = DOMHelper::getElementByTagNameNS(
+			element,
+			DOMHelper::fromUTF8(XML_NS),
+			DOMHelper::fromUTF8("TargetSet")
+		);
+
+		if (!tsetelem) {
+
+			throw XMLImporter::Exception("TargetSet property missing");
 
 		}
 
-		curelement = curelement->getNextElementSibling();
+		/* check if there is any text content */
+		/* xerces fails on transcoding zero-length streams in some versions */
+
+		if (XMLString::stringLen(tsetelem->getTextContent()) != 0) {
+
+			std::istringstream ss(DOMHelper::toUTF8(tsetelem->getTextContent()).c_str());
+
+			std::string auid_str;
+
+			while (ss >> auid_str)
+				def.targetSet.push_back(AUID(auid_str));
+
+		}
+
 	}
 
-	return;
-}
 
+	void _readEnumerationTypeDefinition(DOMElement *element, EnumerationTypeDefinition &def) {
+
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "ElementType", def.elementType);
+
+		/* read Elements */
+
+		DOMElement *elementsElem = DOMHelper::getElementByTagNameNS(
+			element,
+			DOMHelper::fromUTF8(XML_NS),
+			DOMHelper::fromUTF8("Elements")
+		);
+
+		if (!elementsElem) {
+
+			throw new XMLImporter::Exception("Elements property missing");
+
+		}
+
+		DOMElement *elementElem = elementsElem->getFirstElementChild();
+
+		while (elementElem) {
+
+
+
+			if (XMLString::compareIString(DOMHelper::fromUTF8("Name"), elementElem->getLocalName()) == 0) {
+
+				def.elements.resize(def.elements.size() + 1);
+
+				xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().name);
+
+			} else if (XMLString::compareIString(DOMHelper::fromUTF8("Value"), elementElem->getLocalName()) == 0) {
+
+				xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().value);
+
+			} else if (XMLString::compareIString(DOMHelper::fromUTF8("Description"), elementElem->getLocalName()) == 0) {
+
+				xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().description);
+
+			}
+
+
+
+			elementElem = elementElem->getNextElementSibling();
+		}
+
+	}
+
+	void XMLImporter::fromDOM(DOMDocument & dom, MetaDictionary &md, EventHandler * ev)
+	{
+		DOMElement *root = dom.getDocumentElement();
+
+		if (NAME != DOMHelper::toUTF8(root->getLocalName()).c_str() ||
+			XML_NS != DOMHelper::toUTF8(root->getNamespaceURI()).c_str()) {
+			// FATAL
+		}
+
+		/* read SchemeID */
+
+		DOMElement *schemeIDElement = DOMHelper::getElementByTagNameNS(root,
+			DOMHelper::fromUTF8(XML_NS),
+			DOMHelper::fromUTF8("SchemeID")
+		);
+
+		if (!schemeIDElement) {
+			ev->fatal("SCHEME_ID_MISSING", "SchemeID element missing from the MetaDictionary", "");
+
+			return;
+		}
+
+		AUID schemeID = TranscodeToStr(schemeIDElement->getTextContent(), "utf-8").str();
+
+		md.setSchemeID(schemeID);
+
+		/* read SchemeURI */
+
+		DOMElement *schemeURIElement = DOMHelper::getElementByTagNameNS(
+			root,
+			DOMHelper::fromUTF8(XML_NS),
+			DOMHelper::fromUTF8("SchemeURI")
+		);
+
+		if (!schemeURIElement) {
+			ev->fatal("SCHEME_URI_MISSING", "SchemeURI element missing from the MetaDictionary", "");
+
+			return;
+		}
+
+		std::string schemeURI = DOMHelper::toUTF8(schemeURIElement->getTextContent()).c_str();
+
+		md.setSchemeURI(schemeURI);
+
+		/* read and index definitions */
+
+		DOMElement *definitions = DOMHelper::getElementByTagNameNS(
+			root,
+			DOMHelper::fromUTF8(XML_NS),
+			DOMHelper::fromUTF8("MetaDefinitions")
+		);
+
+		if (!definitions) {
+			ev->fatal("METADEFINITIONS_MISSING", "MetaDefinitions element missing from the MetaDictionary", "");
+
+			return;
+		}
+
+		DOMElement *curelement = definitions->getFirstElementChild();
+
+		while (curelement) {
+
+			try {
+
+				std::string localname = DOMHelper::toUTF8(curelement->getLocalName()).c_str();
+
+				if (localname == "ClassDefinition") {
+
+					ClassDefinition def;
+
+					_readClassDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "PropertyDefinition") {
+
+					PropertyDefinition def;
+
+					_readPropertyDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "PropertyAliasDefinition") {
+
+					PropertyAliasDefinition def;
+
+					_readPropertyAliasDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionCharacter") {
+
+					CharacterTypeDefinition def;
+
+					_readDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionEnumeration") {
+
+					EnumerationTypeDefinition def;
+
+					_readEnumerationTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionExtendibleEnumeration") {
+
+					ExtendibleEnumerationTypeDefinition def;
+
+					_readDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionFixedArray") {
+
+					FixedArrayTypeDefinition def;
+
+					_readFixedArrayTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionIndirect") {
+
+					IndirectTypeDefinition def;
+
+					_readDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionInteger") {
+
+					IntegerTypeDefinition def;
+
+					_readIntegerTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionOpaque") {
+
+					OpaqueTypeDefinition def;
+
+					_readDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionRecord") {
+
+					RecordTypeDefinition def;
+
+					_readRecordTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionRename") {
+
+					RenameTypeDefinition def;
+
+					_readRenameTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionSet") {
+
+					SetTypeDefinition def;
+
+					_readSetTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionStream") {
+
+					StreamTypeDefinition def;
+
+					_readDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionString") {
+
+					StringTypeDefinition def;
+
+					_readStringTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionStrongObjectReference") {
+
+					StrongReferenceTypeDefinition def;
+
+					_readStrongReferenceTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionVariableArray") {
+
+					VariableArrayTypeDefinition def;
+
+					_readVariableTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionWeakObjectReference") {
+
+					WeakReferenceTypeDefinition def;
+
+					_readWeakReferenceTypeDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+
+				} else if (localname == "TypeDefinitionLenseSerialFloat") {
+
+					LensSerialFloatTypeDefinition def;
+
+					_readDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else {
+
+					ev->error("UNKNOW_TYPE", "Unknow type: " + localname, "");
+
+				}
+
+			} catch (XMLImporter::Exception e) {
+
+				ev->error("EXCEPTION", "Message: " + std::string(e.what()), "");
+
+			}
+
+			curelement = curelement->getNextElementSibling();
+		}
+
+		return;
+	}
+
+}

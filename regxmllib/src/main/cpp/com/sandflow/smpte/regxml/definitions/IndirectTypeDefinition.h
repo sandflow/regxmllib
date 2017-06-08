@@ -30,17 +30,20 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct IndirectTypeDefinition : public Definition {
+namespace rxml {
 
-public:
+	struct IndirectTypeDefinition : public Definition {
 
-	void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	public:
+
+		void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
 
-};
+	};
 
+}
 
 #endif
 

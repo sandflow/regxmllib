@@ -23,11 +23,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef COM_SANDFLOW_UTIL_OPTIONAL_H
 #define COM_SANDFLOW_UTIL_OPTIONAL_H
 
-
+namespace rxml {
 
 	template<typename T> class Optional {
 
@@ -45,7 +45,7 @@
 
 		Optional& operator=(const T* other)
 		{
-			
+
 			set(other);
 
 			return *this;
@@ -95,5 +95,6 @@
 	};
 
 
+}
 
 #endif

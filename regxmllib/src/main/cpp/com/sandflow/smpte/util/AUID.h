@@ -34,129 +34,133 @@
 #include "UUID.h"
 #include <cstring>
 
-/**
- * AUID as specified in SMPTE ST 377-1
- */
-class AUID {
+namespace rxml {
 
-	
-
-public:
-
-	unsigned char value[16];
-
-
-
-	static bool urnToBytes(const std::string &urn, unsigned char(&ul)[16]);
-    
-    /**
-     * Creates a AUID from a UL or UUID URN. 
-     * @param urn URN from which to create the AUID
-	 * @throws std::invalid_argument
-     */
-	AUID(const std::string &urn);
 
 	/**
-	* Creates a AUID from a UL or UUID URN.
-	* @param urn URN from which to create the AUID
-	* @throws std::invalid_argument
-	*/
-	AUID(const char *urn);
-    
-	AUID();
-    
-    /**
-     * Instantiates a AUID from a 16-byte buffer
-     * @param auid 16-bytes
-     */
-	AUID(const unsigned char auid[16]);
-
-    
-    /**
-     * Instantiates a AUID from a UL
-     * @param ul UL from which to create the AUID
-     */
-    AUID(const UL &ul) {
-		*this = ul;
-    }
-
-    /**
-     * Instantiates a AUID from a UUID
-     * @param uuid UUID from which to create the AUID
-     */
-    AUID(const UUID &uuid) {
-		*this = uuid;
-    }
-
-	/**
-	* Returns the UL underlying the AUID
-	* @throws std::invalid_argument if the AUID is not a UL
-	*/
-	UL asUL() const;
-
-	/**
-	* Returns the UUID underlying the AUID
-	* @throws std::invalid_argument if the AUID is not a UUID
-	*/
-	UUID asUUID() const;
+	 * AUID as specified in SMPTE ST 377-1
+	 */
+	class AUID {
 
 
-	bool equals(const AUID &auid) const;
 
-	std::string to_string() const;
+	public:
 
-    /**
-     * Is the AUID a UL?
-     * @return true if the AUID is a UL
-     */
-    bool isUL() const {
-        return (value[0] & 0x80) == 0;
-    }
-    
-    /**
-     * Is the AUID a UUID?
-     * @return true if the AUID is a UUID
-     */
-    bool isUUID() const {
-        return ! isUL();
-    }
+		unsigned char value[16];
 
-	AUID& operator=(const AUID & src) {
 
-		if (&src != this) {
-			std::copy(src.value, src.value + 16, this->value);
+
+		static bool urnToBytes(const std::string &urn, unsigned char(&ul)[16]);
+
+		/**
+		 * Creates a AUID from a UL or UUID URN.
+		 * @param urn URN from which to create the AUID
+		 * @throws std::invalid_argument
+		 */
+		AUID(const std::string &urn);
+
+		/**
+		* Creates a AUID from a UL or UUID URN.
+		* @param urn URN from which to create the AUID
+		* @throws std::invalid_argument
+		*/
+		AUID(const char *urn);
+
+		AUID();
+
+		/**
+		 * Instantiates a AUID from a 16-byte buffer
+		 * @param auid 16-bytes
+		 */
+		AUID(const unsigned char auid[16]);
+
+
+		/**
+		 * Instantiates a AUID from a UL
+		 * @param ul UL from which to create the AUID
+		 */
+		AUID(const UL &ul) {
+			*this = ul;
 		}
 
-		return *this;
-	}
+		/**
+		 * Instantiates a AUID from a UUID
+		 * @param uuid UUID from which to create the AUID
+		 */
+		AUID(const UUID &uuid) {
+			*this = uuid;
+		}
 
-	AUID& operator=(const UL & src) {
+		/**
+		* Returns the UL underlying the AUID
+		* @throws std::invalid_argument if the AUID is not a UL
+		*/
+		UL asUL() const;
 
-		memcpy(this->value, src.value, 16);
+		/**
+		* Returns the UUID underlying the AUID
+		* @throws std::invalid_argument if the AUID is not a UUID
+		*/
+		UUID asUUID() const;
 
-		return *this;
-	}
 
-	AUID& operator=(const UUID & src) {
+		bool equals(const AUID &auid) const;
 
-		memcpy(this->value, src.value + 8, 8);
-		memcpy(this->value + 8, src.value, 8);
+		std::string to_string() const;
 
-		return *this;
-	}
+		/**
+		 * Is the AUID a UL?
+		 * @return true if the AUID is a UL
+		 */
+		bool isUL() const {
+			return (value[0] & 0x80) == 0;
+		}
 
-	AUID& operator=(const unsigned char src[]) {
-		std::copy(src, src + 16, this->value);
+		/**
+		 * Is the AUID a UUID?
+		 * @return true if the AUID is a UUID
+		 */
+		bool isUUID() const {
+			return !isUL();
+		}
 
-		return *this;
-	}
+		AUID& operator=(const AUID & src) {
 
-	bool operator<(const AUID& other) const {
+			if (&src != this) {
+				std::copy(src.value, src.value + 16, this->value);
+			}
 
-		return std::memcmp(this->value, other.value, 16) < 0;
+			return *this;
+		}
 
-	}
+		AUID& operator=(const UL & src) {
 
-};
+			memcpy(this->value, src.value, 16);
 
+			return *this;
+		}
+
+		AUID& operator=(const UUID & src) {
+
+			memcpy(this->value, src.value + 8, 8);
+			memcpy(this->value + 8, src.value, 8);
+
+			return *this;
+		}
+
+		AUID& operator=(const unsigned char src[]) {
+			std::copy(src, src + 16, this->value);
+
+			return *this;
+		}
+
+		bool operator<(const AUID& other) const {
+
+			return std::memcmp(this->value, other.value, 16) < 0;
+
+		}
+
+	};
+
+}
 #endif

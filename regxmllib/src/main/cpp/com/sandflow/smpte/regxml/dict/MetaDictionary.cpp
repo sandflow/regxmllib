@@ -45,286 +45,290 @@
 #include "com/sandflow/smpte/regxml/definitions/WeakReferenceTypeDefinition.h"
 #include "com/sandflow/smpte/regxml/definitions/LensSerialFloatTypeDefinition.h"
 
-class _AddDefinitionVisitor : public DefinitionVisitor {
+namespace rxml {
 
-public:
-	_AddDefinitionVisitor(MetaDictionary &md, EventHandler *ev = &NULL_EVENTHANDLER) : meta_dictionary(md), event_handler(ev) {};
+	class _AddDefinitionVisitor : public DefinitionVisitor {
 
-	bool _visit(Definition* def) {
+	public:
+		_AddDefinitionVisitor(MetaDictionary &md, EventHandler *ev = &NULL_EVENTHANDLER) : meta_dictionary(md), event_handler(ev) {};
 
-		const AUID defid = MetaDictionary::createNormalizedAUID(def->identification);
+		bool _visit(Definition* def) {
 
-		if (meta_dictionary.getDefinition(defid) != NULL) {
+			const AUID defid = MetaDictionary::createNormalizedAUID(def->identification);
 
-			if (event_handler) event_handler->error("Duplicate definition AUID: ", def->identification.to_string(), "");
+			if (meta_dictionary.getDefinition(defid) != NULL) {
 
-			return false;
+				if (event_handler) event_handler->error("Duplicate definition AUID: ", def->identification.to_string(), "");
 
-		}
+				return false;
 
-		if (meta_dictionary.getDefinition(def->symbol) != NULL) {
-
-			if (event_handler) event_handler->error("Duplicate definition Symbol: ", def->symbol, "");
-
-			return false;
-
-		}
-
-		meta_dictionary.definitionsByAUID[defid] = def;
-		meta_dictionary.definitionsBySymbol[def->symbol] = def;
-		meta_dictionary.definitions.push_back(def);
-
-		return true;
-	}
-
-	virtual void visit(const ClassDefinition &def) {
-		/* Copy and add */
-
-		Definition *def_copy = new ClassDefinition(def);
-
-		if (_visit(def_copy)) {
-
-			/* add to member index */
-
-			if (def.parentClass.is_valid()) {
-
-				const AUID parentauid = MetaDictionary::createNormalizedAUID(def.parentClass.get());
-
-				meta_dictionary.subclassesOf[parentauid].insert(def.identification);
 			}
 
+			if (meta_dictionary.getDefinition(def->symbol) != NULL) {
+
+				if (event_handler) event_handler->error("Duplicate definition Symbol: ", def->symbol, "");
+
+				return false;
+
+			}
+
+			meta_dictionary.definitionsByAUID[defid] = def;
+			meta_dictionary.definitionsBySymbol[def->symbol] = def;
+			meta_dictionary.definitions.push_back(def);
+
+			return true;
 		}
-	}
 
-	virtual void visit(const PropertyDefinition &def) {
+		virtual void visit(const ClassDefinition &def) {
+			/* Copy and add */
 
-		/* Copy and add */
+			Definition *def_copy = new ClassDefinition(def);
 
-		Definition *def_copy = new PropertyDefinition(def);
+			if (_visit(def_copy)) {
 
-		if (_visit(def_copy)) {
+				/* add to member index */
 
-			/* add to member index */
+				if (def.parentClass.is_valid()) {
+
+					const AUID parentauid = MetaDictionary::createNormalizedAUID(def.parentClass.get());
+
+					meta_dictionary.subclassesOf[parentauid].insert(def.identification);
+				}
+
+			}
+		}
+
+		virtual void visit(const PropertyDefinition &def) {
+
+			/* Copy and add */
+
+			Definition *def_copy = new PropertyDefinition(def);
+
+			if (_visit(def_copy)) {
+
+				/* add to member index */
+
+				const AUID parentauid = MetaDictionary::createNormalizedAUID(def.memberOf);
+
+				meta_dictionary.membersOf[parentauid].insert(def.identification);
+			}
+
+
+		}
+
+
+		virtual void visit(const PropertyAliasDefinition & def) {
+			Definition *def_copy = new PropertyAliasDefinition(def);
 
 			const AUID parentauid = MetaDictionary::createNormalizedAUID(def.memberOf);
 
 			meta_dictionary.membersOf[parentauid].insert(def.identification);
+
 		}
 
+		virtual void visit(const EnumerationTypeDefinition &def) {
+			Definition *def_copy = new EnumerationTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const CharacterTypeDefinition &def) {
+			Definition *def_copy = new CharacterTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const RenameTypeDefinition & def) {
+			Definition *def_copy = new RenameTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const RecordTypeDefinition & def) {
+			Definition *def_copy = new RecordTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const StringTypeDefinition & def) {
+			Definition *def_copy = new StringTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const LensSerialFloatTypeDefinition & def) {
+			Definition *def_copy = new LensSerialFloatTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const IntegerTypeDefinition & def) {
+			Definition *def_copy = new IntegerTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const StrongReferenceTypeDefinition & def) {
+			Definition *def_copy = new StrongReferenceTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const WeakReferenceTypeDefinition & def) {
+			Definition *def_copy = new WeakReferenceTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const ExtendibleEnumerationTypeDefinition & def) {
+			Definition *def_copy = new ExtendibleEnumerationTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const VariableArrayTypeDefinition & def) {
+			Definition *def_copy = new VariableArrayTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const FixedArrayTypeDefinition & def) {
+			Definition *def_copy = new FixedArrayTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const OpaqueTypeDefinition & def) {
+			Definition *def_copy = new OpaqueTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const IndirectTypeDefinition & def) {
+			Definition *def_copy = new IndirectTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const StreamTypeDefinition & def) {
+			Definition *def_copy = new StreamTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+		virtual void visit(const SetTypeDefinition & def) {
+			Definition *def_copy = new SetTypeDefinition(def);
+
+			_visit(def_copy);
+		}
+
+	private:
+		MetaDictionary &meta_dictionary;
+		EventHandler *event_handler;
+
+	};
+
+
+	MetaDictionary::MetaDictionary(const AUID & pSchemeID, const std::string & pSchemeURI) : schemeID(pSchemeID), schemeURI(pSchemeURI) {
+	}
+
+	MetaDictionary::MetaDictionary() {}
+
+	MetaDictionary::~MetaDictionary() {
+
+		for (std::vector<Definition*>::iterator it = definitions.begin(); it != definitions.end(); ++it) {
+			delete *it;
+		}
 
 	}
 
+	const Definition * MetaDictionary::getDefinition(const AUID & identification) const {
 
-	virtual void visit(const PropertyAliasDefinition & def) {
-		Definition *def_copy = new PropertyAliasDefinition(def);
-		
-		const AUID parentauid = MetaDictionary::createNormalizedAUID(def.memberOf);
+		std::map<AUID, Definition*>::const_iterator it = definitionsByAUID.find(createNormalizedAUID(identification));
 
-		meta_dictionary.membersOf[parentauid].insert(def.identification);
+		if (it == definitionsByAUID.end()) return NULL;
+
+		return it->second;
+	}
+
+	const Definition *  MetaDictionary::getDefinition(const std::string & symbol) const
+	{
+		if (definitionsBySymbol.find(symbol) == definitionsBySymbol.end()) return NULL;
+
+		return definitionsBySymbol.at(symbol);
+	}
+
+	std::set<AUID> MetaDictionary::getSubclassesOf(const AUID & identification) const {
+
+		const AUID norm_auid = MetaDictionary::createNormalizedAUID(identification);
+
+		if (subclassesOf.find(norm_auid) == subclassesOf.end()) return std::set<AUID>();
+
+		return subclassesOf.at(norm_auid);
+	}
+
+	std::set<AUID> MetaDictionary::getMembersOf(const AUID & identification) const {
+
+		const AUID norm_auid = MetaDictionary::createNormalizedAUID(identification);
+
+		if (membersOf.find(norm_auid) == membersOf.end()) return std::set<AUID>();
+
+		return membersOf.at(norm_auid);
+	}
+
+	void MetaDictionary::setSchemeID(const AUID & pSchemeID) {
+		this->schemeID = pSchemeID;
+	}
+
+	const std::string & MetaDictionary::getSchemeURI() const { return this->schemeURI; }
+
+	void MetaDictionary::setSchemeURI(const std::string & pSchemeURI) {
+		this->schemeURI = pSchemeURI;
+	}
+
+	void MetaDictionary::setDescription(const std::string & desc) {
+		this->description = desc;
+	}
+
+	void MetaDictionary::addDefinition(const Definition & def, EventHandler * ev)
+	{
+
+		_AddDefinitionVisitor ad(*this);
+
+		def.accept(ad);
 
 	}
 
-	virtual void visit(const EnumerationTypeDefinition &def) {
-		Definition *def_copy = new EnumerationTypeDefinition(def);
+	UL MetaDictionary::createNormalizedUL(const UL & ul) {
+		UL norm_ul = ul;
 
-		_visit(def_copy);
+		/* set version to 0 */
+
+		norm_ul.setValueOctet(7, 0);
+
+		if (norm_ul.isGroup()) {
+
+			/* set byte 6 to 0x7f */
+			norm_ul.setValueOctet(5, 0x7f);
+
+		}
+
+		return norm_ul;
 	}
 
-	virtual void visit(const CharacterTypeDefinition &def) {
-		Definition *def_copy = new CharacterTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const RenameTypeDefinition & def) {
-		Definition *def_copy = new RenameTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const RecordTypeDefinition & def)  {
-		Definition *def_copy = new RecordTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const StringTypeDefinition & def) {
-		Definition *def_copy = new StringTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const LensSerialFloatTypeDefinition & def) {
-		Definition *def_copy = new LensSerialFloatTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const IntegerTypeDefinition & def) {
-		Definition *def_copy = new IntegerTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const StrongReferenceTypeDefinition & def) {
-		Definition *def_copy = new StrongReferenceTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const WeakReferenceTypeDefinition & def) {
-		Definition *def_copy = new WeakReferenceTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const ExtendibleEnumerationTypeDefinition & def)	{
-		Definition *def_copy = new ExtendibleEnumerationTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const VariableArrayTypeDefinition & def) {
-		Definition *def_copy = new VariableArrayTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const FixedArrayTypeDefinition & def) {
-		Definition *def_copy = new FixedArrayTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const OpaqueTypeDefinition & def) {
-		Definition *def_copy = new OpaqueTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const IndirectTypeDefinition & def) {
-		Definition *def_copy = new IndirectTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const StreamTypeDefinition & def) {
-		Definition *def_copy = new StreamTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-	virtual void visit(const SetTypeDefinition & def) {
-		Definition *def_copy = new SetTypeDefinition(def);
-
-		_visit(def_copy);
-	}
-
-private:
-	MetaDictionary &meta_dictionary;
-	EventHandler *event_handler;
-
-};
-
-
-MetaDictionary::MetaDictionary(const AUID & pSchemeID, const std::string & pSchemeURI) : schemeID(pSchemeID), schemeURI(pSchemeURI) {
-}
-
-MetaDictionary::MetaDictionary() {}
-
-MetaDictionary::~MetaDictionary() {
-
-	for (std::vector<Definition*>::iterator it = definitions.begin(); it != definitions.end(); ++it) {
-		delete *it;
-	}
-
-}
-
-const Definition * MetaDictionary::getDefinition(const AUID & identification) const {
-
-	std::map<AUID, Definition*>::const_iterator it = definitionsByAUID.find(createNormalizedAUID(identification));
-
-	if (it == definitionsByAUID.end()) return NULL;
-
-	return it->second;
-}
-
-const Definition *  MetaDictionary::getDefinition(const std::string & symbol) const
-{
-	if (definitionsBySymbol.find(symbol) == definitionsBySymbol.end()) return NULL;
-
-	return definitionsBySymbol.at(symbol);
-}
-
-std::set<AUID> MetaDictionary::getSubclassesOf(const AUID & identification) const {
-
-	const AUID norm_auid = MetaDictionary::createNormalizedAUID(identification);
-
-	if (subclassesOf.find(norm_auid) == subclassesOf.end()) return std::set<AUID>();
-
-	return subclassesOf.at(norm_auid);
-}
-
-std::set<AUID> MetaDictionary::getMembersOf(const AUID & identification) const {
-
-	const AUID norm_auid = MetaDictionary::createNormalizedAUID(identification);
-
-	if (membersOf.find(norm_auid) == membersOf.end()) return std::set<AUID>();
-
-	return membersOf.at(norm_auid);
-}
-
-void MetaDictionary::setSchemeID(const AUID & pSchemeID) {
-	this->schemeID = pSchemeID;
-}
-
- const std::string & MetaDictionary::getSchemeURI() const { return this->schemeURI; }
-
-void MetaDictionary::setSchemeURI(const std::string & pSchemeURI) {
-	this->schemeURI = pSchemeURI;
-}
-
-void MetaDictionary::setDescription(const std::string & desc) {
-	this->description = desc;
-}
-
-void MetaDictionary::addDefinition(const Definition & def, EventHandler * ev)
-{
-
-	_AddDefinitionVisitor ad(*this);
-
-	def.accept(ad);
-
-}
-
-UL MetaDictionary::createNormalizedUL(const UL & ul) {
-	UL norm_ul = ul;
-
-	/* set version to 0 */
-
-	norm_ul.setValueOctet(7, 0);
-
-	if (norm_ul.isGroup()) {
-
-		/* set byte 6 to 0x7f */
-		norm_ul.setValueOctet(5, 0x7f);
+	AUID MetaDictionary::createNormalizedAUID(const AUID & auid) {
+
+		if (auid.isUL()) {
+			return createNormalizedUL(auid.asUL());
+		} else {
+			return auid;
+		}
 
 	}
 
-	return norm_ul;
-}
+	bool MetaDictionary::normalizedAUIDEquals(const AUID & auidA, const AUID & auidB) {
 
-AUID MetaDictionary::createNormalizedAUID(const AUID & auid) {
-
-	if (auid.isUL()) {
-		return createNormalizedUL(auid.asUL());
-	} else {
-		return auid;
+		return createNormalizedAUID(auidA).equals(createNormalizedAUID(auidB));
 	}
 
-}
-
-bool MetaDictionary::normalizedAUIDEquals(const AUID & auidA, const AUID & auidB) {
-
-	return createNormalizedAUID(auidA).equals(createNormalizedAUID(auidB));
 }

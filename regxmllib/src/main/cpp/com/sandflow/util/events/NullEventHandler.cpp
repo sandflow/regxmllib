@@ -26,4 +26,7 @@
 
 #include "NullEventHandler.h"
 
-NullEventHandler NULL_EVENTHANDLER;
+namespace rxml
+{
+	NullEventHandler NULL_EVENTHANDLER;
+}

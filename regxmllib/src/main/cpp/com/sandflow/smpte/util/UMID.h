@@ -30,50 +30,54 @@
 #include <string>
 #include <cstring>
 
-class UMID {
+namespace rxml {
 
-public:
+	class UMID {
 
-	/*
-	 * Members
-	 */
+	public:
 
-	unsigned char value[32];
+		/*
+		 * Members
+		 */
 
-	/*
-	* Methods
-	*/
+		unsigned char value[32];
 
-
-	static std::string bytesToString(const unsigned char uuid[32]);
-
-	UMID(const unsigned char umid[32]) {
-		memcpy(this->value, umid, 32);
-	}
-
-	UMID() {
-		memset(this->value, 0, 32);
-	}
-
-	std::string to_string() const {
-		return bytesToString(this->value);
-	}
+		/*
+		* Methods
+		*/
 
 
-	UMID& operator=(const unsigned char src[]) {
+		static std::string bytesToString(const unsigned char uuid[32]);
 
-		std::memcpy(this->value, src, 32);
+		UMID(const unsigned char umid[32]) {
+			memcpy(this->value, umid, 32);
+		}
 
-		return *this;
-	}
+		UMID() {
+			memset(this->value, 0, 32);
+		}
 
-	bool operator<(const UMID& other) const {
+		std::string to_string() const {
+			return bytesToString(this->value);
+		}
 
-		return std::memcmp(this->value, other.value, 32) < 0;
 
-	}
+		UMID& operator=(const unsigned char src[]) {
 
-	
-};
+			std::memcpy(this->value, src, 32);
+
+			return *this;
+		}
+
+		bool operator<(const UMID& other) const {
+
+			return std::memcmp(this->value, other.value, 32) < 0;
+
+		}
+
+
+	};
+
+}
 
 #endif

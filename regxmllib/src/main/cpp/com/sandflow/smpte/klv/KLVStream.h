@@ -33,40 +33,43 @@
 #include <string>
 #include <stdint.h>
 
+namespace rxml {
 
-template<class CharT, class Traits = std::char_traits<CharT> >
-class basic_klvistream : public std::basic_istream<CharT, Traits> {
+	template<class CharT, class Traits = std::char_traits<CharT> >
+	class basic_klvistream : public std::basic_istream<CharT, Traits> {
 
-public:
+	public:
 
-	enum ByteOrder { BIG_ENDIAN_BYTE_ORDER, LITTLE_ENDIAN_BYTE_ORDER };
+		enum ByteOrder { BIG_ENDIAN_BYTE_ORDER, LITTLE_ENDIAN_BYTE_ORDER };
 
-	basic_klvistream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER) : std::basic_istream<CharT, Traits>(sb), byteorder(bo) {}
+		basic_klvistream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER) : std::basic_istream<CharT, Traits>(sb), byteorder(bo) {}
 
-	void readTriplet(MemoryTriplet &t);
-	AUID readAUID();
-	UL readUL();
-	unsigned long int readBERLength();
-	unsigned char readUnsignedByte();
-	char readByte();
-	unsigned short int readUnsignedShort();
-	short int readShort();
-	unsigned long readUnsignedInt() { return readUnsignedLong(); }
-	long readLong();
-	unsigned long readUnsignedLong();
-	long long readLongLong();
-	unsigned long long readUnsignedLongLong();
+		void readTriplet(MemoryTriplet &t);
+		AUID readAUID();
+		UL readUL();
+		unsigned long int readBERLength();
+		unsigned char readUnsignedByte();
+		char readByte();
+		unsigned short int readUnsignedShort();
+		short int readShort();
+		unsigned long readUnsignedInt() { return readUnsignedLong(); }
+		long readLong();
+		unsigned long readUnsignedLong();
+		long long readLongLong();
+		unsigned long long readUnsignedLongLong();
 
-	void readBytes(unsigned char* buffer, size_t length);
+		void readBytes(unsigned char* buffer, size_t length);
 
-	ByteOrder getByteOrder() const { return this->byteorder; };
+		ByteOrder getByteOrder() const { return this->byteorder; };
 
-private:
+	private:
 
-	ByteOrder byteorder;
+		ByteOrder byteorder;
 
-};
+	};
 
-typedef basic_klvistream<char> KLVStream;
+	typedef basic_klvistream<char> KLVStream;
+
+}
 
 #endif

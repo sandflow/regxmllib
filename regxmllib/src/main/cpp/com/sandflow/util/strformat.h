@@ -33,7 +33,7 @@
 #include <stdarg.h>  
 #include <iomanip>
 
-namespace strf {
+namespace rxml {
 
 	/**********************
 

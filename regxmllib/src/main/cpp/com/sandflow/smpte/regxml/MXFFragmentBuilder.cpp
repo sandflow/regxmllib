@@ -37,293 +37,296 @@
 #include "com/sandflow/smpte/klv/KLVException.h"
 #include "com/sandflow/smpte/regxml/dict/MetaDictionary.h"
 
-bool _findPartitionPack(std::istream &is, PartitionPack& pp) {
-	MemoryTriplet t;
+namespace rxml {
 
-	do {
+	bool _findPartitionPack(std::istream &is, PartitionPack& pp) {
+		MemoryTriplet t;
 
-		t.fromStream(is);
+		do {
 
-		if (is.good() && PartitionPack::isPartitionPack(t.getKey())) {
+			t.fromStream(is);
 
-			pp.fromTriplet(t);
+			if (is.good() && PartitionPack::isPartitionPack(t.getKey())) {
 
-			return true;
-
-		}
-
-	} while (is.good());
-
-	return false;
-}
-
-bool _findPrimerPack(std::istream &is, PrimerPack& pp) {
-	MemoryTriplet t;
-
-	do {
-
-		t.fromStream(is);
-
-		if (is.good() && !FillItem::isFillItem(t.getKey()) && PrimerPack::isPrimerPack(t.getKey())) {
-
-			pp.fromTriplet(t);
-
-			return true;
-
-		}
-
-	} while (is.good());
-
-	return false;
-}
-
-static const UL PREFACE_KEY = "urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00";
-
-bool _findPrefaceSet(const std::map<UUID, Set> &setresolver, UUID &rootid) {
-
-	for (std::map<UUID, Set>::const_iterator it = setresolver.begin(); it != setresolver.end(); it++) {
-
-		if (PREFACE_KEY.equals(it->second.getKey(), UL::IGNORE_GROUP_CODING & UL::IGNORE_VERSION)) {
-
-			rootid = it->second.getInstanceID();
-
-			return true;
-
-		}
-
-	}
-
-	return false;
-
-}
-
-bool _findFirstInstanceOfClass(const std::map<UUID, Set> &setresolver, const DefinitionResolver &defresolver, const AUID& superclass, UUID &objectid) {
-
-
-	for (std::map<UUID, Set>::const_iterator it = setresolver.begin(); it != setresolver.end(); it++) {
-
-		/* go up the class hierarchy */
-
-		AUID classauid = it->second.getKey();
-
-		while (true) {
-
-			const Definition *def = defresolver.getDefinition(classauid);
-
-			/* skip if not a class instance */
-
-			if (def == NULL || !instance_of<ClassDefinition>(*def)) {
-				break;
-			}
-
-
-			if (MetaDictionary::normalizedAUIDEquals(def->identification, superclass)) {
-
-				objectid = it->second.getInstanceID();
+				pp.fromTriplet(t);
 
 				return true;
 
-			} else if (((const ClassDefinition*)def)->parentClass.is_valid()) {
-
-				/* get parent class and continue */
-
-				classauid = ((const ClassDefinition*)def)->parentClass.get();
-
-			} else {
-
-				/* reached the top of the hierarchy */
-
-				break;
-
 			}
-		}
 
+		} while (is.good());
+
+		return false;
 	}
 
-	return false;
-
-}
-
-DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
-	std::istream &mxfpartition,
-	const DefinitionResolver &defresolver,
-	const FragmentBuilder::AUIDNameResolver *enumnameresolver,
-	const AUID *rootclasskey,
-	DOMDocument &document,
-	EventHandler *ev) {
-
-	static const UL INDEX_TABLE_SEGMENT_UL = "urn:smpte:ul:060e2b34.02530101.0d010201.01100100";
-
-
-	CountingStreamBuf csb(mxfpartition.rdbuf());
-
-	std::istream cis(&csb);
-
-	/* look for the partition pack */
-
-	PartitionPack pp;
-
-	try {
-
-		if (!_findPartitionPack(cis, pp)) {
-
-			ev->fatal(MisingHeaderPartitionPackError());
-
-			return NULL;
-
-		}
-
-
-	} catch (const std::exception &e) {
-
-		ev->fatal(BadHeaderPartitionPackError(e));
-
-		return NULL;
-
-	}
-
-
-	/* start counting header metadata bytes */
-
-	csb.resetCount();
-
-	/* look for the primer pack */
-
-
-	PrimerPack primer;
-
-	try {
-
-		if (!_findPrimerPack(cis, primer)) {
-
-			ev->fatal(MissingPrimerPackError());
-
-			return NULL;
-
-		}
-
-	} catch (const std::exception &e) {
-
-		ev->fatal(BadPrimerPackError(e));
-
-		return NULL;
-
-	}
-
-	/* capture all local sets within the header metadata */
-
-	std::map<UUID, Set> setresolver;
-
-	while (csb.getCount() < pp.headerByteCount) {
-
-		unsigned long long position = csb.getCount();
-
+	bool _findPrimerPack(std::istream &is, PrimerPack& pp) {
 		MemoryTriplet t;
 
-		try { /* reading triplet */
+		do {
 
-			t.fromStream(cis);
+			t.fromStream(is);
 
-		} catch (const std::exception &e) {
+			if (is.good() && !FillItem::isFillItem(t.getKey()) && PrimerPack::isPrimerPack(t.getKey())) {
 
-			ev->fatal(InvalidTriplet(e, position));
+				pp.fromTriplet(t);
 
-			return NULL;
+				return true;
+
+			}
+
+		} while (is.good());
+
+		return false;
+	}
+
+	static const UL PREFACE_KEY = "urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00";
+
+	bool _findPrefaceSet(const std::map<UUID, Set> &setresolver, UUID &rootid) {
+
+		for (std::map<UUID, Set>::const_iterator it = setresolver.begin(); it != setresolver.end(); it++) {
+
+			if (PREFACE_KEY.equals(it->second.getKey(), UL::IGNORE_GROUP_CODING & UL::IGNORE_VERSION)) {
+
+				rootid = it->second.getInstanceID();
+
+				return true;
+
+			}
 
 		}
+
+		return false;
+
+	}
+
+	bool _findFirstInstanceOfClass(const std::map<UUID, Set> &setresolver, const DefinitionResolver &defresolver, const AUID& superclass, UUID &objectid) {
+
+
+		for (std::map<UUID, Set>::const_iterator it = setresolver.begin(); it != setresolver.end(); it++) {
+
+			/* go up the class hierarchy */
+
+			AUID classauid = it->second.getKey();
+
+			while (true) {
+
+				const Definition *def = defresolver.getDefinition(classauid);
+
+				/* skip if not a class instance */
+
+				if (def == NULL || !instance_of<ClassDefinition>(*def)) {
+					break;
+				}
+
+
+				if (MetaDictionary::normalizedAUIDEquals(def->identification, superclass)) {
+
+					objectid = it->second.getInstanceID();
+
+					return true;
+
+				} else if (((const ClassDefinition*)def)->parentClass.is_valid()) {
+
+					/* get parent class and continue */
+
+					classauid = ((const ClassDefinition*)def)->parentClass.get();
+
+				} else {
+
+					/* reached the top of the hierarchy */
+
+					break;
+
+				}
+			}
+
+		}
+
+		return false;
+
+	}
+
+	DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
+		std::istream &mxfpartition,
+		const DefinitionResolver &defresolver,
+		const FragmentBuilder::AUIDNameResolver *enumnameresolver,
+		const AUID *rootclasskey,
+		DOMDocument &document,
+		EventHandler *ev) {
+
+		static const UL INDEX_TABLE_SEGMENT_UL = "urn:smpte:ul:060e2b34.02530101.0d010201.01100100";
+
+
+		CountingStreamBuf csb(mxfpartition.rdbuf());
+
+		std::istream cis(&csb);
+
+		/* look for the partition pack */
+
+		PartitionPack pp;
 
 		try {
 
-			if (!t.getKey().isUL()) {
+			if (!_findPartitionPack(cis, pp)) {
 
-				/* skip all non MXF groups */
+				ev->fatal(MisingHeaderPartitionPackError());
 
-				ev->info(NonMXFSetError(t.getKey(), position));
-
-				continue;
-
-			} else if (INDEX_TABLE_SEGMENT_UL.equals(t.getKey().asUL(), UL::IGNORE_VERSION)) {
-
-				/* stop if Index Table reached */
-
-				ev->warn(IndexTableReachedEarlyError(position));
-
-				break;
-
-			} else if (FillItem::isFillItem(t.getKey())) {
-
-				/* skip fill items */
-				continue;
-
-			} else if (!LocalSet::isLocalSet(t)) {
-
-				/* Group is not a Local Set */
-
-				ev->info(NonMXFSetError(t.getKey(), position));
-
-				continue;
+				return NULL;
 
 			}
 
-			LocalSet ls(t, primer);
-
-			if (!Set::hasInstanceUID(ls)) {
-
-				/* Group is missing Instance UID */
-
-				ev->warn(NonMXFSetError(t.getKey(), position));
-
-				continue;
-
-			}
-
-			Set set(ls);
-
-			if (setresolver.find(set.getInstanceID()) != setresolver.end()) {
-
-				/* skip over sets with duplicate instance IDs */
-
-				ev->error(DuplicateMXFSetsError(set.getInstanceID(), position));
-
-				continue;
-
-			}
-
-			setresolver[set.getInstanceID()] = set;
 
 		} catch (const std::exception &e) {
 
-			ev->error(InvalidMXFSet(e, position));
-
-		}
-
-	}
-
-	UUID rootid;
-
-	if (rootclasskey == NULL) {
-
-		if (!_findPrefaceSet(setresolver, rootid)) {
-
-			ev->fatal(RootSetNotFoundError(PREFACE_KEY));
+			ev->fatal(BadHeaderPartitionPackError(e));
 
 			return NULL;
 
 		}
 
-	} else {
 
-		if (!_findFirstInstanceOfClass(setresolver, defresolver, *rootclasskey, rootid)) {
+		/* start counting header metadata bytes */
 
-			ev->fatal(RootSetNotFoundError(*rootclasskey));
+		csb.resetCount();
+
+		/* look for the primer pack */
+
+
+		PrimerPack primer;
+
+		try {
+
+			if (!_findPrimerPack(cis, primer)) {
+
+				ev->fatal(MissingPrimerPackError());
+
+				return NULL;
+
+			}
+
+		} catch (const std::exception &e) {
+
+			ev->fatal(BadPrimerPackError(e));
 
 			return NULL;
 
 		}
 
+		/* capture all local sets within the header metadata */
+
+		std::map<UUID, Set> setresolver;
+
+		while (csb.getCount() < pp.headerByteCount) {
+
+			unsigned long long position = csb.getCount();
+
+			MemoryTriplet t;
+
+			try { /* reading triplet */
+
+				t.fromStream(cis);
+
+			} catch (const std::exception &e) {
+
+				ev->fatal(InvalidTriplet(e, position));
+
+				return NULL;
+
+			}
+
+			try {
+
+				if (!t.getKey().isUL()) {
+
+					/* skip all non MXF groups */
+
+					ev->info(NonMXFSetError(t.getKey(), position));
+
+					continue;
+
+				} else if (INDEX_TABLE_SEGMENT_UL.equals(t.getKey().asUL(), UL::IGNORE_VERSION)) {
+
+					/* stop if Index Table reached */
+
+					ev->warn(IndexTableReachedEarlyError(position));
+
+					break;
+
+				} else if (FillItem::isFillItem(t.getKey())) {
+
+					/* skip fill items */
+					continue;
+
+				} else if (!LocalSet::isLocalSet(t)) {
+
+					/* Group is not a Local Set */
+
+					ev->info(NonMXFSetError(t.getKey(), position));
+
+					continue;
+
+				}
+
+				LocalSet ls(t, primer);
+
+				if (!Set::hasInstanceUID(ls)) {
+
+					/* Group is missing Instance UID */
+
+					ev->warn(NonMXFSetError(t.getKey(), position));
+
+					continue;
+
+				}
+
+				Set set(ls);
+
+				if (setresolver.find(set.getInstanceID()) != setresolver.end()) {
+
+					/* skip over sets with duplicate instance IDs */
+
+					ev->error(DuplicateMXFSetsError(set.getInstanceID(), position));
+
+					continue;
+
+				}
+
+				setresolver[set.getInstanceID()] = set;
+
+			} catch (const std::exception &e) {
+
+				ev->error(InvalidMXFSet(e, position));
+
+			}
+
+		}
+
+		UUID rootid;
+
+		if (rootclasskey == NULL) {
+
+			if (!_findPrefaceSet(setresolver, rootid)) {
+
+				ev->fatal(RootSetNotFoundError(PREFACE_KEY));
+
+				return NULL;
+
+			}
+
+		} else {
+
+			if (!_findFirstInstanceOfClass(setresolver, defresolver, *rootclasskey, rootid)) {
+
+				ev->fatal(RootSetNotFoundError(*rootclasskey));
+
+				return NULL;
+
+			}
+
+		}
+
+		FragmentBuilder fb(defresolver, setresolver, NULL, ev);
+
+		return fb.fromTriplet(setresolver[rootid], document);
 	}
-
-	FragmentBuilder fb(defresolver, setresolver, NULL, ev);
-
-	return fb.fromTriplet(setresolver[rootid], document);
 }

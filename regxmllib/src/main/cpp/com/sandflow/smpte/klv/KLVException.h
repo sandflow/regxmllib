@@ -30,14 +30,15 @@
 #include <stdexcept>
 #include <string>
 
+namespace rxml {
 
-class KLVException : public std::runtime_error
-{
-public:
-	KLVException(std::string const& reason) : std::runtime_error(reason) {}
-	KLVException(const char* reason) : std::runtime_error(reason) {}
-};
+	class KLVException : public std::runtime_error
+	{
+	public:
+		KLVException(std::string const& reason) : std::runtime_error(reason) {}
+		KLVException(const char* reason) : std::runtime_error(reason) {}
+	};
 
-
+}
 
 #endif

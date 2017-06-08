@@ -33,68 +33,70 @@
 
 XERCES_CPP_NAMESPACE_USE
 
+namespace rxml {
 
-namespace DOMHelper {
+	namespace DOMHelper {
 
-	class XMLChStr : public TranscodeFromStr {
+		class XMLChStr : public TranscodeFromStr {
 
-	public:
+		public:
 
-		XMLChStr(const char *str) : TranscodeFromStr((XMLByte*)str, strlen(str), "utf-8"), src(str) {}
+			XMLChStr(const char *str) : TranscodeFromStr((XMLByte*)str, strlen(str), "utf-8"), src(str) {}
 
-		const std::string& ostr() const { return this->src; }
+			const std::string& ostr() const { return this->src; }
 
-		const char* c_str() const { return this->src.c_str(); }
+			const char* c_str() const { return this->src.c_str(); }
 
-	private:
+		private:
 
-		std::string src;
+			std::string src;
 
-	};
+		};
 
-	class fromUTF8 : public TranscodeFromStr {
+		class fromUTF8 : public TranscodeFromStr {
 
-	public:
+		public:
 
-		fromUTF8(const char *str) : TranscodeFromStr((XMLByte*)str, strlen(str), "utf-8"), src(str) {}
-		fromUTF8(const std::string &str) : TranscodeFromStr((XMLByte*)str.c_str(), str.size(), "utf-8"), src(str) {}
+			fromUTF8(const char *str) : TranscodeFromStr((XMLByte*)str, strlen(str), "utf-8"), src(str) {}
+			fromUTF8(const std::string &str) : TranscodeFromStr((XMLByte*)str.c_str(), str.size(), "utf-8"), src(str) {}
 
-		const std::string& ostr() const { return this->src; }
+			const std::string& ostr() const { return this->src; }
 
-		const char* c_str() const { return this->src.c_str(); }
+			const char* c_str() const { return this->src.c_str(); }
 
-		operator const XMLCh*() const { return this->str(); }
+			operator const XMLCh*() const { return this->str(); }
 
-	private:
+		private:
 
-		const std::string src;
+			const std::string src;
 
-	};
+		};
 
-	class toUTF8 : public TranscodeToStr {
+		class toUTF8 : public TranscodeToStr {
 
-	public:
+		public:
 
-		toUTF8(const XMLCh *str) : TranscodeToStr(str, "utf-8"), src(str) {}
+			toUTF8(const XMLCh *str) : TranscodeToStr(str, "utf-8"), src(str) {}
 
-		const XMLCh* ostr() const { return this->src; }
+			const XMLCh* ostr() const { return this->src; }
 
-		const char* c_str() const { return (const char*) this->str(); }
+			const char* c_str() const { return (const char*) this->str(); }
 
-		operator const char*() const { return (char*) this->str(); }
+			operator const char*() const { return (char*) this->str(); }
 
-	private:
+		private:
 
-		const XMLCh * src;
+			const XMLCh * src;
 
-	};
-
-
-	DOMElement* getElementByTagNameNS(DOMElement *parent, const XMLCh *namespaceURI, const XMLCh *localName);
+		};
 
 
-	const XMLCh* getElementTextContentByTagNameNS(DOMElement *parent, const XMLCh *namespaceURI, const XMLCh *localName);
+		DOMElement* getElementByTagNameNS(DOMElement *parent, const XMLCh *namespaceURI, const XMLCh *localName);
+
+
+		const XMLCh* getElementTextContentByTagNameNS(DOMElement *parent, const XMLCh *namespaceURI, const XMLCh *localName);
+
+	}
 
 }
-
 #endif

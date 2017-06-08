@@ -34,19 +34,22 @@
 
 XERCES_CPP_NAMESPACE_USE
 
-class XMLImporter {
+namespace rxml {
 
-public:
+	class XMLImporter {
 
-	class Exception : public std::runtime_error
-	{
 	public:
-		Exception(std::string const& reason) : std::runtime_error(reason) {}
-		Exception(const char* reason) : std::runtime_error(reason) {}
+
+		class Exception : public std::runtime_error
+		{
+		public:
+			Exception(std::string const& reason) : std::runtime_error(reason) {}
+			Exception(const char* reason) : std::runtime_error(reason) {}
+		};
+
+		static void fromDOM(DOMDocument &dom, MetaDictionary& md, EventHandler *ev = &NULL_EVENTHANDLER);
+
 	};
 
-	static void fromDOM(DOMDocument &dom, MetaDictionary& md, EventHandler *ev = &NULL_EVENTHANDLER);
-
-};
-
+}
 #endif

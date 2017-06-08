@@ -28,100 +28,103 @@
 #include "Set.h"
 #include "com/sandflow/smpte/klv/MemoryTriplet.h"
 
-const UL Set::INSTANCE_UID_ITEM_UL = "urn:smpte:ul:060e2b34.01010101.01011502.00000000";
+namespace rxml {
 
-const UL & Set::getKey() const
-{
-	return this->key;
-}
+	const UL Set::INSTANCE_UID_ITEM_UL = "urn:smpte:ul:060e2b34.01010101.01011502.00000000";
 
-const std::vector<Triplet*>& Set::getItems() const
-{
-	return this->items;
-}
-
-void Set::fromGroup(const Group & g) {
-
-	const std::vector<Triplet*>& src_items = g.getItems();
-
-	if (!hasInstanceUID(g)) {
-
-		throw new MXFException("Group is missing an instance ID property");
-
+	const UL & Set::getKey() const
+	{
+		return this->key;
 	}
 
-	for (std::vector<Triplet*>::const_iterator it = src_items.begin(); it < src_items.end(); it++) {
+	const std::vector<Triplet*>& Set::getItems() const
+	{
+		return this->items;
+	}
 
-		if ((*it)->getKey().isUL() && INSTANCE_UID_ITEM_UL.equals((*it)->getKey().asUL(), UL::IGNORE_VERSION)) {
+	void Set::fromGroup(const Group & g) {
 
-			this->instanceID = (*it)->getValue();
+		const std::vector<Triplet*>& src_items = g.getItems();
+
+		if (!hasInstanceUID(g)) {
+
+			throw new MXFException("Group is missing an instance ID property");
 
 		}
 
-		MemoryTriplet *t = new MemoryTriplet(**it);
+		for (std::vector<Triplet*>::const_iterator it = src_items.begin(); it < src_items.end(); it++) {
 
-		items.push_back(t);
+			if ((*it)->getKey().isUL() && INSTANCE_UID_ITEM_UL.equals((*it)->getKey().asUL(), UL::IGNORE_VERSION)) {
 
-	}
+				this->instanceID = (*it)->getValue();
 
-	this->key = g.getKey();
-	
+			}
 
-}
+			MemoryTriplet *t = new MemoryTriplet(**it);
 
-bool Set::hasInstanceUID(const Group & g)
-{
-	const std::vector<Triplet*>& src_items = g.getItems();
-
-	for (std::vector<Triplet*>::const_iterator it = src_items.begin(); it < src_items.end(); it++) {
-
-		if ((*it)->getKey().isUL() && INSTANCE_UID_ITEM_UL.equals((*it)->getKey().asUL(), UL::IGNORE_VERSION)) {
-
-			return true;
+			items.push_back(t);
 
 		}
 
+		this->key = g.getKey();
+
+
 	}
 
-	return false;
-}
+	bool Set::hasInstanceUID(const Group & g)
+	{
+		const std::vector<Triplet*>& src_items = g.getItems();
 
-const UUID& Set::getInstanceID() const {
-	return this->instanceID;
-}
+		for (std::vector<Triplet*>::const_iterator it = src_items.begin(); it < src_items.end(); it++) {
 
-Set::Set(const Group & g) {
-	fromGroup(g);
-}
+			if ((*it)->getKey().isUL() && INSTANCE_UID_ITEM_UL.equals((*it)->getKey().asUL(), UL::IGNORE_VERSION)) {
 
-Set::~Set() {
-	clearItems();
-}
+				return true;
 
-Set::Set() {}
+			}
 
-Set & Set::operator=(const Set &src) {
+		}
 
-	this->instanceID = src.instanceID;
-	this->key = src.key;
-
-	clearItems();
-
-	for (std::vector<Triplet*>::size_type i = 0; i < src.items.size(); i++) {
-		
+		return false;
 	}
 
-	for (std::vector<Triplet*>::const_iterator it = src.items.begin(); it != src.items.end(); ++it) {
-		this->items.push_back(new MemoryTriplet(**it));
+	const UUID& Set::getInstanceID() const {
+		return this->instanceID;
 	}
 
-	return *this;
-}
-
-void Set::clearItems() {
-	for (std::vector<Triplet*>::iterator it = this->items.begin(); it != this->items.end(); ++it) {
-		delete *it;
+	Set::Set(const Group & g) {
+		fromGroup(g);
 	}
 
-	this->items.clear();
+	Set::~Set() {
+		clearItems();
+	}
+
+	Set::Set() {}
+
+	Set & Set::operator=(const Set &src) {
+
+		this->instanceID = src.instanceID;
+		this->key = src.key;
+
+		clearItems();
+
+		for (std::vector<Triplet*>::size_type i = 0; i < src.items.size(); i++) {
+
+		}
+
+		for (std::vector<Triplet*>::const_iterator it = src.items.begin(); it != src.items.end(); ++it) {
+			this->items.push_back(new MemoryTriplet(**it));
+		}
+
+		return *this;
+	}
+
+	void Set::clearItems() {
+		for (std::vector<Triplet*>::iterator it = this->items.begin(); it != this->items.end(); ++it) {
+			delete *it;
+		}
+
+		this->items.clear();
+	}
 }

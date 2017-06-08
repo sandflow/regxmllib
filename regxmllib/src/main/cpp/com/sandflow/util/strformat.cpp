@@ -29,7 +29,7 @@
 
 
 
-std::string strf::to_string(int val) {
+std::string rxml::to_string(int val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -37,7 +37,7 @@ std::string strf::to_string(int val) {
 	return ss.str();
 }
 
-std::string strf::to_string(unsigned int val) {
+std::string rxml::to_string(unsigned int val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -45,7 +45,7 @@ std::string strf::to_string(unsigned int val) {
 	return ss.str();
 }
 
-std::string strf::to_string(unsigned long val) {
+std::string rxml::to_string(unsigned long val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -53,7 +53,7 @@ std::string strf::to_string(unsigned long val) {
 	return ss.str();
 }
 
-std::string strf::to_string(long val) {
+std::string rxml::to_string(long val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -61,7 +61,7 @@ std::string strf::to_string(long val) {
 	return ss.str();
 }
 
-std::string strf::to_string(char val) {
+std::string rxml::to_string(char val) {
 	std::stringstream ss;
 
 	ss << (int) val;
@@ -69,7 +69,7 @@ std::string strf::to_string(char val) {
 	return ss.str();
 }
 
-std::string strf::to_string(unsigned char val) {
+std::string rxml::to_string(unsigned char val) {
 	std::stringstream ss;
 
 	ss << (int) val;
@@ -77,7 +77,7 @@ std::string strf::to_string(unsigned char val) {
 	return ss.str();
 }
 
-std::string strf::to_string(short val) {
+std::string rxml::to_string(short val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -85,7 +85,7 @@ std::string strf::to_string(short val) {
 	return ss.str();
 }
 
-std::string strf::to_string(unsigned short val) {
+std::string rxml::to_string(unsigned short val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -93,7 +93,7 @@ std::string strf::to_string(unsigned short val) {
 	return ss.str();
 }
 
-std::string strf::to_string(unsigned long long val) {
+std::string rxml::to_string(unsigned long long val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -101,7 +101,7 @@ std::string strf::to_string(unsigned long long val) {
 	return ss.str();
 }
 
-std::string strf::to_string(long long val) {
+std::string rxml::to_string(long long val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -109,7 +109,7 @@ std::string strf::to_string(long long val) {
 	return ss.str();
 }
 
-std::string strf::to_string(double val) {
+std::string rxml::to_string(double val) {
 	std::stringstream ss;
 
 	ss << val;
@@ -117,7 +117,7 @@ std::string strf::to_string(double val) {
 	return ss.str();
 }
 
-std::string strf::to_string(const std::string & s) {
+std::string rxml::to_string(const std::string & s) {
 	return s;
 }
 
@@ -142,7 +142,7 @@ void _appendfmt(const std::string &fmt,
 
 }
 
-std::string strf::fmt(const std::string & fmt, const std::string & s1, const std::string & s2, const std::string & s3, const std::string & s4) {
+std::string rxml::fmt(const std::string & fmt, const std::string & s1, const std::string & s2, const std::string & s3, const std::string & s4) {
 
 	std::stringstream ss;
 
@@ -157,7 +157,7 @@ std::string strf::fmt(const std::string & fmt, const std::string & s1, const std
 	return ss.str();
 }
 
-std::string strf::bytesToString(const unsigned char * data, size_t len) {
+std::string rxml::bytesToString(const unsigned char * data, size_t len) {
 	std::stringstream ss;
 
 	ss << std::hex;

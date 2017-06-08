@@ -26,53 +26,57 @@
 
 #include "PrimerPack.h"
 
-void PrimerPack::fromTriplet(const Triplet & t) {
-	localtags.clear();
+namespace rxml {
 
-	membuf mb((char*)t.getValue(), t.getLength());
+	void PrimerPack::fromTriplet(const Triplet & t) {
+		localtags.clear();
 
-	MXFInputStream kis(&mb);
+		membuf mb((char*)t.getValue(), t.getLength());
 
-	try {
+		MXFInputStream kis(&mb);
 
-		unsigned long itemcount = kis.readUnsignedLong();
+		try {
 
-		unsigned long itemlength = kis.readUnsignedLong();
+			unsigned long itemcount = kis.readUnsignedLong();
 
-		for (unsigned long i = 0; i < itemcount; i++) {
+			unsigned long itemlength = kis.readUnsignedLong();
 
-			unsigned short tag = kis.readUnsignedShort();
-			AUID auid = kis.readUL();
+			for (unsigned long i = 0; i < itemcount; i++) {
 
-			localtags[tag] = auid;
+				unsigned short tag = kis.readUnsignedShort();
+				AUID auid = kis.readUL();
+
+				localtags[tag] = auid;
+			}
+
+		} catch (std::exception e) {
+			std::cout << e.what();
+		}
+	}
+
+	const AUID * PrimerPack::getIdentification(unsigned long local_tag) const {
+		std::map<unsigned long, AUID>::const_iterator it = localtags.find(local_tag);
+
+		if (it == localtags.end()) {
+			return NULL;
+		} else {
+			return &(it->second);
 		}
 
-	} catch (std::exception e) {
-		std::cout << e.what();
-	}
-}
-
-const AUID * PrimerPack::getIdentification(unsigned long local_tag) const {
-	std::map<unsigned long, AUID>::const_iterator it = localtags.find(local_tag);
-
-	if (it == localtags.end()) {
-		return NULL;
-	} else {
-		return &(it->second);
 	}
 
-}
-
-const UL PrimerPack::KEY = "urn:smpte:ul:060e2b34.02050101.0d010201.01050100";
+	const UL PrimerPack::KEY = "urn:smpte:ul:060e2b34.02050101.0d010201.01050100";
 
 
-bool PrimerPack::isPrimerPack(const UL & key) {
+	bool PrimerPack::isPrimerPack(const UL & key) {
 
 
-	return KEY.equals(key, UL::IGNORE_VERSION);
-}
+		return KEY.equals(key, UL::IGNORE_VERSION);
+	}
 
-bool PrimerPack::isPrimerPack(const AUID & key) {
+	bool PrimerPack::isPrimerPack(const AUID & key) {
 
-	return key.isUL() && KEY.equals(key.asUL(), UL::IGNORE_VERSION);
+		return key.isUL() && KEY.equals(key.asUL(), UL::IGNORE_VERSION);
+	}
+
 }

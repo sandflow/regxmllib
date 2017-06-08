@@ -26,37 +26,42 @@
 
 #include "DOMHelper.h"
 
-DOMElement * DOMHelper::getElementByTagNameNS(DOMElement * parent, const XMLCh * namespaceURI, const XMLCh * localName) {
+namespace rxml {
 
-	DOMNode *child = parent->getFirstElementChild();
 
-	while (child) {
+	DOMElement * DOMHelper::getElementByTagNameNS(DOMElement * parent, const XMLCh * namespaceURI, const XMLCh * localName) {
 
-		if (child->getNodeType() == DOMNode::ELEMENT_NODE &&
-			XMLString::compareIString(child->getNodeName(), localName) == 0 &&
-			XMLString::compareIString(child->getNamespaceURI(), namespaceURI) == 0) {
+		DOMNode *child = parent->getFirstElementChild();
 
-			return (DOMElement*)child;
+		while (child) {
+
+			if (child->getNodeType() == DOMNode::ELEMENT_NODE &&
+				XMLString::compareIString(child->getNodeName(), localName) == 0 &&
+				XMLString::compareIString(child->getNamespaceURI(), namespaceURI) == 0) {
+
+				return (DOMElement*)child;
+
+			}
+
+			child = child->getNextSibling();
 
 		}
 
-		child = child->getNextSibling();
-
+		return NULL;
 	}
 
-	return NULL;
-}
+	const XMLCh * DOMHelper::getElementTextContentByTagNameNS(DOMElement * parent, const XMLCh * namespaceURI, const XMLCh * localName) {
+		DOMElement* e = getElementByTagNameNS(parent, namespaceURI, localName);
 
-const XMLCh * DOMHelper::getElementTextContentByTagNameNS(DOMElement * parent, const XMLCh * namespaceURI, const XMLCh * localName) {
-	DOMElement* e = getElementByTagNameNS(parent, namespaceURI, localName);
+		if (e) {
 
-	if (e) {
+			return e->getTextContent();
 
-		return e->getTextContent();
+		} else {
 
-	} else {
+			return NULL;
 
-		return NULL;
+		}
 
 	}
 

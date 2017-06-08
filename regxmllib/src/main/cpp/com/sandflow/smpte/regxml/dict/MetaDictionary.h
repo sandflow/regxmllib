@@ -40,63 +40,66 @@
 #include "DefinitionResolver.h"
 
 
-class MetaDictionary : public DefinitionResolver {
+namespace rxml {
 
-public:
+	class MetaDictionary : public DefinitionResolver {
 
-	MetaDictionary(const AUID &pSchemeID, const std::string &pSchemeURI);
+	public:
 
-	MetaDictionary();;
+		MetaDictionary(const AUID &pSchemeID, const std::string &pSchemeURI);
 
-	~MetaDictionary();
+		MetaDictionary();;
 
-	virtual const Definition* getDefinition(const AUID &identification) const;
+		~MetaDictionary();
 
-	const Definition* getDefinition(const std::string &symbol) const;
+		virtual const Definition* getDefinition(const AUID &identification) const;
 
-	virtual std::set<AUID> getSubclassesOf(const AUID &identification) const;
+		const Definition* getDefinition(const std::string &symbol) const;
 
-	virtual std::set<AUID> getMembersOf(const AUID &identification) const;
+		virtual std::set<AUID> getSubclassesOf(const AUID &identification) const;
 
-	void setSchemeID(const AUID &pSchemeID);
+		virtual std::set<AUID> getMembersOf(const AUID &identification) const;
 
-	const std::string& getSchemeURI() const;;
-	void setSchemeURI(const std::string &pSchemeURI);
+		void setSchemeID(const AUID &pSchemeID);
 
-	void setDescription(const std::string &desc);
+		const std::string& getSchemeURI() const;;
+		void setSchemeURI(const std::string &pSchemeURI);
 
-	void addDefinition(const Definition &def, EventHandler *ev = &NULL_EVENTHANDLER);
+		void setDescription(const std::string &desc);
 
-	static UL createNormalizedUL(const UL &ul);
+		void addDefinition(const Definition &def, EventHandler *ev = &NULL_EVENTHANDLER);
 
-	static AUID createNormalizedAUID(const AUID &auid);
+		static UL createNormalizedUL(const UL &ul);
 
-	static bool normalizedAUIDEquals(const AUID &auidA, const AUID &auidB);
+		static AUID createNormalizedAUID(const AUID &auid);
+
+		static bool normalizedAUIDEquals(const AUID &auidA, const AUID &auidB);
 
 
-private:
+	private:
 
-	/* members */
+		/* members */
 
-	AUID schemeID;
+		AUID schemeID;
 
-	std::string schemeURI;
+		std::string schemeURI;
 
-	std::string description;
+		std::string description;
 
-	std::vector<Definition*> definitions;
+		std::vector<Definition*> definitions;
 
-	std::map<AUID, Definition*> definitionsByAUID;
+		std::map<AUID, Definition*> definitionsByAUID;
 
-	std::map<std::string, Definition*> definitionsBySymbol;
+		std::map<std::string, Definition*> definitionsBySymbol;
 
-	std::map<AUID, std::set<AUID> > membersOf;
+		std::map<AUID, std::set<AUID> > membersOf;
 
-	std::map<AUID, std::set<AUID> > subclassesOf;
+		std::map<AUID, std::set<AUID> > subclassesOf;
 
-	/* friends */
-	
-	friend class _AddDefinitionVisitor;
-};
+		/* friends */
 
+		friend class _AddDefinitionVisitor;
+	};
+
+}
 #endif

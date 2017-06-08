@@ -30,17 +30,20 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct FixedArrayTypeDefinition : public Definition {
+namespace rxml {
 
-	void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct FixedArrayTypeDefinition : public Definition {
 
-	AUID elementType;
+		void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-	unsigned int elementCount;
+		AUID elementType;
 
-};
+		unsigned int elementCount;
+
+	};
+}
 
 
 #endif

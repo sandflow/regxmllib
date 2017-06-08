@@ -29,28 +29,32 @@
 
 #include <com/sandflow/util/events/EventHandler.h>
 
-class NullEventHandler: public EventHandler {
+namespace rxml {
 
-public:
+	class NullEventHandler : public EventHandler {
 
-	virtual bool info(const std::string &code, const std::string &reason, const std::string &where) {
-		return true;
-	}
+	public:
 
-	virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) {
-		return true;
-	}
+		virtual bool info(const std::string &code, const std::string &reason, const std::string &where) {
+			return true;
+		}
 
-	virtual bool error(const std::string &code, const std::string &reason, const std::string &where) {
-		return true;
-	}
+		virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) {
+			return true;
+		}
 
-	virtual bool fatal(const std::string &code, const std::string &reason, const std::string &where) {
-		return true;
-	}
+		virtual bool error(const std::string &code, const std::string &reason, const std::string &where) {
+			return true;
+		}
 
-};
+		virtual bool fatal(const std::string &code, const std::string &reason, const std::string &where) {
+			return true;
+		}
 
-extern NullEventHandler NULL_EVENTHANDLER;
+	};
+
+	extern NullEventHandler NULL_EVENTHANDLER;
+
+}
 
 #endif

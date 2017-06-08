@@ -33,33 +33,35 @@
 #include <com/sandflow/smpte/klv/Group.h>
 #include <vector>
 
-class LocalSet : public Group {
+namespace rxml {
 
-public:
+	class LocalSet : public Group {
 
-	LocalSet();
+	public:
 
-	LocalSet(const Triplet& t, const LocalTagRegister &reg);
+		LocalSet();
 
-	virtual ~LocalSet();
+		LocalSet(const Triplet& t, const LocalTagRegister &reg);
 
-	virtual const UL& getKey() const;
+		virtual ~LocalSet();
 
-	virtual const std::vector<Triplet*>& getItems() const;
+		virtual const UL& getKey() const;
 
-	void fromTriplet(const Triplet& t, const LocalTagRegister &reg);
+		virtual const std::vector<Triplet*>& getItems() const;
 
-	static bool isLocalSet(const Triplet& t);
+		void fromTriplet(const Triplet& t, const LocalTagRegister &reg);
 
-private:
+		static bool isLocalSet(const Triplet& t);
 
-	LocalSet& operator=(const LocalSet &other);
-	LocalSet(const LocalSet &other);
+	private:
 
-	std::vector<Triplet*> items;
-	UL key;
+		LocalSet& operator=(const LocalSet &other);
+		LocalSet(const LocalSet &other);
 
-};
+		std::vector<Triplet*> items;
+		UL key;
 
+	};
 
+}
 #endif

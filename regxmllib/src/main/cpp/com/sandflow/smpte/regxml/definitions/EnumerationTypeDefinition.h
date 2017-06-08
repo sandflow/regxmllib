@@ -32,21 +32,24 @@
 #include <com/sandflow/smpte/util/AUID.h>
 #include <vector>
 
-struct EnumerationTypeDefinition : public Definition {
+namespace rxml {
 
-	struct Element {
-		std::string name;
-		int value;
-		std::string description;
+	struct EnumerationTypeDefinition : public Definition {
+
+		struct Element {
+			std::string name;
+			int value;
+			std::string description;
+		};
+
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
+
+		AUID	elementType;
+		std::vector<Element> elements;
+
 	};
-
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
-
-	AUID	elementType;
-	std::vector<Element> elements;
-
-};
+}
 
 #endif

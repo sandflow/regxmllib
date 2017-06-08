@@ -29,16 +29,19 @@
 
 #include <iostream>
 
-struct membuf : std::streambuf
-{
-	membuf(char* begin, char* end) {
-		this->setg(begin, begin, end);
-	}
+namespace rxml {
 
-	membuf(char* begin, size_t sz) {
-		this->setg(begin, begin, begin + sz);
-	}
+	struct membuf : std::streambuf
+	{
+		membuf(char* begin, char* end) {
+			this->setg(begin, begin, end);
+		}
 
-};
+		membuf(char* begin, size_t sz) {
+			this->setg(begin, begin, begin + sz);
+		}
+
+	};
+}
 
 #endif

@@ -32,19 +32,22 @@
 #include <com/sandflow/smpte/util/AUID.h>
 #include <vector>
 
-struct RecordTypeDefinition : public Definition {
+namespace rxml {
 
-	struct Member {
-		std::string name;
-		AUID type;
+	struct RecordTypeDefinition : public Definition {
+
+		struct Member {
+			std::string name;
+			AUID type;
+		};
+
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
+
+		std::vector<Member> members;
+
 	};
-
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
-
-	std::vector<Member> members;
-
-};
+}
 
 #endif

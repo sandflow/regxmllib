@@ -32,16 +32,19 @@
 #include <com/sandflow/smpte/regxml/definitions/Definition.h>
 
 
-class DefinitionResolver {
-    
-public:
+namespace rxml {
 
-    virtual const Definition* getDefinition(const AUID &identification) const = 0;
+	class DefinitionResolver {
 
-	virtual std::set<AUID> getSubclassesOf(const AUID &identification) const = 0;
+	public:
 
-	virtual std::set<AUID> getMembersOf(const AUID &identification) const = 0;
-    
-};
+		virtual const Definition* getDefinition(const AUID &identification) const = 0;
+
+		virtual std::set<AUID> getSubclassesOf(const AUID &identification) const = 0;
+
+		virtual std::set<AUID> getMembersOf(const AUID &identification) const = 0;
+
+	};
+}
 
 #endif

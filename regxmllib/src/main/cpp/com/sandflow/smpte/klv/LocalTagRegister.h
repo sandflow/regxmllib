@@ -29,14 +29,15 @@
 
 #include <com/sandflow/smpte/util/AUID.h>
 
+namespace rxml {
 
-class LocalTagRegister {
+	class LocalTagRegister {
 
-public:
+	public:
 
-	virtual const AUID *getIdentification(unsigned long local_tag) const = 0;
+		virtual const AUID *getIdentification(unsigned long local_tag) const = 0;
 
-};
+	};
 
-
+}
 #endif

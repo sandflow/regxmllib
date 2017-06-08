@@ -28,101 +28,102 @@
 #include "UUID.h"
 #include <stdexcept>
 
-static const std::string UUID_URN_PREFIX = "urn:uuid:";
+namespace rxml {
 
+	static const std::string UUID_URN_PREFIX = "urn:uuid:";
 
+	bool AUID::urnToBytes(const std::string & urn, unsigned char(&bytes)[16])
+	{
+		unsigned char auid[16];
 
-bool AUID::urnToBytes(const std::string & urn, unsigned char(&bytes)[16])
-{
-	unsigned char auid[16];
+		if (UL::urnToBytes(urn, bytes)) return true;
 
-	if (UL::urnToBytes(urn, bytes)) return true;
+		if (UUID::urnToBytes(urn, auid)) {
+			memcpy(bytes, auid + 8, 8);
+			memcpy(bytes + 8, auid, 8);
+			return true;
+		}
 
-	if (UUID::urnToBytes(urn, auid)) {
-		memcpy(bytes, auid + 8, 8);
-		memcpy(bytes + 8, auid, 8);
-		return true;
+		return false;
 	}
 
-	return false;
-}
+	AUID::AUID(const std::string & urn) {
 
-AUID::AUID(const std::string & urn) {
-
-	if (!urnToBytes(urn, this->value)) {
-		throw std::invalid_argument("Neither a UL nor a UUID");
-	}
-
-}
-
-
-AUID::AUID(const char *urn) {
-	std::string urn_str(urn);
-
-	if (!urnToBytes(urn_str, this->value)) {
-		throw std::invalid_argument("Neither a UL nor a UUID");
-	}
-}
-
-
-AUID::AUID() {
-	std::fill(this->value, this->value + 16, 0);
-}
-
-/**
-* Instantiates a AUID from a 16-byte buffer
-* @param auid 16-bytes
-*/
-
-AUID::AUID(const unsigned char auid[16]) {
-
-	std::copy(auid, auid + 16, this->value);
-
-}
-
-std::string AUID::to_string() const {
-
-	if (isUL()) {
-
-		return this->asUL().to_string();
-
-	} else {
-
-		return this->asUUID().to_string();
+		if (!urnToBytes(urn, this->value)) {
+			throw std::invalid_argument("Neither a UL nor a UUID");
+		}
 
 	}
 
-}
 
+	AUID::AUID(const char *urn) {
+		std::string urn_str(urn);
 
-UL AUID::asUL() const {
-
-	if (!isUL()) {
-		throw new std::invalid_argument("AUID is not a UL");
+		if (!urnToBytes(urn_str, this->value)) {
+			throw std::invalid_argument("Neither a UL nor a UUID");
+		}
 	}
 
-	return UL(this->value);
-}
 
-UUID AUID::asUUID() const  {
-
-	if (!isUUID()) {
-		throw new std::invalid_argument("AUID is not a UUID");
+	AUID::AUID() {
+		std::fill(this->value, this->value + 16, 0);
 	}
 
-	unsigned char tmp[16];
+	/**
+	* Instantiates a AUID from a 16-byte buffer
+	* @param auid 16-bytes
+	*/
 
-	memcpy(tmp + 8, this->value, 8);
+	AUID::AUID(const unsigned char auid[16]) {
 
-	memcpy(tmp, this->value + 8, 8);
+		std::copy(auid, auid + 16, this->value);
 
-	return UUID(tmp);
-}
+	}
 
-bool AUID::equals(const AUID &other) const {
+	std::string AUID::to_string() const {
 
-	if (this == &other) return true;
+		if (isUL()) {
 
-	return std::memcmp(this->value, other.value, 16) == 0;
+			return this->asUL().to_string();
 
+		} else {
+
+			return this->asUUID().to_string();
+
+		}
+
+	}
+
+
+	UL AUID::asUL() const {
+
+		if (!isUL()) {
+			throw new std::invalid_argument("AUID is not a UL");
+		}
+
+		return UL(this->value);
+	}
+
+	UUID AUID::asUUID() const {
+
+		if (!isUUID()) {
+			throw new std::invalid_argument("AUID is not a UUID");
+		}
+
+		unsigned char tmp[16];
+
+		memcpy(tmp + 8, this->value, 8);
+
+		memcpy(tmp, this->value + 8, 8);
+
+		return UUID(tmp);
+	}
+
+	bool AUID::equals(const AUID &other) const {
+
+		if (this == &other) return true;
+
+		return std::memcmp(this->value, other.value, 16) == 0;
+
+	}
 }

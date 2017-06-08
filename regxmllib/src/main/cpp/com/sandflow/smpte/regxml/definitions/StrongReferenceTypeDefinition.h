@@ -31,16 +31,19 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct StrongReferenceTypeDefinition : Definition {
+namespace rxml {
 
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct StrongReferenceTypeDefinition : Definition {
 
-	AUID referencedType;
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
+
+		AUID referencedType;
 
 
-};
+	};
+}
 
 
 #endif

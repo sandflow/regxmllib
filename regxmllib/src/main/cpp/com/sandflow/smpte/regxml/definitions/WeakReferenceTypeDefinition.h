@@ -31,17 +31,20 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct WeakReferenceTypeDefinition : Definition {
+namespace rxml {
 
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct WeakReferenceTypeDefinition : Definition {
 
-	AUID referencedType;
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-	std::vector<AUID> targetSet;
+		AUID referencedType;
 
-};
+		std::vector<AUID> targetSet;
+
+	};
+}
 
 
 #endif

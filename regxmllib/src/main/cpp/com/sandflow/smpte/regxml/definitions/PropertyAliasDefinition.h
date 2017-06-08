@@ -29,15 +29,18 @@
 
 #include "PropertyDefinition.h"
 
-struct PropertyAliasDefinition : PropertyDefinition {
+namespace rxml {
 
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct PropertyAliasDefinition : PropertyDefinition {
 
-	AUID originalProperty;
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-};
+		AUID originalProperty;
+
+	};
+}
 
 
 #endif

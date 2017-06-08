@@ -34,60 +34,63 @@
 #include "com/sandflow/smpte/util/UMID.h"
 #include "com/sandflow/smpte/util/IDAU.h"
 
-template<class CharT, class Traits = std::char_traits<CharT> >
-class basic_mxfistream : public basic_klvistream<CharT, Traits> {
+namespace rxml {
 
-public:
+	template<class CharT, class Traits = std::char_traits<CharT> >
+	class basic_mxfistream : public basic_klvistream<CharT, Traits> {
 
-	basic_mxfistream(std::basic_streambuf<CharT, Traits>* sb, typename basic_klvistream<CharT, Traits>::ByteOrder bo = (basic_klvistream<CharT, Traits>::BIG_ENDIAN_BYTE_ORDER)) : basic_klvistream<CharT, Traits>(sb, bo) {}
+	public:
 
-	/*void readUUID(UUID &uuid);*/
-	UUID readUUID();
+		basic_mxfistream(std::basic_streambuf<CharT, Traits>* sb, typename basic_klvistream<CharT, Traits>::ByteOrder bo = (basic_klvistream<CharT, Traits>::BIG_ENDIAN_BYTE_ORDER)) : basic_klvistream<CharT, Traits>(sb, bo) {}
 
-	UMID readUMID();
+		/*void readUUID(UUID &uuid);*/
+		UUID readUUID();
 
-	IDAU readIDAU();
+		UMID readUMID();
 
-	/**
-	* Reads an MXF batch into a Java Collection
-	*
-	* @param <T> Type of the collection elements
-	* @param <W> TripletValueAdapter that is used to convert MXF batch elements into Java collection elements
-	* @return Collection of elements of type T
-	* @throws KLVException
-	* @throws IOException
-	*/
-	template<class A, class T> std::vector<T> readBatch() {
-		std::vector<T> batch;
+		IDAU readIDAU();
 
-		unsigned int itemcount = this->readUnsignedLong();
-		unsigned int itemlength = this->readUnsignedLong();
-
-		/* TODO: is this necessary */
-		/*
-		if (itemlength > Integer.MAX_VALUE) {
-			throw new KLVException(KLVException.MAX_LENGTH_EXCEEED);
-		}
+		/**
+		* Reads an MXF batch into a Java Collection
+		*
+		* @param <T> Type of the collection elements
+		* @param <W> TripletValueAdapter that is used to convert MXF batch elements into Java collection elements
+		* @return Collection of elements of type T
+		* @throws KLVException
+		* @throws IOException
 		*/
+		template<class A, class T> std::vector<T> readBatch() {
+			std::vector<T> batch;
 
-		unsigned char *value = new unsigned char[itemlength];
+			unsigned int itemcount = this->readUnsignedLong();
+			unsigned int itemlength = this->readUnsignedLong();
 
-		for (unsigned int i = 0; i < itemcount; i++) {
+			/* TODO: is this necessary */
+			/*
+			if (itemlength > Integer.MAX_VALUE) {
+				throw new KLVException(KLVException.MAX_LENGTH_EXCEEED);
+			}
+			*/
 
-			this->read((char*) value, itemlength);
+			unsigned char *value = new unsigned char[itemlength];
 
-			batch.push_back(A::fromValue(value, itemlength));
+			for (unsigned int i = 0; i < itemcount; i++) {
 
+				this->read((char*)value, itemlength);
+
+				batch.push_back(A::fromValue(value, itemlength));
+
+			}
+
+			delete[] value;
+
+			return batch;
 		}
 
-		delete[] value;
+	};
 
-		return batch;
-	}
-
-};
-
-typedef basic_mxfistream<char> MXFInputStream;
+	typedef basic_mxfistream<char> MXFInputStream;
+}
 
 
 

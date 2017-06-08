@@ -28,23 +28,26 @@
 #include <cstdio>
 #include <stdexcept>
 
-std::string UMID::bytesToString(const unsigned char umid[32]) {
+namespace rxml {
 
-	char str[128];
+	std::string UMID::bytesToString(const unsigned char umid[32]) {
 
-	int r = snprintf(str, sizeof(str), "urn:smpte:umid:%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x",
-		umid[0], umid[1], umid[2], umid[3],
-		umid[4], umid[5], umid[6], umid[7],
-		umid[8], umid[9], umid[10], umid[11],
-		umid[12], umid[13], umid[14], umid[15],
-        umid[16], umid[17], umid[18], umid[19],
-		umid[20], umid[21], umid[22], umid[23],
-		umid[24], umid[25], umid[26], umid[27],
-		umid[28], umid[29], umid[30], umid[31]
-	);
+		char str[128];
 
-	if (r < 0) throw std::runtime_error("UMID::bytesToString failed.");
+		int r = snprintf(str, sizeof(str), "urn:smpte:umid:%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x.%02x%02x%02x%02x",
+			umid[0], umid[1], umid[2], umid[3],
+			umid[4], umid[5], umid[6], umid[7],
+			umid[8], umid[9], umid[10], umid[11],
+			umid[12], umid[13], umid[14], umid[15],
+			umid[16], umid[17], umid[18], umid[19],
+			umid[20], umid[21], umid[22], umid[23],
+			umid[24], umid[25], umid[26], umid[27],
+			umid[28], umid[29], umid[30], umid[31]
+		);
 
-	return str;
+		if (r < 0) throw std::runtime_error("UMID::bytesToString failed.");
 
+		return str;
+
+	}
 }

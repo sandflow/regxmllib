@@ -41,143 +41,146 @@
 XERCES_CPP_NAMESPACE_USE
 
 
-class MXFFragmentBuilder {
+namespace rxml {
 
-public:
+	class MXFFragmentBuilder {
 
-	class NonMXFSetError : public Event {
 	public:
-		NonMXFSetError(const AUID &key, unsigned long long pos) :
-			Event(
-				"MXFFragmentBuilder::NonMXFSetError",
-				"Non-MXF Group Key " + key.to_string() + " encountered",
-				strf::to_string(pos)
-			) {}
+
+		class NonMXFSetError : public Event {
+		public:
+			NonMXFSetError(const AUID &key, unsigned long long pos) :
+				Event(
+					"MXFFragmentBuilder::NonMXFSetError",
+					"Non-MXF Group Key " + key.to_string() + " encountered",
+					rxml::to_string(pos)
+				) {}
+		};
+
+		class IndexTableReachedEarlyError : public Event {
+		public:
+			IndexTableReachedEarlyError(unsigned long long pos) :
+				Event(
+					"MXFFragmentBuilder::IndexTableReachedEarlyError",
+					"Index Table Segment encountered before Header Byte Count bytes read",
+					rxml::to_string(pos)
+				) {}
+		};
+
+		class MissingPrimerPackError : public Event {
+		public:
+			MissingPrimerPackError() :
+				Event(
+					"MXFFragmentBuilder::MissingPrimerPackError",
+					"Primer Pack not found",
+					""
+				) {}
+		};
+
+		class BadPrimerPackError : public Event {
+		public:
+			BadPrimerPackError(const std::exception &e) :
+				Event(
+					"MXFFragmentBuilder::BadPrimerPackError",
+					e.what(),
+					""
+				) {}
+		};
+
+		class MisingHeaderPartitionPackError : public Event {
+		public:
+			MisingHeaderPartitionPackError() :
+				Event(
+					"MXFFragmentBuilder::MisingHeaderPartitionPackError",
+					"Header Partition Pack not found",
+					""
+				) {}
+		};
+
+		class BadHeaderPartitionPackError : public Event {
+		public:
+			BadHeaderPartitionPackError(const std::exception &e) :
+				Event(
+					"MXFFragmentBuilder::BadHeaderPartitionPackError",
+					e.what(),
+					""
+				) {}
+		};
+
+		class InvalidTriplet : public Event {
+		public:
+			InvalidTriplet(const std::exception &e, unsigned long long pos) :
+				Event(
+					"MXFFragmentBuilder::InvalidTriplet",
+					e.what(),
+					rxml::to_string(pos)
+				) {}
+		};
+
+		class InvalidMXFSet : public Event {
+		public:
+			InvalidMXFSet(const std::exception &e, unsigned long long pos) :
+				Event(
+					"MXFFragmentBuilder::InvalidMXFSet",
+					e.what(),
+					rxml::to_string(pos)
+				) {}
+		};
+
+		class DuplicateMXFSetsError : public Event {
+		public:
+			DuplicateMXFSetsError(const UUID &uuid, unsigned long long pos) :
+				Event(
+					"MXFFragmentBuilder::DuplicateMXFSetsError",
+					"Two Sets have identical Instance ID " + uuid.to_string(),
+					rxml::to_string(pos)
+				) {}
+		};
+
+		class RootSetNotFoundError : public Event {
+		public:
+			RootSetNotFoundError(const AUID &key) :
+				Event(
+					"MXFFragmentBuilder::RootSetNotFoundError",
+					"Root set " + key.to_string() + " not found",
+					""
+				) {}
+		};
+
+		class UncaughtExceptionError : public Event {
+		public:
+			UncaughtExceptionError(const std::exception &e) :
+				Event(
+					"MXFFragmentBuilder::UncaughtExceptionError",
+					e.what(),
+					""
+				) {}
+		};
+
+		/**
+		* Returns a DOM Document Fragment containing a RegXML Fragment rooted at
+		* the first Header Metadata object with a class that descends from the
+		* specified class.
+		*
+		* @param mxfpartition MXF partition, including the Partition Pack.
+		* @param defresolver MetaDictionary definitions.
+		* @param enumnameresolver Allows the local name of extendible enumeration
+		* values to be inserted as comments. May be null.
+		* @param evthandler Calls back the caller when an event occurs. Must not be null.
+		* @param rootclasskey Root class of Fragment. The Preface class is used if null.
+		* @param document DOM for which the Document Fragment is created. Must not be null.
+		*
+		* @return Document Fragment containing a single RegXML Fragment
+		*/
+		static DOMDocumentFragment* fromInputStream(
+			std::istream &mxfpartition,
+			const DefinitionResolver &defresolver,
+			const FragmentBuilder::AUIDNameResolver *enumnameresolver,
+			const AUID *rootclasskey,
+			DOMDocument &document,
+			EventHandler *ev = &NULL_EVENTHANDLER);
+
 	};
-
-	class IndexTableReachedEarlyError : public Event {
-	public:
-		IndexTableReachedEarlyError(unsigned long long pos) :
-			Event(
-				"MXFFragmentBuilder::IndexTableReachedEarlyError",
-				"Index Table Segment encountered before Header Byte Count bytes read",
-		strf::to_string(pos)
-			) {}
-	};
-
-	class MissingPrimerPackError : public Event {
-	public:
-		MissingPrimerPackError() :
-			Event(
-				"MXFFragmentBuilder::MissingPrimerPackError",
-				"Primer Pack not found",
-				""
-			) {}
-	};
-
-	class BadPrimerPackError : public Event {
-	public:
-		BadPrimerPackError(const std::exception &e) :
-			Event(
-				"MXFFragmentBuilder::BadPrimerPackError",
-				e.what(),
-				""
-			) {}
-	};
-
-	class MisingHeaderPartitionPackError : public Event {
-	public:
-		MisingHeaderPartitionPackError() :
-			Event(
-				"MXFFragmentBuilder::MisingHeaderPartitionPackError",
-				"Header Partition Pack not found",
-				""
-			) {}
-	};
-
-	class BadHeaderPartitionPackError : public Event {
-	public:
-		BadHeaderPartitionPackError(const std::exception &e) :
-			Event(
-				"MXFFragmentBuilder::BadHeaderPartitionPackError",
-				e.what(),
-				""
-			) {}
-	};
-
-	class InvalidTriplet : public Event {
-	public:
-		InvalidTriplet(const std::exception &e, unsigned long long pos) :
-			Event(
-				"MXFFragmentBuilder::InvalidTriplet",
-				e.what(),
-		strf::to_string(pos)
-			) {}
-	};
-
-	class InvalidMXFSet : public Event {
-	public:
-		InvalidMXFSet(const std::exception &e, unsigned long long pos) :
-			Event(
-				"MXFFragmentBuilder::InvalidMXFSet",
-				e.what(),
-				strf::to_string(pos)
-			) {}
-	};
-
-	class DuplicateMXFSetsError : public Event {
-	public:
-		DuplicateMXFSetsError(const UUID &uuid, unsigned long long pos) :
-			Event(
-				"MXFFragmentBuilder::DuplicateMXFSetsError",
-				"Two Sets have identical Instance ID " + uuid.to_string(),
-		strf::to_string(pos)
-			) {}
-	};
-
-	class RootSetNotFoundError : public Event {
-	public:
-		RootSetNotFoundError(const AUID &key) :
-			Event(
-				"MXFFragmentBuilder::RootSetNotFoundError",
-				"Root set " + key.to_string() + " not found",
-				""
-			) {}
-	};
-
-	class UncaughtExceptionError : public Event {
-	public:
-		UncaughtExceptionError(const std::exception &e) :
-			Event(
-				"MXFFragmentBuilder::UncaughtExceptionError",
-				e.what(),
-				""
-			) {}
-	};
-
-	/**
-	* Returns a DOM Document Fragment containing a RegXML Fragment rooted at
-	* the first Header Metadata object with a class that descends from the
-	* specified class.
-	*
-	* @param mxfpartition MXF partition, including the Partition Pack.
-	* @param defresolver MetaDictionary definitions.
-	* @param enumnameresolver Allows the local name of extendible enumeration
-	* values to be inserted as comments. May be null.
-	* @param evthandler Calls back the caller when an event occurs. Must not be null.
-	* @param rootclasskey Root class of Fragment. The Preface class is used if null.
-	* @param document DOM for which the Document Fragment is created. Must not be null.
-	*
-	* @return Document Fragment containing a single RegXML Fragment
-	*/
-	static DOMDocumentFragment* fromInputStream(
-		std::istream &mxfpartition,
-		const DefinitionResolver &defresolver,
-		const FragmentBuilder::AUIDNameResolver *enumnameresolver,
-		const AUID *rootclasskey,
-		DOMDocument &document,
-		EventHandler *ev = &NULL_EVENTHANDLER);
-
-};
+}
 
 #endif

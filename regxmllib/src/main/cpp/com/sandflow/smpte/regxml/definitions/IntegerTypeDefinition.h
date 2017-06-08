@@ -30,15 +30,18 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct IntegerTypeDefinition : public Definition {
+namespace rxml {
 
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct IntegerTypeDefinition : public Definition {
 
-	bool			isSigned;
-	unsigned char	size;
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-};
+		bool			isSigned;
+		unsigned char	size;
+
+	};
+}
 
 #endif

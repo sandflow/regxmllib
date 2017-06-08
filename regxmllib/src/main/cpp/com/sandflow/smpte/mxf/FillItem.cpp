@@ -26,9 +26,11 @@
 
 #include "FillItem.h"
 
-const UL FillItem::KEY = "urn:smpte:ul:060e2b34.01010102.03010210.01000000";
+namespace rxml {
+	const UL FillItem::KEY = "urn:smpte:ul:060e2b34.01010102.03010210.01000000";
 
-bool FillItem::isFillItem(const UL & key) {
+	bool FillItem::isFillItem(const UL & key) {
 
-	return KEY.equals(key, UL::IGNORE_VERSION);
+		return KEY.equals(key, UL::IGNORE_VERSION);
+	}
 }

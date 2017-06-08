@@ -40,6 +40,8 @@
 
 XERCES_CPP_NAMESPACE_USE
 
+using namespace rxml;
+
 const XMLCh* _getFirstTextNodeText(DOMElement *e) {
 
 	for (DOMNode *n = e->getFirstChild(); n != NULL; n = n->getNextSibling()) {

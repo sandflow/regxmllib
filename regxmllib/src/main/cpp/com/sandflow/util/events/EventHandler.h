@@ -30,20 +30,23 @@
 #include <string>
 #include "Event.h"
 
-class EventHandler {
+namespace rxml {
 
-public:
+	class EventHandler {
 
-	virtual bool info(const std::string &code, const std::string &reason, const std::string &where) = 0;
-	virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) = 0;
-	virtual bool error(const std::string &code, const std::string &reason, const std::string &where) = 0;
-	virtual bool fatal(const std::string &code, const std::string &reason, const std::string &where) = 0;
+	public:
 
-	virtual bool info(const Event &evt) { return this->info(evt.getCode(), evt.getReason(), evt.getWhere()); };
-	virtual bool warn(const Event &evt) { return this->warn(evt.getCode(), evt.getReason(), evt.getWhere()); };
-	virtual bool error(const Event &evt) { return this->error(evt.getCode(), evt.getReason(), evt.getWhere()); };
-	virtual bool fatal(const Event &evt) { return this->fatal(evt.getCode(), evt.getReason(), evt.getWhere()); };
+		virtual bool info(const std::string &code, const std::string &reason, const std::string &where) = 0;
+		virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) = 0;
+		virtual bool error(const std::string &code, const std::string &reason, const std::string &where) = 0;
+		virtual bool fatal(const std::string &code, const std::string &reason, const std::string &where) = 0;
 
-};
+		virtual bool info(const Event &evt) { return this->info(evt.getCode(), evt.getReason(), evt.getWhere()); };
+		virtual bool warn(const Event &evt) { return this->warn(evt.getCode(), evt.getReason(), evt.getWhere()); };
+		virtual bool error(const Event &evt) { return this->error(evt.getCode(), evt.getReason(), evt.getWhere()); };
+		virtual bool fatal(const Event &evt) { return this->fatal(evt.getCode(), evt.getReason(), evt.getWhere()); };
+
+	};
+}
 
 #endif

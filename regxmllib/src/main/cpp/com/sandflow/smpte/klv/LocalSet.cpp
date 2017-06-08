@@ -31,127 +31,131 @@
 #include "KLVException.h"
 #include "com/sandflow/util/strformat.h"
 
-LocalSet::LocalSet() {}
+namespace rxml {
 
-LocalSet::LocalSet(const Triplet & t, const LocalTagRegister & reg) {
-	fromTriplet(t, reg);
-}
+	LocalSet::LocalSet() {}
 
-LocalSet::~LocalSet()
-{
-	for (std::vector<Triplet*>::iterator it = items.begin(); it != items.end(); ++it) {
-		delete *it;
-	}
-}
-
-const UL& LocalSet::getKey() const {
-	return key;
-}
-
-const std::vector<Triplet*>& LocalSet::getItems() const {
-	return items;
-}
-
-
-
-
-void LocalSet::fromTriplet(const Triplet& t, const LocalTagRegister &reg) {
-
-	if (!t.getKey().isUL()) {
-
-		throw new KLVException("Triplet key " + strf::to_string(t.getKey()) + " is not a UL");
+	LocalSet::LocalSet(const Triplet & t, const LocalTagRegister & reg) {
+		fromTriplet(t, reg);
 	}
 
-	UL ul = t.getKey().asUL();
-
-	if (!ul.isLocalSet()) {
-
-		throw new KLVException("Triplet with key " + strf::to_string(t.getKey()) + " is not a Local Set");
+	LocalSet::~LocalSet()
+	{
+		for (std::vector<Triplet*>::iterator it = items.begin(); it != items.end(); ++it) {
+			delete *it;
+		}
 	}
 
-	membuf mb((char*) t.getValue(), (char*) t.getValue() + t.getLength());
+	const UL& LocalSet::getKey() const {
+		return key;
+	}
 
-	CountingStreamBuf csb(&mb);
+	const std::vector<Triplet*>& LocalSet::getItems() const {
+		return items;
+	}
 
-	KLVStream kis(&csb);
 
-	this->key = ul;
-	this->items.clear();
 
-	while (csb.getCount() < t.getLength() && kis.good()) {
 
-		unsigned long localtag = 0;
+	void LocalSet::fromTriplet(const Triplet& t, const LocalTagRegister &reg) {
 
-		/* read local tag */
-		switch (this->key.getRegistryDesignator() >> 3 & 3) {
+		if (!t.getKey().isUL()) {
 
-			/* 1 byte length field */
-		case 0:
-			localtag = kis.readUnsignedByte();
-			break;
-
-			/* ASN.1 OID BER length field */
-		case 1:
-			localtag = kis.readBERLength();
-			break;
-
-			/* 2 byte length field */
-		case 2:
-			localtag = kis.readUnsignedShort();
-			break;
-
-			/* 4 byte length field */
-		case 3:
-			localtag = kis.readUnsignedLong();
-			break;
+			throw new KLVException("Triplet key " + rxml::to_string(t.getKey()) + " is not a UL");
 		}
 
-		long locallen = 0;
+		UL ul = t.getKey().asUL();
 
-		/* read local length */
-		switch (this->key.getRegistryDesignator() >> 5 & 3) {
+		if (!ul.isLocalSet()) {
 
-			/* ASN.1 OID BER length field */
-		case 0:
-			locallen = kis.readBERLength();
-			break;
-
-			/* 1 byte length field */
-		case 1:
-			locallen = kis.readUnsignedByte();
-			break;
-
-			/* 2 byte length field */
-		case 2:
-			locallen = kis.readUnsignedShort();
-			break;
-
-			/* 4 byte length field */
-		case 3:
-			locallen = kis.readUnsignedLong();
-			break;
+			throw new KLVException("Triplet with key " + rxml::to_string(t.getKey()) + " is not a Local Set");
 		}
 
-		/* does the localtag resolve */
+		membuf mb((char*)t.getValue(), (char*)t.getValue() + t.getLength());
 
-		const AUID *auid = reg.getIdentification(localtag);
+		CountingStreamBuf csb(&mb);
 
-		if (!auid) {
+		KLVStream kis(&csb);
 
-			throw KLVException("No UL found for Local Tag " + strf::to_string(localtag) + " at Triplet with Key " + strf::to_string(t.getKey()));
+		this->key = ul;
+		this->items.clear();
+
+		while (csb.getCount() < t.getLength() && kis.good()) {
+
+			unsigned long localtag = 0;
+
+			/* read local tag */
+			switch (this->key.getRegistryDesignator() >> 3 & 3) {
+
+				/* 1 byte length field */
+			case 0:
+				localtag = kis.readUnsignedByte();
+				break;
+
+				/* ASN.1 OID BER length field */
+			case 1:
+				localtag = kis.readBERLength();
+				break;
+
+				/* 2 byte length field */
+			case 2:
+				localtag = kis.readUnsignedShort();
+				break;
+
+				/* 4 byte length field */
+			case 3:
+				localtag = kis.readUnsignedLong();
+				break;
+			}
+
+			long locallen = 0;
+
+			/* read local length */
+			switch (this->key.getRegistryDesignator() >> 5 & 3) {
+
+				/* ASN.1 OID BER length field */
+			case 0:
+				locallen = kis.readBERLength();
+				break;
+
+				/* 1 byte length field */
+			case 1:
+				locallen = kis.readUnsignedByte();
+				break;
+
+				/* 2 byte length field */
+			case 2:
+				locallen = kis.readUnsignedShort();
+				break;
+
+				/* 4 byte length field */
+			case 3:
+				locallen = kis.readUnsignedLong();
+				break;
+			}
+
+			/* does the localtag resolve */
+
+			const AUID *auid = reg.getIdentification(localtag);
+
+			if (!auid) {
+
+				throw KLVException("No UL found for Local Tag " + rxml::to_string(localtag) + " at Triplet with Key " + rxml::to_string(t.getKey()));
+
+			}
+
+			/* TODO: make sure localen is not larger then max triplet len*/
+
+			items.push_back(new MemoryTriplet(*auid, locallen, kis));
 
 		}
 
-		/* TODO: make sure localen is not larger then max triplet len*/
-
-		items.push_back(new MemoryTriplet(*auid, locallen, kis));
 
 	}
 
+	bool LocalSet::isLocalSet(const Triplet & t)
+	{
+		return t.getKey().isUL() && t.getKey().asUL().isLocalSet();
+	}
 
-}
-
-bool LocalSet::isLocalSet(const Triplet & t)
-{
-	return t.getKey().isUL() && t.getKey().asUL().isLocalSet();
 }

@@ -29,34 +29,38 @@
 
 #include <stdexcept>
 
-class Event : public std::runtime_error
-{
-	const std::string reason;
-	const std::string code;
-	const std::string where;
+namespace rxml {
 
-public:
-	Event(const std::string & code, const std::string & reason, const std::string & where) : 
-		std::runtime_error(code + ": " + reason + " at " + where),
-		reason(reason),
+	class Event : public std::runtime_error
+	{
+		const std::string reason;
+		const std::string code;
+		const std::string where;
+
+	public:
+		Event(const std::string & code, const std::string & reason, const std::string & where) :
+			std::runtime_error(code + ": " + reason + " at " + where),
+			reason(reason),
 		where(where),
-		code(code) {}
+			code(code) {}
 
-	virtual const char* getReason() const {
-		return this->reason.c_str();
-	}
+		virtual const char* getReason() const {
+			return this->reason.c_str();
+		}
 
-	virtual const char* getWhere() const {
-		return this->where.c_str();
-	}
+		virtual const char* getWhere() const {
+			return this->where.c_str();
+		}
 
-	virtual const char* getCode() const {
-		return this->code.c_str();
-	}
-	
-	virtual ~Event() throw() {
-	}
+		virtual const char* getCode() const {
+			return this->code.c_str();
+		}
 
-};
+		virtual ~Event() throw() {
+		}
+
+	};
+
+}
 
 #endif

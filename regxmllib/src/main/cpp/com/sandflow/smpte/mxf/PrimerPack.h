@@ -35,25 +35,28 @@
 #include <map>
 
 
-class PrimerPack : public LocalTagRegister {
+namespace rxml {
 
-public:
+	class PrimerPack : public LocalTagRegister {
 
-	static const UL KEY;
+	public:
 
-	void fromTriplet(const Triplet &t);
+		static const UL KEY;
 
-	virtual const AUID *getIdentification(unsigned long local_tag) const;;
+		void fromTriplet(const Triplet &t);
 
-	static bool isPrimerPack(const UL &key);
+		virtual const AUID *getIdentification(unsigned long local_tag) const;;
 
-	static bool isPrimerPack(const AUID &key);
+		static bool isPrimerPack(const UL &key);
 
-private:
+		static bool isPrimerPack(const AUID &key);
 
-	std::map<unsigned long, AUID> localtags;
+	private:
 
-};
+		std::map<unsigned long, AUID> localtags;
+
+	};
+}
 
 
 #endif

@@ -30,15 +30,18 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct VariableArrayTypeDefinition: public Definition{
+namespace rxml {
 
-	void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct VariableArrayTypeDefinition : public Definition {
 
-	AUID elementType;
+		void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-};
+		AUID elementType;
+
+	};
+}
 
 
 #endif

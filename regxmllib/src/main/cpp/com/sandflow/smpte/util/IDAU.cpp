@@ -28,12 +28,16 @@
 #include <cstdio>
 #include <stdexcept>
 
-AUID IDAU::asAUID() const
-{
-	unsigned char auid[16];
+namespace rxml {
 
-	std::memcpy(auid, this->value + 8, 8);
-	std::memcpy(auid + 8, this->value, 8);
+	AUID IDAU::asAUID() const
+	{
+		unsigned char auid[16];
 
-	return AUID(auid);
+		std::memcpy(auid, this->value + 8, 8);
+		std::memcpy(auid + 8, this->value, 8);
+
+		return AUID(auid);
+	}
+
 }

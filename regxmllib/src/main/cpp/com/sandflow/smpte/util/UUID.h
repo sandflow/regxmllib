@@ -30,51 +30,54 @@
 #include <string>
 #include <cstring>
 
-class UUID {
+namespace rxml {
 
-public:
+	class UUID {
 
-	/*
-	 * Members
-	 */
+	public:
 
-	unsigned char value[16];
+		/*
+		 * Members
+		 */
 
-	/*
-	* Methods
-	*/
+		unsigned char value[16];
 
-	static bool urnToBytes(const std::string &urn, unsigned char(&uuid)[16]);
+		/*
+		* Methods
+		*/
 
-	static std::string bytesToString(const unsigned char uuid[16]);
+		static bool urnToBytes(const std::string &urn, unsigned char(&uuid)[16]);
 
-	UUID(const unsigned char uuid[16]) {
-		memcpy(this->value, uuid, 16);
-	}
+		static std::string bytesToString(const unsigned char uuid[16]);
 
-	UUID() {
-		memset(this->value, 0, 16);
-	}
+		UUID(const unsigned char uuid[16]) {
+			memcpy(this->value, uuid, 16);
+		}
 
-	std::string to_string() const {
-		return bytesToString(this->value);
-	}
+		UUID() {
+			memset(this->value, 0, 16);
+		}
+
+		std::string to_string() const {
+			return bytesToString(this->value);
+		}
 
 
-	UUID& operator=(const unsigned char src[]) {
+		UUID& operator=(const unsigned char src[]) {
 
-		std::memcpy(this->value, src, 16);
+			std::memcpy(this->value, src, 16);
 
-		return *this;
-	}
+			return *this;
+		}
 
-	bool operator<(const UUID& other) const {
+		bool operator<(const UUID& other) const {
 
-		return std::memcmp(this->value, other.value, 16) < 0;
+			return std::memcmp(this->value, other.value, 16) < 0;
 
-	}
+		}
 
-	
-};
 
+	};
+
+}
 #endif

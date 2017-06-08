@@ -27,7 +27,9 @@
 #ifndef COM_SANDFLOW_UTIL_SCOPEDPTR_H
 #define COM_SANDFLOW_UTIL_SCOPEDPTR_H
 
-template<class T> class scoped_ptr {
+namespace rxml {
+
+	template<class T> class scoped_ptr {
 
 	public:
 
@@ -56,14 +58,14 @@ template<class T> class scoped_ptr {
 			return ptr;
 		}
 
-private:
+	private:
 
-	T* ptr;
+		T* ptr;
 
-	scoped_ptr(const scoped_ptr&) {};                 // Prevent copy-construction
-	scoped_ptr& operator=(const scoped_ptr&) {};      // Prevent assignment
-};
+		scoped_ptr(const scoped_ptr&) {};                 // Prevent copy-construction
+		scoped_ptr& operator=(const scoped_ptr&) {};      // Prevent assignment
+	};
 
-
+}
 
 #endif

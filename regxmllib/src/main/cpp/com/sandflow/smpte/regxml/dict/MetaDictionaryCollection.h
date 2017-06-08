@@ -28,49 +28,53 @@
 #define COM_SANDFLOW_SMPTE_REGXML_DICT_METADICTIONARYCOLLECTION
 
 #include "MetaDictionary.h"
-/**
- * A collection of multiple RegXML Metadictionary as specified in SMPTE ST 2001-1
- */
-class MetaDictionaryCollection : public DefinitionResolver {
 
-private:
+namespace rxml {
 
-	std::map<std::string, MetaDictionary*> dicts;
+	/**
+	* A collection of multiple RegXML Metadictionary as specified in SMPTE ST 2001-1
+	*/
+	class MetaDictionaryCollection : public DefinitionResolver {
 
-public:
+	private:
 
-	virtual const Definition* getDefinition(const AUID& auid) const;
-    
-    /**
-     * Retrieves a definition from the collection based on its symbol
-     * @param namespace Namespace of the definition
-     * @param symbol Symbol of the definition
-     * @return Definition, or null if none found
-     */
-	const Definition* getDefinition(std::string ns, const std::string& symbol) const;
+		std::map<std::string, MetaDictionary*> dicts;
 
-    /**
-     * Adds a MetaDictionary to the collection. 
-     * 
-     * @param metadictionary MetaDictionary to be added
-     */
-	void addDictionary(MetaDictionary *metadictionary);
+	public:
 
-	const std::map<std::string, MetaDictionary*> &getDictionatries() const;
+		virtual const Definition* getDefinition(const AUID& auid) const;
 
-    /**
-     * Determines whether a meta dictionary with the specified namespace exists
-     * 
-     * @param namespace Namespace sought
-	 * @return true if namespace is covered
-     */
-	bool hasNamespace(const std::string &ns) const;
+		/**
+		 * Retrieves a definition from the collection based on its symbol
+		 * @param namespace Namespace of the definition
+		 * @param symbol Symbol of the definition
+		 * @return Definition, or null if none found
+		 */
+		const Definition* getDefinition(std::string ns, const std::string& symbol) const;
+
+		/**
+		 * Adds a MetaDictionary to the collection.
+		 *
+		 * @param metadictionary MetaDictionary to be added
+		 */
+		void addDictionary(MetaDictionary *metadictionary);
+
+		const std::map<std::string, MetaDictionary*> &getDictionatries() const;
+
+		/**
+		 * Determines whether a meta dictionary with the specified namespace exists
+		 *
+		 * @param namespace Namespace sought
+		 * @return true if namespace is covered
+		 */
+		bool hasNamespace(const std::string &ns) const;
 
 
-	std::set<AUID> getSubclassesOf(const AUID &identification) const;
+		std::set<AUID> getSubclassesOf(const AUID &identification) const;
 
-	std::set<AUID> getMembersOf(const AUID &identification) const;
+		std::set<AUID> getMembersOf(const AUID &identification) const;
 
-};
+	};
+}
 
 #endif

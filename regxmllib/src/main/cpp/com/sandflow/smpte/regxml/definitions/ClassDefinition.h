@@ -31,15 +31,18 @@
 #include "DefinitionVisitor.h"
 #include <com/sandflow/util/optional.h>
 
-struct ClassDefinition : public Definition {
+namespace rxml {
 
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct ClassDefinition : public Definition {
 
-	bool			concrete;
-	Optional<AUID>	parentClass;
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-};
+		bool			concrete;
+		Optional<AUID>	parentClass;
+
+	};
+}
 
 #endif

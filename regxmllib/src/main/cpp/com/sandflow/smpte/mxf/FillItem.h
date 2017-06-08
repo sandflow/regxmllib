@@ -32,20 +32,24 @@
 #include <vector>
 
 
-class FillItem {
+namespace rxml {
 
-public:
+	class FillItem {
 
-	static const UL KEY;
+	public:
 
-	static bool isFillItem(const UL &key);
+		static const UL KEY;
 
-	static bool isFillItem(const AUID &key) {
+		static bool isFillItem(const UL &key);
 
-		return key.isUL() && KEY.equals(key.asUL(), UL::IGNORE_VERSION);
-	}
+		static bool isFillItem(const AUID &key) {
 
-};
+			return key.isUL() && KEY.equals(key.asUL(), UL::IGNORE_VERSION);
+		}
+
+	};
+
+}
 
 
 #endif

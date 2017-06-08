@@ -27,100 +27,103 @@
 #ifndef COM_SANDFLOW_SMPTE_REGXML_DEFINITIONS_DEFINITIONVISITOR
 #define COM_SANDFLOW_SMPTE_REGXML_DEFINITIONS_DEFINITIONVISITOR
 
-struct ClassDefinition;
-struct PropertyDefinition;
-struct PropertyAliasDefinition;
-struct EnumerationTypeDefinition;
-struct CharacterTypeDefinition;
-struct RenameTypeDefinition;
-struct RecordTypeDefinition;
-struct LensSerialFloatTypeDefinition;
-struct IntegerTypeDefinition;
-struct StrongReferenceTypeDefinition;
-struct WeakReferenceTypeDefinition;
-struct StringTypeDefinition;
-struct WeakReferenceTypeDefinition;
-struct ExtendibleEnumerationTypeDefinition;
-struct OpaqueTypeDefinition;
-struct IndirectTypeDefinition;
-struct StreamTypeDefinition;
-struct SetTypeDefinition;
-struct VariableArrayTypeDefinition;
-struct FixedArrayTypeDefinition;
+namespace rxml {
+
+	struct ClassDefinition;
+	struct PropertyDefinition;
+	struct PropertyAliasDefinition;
+	struct EnumerationTypeDefinition;
+	struct CharacterTypeDefinition;
+	struct RenameTypeDefinition;
+	struct RecordTypeDefinition;
+	struct LensSerialFloatTypeDefinition;
+	struct IntegerTypeDefinition;
+	struct StrongReferenceTypeDefinition;
+	struct WeakReferenceTypeDefinition;
+	struct StringTypeDefinition;
+	struct WeakReferenceTypeDefinition;
+	struct ExtendibleEnumerationTypeDefinition;
+	struct OpaqueTypeDefinition;
+	struct IndirectTypeDefinition;
+	struct StreamTypeDefinition;
+	struct SetTypeDefinition;
+	struct VariableArrayTypeDefinition;
+	struct FixedArrayTypeDefinition;
 
 
-class DefinitionVisitor {
+	class DefinitionVisitor {
 
-public:
+	public:
 
-	virtual void visit(const ClassDefinition &def) = 0;
-	virtual void visit(const PropertyDefinition &def) = 0;
-	virtual void visit(const PropertyAliasDefinition &def) = 0;
-	virtual void visit(const EnumerationTypeDefinition &def) = 0;
-	virtual void visit(const CharacterTypeDefinition &def) = 0;
-	virtual void visit(const StringTypeDefinition &def) = 0;
-	virtual void visit(const RenameTypeDefinition &def) = 0;
-	virtual void visit(const RecordTypeDefinition &def) = 0;
-	virtual void visit(const ExtendibleEnumerationTypeDefinition &def) = 0;
-	virtual void visit(const LensSerialFloatTypeDefinition &def) = 0;
-	virtual void visit(const IntegerTypeDefinition &def) = 0;
-	virtual void visit(const StrongReferenceTypeDefinition &def) = 0;
-	virtual void visit(const WeakReferenceTypeDefinition &def) = 0;
-	virtual void visit(const VariableArrayTypeDefinition &def) = 0;
-	virtual void visit(const FixedArrayTypeDefinition &def) = 0;
-	virtual void visit(const OpaqueTypeDefinition &def) = 0;
-	virtual void visit(const IndirectTypeDefinition &def) = 0;
-	virtual void visit(const StreamTypeDefinition &def) = 0;
-	virtual void visit(const SetTypeDefinition &def) = 0;
-};
+		virtual void visit(const ClassDefinition &def) = 0;
+		virtual void visit(const PropertyDefinition &def) = 0;
+		virtual void visit(const PropertyAliasDefinition &def) = 0;
+		virtual void visit(const EnumerationTypeDefinition &def) = 0;
+		virtual void visit(const CharacterTypeDefinition &def) = 0;
+		virtual void visit(const StringTypeDefinition &def) = 0;
+		virtual void visit(const RenameTypeDefinition &def) = 0;
+		virtual void visit(const RecordTypeDefinition &def) = 0;
+		virtual void visit(const ExtendibleEnumerationTypeDefinition &def) = 0;
+		virtual void visit(const LensSerialFloatTypeDefinition &def) = 0;
+		virtual void visit(const IntegerTypeDefinition &def) = 0;
+		virtual void visit(const StrongReferenceTypeDefinition &def) = 0;
+		virtual void visit(const WeakReferenceTypeDefinition &def) = 0;
+		virtual void visit(const VariableArrayTypeDefinition &def) = 0;
+		virtual void visit(const FixedArrayTypeDefinition &def) = 0;
+		virtual void visit(const OpaqueTypeDefinition &def) = 0;
+		virtual void visit(const IndirectTypeDefinition &def) = 0;
+		virtual void visit(const StreamTypeDefinition &def) = 0;
+		virtual void visit(const SetTypeDefinition &def) = 0;
+	};
 
-/* TODO: refactor in its own file */
+	/* TODO: refactor in its own file */
 
-class NullDefinitionVisitor : public DefinitionVisitor {
+	class NullDefinitionVisitor : public DefinitionVisitor {
 
-public:
+	public:
 
-	virtual void visit(const ClassDefinition &def) {};
-	virtual void visit(const PropertyDefinition &def) {};
-	virtual void visit(const PropertyAliasDefinition &def) {};
-	virtual void visit(const EnumerationTypeDefinition &def) {};
-	virtual void visit(const CharacterTypeDefinition &def) {};
-	virtual void visit(const StringTypeDefinition &def) {};
-	virtual void visit(const RenameTypeDefinition &def) {};
-	virtual void visit(const RecordTypeDefinition &def) {};
-	virtual void visit(const ExtendibleEnumerationTypeDefinition &def) {};
-	virtual void visit(const LensSerialFloatTypeDefinition &def) {};
-	virtual void visit(const IntegerTypeDefinition &def) {};
-	virtual void visit(const StrongReferenceTypeDefinition &def) {};
-	virtual void visit(const WeakReferenceTypeDefinition &def) {};
-	virtual void visit(const VariableArrayTypeDefinition &def) {};
-	virtual void visit(const FixedArrayTypeDefinition &def) {};
-	virtual void visit(const OpaqueTypeDefinition &def) {};
-	virtual void visit(const IndirectTypeDefinition &def) {};
-	virtual void visit(const StreamTypeDefinition &def) {};
-	virtual void visit(const SetTypeDefinition &def) {};
+		virtual void visit(const ClassDefinition &def) {};
+		virtual void visit(const PropertyDefinition &def) {};
+		virtual void visit(const PropertyAliasDefinition &def) {};
+		virtual void visit(const EnumerationTypeDefinition &def) {};
+		virtual void visit(const CharacterTypeDefinition &def) {};
+		virtual void visit(const StringTypeDefinition &def) {};
+		virtual void visit(const RenameTypeDefinition &def) {};
+		virtual void visit(const RecordTypeDefinition &def) {};
+		virtual void visit(const ExtendibleEnumerationTypeDefinition &def) {};
+		virtual void visit(const LensSerialFloatTypeDefinition &def) {};
+		virtual void visit(const IntegerTypeDefinition &def) {};
+		virtual void visit(const StrongReferenceTypeDefinition &def) {};
+		virtual void visit(const WeakReferenceTypeDefinition &def) {};
+		virtual void visit(const VariableArrayTypeDefinition &def) {};
+		virtual void visit(const FixedArrayTypeDefinition &def) {};
+		virtual void visit(const OpaqueTypeDefinition &def) {};
+		virtual void visit(const IndirectTypeDefinition &def) {};
+		virtual void visit(const StreamTypeDefinition &def) {};
+		virtual void visit(const SetTypeDefinition &def) {};
 
-};
+	};
 
-template<typename D> class DefinitionKindVisitor : public NullDefinitionVisitor {
+	template<typename D> class DefinitionKindVisitor : public NullDefinitionVisitor {
 
-protected:
+	protected:
 
-	DefinitionKindVisitor(const Definition &def) : iskind(false) {
-		def.accept(*this);
+		DefinitionKindVisitor(const Definition &def) : iskind(false) {
+			def.accept(*this);
+		}
+
+		virtual void visit(const D &def) {
+			this->iskind = true;
+		}
+
+		bool iskind;
+
+		template<class U> friend bool instance_of(const Definition &def);
+	};
+
+	template<typename D> bool instance_of(const Definition &def) {
+		return DefinitionKindVisitor<D>(def).iskind;
 	}
-
-	virtual void visit(const D &def) {
-		this->iskind = true;
-	}
-
-	bool iskind;
-
-	template<class U> friend bool instance_of(const Definition &def);
-};
-
-template<typename D> bool instance_of(const Definition &def) {
-	return DefinitionKindVisitor<D>(def).iskind;
 }
 
 #endif

@@ -27,6 +27,8 @@
 #include <com/sandflow/smpte/util/AUID.h>
 #include <iostream>
 
+using namespace rxml;
+
 int main() {
 
 	const std::string ul = "urn:smpte:ul:060e2b34.027f0101.00000000.00000000";

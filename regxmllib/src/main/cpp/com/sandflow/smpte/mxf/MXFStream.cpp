@@ -27,89 +27,92 @@
 #include "MXFStream.h"
 
 
-void uuidLEtoBE(unsigned char uuid[16]) {
-	/* swap the 32-bit word of the UUID */
-	std::swap(uuid[0], uuid[3]);
-	std::swap(uuid[1], uuid[2]);
+namespace rxml {
 
-	/* swap the first 16-bit word of the UUID */
-	std::swap(uuid[4], uuid[5]);
+	void uuidLEtoBE(unsigned char uuid[16]) {
+		/* swap the 32-bit word of the UUID */
+		std::swap(uuid[0], uuid[3]);
+		std::swap(uuid[1], uuid[2]);
 
-	/* swap the second 16-bit word of the UUID */
-	std::swap(uuid[6], uuid[7]);
+		/* swap the first 16-bit word of the UUID */
+		std::swap(uuid[4], uuid[5]);
 
+		/* swap the second 16-bit word of the UUID */
+		std::swap(uuid[6], uuid[7]);
+
+	}
+
+	template<class CharT, class Traits>
+	UUID basic_mxfistream<CharT, Traits>::readUUID()
+	{
+		unsigned char buf[16];
+
+		this->read((char*)buf, 16);
+
+		if (!this->good()) throw std::ios_base::failure("UUID read failed");
+
+		if (this->getByteOrder() == KLVStream::LITTLE_ENDIAN_BYTE_ORDER) {
+
+			uuidLEtoBE(buf);
+
+		}
+
+		if (this->good()) {
+
+			return UUID(buf);
+
+		} else {
+
+			throw std::ios_base::failure("UUID read failed");
+
+		}
+	}
+
+	template<class CharT, class Traits>
+	UMID basic_mxfistream<CharT, Traits>::readUMID()
+	{
+		unsigned char buf[32];
+
+		this->read((char*)buf, sizeof(buf));
+
+		if (!this->good()) throw std::ios_base::failure("UUID read failed");
+
+		if (this->good()) {
+
+			return UMID(buf);
+
+		} else {
+
+			throw std::ios_base::failure("UMID read failed");
+
+		}
+	}
+
+	template<class CharT, class Traits>
+	IDAU basic_mxfistream<CharT, Traits>::readIDAU()
+	{
+		unsigned char buf[16];
+
+		this->read((char*)buf, sizeof(buf));
+
+		if (!this->good()) throw std::ios_base::failure("IDAU read failed");
+
+		if (this->getByteOrder() == KLVStream::LITTLE_ENDIAN_BYTE_ORDER) {
+
+			uuidLEtoBE(buf);
+
+		}
+
+		if (this->good()) {
+
+			return IDAU(buf);
+
+		} else {
+
+			throw std::ios_base::failure("IDAU read failed");
+
+		}
+	}
+
+	template class basic_mxfistream<char>;
 }
-
-template<class CharT, class Traits>
-UUID basic_mxfistream<CharT, Traits>::readUUID()
-{
-	unsigned char buf[16];
-
-	this->read((char*)buf, 16);
-
-	if (!this->good()) throw std::ios_base::failure("UUID read failed");
-
-	if (this->getByteOrder() == KLVStream::LITTLE_ENDIAN_BYTE_ORDER) {
-
-		uuidLEtoBE(buf);
-
-	}
-
-	if (this->good()) {
-
-		return UUID(buf);
-
-	} else {
-
-		throw std::ios_base::failure("UUID read failed");
-
-	}
-}
-
-template<class CharT, class Traits>
-UMID basic_mxfistream<CharT, Traits>::readUMID()
-{
-	unsigned char buf[32];
-
-	this->read((char*)buf, sizeof(buf));
-
-	if (!this->good()) throw std::ios_base::failure("UUID read failed");
-
-	if (this->good()) {
-
-		return UMID(buf);
-
-	} else {
-
-		throw std::ios_base::failure("UMID read failed");
-
-	}
-}
-
-template<class CharT, class Traits>
-IDAU basic_mxfistream<CharT, Traits>::readIDAU()
-{
-	unsigned char buf[16];
-
-	this->read((char*)buf, sizeof(buf));
-
-	if (!this->good()) throw std::ios_base::failure("IDAU read failed");
-
-	if (this->getByteOrder() == KLVStream::LITTLE_ENDIAN_BYTE_ORDER) {
-
-		uuidLEtoBE(buf);
-
-	}
-
-	if (this->good()) {
-
-		return IDAU(buf);
-
-	} else {
-
-		throw std::ios_base::failure("IDAU read failed");
-
-	}
-}
-
-template class basic_mxfistream<char>;

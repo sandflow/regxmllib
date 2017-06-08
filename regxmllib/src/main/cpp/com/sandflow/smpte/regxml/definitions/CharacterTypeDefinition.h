@@ -30,16 +30,19 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct CharacterTypeDefinition : public Definition {
+namespace rxml {
 
-public:
+	struct CharacterTypeDefinition : public Definition {
 
-	void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	public:
+
+		void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
 
-};
+	};
+}
 
 
 #endif

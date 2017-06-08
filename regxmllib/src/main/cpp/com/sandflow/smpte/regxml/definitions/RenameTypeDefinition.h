@@ -30,14 +30,17 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct RenameTypeDefinition : public Definition {
+namespace rxml {
 
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct RenameTypeDefinition : public Definition {
 
-	AUID renamedType;
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-};
+		AUID renamedType;
+
+	};
+}
 
 #endif

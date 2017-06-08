@@ -31,14 +31,18 @@
 #include <com/sandflow/smpte/klv/Triplet.h>
 #include <vector>
 
-class Group {
+namespace rxml {
 
-public:
+	class Group {
 
-	virtual const UL& getKey() const = 0;
+	public:
 
-	virtual const std::vector<Triplet*>& getItems() const = 0;
-};
+		virtual const UL& getKey() const = 0;
+
+		virtual const std::vector<Triplet*>& getItems() const = 0;
+	};
+
+}
 
 
 #endif

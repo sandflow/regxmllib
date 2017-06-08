@@ -29,17 +29,18 @@
 
 #include <com/sandflow/smpte/util/AUID.h>
 
+namespace rxml {
 
-class Triplet {
+	class Triplet {
 
-public:
+	public:
 
-	virtual const AUID& getKey() const = 0;
+		virtual const AUID& getKey() const = 0;
 
-	virtual size_t getLength() const = 0;
+		virtual size_t getLength() const = 0;
 
-	virtual const unsigned char* getValue() const = 0;
-};
+		virtual const unsigned char* getValue() const = 0;
+	};
 
-
+}
 #endif

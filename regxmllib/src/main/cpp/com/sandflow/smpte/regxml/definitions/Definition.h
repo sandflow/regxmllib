@@ -31,18 +31,21 @@
 #include <com/sandflow/smpte/util/AUID.h>
 #include <com/sandflow/util/optional.h>
 
-class DefinitionVisitor;
+namespace rxml {
 
-struct Definition {
+	class DefinitionVisitor;
 
-	virtual void accept(DefinitionVisitor & v) const = 0;
+	struct Definition {
 
-	std::string			symbol;
-	AUID					identification;
-	std::string			name;
-	Optional<std::string>	description;
-	std::string			ns;
+		virtual void accept(DefinitionVisitor & v) const = 0;
 
-};
+		std::string			symbol;
+		AUID					identification;
+		std::string			name;
+		Optional<std::string>	description;
+		std::string			ns;
+
+	};
+}
 
 #endif

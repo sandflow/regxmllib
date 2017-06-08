@@ -31,32 +31,36 @@
 #include <cstring>
 #include "AUID.h"
 
-class IDAU {
+namespace rxml {
 
-public:
+	class IDAU {
 
-	/*
-	 * Members
-	 */
+	public:
 
-	unsigned char value[16];
+		/*
+		 * Members
+		 */
 
-	/*
-	* Methods
-	*/
+		unsigned char value[16];
+
+		/*
+		* Methods
+		*/
 
 
-	IDAU(const unsigned char idau[16]) {
-		memcpy(this->value, idau, 16);
-	}
+		IDAU(const unsigned char idau[16]) {
+			memcpy(this->value, idau, 16);
+		}
 
-	IDAU() {
-		memset(this->value, 0, 16);
-	}
+		IDAU() {
+			memset(this->value, 0, 16);
+		}
 
-	AUID asAUID() const;
+		AUID asAUID() const;
 
-	
-};
+
+	};
+
+}
 
 #endif

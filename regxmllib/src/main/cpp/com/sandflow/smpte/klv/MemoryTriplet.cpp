@@ -27,53 +27,57 @@
 #include "MemoryTriplet.h"
 #include "KLVStream.h"
 
-MemoryTriplet::MemoryTriplet() {}
+namespace rxml {
 
-MemoryTriplet::MemoryTriplet(AUID key, long int length, unsigned char* value) : key(key), value(value, value + length) {
-	
-}
+	MemoryTriplet::MemoryTriplet() {}
 
-MemoryTriplet::MemoryTriplet(AUID key, long int length, std::istream & is) {
-	this->key = key;
-	this->value.resize(length);
-	is.read((char*) this->value.data(), this->value.size());
-}
+	MemoryTriplet::MemoryTriplet(AUID key, long int length, unsigned char* value) : key(key), value(value, value + length) {
 
-MemoryTriplet::MemoryTriplet(std::istream & is) {
-	fromStream(is);
-}
+	}
 
-MemoryTriplet::MemoryTriplet(const Triplet & t) {
-	this->key = t.getKey();
-	this->value.resize(t.getLength());
+	MemoryTriplet::MemoryTriplet(AUID key, long int length, std::istream & is) {
+		this->key = key;
+		this->value.resize(length);
+		is.read((char*) this->value.data(), this->value.size());
+	}
 
-	const unsigned char *v = t.getValue();
+	MemoryTriplet::MemoryTriplet(std::istream & is) {
+		fromStream(is);
+	}
 
-	this->value.assign(v, v + this->value.size());
-}
+	MemoryTriplet::MemoryTriplet(const Triplet & t) {
+		this->key = t.getKey();
+		this->value.resize(t.getLength());
 
-const AUID& MemoryTriplet::getKey() const {
-	return key;
-}
+		const unsigned char *v = t.getValue();
 
-size_t MemoryTriplet::getLength() const {
-	return value.size();
-}
+		this->value.assign(v, v + this->value.size());
+	}
 
-const unsigned char* MemoryTriplet::getValue() const {
-	return value.data();
-}
+	const AUID& MemoryTriplet::getKey() const {
+		return key;
+	}
 
-void MemoryTriplet::fromStream(std::istream &is) {
+	size_t MemoryTriplet::getLength() const {
+		return value.size();
+	}
 
-	KLVStream kis(is.rdbuf());
+	const unsigned char* MemoryTriplet::getValue() const {
+		return value.data();
+	}
 
-	this->key = kis.readAUID();
+	void MemoryTriplet::fromStream(std::istream &is) {
 
-	size_t len = kis.readBERLength();
+		KLVStream kis(is.rdbuf());
 
-	value.resize(len);
+		this->key = kis.readAUID();
 
-	kis.readBytes(this->value.data(), value.size());
+		size_t len = kis.readBERLength();
+
+		value.resize(len);
+
+		kis.readBytes(this->value.data(), value.size());
+
+	}
 
 }

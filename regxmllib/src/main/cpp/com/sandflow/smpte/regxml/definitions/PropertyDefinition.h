@@ -31,23 +31,26 @@
 #include "DefinitionVisitor.h"
 #include <com/sandflow/util/optional.h>
 
-struct PropertyDefinition : public Definition {
+namespace rxml {
 
-	void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct PropertyDefinition : public Definition {
 
-	AUID type;
+		void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-	bool optional;
+		AUID type;
 
-	Optional<bool> uniqueIdentifier;
+		bool optional;
 
-	unsigned int localIdentification;
+		Optional<bool> uniqueIdentifier;
 
-	AUID memberOf;
+		unsigned int localIdentification;
 
-};
+		AUID memberOf;
+
+	};
+}
 
 
 #endif

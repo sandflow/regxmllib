@@ -31,16 +31,19 @@
 #include "Definition.h"
 #include "DefinitionVisitor.h"
 
-struct StringTypeDefinition : Definition {
+namespace rxml {
 
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct StringTypeDefinition : Definition {
 
-	AUID elementType;
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-};
+		AUID elementType;
 
+	};
+
+}
 
 #endif
 

@@ -35,45 +35,48 @@
 #include "com/sandflow/util/membuf.h"
 #include "com/sandflow/smpte/mxf/MXFStream.h"
 
-class ULAdapter {
-public:
-	static UL fromValue(unsigned char* value, size_t len) {
-		return UL(value);
+namespace rxml {
+
+	class ULAdapter {
+	public:
+		static UL fromValue(unsigned char* value, size_t len) {
+			return UL(value);
+		};
 	};
-};
 
-class PartitionPack {
+	class PartitionPack {
 
-public:
+	public:
 
-	static const UL KEY;
+		static const UL KEY;
 
-	enum Kind { HEADER, BODY, FOOTER };
-	enum Status { OPEN_INCOMPLETE, CLOSED_INCOMPLETE, OPEN_COMPLETE, CLOSED_COMPLETE };
+		enum Kind { HEADER, BODY, FOOTER };
+		enum Status { OPEN_INCOMPLETE, CLOSED_INCOMPLETE, OPEN_COMPLETE, CLOSED_COMPLETE };
 
-	unsigned short majorVersion;
-	unsigned short minorVersion;
-	unsigned long kagSize;
-	unsigned long long thisPartition;
-	unsigned long long previousPartition;
-	unsigned long long footerPartition;
-	unsigned long long headerByteCount;
-	unsigned long long indexByteCount;
-	unsigned long indexSID;
-	unsigned long long bodyOffset;
-	unsigned long bodySID;
-	AUID operationalPattern;
-	std::vector<UL> essenceContainers;
-	Kind kind;
-	Status status;
+		unsigned short majorVersion;
+		unsigned short minorVersion;
+		unsigned long kagSize;
+		unsigned long long thisPartition;
+		unsigned long long previousPartition;
+		unsigned long long footerPartition;
+		unsigned long long headerByteCount;
+		unsigned long long indexByteCount;
+		unsigned long indexSID;
+		unsigned long long bodyOffset;
+		unsigned long bodySID;
+		AUID operationalPattern;
+		std::vector<UL> essenceContainers;
+		Kind kind;
+		Status status;
 
-	void fromTriplet(const Triplet &t);
+		void fromTriplet(const Triplet &t);
 
-	static bool isPartitionPack(const UL &key);
+		static bool isPartitionPack(const UL &key);
 
-	static bool isPartitionPack(const AUID &key);
+		static bool isPartitionPack(const AUID &key);
 
-};
+	};
 
+}
 
 #endif

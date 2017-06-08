@@ -31,36 +31,38 @@
 #include <vector>
 #include <iostream>
 
-class MemoryTriplet : public Triplet {
+namespace rxml {
 
-public:
+	class MemoryTriplet : public Triplet {
 
-	MemoryTriplet();
+	public:
 
-	/* TODO: pick a length for triplet */
+		MemoryTriplet();
 
-	MemoryTriplet(AUID key, long int length, unsigned char* value);
+		/* TODO: pick a length for triplet */
 
-	MemoryTriplet(AUID key, long int length, std::istream &value);
+		MemoryTriplet(AUID key, long int length, unsigned char* value);
 
-	MemoryTriplet(std::istream &is);
+		MemoryTriplet(AUID key, long int length, std::istream &value);
 
-	MemoryTriplet(const Triplet &t);
+		MemoryTriplet(std::istream &is);
 
-	virtual const AUID& getKey() const;
+		MemoryTriplet(const Triplet &t);
 
-	virtual size_t getLength() const;
+		virtual const AUID& getKey() const;
 
-	virtual const unsigned char* getValue() const;
+		virtual size_t getLength() const;
 
-	void fromStream(std::istream &is);
+		virtual const unsigned char* getValue() const;
 
-private:
+		void fromStream(std::istream &is);
 
-	AUID key;
-	std::vector<unsigned char> value;
+	private:
 
-};
+		AUID key;
+		std::vector<unsigned char> value;
 
+	};
 
+}
 #endif

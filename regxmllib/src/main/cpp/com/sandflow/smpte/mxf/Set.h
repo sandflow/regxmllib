@@ -34,41 +34,44 @@
 #include "MXFException.h"
 #include <vector>
 
-class Set : public Group {
+namespace rxml {
 
-public:
+	class Set : public Group {
 
-	static const UL INSTANCE_UID_ITEM_UL;
+	public:
 
-	Set(const Group &g);
+		static const UL INSTANCE_UID_ITEM_UL;
 
-	Set();
+		Set(const Group &g);
 
-	virtual ~Set();
+		Set();
 
-	virtual Set & operator=(const Set &src);
+		virtual ~Set();
 
-	virtual const UL& getKey() const;
+		virtual Set & operator=(const Set &src);
 
-	virtual const std::vector<Triplet*>& getItems() const;
+		virtual const UL& getKey() const;
 
-	void fromGroup(const Group &g);
+		virtual const std::vector<Triplet*>& getItems() const;
 
-	static bool hasInstanceUID(const Group &g);
+		void fromGroup(const Group &g);
 
-	const UUID& getInstanceID() const;
+		static bool hasInstanceUID(const Group &g);
 
-
-
-private:
-
-	std::vector<Triplet*> items;
-	UL key;
-	UUID instanceID;
-
-	void clearItems();
-
-};
+		const UUID& getInstanceID() const;
 
 
+
+	private:
+
+		std::vector<Triplet*> items;
+		UL key;
+		UUID instanceID;
+
+		void clearItems();
+
+	};
+
+
+}
 #endif

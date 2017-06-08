@@ -32,14 +32,17 @@
 #include <com/sandflow/smpte/util/AUID.h>
 #include <vector>
 
-struct SetTypeDefinition : public Definition {
+namespace rxml {
 
-	virtual void accept(DefinitionVisitor &visitor) const {
-		visitor.visit(*this);
-	}
+	struct SetTypeDefinition : public Definition {
 
-	AUID elementType;
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-};
+		AUID elementType;
+
+	};
+}
 
 #endif
