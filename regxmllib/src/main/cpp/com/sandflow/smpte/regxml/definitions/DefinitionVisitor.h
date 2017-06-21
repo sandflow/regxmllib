@@ -55,6 +55,8 @@ namespace rxml {
 
 	public:
 
+		virtual ~DefinitionVisitor() = 0 {};
+
 		virtual void visit(const ClassDefinition &def) = 0;
 		virtual void visit(const PropertyDefinition &def) = 0;
 		virtual void visit(const PropertyAliasDefinition &def) = 0;

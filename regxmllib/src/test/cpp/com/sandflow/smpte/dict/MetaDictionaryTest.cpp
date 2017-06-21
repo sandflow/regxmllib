@@ -24,7 +24,6 @@
 * POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <com/sandflow/smpte/regxml/dict/MetaDictionary.h>
 #include <com/sandflow/smpte/regxml/dict/MetaDictionaryCollection.h>
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/sax/ErrorHandler.hpp>

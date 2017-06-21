@@ -35,6 +35,8 @@ namespace rxml {
 
 	public:
 
+		virtual ~Triplet() = 0 {};
+
 		virtual const AUID& getKey() const = 0;
 
 		virtual size_t getLength() const = 0;

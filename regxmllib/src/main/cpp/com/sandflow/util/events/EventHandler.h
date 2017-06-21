@@ -36,6 +36,8 @@ namespace rxml {
 
 	public:
 
+		virtual ~EventHandler() = 0 {};
+
 		virtual bool info(const std::string &code, const std::string &reason, const std::string &where) = 0;
 		virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) = 0;
 		virtual bool error(const std::string &code, const std::string &reason, const std::string &where) = 0;

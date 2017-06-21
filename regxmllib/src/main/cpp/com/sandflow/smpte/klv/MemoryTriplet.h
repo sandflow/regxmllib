@@ -39,6 +39,8 @@ namespace rxml {
 
 		MemoryTriplet();
 
+		virtual ~MemoryTriplet();
+
 		/* TODO: pick a length for triplet */
 
 		MemoryTriplet(AUID key, long int length, unsigned char* value);

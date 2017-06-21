@@ -35,6 +35,8 @@ namespace rxml {
 
 	public:
 
+		virtual ~LocalTagRegister() = 0 {};
+
 		virtual const AUID *getIdentification(unsigned long local_tag) const = 0;
 
 	};

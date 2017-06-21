@@ -297,6 +297,8 @@ namespace rxml {
 
 		public:
 
+			virtual ~AUIDNameResolver() {};
+
 			virtual const std::string *getLocalName(const AUID &enumid) const = 0;
 
 		};

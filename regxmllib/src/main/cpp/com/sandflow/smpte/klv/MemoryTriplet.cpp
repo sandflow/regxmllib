@@ -31,6 +31,10 @@ namespace rxml {
 
 	MemoryTriplet::MemoryTriplet() {}
 
+	MemoryTriplet::~MemoryTriplet()
+	{
+	}
+
 	MemoryTriplet::MemoryTriplet(AUID key, long int length, unsigned char* value) : key(key), value(value, value + length) {
 
 	}

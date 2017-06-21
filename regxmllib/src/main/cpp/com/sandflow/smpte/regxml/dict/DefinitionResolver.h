@@ -38,6 +38,8 @@ namespace rxml {
 
 	public:
 
+		virtual ~DefinitionResolver() = 0 {};
+
 		virtual const Definition* getDefinition(const AUID &identification) const = 0;
 
 		virtual std::set<AUID> getSubclassesOf(const AUID &identification) const = 0;

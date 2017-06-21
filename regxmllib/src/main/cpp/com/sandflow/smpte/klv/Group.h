@@ -37,6 +37,8 @@ namespace rxml {
 
 	public:
 
+		virtual ~Group() = 0 {};
+
 		virtual const UL& getKey() const = 0;
 
 		virtual const std::vector<Triplet*>& getItems() const = 0;
