@@ -37,7 +37,7 @@ namespace rxml {
 
 	public:
 
-		virtual ~Group() = 0 {};
+		virtual ~Group() {};
 
 		virtual const UL& getKey() const = 0;
 

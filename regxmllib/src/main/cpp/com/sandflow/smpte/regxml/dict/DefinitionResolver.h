@@ -38,7 +38,7 @@ namespace rxml {
 
 	public:
 
-		virtual ~DefinitionResolver() = 0 {};
+		virtual ~DefinitionResolver() {};
 
 		virtual const Definition* getDefinition(const AUID &identification) const = 0;
 

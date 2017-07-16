@@ -35,7 +35,7 @@ namespace rxml {
 
 	public:
 
-		virtual ~Triplet() = 0 {};
+		virtual ~Triplet() {};
 
 		virtual const AUID& getKey() const = 0;
 
