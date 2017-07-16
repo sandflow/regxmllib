@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Fri Feb 10 21:37:32 PST 2017--><!--By: regxmllib build 1d36fd994594db7deefe42ef76f6592f5029b863--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:5b0e02d6-86cc-5f56-7f0f-0edb3cb926b3</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/2003/2012/13/12/as11</SchemeURI>
+<MetaDefinitions>
+<TypeDefinitionEnumeration>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0c0101.01000000</Identification>
+<Symbol>UKDPP_PSE_Pass_Enum</Symbol>
+<Name>PSE Pass Enum</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</ElementType>
+<Elements>
+<Name>PSE_Yes</Name>
+<Value>0</Value>
+<Name>PSE_No</Name>
+<Value>1</Value>
+<Name>PSE_Not_tested</Name>
+<Value>2</Value>
+</Elements>
+</TypeDefinitionEnumeration>
+<TypeDefinitionEnumeration>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0c0101.02000000</Identification>
+<Symbol>UKDPP_Signing_Present_Enum</Symbol>
+<Name>Signing Present Enum</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</ElementType>
+<Elements>
+<Name>Signing_Yes</Name>
+<Value>0</Value>
+<Name>Signing_No</Name>
+<Value>1</Value>
+<Name>Signing_Signer_only</Name>
+<Value>2</Value>
+</Elements>
+</TypeDefinitionEnumeration>
+<TypeDefinitionEnumeration>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0c0101.03000000</Identification>
+<Symbol>UKDPP_3D_Type_Enum</Symbol>
+<Name>3D Type Enum</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</ElementType>
+<Elements>
+<Name>ThreeD_Side_by_side</Name>
+<Value>0</Value>
+<Name>ThreeD_Dual</Name>
+<Value>1</Value>
+<Name>ThreeD_Left_eye_only</Name>
+<Value>2</Value>
+<Name>ThreeD_Right_eye_only</Name>
+<Value>3</Value>
+</Elements>
+</TypeDefinitionEnumeration>
+<TypeDefinitionEnumeration>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0c0101.04000000</Identification>
+<Symbol>UKDPP_Audio_Loudness_Standard_Enum</Symbol>
+<Name>Audio Loudness Standard Enum</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</ElementType>
+<Elements>
+<Name>Loudness_None</Name>
+<Value>0</Value>
+<Name>Loudness_EBU_R_128</Name>
+<Value>1</Value>
+</Elements>
+</TypeDefinitionEnumeration>
+<TypeDefinitionEnumeration>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0c0101.05000000</Identification>
+<Symbol>UKDPP_Audio_Description_Type_Enum</Symbol>
+<Name>Audio Description Type Enum</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</ElementType>
+<Elements>
+<Name>AD_Control_data_Narration</Name>
+<Value>0</Value>
+<Name>AD_Mix</Name>
+<Value>1</Value>
+</Elements>
+</TypeDefinitionEnumeration>
+<TypeDefinitionEnumeration>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0c0101.06000000</Identification>
+<Symbol>UKDPP_Sign_Language_Enum</Symbol>
+<Name>Sign Language Enum</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</ElementType>
+<Elements>
+<Name>Sign_Language_BSL_British_Sign_Language</Name>
+<Value>0</Value>
+<Name>Sign_Language_BSL_Makaton</Name>
+<Value>1</Value>
+</Elements>
+</TypeDefinitionEnumeration>
+</MetaDefinitions>
+</Extension>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Fri Feb 10 21:37:32 PST 2017--><!--By: regxmllib build 1d36fd994594db7deefe42ef76f6592f5029b863--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:95b4bc3d-5624-5fd8-7f82-a2ef057e7b8b</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/335/2012/13/13</SchemeURI>
+<MetaDefinitions>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0101.00000000</Identification>
+<Symbol>adid_prefix</Symbol>
+<Description>The four character prefix of the advertising asset encoded in the file</Description>
+<Name>adid_prefix</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0102.00000000</Identification>
+<Symbol>adid_code</Symbol>
+<Description>The unique identifier for the advertising asset encoded in the file</Description>
+<Name>adid_code</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0103.00000000</Identification>
+<Symbol>ad_title</Symbol>
+<Description>Alpha-numeric combination that follows the prefix</Description>
+<Name>ad_title</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0104.00000000</Identification>
+<Symbol>brand</Symbol>
+<Description>The advertiser brand that is associated to this product</Description>
+<Name>Brand</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0105.00000000</Identification>
+<Symbol>product</Symbol>
+<Description>The product that is the extension of the brand</Description>
+<Name>Product</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0106.00000000</Identification>
+<Symbol>advertiser</Symbol>
+<Description>The company or the agency's client that is advertising</Description>
+<Name>Advertiser</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0107.00000000</Identification>
+<Symbol>agency_office_location</Symbol>
+<Description>The agency working with the advertiser and their office location</Description>
+<Name>agency_office_location</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0108.00000000</Identification>
+<Symbol>length</Symbol>
+<Description>The intended length of the advertisement between SOM and EOM</Description>
+<Name>Length</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d0109.00000000</Identification>
+<Symbol>medium</Symbol>
+<Description>Medium - Television/Radio/Print etc</Description>
+<Name>Medium</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d010a.00000000</Identification>
+<Symbol>sd_flag</Symbol>
+<Description>SD Flag - CDC Flag for SD Code (video only)</Description>
+<Name>sd_flag</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010d.0d0d010b.00000000</Identification>
+<Symbol>parent</Symbol>
+<Description>Parent - the parent company of the advertiser</Description>
+<Name>Parent</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f010d.0d0d0100.00000000</MemberOf>
+</PropertyDefinition>
+</MetaDefinitions>
+</Extension>

@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Fri Feb 10 21:37:32 PST 2017--><!--By: regxmllib build 1d36fd994594db7deefe42ef76f6592f5029b863--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:472f6af2-a546-5f6c-7f20-2f06cb487ec3</SchemeID>
+<SchemeURI>http://www.ebu.ch/metadata/schemas/ebucore/smpte/class13/group</SchemeURI>
+<MetaDefinitions>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020101.00000000</Identification>
+<Symbol>EBUCoreMainFramework</Symbol>
+<Name>EBU Core Main Framework</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020102.00000000</Identification>
+<Symbol>coreMetadata</Symbol>
+<Name>Core Metadata</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020103.00000000</Identification>
+<Symbol>metadataSchemaInformation</Symbol>
+<Name>Metadata  Schema Information</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020104.00000000</Identification>
+<Symbol>identifier</Symbol>
+<Name>Identifier</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020105.00000000</Identification>
+<Symbol>title</Symbol>
+<Name>Title</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020106.00000000</Identification>
+<Symbol>alternativeTitle</Symbol>
+<Name>Alternative Title</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020108.00000000</Identification>
+<Symbol>subject</Symbol>
+<Name>Subject</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020109.00000000</Identification>
+<Symbol>description</Symbol>
+<Name>Description</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02010c.00000000</Identification>
+<Symbol>date</Symbol>
+<Name>Date</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02010d.00000000</Identification>
+<Symbol>dateType</Symbol>
+<Name>Date Type</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02010e.00000000</Identification>
+<Symbol>type</Symbol>
+<Name>Type</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02010f.00000000</Identification>
+<Symbol>objectType</Symbol>
+<Name>Object Type</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020110.00000000</Identification>
+<Symbol>genre</Symbol>
+<Name>Genre</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020111.00000000</Identification>
+<Symbol>targetAudience</Symbol>
+<Name>Target Audience</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020112.00000000</Identification>
+<Symbol>language</Symbol>
+<Name>Language</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020113.00000000</Identification>
+<Symbol>coverage</Symbol>
+<Name>Coverage</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020114.00000000</Identification>
+<Symbol>spatial</Symbol>
+<Name>Spatial</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020115.00000000</Identification>
+<Symbol>location</Symbol>
+<Name>Location</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020116.00000000</Identification>
+<Symbol>coordinates</Symbol>
+<Name>Coordinates</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020117.00000000</Identification>
+<Symbol>temporal</Symbol>
+<Name>Temporal</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020118.00000000</Identification>
+<Symbol>periodOfTime</Symbol>
+<Name>Period Of Time</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020119.00000000</Identification>
+<Symbol>rights</Symbol>
+<Name>Rights</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02011a.00000000</Identification>
+<Symbol>version</Symbol>
+<Name>Version</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02011b.00000000</Identification>
+<Symbol>rating</Symbol>
+<Name>Rating</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02011c.00000000</Identification>
+<Symbol>publicationEvent</Symbol>
+<Name>Publication Event</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02011d.00000000</Identification>
+<Symbol>publicationHistory</Symbol>
+<Name>Publication History</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02011e.00000000</Identification>
+<Symbol>publicationChannel</Symbol>
+<Name>Publication Channel</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02011f.00000000</Identification>
+<Symbol>publicationMedium</Symbol>
+<Name>Publication Medium</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020120.00000000</Identification>
+<Symbol>publicationService</Symbol>
+<Name>Publication Service</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020121.00000000</Identification>
+<Symbol>entity</Symbol>
+<Name>Entity</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020122.00000000</Identification>
+<Symbol>contact</Symbol>
+<Name>Contact</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020123.00000000</Identification>
+<Symbol>organization</Symbol>
+<Name>Organization</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020124.00000000</Identification>
+<Symbol>department</Symbol>
+<Name>Department</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020125.00000000</Identification>
+<Symbol>details</Symbol>
+<Name>Details</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020126.00000000</Identification>
+<Symbol>address</Symbol>
+<Name>Address</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020127.00000000</Identification>
+<Symbol>region</Symbol>
+<Name>Region</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020128.00000000</Identification>
+<Symbol>compoundName</Symbol>
+<Name>Compound Name</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020129.00000000</Identification>
+<Symbol>role</Symbol>
+<Name>Role</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012a.00000000</Identification>
+<Symbol>countryType</Symbol>
+<Name>Country Type</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012b.01000000</Identification>
+<Symbol>customRelation</Symbol>
+<Name>Custom Relation</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012b.02000000</Identification>
+<Symbol>basicRelation</Symbol>
+<Name>basicRelation</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012c.00000000</Identification>
+<Symbol>planning</Symbol>
+<Name>Planning</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012d.01000000</Identification>
+<Symbol>typeGroup</Symbol>
+<Name>Type Group</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012d.02000000</Identification>
+<Symbol>formatGroup</Symbol>
+<Name>Format  Group</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012d.03000000</Identification>
+<Symbol>statusGroup</Symbol>
+<Name>Status Group</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012e.00000000</Identification>
+<Symbol>textualAnnotation</Symbol>
+<Name>Textual Annotation</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02012f.00000000</Identification>
+<Symbol>basicLink</Symbol>
+<Name>Basic Link</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020130.00000000</Identification>
+<Symbol>format</Symbol>
+<Name>Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020131.00000000</Identification>
+<Symbol>videoFormat</Symbol>
+<Name>Video Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020132.00000000</Identification>
+<Symbol>imageFormat</Symbol>
+<Name>Image Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020133.00000000</Identification>
+<Symbol>audioFormat</Symbol>
+<Name>Audio Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020134.00000000</Identification>
+<Symbol>track</Symbol>
+<Name>Track</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020135.00000000</Identification>
+<Symbol>dataFormat</Symbol>
+<Name>Data Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020136.00000000</Identification>
+<Symbol>captioning</Symbol>
+<Name>Captioning</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020137.00000000</Identification>
+<Symbol>subtitling</Symbol>
+<Name>Subtitling</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020138.00000000</Identification>
+<Symbol>ancillaryData</Symbol>
+<Name>Ancillary Data</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020139.00000000</Identification>
+<Symbol>signingFormat</Symbol>
+<Name>Signing  Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.01000000</Identification>
+<Symbol>technicalAttributeString</Symbol>
+<Name>Technical Attribute String</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.02000000</Identification>
+<Symbol>technicalAttributeInt8</Symbol>
+<Name>Technical Attribute Int8</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.03000000</Identification>
+<Symbol>technicalAttributeInt16</Symbol>
+<Name>Technical Attribute Int16</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.04000000</Identification>
+<Symbol>technicalAttributeInt32</Symbol>
+<Name>Technical Attribute Int32</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.05000000</Identification>
+<Symbol>technicalAttributeInt64</Symbol>
+<Name>Technical Attribute Int64</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.06000000</Identification>
+<Symbol>technicalAttributeUInt8</Symbol>
+<Name>Technical Attribute UInt8</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.07000000</Identification>
+<Symbol>technicalAttributeUInt16</Symbol>
+<Name>Technical Attribute UInt16</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.08000000</Identification>
+<Symbol>technicalAttributeUInt32</Symbol>
+<Name>Technical Attribute UInt32</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.09000000</Identification>
+<Symbol>technicalAttributeUInt64</Symbol>
+<Name>Technical Attribute UInt64</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.0a000000</Identification>
+<Symbol>technicalAttributeFloat</Symbol>
+<Name>Technical Attribute Float</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.0b000000</Identification>
+<Symbol>technicalAttributeRational</Symbol>
+<Name>Technical Attribute Rational</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.0c000000</Identification>
+<Symbol>technicalAttributeAnyURI</Symbol>
+<Name>Technical Attribute AnyURI</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013a.0d000000</Identification>
+<Symbol>technicalAttributeBoolean</Symbol>
+<Name>Technical Attribute Boolean</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013b.00000000</Identification>
+<Symbol>dimension</Symbol>
+<Name>Dimension</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013c.00000000</Identification>
+<Symbol>packageInfo</Symbol>
+<Name>Package Info</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013d.00000000</Identification>
+<Symbol>medium</Symbol>
+<Name>Medium</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013e.00000000</Identification>
+<Symbol>codec</Symbol>
+<Name>Codec</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02013f.00000000</Identification>
+<Symbol>rational</Symbol>
+<Name>Rational</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020140.00000000</Identification>
+<Symbol>aspectRatio</Symbol>
+<Name>Aspect Ratio</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020141.00000000</Identification>
+<Symbol>height</Symbol>
+<Name>Height</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020142.00000000</Identification>
+<Symbol>width</Symbol>
+<Name>Width</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020143.00000000</Identification>
+<Symbol>part</Symbol>
+<Name>Part</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020144.00000000</Identification>
+<Symbol>partMetadata</Symbol>
+<Name>Part  Metadata</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020146.00000000</Identification>
+<Symbol>hash</Symbol>
+<Name>Hash</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020147.00000000</Identification>
+<Symbol>locator</Symbol>
+<Name>Locator</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020148.00000000</Identification>
+<Symbol>containerFormat</Symbol>
+<Name>Container Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020149.00000000</Identification>
+<Symbol>audioFormatExtended</Symbol>
+<Name>Audio Format Extended</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02014a.00000000</Identification>
+<Symbol>audioProgramme</Symbol>
+<Name>Audio Programme</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02014b.00000000</Identification>
+<Symbol>IDRef</Symbol>
+<Name>IDRef</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02014c.00000000</Identification>
+<Symbol>loudnessMetadata</Symbol>
+<Name>Loudness Metadata</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02014d.00000000</Identification>
+<Symbol>audioContent</Symbol>
+<Name>Audio Content</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02014e.00000000</Identification>
+<Symbol>audioObject</Symbol>
+<Name>Audio Object</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02014f.00000000</Identification>
+<Symbol>audioPackFormat</Symbol>
+<Name>Audio Pack Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020150.00000000</Identification>
+<Symbol>audioChannelFormat</Symbol>
+<Name>Audio Channel Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020151.00000000</Identification>
+<Symbol>audioBlockFormat</Symbol>
+<Name>Audio Block Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020152.00000000</Identification>
+<Symbol>audioBlockMatrixCoefficient</Symbol>
+<Name>Audio Block Matrix Coefficient</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020153.00000000</Identification>
+<Symbol>audioStreamFormat</Symbol>
+<Name>Audio Stream Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020154.00000000</Identification>
+<Symbol>audioTrackFormat</Symbol>
+<Name>Audio Track Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020155.00000000</Identification>
+<Symbol>audioTrackUID</Symbol>
+<Name>Audio Track UID</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020156.00000000</Identification>
+<Symbol>audioMXFLookup</Symbol>
+<Name>Audio MXF Lookup</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020157.00000000</Identification>
+<Symbol>audioBlockMatrix</Symbol>
+<Name>Audio Block Matrix</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020158.00000000</Identification>
+<Symbol>time</Symbol>
+<Name>Time</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020159.00000000</Identification>
+<Symbol>metadataFormat</Symbol>
+<Name>Metadata Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02015a.00000000</Identification>
+<Symbol>timecodeFormat</Symbol>
+<Name>Timecode Format</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02015b.00000000</Identification>
+<Symbol>videoNoiseFilter</Symbol>
+<Name>Video Noise Filter</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</Identification>
+<Symbol>EBUCoreObject</Symbol>
+<Name>EBU Core Object</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</ParentClass>
+<IsConcrete>false</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02015d.00000000</Identification>
+<Symbol>audience</Symbol>
+<Description>To describe an audience.</Description>
+<Name>Audience</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02015e.00000000</Identification>
+<Symbol>filter</Symbol>
+<Description>To define the characteristics of a filter.</Description>
+<Name>Filter</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02015f.00000000</Identification>
+<Symbol>filterSetting</Symbol>
+<Description>To describe the settings of a filter.</Description>
+<Name>Filter Setting</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020160.00000000</Identification>
+<Symbol>referenceScreen</Symbol>
+<Description>To define a reference screen.</Description>
+<Name>Reference screen</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020161.00000000</Identification>
+<Symbol>referenceScreenCentrePosition</Symbol>
+<Description>To define the centre position of a reference screen.</Description>
+<Name>Reference Screen Centre Position</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020162.00000000</Identification>
+<Symbol>referenceScreenWidth</Symbol>
+<Description>To define the width of a reference screen.</Description>
+<Name>Reference Screen Width</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020163.00000000</Identification>
+<Symbol>audioContentDialogue</Symbol>
+<Description>To define an audio content dialogue.</Description>
+<Name>Audio Content Dialogue</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020164.00000000</Identification>
+<Symbol>audioObjectInteraction</Symbol>
+<Description>To define the interaction parameters of an audio object.</Description>
+<Name>Audio Content Interaction</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020165.00000000</Identification>
+<Symbol>gainInteractionRange</Symbol>
+<Description>To define a gain interaction range.</Description>
+<Name>Gain Interaction Range</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020166.00000000</Identification>
+<Symbol>positionInteractionRange</Symbol>
+<Description>To define a position interaction range.</Description>
+<Name>Position Interaction Range</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020167.00000000</Identification>
+<Symbol>audioBlockPosition</Symbol>
+<Description>To define the position of an audio object.</Description>
+<Name>Audio Block Position</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020168.00000000</Identification>
+<Symbol>audioBlockDivergence</Symbol>
+<Description>To define the divergence of an audio object.</Description>
+<Name>Audio Block Divergence</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d020169.00000000</Identification>
+<Symbol>audioBlockZoneExclusion</Symbol>
+<Description>To define the exclusion zone of an audio object.</Description>
+<Name>Audio Block Zone Exclusion</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02016a.00000000</Identification>
+<Symbol>audioBlockZone</Symbol>
+<Description>To define a zone of an audio object.</Description>
+<Name>Audio Block Zone</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02016b.00000000</Identification>
+<Symbol>audioBlockJumpPosition</Symbol>
+<Description>To define a jump position of an audio object.</Description>
+<Name>Audio Block Jump Position</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02016c.00000000</Identification>
+<Symbol>event</Symbol>
+<Description>To define an event.</Description>
+<Name>Event</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02016d.00000000</Identification>
+<Symbol>award</Symbol>
+<Description>To define an award.</Description>
+<Name>Award</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d02016e.00000000</Identification>
+<Symbol>affiliation</Symbol>
+<Description>To define an affiliation.</Description>
+<Name>Affiliation</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d02015c.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+</MetaDefinitions>
+</Extension>

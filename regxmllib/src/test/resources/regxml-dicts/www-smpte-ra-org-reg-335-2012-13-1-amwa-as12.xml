@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Fri Feb 10 21:37:32 PST 2017--><!--By: regxmllib build 1d36fd994594db7deefe42ef76f6592f5029b863--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:3ebae008-c1b4-5f8c-7ff6-371ba526bb9c</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/335/2012/13/1/amwa/as12</SchemeURI>
+<MetaDefinitions>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0c010101</Identification>
+<Symbol>AS_12_ShimName</Symbol>
+<Description>An informative shim name that identifies the specification for provider dependent metadata that may be shimmed into this file. E.g. "Ad-ID Digital Identification". Note, this string is informative therefore should not be considered to be a definitive indication that additional, shimmed, metadata is present in the file. The definitive indication is the presence of a shim's concrete subclass of "AS_12_DescriptiveObject".</Description>
+<Name>AS_12_ShimName</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0c010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0c010102</Identification>
+<Symbol>AS_12_Slate</Symbol>
+<Description>A Strong Reference to the provider dependent metadata contained in a Descriptive Object as defined by the provider dependent shim</Description>
+<Name>AS_12_Slate</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0c010100</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0c010100</MemberOf>
+</PropertyDefinition>
+</MetaDefinitions>
+</Extension>

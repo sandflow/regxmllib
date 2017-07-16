@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Fri Feb 10 21:37:32 PST 2017--><!--By: regxmllib build 1d36fd994594db7deefe42ef76f6592f5029b863--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:6465ce5e-bca7-5faf-7f1e-9a5990861c8b</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/335/2012/13/12/as11</SchemeURI>
+<MetaDefinitions>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010100</Identification>
+<Symbol>UKDPP_Production_Number</Symbol>
+<Description>A unique identifier / code for the programme (i.e. a unique identifier for this version of the episode).</Description>
+<Name>Production Number</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010200</Identification>
+<Symbol>UKDPP_Synopsis</Symbol>
+<Description>A brief descriptive summary of the programme.</Description>
+<Name>Synopsis</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010300</Identification>
+<Symbol>UKDPP_Originator</Symbol>
+<Description>The name of the person or organisation responsible for creating the programme.</Description>
+<Name>Originator</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010400</Identification>
+<Symbol>UKDPP_Copyright_Year</Symbol>
+<Description>The full year in which one of the following occurred or will occur: completion of the production of the programme; delivery of the completed file to the Broadcaster; transmission of the delivered programme.</Description>
+<Name>Copyright Year</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010500</Identification>
+<Symbol>UKDPP_Other_Identifier</Symbol>
+<Description>Another unique identifier / code for the content.</Description>
+<Name>Other Identifier</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010600</Identification>
+<Symbol>UKDPP_Other_Identifier_Type</Symbol>
+<Description>The kind of identifier / code used for "Other Identifier".</Description>
+<Name>Other Identifier type</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010700</Identification>
+<Symbol>UKDPP_Genre</Symbol>
+<Description>A single style or category describing the whole programme.</Description>
+<Name>Genre</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010800</Identification>
+<Symbol>UKDPP_Distributor</Symbol>
+<Description>The name of the person or organisation responsible for supplying the programme to the Broadcaster.</Description>
+<Name>Distributor</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010900</Identification>
+<Symbol>UKDPP_Picture_Ratio</Symbol>
+<Description>The ratio of the display width to the display height of the smallest rectangle that completely contains (throughout the duration of the entire programme) the region of the video frame used for "programme content" (where "programme content" includes all pictures, captions, etc but excludes any black bars).</Description>
+<Name>Picture Ratio</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.03010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010a00</Identification>
+<Symbol>UKDPP_3D</Symbol>
+<Description>A flag to indicate whether the file contains video intended for stereoscopic rendition.</Description>
+<Name>3D</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010b00</Identification>
+<Symbol>UKDPP_3D_Type</Symbol>
+<Description>A code to identify the kind of stereoscopic video contained in the file.</Description>
+<Name>3D Type</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0c0101.03000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010c00</Identification>
+<Symbol>UKDPP_Product_Placement</Symbol>
+<Description>A flag to indicate whether the programme contains "product placement".</Description>
+<Name>Product Placement</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010d00</Identification>
+<Symbol>UKDPP_PSE_Pass</Symbol>
+<Description>A code to indicate: whether the entire programme passed a flash and pattern test for compliance with Photosensitive Epilepsy (PSE) guidelines; or that such a test has not been carried out.</Description>
+<Name>PSE Pass</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0c0101.01000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010e00</Identification>
+<Symbol>UKDPP_PSE_Manufacturer</Symbol>
+<Description>The name of the product used to perform the test for compliance with PSE guidelines.</Description>
+<Name>PSE Manufacturer</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01010f00</Identification>
+<Symbol>UKDPP_PSE_Version</Symbol>
+<Description>The version of the algorithm / product module used to perform the test for compliance with PSE guidelines.</Description>
+<Name>PSE Version</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011000</Identification>
+<Symbol>UKDPP_Video_Comments</Symbol>
+<Description>A description of the subjective quality of the video in the programme including notes on any global characteristics or video treatments.</Description>
+<Name>Video Comments</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011100</Identification>
+<Symbol>UKDPP_Secondary_Audio_Language</Symbol>
+<Description>A code to identify the main language used on secondary audio channels.</Description>
+<Name>Secondary Audio Language</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010300</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011200</Identification>
+<Symbol>UKDPP_Tertiary_Audio_Language</Symbol>
+<Description>A code to identify the main language used on tertiary audio channels.</Description>
+<Name>Tertiary Audio Language</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010300</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011300</Identification>
+<Symbol>UKDPP_Audio_Loudness_Standard</Symbol>
+<Description>A code to identify a relevant audio loudness recommendation or standard.</Description>
+<Name>Audio Loudness Standard</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0c0101.04000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011400</Identification>
+<Symbol>UKDPP_Audio_Comments</Symbol>
+<Description>A description of the subjective quality of the audio in the programme including notes on any global characteristics or audio treatments.</Description>
+<Name>Audio Comments</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011500</Identification>
+<Symbol>UKDPP_Line_Up_Start</Symbol>
+<Description>The value of the Position in the MXF Material Package at which the line-up test signals begin.</Description>
+<Name>Line Up Start</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01012001.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011600</Identification>
+<Symbol>UKDPP_Ident_Clock_Start</Symbol>
+<Description>The value of the Position in the MXF Material Package at which the initial "ident" or countdown clock begins.</Description>
+<Name>Ident Clock Start</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01012001.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011700</Identification>
+<Symbol>UKDPP_Total_Number_Of_Parts</Symbol>
+<Description>The count of parts / segments in the file.</Description>
+<Name>Total Number Of Parts</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011800</Identification>
+<Symbol>UKDPP_Total_Programme_Duration</Symbol>
+<Description>The sum of the durations of all the parts / segments in the entire programme.</Description>
+<Name>Total Programme Duration</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01012002.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011900</Identification>
+<Symbol>UKDPP_Audio_Description_Present</Symbol>
+<Description>A flag to indicate whether the programme contains audio description for the visually impaired.</Description>
+<Name>Audio Description Present</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011a00</Identification>
+<Symbol>UKDPP_Audio_Description_Type</Symbol>
+<Description>A code to identify the format of the audio description.</Description>
+<Name>Audio Description Type</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0c0101.05000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011b00</Identification>
+<Symbol>UKDPP_Open_Captions_Present</Symbol>
+<Description>A flag to indicate whether the programme contains visible (in-vision) subtitling information.</Description>
+<Name>Open Captions Present</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011c00</Identification>
+<Symbol>UKDPP_Open_Captions_Type</Symbol>
+<Description>A code to identify the editorial description of the open captions.</Description>
+<Name>Open Captions Type</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010100</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011d00</Identification>
+<Symbol>UKDPP_Open_Captions_Language</Symbol>
+<Description>A code to identify the main language used in the open captions.</Description>
+<Name>Open Captions Language</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010300</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011e00</Identification>
+<Symbol>UKDPP_Signing_Present</Symbol>
+<Description>A code to indicate: whether the programme contains visible (in-vision) signing along with the rest of the programme content; or that the programme contains only visible (in-vision) signing.</Description>
+<Name>Signing Present</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0c0101.02000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01011f00</Identification>
+<Symbol>UKDPP_Sign_Language</Symbol>
+<Description>A code to identify the main language and / or format of the visible (in-vision) signing contained in the programme.</Description>
+<Name>Sign Language</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0c0101.06000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01012000</Identification>
+<Symbol>UKDPP_Completion_Date</Symbol>
+<Description>The date on which the programme file was completed ready for delivery to the Broadcaster.</Description>
+<Name>Completion Date</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.03010700.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01012100</Identification>
+<Symbol>UKDPP_Textless_Elements_Exist</Symbol>
+<Description>A flag to indicate whether the programme contains "textless elements" after the end of the main programme content.</Description>
+<Name>Textless Elements Exist</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01012200</Identification>
+<Symbol>UKDPP_Programme_Has_Text</Symbol>
+<Description>A flag to indicate whether the main programme content contains text overlays (or similar) in the video.</Description>
+<Name>Programme Has Text</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01012300</Identification>
+<Symbol>UKDPP_Programme_Text_Language</Symbol>
+<Description>A code to identify the main language used for text overlays (or similar) in the video of the main programme content.</Description>
+<Name>Programme Text Language</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010300</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01012400</Identification>
+<Symbol>UKDPP_Contact_Email</Symbol>
+<Description>The email address for the person or organisation responsible for supplying the programme file to the Broadcaster.</Description>
+<Name>Contact Email</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0c0101.01012500</Identification>
+<Symbol>UKDPP_Contact_Telephone_Number</Symbol>
+<Description>The telephone number for the person or organisation responsible for supplying the programme file to the Broadcaster.</Description>
+<Name>Contact Telephone No.</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0c0101.01010000</MemberOf>
+</PropertyDefinition>
+</MetaDefinitions>
+</Extension>

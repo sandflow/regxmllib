@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Fri Feb 10 21:37:32 PST 2017--><!--By: regxmllib build 1d36fd994594db7deefe42ef76f6592f5029b863--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:9193e802-4aa0-5f02-7f75-4a7967b957a8</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as12</SchemeURI>
+<MetaDefinitions>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d010701.0c010100</Identification>
+<Symbol>DMS_AS_12_Framework</Symbol>
+<Description>AS_12 content provider independent metadata framework</Description>
+<Name>DMS_AS_12_Framework</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d010701.0c010200</Identification>
+<Symbol>AS_12_DescriptiveObject</Symbol>
+<Description>AS_12 Commercial Distribution Slate Metadata</Description>
+<Name>AS_12_DescriptiveObject</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</ParentClass>
+<IsConcrete>false</IsConcrete>
+</ClassDefinition>
+</MetaDefinitions>
+</Extension>
