@@ -46,4 +46,4 @@ endforeach( UNIT_TEST_PATH ${UNIT_TESTS} )
 #target_link_libraries(AUIDTest regxmllibc)
 #add_test(AUIDTest AUIDTest)
 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/main/cpp/com/sandflow DESTINATION include FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY src/main/cpp/com/sandflow DESTINATION include FILES_MATCHING PATTERN "*.h")
