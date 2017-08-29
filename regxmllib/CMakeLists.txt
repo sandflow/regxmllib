@@ -53,7 +53,7 @@ foreach(HEADER_FILE_PATH ${HEADER_FILE_LIST} )
     install(FILES ${HEADER_FILE_PATH} DESTINATION include/${relative_path})
 endforeach(HEADER_FILE_PATH ${HEADER_FILE_LIST} )
 
-file( GLOB_RECURSE SRC_RESOURCE_LIST ${CMAKE_SOURCE_DIR}/src/main/resources/*)
+file( GLOB_RECURSE SRC_RESOURCE_LIST ${CMAKE_SOURCE_DIR}/src/main/resources/*.xsd)
 foreach(SRC_RESOURCE_PATH ${SRC_RESOURCE_LIST} )
     file(RELATIVE_PATH relative_src_res_path ${CMAKE_SOURCE_DIR}/.. ${SRC_RESOURCE_PATH})
     get_filename_component(relative_path ${relative_src_res_path} DIRECTORY)
