@@ -9,8 +9,12 @@ include_directories( ${XercesC_INCLUDE_DIR}
 
 
 file(GLOB_RECURSE SRC_FILES src/main/cpp/*.cpp src/main/cpp/*.h )
-add_library(${PROJECT_NAME} SHARED ${SRC_FILES})
-install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
+add_library(${PROJECT_NAME} ${SRC_FILES})
+if(BUILD_SHARED_LIBS)
+    install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
+else()
+    install(TARGETS ${PROJECT_NAME} ARCHIVE DESTINATION lib)
+endif()
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 98)
 
 
@@ -46,16 +50,4 @@ endforeach( UNIT_TEST_PATH ${UNIT_TESTS} )
 #target_link_libraries(AUIDTest regxmllibc)
 #add_test(AUIDTest AUIDTest)
 
-file( GLOB_RECURSE HEADER_FILE_LIST ${CMAKE_SOURCE_DIR}/src/main/cpp/com/*.h )
-foreach(HEADER_FILE_PATH ${HEADER_FILE_LIST} )
-    file(RELATIVE_PATH relative_header_path ${CMAKE_SOURCE_DIR}/src/main/cpp/ ${HEADER_FILE_PATH})
-    get_filename_component(relative_path ${relative_header_path} DIRECTORY)
-    install(FILES ${HEADER_FILE_PATH} DESTINATION include/${relative_path})
-endforeach(HEADER_FILE_PATH ${HEADER_FILE_LIST} )
-
-file( GLOB_RECURSE SRC_RESOURCE_LIST ${CMAKE_SOURCE_DIR}/src/main/resources/*.xsd)
-foreach(SRC_RESOURCE_PATH ${SRC_RESOURCE_LIST} )
-    file(RELATIVE_PATH relative_src_res_path ${CMAKE_SOURCE_DIR}/.. ${SRC_RESOURCE_PATH})
-    get_filename_component(relative_path ${relative_src_res_path} DIRECTORY)
-    install(FILES ${SRC_RESOURCE_PATH} DESTINATION res/${relative_path})
-endforeach(SRC_RESOURCE_PATH ${SRC_RESOURCE_LIST} )
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/main/cpp/com/sandflow DESTINATION include FILES_MATCHING PATTERN "*.h")
