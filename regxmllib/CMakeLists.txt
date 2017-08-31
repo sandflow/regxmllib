@@ -10,6 +10,7 @@ include_directories( ${XercesC_INCLUDE_DIR}
 
 file(GLOB_RECURSE SRC_FILES src/main/cpp/*.cpp src/main/cpp/*.h )
 add_library(${PROJECT_NAME} ${SRC_FILES})
+install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 98)
 
 
@@ -44,3 +45,5 @@ endforeach( UNIT_TEST_PATH ${UNIT_TESTS} )
 #add_executable(AUIDTest src/test/cpp/com/sandflow/smpte/util/AUIDTest.cpp)
 #target_link_libraries(AUIDTest regxmllibc)
 #add_test(AUIDTest AUIDTest)
+
+install(DIRECTORY src/main/cpp/com/sandflow DESTINATION include FILES_MATCHING PATTERN "*.h")
