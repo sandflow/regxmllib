@@ -1,6 +1,5 @@
 #  REGXMLLIBC_INCLUDE_DIRS - include directories for regxmllibc
 #  REGXMLLIBC_LIBRARIES    - libraries to link against
-#  REGXMLLIBC_EXECUTABLE   - the bar executable
  
 # Compute paths
 get_filename_component(REGXMLLIBC_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
@@ -12,10 +11,8 @@ if(NOT TARGET regxmllibc AND NOT regxmllibc_BINARY_DIR)
   include("${REGXMLLIBC_CMAKE_DIR}/regxmllibcTargets.cmake")
 endif()
  
-# These are IMPORTED targets created by FooBarTargets.cmake
+# These are IMPORTED targets created by regxmllibcTargets.cmake
 set(REGXMLLIBC_LIBRARIES
         "$<$<NOT:$<CONFIG:Debug>>:${PROJECT_NAME}>"
         "$<$<CONFIG:Debug>:${PROJECT_NAME}${CMAKE_DEBUG_POSTFIX}>"
 )
-
-

@@ -2,16 +2,18 @@ cmake_minimum_required (VERSION 3.6)
 project (regxmllibc)
 option(BUILD_SHARED_LIB Bool OFF)
 
+# Set build type
 if(BUILD_SHARED_LIB)
 set(LIB_TYPE SHARED)
 if(WIN32 AND NOT CYGWIN)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 endif(WIN32 AND NOT CYGWIN)
-message(STATUS "*** Building DLL library ${LIB_TYPE}")
 else(BUILD_SHARED_LIB)
-message(STATUS "*** Option BUILD_SHARED_LIB is OFF ${LIB_TYPE}")
+set(LIB_TYPE STATIC)
 add_definitions( -DUTILS_LIB_STATIC )
 endif(BUILD_SHARED_LIB)
+message(STATUS "*** LIB_TYPE is ${LIB_TYPE}")
+
 include(FindXercesC)
 find_package(XercesC REQUIRED)
 include_directories( ${XercesC_INCLUDE_DIR}
@@ -27,10 +29,9 @@ add_library(${PROJECT_NAME} ${LIB_TYPE} ${SRC_FILES} ${INC_FILES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 98)
 
-
-
 target_link_libraries ( ${PROJECT_NAME} ${XercesC_LIBRARY} )
 
+#  Set Visual Studio filters for nested sourcce paths
 foreach(source IN LISTS SRC_FILES INC_FILES)
 	file(RELATIVE_PATH rel_source ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/com/ ${source})
     get_filename_component(source_path ${rel_source} DIRECTORY)
@@ -55,7 +56,6 @@ foreach(p LIB BIN INCLUDE CMAKE)
     set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
   endif()
 endforeach()
-
 
 # Export the package for use from the build-tree
 # (this registers the build-tree with a global CMake-registry)
