@@ -36,7 +36,7 @@ namespace rxml {
 	class DefinitionVisitor;
 
 	struct Definition {
-
+	  virtual ~Definition() {}
 		virtual void accept(DefinitionVisitor & v) const = 0;
 
 		std::string			symbol;
