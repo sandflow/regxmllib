@@ -29,7 +29,7 @@ add_library(${PROJECT_NAME} ${LIB_TYPE} ${SRC_FILES} ${INC_FILES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 98)
 
-target_link_libraries ( ${PROJECT_NAME} ${XercesC_LIBRARY} )
+target_link_libraries ( ${PROJECT_NAME} optimized ${XercesC_LIBRARY_RELEASE} debug ${XercesC_LIBRARY_DEBUG} )
 
 #  Set Visual Studio filters for nested sourcce paths
 foreach(source IN LISTS SRC_FILES INC_FILES)
@@ -78,8 +78,6 @@ EXPORT ${PROJECT_NAME}Targets DESTINATION ${INSTALL_LIB_DIR}
 foreach ( file ${INC_FILES} )
     get_filename_component( dir ${file} DIRECTORY )
     file(RELATIVE_PATH dir2 "${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp" ${dir})
-    message(STATUS ${dir})
-    message(STATUS ${dir2})
     install( FILES ${file} DESTINATION "${INSTALL_INCLUDE_DIR}/${PROJECT_NAME}/${dir2}" )
 endforeach()
 
