@@ -221,7 +221,7 @@ public class RegisterImporter {
             }
 
             /* Skip class 14 and 15 */
-            if (group.getUL().isClass14() || group.getUL().isClass15()) {
+            if (group.getUL().isClass15()) {
                 continue;
             }
 
