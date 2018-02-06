@@ -70,6 +70,8 @@ public class MXFFragmentBuilderTest extends TestCase {
 
     private MetaDictionaryCollection mds_catsup;
     private MetaDictionaryCollection mds_brown_sauce;
+    private MetaDictionaryCollection mds_snapshot;
+    
     private DocumentBuilder db;
 
     public MXFFragmentBuilderTest(String testName) {
@@ -146,6 +148,15 @@ public class MXFFragmentBuilderTest extends TestCase {
             "resources/registers/brown_sauce/Elements.xml",
             "resources/registers/brown_sauce/Groups.xml",
             "resources/registers/brown_sauce/Types.xml"
+        );
+
+        assertNotNull(mds_brown_sauce);
+        
+        /* build the dictionaries */
+        mds_snapshot = buildDictionaryCollection(
+            "resources/registers/snapshot/Elements.xml",
+            "resources/registers/snapshot/Groups.xml",
+            "resources/registers/snapshot/Types.xml"
         );
 
         assertNotNull(mds_brown_sauce);
@@ -287,6 +298,12 @@ public class MXFFragmentBuilderTest extends TestCase {
     public void testUTF8AgainstBrownSauce() throws Exception {
 
         compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
+
+    }
+    
+    public void testClass14AgainstSnapshot() throws Exception {
+
+        compareGeneratedVsRef(mds_snapshot, "resources/sample-files/class14.mxf", "resources/reference-files/class14.xml");
 
     }
 
