@@ -195,7 +195,9 @@ int main(int argc, char **argv) {
 		,"www-smpte-ra-org-reg-335-2012.xml"
 		,"www-smpte-ra-org-reg-335-2012-13-1-aaf.xml"
 		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as10.xml"
-		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as11.xml" };
+		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as11.xml"
+		,"www-smpte-ra-org-reg-335-2012-14-9.xml"
+		,"www-smpte-ra-org-reg-395-2014-14-9.xml"};
 
 	XMLPlatformUtils::Initialize();
 
@@ -243,7 +245,8 @@ int main(int argc, char **argv) {
 		"video1",
 		"video2",
 		"indirect",
-		"utf8_embedded_text"
+		"utf8_embedded_text",
+		"class14"
 	};
 
 	for (size_t i = 0; i < sizeof(test_names) / sizeof(char*); i++) {
