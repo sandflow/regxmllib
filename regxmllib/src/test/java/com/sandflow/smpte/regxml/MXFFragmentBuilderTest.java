@@ -159,7 +159,7 @@ public class MXFFragmentBuilderTest extends TestCase {
             "resources/registers/snapshot/Types.xml"
         );
 
-        assertNotNull(mds_brown_sauce);
+        assertNotNull(mds_snapshot);
 
         /* setup the doc builder */
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
