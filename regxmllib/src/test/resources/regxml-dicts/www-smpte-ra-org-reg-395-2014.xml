@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--Created: Fri Feb 10 21:37:32 PST 2017--><!--By: regxmllib build 1d36fd994594db7deefe42ef76f6592f5029b863--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<!--Created: Tue Feb 06 15:14:43 PST 2018--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
 <SchemeID>urn:uuid:3c1f888d-e658-5f03-7fe0-c96d7c354c75</SchemeID>
 <SchemeURI>http://www.smpte-ra.org/reg/395/2014</SchemeURI>
 <MetaDefinitions>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.05310101.00000000</Identification>
+<Symbol>DMCVTGenericSet1</Symbol>
+<Description>Identifies a DMCVT Generic Set 1</Description>
+<Name>DMCVT Generic Set 1</Name>
+<IsConcrete>false</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.05310201.00000000</Identification>
+<Symbol>DMCVTApp1Set</Symbol>
+<Description>Identifies a DMCVT Application 1 Set</Description>
+<Name>DMCVT App1 Set</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.05310101.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.05310202.00000000</Identification>
+<Symbol>DMCVTApp2Set</Symbol>
+<Description>Identifies a DMCVT Application 2 Set</Description>
+<Name>DMCVT App2 Set</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.05310101.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.05310203.00000000</Identification>
+<Symbol>DMCVTApp3Set</Symbol>
+<Description>Identifies a DMCVT Application 3 Set</Description>
+<Name>DMCVT App3 Set</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.05310101.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.05310204.00000000</Identification>
+<Symbol>DMCVTApp4Set</Symbol>
+<Description>Identifies a DMCVT Application 4 Set</Description>
+<Name>DMCVT App4 Set</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.05310101.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
 <ClassDefinition>
 <Identification>urn:smpte:ul:060e2b34.027f0101.0c020101.01010000</Identification>
 <Symbol>LensUnitAcquisitionMetadata</Symbol>

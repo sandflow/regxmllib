@@ -182,7 +182,7 @@
         
         <!-- Generate temporary dictionaries from the reference registers -->
 
-        <property name="ref.regs.dir" value="${test.resources.dir}/registers/catsup"/>
+        <property name="ref.regs.dir" value="${test.resources.dir}/registers/snapshot"/>
         
         <tempfile property="dict.temp.dir" destDir="${java.io.tmpdir}"/>
         
@@ -234,6 +234,7 @@
         <genreffile samplename="audio2"/>
         <genreffile samplename="indirect"/>
         <genreffile samplename="utf8_embedded_text"/>
+        <genreffile samplename="class14"/>
         
         <!-- Delete the temp dir -->
         
