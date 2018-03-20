@@ -132,7 +132,7 @@ public class RegisterImporter {
         if (handler != null) {
 
             if (!handler.handle(evt)
-                    || evt.getSeverity() == Event.Severity.FATAL) {
+                || evt.getSeverity() == Event.Severity.FATAL) {
 
                 /* die on FATAL events or if requested by the handler */
                 throw new Exception(evt.getMessage());
@@ -140,7 +140,7 @@ public class RegisterImporter {
             }
 
         } else if (evt.getSeverity() == Event.Severity.ERROR
-                || evt.getSeverity() == Event.Severity.FATAL) {
+            || evt.getSeverity() == Event.Severity.FATAL) {
 
             /* if no event handler was provided, die on FATAL and ERROR events */
             throw new Exception(evt.getMessage());
@@ -163,8 +163,8 @@ public class RegisterImporter {
      * @throws Exception
      */
     public static MetaDictionaryCollection fromRegister(TypesRegister tr,
-            GroupsRegister gr,
-            ElementsRegister er
+        GroupsRegister gr,
+        ElementsRegister er
     ) throws Exception {
 
         EventHandler handler = new EventHandler() {
@@ -204,9 +204,9 @@ public class RegisterImporter {
      * @throws Exception
      */
     public static MetaDictionaryCollection fromRegister(TypesRegister tr,
-            GroupsRegister gr,
-            ElementsRegister er,
-            EventHandler evthandler
+        GroupsRegister gr,
+        ElementsRegister er,
+        EventHandler evthandler
     ) throws Exception {
 
         /* definition collection */
@@ -291,12 +291,12 @@ public class RegisterImporter {
                 if (element == null) {
 
                     RegisterEvent evt = new RegisterEvent(
-                            EventKind.UNKNOWN_ELEMENT,
-                            String.format(
-                                    "Undefined Element %s for Group %s",
-                                    child.getItem(),
-                                    group.getUL()
-                            )
+                        EventKind.UNKNOWN_ELEMENT,
+                        String.format(
+                            "Undefined Element %s for Group %s",
+                            child.getItem(),
+                            group.getUL()
+                        )
                     );
 
                     handleEvent(evthandler, evt);
@@ -313,12 +313,12 @@ public class RegisterImporter {
                 if (element.getTypeUL() == null) {
 
                     RegisterEvent evt = new RegisterEvent(
-                            EventKind.UNKNOWN_TYPE,
-                            String.format(
-                                    "Missing Type UL at Element %s for Group %s",
-                                    child.getItem(),
-                                    group.getUL()
-                            )
+                        EventKind.UNKNOWN_TYPE,
+                        String.format(
+                            "Missing Type UL at Element %s for Group %s",
+                            child.getItem(),
+                            group.getUL()
+                        )
                     );
 
                     handleEvent(evthandler, evt);
@@ -333,6 +333,19 @@ public class RegisterImporter {
                 pdef.setNamespace(element.getNamespaceName());
 
                 _add(defs, pdef);
+
+                /* register the property's type as referenced by the property definition */
+                HashSet<AUID> hs = isReferencedBy.get(pdef.getType());
+
+                if (hs == null) {
+
+                    hs = new HashSet<>();
+
+                    isReferencedBy.put(pdef.getType(), hs);
+
+                }
+
+                hs.add(pdef.getIdentification());
 
             }
 
@@ -462,10 +475,10 @@ public class RegisterImporter {
 
                 if (type.getBaseType() == null) {
                     throw new Exception(
-                            String.format(
-                                    "Missing base type for Type %s",
-                                    type.getUL()
-                            )
+                        String.format(
+                            "Missing base type for Type %s",
+                            type.getUL()
+                        )
                     );
                 }
 
@@ -484,11 +497,11 @@ public class RegisterImporter {
                     if (ul == null) {
 
                         RegisterEvent evt = new RegisterEvent(
-                                EventKind.UNKNOWN_TARGET_SET,
-                                String.format(
-                                        "Missing Target Set UL at Type %s",
-                                        type.getUL().toString()
-                                )
+                            EventKind.UNKNOWN_TARGET_SET,
+                            String.format(
+                                "Missing Target Set UL at Type %s",
+                                type.getUL().toString()
+                            )
                         );
 
                         handleEvent(evthandler, evt);
@@ -499,11 +512,11 @@ public class RegisterImporter {
                     if (!((WeakReferenceTypeDefinition) tdef).getTargetSet().add(new AUID(ul))) {
 
                         RegisterEvent evt = new RegisterEvent(
-                                EventKind.DUP_TARGET_SET,
-                                String.format(
-                                        "Duplicate Target Set UL at Type %s",
-                                        type.getUL().toString()
-                                )
+                            EventKind.DUP_TARGET_SET,
+                            String.format(
+                                "Duplicate Target Set UL at Type %s",
+                                type.getUL().toString()
+                            )
                         );
 
                         handleEvent(evthandler, evt);
@@ -564,12 +577,12 @@ public class RegisterImporter {
                 } else {
 
                     RegisterEvent evt = new RegisterEvent(
-                            EventKind.BAD_ENUM_TYPE,
-                            String.format(
-                                    "Enumeration base type %s is neither integer nor AUID for Type UL %s.",
-                                    type.getBaseType(),
-                                    type.getUL().toString()
-                            )
+                        EventKind.BAD_ENUM_TYPE,
+                        String.format(
+                            "Enumeration base type %s is neither integer nor AUID for Type UL %s.",
+                            type.getBaseType(),
+                            type.getUL().toString()
+                        )
                     );
 
                     handleEvent(evthandler, evt);
@@ -592,12 +605,12 @@ public class RegisterImporter {
             } else {
 
                 RegisterEvent evt = new RegisterEvent(
-                        EventKind.UNKNOWN_TYPE_KIND,
-                        String.format(
-                                "Unknown type kind of %s for Type UL %s.",
-                                type.getTypeKind(),
-                                type.getUL().toString()
-                        )
+                    EventKind.UNKNOWN_TYPE_KIND,
+                    String.format(
+                        "Unknown type kind of %s for Type UL %s.",
+                        type.getTypeKind(),
+                        type.getUL().toString()
+                    )
                 );
 
                 handleEvent(evthandler, evt);
@@ -634,11 +647,11 @@ public class RegisterImporter {
             } else {
 
                 RegisterEvent evt = new RegisterEvent(
-                        EventKind.TYPE_IMPORT_FAILED,
-                        String.format(
-                                "Type UL %s import failed",
-                                type.getUL().toString()
-                        )
+                    EventKind.TYPE_IMPORT_FAILED,
+                    String.format(
+                        "Type UL %s import failed",
+                        type.getUL().toString()
+                    )
                 );
 
                 handleEvent(evthandler, evt);
@@ -676,13 +689,13 @@ public class RegisterImporter {
                     String newsym = "dup" + def.getSymbol() + (index++);
 
                     RegisterEvent evt = new RegisterEvent(
-                            EventKind.DUPLICATE_SYMBOL,
-                            String.format(
-                                    "Duplicate symbol %s (%s) renamed %s",
-                                    def.getSymbol(),
-                                    def.getNamespace().toASCIIString(),
-                                    newsym
-                            )
+                        EventKind.DUPLICATE_SYMBOL,
+                        String.format(
+                            "Duplicate symbol %s (%s) renamed %s",
+                            def.getSymbol(),
+                            def.getNamespace().toASCIIString(),
+                            newsym
+                        )
                     );
 
                     handleEvent(evthandler, evt);
@@ -711,8 +724,8 @@ public class RegisterImporter {
     }
 
     private static void _prune(Map<AUID, ArrayList<Definition>> defs,
-            HashMap<AUID, HashSet<AUID>> isReferencedBy,
-            AUID aref) {
+        HashMap<AUID, HashSet<AUID>> isReferencedBy,
+        AUID aref) {
 
         if (isReferencedBy.containsKey(aref)) {
 
