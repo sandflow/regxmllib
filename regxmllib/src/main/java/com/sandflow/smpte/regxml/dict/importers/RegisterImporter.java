@@ -102,7 +102,11 @@ public class RegisterImporter {
         /**
          * Duplicate symbol found
          */
-        DUPLICATE_SYMBOL(Event.Severity.ERROR);
+        DUPLICATE_SYMBOL(Event.Severity.ERROR),
+        /**
+         * Enumeration Base Type is not permitted
+         */
+        BAD_ENUM_TYPE(Event.Severity.ERROR);
 
         public final Event.Severity severity;
 
@@ -127,8 +131,8 @@ public class RegisterImporter {
 
         if (handler != null) {
 
-            if (!handler.handle(evt) ||
-                evt.getSeverity() == Event.Severity.FATAL) {
+            if (!handler.handle(evt)
+                || evt.getSeverity() == Event.Severity.FATAL) {
 
                 /* die on FATAL events or if requested by the handler */
                 throw new Exception(evt.getMessage());
@@ -146,9 +150,9 @@ public class RegisterImporter {
 
     /**
      * @deprecated Replaced by {@link MetaDictionaryCollection fromRegister(TypesRegister,
-     * GroupsRegister,ElementsRegister,EventHandler)}. This constructor does not allow the
-     * caller to provide an event handler, and instead uses java.util.logging to
-     * output events.
+     * GroupsRegister,ElementsRegister,EventHandler)}. This constructor does not
+     * allow the caller to provide an event handler, and instead uses
+     * java.util.logging to output events.
      *
      * @param tr Types Register
      * @param gr Groups Register
@@ -329,6 +333,19 @@ public class RegisterImporter {
                 pdef.setNamespace(element.getNamespaceName());
 
                 _add(defs, pdef);
+
+                /* register the property's type as referenced by the property definition */
+                HashSet<AUID> hs = isReferencedBy.get(pdef.getType());
+
+                if (hs == null) {
+
+                    hs = new HashSet<>();
+
+                    isReferencedBy.put(pdef.getType(), hs);
+
+                }
+
+                hs.add(pdef.getIdentification());
 
             }
 
@@ -538,7 +555,7 @@ public class RegisterImporter {
                      }*/
                     tdef = new ExtendibleEnumerationTypeDefinition(ecelems);
 
-                } else {
+                } else if (type.getBaseType().equalsWithMask(UL.fromURN("urn:smpte:ul:060e2b34.01040101.01010000.00000000"), 0b1111111111000000)) {
 
                     ArrayList<EnumerationTypeDefinition.Element> celems = new ArrayList<>();
 
@@ -556,6 +573,21 @@ public class RegisterImporter {
                     ((EnumerationTypeDefinition) tdef).setElementType(new AUID(type.getBaseType()));
 
                     references.add(((EnumerationTypeDefinition) tdef).getElementType());
+
+                } else {
+
+                    RegisterEvent evt = new RegisterEvent(
+                        EventKind.BAD_ENUM_TYPE,
+                        String.format(
+                            "Enumeration base type %s is neither integer nor AUID for Type UL %s.",
+                            type.getBaseType(),
+                            type.getUL().toString()
+                        )
+                    );
+
+                    handleEvent(evthandler, evt);
+
+                    continue;
                 }
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.CHARACTER_TYPEKIND.equals(type.getTypeKind())) {
