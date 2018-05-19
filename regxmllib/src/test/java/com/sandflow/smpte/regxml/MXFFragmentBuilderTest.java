@@ -71,7 +71,8 @@ public class MXFFragmentBuilderTest extends TestCase {
     private MetaDictionaryCollection mds_catsup;
     private MetaDictionaryCollection mds_brown_sauce;
     private MetaDictionaryCollection mds_snapshot;
-    
+    private MetaDictionaryCollection mds_ponzu;
+
     private DocumentBuilder db;
 
     public MXFFragmentBuilderTest(String testName) {
@@ -153,6 +154,7 @@ public class MXFFragmentBuilderTest extends TestCase {
         assertNotNull(mds_brown_sauce);
         
         /* build the dictionaries */
+
         mds_snapshot = buildDictionaryCollection(
             "resources/registers/snapshot/Elements.xml",
             "resources/registers/snapshot/Groups.xml",
@@ -160,6 +162,15 @@ public class MXFFragmentBuilderTest extends TestCase {
         );
 
         assertNotNull(mds_snapshot);
+
+        mds_ponzu = buildDictionaryCollection(
+            "resources/registers/ponzu/Elements.xml",
+            "resources/registers/ponzu/Groups.xml",
+            "resources/registers/ponzu/Types.xml"
+        );
+
+        assertNotNull(mds_ponzu);
+
 
         /* setup the doc builder */
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -304,6 +315,41 @@ public class MXFFragmentBuilderTest extends TestCase {
     public void testClass14AgainstSnapshot() throws Exception {
 
         compareGeneratedVsRef(mds_snapshot, "resources/sample-files/class14.mxf", "resources/reference-files/class14.xml");
+    }
+    
+    public void testAudio1AgainstPonzu() throws Exception {
+
+        compareGeneratedVsRef(mds_ponzu, "resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
+
+    }
+
+    public void testAudio2AgainstPonzu() throws Exception {
+
+        compareGeneratedVsRef(mds_ponzu, "resources/sample-files/audio2.mxf", "resources/reference-files/audio2.xml");
+
+    }
+
+    public void testVideo1AgainstPonzu() throws Exception {
+
+        compareGeneratedVsRef(mds_ponzu, "resources/sample-files/video1.mxf", "resources/reference-files/video1.xml");
+
+    }
+
+    public void testVideo2AgainstPonzu() throws Exception {
+
+        compareGeneratedVsRef(mds_ponzu, "resources/sample-files/video2.mxf", "resources/reference-files/video2.xml");
+
+    }
+
+    public void testIndirectAgainstPonzu() throws Exception {
+
+        compareGeneratedVsRef(mds_ponzu, "resources/sample-files/indirect.mxf", "resources/reference-files/indirect.xml");
+
+    }
+
+    public void testUTF8AgainstPonzu() throws Exception {
+
+        compareGeneratedVsRef(mds_ponzu, "resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
 
     }
 

@@ -58,6 +58,8 @@ public class XMLSchemaBuilderTest extends TestCase {
 
     private MetaDictionaryCollection mds_catsup;
     private MetaDictionaryCollection mds_brown_sauce;
+    private MetaDictionaryCollection mds_ponzu;
+    private MetaDictionaryCollection mds_snapshot;
 
     public XMLSchemaBuilderTest(String testName) {
         super(testName);
@@ -137,6 +139,24 @@ public class XMLSchemaBuilderTest extends TestCase {
 
         assertNotNull(mds_brown_sauce);
 
+        /* build the dictionaries */
+        mds_ponzu = buildDictionaryCollection(
+            "resources/registers/ponzu/Elements.xml",
+            "resources/registers/ponzu/Groups.xml",
+            "resources/registers/ponzu/Types.xml"
+        );
+
+        assertNotNull(mds_ponzu);
+
+        /* build the dictionaries */
+        mds_snapshot = buildDictionaryCollection(
+            "resources/registers/snapshot/Elements.xml",
+            "resources/registers/snapshot/Groups.xml",
+            "resources/registers/snapshot/Types.xml"
+        );
+
+        assertNotNull(mds_snapshot);
+
     }
 
     @Override
@@ -188,6 +208,18 @@ public class XMLSchemaBuilderTest extends TestCase {
     public void testAgainstCatsup() throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
 
         generateXMLSchema(mds_catsup);
+
+    }
+
+    public void testAgainstPonzu() throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
+
+        generateXMLSchema(mds_ponzu);
+
+    }
+
+    public void testAgainstSnapshot() throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
+
+        generateXMLSchema(mds_snapshot);
 
     }
 
