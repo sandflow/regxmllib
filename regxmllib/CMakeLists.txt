@@ -14,7 +14,6 @@ install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 98)
 
 
-
 target_link_libraries ( ${PROJECT_NAME} ${XercesC_LIBRARY} )
 
 foreach(source IN LISTS SRC_FILES)
@@ -23,7 +22,6 @@ foreach(source IN LISTS SRC_FILES)
     string(REPLACE "\\" "/" source_path_msvc "${source_path}")
     source_group("${source_path_msvc}" FILES "${source}")
 endforeach()
-
 
 
 #unit tests
@@ -42,8 +40,6 @@ foreach( UNIT_TEST_PATH ${UNIT_TESTS} )
 	add_test(${UNIT_TEST_NAME}  ${UNIT_TEST_NAME} WORKINGDIRECTORY "${CMAKE_BINARY_DIR}")
 endforeach( UNIT_TEST_PATH ${UNIT_TESTS} )
 
-#add_executable(AUIDTest src/test/cpp/com/sandflow/smpte/util/AUIDTest.cpp)
-#target_link_libraries(AUIDTest regxmllibc)
-#add_test(AUIDTest AUIDTest)
+#install
 
-install(DIRECTORY src/main/cpp/com/sandflow DESTINATION include FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY src/main/cpp/com DESTINATION include FILES_MATCHING PATTERN "*.h")
