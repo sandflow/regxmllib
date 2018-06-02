@@ -48,22 +48,24 @@ public class LocalSet implements Group {
     public static LocalSet fromTriplet(Triplet localset, LocalTagRegister reg) throws KLVException {
         try {
 
-            if (!localset.getKey().isLocalSet()) {
+            if (!(localset.getKey().isUL() && localset.getKey().asUL().isLocalSet())) {
                 return null;
             }
+            
+            UL lskey = localset.getKey().asUL();
             
             CountingInputStream cis = new CountingInputStream(localset.getValueAsStream());
 
             KLVInputStream kis = new KLVInputStream(cis);
 
-            LocalSet set = new LocalSet(localset.getKey());
+            LocalSet set = new LocalSet(lskey);
 
             while(cis.getCount() < localset.getLength()) {
 
                 long localtag = 0;
 
                 /* read local tag */
-                switch (localset.getKey().getRegistryDesignator() >> 3 & 3) {
+                switch (lskey.getRegistryDesignator() >> 3 & 3) {
 
                     /* 1 byte length field */
                     case 0:
@@ -89,7 +91,7 @@ public class LocalSet implements Group {
                 long locallen = 0;
 
                 /* read local length */
-                switch (localset.getKey().getRegistryDesignator() >> 5 & 3) {
+                switch (lskey.getRegistryDesignator() >> 5 & 3) {
 
                     /* ASN.1 OID BER length field */
                     case 0:

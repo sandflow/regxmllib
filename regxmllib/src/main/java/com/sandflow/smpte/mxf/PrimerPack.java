@@ -28,6 +28,7 @@ package com.sandflow.smpte.mxf;
 import com.sandflow.smpte.klv.LocalTagRegister;
 import com.sandflow.smpte.klv.Triplet;
 import com.sandflow.smpte.klv.exceptions.KLVException;
+import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.io.IOException;
 import java.util.HashMap;
@@ -52,7 +53,7 @@ public class PrimerPack {
             return null;
         }
 
-        HashMap<Long, UL> reg = new HashMap<>();
+        HashMap<Long, AUID> reg = new HashMap<>();
 
         MXFInputStream kis = new MXFInputStream(triplet.getValueAsStream());
 
@@ -64,7 +65,7 @@ public class PrimerPack {
 
             for (int i = 0; i < itemcount; i++) {
 
-                reg.put((long) kis.readUnsignedShort(), kis.readUL());
+                reg.put((long) kis.readUnsignedShort(), kis.readAUID());
             }
 
         } catch (IOException e) {
