@@ -2,7 +2,7 @@ language: cpp
 script:
   - mkdir regxmllib/build
   - cd regxmllib/build
-  - cmake .
+  - cmake ..
   - cmake --build .
   - ctest .
   
