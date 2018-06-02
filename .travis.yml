@@ -2,7 +2,7 @@ language: cpp
 addons:
   apt:
     packages:
-    - xerces-c
+    - libxerces-c-dev
 script:
   - mkdir regxmllib/build
   - cd regxmllib/build
