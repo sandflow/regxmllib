@@ -1,5 +1,6 @@
 language: cpp
 script:
+  - mkdir regxmllib/build
   - cd regxmllib/build
   - ccmake ..
   - cmake --build .
