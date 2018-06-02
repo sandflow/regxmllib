@@ -1,0 +1,7 @@
+language: cpp
+script:
+  - cd regxmllib/build
+  - ccmake ..
+  - cmake --build .
+  - ctest .
+  
