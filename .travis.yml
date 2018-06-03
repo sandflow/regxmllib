@@ -16,6 +16,7 @@ matrix:
     - language: java
       install:
         - sudo apt-get install junit
+        - sudo apt-get install libhamcrest-java
       script:
         - cd regxmllib
         - ant test -lib /usr/share/java
