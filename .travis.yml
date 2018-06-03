@@ -12,6 +12,7 @@ matrix:
         - cmake ..
         - cmake --build .
         - ctest .
+        - sudo make install
       
     - language: java
       install:
