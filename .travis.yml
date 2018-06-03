@@ -6,13 +6,13 @@ matrix:
           packages:
             - libxerces-c-dev
             
-        script:
-          - mkdir regxmllib/build
-          - cd regxmllib/build
-          - cmake ..
-          - cmake --build .
-          - ctest .
+      script:
+        - mkdir regxmllib/build
+        - cd regxmllib/build
+        - cmake ..
+        - cmake --build .
+        - ctest .
       
     - language: java
-        script:
-          - ant test
+      script:
+        - ant test
