@@ -1,0 +1,22 @@
+matrix:
+  include:
+    - language: cpp
+      addons:
+        apt:
+          packages:
+            - libxerces-c-dev
+            
+      script:
+        - mkdir regxmllib/build
+        - cd regxmllib/build
+        - cmake ..
+        - cmake --build .
+        - ctest .
+      
+    - language: java
+      install:
+        - sudo apt-get install junit
+        - sudo apt-get install libhamcrest-java
+      script:
+        - cd regxmllib
+        - ant -Dbuild.sysclasspath=first test
