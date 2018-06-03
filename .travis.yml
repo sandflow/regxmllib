@@ -14,6 +14,8 @@ matrix:
         - ctest .
       
     - language: java
+      install:
+        - sudo apt-get install junit
       script:
         - cd regxmllib
         - ant test -lib /usr/share/java/junit.jar
