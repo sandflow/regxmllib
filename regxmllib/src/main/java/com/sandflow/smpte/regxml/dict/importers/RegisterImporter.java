@@ -731,7 +731,7 @@ public class RegisterImporter {
 
             for (AUID entry : isReferencedBy.get(aref)) {
 
-                _prune(defs, isReferencedBy, entry);
+                _prune(defs,  isReferencedBy, entry);
 
             }
 
