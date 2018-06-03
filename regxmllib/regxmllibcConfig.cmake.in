@@ -1,0 +1,18 @@
+#  REGXMLLIBC_INCLUDE_DIRS - include directories for regxmllibc
+#  REGXMLLIBC_LIBRARIES    - libraries to link against
+ 
+# Compute paths
+get_filename_component(REGXMLLIBC_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+# set(regxmllibc_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@/regxmllibc")
+set(REGXMLLIBC_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@/regxmllibc")
+ 
+# Our library dependencies (contains definitions for IMPORTED targets)
+if(NOT TARGET regxmllibc AND NOT regxmllibc_BINARY_DIR)
+  include("${REGXMLLIBC_CMAKE_DIR}/regxmllibcTargets.cmake")
+endif()
+ 
+# These are IMPORTED targets created by regxmllibcTargets.cmake
+set(REGXMLLIBC_LIBRARIES
+        "$<$<NOT:$<CONFIG:Debug>>:${PROJECT_NAME}>"
+        "$<$<CONFIG:Debug>:${PROJECT_NAME}${CMAKE_DEBUG_POSTFIX}>"
+)
