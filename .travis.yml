@@ -14,7 +14,8 @@ matrix:
         - ctest .
       
     - language: java
-      install: ant deps
+      install:
+        - sudo apt-get install ant-optional
       script:
         - cd regxmllib
         - ant test
