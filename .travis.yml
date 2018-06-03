@@ -14,6 +14,7 @@ matrix:
         - ctest .
       
     - language: java
+      install: ant deps
       script:
         - cd regxmllib
         - ant test
