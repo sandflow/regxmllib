@@ -18,4 +18,4 @@ matrix:
         - sudo apt-get install junit
       script:
         - cd regxmllib
-        - ant test -lib /usr/share/java/junit.jar
+        - ant test -lib /usr/share/java
