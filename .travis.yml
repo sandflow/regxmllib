@@ -15,4 +15,5 @@ matrix:
       
     - language: java
       script:
+        - cd regxmllib
         - ant test
