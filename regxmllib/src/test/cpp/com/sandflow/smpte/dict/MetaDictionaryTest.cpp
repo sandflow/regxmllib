@@ -170,34 +170,34 @@ int main(int argc, char **argv) {
 
 	int ret_val = 0;
 
-	char const *dicts_fname[] = { "www-smpte-ra-org-reg-335-2012-13-1-amwa-as12.xml"
-		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-rules.xml"
-		,"www-smpte-ra-org-reg-335-2012-13-4-archive.xml"
-		,"www-smpte-ra-org-reg-335-2012-13-12-as11.xml"
-		,"www-smpte-ra-org-reg-335-2012-13-13.xml"
-		,"www-smpte-ra-org-reg-395-2014.xml"
-		,"www-smpte-ra-org-reg-395-2014-13-1-aaf.xml"
-		,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as10.xml"
-		,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as11.xml"
-		,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as12.xml"
-		,"www-smpte-ra-org-reg-395-2014-13-1-amwa-as-common.xml"
-		,"www-smpte-ra-org-reg-395-2014-13-4-archive.xml"
-		,"www-smpte-ra-org-reg-395-2014-13-12-as11.xml"
-		,"www-smpte-ra-org-reg-395-2014-13-13.xml"
-		,"www-smpte-ra-org-reg-2003-2012.xml"
-		,"www-smpte-ra-org-reg-2003-2012-13-1-amwa-as11.xml"
-		,"www-smpte-ra-org-reg-2003-2012-13-1-amwa-as12.xml"
-		,"www-smpte-ra-org-reg-2003-2012-13-4-archive.xml"
-		,"www-smpte-ra-org-reg-2003-2012-13-12-as11.xml"
-		,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-element.xml"
-		,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-group.xml"
-		,"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-type.xml"
-		,"www-smpte-ra-org-reg-335-2012.xml"
-		,"www-smpte-ra-org-reg-335-2012-13-1-aaf.xml"
-		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as10.xml"
-		,"www-smpte-ra-org-reg-335-2012-13-1-amwa-as11.xml"
-		,"www-smpte-ra-org-reg-335-2012-14-9.xml"
-		,"www-smpte-ra-org-reg-395-2014-14-9.xml"};
+	char const *dicts_fname[] = { "www-ebu-ch-metadata-schemas-ebucore-smpte-class13-element.xml",
+		"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-group.xml",
+		"www-ebu-ch-metadata-schemas-ebucore-smpte-class13-type.xml",
+		"www-smpte-ra-org-reg-335-2012.xml",
+		"www-smpte-ra-org-reg-335-2012-13-1-aaf.xml",
+		"www-smpte-ra-org-reg-335-2012-13-1-amwa-as10.xml",
+		"www-smpte-ra-org-reg-335-2012-13-1-amwa-as11.xml",
+		"www-smpte-ra-org-reg-335-2012-13-1-amwa-as12.xml",
+		"www-smpte-ra-org-reg-335-2012-13-1-amwa-rules.xml",
+		"www-smpte-ra-org-reg-335-2012-13-4-archive.xml",
+		"www-smpte-ra-org-reg-335-2012-13-12-as11.xml",
+		"www-smpte-ra-org-reg-335-2012-13-13.xml",
+		"www-smpte-ra-org-reg-335-2012-14-9.xml",
+		"www-smpte-ra-org-reg-395-2014.xml",
+		"www-smpte-ra-org-reg-395-2014-13-1-aaf.xml",
+		"www-smpte-ra-org-reg-395-2014-13-1-amwa-as10.xml",
+		"www-smpte-ra-org-reg-395-2014-13-1-amwa-as11.xml",
+		"www-smpte-ra-org-reg-395-2014-13-1-amwa-as12.xml",
+		"www-smpte-ra-org-reg-395-2014-13-1-amwa-as-common.xml",
+		"www-smpte-ra-org-reg-395-2014-13-4-archive.xml",
+		"www-smpte-ra-org-reg-395-2014-13-12-as11.xml",
+		"www-smpte-ra-org-reg-395-2014-13-13.xml",
+		"www-smpte-ra-org-reg-395-2014-14-9.xml",
+		"www-smpte-ra-org-reg-2003-2012.xml",
+		"www-smpte-ra-org-reg-2003-2012-13-1-amwa-as11.xml",
+		"www-smpte-ra-org-reg-2003-2012-13-1-amwa-as12.xml",
+		"www-smpte-ra-org-reg-2003-2012-13-4-archive.xml",
+		"www-smpte-ra-org-reg-2003-2012-13-12-as11.xml" };
 
 	XMLPlatformUtils::Initialize();
 
