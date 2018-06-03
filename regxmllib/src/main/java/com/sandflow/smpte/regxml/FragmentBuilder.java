@@ -1484,7 +1484,7 @@ public class FragmentBuilder {
 
     void applyRule5_13(Element element, MXFInputStream value, StrongReferenceTypeDefinition definition) throws RuleException, IOException {
 
-        Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getReferenceType()));
+        Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getReferencedType()));
 
         if (!(typedef instanceof ClassDefinition)) {
 
