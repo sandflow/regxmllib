@@ -1,12 +1,18 @@
-language: cpp
-addons:
-  apt:
-    packages:
-    - libxerces-c-dev
-script:
-  - mkdir regxmllib/build
-  - cd regxmllib/build
-  - cmake ..
-  - cmake --build .
-  - ctest .
-  
+matrix:
+  include:
+    - language: cpp
+      addons:
+        apt:
+          packages:
+            - libxerces-c-dev
+            
+        script:
+          - mkdir regxmllib/build
+          - cd regxmllib/build
+          - cmake ..
+          - cmake --build .
+          - ctest .
+      
+    - language: java
+        script:
+          - ant test
