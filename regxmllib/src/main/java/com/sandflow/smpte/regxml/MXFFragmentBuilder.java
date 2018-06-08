@@ -283,7 +283,7 @@ public class MXFFragmentBuilder {
         for (Triplet t; (t = kis.readTriplet()) != null; cis.resetCount()) {
 
             /* skip fill items, if any */
-            if (!t.getKey().equalsIgnoreVersion(FillItem.getKey())) {
+            if (!FillItem.getKey().equalsIgnoreVersion(t.getKey())) {
                 localreg = PrimerPack.createLocalTagRegister(t);
                 break;
             }
@@ -308,7 +308,7 @@ public class MXFFragmentBuilder {
             cis.getCount() < pp.getHeaderByteCount()
             && (t = kis.readTriplet()) != null;) {
 
-            if (t.getKey().equalsIgnoreVersion(INDEX_TABLE_SEGMENT_UL)) {
+            if (INDEX_TABLE_SEGMENT_UL.equalsIgnoreVersion(t.getKey())) {
 
                 /* stop if Index Table reached */
                 MXFEvent evt = new MXFEvent(
@@ -320,7 +320,7 @@ public class MXFFragmentBuilder {
 
                 break;
 
-            } else if (t.getKey().equalsIgnoreVersion(FillItem.getKey())) {
+            } else if (FillItem.getKey().equalsIgnoreVersion(t.getKey())) {
 
                 /* skip fill items */
                 continue;

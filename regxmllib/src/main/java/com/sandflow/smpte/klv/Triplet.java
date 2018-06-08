@@ -26,7 +26,7 @@
 
 package com.sandflow.smpte.klv;
 
-import com.sandflow.smpte.util.UL;
+import com.sandflow.smpte.util.AUID;
 import java.io.InputStream;
 
 /**
@@ -38,7 +38,7 @@ public interface Triplet {
      * Returns the Key of the KLV Triplet
      * @return Triplet Key
      */
-    UL getKey();
+    AUID getKey();
     
     /**
      * Returns the Length of the KLV Triplet

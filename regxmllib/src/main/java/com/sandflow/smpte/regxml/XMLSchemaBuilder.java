@@ -674,7 +674,7 @@ public class XMLSchemaBuilder {
 
             ClassDefinition parent
                 = (ClassDefinition) resolver.getDefinition(
-                    ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
+                    ((StrongReferenceTypeDefinition) elemdef).getReferencedType()
                 );
 
             if (parent == null) {
@@ -683,7 +683,7 @@ public class XMLSchemaBuilder {
                     EventCodes.UNKNOWN_TYPE,
                     String.format(
                         "Cannot resolve referenced type %s",
-                        ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
+                        ((StrongReferenceTypeDefinition) elemdef).getReferencedType().toString()
                     ),
                     String.format(
                         "Definition %s at ComplexType %s",
@@ -1193,7 +1193,7 @@ public class XMLSchemaBuilder {
 
             ClassDefinition parent
                 = (ClassDefinition) resolver.getDefinition(
-                    ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
+                    ((StrongReferenceTypeDefinition) elemdef).getReferencedType()
                 );
 
             if (parent == null) {
@@ -1202,7 +1202,7 @@ public class XMLSchemaBuilder {
                     EventCodes.UNKNOWN_TYPE,
                     String.format(
                         "Cannot resolve referenced type %s",
-                        ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
+                        ((StrongReferenceTypeDefinition) elemdef).getReferencedType().toString()
                     ),
                     String.format(
                         "Definition %s at ComplexType %s",
@@ -1291,7 +1291,7 @@ public class XMLSchemaBuilder {
 
         ClassDefinition parent
             = (ClassDefinition) resolver.getDefinition(
-                definition.getReferenceType()
+                definition.getReferencedType()
             );
 
         if (parent == null) {
@@ -1300,7 +1300,7 @@ public class XMLSchemaBuilder {
                 EventCodes.UNKNOWN_TYPE,
                 String.format(
                     "Cannot resolve referenced type %s",
-                    definition.getReferenceType().toString()
+                    definition.getReferencedType().toString()
                 ),
                 String.format(
                     "Definition %s at ComplexType %s",
@@ -1359,7 +1359,7 @@ public class XMLSchemaBuilder {
 
             ClassDefinition parent
                 = (ClassDefinition) resolver.getDefinition(
-                    ((StrongReferenceTypeDefinition) elemdef).getReferenceType()
+                    ((StrongReferenceTypeDefinition) elemdef).getReferencedType()
                 );
 
             if (parent == null) {
@@ -1368,7 +1368,7 @@ public class XMLSchemaBuilder {
                     EventCodes.UNKNOWN_TYPE,
                     String.format(
                         "Cannot resolve referenced type %s",
-                        ((StrongReferenceTypeDefinition) elemdef).getReferenceType().toString()
+                        ((StrongReferenceTypeDefinition) elemdef).getReferencedType().toString()
                     ),
                     String.format(
                         "Definition %s at ComplextType %s",

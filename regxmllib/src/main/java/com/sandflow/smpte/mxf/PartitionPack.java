@@ -61,7 +61,7 @@ public class PartitionPack {
             return null;
         }
         
-        switch (triplet.getKey().getValueOctet(14)) {
+        switch (triplet.getKey().asUL().getValueOctet(14)) {
             case 0x01:
                 pp.setStatus(Status.OPEN_INCOMPLETE);
                 break;
@@ -78,7 +78,7 @@ public class PartitionPack {
                 return null;
         }
         
-        switch (triplet.getKey().getValueOctet(13)) {
+        switch (triplet.getKey().asUL().getValueOctet(13)) {
             case 0x02:
                 pp.setKind(Kind.HEADER);
                 

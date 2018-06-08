@@ -149,6 +149,16 @@ public class UL {
 
         return true;
     }
+    
+        /**
+     * Compares this UL to another AUID, ignoring the version byte
+     *
+     * @param auid Other AUID to compare
+     * @return true if the UL is equal to the AUID, ignoring the version byte
+     */
+    public boolean equalsIgnoreVersion(AUID auid) {
+        return (auid.isUL() && this.equalsIgnoreVersion(auid.asUL()));
+    }
 
     /**
      * @return The value of the Version byte of the UL
@@ -177,6 +187,18 @@ public class UL {
 
         return true;
     }
+    
+   /**
+     * Compares this UL to another AUID, ignoring specific bytes based on a mask
+     *
+     * @param auid Other UL to compare
+     * @param bytemask 16-bit mask, where byte[n] is ignored if bit[n] is 0,
+     * with n = 0 is the LSB
+     * @return true if the UL and the AUID are equal, ignoring specific bytes based on bytemask
+     */
+    public boolean equalsWithMask(AUID auid, int bytemask) {
+        return auid.isUL() && this.equalsWithMask(auid.asUL(), bytemask);
+    }
 
     /**
      * Compares this UL to another UL
@@ -186,6 +208,16 @@ public class UL {
      */
     public boolean equals(UL ul) {
         return Arrays.equals(ul.value, this.value);
+    }
+    
+    /**
+     * Compares this UL to a AUID
+     *
+     * @param auid AUID to compare
+     * @return true if the UL and AUID are equal
+     */
+    public boolean equals(AUID auid) {
+        return auid.equals(this);
     }
     
     /**

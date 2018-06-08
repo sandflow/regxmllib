@@ -27,11 +27,11 @@ package com.sandflow.smpte.klv;
 
 import com.sandflow.smpte.klv.exceptions.KLVException;
 import static com.sandflow.smpte.klv.exceptions.KLVException.MAX_LENGTH_EXCEEED;
+import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.EOFException;
-import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -79,7 +79,7 @@ public class KLVInputStream extends InputStream implements DataInput {
      * 
      * @return Byte order of the stream
      */
-    public ByteOrder getByteorder() {
+    public ByteOrder getByteOrder() {
         return byteorder;
     }
     
@@ -96,6 +96,22 @@ public class KLVInputStream extends InputStream implements DataInput {
         readFully(ul);
         
         return new UL(ul);
+    }
+    
+    /**
+     * Reads a single AUID.
+     * @return AUID
+     * @throws IOException
+     * @throws EOFException 
+     */
+    public AUID readAUID() throws IOException, EOFException {
+        byte[] auid = new byte[16];
+        
+        if (read(auid) < auid.length) {
+            throw new EOFException();
+        }
+        
+        return new AUID(auid);
     }
 
     /**
@@ -153,7 +169,7 @@ public class KLVInputStream extends InputStream implements DataInput {
      * @throws KLVException 
      */
     public Triplet readTriplet() throws IOException, EOFException, KLVException {
-        UL ul = readUL();
+        AUID auid = readAUID();
 
         long len = readBERLength();
 
@@ -167,7 +183,7 @@ public class KLVInputStream extends InputStream implements DataInput {
             throw new EOFException("EOF reached while reading Value.");
         }
 
-        return new MemoryTriplet(ul, value);
+        return new MemoryTriplet(auid, value);
     }
 
     @Override

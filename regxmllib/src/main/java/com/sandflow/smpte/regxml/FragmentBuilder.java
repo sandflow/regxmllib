@@ -468,7 +468,7 @@ public class FragmentBuilder {
         for (Triplet item : group.getItems()) {
 
             /* skip if the property is not defined in the registers */
-            Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
+            Definition itemdef = defresolver.getDefinition(item.getKey());
 
             if (itemdef == null) {
 
@@ -522,7 +522,7 @@ public class FragmentBuilder {
             }
 
             /* warn if version byte of the property does not match the register version byte  */
-            if (itemdef.getIdentification().asUL().getVersion() != item.getKey().getVersion()) {
+            if (itemdef.getIdentification().asUL().getVersion() != item.getKey().asUL().getVersion()) {
 
                 handleEvent(new FragmentEvent(
                     EventCodes.VERSION_BYTE_MISMATCH,
@@ -693,7 +693,7 @@ public class FragmentBuilder {
                         /* find the unique identifier in the group */
                         for (Triplet item : g.getItems()) {
 
-                            Definition itemdef = defresolver.getDefinition(new AUID(item.getKey()));
+                            Definition itemdef = defresolver.getDefinition(item.getKey());
 
                             if (itemdef != null
                                 && itemdef instanceof PropertyDefinition
@@ -847,7 +847,7 @@ public class FragmentBuilder {
 
         if (definition.getIdentification().equals(Character_UL)) {
 
-            if (value.getByteorder() == ByteOrder.BIG_ENDIAN) {
+            if (value.getByteOrder() == ByteOrder.BIG_ENDIAN) {
 
                 in = new InputStreamReader(value, "UTF-16BE");
 
@@ -1484,7 +1484,7 @@ public class FragmentBuilder {
 
     void applyRule5_13(Element element, MXFInputStream value, StrongReferenceTypeDefinition definition) throws RuleException, IOException {
 
-        Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getReferenceType()));
+        Definition typedef = findBaseDefinition(defresolver.getDefinition(definition.getReferencedType()));
 
         if (!(typedef instanceof ClassDefinition)) {
 

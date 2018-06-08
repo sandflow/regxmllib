@@ -50,7 +50,7 @@ public class StrongReferenceTypeDefinition extends Definition {
         visitor.visit(this);
     }
 
-    public AUID getReferenceType() {
+    public AUID getReferencedType() {
         return referenceType;
     }
 

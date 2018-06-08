@@ -532,7 +532,7 @@ public class RegisterImporter {
 
                 ((StrongReferenceTypeDefinition) tdef).setReferenceType(new AUID(type.getBaseType()));
 
-                references.add(((StrongReferenceTypeDefinition) tdef).getReferenceType());
+                references.add(((StrongReferenceTypeDefinition) tdef).getReferencedType());
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.ENUMERATION_TYPEKIND.equals(type.getTypeKind())) {
 

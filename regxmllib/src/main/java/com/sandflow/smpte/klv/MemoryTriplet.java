@@ -25,7 +25,7 @@
  */
 package com.sandflow.smpte.klv;
 
-import com.sandflow.smpte.util.UL;
+import com.sandflow.smpte.util.AUID;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.InvalidParameterException;
@@ -35,7 +35,7 @@ import java.security.InvalidParameterException;
  */
 public class MemoryTriplet implements Triplet {
 
-    final private UL key;
+    final private AUID key;
     final private byte[] value;
 
     /**
@@ -43,7 +43,7 @@ public class MemoryTriplet implements Triplet {
      * @param key Triplet Key
      * @param value Triplet Value
      */
-    public MemoryTriplet(UL key, byte[] value) {
+    public MemoryTriplet(AUID key, byte[] value) {
         
         if (key == null || value == null) throw new InvalidParameterException("Triplet muse have key and value.");
         
@@ -52,7 +52,7 @@ public class MemoryTriplet implements Triplet {
     }
 
     @Override
-    public UL getKey() {
+    public AUID getKey() {
         return key;
     }
 

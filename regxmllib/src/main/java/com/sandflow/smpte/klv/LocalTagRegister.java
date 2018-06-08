@@ -25,16 +25,16 @@
  */
 package com.sandflow.smpte.klv;
 
-import com.sandflow.smpte.util.UL;
+import com.sandflow.smpte.util.AUID;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * LocalTagRegister maps Local Tags found in a Local Set to UL Keys
+ * LocalTagRegister maps Local Tags found in a Local Set to AUID Keys
  */
 public class LocalTagRegister {
 
-    private final HashMap<Long, UL> entries = new HashMap<>();
+    private final HashMap<Long, AUID> entries = new HashMap<>();
     
     /**
      * Instantiates an empty LocalTagRegister
@@ -42,10 +42,10 @@ public class LocalTagRegister {
     public LocalTagRegister() { }
 
     /**
-     * Instantiates a LocalTagRegister with an initial set of mappings from Local Tag values to UL Keys
+     * Instantiates a LocalTagRegister with an initial set of mappings from Local Tag values to AUID Keys
      * @param entries Initial set of mappings
      */
-    public LocalTagRegister(Map<Long, UL> entries) {
+    public LocalTagRegister(Map<Long, AUID> entries) {
         this.entries.putAll(entries);
     }
 
@@ -54,7 +54,7 @@ public class LocalTagRegister {
      * @param localtag Local Tag
      * @return Key, or null if no Key exists for the Local Tag
      */
-    public UL get(long localtag) {
+    public AUID get(long localtag) {
         return entries.get(localtag);
     }
     
@@ -64,7 +64,7 @@ public class LocalTagRegister {
      * @param key Key with which the Local Tag is associated
      * @return The Key is the Local Tag was already present in the registry, or null otherwise.
      */
-    public UL add(long localtag, UL key) {
+    public AUID add(long localtag, AUID key) {
         return entries.put(localtag, key);
     }
     
