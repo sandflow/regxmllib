@@ -31,17 +31,15 @@
 #include <xercesc/dom/DOM.hpp>
 #include <string>
 
-XERCES_CPP_NAMESPACE_USE
-
 namespace rxml {
 
 	namespace DOMHelper {
 
-		class XMLChStr : public TranscodeFromStr {
+		class XMLChStr : public xercesc::TranscodeFromStr {
 
 		public:
 
-			XMLChStr(const char *str) : TranscodeFromStr((XMLByte*)str, strlen(str), "utf-8"), src(str) {}
+			XMLChStr(const char *str) : xercesc::TranscodeFromStr((XMLByte*)str, strlen(str), "utf-8"), src(str) {}
 
 			const std::string& ostr() const { return this->src; }
 
@@ -53,12 +51,12 @@ namespace rxml {
 
 		};
 
-		class fromUTF8 : public TranscodeFromStr {
+		class fromUTF8 : public xercesc::TranscodeFromStr {
 
 		public:
 
-			fromUTF8(const char *str) : TranscodeFromStr((XMLByte*)str, strlen(str), "utf-8"), src(str) {}
-			fromUTF8(const std::string &str) : TranscodeFromStr((XMLByte*)str.c_str(), str.size(), "utf-8"), src(str) {}
+			fromUTF8(const char *str) : xercesc::TranscodeFromStr((XMLByte*)str, strlen(str), "utf-8"), src(str) {}
+			fromUTF8(const std::string &str) : xercesc::TranscodeFromStr((XMLByte*)str.c_str(), str.size(), "utf-8"), src(str) {}
 
 			const std::string& ostr() const { return this->src; }
 
@@ -72,11 +70,11 @@ namespace rxml {
 
 		};
 
-		class toUTF8 : public TranscodeToStr {
+		class toUTF8 : public xercesc::TranscodeToStr {
 
 		public:
 
-			toUTF8(const XMLCh *str) : TranscodeToStr(str, "utf-8"), src(str) {}
+			toUTF8(const XMLCh *str) : xercesc::TranscodeToStr(str, "utf-8"), src(str) {}
 
 			const XMLCh* ostr() const { return this->src; }
 
@@ -91,10 +89,10 @@ namespace rxml {
 		};
 
 
-		DOMElement* getElementByTagNameNS(DOMElement *parent, const XMLCh *namespaceURI, const XMLCh *localName);
+		xercesc::DOMElement* getElementByTagNameNS(xercesc::DOMElement *parent, const XMLCh *namespaceURI, const XMLCh *localName);
 
 
-		const XMLCh* getElementTextContentByTagNameNS(DOMElement *parent, const XMLCh *namespaceURI, const XMLCh *localName);
+		const XMLCh* getElementTextContentByTagNameNS(xercesc::DOMElement *parent, const XMLCh *namespaceURI, const XMLCh *localName);
 
 	}
 

@@ -37,6 +37,8 @@
 #include "com/sandflow/smpte/klv/KLVException.h"
 #include "com/sandflow/smpte/regxml/dict/MetaDictionary.h"
 
+XERCES_CPP_NAMESPACE_USE
+
 namespace rxml {
 
 	bool _findPartitionPack(std::istream &is, PartitionPack& pp) {

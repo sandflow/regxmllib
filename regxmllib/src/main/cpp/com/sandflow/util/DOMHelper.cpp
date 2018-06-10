@@ -26,6 +26,8 @@
 
 #include "DOMHelper.h"
 
+XERCES_CPP_NAMESPACE_USE
+
 namespace rxml {
 
 

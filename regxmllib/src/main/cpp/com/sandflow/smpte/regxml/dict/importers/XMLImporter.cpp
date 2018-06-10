@@ -49,6 +49,7 @@
 #include "com/sandflow/smpte/regxml/definitions/LensSerialFloatTypeDefinition.h"
 #include "com/sandflow/util/strformat.h"
 
+XERCES_CPP_NAMESPACE_USE
 
 namespace rxml {
 

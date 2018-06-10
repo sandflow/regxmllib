@@ -38,8 +38,6 @@
 #include "com/sandflow/util/events/Event.h"
 #include "com/sandflow/util/strformat.h"
 
-XERCES_CPP_NAMESPACE_USE
-
 
 namespace rxml {
 
@@ -172,12 +170,12 @@ namespace rxml {
 		*
 		* @return Document Fragment containing a single RegXML Fragment
 		*/
-		static DOMDocumentFragment* fromInputStream(
+		static xercesc::DOMDocumentFragment* fromInputStream(
 			std::istream &mxfpartition,
 			const DefinitionResolver &defresolver,
 			const FragmentBuilder::AUIDNameResolver *enumnameresolver,
 			const AUID *rootclasskey,
-			DOMDocument &document,
+			xercesc::DOMDocument &document,
 			EventHandler *ev = &NULL_EVENTHANDLER);
 
 	};

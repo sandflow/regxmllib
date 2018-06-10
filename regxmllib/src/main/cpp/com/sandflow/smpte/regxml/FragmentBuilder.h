@@ -65,8 +65,6 @@
 #include <iomanip>
 
 
-XERCES_CPP_NAMESPACE_USE
-
 namespace rxml {
 
 	class FragmentBuilder {
@@ -337,7 +335,7 @@ namespace rxml {
 		* @throws KLVException
 		* @throws com.sandflow.smpte.regxml.FragmentBuilder.RuleException
 		*/
-		DOMDocumentFragment* fromTriplet(const Group &group, DOMDocument &document);
+    xercesc::DOMDocumentFragment* fromTriplet(const Group &group, xercesc::DOMDocument &document);
 
 	private:
 
@@ -386,49 +384,49 @@ namespace rxml {
 
 		static std::string generateISO8601Date(int year, int month, int day);
 
-		void readCharacters(DOMElement *element, MXFInputStream &value, const CharacterTypeDefinition *definition, bool removeTrailingZeroes);
+		void readCharacters(xercesc::DOMElement *element, MXFInputStream &value, const CharacterTypeDefinition *definition, bool removeTrailingZeroes);
 
-		static void addInformativeComment(DOMElement * element, std::string comment);
+		static void addInformativeComment(xercesc::DOMElement * element, std::string comment);
 
-		void appendCommentWithAUIDName(AUID auid, DOMElement * elem);
+		void appendCommentWithAUIDName(AUID auid, xercesc::DOMElement * elem);
 
-		void applyRule3(DOMNode *node, const Group &group);
+		void applyRule3(xercesc::DOMNode *node, const Group &group);
 
-		void applyRule4(DOMElement *element, MXFInputStream &value, const PropertyDefinition *propdef);
+		void applyRule4(xercesc::DOMElement *element, MXFInputStream &value, const PropertyDefinition *propdef);
 
-		void applyRule5(DOMElement *element, MXFInputStream &value, const Definition *definition);
+		void applyRule5(xercesc::DOMElement *element, MXFInputStream &value, const Definition *definition);
 
-		void applyRule5_1(DOMElement *element, MXFInputStream &value, const CharacterTypeDefinition *definition);
+		void applyRule5_1(xercesc::DOMElement *element, MXFInputStream &value, const CharacterTypeDefinition *definition);
 
-		void applyRule5_2(DOMElement *element, MXFInputStream &value, const EnumerationTypeDefinition *definition);
+		void applyRule5_2(xercesc::DOMElement *element, MXFInputStream &value, const EnumerationTypeDefinition *definition);
 
-		void applyRule5_3(DOMElement *element, MXFInputStream &value, const ExtendibleEnumerationTypeDefinition* definition);
+		void applyRule5_3(xercesc::DOMElement *element, MXFInputStream &value, const ExtendibleEnumerationTypeDefinition* definition);
 
-		void applyRule5_4(DOMElement *element, MXFInputStream &value, const FixedArrayTypeDefinition *definition);
+		void applyRule5_4(xercesc::DOMElement *element, MXFInputStream &value, const FixedArrayTypeDefinition *definition);
 
 		/* TODO: unsigned int or unsigned long for element count */
 
-		void applyCoreRule5_4(DOMElement* element, MXFInputStream &value, const Definition *tdef, unsigned long elementcount);
+		void applyCoreRule5_4(xercesc::DOMElement* element, MXFInputStream &value, const Definition *tdef, unsigned long elementcount);
 
-		void applyRule5_5(DOMElement* element, MXFInputStream &value, const IndirectTypeDefinition *definition);
+		void applyRule5_5(xercesc::DOMElement* element, MXFInputStream &value, const IndirectTypeDefinition *definition);
 
-		void applyRule5_6(DOMElement *element, MXFInputStream &value, const IntegerTypeDefinition *definition);
+		void applyRule5_6(xercesc::DOMElement *element, MXFInputStream &value, const IntegerTypeDefinition *definition);
 
-		void applyRule5_7(DOMElement *element, MXFInputStream &value, const OpaqueTypeDefinition *definition);
+		void applyRule5_7(xercesc::DOMElement *element, MXFInputStream &value, const OpaqueTypeDefinition *definition);
 
-		void applyRule5_8(DOMElement *element, MXFInputStream &value, const RecordTypeDefinition *definition);
+		void applyRule5_8(xercesc::DOMElement *element, MXFInputStream &value, const RecordTypeDefinition *definition);
 
-		void applyRule5_9(DOMElement *element, MXFInputStream &value, const RenameTypeDefinition *definition);
+		void applyRule5_9(xercesc::DOMElement *element, MXFInputStream &value, const RenameTypeDefinition *definition);
 
-		void applyRule5_10(DOMElement *element, MXFInputStream &value, const SetTypeDefinition *definition);
+		void applyRule5_10(xercesc::DOMElement *element, MXFInputStream &value, const SetTypeDefinition *definition);
 
-		void applyRule5_11(DOMElement *element, MXFInputStream &value, const StreamTypeDefinition *definition);
+		void applyRule5_11(xercesc::DOMElement *element, MXFInputStream &value, const StreamTypeDefinition *definition);
 
-		void applyRule5_12(DOMElement *element, MXFInputStream &value, const StringTypeDefinition *definition);
+		void applyRule5_12(xercesc::DOMElement *element, MXFInputStream &value, const StringTypeDefinition *definition);
 
-		void applyRule5_13(DOMElement *element, MXFInputStream &value, const StrongReferenceTypeDefinition *definition);
+		void applyRule5_13(xercesc::DOMElement *element, MXFInputStream &value, const StrongReferenceTypeDefinition *definition);
 
-		/*void applyRule5_alpha(DOMElement *element, MXFInputStream &value, const FloatTypeDefinition *definition) {
+		/*void applyRule5_alpha(xercesc::DOMElement *element, MXFInputStream &value, const FloatTypeDefinition *definition) {
 
 
 				double val = 0;
@@ -452,11 +450,11 @@ namespace rxml {
 
 		}*/
 
-		void applyRule5_beta(DOMElement *element, MXFInputStream &value, const LensSerialFloatTypeDefinition *definition);
+		void applyRule5_beta(xercesc::DOMElement *element, MXFInputStream &value, const LensSerialFloatTypeDefinition *definition);
 
-		void applyRule5_14(DOMElement *element, MXFInputStream &value, const VariableArrayTypeDefinition *definition);
+		void applyRule5_14(xercesc::DOMElement *element, MXFInputStream &value, const VariableArrayTypeDefinition *definition);
 
-		void applyRule5_15(DOMElement *element, MXFInputStream &value, const WeakReferenceTypeDefinition *typedefinition);
+		void applyRule5_15(xercesc::DOMElement *element, MXFInputStream &value, const WeakReferenceTypeDefinition *typedefinition);
 
 		/* MEMBERS */
 

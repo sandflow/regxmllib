@@ -27,6 +27,8 @@
 #include "FragmentBuilder.h"
 #include "com/sandflow/smpte/util/IDAU.h"
 
+XERCES_CPP_NAMESPACE_USE
+
 namespace rxml {
 
 	const UL FragmentBuilder::INSTANCE_UID_ITEM_UL = "urn:smpte:ul:060e2b34.01010101.01011502.00000000";
