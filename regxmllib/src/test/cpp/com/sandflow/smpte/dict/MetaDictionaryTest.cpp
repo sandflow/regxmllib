@@ -33,7 +33,7 @@
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <com/sandflow/smpte/regxml/dict/importers/XMLImporter.h>
 #include "com/sandflow/smpte/regxml/MXFFragmentBuilder.h"
-#include "xercesc/DOM/DOMErrorHandler.hpp"
+#include "xercesc/dom/DOMErrorHandler.hpp"
 #include <string>
 #include <fstream>
 
