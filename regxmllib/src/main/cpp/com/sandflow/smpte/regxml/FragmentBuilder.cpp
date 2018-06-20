@@ -27,8 +27,6 @@
 #include "FragmentBuilder.h"
 #include "com/sandflow/smpte/util/IDAU.h"
 
-XERCES_CPP_NAMESPACE_USE
-
 namespace rxml {
 
 	const UL FragmentBuilder::INSTANCE_UID_ITEM_UL = "urn:smpte:ul:060e2b34.01010101.01011502.00000000";
@@ -112,9 +110,9 @@ namespace rxml {
 	FragmentBuilder::FragmentBuilder(const DefinitionResolver & defresolver, const std::map<UUID, Set>& setresolver, const AUIDNameResolver * anameresolver, EventHandler * evthandler) : defresolver(defresolver), setresolver(setresolver), anameresolver(anameresolver), evthandler(evthandler) {
 	}
 
-	DOMDocumentFragment * FragmentBuilder::fromTriplet(const Group & group, DOMDocument & document) {
+	xercesc::DOMDocumentFragment * FragmentBuilder::fromTriplet(const Group & group, xercesc::DOMDocument & document) {
 
-		DOMDocumentFragment *df = NULL;
+		xercesc::DOMDocumentFragment *df = NULL;
 
 		try {
 
@@ -127,7 +125,7 @@ namespace rxml {
 			/* NOTE: Hack to clean-up namespace prefixes */
 			for (std::map<std::string, std::string>::const_iterator it = this->nsprefixes.begin(); it != this->nsprefixes.end(); it++) {
 
-				((DOMElement*)df->getFirstChild())->setAttributeNS(DOMHelper::fromUTF8(XMLNS_NS), DOMHelper::fromUTF8("xmlns:" + it->second), DOMHelper::fromUTF8(it->first));
+				((xercesc::DOMElement*)df->getFirstChild())->setAttributeNS(DOMHelper::fromUTF8(XMLNS_NS), DOMHelper::fromUTF8("xmlns:" + it->second), DOMHelper::fromUTF8(it->first));
 			}
 
 
@@ -178,11 +176,11 @@ namespace rxml {
 	}
 
 
-	void FragmentBuilder::addInformativeComment(DOMElement *element, std::string comment) {
+	void FragmentBuilder::addInformativeComment(xercesc::DOMElement *element, std::string comment) {
 		element->appendChild(element->getOwnerDocument()->createComment(DOMHelper::fromUTF8(comment)));
 	}
 
-	void FragmentBuilder::appendCommentWithAUIDName(AUID auid, DOMElement* elem) {
+	void FragmentBuilder::appendCommentWithAUIDName(AUID auid, xercesc::DOMElement* elem) {
 		if (this->anameresolver != NULL) {
 
 			const std::string *ename = this->anameresolver->getLocalName(auid);
@@ -194,7 +192,7 @@ namespace rxml {
 		}
 	}
 
-	void FragmentBuilder::applyRule3(DOMNode * node, const Group & group) {
+	void FragmentBuilder::applyRule3(xercesc::DOMNode * node, const Group & group) {
 
 		const Definition *definition = defresolver.getDefinition(group.getKey());
 
@@ -237,7 +235,7 @@ namespace rxml {
 
 		/* create the element */
 
-		DOMElement *objelem = node->getOwnerDocument()->createElementNS(
+		xercesc::DOMElement *objelem = node->getOwnerDocument()->createElementNS(
 			DOMHelper::fromUTF8(definition->ns),
 			DOMHelper::fromUTF8(definition->symbol)
 		);
@@ -293,7 +291,7 @@ namespace rxml {
 
 			}
 
-			DOMElement *elem = node->getOwnerDocument()->createElementNS(
+			xercesc::DOMElement *elem = node->getOwnerDocument()->createElementNS(
 				DOMHelper::fromUTF8(itemdef->ns),
 				DOMHelper::fromUTF8(itemdef->symbol)
 			);
@@ -318,22 +316,22 @@ namespace rxml {
 				const XMLCh* iid = objelem->getLastChild()->getTextContent();
 
 				/* look for identical instanceID in parent elements */
-				DOMNode *parent = node;
+				xercesc::DOMNode *parent = node;
 
-				while (parent->getNodeType() == DOMNode::ELEMENT_NODE) {
+				while (parent->getNodeType() == xercesc::DOMNode::ELEMENT_NODE) {
 
-					for (DOMNode *n = parent->getFirstChild(); n != NULL; n = n->getNextSibling()) {
+					for (xercesc::DOMNode *n = parent->getFirstChild(); n != NULL; n = n->getNextSibling()) {
 
-						if (n->getNodeType() == DOMNode::ELEMENT_NODE
-							&& XMLString::compareIString(iidname, n->getLocalName()) == 0
-							&& XMLString::compareIString(iidns, n->getNamespaceURI()) == 0
-							&& XMLString::compareIString(iid, n->getTextContent()) == 0) {
+						if (n->getNodeType() == xercesc::DOMNode::ELEMENT_NODE
+							&& xercesc::XMLString::compareIString(iidname, n->getLocalName()) == 0
+							&& xercesc::XMLString::compareIString(iidns, n->getNamespaceURI()) == 0
+							&& xercesc::XMLString::compareIString(iid, n->getTextContent()) == 0) {
 
 							CircularStrongReferenceError err(std::string(DOMHelper::toUTF8(iid)), "Group " + definition->symbol);
 
 							evthandler->info(err);
 
-							addInformativeComment((DOMElement*)n, err.getReason());
+							addInformativeComment((xercesc::DOMElement*)n, err.getReason());
 
 							return;
 						}
@@ -347,7 +345,7 @@ namespace rxml {
 			/* add reg:uid if property is a unique ID */
 			if (((PropertyDefinition*)itemdef)->uniqueIdentifier.is_valid() && ((PropertyDefinition*)itemdef)->uniqueIdentifier.get()) {
 
-				DOMAttr *attr = node->getOwnerDocument()->createAttributeNS(
+				xercesc::DOMAttr *attr = node->getOwnerDocument()->createAttributeNS(
 					DOMHelper::fromUTF8(REGXML_NS),
 					DOMHelper::fromUTF8(UID_ATTR)
 				);
@@ -363,7 +361,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule4(DOMElement * element, MXFInputStream & value, const PropertyDefinition * propdef) {
+	void FragmentBuilder::applyRule4(xercesc::DOMElement * element, MXFInputStream & value, const PropertyDefinition * propdef) {
 
 		try {
 
@@ -555,7 +553,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5(DOMElement * element, MXFInputStream & value, const Definition * definition) {
+	void FragmentBuilder::applyRule5(xercesc::DOMElement * element, MXFInputStream & value, const Definition * definition) {
 
 		try {
 
@@ -663,7 +661,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::readCharacters(DOMElement * element, MXFInputStream & value, const CharacterTypeDefinition * definition, bool isSingleChar) {
+	void FragmentBuilder::readCharacters(xercesc::DOMElement * element, MXFInputStream & value, const CharacterTypeDefinition * definition, bool isSingleChar) {
 
 		std::vector<char> sb;
 
@@ -726,7 +724,7 @@ namespace rxml {
 
 		}
 
-		TranscodeFromStr xmlstr((XMLByte*)sb.data(), sb.size(), codec.c_str());
+		xercesc::TranscodeFromStr xmlstr((XMLByte*)sb.data(), sb.size(), codec.c_str());
 
 		/* return if there is not text to add */
 
@@ -736,13 +734,13 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_1(DOMElement * element, MXFInputStream & value, const CharacterTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_1(xercesc::DOMElement * element, MXFInputStream & value, const CharacterTypeDefinition * definition) {
 
 		readCharacters(element, value, definition, false /* do not remove trailing zeroes for a single char */);
 
 	}
 
-	void FragmentBuilder::applyRule5_2(DOMElement * element, MXFInputStream & value, const EnumerationTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_2(xercesc::DOMElement * element, MXFInputStream & value, const EnumerationTypeDefinition * definition) {
 
 		const Definition *bdef = findBaseDefinition(defresolver.getDefinition(definition->elementType));
 
@@ -858,7 +856,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_3(DOMElement * element, MXFInputStream & value, const ExtendibleEnumerationTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_3(xercesc::DOMElement * element, MXFInputStream & value, const ExtendibleEnumerationTypeDefinition * definition) {
 
 		UL ul = value.readUL();
 
@@ -870,7 +868,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_4(DOMElement * element, MXFInputStream & value, const FixedArrayTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_4(xercesc::DOMElement * element, MXFInputStream & value, const FixedArrayTypeDefinition * definition) {
 
 		if (definition->identification.equals(UUID_UL)) {
 
@@ -887,7 +885,7 @@ namespace rxml {
 		}
 	}
 
-	void FragmentBuilder::applyCoreRule5_4(DOMElement * element, MXFInputStream & value, const Definition * tdef, unsigned long elementcount) {
+	void FragmentBuilder::applyCoreRule5_4(xercesc::DOMElement * element, MXFInputStream & value, const Definition * tdef, unsigned long elementcount) {
 
 		for (unsigned long i = 0; i < elementcount; i++) {
 
@@ -899,7 +897,7 @@ namespace rxml {
 			} else {
 
 				/* Rule 5.4.2 */
-				DOMElement *elem = element->getOwnerDocument()->createElementNS(
+				xercesc::DOMElement *elem = element->getOwnerDocument()->createElementNS(
 					DOMHelper::fromUTF8(tdef->ns),
 					DOMHelper::fromUTF8(tdef->symbol)
 				);
@@ -914,7 +912,7 @@ namespace rxml {
 		}
 	}
 
-	void FragmentBuilder::applyRule5_5(DOMElement * element, MXFInputStream & value, const IndirectTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_5(xercesc::DOMElement * element, MXFInputStream & value, const IndirectTypeDefinition * definition) {
 
 		/* see https://github.com/sandflow/regxmllib/issues/74 for a discussion on Indirect Type */
 		KLVStream::ByteOrder bo;
@@ -959,7 +957,7 @@ namespace rxml {
 		}
 
 		// create reg:actualType attribute
-		DOMAttr *attr = element->getOwnerDocument()->createAttributeNS(
+		xercesc::DOMAttr *attr = element->getOwnerDocument()->createAttributeNS(
 			DOMHelper::fromUTF8(REGXML_NS),
 			DOMHelper::fromUTF8(ACTUALTYPE_ATTR)
 		);
@@ -973,7 +971,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_6(DOMElement * element, MXFInputStream & value, const IntegerTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_6(xercesc::DOMElement * element, MXFInputStream & value, const IntegerTypeDefinition * definition) {
 
 
 		switch (definition->size) {
@@ -1066,7 +1064,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_7(DOMElement * element, MXFInputStream & value, const OpaqueTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_7(xercesc::DOMElement * element, MXFInputStream & value, const OpaqueTypeDefinition * definition) {
 
 		/* NOTE: Opaque Types are not used in MXF */
 		throw FragmentBuilder::Exception("Opaque types are not supported.");
@@ -1103,7 +1101,7 @@ namespace rxml {
 		return sb.str();
 	}
 
-	void FragmentBuilder::applyRule5_8(DOMElement * element, MXFInputStream & value, const RecordTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_8(xercesc::DOMElement * element, MXFInputStream & value, const RecordTypeDefinition * definition) {
 
 		if (definition->identification.equals(AUID_UL)) {
 
@@ -1182,7 +1180,7 @@ namespace rxml {
 
 				const Definition *itemdef = findBaseDefinition(defresolver.getDefinition(it->type));
 
-				DOMElement *elem = element->getOwnerDocument()->createElementNS(
+				xercesc::DOMElement *elem = element->getOwnerDocument()->createElementNS(
 					DOMHelper::fromUTF8(definition->ns),
 					DOMHelper::fromUTF8(it->name)
 				);
@@ -1199,7 +1197,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_9(DOMElement * element, MXFInputStream & value, const RenameTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_9(xercesc::DOMElement * element, MXFInputStream & value, const RenameTypeDefinition * definition) {
 
 		const Definition *rdef = defresolver.getDefinition(definition->renamedType);
 
@@ -1207,7 +1205,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_10(DOMElement * element, MXFInputStream & value, const SetTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_10(xercesc::DOMElement * element, MXFInputStream & value, const SetTypeDefinition * definition) {
 
 		const Definition* tdef = findBaseDefinition(defresolver.getDefinition(definition->elementType));
 
@@ -1218,13 +1216,13 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_11(DOMElement * element, MXFInputStream & value, const StreamTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_11(xercesc::DOMElement * element, MXFInputStream & value, const StreamTypeDefinition * definition) {
 
 		throw FragmentBuilder::Exception("Rule 5.11 is not supported yet.");
 
 	}
 
-	void FragmentBuilder::applyRule5_12(DOMElement * element, MXFInputStream & value, const StringTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_12(xercesc::DOMElement * element, MXFInputStream & value, const StringTypeDefinition * definition) {
 
 		/* Rule 5.12 */
 		const Definition *chrdef = findBaseDefinition(defresolver.getDefinition(definition->elementType));
@@ -1253,7 +1251,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_13(DOMElement * element, MXFInputStream & value, const StrongReferenceTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_13(xercesc::DOMElement * element, MXFInputStream & value, const StrongReferenceTypeDefinition * definition) {
 
 		const Definition *tdef = findBaseDefinition(defresolver.getDefinition(definition->referencedType));
 
@@ -1291,7 +1289,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_beta(DOMElement * element, MXFInputStream & value, const LensSerialFloatTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_beta(xercesc::DOMElement * element, MXFInputStream & value, const LensSerialFloatTypeDefinition * definition) {
 
 		throw FragmentBuilder::Exception("Lens serial floats not supported.");
 
@@ -1320,7 +1318,7 @@ namespace rxml {
 		return props;
 	}
 
-	void FragmentBuilder::applyRule5_14(DOMElement * element, MXFInputStream & value, const VariableArrayTypeDefinition * definition) {
+	void FragmentBuilder::applyRule5_14(xercesc::DOMElement * element, MXFInputStream & value, const VariableArrayTypeDefinition * definition) {
 
 		const Definition *tdef = findBaseDefinition(defresolver.getDefinition(definition->elementType));
 
@@ -1361,7 +1359,7 @@ namespace rxml {
 
 	}
 
-	void FragmentBuilder::applyRule5_15(DOMElement * element, MXFInputStream & value, const WeakReferenceTypeDefinition * typedefinition) {
+	void FragmentBuilder::applyRule5_15(xercesc::DOMElement * element, MXFInputStream & value, const WeakReferenceTypeDefinition * typedefinition) {
 
 		const ClassDefinition *classdef = (ClassDefinition*)defresolver.getDefinition(typedefinition->referencedType);
 

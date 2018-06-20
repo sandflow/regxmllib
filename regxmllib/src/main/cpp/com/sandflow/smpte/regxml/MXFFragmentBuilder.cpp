@@ -37,8 +37,6 @@
 #include "com/sandflow/smpte/klv/KLVException.h"
 #include "com/sandflow/smpte/regxml/dict/MetaDictionary.h"
 
-XERCES_CPP_NAMESPACE_USE
-
 namespace rxml {
 
 	bool _findPartitionPack(std::istream &is, PartitionPack& pp) {
@@ -148,12 +146,12 @@ namespace rxml {
 
 	}
 
-	DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
+	xercesc::DOMDocumentFragment* MXFFragmentBuilder::fromInputStream(
 		std::istream &mxfpartition,
 		const DefinitionResolver &defresolver,
 		const FragmentBuilder::AUIDNameResolver *enumnameresolver,
 		const AUID *rootclasskey,
-		DOMDocument &document,
+		xercesc::DOMDocument &document,
 		EventHandler *ev) {
 
 		static const UL INDEX_TABLE_SEGMENT_UL = "urn:smpte:ul:060e2b34.02530101.0d010201.01100100";
