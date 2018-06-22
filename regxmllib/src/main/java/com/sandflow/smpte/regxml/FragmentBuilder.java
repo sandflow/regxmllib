@@ -898,6 +898,59 @@ public class FragmentBuilder {
             }
         }
 
+        /* escape characters per ST 2001-1 */
+        boolean isescaped = false;
+
+        for (int i = 0; i < sb.length(); i++) {
+            char c = sb.charAt(i);
+
+            if (!(c == 0x09
+                    || c == 0x0A
+                    || (c >= 0x20 && c <= 0xd7ff)
+                    || (c >= 0xE000 && c <= 0xFFFD)
+                    || (c >= 0x10000 && c <= 0x10FFFF))) {
+
+                isescaped = true;
+
+                break;
+
+            }
+        }
+
+        if (isescaped) {
+
+            StringBuilder esb = new StringBuilder();
+
+            for (int i = 0; i < sb.length(); i++) {
+                char c = sb.charAt(i);
+
+                if (c == 0x09
+                        || c == 0x0A
+                        || (c >= 0x20 && c <= 0x23)
+                        || (c >= 0x25 && c <= 0xd7ff)
+                        || (c >= 0xE000 && c <= 0xFFFD)
+                        || (c >= 0x10000 && c <= 0x10FFFF)) {
+
+                    esb.append(c);
+
+                } else {
+
+                    esb.append("$#x");
+                    esb.append(Integer.toString(c, 16));
+                    esb.append(";");
+
+                }
+            }
+
+            element.setAttributeNS(REGXML_NS, "escape", "true");
+            element.setTextContent(esb.toString());
+
+        } else {
+
+            element.setTextContent(sb.toString());
+
+        }
+
         element.setTextContent(sb.toString());
     }
 
@@ -1050,59 +1103,6 @@ public class FragmentBuilder {
                     addInformativeComment(element, evt.getReason());
 
                 }
-            }
-
-            /* escape characters per ST 2001-1 */
-            boolean isescaped = false;
-
-            for (int i = 0; i < str.length(); i++) {
-                char c = str.charAt(i);
-
-                if (!(c == 0x09
-                        || c == 0x0A
-                        || (c >= 0x20 && c <= 0xd7ff)
-                        || (c >= 0xE000 && c <= 0xFFFD)
-                        || (c >= 0x10000 && c <= 0x10FFFF))) {
-
-                    isescaped = true;
-
-                    break;
-
-                }
-            }
-
-            if (isescaped) {
-
-                StringBuilder sb = new StringBuilder();
-
-                for (int i = 0; i < str.length(); i++) {
-                    char c = str.charAt(i);
-
-                    if (c == 0x09
-                            || c == 0x0A
-                            || (c >= 0x20 && c <= 0x23)
-                            || (c >= 0x25 && c <= 0xd7ff)
-                            || (c >= 0xE000 && c <= 0xFFFD)
-                            || (c >= 0x10000 && c <= 0x10FFFF)) {
-
-                        sb.append(c);
-
-                    } else {
-
-                        sb.append("$#x");
-                        sb.append(Integer.toString(c, 16));
-                        sb.append(";");
-
-                    }
-                }
-
-                element.setAttributeNS(REGXML_NS, "escape", "true");
-                element.setTextContent(sb.toString());
-
-            } else {
-                
-                element.setTextContent(str);
-                
             }
 
         } catch (UnsupportedEncodingException e) {
