@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Created: Tue Feb 06 15:17:38 PST 2018--><!--From: indirect.mxf--><!--Partition: HEADER--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Fri Jun 22 16:17:50 PDT 2018--><!--From: indirect.mxf--><!--Partition: HEADER--><!--By: regxmllib build 80585d09fb02349076635d0853cc4e518f6651fb--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
   <r1:InstanceID>urn:uuid:39e564bf-93fb-4750-baed-64c720ce0474</r1:InstanceID>
   <!--Unknown property
-Key: urn:smpte:ul:ae5878e0.41454179.ffdd41e1.ae2c49c6
+Key: urn:uuid:ffdd41e1-ae2c-49c6-ae58-78e041454179
 Data: 060a2b340101010101010f001300000056a8dcb65a3b4544060e2b347f7f2a80-->
   <!--Unknown property
-Key: urn:smpte:ul:8c70a718.467ae486.f36546b1.387c4ee9
+Key: urn:uuid:f36546b1-387c-4ee9-8c70-a718467ae486
 Data: 0000001900000001-->
   <!--Unknown property
-Key: urn:smpte:ul:8b2f680d.ff611381.abf1b771.8efd4802
+Key: urn:uuid:abf1b771-8efd-4802-8b2f-680dff611381
 Data: 060a2b340101010101010f001300000056a8dcb65a3c4544060e2b347f7f2a80-->
   <!--Unknown property
-Key: urn:smpte:ul:a5fb7b25.f61594b9.62fc3717.492d42bf
+Key: urn:uuid:62fc3717-492d-42bf-a5fb-7b25f61594b9
 Data: 00550048004400200032003500700000-->
   <r1:DescriptiveSchemes/>
   <r1:EssenceContainers>
@@ -933,10 +933,10 @@ Data: 00550048004400200032003500700000-->
         <r0:MaterialPackage r3:uid="urn:smpte:umid:060a2b34.01010101.01010f00.13000000.56a8dcb6.5a3b4544.060e2b34.7f7f2a80">
           <r1:InstanceID>urn:uuid:956b7f0b-8f9b-46cd-96a1-1f5402710f80</r1:InstanceID>
           <!--Unknown property
-Key: urn:smpte:ul:a8f3f2eb.a54244de.d4243bd4.01424595
+Key: urn:uuid:d4243bd4-0142-4595-a8f3-f2eba54244de
 Data: 00-->
           <!--Unknown property
-Key: urn:smpte:ul:a01c0004.ac969f50.60958183.47b111d4
+Key: urn:uuid:60958183-47b1-11d4-a01c-0004ac969f50
 Data: 000000010000001098022eb425c1406394bc683fe0b20e73-->
           <r1:PackageUserComments>
             <r0:TaggedValue>
@@ -983,10 +983,10 @@ Data: 000000010000001098022eb425c1406394bc683fe0b20e73-->
             <r0:CDCIDescriptor>
               <r1:InstanceID>urn:uuid:e873201b-87be-4fd6-bf5c-23a7bf530a47</r1:InstanceID>
               <!--Unknown property
-Key: urn:smpte:ul:a0240060.94eb75cb.ce2aca50.51ab11d3
+Key: urn:uuid:ce2aca50-51ab-11d3-a024-006094eb75cb
 Data: 00000000-->
               <!--Unknown property
-Key: urn:smpte:ul:a0240060.94eb75cb.ce2aca4f.51ab11d3
+Key: urn:uuid:ce2aca4f-51ab-11d3-a024-006094eb75cb
 Data: 000b8000-->
               <!--Unknown property
 Key: urn:smpte:ul:060e2b34.01010101.0e040101.01010108
@@ -1064,7 +1064,7 @@ Data: fffff9c000000001fffffc7c0000000100000c80000000010000070800000001-->
         <r0:SourcePackage r3:uid="urn:smpte:umid:060a2b34.01010101.01010f00.13000000.56a8dcb6.5a3d4544.060e2b34.7f7f2a80">
           <r1:InstanceID>urn:uuid:ea7bd2cd-3b8c-4e72-89cb-c8ec4bfcb490</r1:InstanceID>
           <!--Unknown property
-Key: urn:smpte:ul:a01c0004.ac969f50.60958183.47b111d4
+Key: urn:uuid:60958183-47b1-11d4-a01c-0004ac969f50
 Data: 000000010000001031fb1c50e4b146d396278f632c5cebed-->
           <r1:EssenceDescription>
             <r0:ImportDescriptor>

@@ -126,7 +126,7 @@ public class MXFFragmentBuilderTest extends TestCase {
                 return true;
             }
         };
-        
+
         return fromRegister(treg, greg, ereg, evthandler);
 
     }
@@ -152,9 +152,8 @@ public class MXFFragmentBuilderTest extends TestCase {
         );
 
         assertNotNull(mds_brown_sauce);
-        
-        /* build the dictionaries */
 
+        /* build the dictionaries */
         mds_snapshot = buildDictionaryCollection(
             "resources/registers/snapshot/Elements.xml",
             "resources/registers/snapshot/Groups.xml",
@@ -276,6 +275,12 @@ public class MXFFragmentBuilderTest extends TestCase {
 
     }
 
+    public void testEscapeCharsAgainstCatsup() throws Exception {
+
+        compareGeneratedVsRef(mds_catsup, "resources/sample-files/escape-chars.mxf", "resources/reference-files/escape-chars.xml");
+
+    }
+
     public void testAudio1AgainstBrownSauce() throws Exception {
 
         compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
@@ -311,12 +316,18 @@ public class MXFFragmentBuilderTest extends TestCase {
         compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
 
     }
-    
+
+    public void testEscapeCharsAgainstBrownSauce() throws Exception {
+
+        compareGeneratedVsRef(mds_brown_sauce, "resources/sample-files/escape-chars.mxf", "resources/reference-files/escape-chars.xml");
+
+    }
+
     public void testClass14AgainstSnapshot() throws Exception {
 
         compareGeneratedVsRef(mds_snapshot, "resources/sample-files/class14.mxf", "resources/reference-files/class14.xml");
     }
-    
+
     public void testAudio1AgainstPonzu() throws Exception {
 
         compareGeneratedVsRef(mds_ponzu, "resources/sample-files/audio1.mxf", "resources/reference-files/audio1.xml");
@@ -350,6 +361,12 @@ public class MXFFragmentBuilderTest extends TestCase {
     public void testUTF8AgainstPonzu() throws Exception {
 
         compareGeneratedVsRef(mds_ponzu, "resources/sample-files/utf8_embedded_text.mxf", "resources/reference-files/utf8_embedded_text.xml");
+
+    }
+
+    public void testEscapeCharsAgainstPonzu() throws Exception {
+
+        compareGeneratedVsRef(mds_ponzu, "resources/sample-files/escape-chars.mxf", "resources/reference-files/escape-chars.xml");
 
     }
 
