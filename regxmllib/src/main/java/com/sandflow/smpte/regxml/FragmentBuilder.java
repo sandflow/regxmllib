@@ -235,6 +235,7 @@ public class FragmentBuilder {
     private static final String BYTEORDER_LE = "LittleEndian";
     private static final String UID_ATTR = "uid";
     private static final String ACTUALTYPE_ATTR = "actualType";
+    private static final String ESCAPE_ATTR = "escape";
 
     private final DefinitionResolver defresolver;
     private final Map<UUID, Set> setresolver;
@@ -942,7 +943,11 @@ public class FragmentBuilder {
                 }
             }
 
-            element.setAttributeNS(REGXML_NS, "escape", "true");
+            Attr attr = element.getOwnerDocument().createAttributeNS(REGXML_NS, ESCAPE_ATTR);
+            attr.setPrefix(getPrefix(REGXML_NS));
+            attr.setTextContent("true");
+            element.setAttributeNodeNS(attr);
+
             element.setTextContent(esb.toString());
 
         } else {
@@ -951,7 +956,6 @@ public class FragmentBuilder {
 
         }
 
-        element.setTextContent(sb.toString());
     }
 
     void applyRule5_1(Element element, MXFInputStream value, CharacterTypeDefinition definition) throws RuleException, IOException {
@@ -1104,6 +1108,8 @@ public class FragmentBuilder {
 
                 }
             }
+
+            element.setTextContent(str);
 
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
