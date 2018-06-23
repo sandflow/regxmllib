@@ -889,43 +889,18 @@ public class FragmentBuilder {
             sb.append(chars, 0, c);
         }
 
-        if (removeTrailingZeroes) {
+        StringBuilder esb = new StringBuilder();
 
-            /* remove trailing zeroes if any */
-            int nullpos = sb.indexOf("\0");
-
-            if (nullpos > -1) {
-                sb.setLength(nullpos);
-            }
-        }
-
-        /* escape characters per ST 2001-1 */
+        /* remove trailing zeroes if requested */
+        /* and escape characters per ST 2001-1 */
         boolean isescaped = false;
 
         for (int i = 0; i < sb.length(); i++) {
             char c = sb.charAt(i);
+            
+            if (c == 0 && removeTrailingZeroes) break;
 
-            if (!(c == 0x09
-                    || c == 0x0A
-                    || (c >= 0x20 && c <= 0xd7ff)
-                    || (c >= 0xE000 && c <= 0xFFFD)
-                    || (c >= 0x10000 && c <= 0x10FFFF))) {
-
-                isescaped = true;
-
-                break;
-
-            }
-        }
-
-        if (isescaped) {
-
-            StringBuilder esb = new StringBuilder();
-
-            for (int i = 0; i < sb.length(); i++) {
-                char c = sb.charAt(i);
-
-                if (c == 0x09
+            if (c == 0x09
                         || c == 0x0A
                         || (c >= 0x20 && c <= 0x23)
                         || (c >= 0x25 && c <= 0xd7ff)
@@ -935,26 +910,26 @@ public class FragmentBuilder {
                     esb.append(c);
 
                 } else {
+                
+                    isescaped = true;
 
                     esb.append("$#x");
                     esb.append(Integer.toString(c, 16));
                     esb.append(";");
 
                 }
-            }
+        }
+
+        if (isescaped) {
 
             Attr attr = element.getOwnerDocument().createAttributeNS(REGXML_NS, ESCAPE_ATTR);
             attr.setPrefix(getPrefix(REGXML_NS));
             attr.setTextContent("true");
             element.setAttributeNodeNS(attr);
-
-            element.setTextContent(esb.toString());
-
-        } else {
-
-            element.setTextContent(sb.toString());
-
+            
         }
+        
+        element.setTextContent(esb.toString());
 
     }
 
