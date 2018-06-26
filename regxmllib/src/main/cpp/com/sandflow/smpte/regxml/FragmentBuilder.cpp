@@ -26,6 +26,9 @@
 
 #include "FragmentBuilder.h"
 #include "com/sandflow/smpte/util/IDAU.h"
+#include <algorithm>
+#include <iostream>
+#include <iterator> 
 
 namespace rxml {
 
@@ -751,7 +754,7 @@ namespace rxml {
 
 				ss << "$#x" << std::hex << c << ";";
 
-				xmlchar.insert(xmlchar.end(), ss.str().begin(), ss.str().end());
+				std::copy(std::istream_iterator<unsigned char>(ss), std::istream_iterator<unsigned char>(),	std::back_inserter(xmlchar));
 
 			}
 
