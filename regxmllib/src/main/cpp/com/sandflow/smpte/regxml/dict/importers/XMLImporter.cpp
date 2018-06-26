@@ -95,7 +95,7 @@ namespace rxml {
 	 * @throws XMLImporter::Exception
 	 */
 	template<typename T> void _readPropertyOfElement(
-		DOMElement *parent,
+		xercesc::DOMElement *parent,
 		const char *namespaceURI,
 		const char *localName,
 		T& field,
@@ -118,7 +118,7 @@ namespace rxml {
 	}
 
 	template<typename T> void _readPropertyOfElement(
-		DOMElement *parent,
+		xercesc::DOMElement *parent,
 		const char *namespaceURI,
 		const char *localName,
 		Optional<T>& field,
@@ -139,7 +139,7 @@ namespace rxml {
 
 	}
 
-	void _readDefinition(DOMElement *element, Definition &def) {
+	void _readDefinition(xercesc::DOMElement *element, Definition &def) {
 
 
 		_readPropertyOfElement(element, XML_NS.c_str(), "Identification", def.identification);
@@ -149,7 +149,7 @@ namespace rxml {
 
 	}
 
-	void _readClassDefinition(DOMElement *element, ClassDefinition &def) {
+	void _readClassDefinition(xercesc::DOMElement *element, ClassDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -158,7 +158,7 @@ namespace rxml {
 
 	}
 
-	void _readPropertyDefinition(DOMElement *element, PropertyDefinition &def) {
+	void _readPropertyDefinition(xercesc::DOMElement *element, PropertyDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -174,7 +174,7 @@ namespace rxml {
 
 	}
 
-	void _readPropertyAliasDefinition(DOMElement *element, PropertyAliasDefinition &def) {
+	void _readPropertyAliasDefinition(xercesc::DOMElement *element, PropertyAliasDefinition &def) {
 
 		_readPropertyDefinition(element, def);
 
@@ -182,7 +182,7 @@ namespace rxml {
 
 	}
 
-	void _readIntegerTypeDefinition(DOMElement *element, IntegerTypeDefinition &def) {
+	void _readIntegerTypeDefinition(xercesc::DOMElement *element, IntegerTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -192,7 +192,7 @@ namespace rxml {
 	}
 
 
-	void _readRenameTypeDefinition(DOMElement *element, RenameTypeDefinition &def) {
+	void _readRenameTypeDefinition(xercesc::DOMElement *element, RenameTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -200,7 +200,7 @@ namespace rxml {
 
 	}
 
-	void _readSetTypeDefinition(DOMElement *element, SetTypeDefinition &def) {
+	void _readSetTypeDefinition(xercesc::DOMElement *element, SetTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -208,7 +208,7 @@ namespace rxml {
 
 	}
 
-	void _readStringTypeDefinition(DOMElement *element, StringTypeDefinition &def) {
+	void _readStringTypeDefinition(xercesc::DOMElement *element, StringTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -217,7 +217,7 @@ namespace rxml {
 	}
 
 
-	void _readStrongReferenceTypeDefinition(DOMElement *element, StrongReferenceTypeDefinition &def) {
+	void _readStrongReferenceTypeDefinition(xercesc::DOMElement *element, StrongReferenceTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -225,7 +225,7 @@ namespace rxml {
 
 	}
 
-	void _readVariableTypeDefinition(DOMElement *element, VariableArrayTypeDefinition &def) {
+	void _readVariableTypeDefinition(xercesc::DOMElement *element, VariableArrayTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -233,13 +233,13 @@ namespace rxml {
 
 	}
 
-	void _readTypeDefinitionCharacter(DOMElement *element, CharacterTypeDefinition &def) {
+	void _readTypeDefinitionCharacter(xercesc::DOMElement *element, CharacterTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
 	}
 
-	void _readFixedArrayTypeDefinition(DOMElement *element, FixedArrayTypeDefinition &def) {
+	void _readFixedArrayTypeDefinition(xercesc::DOMElement *element, FixedArrayTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
@@ -248,14 +248,14 @@ namespace rxml {
 
 	}
 
-	void _readRecordTypeDefinition(DOMElement *element, RecordTypeDefinition &def) {
+	void _readRecordTypeDefinition(xercesc::DOMElement *element, RecordTypeDefinition &def) {
 
 
 		_readDefinition(element, def);
 
 		/* read Members */
 
-		DOMElement *membersElem = DOMHelper::getElementByTagNameNS(
+		xercesc::DOMElement *membersElem = DOMHelper::getElementByTagNameNS(
 			element,
 			DOMHelper::fromUTF8(XML_NS),
 			DOMHelper::fromUTF8("Members")
@@ -267,19 +267,19 @@ namespace rxml {
 
 		}
 
-		DOMElement *memberElem = membersElem->getFirstElementChild();
+		xercesc::DOMElement *memberElem = membersElem->getFirstElementChild();
 
 		while (memberElem) {
 
 
 
-			if (XMLString::compareIString(DOMHelper::fromUTF8("Name"), memberElem->getLocalName()) == 0) {
+			if (xercesc::XMLString::compareIString(DOMHelper::fromUTF8("Name"), memberElem->getLocalName()) == 0) {
 
 				def.members.resize(def.members.size() + 1);
 
 				xmlAdapter(DOMHelper::toUTF8(memberElem->getTextContent()), def.members.back().name);
 
-			} else if (XMLString::compareIString(DOMHelper::fromUTF8("Type"), memberElem->getLocalName()) == 0) {
+			} else if (xercesc::XMLString::compareIString(DOMHelper::fromUTF8("Type"), memberElem->getLocalName()) == 0) {
 
 				xmlAdapter(DOMHelper::toUTF8(memberElem->getTextContent()), def.members.back().type);
 
@@ -292,13 +292,13 @@ namespace rxml {
 
 	}
 
-	void _readWeakReferenceTypeDefinition(DOMElement *element, WeakReferenceTypeDefinition &def) {
+	void _readWeakReferenceTypeDefinition(xercesc::DOMElement *element, WeakReferenceTypeDefinition &def) {
 
 		_readDefinition(element, def);
 
 		_readPropertyOfElement(element, XML_NS.c_str(), "ReferencedType", def.referencedType);
 
-		DOMElement *tsetelem = DOMHelper::getElementByTagNameNS(
+		xercesc::DOMElement *tsetelem = DOMHelper::getElementByTagNameNS(
 			element,
 			DOMHelper::fromUTF8(XML_NS),
 			DOMHelper::fromUTF8("TargetSet")
@@ -313,7 +313,7 @@ namespace rxml {
 		/* check if there is any text content */
 		/* xerces fails on transcoding zero-length streams in some versions */
 
-		if (XMLString::stringLen(tsetelem->getTextContent()) != 0) {
+		if (xercesc::XMLString::stringLen(tsetelem->getTextContent()) != 0) {
 
 			std::istringstream ss(DOMHelper::toUTF8(tsetelem->getTextContent()).c_str());
 
@@ -327,7 +327,7 @@ namespace rxml {
 	}
 
 
-	void _readEnumerationTypeDefinition(DOMElement *element, EnumerationTypeDefinition &def) {
+	void _readEnumerationTypeDefinition(xercesc::DOMElement *element, EnumerationTypeDefinition &def) {
 
 
 		_readDefinition(element, def);
@@ -336,7 +336,7 @@ namespace rxml {
 
 		/* read Elements */
 
-		DOMElement *elementsElem = DOMHelper::getElementByTagNameNS(
+		xercesc::DOMElement *elementsElem = DOMHelper::getElementByTagNameNS(
 			element,
 			DOMHelper::fromUTF8(XML_NS),
 			DOMHelper::fromUTF8("Elements")
@@ -348,23 +348,23 @@ namespace rxml {
 
 		}
 
-		DOMElement *elementElem = elementsElem->getFirstElementChild();
+		xercesc::DOMElement *elementElem = elementsElem->getFirstElementChild();
 
 		while (elementElem) {
 
 
 
-			if (XMLString::compareIString(DOMHelper::fromUTF8("Name"), elementElem->getLocalName()) == 0) {
+			if (xercesc::XMLString::compareIString(DOMHelper::fromUTF8("Name"), elementElem->getLocalName()) == 0) {
 
 				def.elements.resize(def.elements.size() + 1);
 
 				xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().name);
 
-			} else if (XMLString::compareIString(DOMHelper::fromUTF8("Value"), elementElem->getLocalName()) == 0) {
+			} else if (xercesc::XMLString::compareIString(DOMHelper::fromUTF8("Value"), elementElem->getLocalName()) == 0) {
 
 				xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().value);
 
-			} else if (XMLString::compareIString(DOMHelper::fromUTF8("Description"), elementElem->getLocalName()) == 0) {
+			} else if (xercesc::XMLString::compareIString(DOMHelper::fromUTF8("Description"), elementElem->getLocalName()) == 0) {
 
 				xmlAdapter(DOMHelper::toUTF8(elementElem->getTextContent()), def.elements.back().description);
 
@@ -377,9 +377,9 @@ namespace rxml {
 
 	}
 
-	void XMLImporter::fromDOM(DOMDocument & dom, MetaDictionary &md, EventHandler * ev)
+	void XMLImporter::fromDOM(xercesc::DOMDocument & dom, MetaDictionary &md, EventHandler * ev)
 	{
-		DOMElement *root = dom.getDocumentElement();
+		xercesc::DOMElement *root = dom.getDocumentElement();
 
 		if (NAME != DOMHelper::toUTF8(root->getLocalName()).c_str() ||
 			XML_NS != DOMHelper::toUTF8(root->getNamespaceURI()).c_str()) {
@@ -388,7 +388,7 @@ namespace rxml {
 
 		/* read SchemeID */
 
-		DOMElement *schemeIDElement = DOMHelper::getElementByTagNameNS(root,
+		xercesc::DOMElement *schemeIDElement = DOMHelper::getElementByTagNameNS(root,
 			DOMHelper::fromUTF8(XML_NS),
 			DOMHelper::fromUTF8("SchemeID")
 		);
@@ -399,13 +399,13 @@ namespace rxml {
 			return;
 		}
 
-		AUID schemeID = TranscodeToStr(schemeIDElement->getTextContent(), "utf-8").str();
+		AUID schemeID = xercesc::TranscodeToStr(schemeIDElement->getTextContent(), "utf-8").str();
 
 		md.setSchemeID(schemeID);
 
 		/* read SchemeURI */
 
-		DOMElement *schemeURIElement = DOMHelper::getElementByTagNameNS(
+		xercesc::DOMElement *schemeURIElement = DOMHelper::getElementByTagNameNS(
 			root,
 			DOMHelper::fromUTF8(XML_NS),
 			DOMHelper::fromUTF8("SchemeURI")
@@ -423,7 +423,7 @@ namespace rxml {
 
 		/* read and index definitions */
 
-		DOMElement *definitions = DOMHelper::getElementByTagNameNS(
+		xercesc::DOMElement *definitions = DOMHelper::getElementByTagNameNS(
 			root,
 			DOMHelper::fromUTF8(XML_NS),
 			DOMHelper::fromUTF8("MetaDefinitions")
@@ -435,7 +435,7 @@ namespace rxml {
 			return;
 		}
 
-		DOMElement *curelement = definitions->getFirstElementChild();
+		xercesc::DOMElement *curelement = definitions->getFirstElementChild();
 
 		while (curelement) {
 

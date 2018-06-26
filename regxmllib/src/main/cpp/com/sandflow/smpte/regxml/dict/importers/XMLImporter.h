@@ -32,8 +32,6 @@
 #include <xercesc/dom/DOM.hpp>
 #include <stdexcept>
 
-XERCES_CPP_NAMESPACE_USE
-
 namespace rxml {
 
 	class XMLImporter {
@@ -47,7 +45,7 @@ namespace rxml {
 			Exception(const char* reason) : std::runtime_error(reason) {}
 		};
 
-		static void fromDOM(DOMDocument &dom, MetaDictionary& md, EventHandler *ev = &NULL_EVENTHANDLER);
+		static void fromDOM(xercesc::DOMDocument &dom, MetaDictionary& md, EventHandler *ev = &NULL_EVENTHANDLER);
 
 	};
 

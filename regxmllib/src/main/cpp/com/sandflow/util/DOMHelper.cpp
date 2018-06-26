@@ -29,17 +29,17 @@
 namespace rxml {
 
 
-	DOMElement * DOMHelper::getElementByTagNameNS(DOMElement * parent, const XMLCh * namespaceURI, const XMLCh * localName) {
+	xercesc::DOMElement * DOMHelper::getElementByTagNameNS(xercesc::DOMElement * parent, const XMLCh * namespaceURI, const XMLCh * localName) {
 
-		DOMNode *child = parent->getFirstElementChild();
+		xercesc::DOMNode *child = parent->getFirstElementChild();
 
 		while (child) {
 
-			if (child->getNodeType() == DOMNode::ELEMENT_NODE &&
-				XMLString::compareIString(child->getNodeName(), localName) == 0 &&
-				XMLString::compareIString(child->getNamespaceURI(), namespaceURI) == 0) {
+			if (child->getNodeType() == xercesc::DOMNode::ELEMENT_NODE &&
+				xercesc::XMLString::compareIString(child->getNodeName(), localName) == 0 &&
+				xercesc::XMLString::compareIString(child->getNamespaceURI(), namespaceURI) == 0) {
 
-				return (DOMElement*)child;
+				return (xercesc::DOMElement*)child;
 
 			}
 
@@ -50,8 +50,8 @@ namespace rxml {
 		return NULL;
 	}
 
-	const XMLCh * DOMHelper::getElementTextContentByTagNameNS(DOMElement * parent, const XMLCh * namespaceURI, const XMLCh * localName) {
-		DOMElement* e = getElementByTagNameNS(parent, namespaceURI, localName);
+	const XMLCh * DOMHelper::getElementTextContentByTagNameNS(xercesc::DOMElement * parent, const XMLCh * namespaceURI, const XMLCh * localName) {
+		xercesc::DOMElement* e = getElementByTagNameNS(parent, namespaceURI, localName);
 
 		if (e) {
 

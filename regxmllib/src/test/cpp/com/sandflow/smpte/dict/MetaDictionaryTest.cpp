@@ -37,15 +37,14 @@
 #include <string>
 #include <fstream>
 
-XERCES_CPP_NAMESPACE_USE
 
 using namespace rxml;
 
-const XMLCh* _getFirstTextNodeText(DOMElement *e) {
+const XMLCh* _getFirstTextNodeText(xercesc::DOMElement *e) {
 
-	for (DOMNode *n = e->getFirstChild(); n != NULL; n = n->getNextSibling()) {
+	for (xercesc::DOMNode *n = e->getFirstChild(); n != NULL; n = n->getNextSibling()) {
 
-		if (n->getNodeType() == DOMNode::TEXT_NODE) {
+		if (n->getNodeType() == xercesc::DOMNode::TEXT_NODE) {
 
 			return n->getNodeValue();
 
@@ -57,18 +56,18 @@ const XMLCh* _getFirstTextNodeText(DOMElement *e) {
 
 }
 
-bool _compareDOMElements(DOMElement *e1, DOMElement *e2) {
+bool _compareDOMElements(xercesc::DOMElement *e1, xercesc::DOMElement *e2) {
 
-	if (XMLString::compareIString(e1->getNamespaceURI(), e2->getNamespaceURI()) != 0) {
+	if (xercesc::XMLString::compareIString(e1->getNamespaceURI(), e2->getNamespaceURI()) != 0) {
 		return false;
 	}
 
-	if (XMLString::compareIString(e1->getLocalName(), e2->getLocalName()) != 0) {
+	if (xercesc::XMLString::compareIString(e1->getLocalName(), e2->getLocalName()) != 0) {
 		return false;
 	}
 
-	DOMNamedNodeMap *attrs1 = e1->getAttributes();
-	DOMNamedNodeMap *attrs2 = e2->getAttributes();
+	xercesc::DOMNamedNodeMap *attrs1 = e1->getAttributes();
+	xercesc::DOMNamedNodeMap *attrs2 = e2->getAttributes();
 
 	if (attrs1->getLength() != attrs2->getLength()) {
 		return false;
@@ -76,28 +75,28 @@ bool _compareDOMElements(DOMElement *e1, DOMElement *e2) {
 
 	for (XMLSize_t i = 0; i < attrs1->getLength(); i++) {
 
-		DOMAttr* a1 = (DOMAttr*) attrs1->item(i);
+		xercesc::DOMAttr* a1 = (xercesc::DOMAttr*) attrs1->item(i);
 
-		DOMAttr* a2 = (DOMAttr*)attrs2->getNamedItemNS(a1->getNamespaceURI(), a1->getLocalName());
+		xercesc::DOMAttr* a2 = (xercesc::DOMAttr*)attrs2->getNamedItemNS(a1->getNamespaceURI(), a1->getLocalName());
 
 		if (a2 == NULL) {
 			return false;
 		}
 
-		if (XMLString::compareIString(a1->getValue(), a2->getValue()) != 0) {
+		if (xercesc::XMLString::compareIString(a1->getValue(), a2->getValue()) != 0) {
 			return false;
 		}
 
 	}
 
-	DOMElement *c1 = e1->getFirstElementChild();
-	DOMElement *c2 = e2->getFirstElementChild();
+	xercesc::DOMElement *c1 = e1->getFirstElementChild();
+	xercesc::DOMElement *c2 = e2->getFirstElementChild();
 
 	/* TODO: detect mixed contents */
 
 	if (c1 == NULL && c2 == NULL) {
 
-		if (XMLString::compareIString(e1->getTextContent(), e2->getTextContent()) != 0) {
+		if (xercesc::XMLString::compareIString(e1->getTextContent(), e2->getTextContent()) != 0) {
 			return false;
 		}
 
@@ -121,20 +120,20 @@ bool _compareDOMElements(DOMElement *e1, DOMElement *e2) {
 		 
 }
 
-class MyErrorHandler : public ErrorHandler {
+class MyErrorHandler : public xercesc::ErrorHandler {
 public:
 
 
 	// Inherited via ErrorHandler
-	virtual void warning(const SAXParseException & exc) {
+	virtual void warning(const xercesc::SAXParseException & exc) {
 		std::cout << DOMHelper::toUTF8(exc.getMessage());
 	}
 
-	virtual void error(const SAXParseException & exc) {
+	virtual void error(const xercesc::SAXParseException & exc) {
 		std::cout << DOMHelper::toUTF8(exc.getMessage());
 	}
 
-	virtual void fatalError(const SAXParseException & exc) {
+	virtual void fatalError(const xercesc::SAXParseException & exc) {
 		std::cout << DOMHelper::toUTF8(exc.getMessage()) ;
 	}
 
@@ -199,9 +198,9 @@ int main(int argc, char **argv) {
 		"www-smpte-ra-org-reg-2003-2012-13-4-archive.xml",
 		"www-smpte-ra-org-reg-2003-2012-13-12-as11.xml" };
 
-	XMLPlatformUtils::Initialize();
+	xercesc::XMLPlatformUtils::Initialize();
 
-	XercesDOMParser *parser = new XercesDOMParser();
+	xercesc::XercesDOMParser *parser = new xercesc::XercesDOMParser();
 
 	MyErrorHandler handler;
 	parser->setErrorHandler(&handler);
@@ -222,7 +221,7 @@ int main(int argc, char **argv) {
 
 		parser->parse(dict_path.c_str());
 
-		DOMDocument *doc = parser->getDocument();
+		xercesc::DOMDocument *doc = parser->getDocument();
 
 		MetaDictionary *md = new MetaDictionary();
 
@@ -232,10 +231,10 @@ int main(int argc, char **argv) {
 
 	}
 
-	XMLCh tempStr[3] = { chLatin_L, chLatin_S, chNull };
-	DOMImplementation *impl = DOMImplementationRegistry::getDOMImplementation(tempStr);
-	DOMLSSerializer   *ser = ((DOMImplementationLS*)impl)->createLSSerializer();
-	DOMLSOutput       *output = ((DOMImplementationLS*)impl)->createLSOutput();
+	XMLCh tempStr[3] = { xercesc::chLatin_L, xercesc::chLatin_S, xercesc::chNull };
+	xercesc::DOMImplementation *impl = xercesc::DOMImplementationRegistry::getDOMImplementation(tempStr);
+	xercesc::DOMLSSerializer   *ser = ((xercesc::DOMImplementationLS*)impl)->createLSSerializer();
+	xercesc::DOMLSOutput       *output = ((xercesc::DOMImplementationLS*)impl)->createLSOutput();
 	
 	/*XMLFormatTarget *ft = new StdOutFormatTarget();*/
 
@@ -259,14 +258,14 @@ int main(int argc, char **argv) {
 		std::string in_fname = "resources/sample-files/" + std::string(test_names[i]) + ".mxf";
 
 
-		LocalFileFormatTarget *ft = new LocalFileFormatTarget(out_fname.c_str());
+		xercesc::LocalFileFormatTarget *ft = new xercesc::LocalFileFormatTarget(out_fname.c_str());
 
 		output->setByteStream(ft);
 
-		if (ser->getDomConfig()->canSetParameter(XMLUni::fgDOMWRTFormatPrettyPrint, true))
-			ser->getDomConfig()->setParameter(XMLUni::fgDOMWRTFormatPrettyPrint, true);
+		if (ser->getDomConfig()->canSetParameter(xercesc::XMLUni::fgDOMWRTFormatPrettyPrint, true))
+			ser->getDomConfig()->setParameter(xercesc::XMLUni::fgDOMWRTFormatPrettyPrint, true);
 
-		DOMDocument *doc = impl->createDocument();
+		xercesc::DOMDocument *doc = impl->createDocument();
 
 		std::ifstream f(in_fname.c_str(), std::ifstream::in | std::ifstream::binary);
 
@@ -279,7 +278,7 @@ int main(int argc, char **argv) {
 			continue;
 		}
 
-		DOMDocumentFragment* frag = MXFFragmentBuilder::fromInputStream(f, mds, NULL, NULL, *doc, &evthandler);
+		xercesc::DOMDocumentFragment* frag = MXFFragmentBuilder::fromInputStream(f, mds, NULL, NULL, *doc, &evthandler);
 
 		doc->appendChild(frag);
 
@@ -291,7 +290,7 @@ int main(int argc, char **argv) {
 
 		parser->parse(ref_fname.c_str());
 
-		DOMDocument *ref_doc = parser->getDocument();
+		xercesc::DOMDocument *ref_doc = parser->getDocument();
 
 		if (!_compareDOMElements(ref_doc->getDocumentElement(), doc->getDocumentElement())) {
 
@@ -317,7 +316,7 @@ int main(int argc, char **argv) {
 	ser->release();
 	
 	
-	XMLPlatformUtils::Terminate();
+	xercesc::XMLPlatformUtils::Terminate();
 
 	return ret_val;
 }
