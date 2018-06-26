@@ -751,9 +751,7 @@ namespace rxml {
 
 				ss << "$#x" << std::hex << c << ";";
 
-				std::string &str = ss.str();
-
-				xmlchar.insert(xmlchar.end(), str.begin(), str.end());
+				xmlchar.insert(xmlchar.end(), ss.str().begin(), ss.str().end());
 
 			}
 
