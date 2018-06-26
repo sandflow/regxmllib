@@ -369,6 +369,7 @@ namespace rxml {
 		static const std::string XMLNS_NS;
 		static const std::string UID_ATTR;
 		static const std::string ACTUALTYPE_ATTR;
+		static const std::string ESCAPE_ATTR;
 
 		/* METHODS */
 

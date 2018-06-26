@@ -245,7 +245,8 @@ int main(int argc, char **argv) {
 		"video2",
 		"indirect",
 		"utf8_embedded_text",
-		"class14"
+		"class14",
+		"escape-chars"
 	};
 
 	for (size_t i = 0; i < sizeof(test_names) / sizeof(char*); i++) {
