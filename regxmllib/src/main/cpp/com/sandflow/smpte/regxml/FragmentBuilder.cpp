@@ -55,8 +55,10 @@ namespace rxml {
 
 	const std::string FragmentBuilder::REGXML_NS = "http://sandflow.com/ns/SMPTEST2001-1/baseline";
 	const std::string FragmentBuilder::XMLNS_NS = "http://www.w3.org/2000/xmlns/";
+
 	const std::string FragmentBuilder::ACTUALTYPE_ATTR = "actualType";
 	const std::string FragmentBuilder::UID_ATTR = "uid";
+	const std::string FragmentBuilder::ESCAPE_ATTR = "escape";
 
 	const Definition * FragmentBuilder::findBaseTypeDefinition(const Definition * definition, const DefinitionResolver & defresolver) {
 
@@ -715,28 +717,70 @@ namespace rxml {
 				)
 			);
 
-			/*evthandler->error(err);
+		}
 
-			addInformativeComment(element, err.getReason());
+		TranscodeFromStr mxfchars((XMLByte*) sb.data(), sb.size(), codec.c_str());
 
+		std::vector<XMLCh> xmlchar;
 
-			return;*/
+		/* do we need to use the escape mechanism specified in ST 2001-1? */
+		bool isescaped = false;
+
+		for (int i = 0; i < mxfchars.length(); i++) {
+
+			XMLCh c = mxfchars.str()[i];
+
+			/* terminate on the first null character unless we are parsing a single character type */
+
+			if (c == 0 && (!isSingleChar)) break;
+
+			if (c == 0x09
+				|| c == 0x0A
+				|| (c >= 0x20 && c <= 0x23)
+				|| c >= 0x25) {
+
+				xmlchar.push_back(c);
+
+			} else {
+
+				isescaped = true;
+
+				std::stringstream ss;
+
+				/* c is guaranteed to be less than 0xFF */
+
+				ss << "$#x" << std::hex << c << ";";
+
+				std::string &str = ss.str();
+
+				xmlchar.insert(xmlchar.end(), str.begin(), str.end());
+
+			}
 
 		}
 
-		TranscodeFromStr xmlstr((XMLByte*)sb.data(), sb.size(), codec.c_str());
+		if (isescaped) {
 
-		/* return if there is not text to add */
+			xercesc::DOMAttr *attr = element->getOwnerDocument()->createAttributeNS(
+				DOMHelper::fromUTF8(REGXML_NS),
+				DOMHelper::fromUTF8(ESCAPE_ATTR)
+			);
 
-		if (xmlstr.length() == 0) return;
+			attr->setPrefix(DOMHelper::fromUTF8(getElementNSPrefix(REGXML_NS)));
+			attr->setTextContent(DOMHelper::fromUTF8("true"));
+			element->setAttributeNodeNS(attr);
 
-		element->setTextContent(xmlstr.str());
+		}
+
+		xmlchar.push_back(0);
+
+		element->setTextContent(&(xmlchar[0]));
 
 	}
 
 	void FragmentBuilder::applyRule5_1(DOMElement * element, MXFInputStream & value, const CharacterTypeDefinition * definition) {
 
-		readCharacters(element, value, definition, false /* do not remove trailing zeroes for a single char */);
+		readCharacters(element, value, definition, true /* do not remove trailing zeroes for a single char */);
 
 	}
 
@@ -1246,7 +1290,7 @@ namespace rxml {
 			element,
 			value,
 			(CharacterTypeDefinition*)chrdef,
-			true /* remove trailing zeroes */
+			false /* remove trailing zeroes */
 		);
 
 	}

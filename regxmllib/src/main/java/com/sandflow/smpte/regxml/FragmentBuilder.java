@@ -837,7 +837,7 @@ public class FragmentBuilder {
 
     }
 
-    private void readCharacters(Element element, MXFInputStream value, CharacterTypeDefinition definition, boolean removeTrailingZeroes) throws RuleException, IOException {
+    private void readCharacters(Element element, MXFInputStream value, CharacterTypeDefinition definition, boolean isSingleChar) throws RuleException, IOException {
 
         StringBuilder sb = new StringBuilder();
 
@@ -898,14 +898,12 @@ public class FragmentBuilder {
         for (int i = 0; i < sb.length(); i++) {
             char c = sb.charAt(i);
             
-            if (c == 0 && removeTrailingZeroes) break;
+            if (c == 0 && (! isSingleChar)) break;
 
-            if (c == 0x09
-                        || c == 0x0A
-                        || (c >= 0x20 && c <= 0x23)
-                        || (c >= 0x25 && c <= 0xd7ff)
-                        || (c >= 0xE000 && c <= 0xFFFD)
-                        || (c >= 0x10000 && c <= 0x10FFFF)) {
+            if (c == 0x09 ||
+                c == 0x0A ||
+                (c >= 0x20 && c <= 0x23) ||
+                c >= 0x25) {
 
                     esb.append(c);
 
@@ -935,7 +933,7 @@ public class FragmentBuilder {
 
     void applyRule5_1(Element element, MXFInputStream value, CharacterTypeDefinition definition) throws RuleException, IOException {
 
-        readCharacters(element, value, definition, false /* do not remove trailing zeroes for a single char */);
+        readCharacters(element, value, definition, true /* do not remove trailing zeroes for a single char */);
 
     }
 
@@ -1506,7 +1504,7 @@ public class FragmentBuilder {
                 element,
                 value,
                 (CharacterTypeDefinition) chrdef,
-                true /* remove trailing zeroes */
+                false /* remove trailing zeroes */
         );
 
     }

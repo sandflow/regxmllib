@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Created: Fri Jun 22 16:17:53 PDT 2018--><!--From: escape-chars.mxf--><!--Partition: HEADER--><!--By: regxmllib build 80585d09fb02349076635d0853cc4e518f6651fb--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Mon Jun 25 20:22:19 PDT 2018--><!--From: escape-chars.mxf--><!--Partition: HEADER--><!--By: regxmllib build 80585d09fb02349076635d0853cc4e518f6651fb--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline">
   <r1:InstanceID>urn:uuid:dc1102ae-c3a6-4598-9fb9-5f892bf2da5a</r1:InstanceID>
   <r1:FileLastModified>2018-06-22T19:24:06Z</r1:FileLastModified>
   <r1:FormatVersion>1.3</r1:FormatVersion>
@@ -165,7 +165,7 @@
                   <r1:MCATitle>Default Title</r1:MCATitle>
                   <r1:MCATitleVersion>Domestic</r1:MCATitleVersion>
                   <r1:MCAAudioContentKind>ContentKind</r1:MCAAudioContentKind>
-                  <r1:MCAAudioElementKind r3:escape="true">$#x1;$#x1;$#x2;$#xf;$#x10;$#x1f;$#xd800;$#xdc00;$#xd801;$#xdc37;</r1:MCAAudioElementKind>
+                  <r1:MCAAudioElementKind r3:escape="true">$#x1;$#x1;$#x2;$#xf;$#x10;$#x1f;&#65536;&#66615;</r1:MCAAudioElementKind>
                 </r0:SoundfieldGroupLabelSubDescriptor>
                 <r0:AudioChannelLabelSubDescriptor>
                   <r1:InstanceID>urn:uuid:d0beab59-7125-446d-b838-9bc815d892fe</r1:InstanceID>
