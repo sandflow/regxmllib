@@ -84,6 +84,13 @@ namespace rxml {
 
 	public:
 
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverloaded-virtual"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Woverloaded-virtual"
+#endif
 		virtual void visit(const ClassDefinition &def) {};
 		virtual void visit(const PropertyDefinition &def) {};
 		virtual void visit(const PropertyAliasDefinition &def) {};
@@ -103,6 +110,11 @@ namespace rxml {
 		virtual void visit(const IndirectTypeDefinition &def) {};
 		virtual void visit(const StreamTypeDefinition &def) {};
 		virtual void visit(const SetTypeDefinition &def) {};
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
 	};
 

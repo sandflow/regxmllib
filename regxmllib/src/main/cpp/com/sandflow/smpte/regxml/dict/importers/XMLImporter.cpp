@@ -162,10 +162,6 @@ namespace rxml {
 
 		_readDefinition(element, def);
 
-		if (def.symbol == "FormatVersion") {
-			int b = 0;
-		}
-
 		_readPropertyOfElement(element, XML_NS.c_str(), "Type", def.type);
 		_readPropertyOfElement(element, XML_NS.c_str(), "MemberOf", def.memberOf);
 		_readPropertyOfElement(element, XML_NS.c_str(), "LocalIdentification", def.localIdentification);

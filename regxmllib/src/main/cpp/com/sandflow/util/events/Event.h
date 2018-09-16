@@ -34,8 +34,8 @@ namespace rxml {
 	class Event : public std::runtime_error
 	{
 		const std::string reason;
-		const std::string code;
 		const std::string where;
+		const std::string code;
 
 	public:
 		Event(const std::string & code, const std::string & reason, const std::string & where) :
