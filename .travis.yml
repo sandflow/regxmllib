@@ -5,6 +5,7 @@ matrix:
         apt:
           packages:
             - libxerces-c-dev
+            - valgrind
             
       script:
         - mkdir regxmllib/build
@@ -12,6 +13,7 @@ matrix:
         - cmake ..
         - cmake --build .
         - ctest .
+        - ctest -T memcheck .
         - sudo make install
       
     - language: java

@@ -102,7 +102,7 @@ namespace rxml {
 			throw std::ios_base::failure("Max BER length exceeded");
 		}
 
-		unsigned char *buf = new unsigned char[bersz];
+		unsigned char buf[8];
 
 		this->read((char*)buf, bersz);
 

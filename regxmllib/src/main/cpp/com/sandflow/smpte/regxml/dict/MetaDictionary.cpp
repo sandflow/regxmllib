@@ -95,6 +95,10 @@ namespace rxml {
 					meta_dictionary.subclassesOf[parentauid].insert(def.identification);
 				}
 
+			} else {
+
+				delete def_copy;
+
 			}
 		}
 
@@ -111,6 +115,11 @@ namespace rxml {
 				const AUID parentauid = MetaDictionary::createNormalizedAUID(def.memberOf);
 
 				meta_dictionary.membersOf[parentauid].insert(def.identification);
+
+			} else {
+
+				delete def_copy;
+
 			}
 
 
@@ -118,12 +127,9 @@ namespace rxml {
 
 
 		virtual void visit(const PropertyAliasDefinition & def) {
-			Definition *def_copy = new PropertyAliasDefinition(def);
-
 			const AUID parentauid = MetaDictionary::createNormalizedAUID(def.memberOf);
 
 			meta_dictionary.membersOf[parentauid].insert(def.identification);
-
 		}
 
 		virtual void visit(const EnumerationTypeDefinition &def) {

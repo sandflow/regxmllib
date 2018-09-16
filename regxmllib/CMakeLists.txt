@@ -28,6 +28,8 @@ endforeach()
 
 enable_testing()
 
+include(CTest)
+
 file( GLOB_RECURSE UNIT_TESTS src/test/cpp/*.cpp )
 file(COPY "src/test/resources" DESTINATION "${CMAKE_BINARY_DIR}")
 
