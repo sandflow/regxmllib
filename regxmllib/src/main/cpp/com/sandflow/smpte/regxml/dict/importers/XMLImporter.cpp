@@ -263,7 +263,7 @@ namespace rxml {
 
 		if (!membersElem) {
 
-			throw new XMLImporter::Exception("Elements property missing");
+			throw XMLImporter::Exception("Elements property missing");
 
 		}
 
@@ -344,7 +344,7 @@ namespace rxml {
 
 		if (!elementsElem) {
 
-			throw new XMLImporter::Exception("Elements property missing");
+			throw XMLImporter::Exception("Elements property missing");
 
 		}
 

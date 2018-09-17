@@ -34,7 +34,7 @@ namespace rxml {
 
 		if (!t.getKey().isUL()) {
 
-			throw new MXFException("Triplet key " + rxml::to_string(t.getKey()) + " is not a UL");
+			throw MXFException("Triplet key " + rxml::to_string(t.getKey()) + " is not a UL");
 		}
 
 		UL ul = t.getKey().asUL();
@@ -112,7 +112,7 @@ namespace rxml {
 			this->essenceContainers = kis.readBatch<ULAdapter, UL>();
 
 		} catch (std::exception e) {
-			throw new MXFException("Error reading partition pack");
+			throw MXFException("Error reading partition pack");
 		}
 
 	}

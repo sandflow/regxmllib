@@ -135,61 +135,61 @@ namespace rxml {
 		virtual void visit(const EnumerationTypeDefinition &def) {
 			Definition *def_copy = new EnumerationTypeDefinition(def);
 
-			_visit(def_copy);
+			if (! _visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const CharacterTypeDefinition &def) {
 			Definition *def_copy = new CharacterTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const RenameTypeDefinition & def) {
 			Definition *def_copy = new RenameTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const RecordTypeDefinition & def) {
 			Definition *def_copy = new RecordTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const StringTypeDefinition & def) {
 			Definition *def_copy = new StringTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const LensSerialFloatTypeDefinition & def) {
 			Definition *def_copy = new LensSerialFloatTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const IntegerTypeDefinition & def) {
 			Definition *def_copy = new IntegerTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const StrongReferenceTypeDefinition & def) {
 			Definition *def_copy = new StrongReferenceTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const WeakReferenceTypeDefinition & def) {
 			Definition *def_copy = new WeakReferenceTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const ExtendibleEnumerationTypeDefinition & def) {
 			Definition *def_copy = new ExtendibleEnumerationTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const VariableArrayTypeDefinition & def) {
@@ -201,31 +201,31 @@ namespace rxml {
 		virtual void visit(const FixedArrayTypeDefinition & def) {
 			Definition *def_copy = new FixedArrayTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const OpaqueTypeDefinition & def) {
 			Definition *def_copy = new OpaqueTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const IndirectTypeDefinition & def) {
 			Definition *def_copy = new IndirectTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const StreamTypeDefinition & def) {
 			Definition *def_copy = new StreamTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 		virtual void visit(const SetTypeDefinition & def) {
 			Definition *def_copy = new SetTypeDefinition(def);
 
-			_visit(def_copy);
+			if (!_visit(def_copy)) delete def_copy;
 		}
 
 	private:
