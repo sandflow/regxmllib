@@ -1256,7 +1256,7 @@ namespace rxml {
 		const Definition* tdef = findBaseDefinition(defresolver.getDefinition(definition->elementType));
 
 		unsigned long itemcount = value.readUnsignedLong();
-		unsigned long itemlength = value.readUnsignedLong();
+		value.readUnsignedLong(); // item length
 
 		applyCoreRule5_4(element, value, tdef, (unsigned long)itemcount);
 
@@ -1396,7 +1396,7 @@ namespace rxml {
 			} else {
 
 				unsigned long itemcount = value.readLong();
-				unsigned long itemlength = value.readLong();
+				value.readLong(); // item length
 
 				applyCoreRule5_4(element, value, tdef, itemcount);
 			}

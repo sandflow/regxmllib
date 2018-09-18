@@ -39,7 +39,7 @@ namespace rxml {
 
 			unsigned long itemcount = kis.readUnsignedLong();
 
-			unsigned long itemlength = kis.readUnsignedLong();
+			kis.readUnsignedLong(); // item length
 
 			for (unsigned long i = 0; i < itemcount; i++) {
 
