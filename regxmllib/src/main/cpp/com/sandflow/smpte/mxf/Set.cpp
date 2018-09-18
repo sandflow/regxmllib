@@ -48,7 +48,7 @@ namespace rxml {
 
 		if (!hasInstanceUID(g)) {
 
-			throw new MXFException("Group is missing an instance ID property");
+			throw MXFException("Group is missing an instance ID property");
 
 		}
 

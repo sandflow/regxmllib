@@ -98,7 +98,7 @@ namespace rxml {
 	UL AUID::asUL() const {
 
 		if (!isUL()) {
-			throw new std::invalid_argument("AUID is not a UL");
+			throw std::invalid_argument("AUID is not a UL");
 		}
 
 		return UL(this->value);
@@ -107,7 +107,7 @@ namespace rxml {
 	UUID AUID::asUUID() const {
 
 		if (!isUUID()) {
-			throw new std::invalid_argument("AUID is not a UUID");
+			throw std::invalid_argument("AUID is not a UUID");
 		}
 
 		unsigned char tmp[16];

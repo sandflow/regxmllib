@@ -392,7 +392,7 @@ namespace rxml {
 					addInformativeComment(element, err.getReason());
 
 				} else {
-					throw new FragmentBuilder::UnknownByteOrderError(ByteOrder_UL.to_string());
+					throw FragmentBuilder::UnknownByteOrderError(ByteOrder_UL.to_string());
 				}
 
 			} else {

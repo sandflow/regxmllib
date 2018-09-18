@@ -302,6 +302,7 @@ int main(int argc, char **argv) {
 
 		doc->release();
 
+		delete ft;
 	}
 
 	/* free heap */
@@ -314,7 +315,7 @@ int main(int argc, char **argv) {
 	
 	output->release();
 	ser->release();
-	
+	delete parser;
 	
 	xercesc::XMLPlatformUtils::Terminate();
 

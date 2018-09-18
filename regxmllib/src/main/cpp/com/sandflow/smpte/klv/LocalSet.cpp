@@ -61,14 +61,14 @@ namespace rxml {
 
 		if (!t.getKey().isUL()) {
 
-			throw new KLVException("Triplet key " + rxml::to_string(t.getKey()) + " is not a UL");
+			throw KLVException("Triplet key " + rxml::to_string(t.getKey()) + " is not a UL");
 		}
 
 		UL ul = t.getKey().asUL();
 
 		if (!ul.isLocalSet()) {
 
-			throw new KLVException("Triplet with key " + rxml::to_string(t.getKey()) + " is not a Local Set");
+			throw KLVException("Triplet with key " + rxml::to_string(t.getKey()) + " is not a Local Set");
 		}
 
 		membuf mb((char*)t.getValue(), (char*)t.getValue() + t.getLength());
