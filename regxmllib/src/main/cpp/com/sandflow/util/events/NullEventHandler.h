@@ -34,11 +34,7 @@ namespace rxml {
 	class NullEventHandler : public EventHandler {
 
 	public:
-                using EventHandler::info;
-                using EventHandler::warn;
-                using EventHandler::error;
-                using EventHandler::fatal;
-            
+
 		virtual bool info(const std::string &code, const std::string &reason, const std::string &where) {
 			return true;
 		}
