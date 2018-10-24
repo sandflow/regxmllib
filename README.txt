@@ -81,7 +81,7 @@ of the header metadata of the MXF file at path PATH_TO_MXF_FILE
     
         * retrieve metadictionaries from [3]
         
-            [3] https://github.com/sandflow/IMF/tree/master/registers
+            [3] https://github.com/sandflow/IMF/tree/master/dict
   
 * generate the RegXML fragment
     
