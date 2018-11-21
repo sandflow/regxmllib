@@ -254,8 +254,8 @@ int main(int argc, char **argv) {
 		std::cout << "Processing input file: " << test_names[i] << std::endl;
 
 		std::string out_fname = std::string(test_names[i]) + ".mxf.xml";
-		std::string ref_fname = "resources/reference-files/" + std::string(test_names[i]) + ".xml";
-		std::string in_fname = "resources/sample-files/" + std::string(test_names[i]) + ".mxf";
+		std::string ref_fname = "resources/regxml-files/" + std::string(test_names[i]) + ".xml";
+		std::string in_fname = "resources/mxf-files/" + std::string(test_names[i]) + ".mxf";
 
 
 		xercesc::LocalFileFormatTarget *ft = new xercesc::LocalFileFormatTarget(out_fname.c_str());
