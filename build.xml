@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <property name="resources.dir" value="src/test/resources"/>
+    <property name="samples.dir" value="${resources.dir}/mxf-files"/>
+    <property name="ref.files.dir" value="${resources.dir}/regxml-files"/>
+    <property name="ref.regs.dir" value="${resources.dir}/registers/snapshot"/>
+    <property name="dict.dir" value="${resources.dir}/regxml-dicts"/>
+    <property name="elements.register" value="${ref.regs.dir}/Elements.xml"/>
+    <property name="groups.register" value="${ref.regs.dir}/Groups.xml"/>
+    <property name="types.register" value="${ref.regs.dir}/Types.xml"/>
+    <property name="labels.register" value="${ref.regs.dir}/Labels.xml"/>
+
+    <!--Generate Reference Test Files-->
+
+    <target name="build-reference-test-files">
+
+        <!-- properties that must be set by the caller -->
+<!-- 
+        <fail message="Missing com.sun.xml.bind:jaxb-api:jar property" unless="com.sun.xml.bind:jaxb-api:jar"/>
+        <fail message="Missing com.sun.xml.bind:jaxb-impl:jar property" unless="com.sun.xml.bind:jaxb-impl:jar"/>
+        <fail message="Missing com.sun.xml.bind:jaxb-core:jar property" unless="com.sun.xml.bind:jaxb-core:jar"/> -->
+
+        <!-- Do not overwrite existing reference file -->
+
+        <fail message="Reference regxml files already present. Delete manually.">
+            <condition>
+                <resourcecount when="greater" count="0">
+                    <fileset dir="${ref.files.dir}" includes="*"/>
+                </resourcecount>
+            </condition>
+        </fail>
+
+        <fail message="Reference metadictionaries present already. Delete manually.">
+            <condition>
+                <resourcecount when="greater" count="0">
+                    <fileset dir="${dict.dir}" includes="*"/>
+                </resourcecount>
+            </condition>
+        </fail>
+
+        <!--Generate RegXML dictionary-->
+
+        <java classname="com.sandflow.smpte.tools.XMLRegistersToDict" failonerror="true">
+            <arg value="-e"/>
+            <arg path="${elements.register}"/>
+            <arg value="-l"/>
+            <arg path="${labels.register}"/>
+            <arg value="-g"/>
+            <arg path="${groups.register}"/>
+            <arg value="-t"/>
+            <arg path="${types.register}"/>
+            <arg path="${dict.dir}"/>
+
+            <classpath>
+                <pathelement location="${com.sandflow:regxmllib:jar}"/>
+                <pathelement location="${com.sun.xml.bind:jaxb-api:jar}"/>
+                <pathelement location="${com.sun.xml.bind:jaxb-impl:jar}"/>
+                <pathelement location="${com.sun.xml.bind:jaxb-core:jar}"/>
+            </classpath>
+        </java>
+
+        <!-- Generate RegXML files -->
+
+        <fileset dir="${dict.dir}" id="dicts">
+            <include name="*.xml" />
+        </fileset>
+
+        <pathconvert property="dictpaths" refid="dicts" pathsep=" " />
+
+        <macrodef name="genreffile">
+            <attribute name="samplename"/>
+            <sequential>
+                <java fork="true" classname="com.sandflow.smpte.tools.RegXMLDump" output="${ref.files.dir}/@{samplename}.xml" logError="true">
+                    <arg value="-all"/>
+                    <arg value="-d"/>
+                    <arg line="${dictpaths}"/>
+                    <arg value="-i"/>
+                    <arg path="${samples.dir}/@{samplename}.mxf"/>
+
+                    <classpath>
+                        <pathelement location="${com.sandflow:regxmllib:jar}"/>
+                        <pathelement location="${com.sun.xml.bind:jaxb-api:jar}"/>
+                        <pathelement location="${com.sun.xml.bind:jaxb-impl:jar}"/>
+                        <pathelement location="${com.sun.xml.bind:jaxb-core:jar}"/>
+                    </classpath>
+                </java>
+            </sequential>
+        </macrodef>
+
+        <genreffile samplename="video1"/>
+        <genreffile samplename="audio1"/>
+        <genreffile samplename="video2"/>
+        <genreffile samplename="audio2"/>
+        <genreffile samplename="indirect"/>
+        <genreffile samplename="utf8_embedded_text"/>
+        <genreffile samplename="class14"/>
+        <genreffile samplename="escape-chars"/>
+
+    </target>
+
+
+</project>
