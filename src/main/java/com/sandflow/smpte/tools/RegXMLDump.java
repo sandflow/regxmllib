@@ -25,6 +25,26 @@
  */
 package com.sandflow.smpte.tools;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FilenameFilter;
+import java.io.InputStream;
+import java.nio.channels.Channels;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.logging.Logger;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import com.sandflow.smpte.mxf.MXFFiles;
 import com.sandflow.smpte.register.LabelsRegister;
 import com.sandflow.smpte.regxml.FragmentBuilder;
@@ -35,22 +55,7 @@ import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.util.events.Event;
 import com.sandflow.util.events.EventHandler;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.nio.channels.Channels;
-import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.logging.Logger;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 
@@ -70,7 +75,7 @@ public class RegXMLDump {
 
     protected final static String USAGE = "Dump header metadata of an MXF file as a RegXML structure.\n"
         + "  Usage:\n"
-        + "     RegXMLDump ( -all | -ed ) ( -header | -footer | -auto ) (-l labelsregister) -d regxmldictionary1 regxmldictionary2 regxmldictionary3 ... -i mxffile\n"
+        + "     RegXMLDump ( -all | -ed ) ( -header | -footer | -auto ) (-l labelsregister) -d regxmldictionarydirorfile_1 ... regxmldictionarydirorfile_n -i mxffile\n"
         + "     RegXMLDump -?\n"
         + "  Where:\n"
         + "     -all: dumps all header metadata (default)\n"
@@ -175,11 +180,37 @@ public class RegXMLDump {
 
                 for (; i < args.length && args[i].charAt(0) != '-'; i++) {
 
-                    /* load the regxml metadictionary */
-                    FileReader fr = new FileReader(args[i]);
+                    File mdf = new File(args[i]);
 
-                    /* add it to the dictionary group */
-                    mds.addDictionary(MetaDictionary.fromXML(fr));
+                    File mdfs[];
+
+                    if (mdf.isDirectory()) {
+
+                        mdfs = mdf.listFiles(
+                            new FilenameFilter(){
+                        
+                                @Override
+                                public boolean accept(File dir, String name) {
+                                    return name.endsWith(".xml");
+                                }
+                            }
+                        );
+
+                    } else {
+
+                        mdfs = new File[] {mdf};
+
+                    }
+
+                    for(int j = 0; j < mdfs.length; j++ ) {
+
+                        /* load the regxml metadictionary */
+                        FileReader fr = new FileReader(mdfs[j]);
+
+                        /* add it to the dictionary group */
+                        mds.addDictionary(MetaDictionary.fromXML(fr));
+
+                    }
 
                 }
 
