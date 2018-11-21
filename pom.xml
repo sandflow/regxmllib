@@ -120,7 +120,7 @@
                                 <configuration>
                                     <target>
                                         <property name="classpath" refid="maven.runtime.classpath"/>
-                                        <property name="resources.dir" refid="com.sandflow.test.resources.dir"/>
+                                        <property name="resources.dir" value="${com.sandflow.test.resources.dir}"/>
                                         <ant antfile="build.xml" target="build-reference-test-files"/>
                                     </target>
                                 </configuration>
