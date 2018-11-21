@@ -241,132 +241,132 @@ public class MXFFragmentBuilderTest extends TestCase {
 
     public void testAudio1AgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef(mds_catsup, "sample-files/audio1.mxf", "reference-files/audio1.xml");
+        compareGeneratedVsRef(mds_catsup, "mxf-files/audio1.mxf", "regxml-files/audio1.xml");
 
     }
 
     public void testAudio2AgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef(mds_catsup, "sample-files/audio2.mxf", "reference-files/audio2.xml");
+        compareGeneratedVsRef(mds_catsup, "mxf-files/audio2.mxf", "regxml-files/audio2.xml");
 
     }
 
     public void testVideo1AgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef(mds_catsup, "sample-files/video1.mxf", "reference-files/video1.xml");
+        compareGeneratedVsRef(mds_catsup, "mxf-files/video1.mxf", "regxml-files/video1.xml");
 
     }
 
     public void testVideo2AgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef(mds_catsup, "sample-files/video2.mxf", "reference-files/video2.xml");
+        compareGeneratedVsRef(mds_catsup, "mxf-files/video2.mxf", "regxml-files/video2.xml");
 
     }
 
     public void testIndirectAgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef(mds_catsup, "sample-files/indirect.mxf", "reference-files/indirect.xml");
+        compareGeneratedVsRef(mds_catsup, "mxf-files/indirect.mxf", "regxml-files/indirect.xml");
 
     }
 
     public void testUTF8AgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef(mds_catsup, "sample-files/utf8_embedded_text.mxf", "reference-files/utf8_embedded_text.xml");
+        compareGeneratedVsRef(mds_catsup, "mxf-files/utf8_embedded_text.mxf", "regxml-files/utf8_embedded_text.xml");
 
     }
 
     public void testEscapeCharsAgainstCatsup() throws Exception {
 
-        compareGeneratedVsRef(mds_catsup, "sample-files/escape-chars.mxf", "reference-files/escape-chars.xml");
+        compareGeneratedVsRef(mds_catsup, "mxf-files/escape-chars.mxf", "regxml-files/escape-chars.xml");
 
     }
 
     public void testAudio1AgainstBrownSauce() throws Exception {
 
-        compareGeneratedVsRef(mds_brown_sauce, "sample-files/audio1.mxf", "reference-files/audio1.xml");
+        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/audio1.mxf", "regxml-files/audio1.xml");
 
     }
 
     public void testAudio2AgainstBrownSauce() throws Exception {
 
-        compareGeneratedVsRef(mds_brown_sauce, "sample-files/audio2.mxf", "reference-files/audio2.xml");
+        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/audio2.mxf", "regxml-files/audio2.xml");
 
     }
 
     public void testVideo1AgainstBrownSauce() throws Exception {
 
-        compareGeneratedVsRef(mds_brown_sauce, "sample-files/video1.mxf", "reference-files/video1.xml");
+        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/video1.mxf", "regxml-files/video1.xml");
 
     }
 
     public void testVideo2AgainstBrownSauce() throws Exception {
 
-        compareGeneratedVsRef(mds_brown_sauce, "sample-files/video2.mxf", "reference-files/video2.xml");
+        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/video2.mxf", "regxml-files/video2.xml");
 
     }
 
     public void testIndirectAgainstBrownSauce() throws Exception {
 
-        compareGeneratedVsRef(mds_brown_sauce, "sample-files/indirect.mxf", "reference-files/indirect.xml");
+        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/indirect.mxf", "regxml-files/indirect.xml");
 
     }
 
     public void testUTF8AgainstBrownSauce() throws Exception {
 
-        compareGeneratedVsRef(mds_brown_sauce, "sample-files/utf8_embedded_text.mxf", "reference-files/utf8_embedded_text.xml");
+        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/utf8_embedded_text.mxf", "regxml-files/utf8_embedded_text.xml");
 
     }
 
     public void testEscapeCharsAgainstBrownSauce() throws Exception {
 
-        compareGeneratedVsRef(mds_brown_sauce, "sample-files/escape-chars.mxf", "reference-files/escape-chars.xml");
+        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/escape-chars.mxf", "regxml-files/escape-chars.xml");
 
     }
 
     public void testClass14AgainstSnapshot() throws Exception {
 
-        compareGeneratedVsRef(mds_snapshot, "sample-files/class14.mxf", "reference-files/class14.xml");
+        compareGeneratedVsRef(mds_snapshot, "mxf-files/class14.mxf", "regxml-files/class14.xml");
     }
 
     public void testAudio1AgainstPonzu() throws Exception {
 
-        compareGeneratedVsRef(mds_ponzu, "sample-files/audio1.mxf", "reference-files/audio1.xml");
+        compareGeneratedVsRef(mds_ponzu, "mxf-files/audio1.mxf", "regxml-files/audio1.xml");
 
     }
 
     public void testAudio2AgainstPonzu() throws Exception {
 
-        compareGeneratedVsRef(mds_ponzu, "sample-files/audio2.mxf", "reference-files/audio2.xml");
+        compareGeneratedVsRef(mds_ponzu, "mxf-files/audio2.mxf", "regxml-files/audio2.xml");
 
     }
 
     public void testVideo1AgainstPonzu() throws Exception {
 
-        compareGeneratedVsRef(mds_ponzu, "sample-files/video1.mxf", "reference-files/video1.xml");
+        compareGeneratedVsRef(mds_ponzu, "mxf-files/video1.mxf", "regxml-files/video1.xml");
 
     }
 
     public void testVideo2AgainstPonzu() throws Exception {
 
-        compareGeneratedVsRef(mds_ponzu, "sample-files/video2.mxf", "reference-files/video2.xml");
+        compareGeneratedVsRef(mds_ponzu, "mxf-files/video2.mxf", "regxml-files/video2.xml");
 
     }
 
     public void testIndirectAgainstPonzu() throws Exception {
 
-        compareGeneratedVsRef(mds_ponzu, "sample-files/indirect.mxf", "reference-files/indirect.xml");
+        compareGeneratedVsRef(mds_ponzu, "mxf-files/indirect.mxf", "regxml-files/indirect.xml");
 
     }
 
     public void testUTF8AgainstPonzu() throws Exception {
 
-        compareGeneratedVsRef(mds_ponzu, "sample-files/utf8_embedded_text.mxf", "reference-files/utf8_embedded_text.xml");
+        compareGeneratedVsRef(mds_ponzu, "mxf-files/utf8_embedded_text.mxf", "regxml-files/utf8_embedded_text.xml");
 
     }
 
     public void testEscapeCharsAgainstPonzu() throws Exception {
 
-        compareGeneratedVsRef(mds_ponzu, "sample-files/escape-chars.mxf", "reference-files/escape-chars.xml");
+        compareGeneratedVsRef(mds_ponzu, "mxf-files/escape-chars.mxf", "regxml-files/escape-chars.xml");
 
     }
 

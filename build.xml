@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
-    <property name="resources.dir" value="src/test/resources"/>
     <property name="samples.dir" value="${resources.dir}/mxf-files"/>
     <property name="ref.files.dir" value="${resources.dir}/regxml-files"/>
     <property name="ref.regs.dir" value="${resources.dir}/registers/snapshot"/>
@@ -16,10 +15,9 @@
     <target name="build-reference-test-files">
 
         <!-- properties that must be set by the caller -->
-<!-- 
-        <fail message="Missing com.sun.xml.bind:jaxb-api:jar property" unless="com.sun.xml.bind:jaxb-api:jar"/>
-        <fail message="Missing com.sun.xml.bind:jaxb-impl:jar property" unless="com.sun.xml.bind:jaxb-impl:jar"/>
-        <fail message="Missing com.sun.xml.bind:jaxb-core:jar property" unless="com.sun.xml.bind:jaxb-core:jar"/> -->
+
+        <fail message="Missing classpath property" unless="classpath"/> 
+        <fail message="Missing resources.dir property" unless="resources.dir"/> 
 
         <!-- Do not overwrite existing reference file -->
 
@@ -53,10 +51,7 @@
             <arg path="${dict.dir}"/>
 
             <classpath>
-                <pathelement location="${com.sandflow:regxmllib:jar}"/>
-                <pathelement location="${com.sun.xml.bind:jaxb-api:jar}"/>
-                <pathelement location="${com.sun.xml.bind:jaxb-impl:jar}"/>
-                <pathelement location="${com.sun.xml.bind:jaxb-core:jar}"/>
+                <pathelement path="${classpath}"/>
             </classpath>
         </java>
 
@@ -79,10 +74,7 @@
                     <arg path="${samples.dir}/@{samplename}.mxf"/>
 
                     <classpath>
-                        <pathelement location="${com.sandflow:regxmllib:jar}"/>
-                        <pathelement location="${com.sun.xml.bind:jaxb-api:jar}"/>
-                        <pathelement location="${com.sun.xml.bind:jaxb-impl:jar}"/>
-                        <pathelement location="${com.sun.xml.bind:jaxb-core:jar}"/>
+                        <pathelement path="${classpath}"/>
                     </classpath>
                 </java>
             </sequential>

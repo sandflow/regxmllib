@@ -11,6 +11,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <com.sandflow.config.dir>${basedir}/src/main/config</com.sandflow.config.dir>
+        <com.sandflow.resources.dir>${basedir}/src/main/resources</com.sandflow.resources.dir>
+        <com.sandflow.test.resources.dir>${basedir}/src/test/resources</com.sandflow.test.resources.dir>
     </properties>
 
     <name>regxmllib</name>
@@ -70,12 +73,12 @@
         <resources>
             <resource>
                 <targetPath>config</targetPath>
-                <directory>${basedir}/src/main/config</directory>
+                <directory>${com.sandflow.config.dir}</directory>
                 <filtering>true</filtering>
             </resource>
             <resource>
                 <targetPath>resources</targetPath>
-                <directory>${basedir}/src/main/resources</directory>
+                <directory>${com.sandflow.resources.dir}</directory>
             </resource>
         </resources>
     </build>
@@ -91,16 +94,19 @@
                     <groupId>javax.xml.bind</groupId>
                     <artifactId>jaxb-api</artifactId>
                     <version>2.3.1</version>
+                    <scope>runtime</scope>
                 </dependency>
                 <dependency>
                     <groupId>com.sun.xml.bind</groupId>
                     <artifactId>jaxb-impl</artifactId>
                     <version>2.3.1</version>
+                    <scope>runtime</scope>
                 </dependency>
                 <dependency>
                     <groupId>com.sun.xml.bind</groupId>
                     <artifactId>jaxb-core</artifactId>
                     <version>2.3.0.1</version>
+                    <scope>runtime</scope>
                 </dependency>
             </dependencies>
             <build>
@@ -113,6 +119,8 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
+                                        <property name="classpath" refid="maven.runtime.classpath"/>
+                                        <property name="resources.dir" refid="com.sandflow.test.resources.dir"/>
                                         <ant antfile="build.xml" target="build-reference-test-files"/>
                                     </target>
                                 </configuration>

@@ -45,7 +45,7 @@ public class MXFFilesTest extends TestCase {
 
     public void testSeekFooterPartition() throws Exception {
         /* get the sample files */
-        URI uri = ClassLoader.getSystemResource("sample-files/audio1.mxf").toURI();
+        URI uri = ClassLoader.getSystemResource("mxf-files/audio1.mxf").toURI();
 
         assertNotNull(uri);
 
@@ -56,7 +56,7 @@ public class MXFFilesTest extends TestCase {
     
     public void testSeekFooterPartitionOpenIncompleteHeader() throws Exception {
         /* get the sample files */
-        URI uri = ClassLoader.getSystemResource("sample-files/open-incomplete-header.mxf").toURI();
+        URI uri = ClassLoader.getSystemResource("mxf-files/open-incomplete-header.mxf").toURI();
 
         assertNotNull(uri);
 
@@ -67,7 +67,7 @@ public class MXFFilesTest extends TestCase {
 
     public void testSeekHeaderPartition() throws Exception {
         /* get the sample files */
-        URI uri = ClassLoader.getSystemResource("sample-files/audio1.mxf").toURI();
+        URI uri = ClassLoader.getSystemResource("mxf-files/audio1.mxf").toURI();
 
         assertNotNull(uri);
 
