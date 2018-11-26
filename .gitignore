@@ -1,0 +1,12 @@
+build/
+dist/
+nbproject/private/
+target/
+cmake/
+pom.xml.asc
+CMakeSettings.json
+.vs/
+.project
+.settings
+.vscode/
+.classpath

@@ -8,8 +8,8 @@ matrix:
             - valgrind
             
       script:
-        - mkdir regxmllib/build
-        - cd regxmllib/build
+        - mkdir build
+        - cd build
         - cmake ..
         - cmake --build .
         - ctest .
@@ -17,9 +17,3 @@ matrix:
         - sudo make install
       
     - language: java
-      install:
-        - sudo apt-get install junit
-        - sudo apt-get install libhamcrest-java
-      script:
-        - cd regxmllib
-        - ant -Dbuild.sysclasspath=first test

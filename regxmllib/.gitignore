@@ -1,8 +1,0 @@
-/build/
-/dist/
-/nbproject/private/
-/target/
-/cmake/
-pom.xml.asc
-CMakeSettings.json
-/.vs/
