@@ -113,13 +113,13 @@ public class MXFFragmentBuilderTest extends TestCase {
                 String msg = evt.getCode().getClass().getCanonicalName() + "::" + evt.getCode().toString() + " " + evt.getMessage();
 
                 switch (evt.getSeverity()) {
+                    case ERROR:
                     case FATAL:
                         LOG.severe(msg);
-                        return false;
+                        break;
                     case INFO:
                         LOG.info(msg);
                         break;
-                    case ERROR:
                     case WARN:
                         LOG.warning(msg);
                 }
@@ -206,13 +206,13 @@ public class MXFFragmentBuilderTest extends TestCase {
                 String msg = evt.getCode().getClass().getCanonicalName() + "::" + evt.getCode().toString() + " " + evt.getMessage();
 
                 switch (evt.getSeverity()) {
+                    case ERROR:
                     case FATAL:
                         LOG.severe(msg);
-                        return false;
+                        break;
                     case INFO:
                         LOG.info(msg);
                         break;
-                    case ERROR:
                     case WARN:
                         LOG.warning(msg);
                 }
