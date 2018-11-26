@@ -142,7 +142,7 @@
                 </plugins>
             </build>
         </profile>
-                <profile>
+        <profile>
             <id>release</id>
             <distributionManagement>
                 <snapshotRepository>
