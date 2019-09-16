@@ -17,3 +17,5 @@ matrix:
         - sudo make install
       
     - language: java
+      jdk:
+        - openjdk8
