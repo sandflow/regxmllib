@@ -71,6 +71,7 @@ import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -999,6 +1000,10 @@ public class FragmentBuilder {
                 br += count;
             }
 
+            if (br < len) {
+                val = Arrays.copyOf(val, br);
+            }
+
             String str = null;
 
             if (br == 0) {
@@ -1269,6 +1274,10 @@ public class FragmentBuilder {
                 int count = value.read(val, br, len - br);
                 if (count < 0) break;
                 br += count;
+            }
+
+            if (br < len) {
+                val = Arrays.copyOf(val, br);
             }
 
             if (br == 0) {
