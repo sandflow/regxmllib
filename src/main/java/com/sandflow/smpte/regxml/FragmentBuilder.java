@@ -991,7 +991,13 @@ public class FragmentBuilder {
 
             byte[] val = new byte[len];
 
-            int br = value.read(val);
+            int br = 0;
+
+            while (br < len) {
+                int count = value.read(val, br, len - br);
+                if (count < 0) break;
+                br += count;
+            }
 
             String str = null;
 
@@ -1257,7 +1263,13 @@ public class FragmentBuilder {
 
             byte[] val = new byte[len];
 
-            int br = value.read(val);
+            int br = 0;
+
+            while (br < len) {
+                int count = value.read(val, br, len - br);
+                if (count < 0) break;
+                br += count;
+            }
 
             if (br == 0) {
 
