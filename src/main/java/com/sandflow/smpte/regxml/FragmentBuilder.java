@@ -938,6 +938,24 @@ public class FragmentBuilder {
 
     }
 
+    private byte[] fullyReadBytes(MXFInputStream value, int len) throws IOException {
+        byte[] bytes = new byte[len];
+
+        int br = 0;
+
+        while (br < len) {
+            int count = value.read(bytes, br, len - br);
+            if (count < 0) break;
+            br += count;
+        }
+
+        if (br < len) {
+            bytes = Arrays.copyOf(bytes, br);
+        }
+
+        return bytes;
+    }
+
     void applyRule5_2(Element element, MXFInputStream value, EnumerationTypeDefinition definition) throws RuleException, IOException {
 
         try {
@@ -990,23 +1008,11 @@ public class FragmentBuilder {
                 }
             }
 
-            byte[] val = new byte[len];
-
-            int br = 0;
-
-            while (br < len) {
-                int count = value.read(val, br, len - br);
-                if (count < 0) break;
-                br += count;
-            }
-
-            if (br < len) {
-                val = Arrays.copyOf(val, br);
-            }
+            byte[] val = fullyReadBytes(value, len);
 
             String str = null;
 
-            if (br == 0) {
+            if (val.length == 0) {
 
                 str = "ERROR";
 
@@ -1070,14 +1076,14 @@ public class FragmentBuilder {
 
                     addInformativeComment(element, evt.getReason());
 
-                } else if (br != len) {
+                } else if (val.length != len) {
 
                     FragmentEvent evt = new FragmentEvent(
                             EventCodes.VALUE_LENGTH_MISMATCH,
                             String.format(
                                     "Incorrect length: expected %d and received %d",
                                     len,
-                                    br
+                                    val.length
                             ),
                             String.format(
                                     "Enumeration %s at Element %s",
@@ -1266,21 +1272,9 @@ public class FragmentBuilder {
                     break;
             }
 
-            byte[] val = new byte[len];
+            byte[] val = fullyReadBytes(value, len);
 
-            int br = 0;
-
-            while (br < len) {
-                int count = value.read(val, br, len - br);
-                if (count < 0) break;
-                br += count;
-            }
-
-            if (br < len) {
-                val = Arrays.copyOf(val, br);
-            }
-
-            if (br == 0) {
+            if (val.length == 0) {
 
                 element.setTextContent("NaN");
 
@@ -1306,14 +1300,14 @@ public class FragmentBuilder {
 
                     element.setTextContent(bi.toString());
 
-                    if (br != len) {
+                    if (val.length != len) {
 
                         FragmentEvent evt = new FragmentEvent(
                                 EventCodes.VALUE_LENGTH_MISMATCH,
                                 String.format(
                                         "Incorrect field length: expected %d and parsed %d.",
                                         len,
-                                        br
+                                        val.length
                                 ),
                                 String.format(
                                         "Integer %s at Element %s",
