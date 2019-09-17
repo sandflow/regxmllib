@@ -71,10 +71,8 @@ public class MXFInputStream extends KLVInputStream {
     public UUID readUUID() throws IOException, EOFException {
         byte[] uuid = new byte[16];
 
-        if (read(uuid) < uuid.length) {
-            throw new EOFException();
-        }
-        
+        readFully(uuid);
+
         if (getByteOrder() == ByteOrder.LITTLE_ENDIAN) {
 
            uuidLEtoBE(uuid);
@@ -92,11 +90,9 @@ public class MXFInputStream extends KLVInputStream {
      */
     public IDAU readIDAU() throws IOException, EOFException {
         byte[] idau = new byte[16];
-        
-        if (read(idau) < idau.length) {
-            throw new EOFException();
-        }
-        
+
+        readFully(idau);
+
         if (getByteOrder() == ByteOrder.LITTLE_ENDIAN) {
 
            uuidLEtoBE(idau);
@@ -115,9 +111,7 @@ public class MXFInputStream extends KLVInputStream {
     public UMID readUMID() throws IOException, EOFException {
         byte[] umid = new byte[32];
 
-        if (read(umid) < umid.length) {
-            throw new EOFException();
-        }
+        readFully(umid);
 
         return new UMID(umid);
     }

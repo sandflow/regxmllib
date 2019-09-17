@@ -106,11 +106,9 @@ public class KLVInputStream extends InputStream implements DataInput {
      */
     public AUID readAUID() throws IOException, EOFException {
         byte[] auid = new byte[16];
-        
-        if (read(auid) < auid.length) {
-            throw new EOFException();
-        }
-        
+
+        readFully(auid);
+
         return new AUID(auid);
     }
 
@@ -144,9 +142,7 @@ public class KLVInputStream extends InputStream implements DataInput {
 
         byte[] octets = new byte[bersz];
 
-        if (read(octets) < bersz) {
-            throw new EOFException();
-        }
+        readFully(octets);
 
         for (int i = 0; i < bersz; i++) {
             int tmp = (((int) octets[i]) & 0xFF);
@@ -179,9 +175,7 @@ public class KLVInputStream extends InputStream implements DataInput {
 
         byte[] value = new byte[(int) len];
 
-        if (len != read(value)) {
-            throw new EOFException("EOF reached while reading Value.");
-        }
+        readFully(value);
 
         return new MemoryTriplet(auid, value);
     }
