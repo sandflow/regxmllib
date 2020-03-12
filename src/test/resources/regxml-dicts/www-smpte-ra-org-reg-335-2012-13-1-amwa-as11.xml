@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Tue Feb 06 15:14:43 PST 2018--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:1172125c-89ec-5f40-7f1f-265d6a04cab3</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/335/2012/13/1/amwa/as11</SchemeURI>
+<MetaDefinitions>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010101</Identification>
+<Symbol>AS_11_Series_Title</Symbol>
+<Description>The final name of a "group" of episodes to which the programme belongs. These episodes have a shared identification and branding and are linked by common characters, subject matter, style or story.</Description>
+<Name>Series Title</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010102</Identification>
+<Symbol>AS_11_Programme_Title</Symbol>
+<Description>The final name of the programme used to identify it as a version of an episode. This name indicates the specific purpose for which the version was created.</Description>
+<Name>Programme Title</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010103</Identification>
+<Symbol>AS_11_Episode_Title_Number</Symbol>
+<Description>The final name of the programme used to identify it as an editorially distinct member of a series i.e. an episode. This name may include a number (or consist only of a number) indicating the position of the episode within the series.</Description>
+<Name>Episode Title/Episode No.</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010104</Identification>
+<Symbol>AS_11_Shim_Name</Symbol>
+<Description>The name of the AS-11 shim specification to which the MXF file conforms.</Description>
+<Name>Shim Name</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b01010a</Identification>
+<Symbol>AS_11_Shim_Version</Symbol>
+<Description>The version of the AS-11 shim specification to which the MXF file conforms.</Description>
+<Name>Shim Version</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.03010300.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010105</Identification>
+<Symbol>AS_11_Audio_Track_Layout</Symbol>
+<Description>A code to identify the scheme that describes the usage of the audio channels encoded in the file.</Description>
+<Name>Audio Track Layout</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010200</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010106</Identification>
+<Symbol>AS_11_Primary_Audio_Language</Symbol>
+<Description>A code to identify the main language used on primary audio channels.</Description>
+<Name>Primary Audio Language</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010300</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010107</Identification>
+<Symbol>AS_11_Closed_Captions_Present</Symbol>
+<Description>A flag to indicate whether the programme contains embedded (out of vision) subtitling information.</Description>
+<Name>Closed Captions Present</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010108</Identification>
+<Symbol>AS_11_Closed_Captions_Type</Symbol>
+<Description>A code to identify the editorial description of the closed captions.</Description>
+<Name>Closed Captions Type</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010100</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b010109</Identification>
+<Symbol>AS_11_Caption_Language</Symbol>
+<Description>A code to identify the main language used in the closed captions.</Description>
+<Name>Closed Captions Language</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d010701.0b010300</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b020101</Identification>
+<Symbol>AS_11_Part_Number</Symbol>
+<Description>A number that both: uniquely identifies the part / segment within the programme; and identifies the position of the part / segment within the programme.</Description>
+<Name>Part Number</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b020100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d010701.0b020102</Identification>
+<Symbol>AS_11_Part_Total</Symbol>
+<Description>The count of parts / segments in the entire programme.</Description>
+<Name>Part Total</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010701.0b020100</MemberOf>
+</PropertyDefinition>
+</MetaDefinitions>
+</Extension>

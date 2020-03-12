@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Tue Feb 06 15:14:44 PST 2018--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:27b78e4c-8645-5f1d-7fd6-3a4c4a85e9e3</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/335/2012/13/4/archive</SchemeURI>
+<MetaDefinitions>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.40010100</Identification>
+<Symbol>APP_VTRErrorCount</Symbol>
+<Description>Total number of VTR replay errors</Description>
+<Name>APP VTR Error Count</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.40010200</Identification>
+<Symbol>APP_PSEFailureCount</Symbol>
+<Description>Total number of PSE analysis failures</Description>
+<Name>APP PSE Failure Count</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.40010300</Identification>
+<Symbol>APP_DigiBetaDropoutCount</Symbol>
+<Description>Total number of DigiBeta dropouts detected</Description>
+<Name>APP DigiBeta Dropout Count</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.40010400</Identification>
+<Symbol>APP_TimecodeBreakCount</Symbol>
+<Description>Total number of Timecode break events</Description>
+<Name>APP Timecode Break Count</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010100</Identification>
+<Symbol>APP_Format</Symbol>
+<Description>The technical code describing the method or recording of this element. E.g. 'LTO', 'D3' (Infax table T_RECORDING, item tech_code)</Description>
+<Name>APP Format</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010200</Identification>
+<Symbol>APP_ProgrammeTitle</Symbol>
+<Description>Indicates the series the programme is related to. E.g. 'OLD GREY WHISTLE TEST' (Infax table T_PROGRAMME, item series_title)</Description>
+<Name>APP Programme Title</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010300</Identification>
+<Symbol>APP_EpisodeTitle</Symbol>
+<Description>The title of this programme. E.g. 'PICK OF THE YEAR'(Infax table T_PROGRAMME, item core_title)</Description>
+<Name>APP Episode Title</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010400</Identification>
+<Symbol>APP_TransmissionDate</Symbol>
+<Description>Earliest transmission date E.g. 1978-01-05 (Infax table T_PROGRAMME, item fst_aptx_date)</Description>
+<Name>APP Transmission Date</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.03010700.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010500</Identification>
+<Symbol>APP_MagazinePrefix</Symbol>
+<Description>Programmes are identified by a programme number and optionally a magazine prefix, which consists of a letter, ranging from A to Z. E.g. 'A'(Infax table T_PROGRAMME, item mag_prefix)</Description>
+<Name>APP Magazine Prefix</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010600</Identification>
+<Symbol>APP_ProgrammeNumber</Symbol>
+<Description>A number, which in conjunction with the magazine prefix, uniquely identifies a programme. It never changes and stays with the programme throughout its life.E.g. LNF2073N (Infax table T_PROGRAMME, item prog_num)</Description>
+<Name>APP Programme  Number</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010700</Identification>
+<Symbol>APP_SpoolStatus</Symbol>
+<Description>This is a code to describe the recording status of spool items.E.g. 'M'(Infax table T_RECORDING, item rec_status</Description>
+<Name>APP Spool Status</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010800</Identification>
+<Symbol>APP_StockDate</Symbol>
+<Description>The date on which this element was recorded onto the spool item. E.g. 2008-04-17 (Infax table T_RECORDING, item rec_date)</Description>
+<Name>APP Stock Date</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.03010700.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010900</Identification>
+<Symbol>APP_SpoolDescriptor</Symbol>
+<Description>A free format text containing a technical description of the recording. E.g. 'PROGRAMME (DUB OF 005123) (Infax table T_RECORDING, item rec_vt_desc)</Description>
+<Name>APP Spool Descriptor</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010a00</Identification>
+<Symbol>APP_Memo</Symbol>
+<Description>The catalogue description of the recording. (Infax table T_RECORDING, item rec_cat_desc)</Description>
+<Name>APP Memo</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010b00</Identification>
+<Symbol>APP_Duration</Symbol>
+<Description>The amount of material used. This is recorded as duration in number of seconds. E.g. 4145 (Infax table T_RECORDING, item rec_duration)</Description>
+<Name>APP Duration</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010800.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010c00</Identification>
+<Symbol>APP_SpoolNumber</Symbol>
+<Description>The numeric component of a spool number. The number and prefix form a spool-number which is usually issued when the material is created. The spool number equates to a gap in the short term store. The number on the spool identifies the last current number for the spool. E.g. 'DA 005123'(Infax table T_SPOOL, item spl_prefix and spl_num)</Description>
+<Name>APP Spool Number</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010d00</Identification>
+<Symbol>APP_AccessionNumber</Symbol>
+<Description>The accession number identifies a number given to an item being added to the library's long term store system. This number equates to a space on a storage shelf and is therefore a reusable storage identifier.E.g. 'DA 018820'(Infax table T_SPOOL, item acc_prefix and acc_num)</Description>
+<Name>APP Accession Number</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010e00</Identification>
+<Symbol>APP_CatalogueDetail</Symbol>
+<Description>A code which allows the user to retrieve catalogue entries by a category. It is a subcatalogue within the catalogue.E.g. 'LONPROG' (Infax table T_CAT_ITEM, item cat_recall)</Description>
+<Name>APP Catalogue Detail</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01010f00</Identification>
+<Symbol>APP_ProductionCode</Symbol>
+<Description>The production code assigned to the programme. E.g. 70</Description>
+<Name>APP Production Code</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01011000</Identification>
+<Symbol>APP_ItemNumber</Symbol>
+<Description>Index of the item on the videotape containing multiple items E.g. 1</Description>
+<Name>APP Item Number</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01010000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01020100</Identification>
+<Symbol>APP_RedFlash</Symbol>
+<Description>The value of the red flash analysis, scaled by a factor of 1000.</Description>
+<Name>APP Red Flash</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010600.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01020000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01020300</Identification>
+<Symbol>APP_LuminanceFlash</Symbol>
+<Description>The value of the luminance flash analysis, scaled by a factor of 1000</Description>
+<Name>APP Luminance Flash</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010600.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01020000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01020200</Identification>
+<Symbol>APP_SpatialPattern</Symbol>
+<Description>The value of the spatial analysis, scaled by a factor of 1000.</Description>
+<Name>APP Spatial Pattern</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010600.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01020000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01020400</Identification>
+<Symbol>APP_ExtendedFailure</Symbol>
+<Description>The extended warning failure flag</Description>
+<Name>APP Extended Failure</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01020000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01030100</Identification>
+<Symbol>APP_VTRErrorCode</Symbol>
+<Description>Error code reported by the VTR</Description>
+<Name>APP VTR Error Code</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01030000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01040100</Identification>
+<Symbol>APP_Strength</Symbol>
+<Description>Normalised Digibeta dropout strength</Description>
+<Name>APP Strength</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010700.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01040000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d040101.01050100</Identification>
+<Symbol>APP_TimecodeType</Symbol>
+<Description>Flags which timecode types are associated with this event</Description>
+<Name>APP Timecode Type</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d040101.01010101</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d040101.01050000</MemberOf>
+</PropertyDefinition>
+</MetaDefinitions>
+</Extension>
