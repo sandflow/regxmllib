@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Tue Feb 06 15:14:43 PST 2018--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:908d2dfc-e4de-5f98-7f39-27277eeb2619</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/395/2014/13/1/amwa/as10</SchemeURI>
+<MetaDefinitions>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d010701.0a010100</Identification>
+<Symbol>DMS_AS_10_Core_Framework</Symbol>
+<Description>AS-10 Metadata Framework set</Description>
+<Name>DMS AS-10 Core Framework</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+</MetaDefinitions>
+</Extension>

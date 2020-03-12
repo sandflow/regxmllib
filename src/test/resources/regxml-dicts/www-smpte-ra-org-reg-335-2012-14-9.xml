@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Tue Feb 06 15:14:44 PST 2018--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:6924fe2d-4f82-5f5c-7fc8-eb8a9017a91c</SchemeID>
+<SchemeURI>http://www.smpte-ra.org/reg/335/2012/14/9</SchemeURI>
+<MetaDefinitions>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010105.0e090506.00000000</Identification>
+<Symbol>ImmersiveAudioVersion</Symbol>
+<Description>Immersive Audio  Coder version used to create the source Bitstream</Description>
+<Name>Immersive Audio Version</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0105.0e090606.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010105.0e090507.00000000</Identification>
+<Symbol>MaxChannelCount</Symbol>
+<Description>Maximum number of audio channels in the bitstream</Description>
+<Name>Max Channel Count</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0105.0e090606.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010105.0e090508.00000000</Identification>
+<Symbol>MaxObjectCount</Symbol>
+<Description>Maximum number of audio objects in the bitstream</Description>
+<Name>Max Object Count</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0105.0e090606.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010105.0e090509.00000000</Identification>
+<Symbol>ImmersiveAudioID</Symbol>
+<Description>UUID of the Immersive Audio  project</Description>
+<Name>Immersive Audio ID</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01030300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0105.0e090606.00000000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010105.0e09050a.00000000</Identification>
+<Symbol>FirstFrame</Symbol>
+<Description>Specifies an edit unit for alignment with the FFOA of the picture track</Description>
+<Name>First Frame</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0105.0e090606.00000000</MemberOf>
+</PropertyDefinition>
+</MetaDefinitions>
+</Extension>

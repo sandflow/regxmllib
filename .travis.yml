@@ -1,0 +1,21 @@
+matrix:
+  include:
+    - language: cpp
+      addons:
+        apt:
+          packages:
+            - libxerces-c-dev
+            - valgrind
+            
+      script:
+        - mkdir build
+        - cd build
+        - cmake ..
+        - cmake --build .
+        - ctest .
+        - ctest -T memcheck .
+        - sudo make install
+      
+    - language: java
+      jdk:
+        - openjdk8
