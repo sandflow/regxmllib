@@ -84,25 +84,25 @@ namespace rxml {
 
 	public:
 
-		virtual void visit(const ClassDefinition &def) {};
-		virtual void visit(const PropertyDefinition &def) {};
-		virtual void visit(const PropertyAliasDefinition &def) {};
-		virtual void visit(const EnumerationTypeDefinition &def) {};
-		virtual void visit(const CharacterTypeDefinition &def) {};
-		virtual void visit(const StringTypeDefinition &def) {};
-		virtual void visit(const RenameTypeDefinition &def) {};
-		virtual void visit(const RecordTypeDefinition &def) {};
-		virtual void visit(const ExtendibleEnumerationTypeDefinition &def) {};
-		virtual void visit(const LensSerialFloatTypeDefinition &def) {};
-		virtual void visit(const IntegerTypeDefinition &def) {};
-		virtual void visit(const StrongReferenceTypeDefinition &def) {};
-		virtual void visit(const WeakReferenceTypeDefinition &def) {};
-		virtual void visit(const VariableArrayTypeDefinition &def) {};
-		virtual void visit(const FixedArrayTypeDefinition &def) {};
-		virtual void visit(const OpaqueTypeDefinition &def) {};
-		virtual void visit(const IndirectTypeDefinition &def) {};
-		virtual void visit(const StreamTypeDefinition &def) {};
-		virtual void visit(const SetTypeDefinition &def) {};
+		virtual void visit(const ClassDefinition &) {};
+		virtual void visit(const PropertyDefinition &) {};
+		virtual void visit(const PropertyAliasDefinition &) {};
+		virtual void visit(const EnumerationTypeDefinition &) {};
+		virtual void visit(const CharacterTypeDefinition &) {};
+		virtual void visit(const StringTypeDefinition &) {};
+		virtual void visit(const RenameTypeDefinition &) {};
+		virtual void visit(const RecordTypeDefinition &) {};
+		virtual void visit(const ExtendibleEnumerationTypeDefinition &) {};
+		virtual void visit(const LensSerialFloatTypeDefinition &) {};
+		virtual void visit(const IntegerTypeDefinition &) {};
+		virtual void visit(const StrongReferenceTypeDefinition &) {};
+		virtual void visit(const WeakReferenceTypeDefinition &) {};
+		virtual void visit(const VariableArrayTypeDefinition &) {};
+		virtual void visit(const FixedArrayTypeDefinition &) {};
+		virtual void visit(const OpaqueTypeDefinition &) {};
+		virtual void visit(const IndirectTypeDefinition &) {};
+		virtual void visit(const StreamTypeDefinition &) {};
+		virtual void visit(const SetTypeDefinition &) {};
 
 	};
 

@@ -59,6 +59,10 @@ namespace rxml {
 		return NULL;
 	}
 
+    const std::vector<Definition*>& MetaDictionaryCollection::getDefinitions() const {
+		return this->definitions;
+    }
+
 	/**
 	* Adds a MetaDictionary to the collection.
 	*
@@ -67,10 +71,15 @@ namespace rxml {
 
 	void MetaDictionaryCollection::addDictionary(MetaDictionary * metadictionary) {
 
-		std::map<std::string, MetaDictionary*>::const_iterator it = dicts.find(metadictionary->getSchemeURI());
+		std::map<std::string, MetaDictionary*>::const_iterator it = this->dicts.find(metadictionary->getSchemeURI());
 
-		if (it == dicts.end()) {
-			dicts[metadictionary->getSchemeURI()] = metadictionary;
+		if (it == this->dicts.end()) {
+
+			/* dictionary does not currently exist and can be added */
+
+			this->dicts[metadictionary->getSchemeURI()] = metadictionary;
+
+			this->definitions.insert(definitions.end(), metadictionary->getDefinitions().begin(), metadictionary->getDefinitions().end());
 		}
 
 	}

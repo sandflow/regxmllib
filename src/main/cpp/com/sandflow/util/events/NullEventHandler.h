@@ -35,19 +35,19 @@ namespace rxml {
 
 	public:
 
-		virtual bool info(const std::string &code, const std::string &reason, const std::string &where) {
+		virtual bool info(const std::string &/*code*/, const std::string &/*reason*/, const std::string &/*where*/) {
 			return true;
 		}
 
-		virtual bool warn(const std::string &code, const std::string &reason, const std::string &where) {
+		virtual bool warn(const std::string &/*code*/, const std::string &/*reason*/, const std::string &/*where*/) {
 			return true;
 		}
 
-		virtual bool error(const std::string &code, const std::string &reason, const std::string &where) {
+		virtual bool error(const std::string &/*code*/, const std::string &/*reason*/, const std::string &/*where*/) {
 			return true;
 		}
 
-		virtual bool fatal(const std::string &code, const std::string &reason, const std::string &where) {
+		virtual bool fatal(const std::string &/*code*/, const std::string &/*reason*/, const std::string &/*where*/) {
 			return true;
 		}
 

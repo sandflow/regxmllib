@@ -48,13 +48,15 @@ namespace rxml {
 
 		MetaDictionary(const AUID &pSchemeID, const std::string &pSchemeURI);
 
-		MetaDictionary();;
+		MetaDictionary();
 
 		~MetaDictionary();
 
 		virtual const Definition* getDefinition(const AUID &identification) const;
 
 		const Definition* getDefinition(const std::string &symbol) const;
+
+		const std::vector<Definition*>& getDefinitions() const;
 
 		virtual std::set<AUID> getSubclassesOf(const AUID &identification) const;
 

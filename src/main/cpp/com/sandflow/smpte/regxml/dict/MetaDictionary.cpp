@@ -264,6 +264,10 @@ namespace rxml {
 		return definitionsBySymbol.at(symbol);
 	}
 
+    const std::vector<Definition*>& MetaDictionary::getDefinitions() const {
+		return this->definitions;
+    }
+
 	std::set<AUID> MetaDictionary::getSubclassesOf(const AUID & identification) const {
 
 		const AUID norm_auid = MetaDictionary::createNormalizedAUID(identification);

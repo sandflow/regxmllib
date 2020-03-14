@@ -30,6 +30,7 @@
 #include <set>
 #include <com/sandflow/smpte/util/AUID.h>
 #include <com/sandflow/smpte/regxml/definitions/Definition.h>
+#include <vector>
 
 
 namespace rxml {
@@ -41,6 +42,8 @@ namespace rxml {
 		virtual ~DefinitionResolver() {};
 
 		virtual const Definition* getDefinition(const AUID &identification) const = 0;
+
+        virtual const std::vector<Definition*>& getDefinitions() const = 0;
 
 		virtual std::set<AUID> getSubclassesOf(const AUID &identification) const = 0;
 

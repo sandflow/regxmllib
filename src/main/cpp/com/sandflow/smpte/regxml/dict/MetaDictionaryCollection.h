@@ -40,6 +40,8 @@ namespace rxml {
 
 		std::map<std::string, MetaDictionary*> dicts;
 
+		std::vector<Definition*> definitions;
+
 	public:
 
 		virtual const Definition* getDefinition(const AUID& auid) const;
@@ -51,6 +53,8 @@ namespace rxml {
 		 * @return Definition, or null if none found
 		 */
 		const Definition* getDefinition(std::string ns, const std::string& symbol) const;
+
+		const std::vector<Definition*>& getDefinitions() const;
 
 		/**
 		 * Adds a MetaDictionary to the collection.
