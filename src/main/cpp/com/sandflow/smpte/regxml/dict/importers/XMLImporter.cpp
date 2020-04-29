@@ -632,7 +632,7 @@ namespace rxml {
 
 				} else {
 
-					ev->error("UNKNOW_TYPE", "Unknow type: " + localname, "");
+					ev->error("UNKNOWN_TYPE", "Unknown type: " + localname, "");
 
 				}
 
