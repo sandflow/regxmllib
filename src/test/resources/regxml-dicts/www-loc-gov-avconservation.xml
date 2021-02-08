@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created: Sun Feb 07 16:42:13 PST 2021--><!--By: regxmllib build 52f8ec992adbcba8bd18d9b06508c69a1e9c459b--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<SchemeID>urn:uuid:18f8b8ce-6110-5f18-7f44-7032fcd569eb</SchemeID>
+<SchemeURI>http://www.loc.gov/avconservation</SchemeURI>
+<MetaDefinitions>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07040300</Identification>
+<Symbol>MICCarriage</Symbol>
+<Description>Informs decoder where to find MIC value. Absent Value indicates use of Encrypted Triplets</Description>
+<Name>MICCarriage</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010401.02020000</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010101</Identification>
+<Symbol>AS_07_Core_DMS_ShimName</Symbol>
+<Description>Controlled vocabulary string value indicating the AS-07 Shim Name, e.g., Derived-from-video-serial-interface</Description>
+<Name>AS_07_Core_DMS_ShimName</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010102</Identification>
+<Symbol>AS_07_Core_DMS_Identifiers</Symbol>
+<Description>Unordered list of strong references to all AS_07_DMS_Identifier sets. At least one AS_07_DMS_Identifier Objects set is required with the IdentifierRole = Main. Other AS_07_DMSIdentifierObjects sets are optional.</Description>
+<Name>AS_07_Core_DMS_Identifiers</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010301</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010103</Identification>
+<Symbol>AS_07_Core_DMS_ResponsibleOrganizationName</Symbol>
+<Description>The main name for the entity responsible for the creation, maintenance, preservation of this digital item</Description>
+<Name>AS_07_Core_DMS_ResponsibleOrganizationName</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010105</Identification>
+<Symbol>AS_07_Core_DMS_ResponsibleOrganizationCode</Symbol>
+<Description>A familiar abbreviation of entity name.</Description>
+<Name>AS_07_Core_DMS_ResponsibleOrganizationCode</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010106</Identification>
+<Symbol>AS_07_Core_DMS_NatureOfOrganization</Symbol>
+<Description>The nature of an organization (e.g., limited company, government department, etc.)</Description>
+<Name>AS_07_Core_DMS_NatureOfOrganization</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010107</Identification>
+<Symbol>AS_07_Core_DMS_WorkingTitle</Symbol>
+<Description>Free text: Best known or working title of the production or production component</Description>
+<Name>AS_07_Core_DMS_WorkingTitle</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010108</Identification>
+<Symbol>AS_07_Core_DMS_SecondaryTitle</Symbol>
+<Description>Free text Secondary title of the production or production component</Description>
+<Name>AS_07_Core_DMS_SecondaryTitle</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010109</Identification>
+<Symbol>AS_07_Core_DMS_PictureFormat</Symbol>
+<Description>The signal standard (frame resolution and aspect ratio) of the encoded file.</Description>
+<Name>AS_07_Core_DMS_PictureFormat</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.0701010a</Identification>
+<Symbol>AS_07_Core_DMS_IntendedAFD</Symbol>
+<Description>String value indicating the intended display format for the program, per SMPTE 2016-1 table 1 a3 a2 a1 a0 with optional informative appended text e.g. 1001 Pillarbox, 0100 Letterbox, 1000 FullHD</Description>
+<Name>AS_07_Core_DMS_IntendedAFD</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.0701010b</Identification>
+<Symbol>AS_07_Core_DMS_Captions</Symbol>
+<Description>Y/N value to indicate if  captions are present in the encoded file</Description>
+<Name>AS_07_Core_DMS_Captions</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.0701010c</Identification>
+<Symbol>AS_07_Core_DMS_AudioTrackPrimaryLanguage</Symbol>
+<Description>The primary language in audio track by codes as defined by RFC5646. Use only when language is known.</Description>
+<Name>AS_07_Core_DMS_AudioTrackPrimaryLanguage</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.0701010d</Identification>
+<Symbol>AS_07_Core_DMS_AudioTrackSecondaryLanguage</Symbol>
+<Description>The secondary language in audio track by codes as defined by RFC5646.  If multiple secondary language are present the RFC tags in white space separated list. Use only when secondary languages are present and language is known</Description>
+<Name>AS_07_Core_DMS_AudioTrackSecondaryLanguage</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.0701010e</Identification>
+<Symbol>AS_07_Core_DMS_AudioTrackLayout</Symbol>
+<Description>Appropriate values in AS-07 Appendix E</Description>
+<Name>AS_07_Core_DMS_AudioTrackLayout</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.0701010f</Identification>
+<Symbol>AS_07_Core_DMS_AudioTrackLayoutComment</Symbol>
+<Description>Free text comment to augment AS_07_Core_DMS_AudioTrackLayout. This is for track tagging information and is not to be used for descriptive essays. Robust descriptive data can be held in Supplemental Metadata in GSPs.</Description>
+<Name>AS_07_Core_DMS_AudioTrackLayoutComment</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010110</Identification>
+<Symbol>AS_07_Core_DMS_Devices</Symbol>
+<Description>strong references to all AS_07_Core_DMS_Device objects used in this file</Description>
+<Name>AS_07_Core_DMS_Devices</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010201</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</MemberOf>
+</PropertyDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010100</Identification>
+<Symbol>AS_07_Core_DMS_Framework</Symbol>
+<Description>AS-07 Descriptive Metadata</Description>
+<Name>AS_07_Core_DMS_Framework</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010401.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010202</Identification>
+<Symbol>AS_07_Core_DMS_DeviceType</Symbol>
+<Description>the kind of device used to capture or create the content (as either a commonly known name or as a locally defined name; e.g., Radio-camera)</Description>
+<Name>AS_07_Core_DMS_DeviceType</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010200</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010203</Identification>
+<Symbol>AS_07_Core_DMS_DeviceManufacturer</Symbol>
+<Description>The manufacturer or maker of the device</Description>
+<Name>AS_07_Core_DMS_DeviceManufacturer</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010200</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010204</Identification>
+<Symbol>AS_07_Core_DMS_DeviceModel</Symbol>
+<Description>Identifies the device model used in capturing or generating the essence.</Description>
+<Name>AS_07_Core_DMS_DeviceModel</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100600.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010200</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010205</Identification>
+<Symbol>AS_07_Core_DMS_DeviceSerialNumber</Symbol>
+<Description>Alphanumeric serial number identifying the individual device</Description>
+<Name>AS_07_Core_DMS_DeviceSerialNumber</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100600.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010200</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010206</Identification>
+<Symbol>AS_07_Core_DMS_DeviceUsageDescription</Symbol>
+<Description>Free text description of the function or use of the device in the production of a specific content item</Description>
+<Name>AS_07_Core_DMS_DeviceUsageDescription</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010200</MemberOf>
+</PropertyDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010200</Identification>
+<Symbol>AS_07_DMS_Device</Symbol>
+<Description>Description of a device used to capture or create the content</Description>
+<Name>AS_07_DMS_Device</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010302</Identification>
+<Symbol>AS_07_DMS_IdentifierValue</Symbol>
+<Description>Identifier Value</Description>
+<Name>AS_07_DMS_IdentifierValue</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010300</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010305</Identification>
+<Symbol>AS_07_DMS_IdentifierComment</Symbol>
+<Description>Free text comment pertaining to the additional identifier</Description>
+<Name>AS_07_DMS_IdentifierComment</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010300</MemberOf>
+</PropertyDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010300</Identification>
+<Symbol>AS_07_DMS_Identifier</Symbol>
+<Description>Description of a file or part identifier in an AS-07 file</Description>
+<Name>AS_07_DMS_Identifier</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010400.00000000</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010401</Identification>
+<Symbol>AS_07_GSP_DMS_Identifiers</Symbol>
+<Description>Unordered list of strong references to all AS_07_DMS_Identifier sets. At least one AS_07_DMS_Identifier Objects set is required with the IdentifierRole = Main. Other AS_07_DMSIdentifierObjects sets are optional.</Description>
+<Name>AS_07_GSP_DMS_Identifiers</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010301</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010400</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010402</Identification>
+<Symbol>AS_07_GSP_DMS_MIMEMediaType</Symbol>
+<Description>Text string that defines the data type of the text. A value shall be selected from the values listed at the following web site. http://www.iana.org/assignments/media-types/text/</Description>
+<Name>AS_07_GSP_DMS_MIMEMediaType</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010400</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07010404</Identification>
+<Symbol>AS_07_GSP_DMS_Note</Symbol>
+<Description>Free text note pertaining to the GSP data payload.</Description>
+<Name>AS_07_GSP_DMS_Note</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010400</MemberOf>
+</PropertyDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010400</Identification>
+<Symbol>AS_07_GSP_DMS_Object</Symbol>
+<Description>Additional GSP descriptive information for AS-07</Description>
+<Name>AS_07_GSP_DMS_Object</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010401.04020100</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07020100</Identification>
+<Symbol>AS_07_GSP_DMS_Framework</Symbol>
+<Description>Abstract GSP Object Group</Description>
+<Name>AS_07_GSP_DMS_Framework</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010401.04010100</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07020200</Identification>
+<Symbol>AS_07_GSP_BD_DMS_Framework</Symbol>
+<Description>Binary Data GSP Object Group</Description>
+<Name>AS_07_GSP_BD_DMS_Framework</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07020100</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07020301</Identification>
+<Symbol>AS_07_GSP_TD_DMS_PrimaryRFC5646LanguageCode</Symbol>
+<Description>Identifies the primary language in Timed Text by codes defined by RFC5646</Description>
+<Name>AS_07_GSP_TD_DMS_PrimaryRFC5646LanguageCode</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07020300</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07020302</Identification>
+<Symbol>AS_07_GSP_TD_DMS_SecondaryRFC5646LanguageCode</Symbol>
+<Description>Identifies the secondary language in Timed Text by codes defined by RFC5646.  If multiple secondary languages are present, the RFC tags in white space separated list. Use only when secondary languages are present and language is known.</Description>
+<Name>AS_07_GSP_TD_DMS_SecondaryRFC5646LanguageCode</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07020300</MemberOf>
+</PropertyDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07020300</Identification>
+<Symbol>AS_07_GSP_TD_DMS_Framework</Symbol>
+<Description>Text Data GSP Object Group</Description>
+<Name>AS_07_GSP_TD_DMS_Framework</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07020100</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07030101</Identification>
+<Symbol>AS_07_Segmentation_DMS_PartNumber</Symbol>
+<Description>Identifier for the part number. Combined with AS_07_Segmentation_DMS_PartTotal, these metadata items represent part numbers of the form 1 of 3, 2 of 3, 3 of 3 with AS_07_Segmentation_DMS_PartNumber being the first integer.</Description>
+<Name>AS_07_Segmentation_DMS_PartNumber</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07030100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07030102</Identification>
+<Symbol>AS_07_Segmentation_DMS_PartTotal</Symbol>
+<Description>The total number of parts in the program. Combined with AS_07_Segmentation_DMS_PartNumber, these metadata items represent part numbers of the form 1 of 3, 2 of 3, 3 of 3 with AS_07_Segmentation_DMS_PartTotal being the second integer.</Description>
+<Name>AS_07_Segmentation_DMS_PartTotal</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07030100</MemberOf>
+</PropertyDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07030100</Identification>
+<Symbol>AS_07_Segmentation_DMS_Framework</Symbol>
+<Description>Metadata for AS-07 files that segment essence data</Description>
+<Name>AS_07_Segmentation_DMS_Framework</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010701.01010100</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07040101</Identification>
+<Symbol>AS_07_DateTimeSymbol</Symbol>
+<Description>Symbol that specifies the timecode, values listed in the SMPTE Labels Register as defined by SMPTE ST 400</Description>
+<Name>AS_07_DateTimeSymbol</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07040100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07040102</Identification>
+<Symbol>AS_07_DateTimeEssenceTrackID</Symbol>
+<Description>Link to (value of) the Track ID of the audio track where the timecode data is stored in a Top Level Source Package</Description>
+<Name>AS_07_DateTimeEssenceTrackID</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07040100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07040103</Identification>
+<Symbol>AS_07_DateTimeChannelID</Symbol>
+<Description>The numerical channel identifier within the essence, if applicable.</Description>
+<Name>AS_07_DateTimeChannelID</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07040100</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.01010101.0d0e0101.07040104</Identification>
+<Symbol>AS_07_DateTimeDescription</Symbol>
+<Description>Additional optional text description of the timecode origin or role or details</Description>
+<Name>AS_07_DateTimeDescription</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07040100</MemberOf>
+</PropertyDefinition>
+<ClassDefinition>
+<Identification>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07040100</Identification>
+<Symbol>AS_07_TimecodeLabelSubdescriptor</Symbol>
+<Description>Timecode Label for AS-07 files</Description>
+<Name>AS_07_TimecodeLabelSubdescriptor</Name>
+<ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</ParentClass>
+<IsConcrete>true</IsConcrete>
+</ClassDefinition>
+<TypeDefinitionStrongObjectReference>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010200</Identification>
+<Symbol>StrongReferenceAS_07_DMS_Device</Symbol>
+<Description>StrongReference to AS_07_DMS_Device Set</Description>
+<Name>StrongReferenceAS_07_DMS_Device</Name>
+<ReferencedType>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010200</ReferencedType>
+</TypeDefinitionStrongObjectReference>
+<TypeDefinitionSet>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010201</Identification>
+<Symbol>StrongReferenceSetAS_07_DMS_Device</Symbol>
+<Description>Set of StrongReferences to AS_07_DMS_Device sets</Description>
+<Name>StrongReferenceSetAS_07_DMS_Device</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010200</ElementType>
+</TypeDefinitionSet>
+<TypeDefinitionStrongObjectReference>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010300</Identification>
+<Symbol>StrongReferenceAS_07_DMS_Identifier</Symbol>
+<Description>StrongReference to AS_07_DMS_Identifier Set</Description>
+<Name>StrongReferenceAS_07_DMS_Identifier</Name>
+<ReferencedType>urn:smpte:ul:060e2b34.027f0101.0d0e0101.07010300</ReferencedType>
+</TypeDefinitionStrongObjectReference>
+<TypeDefinitionSet>
+<Identification>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010301</Identification>
+<Symbol>StrongReferenceSetAS_07_DMS_Identifier</Symbol>
+<Description>Set of StrongReferences to AS_07_DMS_Identifier sets</Description>
+<Name>StrongReferenceSetAS_07_DMS_Identifier</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.0d0e0101.07010300</ElementType>
+</TypeDefinitionSet>
+</MetaDefinitions>
+</Extension>

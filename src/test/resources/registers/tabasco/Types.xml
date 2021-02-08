@@ -1,25 +1,28 @@
-<!-- ************************************* -->
-<!-- ************************************* -->
-<!-- ************************************* -->
-<!-- *****DO NOT EDIT THIS XML FILE******* -->
-<!-- ************************************* -->
-<!-- ************************************* -->
-<!-- ************************************* -->
-<!--  -->
-<!-- DRAFT REGISTER -->
-<!--  -->
-<!-- SMPTE METADATA REGISTER -->
-<!-- ####################### -->
-<!--  -->
-<!-- See https://registry.smpte-ra.org for SMPTE Metadata Registers resources including copies of the  -->
-<!-- SMPTE Metadata Registers that are suitable for editing. -->
-<!--  -->
-<!-- Contact -->
-<!-- ####### -->
-<!--  -->
-<!-- Please email:  30mr10wg-def@lists.smpte.org -->
-<!--  -->
-<!--  -->
+<!-- DO NOT EDIT THIS TAG -->
+<!-- master_commit_tag=v000000081 -->
+<!-- DO NOT EDIT THIS TAG -->
+<!--
+Copyright (c) 2020 SMPTE All rights reserved.
+
+The latest version of this document can be retrieved at
+
+http://smpte-ra.org/smpte-metadata-registry
+
+The document is constructed according to 
+
+ST 2003:2012  -  Types Dictionary Structure,
+
+which is available at http://dx.doi.org/10.5594/SMPTE.ST2003.2012
+
+Use of this file without consulting the corresponding SMPTE Engineering Document is NOT supported.  Interoperability will generally require adherence to additional guidelines and constraints specified in the corresponding prose document.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
 <TypesRegister xmlns="http://www.smpte-ra.org/schemas/2003/2012">
   <Entries>
     <Entry>
@@ -2749,39 +2752,6 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
-      <Symbol>HEVCCodedContentType</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.02010133.00000000</UL>
-      <Kind>LEAF</Kind>
-      <Name>HEVCCodedContentType</Name>
-      <DefiningDocument>SMPTE ST 381-5</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Enumeration</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</BaseType>
-      <Facets>
-        <Facet>
-          <Symbol>HEVCCodedContent_NotKnown</Symbol>
-          <Name>HEVCCodedContent_NotKnown</Name>
-          <Value>0</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Symbol>HEVCCodedContent_ProgressiveFramePicture</Symbol>
-          <Name>HEVCCodedContent_ProgressiveFramePicture</Name>
-          <Value>1</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Symbol>HEVCCodedContent_InterlacedFieldPicture</Symbol>
-          <Name>HEVCCodedContent_InterlacedFieldPicture</Name>
-          <Value>2</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-      </Facets>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>EnumeratedUInt16Types</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.02010200.00000000</UL>
       <Kind>NODE</Kind>
@@ -2982,22 +2952,6 @@
           <Value>urn:smpte:ul:060e2b34.0401010d.04010101.010d0000</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.010e0000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.010f0000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.01100000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.01110000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
       </Facets>
     </Entry>
     <Entry>
@@ -3120,30 +3074,6 @@
           <Value>urn:smpte:ul:060e2b34.0401010d.04010101.03080000</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.03090000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.030a0000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.030b0000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.030c0000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.030d0000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.030e0000</Value>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
       </Facets>
     </Entry>
     <Entry>
@@ -3185,10 +3115,6 @@
         <Facet>
           <Value>urn:smpte:ul:060e2b34.0401010d.04010101.02060000</Value>
           <Applications>AAF[1.1:]</Applications>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.02070000</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
       </Facets>
@@ -3753,32 +3679,6 @@
           <Symbol>Y</Symbol>
           <Name>Y Color Coordinate</Name>
           <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-      </Facets>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
-      <Symbol>J2KExtendedCapabilities</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.03010d00.00000000</UL>
-      <Kind>LEAF</Kind>
-      <Name>JPEG 2000 Extended Capabilities</Name>
-      <DefiningDocument>SMPTE ST 422</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Record</TypeKind>
-      <Facets>
-        <Facet>
-          <Symbol>Pcap</Symbol>
-          <Name>Pcap</Name>
-          <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Symbol>Ccapi</Symbol>
-          <Name>Ccapi</Name>
-          <Type>urn:smpte:ul:060e2b34.01040101.04011200.00000000</Type>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
       </Facets>
@@ -4425,19 +4325,6 @@
       <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Rename</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.01040101.04100100.00000000</BaseType>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
-      <Symbol>ST2109PayloadSeries</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.04100b00.00000000</UL>
-      <Kind>LEAF</Kind>
-      <Name>ST 2109 Payload Series</Name>
-      <DefiningDocument>SMPTE ST 2109</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>DefinedContext</ContextScope>
       <TypeKind>Rename</TypeKind>
       <BaseType>urn:smpte:ul:060e2b34.01040101.04100100.00000000</BaseType>
     </Entry>
@@ -10631,16 +10518,6 @@
       <Kind>NODE</Kind>
       <Name>Apple Inc.</Name>
       <Definition>Metadata registered by Apple Inc. for private use</Definition>
-      <IsDeprecated>false</IsDeprecated>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012/14/33</NamespaceName>
-      <Symbol>Fraunhofer</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0e210000.00000000</UL>
-      <Kind>NODE</Kind>
-      <Name>Fraunhofer</Name>
-      <Definition>Metadata registered by Fraunhofer for private use</Definition>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>

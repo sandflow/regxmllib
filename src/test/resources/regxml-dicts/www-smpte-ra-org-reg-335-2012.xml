@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--Created: Tue Feb 06 15:14:44 PST 2018--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<!--Created: Sun Feb 07 16:42:14 PST 2021--><!--By: regxmllib build 52f8ec992adbcba8bd18d9b06508c69a1e9c459b--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
 <SchemeID>urn:uuid:e9ad45b5-abdb-5f16-7ffc-ff560e475a87</SchemeID>
 <SchemeURI>http://www.smpte-ra.org/reg/335/2012</SchemeURI>
 <MetaDefinitions>
@@ -3515,6 +3515,17 @@
 <MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00</MemberOf>
 </PropertyDefinition>
 <PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.01020210.02040000</Identification>
+<Symbol>ConformsToSpecifications</Symbol>
+<Description>Identifies the specification(s) to which an MXF file conforms.</Description>
+<Name>Conforms To Specifications</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.04030100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
 <Identification>urn:smpte:ul:060e2b34.01010102.05200701.02010000</Identification>
 <Symbol>ApplicationSupplierName</Symbol>
 <Description>Specifies the name of the application provider</Description>
@@ -5111,6 +5122,39 @@
 <MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01015a00</MemberOf>
 </PropertyDefinition>
 <PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010603.0f000000</Identification>
+<Symbol>J2KExtendedCapabilities</Symbol>
+<Description>Signals that extended capabilities were used to create (and are recommended or required to decode) a codestream. The value is a record that comprises the Pcap parameter followed by an array of consisting of the Ccap(i) parameters of the CAP Marker Segment, as specified in ISO/IEC 15444-1.</Description>
+<Name>J2K Extended Capabilities</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.03010d00.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01015a00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010603.10000000</Identification>
+<Symbol>J2KProfile</Symbol>
+<Description>Signals the profile to which the codestream conforms. Profiles provide limits on the codestream syntax parameters. The value comprises an array of the Pprf(i) parameters of the PRF Marker Segment, as specified in ISO/IEC 15444-1.</Description>
+<Name>J2K Profile</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.04011200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01015a00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010603.11000000</Identification>
+<Symbol>J2KCorrespondingProfile</Symbol>
+<Description>Facilitate the reversible transcoding of HTJ2K codestreams, as specified in ISO/IEC 15444-15, to and from codestreams that conform to Rec. ISO/IEC 15444-1. The value comprises an array of the Pcpf(i) parameters of the CPF Marker Segment, as specified in ISO/IEC 15444-15.</Description>
+<Name>J2K Corresponding Profile</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.04011200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01015a00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
 <Identification>urn:smpte:ul:060e2b34.0101010a.04020403.01020000</Identification>
 <Symbol>MPEGAudioBitRate</Symbol>
 <Description>Specifies the rate of a compressed MPEG audio bitstream in kbit/s. The allowed values are typically determined by a given MPEG audio layer and mode.</Description>
@@ -5322,7 +5366,7 @@
 <PropertyDefinition>
 <Identification>urn:smpte:ul:060e2b34.0101010e.03010102.02160000</Identification>
 <Symbol>RFC5646LanguageTagList</Symbol>
-<Description>Identifies one or more languages as a comma-separated list of RFC 5646 language tags.</Description>
+<Description>An RFC 5646 Language Tag List that identifies one or more languages as a comma-separated list of RFC 5646 language tags.</Description>
 <Name>RFC 5646 Language Tag List</Name>
 <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
 <IsOptional>true</IsOptional>
@@ -5333,7 +5377,7 @@
 <PropertyDefinition>
 <Identification>urn:smpte:ul:060e2b34.0101010e.06010102.04000000</Identification>
 <Symbol>DisplayType</Symbol>
-<Description>Indicates the type of display device intended for use with the enclosed XML resource</Description>
+<Description>A text string giving an application specific means to indicate the intended use of the content of the XML document.</Description>
 <Name>Display Type</Name>
 <Type>urn:smpte:ul:060e2b34.01040101.01100200.00000000</Type>
 <IsOptional>true</IsOptional>
@@ -6221,6 +6265,369 @@
 <IsUniqueIdentifier>false</IsUniqueIdentifier>
 <LocalIdentification>0</LocalIdentification>
 <MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01017a00</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02030000</Identification>
+<Symbol>HEVCConstantBPictureFlag</Symbol>
+<Description>TRUE if the number of B Pictures is always constant</Description>
+<Name>HEVC Constant B Picture Flag</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02040000</Identification>
+<Symbol>HEVCCodedContentKind</Symbol>
+<Description>Enumerated value specifying Picture type and Coding type</Description>
+<Name>HEVC Coded Content Kind</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.02010133.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02060000</Identification>
+<Symbol>HEVCClosedGOPIndicator</Symbol>
+<Description>TRUE if all GOPs are started with IDR Picture.</Description>
+<Name>HEVC Closed GOP Indicator</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02070000</Identification>
+<Symbol>HEVCIdenticalGOPIndicator</Symbol>
+<Description>TRUE if every GOP in the sequence has the same number of pictures and the same types of pictures in  the same order.</Description>
+<Name>HEVC Identical GOP Indicator</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02080000</Identification>
+<Symbol>HEVCMaximumGOPSize</Symbol>
+<Description>Specifies the maximum occurring spacing between I Pictures</Description>
+<Name>HEVC Maximum GOP Size</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02090000</Identification>
+<Symbol>HEVCMaximumBPictureCount</Symbol>
+<Description>Specifies the maximum number of B Pictures between P or I Pictures</Description>
+<Name>HEVC Maximum B-Picture Count</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.020a0000</Identification>
+<Symbol>HEVCProfile</Symbol>
+<Description>Specifies the HEVC video profile</Description>
+<Name>HEVC Profile</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.020b0000</Identification>
+<Symbol>HEVCMaximumBitRate</Symbol>
+<Description>Maximum bit rate of the HEVC stream in bit/s</Description>
+<Name>HEVC Maximum Bit Rate</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.020c0000</Identification>
+<Symbol>HEVCProfileConstraint</Symbol>
+<Description>Specifies the HEVC video profile constraint flags</Description>
+<Name>HEVC Profile Constraint</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.020d0000</Identification>
+<Symbol>HEVCLevel</Symbol>
+<Description>Specifies the HEVC level</Description>
+<Name>HEVC Level</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.020e0000</Identification>
+<Symbol>HEVCDecodingDelay</Symbol>
+<Description>Specifies the delay required for decoded pictures in number of access units</Description>
+<Name>HEVC Decoding Delay</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.020f0000</Identification>
+<Symbol>HEVCMaximumRefFrames</Symbol>
+<Description>Specifies the maximum number of reference frames</Description>
+<Name>HEVC Maximum Ref Frames</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02100000</Identification>
+<Symbol>HEVCSequenceParameterSetFlag</Symbol>
+<Description>Specifies the location and the constancy of sequence parameter sets</Description>
+<Name>HEVC Sequence Parameter Set Flag</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02110000</Identification>
+<Symbol>HEVCPictureParameterSetFlag</Symbol>
+<Description>Specifies the location and the constancy of picture parameter sets</Description>
+<Name>HEVC Picture Parameter Set Flag</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02120000</Identification>
+<Symbol>HEVCTier</Symbol>
+<Description>Specifies the HEVC tier</Description>
+<Name>HEVC Tier</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02130000</Identification>
+<Symbol>HEVCVideoParameterSetFlag</Symbol>
+<Description>Specifies the location and the constancy of video parameter sets</Description>
+<Name>HEVC Video Parameter Set Flag</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02140000</Identification>
+<Symbol>HEVCAverageBitRate</Symbol>
+<Description>Average bit rate of the HEVC stream in bit/s</Description>
+<Name>HEVC Average Bit Rate</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02150000</Identification>
+<Symbol>HEVCCTUSize</Symbol>
+<Description>Specifies the size of CTU</Description>
+<Name>HEVC CTU Size</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02160000</Identification>
+<Symbol>HEVCTileUniformSpacingFlag</Symbol>
+<Description>TRUE if tile column boundaries and tile row boundaries are distributed uniformly</Description>
+<Name>HEVC Tile Uniform Spacing Flag</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01040100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02170000</Identification>
+<Symbol>HEVCTileColumnsMinus1</Symbol>
+<Description>Specifies the number of tile columns minus 1</Description>
+<Name>HEVC Tile Columns Minus 1</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02180000</Identification>
+<Symbol>HEVCTileRowsMinus1</Symbol>
+<Description>Specifies the number of tile rows minus 1</Description>
+<Name>HEVC Tile Rows Minus 1</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.02190000</Identification>
+<Symbol>HEVCTileWidthMinus1</Symbol>
+<Description>Specifies the width minus 1 of tiles in units of CTBs</Description>
+<Name>HEVC Tile Width Minus 1</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.04011200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.021a0000</Identification>
+<Symbol>HEVCTileHeightMinus1</Symbol>
+<Description>Specifies the height minus 1 of tiles in units of CTBs</Description>
+<Name>HEVC Tile Height Minus 1</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.04011200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.04010606.021b0000</Identification>
+<Symbol>HEVCNumberOfPPSs</Symbol>
+<Description>Spefifies the maximum number of picture parameter sets that have different pps_pic_parameter_set_id in each GOP</Description>
+<Name>HEVC Number of PPSs</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018101</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.01000000</Identification>
+<Symbol>JPEGXSPpih</Symbol>
+<Description>Specifies the JPEG XS Profile</Description>
+<Name>JPEG XS Ppih</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.02000000</Identification>
+<Symbol>JPEGXSPlev</Symbol>
+<Description>Specifies the JPEG XS Level</Description>
+<Name>JPEG XS Plev</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.03000000</Identification>
+<Symbol>JPEGXSWf</Symbol>
+<Description>Specifies the width of the image</Description>
+<Name>JPEG XS Wf</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.04000000</Identification>
+<Symbol>JPEGXSHf</Symbol>
+<Description>Specifies the height of the image</Description>
+<Name>JPEG XS Hf</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.05000000</Identification>
+<Symbol>JPEGXSNc</Symbol>
+<Description>Specifies the number of components in the image</Description>
+<Name>JPEG XS Nc</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010100.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.06000000</Identification>
+<Symbol>JPEGXSComponentTable</Symbol>
+<Description>A byte-wise copy of the component_table Marker Segment in the codestream</Description>
+<Name>JPEG XS Component Table</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.04010100.00000000</Type>
+<IsOptional>false</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.07000000</Identification>
+<Symbol>JPEGXSCw</Symbol>
+<Description>Specifies the width of a precinct</Description>
+<Name>JPEG XS Cw</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.08000000</Identification>
+<Symbol>JPEGXSHsl</Symbol>
+<Description>Specifies the height of a slice</Description>
+<Name>JPEG XS Hsl</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
+</PropertyDefinition>
+<PropertyDefinition>
+<Identification>urn:smpte:ul:060e2b34.0101010e.0401060b.09000000</Identification>
+<Symbol>JPEGXSMaximumBitrate</Symbol>
+<Description>Specifies the maximum bit rate in Mbit/s</Description>
+<Name>JPEG XS Maximum Bit Rate</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<IsOptional>true</IsOptional>
+<IsUniqueIdentifier>false</IsUniqueIdentifier>
+<LocalIdentification>0</LocalIdentification>
+<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010101.01018102</MemberOf>
 </PropertyDefinition>
 <PropertyDefinition>
 <Identification>urn:smpte:ul:060e2b34.01010102.06010107.01000000</Identification>
@@ -7818,17 +8225,6 @@
 <MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010401.01180100</MemberOf>
 </PropertyDefinition>
 <PropertyDefinition>
-<Identification>urn:smpte:ul:060e2b34.01010103.02300501.02000000</Identification>
-<Symbol>JobFunctionCode</Symbol>
-<Description>Code for the function of the participating parties (e.g., editor, actor)</Description>
-<Name>Job Function Code</Name>
-<Type>urn:smpte:ul:060e2b34.01040101.02020204.00000000</Type>
-<IsOptional>true</IsOptional>
-<IsUniqueIdentifier>false</IsUniqueIdentifier>
-<LocalIdentification>0</LocalIdentification>
-<MemberOf>urn:smpte:ul:060e2b34.027f0101.0d010401.01180100</MemberOf>
-</PropertyDefinition>
-<PropertyDefinition>
 <Identification>urn:smpte:ul:060e2b34.01010103.02300502.01000000</Identification>
 <Symbol>RoleName</Symbol>
 <Description>eg. Name of character played</Description>
@@ -9129,7 +9525,7 @@
 <PropertyDefinition>
 <Identification>urn:smpte:ul:060e2b34.0101010e.04020301.0f000000</Identification>
 <Symbol>IABSampleRate</Symbol>
-<Description>Indicates the sample rate of the audio essence contained in the bistream</Description>
+<Description>Sample rate of the audio essence contained in the bistream</Description>
 <Name>IAB Sample Rate</Name>
 <Type>urn:smpte:ul:060e2b34.01040101.03010100.00000000</Type>
 <IsOptional>true</IsOptional>
