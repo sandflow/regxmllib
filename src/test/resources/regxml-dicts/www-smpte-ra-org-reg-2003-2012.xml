@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--Created: Tue Feb 06 15:14:44 PST 2018--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<!--Created: Sun Feb 07 16:42:14 PST 2021--><!--By: regxmllib build 52f8ec992adbcba8bd18d9b06508c69a1e9c459b--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
 <SchemeID>urn:uuid:eb4c6bf8-c197-5ffe-7f01-2123ea606f17</SchemeID>
 <SchemeURI>http://www.smpte-ra.org/reg/2003/2012</SchemeURI>
 <MetaDefinitions>
@@ -127,18 +127,6 @@
 <Size>4</Size>
 <IsSigned>true</IsSigned>
 </TypeDefinitionInteger>
-<TypeDefinitionFloat>
-<Identification>urn:smpte:ul:060e2b34.01040101.01020200.00000000</Identification>
-<Symbol>Double</Symbol>
-<Name>Double</Name>
-<Size>8</Size>
-</TypeDefinitionFloat>
-<TypeDefinitionFloat>
-<Identification>urn:smpte:ul:060e2b34.01040101.01020300.00000000</Identification>
-<Symbol>HalfFloat</Symbol>
-<Name>HalfFloat</Name>
-<Size>2</Size>
-</TypeDefinitionFloat>
 <TypeDefinitionRecord>
 <Identification>urn:smpte:ul:060e2b34.01040101.01030100.00000000</Identification>
 <Symbol>AUID</Symbol>
@@ -274,7 +262,7 @@
 <TypeDefinitionRename>
 <Identification>urn:smpte:ul:060e2b34.01040101.01200800.00000000</Identification>
 <Symbol>CanonicalEIDRIdentifierType</Symbol>
-<Description>Canonical EIDR Identifier as specified in RP 2079</Description>
+<Description>Canonical EIDR Content Identifier as specified in RP 2079. NOTE: This type refers to EIDR Content Identifiers exclusively. Other types, e.g. CanonicalEIDRServiceIdentifierType, are used to refer to other kinds of EIDR Identifiers.</Description>
 <Name>Canonical EIDR Identifier Type</Name>
 <RenamedType>urn:smpte:ul:060e2b34.01040101.01200700.00000000</RenamedType>
 </TypeDefinitionRename>
@@ -284,6 +272,13 @@
 <Description>Canonical Full Ad-ID Identifier Type</Description>
 <Name>Canonical Full Ad-ID Identifier Type</Name>
 <RenamedType>urn:smpte:ul:060e2b34.01040101.01100200.00000000</RenamedType>
+</TypeDefinitionRename>
+<TypeDefinitionRename>
+<Identification>urn:smpte:ul:060e2b34.01040101.01200b00.00000000</Identification>
+<Symbol>CanonicalEIDRServiceIdentifierType</Symbol>
+<Description>Canonical EIDR Service Identifier as specified in RP 2079</Description>
+<Name>Canonical EIDR Service Identifier Type</Name>
+<RenamedType>urn:smpte:ul:060e2b34.01040101.01200700.00000000</RenamedType>
 </TypeDefinitionRename>
 <TypeDefinitionRename>
 <Identification>urn:smpte:ul:060e2b34.01040101.01300100.00000000</Identification>
@@ -988,6 +983,20 @@
 </Elements>
 </TypeDefinitionEnumeration>
 <TypeDefinitionEnumeration>
+<Identification>urn:smpte:ul:060e2b34.01040101.02010133.00000000</Identification>
+<Symbol>HEVCCodedContentType</Symbol>
+<Name>HEVCCodedContentType</Name>
+<ElementType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</ElementType>
+<Elements>
+<Name>HEVCCodedContent_NotKnown</Name>
+<Value>0</Value>
+<Name>HEVCCodedContent_ProgressiveFramePicture</Name>
+<Value>1</Value>
+<Name>HEVCCodedContent_InterlacedFieldPicture</Name>
+<Value>2</Value>
+</Elements>
+</TypeDefinitionEnumeration>
+<TypeDefinitionEnumeration>
 <Identification>urn:smpte:ul:060e2b34.01040101.02010201.00000000</Identification>
 <Symbol>TIFFByteOrderType</Symbol>
 <Name>TIFFByteOrderType</Name>
@@ -1063,55 +1072,6 @@
 <Symbol>ViewingEnvironmentType</Symbol>
 <Name>Viewing Environment Type</Name>
 </TypeDefinitionExtendibleEnumeration>
-<TypeDefinitionEnumeration>
-<Identification>urn:smpte:ul:060e2b34.01040101.02020201.00000000</Identification>
-<Symbol>ContractTypeCode</Symbol>
-<Name>ContractTypeCode</Name>
-<ElementType>urn:smpte:ul:060e2b34.01040101.01100400.00000000</ElementType>
-<Elements/>
-</TypeDefinitionEnumeration>
-<TypeDefinitionEnumeration>
-<Identification>urn:smpte:ul:060e2b34.01040101.02020202.00000000</Identification>
-<Symbol>ContractLineCode</Symbol>
-<Name>ContractLineCode</Name>
-<ElementType>urn:smpte:ul:060e2b34.01040101.01100400.00000000</ElementType>
-<Elements/>
-</TypeDefinitionEnumeration>
-<TypeDefinitionEnumeration>
-<Identification>urn:smpte:ul:060e2b34.01040101.02020203.00000000</Identification>
-<Symbol>PublishingMediumCode</Symbol>
-<Name>PublishingMediumCode</Name>
-<ElementType>urn:smpte:ul:060e2b34.01040101.01100400.00000000</ElementType>
-<Elements/>
-</TypeDefinitionEnumeration>
-<TypeDefinitionEnumeration>
-<Identification>urn:smpte:ul:060e2b34.01040101.02020204.00000000</Identification>
-<Symbol>JobFunctionCode</Symbol>
-<Name>JobFunctionCode</Name>
-<ElementType>urn:smpte:ul:060e2b34.01040101.01100400.00000000</ElementType>
-<Elements/>
-</TypeDefinitionEnumeration>
-<TypeDefinitionEnumeration>
-<Identification>urn:smpte:ul:060e2b34.01040101.02020205.00000000</Identification>
-<Symbol>ObjectTypeCode</Symbol>
-<Name>ObjectTypeCode</Name>
-<ElementType>urn:smpte:ul:060e2b34.01040101.01100400.00000000</ElementType>
-<Elements/>
-</TypeDefinitionEnumeration>
-<TypeDefinitionEnumeration>
-<Identification>urn:smpte:ul:060e2b34.01040101.02020206.00000000</Identification>
-<Symbol>GammaCode</Symbol>
-<Name>GammaCode</Name>
-<ElementType>urn:smpte:ul:060e2b34.01040101.01100400.00000000</ElementType>
-<Elements/>
-</TypeDefinitionEnumeration>
-<TypeDefinitionEnumeration>
-<Identification>urn:smpte:ul:060e2b34.01040101.02020207.00000000</Identification>
-<Symbol>SamplingStructureCode</Symbol>
-<Name>SamplingStructureCode</Name>
-<ElementType>urn:smpte:ul:060e2b34.01040101.01100400.00000000</ElementType>
-<Elements/>
-</TypeDefinitionEnumeration>
 <TypeDefinitionRecord>
 <Identification>urn:smpte:ul:060e2b34.01040101.03010100.00000000</Identification>
 <Symbol>Rational</Symbol>
@@ -1262,6 +1222,17 @@
 <Type>urn:smpte:ul:060e2b34.01040101.01010200.00000000</Type>
 </Members>
 </TypeDefinitionRecord>
+<TypeDefinitionRecord>
+<Identification>urn:smpte:ul:060e2b34.01040101.03010d00.00000000</Identification>
+<Symbol>J2KExtendedCapabilities</Symbol>
+<Name>JPEG 2000 Extended Capabilities</Name>
+<Members>
+<Name>Pcap</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+<Name>Ccapi</Name>
+<Type>urn:smpte:ul:060e2b34.01040101.04011200.00000000</Type>
+</Members>
+</TypeDefinitionRecord>
 <TypeDefinitionVariableArray>
 <Identification>urn:smpte:ul:060e2b34.01040101.04010100.00000000</Identification>
 <Symbol>UInt8Array</Symbol>
@@ -1377,12 +1348,6 @@
 <Symbol>UInt16Array</Symbol>
 <Name>UInt16Array</Name>
 <ElementType>urn:smpte:ul:060e2b34.01040101.01010200.00000000</ElementType>
-</TypeDefinitionVariableArray>
-<TypeDefinitionVariableArray>
-<Identification>urn:smpte:ul:060e2b34.01040101.04011300.00000000</Identification>
-<Symbol>HalfFloatArray</Symbol>
-<Name>HalfFloatArray</Name>
-<ElementType>urn:smpte:ul:060e2b34.01040101.01020300.00000000</ElementType>
 </TypeDefinitionVariableArray>
 <TypeDefinitionVariableArray>
 <Identification>urn:smpte:ul:060e2b34.01040101.04011400.00000000</Identification>
@@ -1531,6 +1496,12 @@
 <Identification>urn:smpte:ul:060e2b34.01040101.04100a00.00000000</Identification>
 <Symbol>DeltaEntry</Symbol>
 <Name>DeltaEntry</Name>
+<RenamedType>urn:smpte:ul:060e2b34.01040101.04100100.00000000</RenamedType>
+</TypeDefinitionRename>
+<TypeDefinitionRename>
+<Identification>urn:smpte:ul:060e2b34.01040101.04100b00.00000000</Identification>
+<Symbol>ST2109PayloadSeries</Symbol>
+<Name>ST 2109 Payload Series</Name>
 <RenamedType>urn:smpte:ul:060e2b34.01040101.04100100.00000000</RenamedType>
 </TypeDefinitionRename>
 <TypeDefinitionWeakObjectReference>

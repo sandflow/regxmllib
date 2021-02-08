@@ -29,27 +29,31 @@ import com.sandflow.smpte.klv.exceptions.KLVException;
 import com.sandflow.smpte.register.ElementsRegister;
 import com.sandflow.smpte.register.GroupsRegister;
 import com.sandflow.smpte.register.TypesRegister;
-import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
 import com.sandflow.smpte.util.UL;
 import com.sandflow.util.events.Event;
 import com.sandflow.util.events.EventHandler;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import static org.junit.Assert.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
@@ -61,38 +65,51 @@ import org.xml.sax.SAXException;
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class MXFFragmentBuilderTest extends TestCase {
+@RunWith(Parameterized.class)
+public class MXFFragmentBuilderTest {
 
     private final static Logger LOG = Logger.getLogger(MXFFragmentBuilderTest.class.getName());
 
     private static final UL PREFACE_KEY
         = UL.fromURN("urn:smpte:ul:060e2b34.027f0101.0d010101.01012f00");
 
-    private MetaDictionaryCollection mds_catsup;
-    private MetaDictionaryCollection mds_brown_sauce;
-    private MetaDictionaryCollection mds_snapshot;
-    private MetaDictionaryCollection mds_ponzu;
+    private final static String registers_dir_path = "registers";
+    private final static String mxf_files_dir_path = "mxf-files";
+    private final static String ref_files_dir_path = "regxml-files";
+    
+    private final MetaDictionaryCollection mds;
+    private final String ref_file_name;
+    private final DocumentBuilder db;
 
-    private DocumentBuilder db;
+    @Parameters(name = "Test file {1} against Release {0}")
+    public static Iterable<? extends Object[]> data() throws URISyntaxException {
 
-    public MXFFragmentBuilderTest(String testName) {
-        super(testName);
-    }
+        File ref_files_dir = new File(ClassLoader.getSystemResource(MXFFragmentBuilderTest.ref_files_dir_path).toURI());
 
-    private MetaDictionaryCollection buildDictionaryCollection(
-        String er_path,
-        String gr_path,
-        String tr_path
-    ) throws JAXBException, IOException, DuplicateEntryException, Exception {
+        ArrayList<String[]> params = new ArrayList<>();
 
+        for (String ref_file_name : ref_files_dir.list()) {
+
+            params.add(new String[]{"snapshot", ref_file_name});
+
+        }
+
+        return params;
+     }
+
+    public MXFFragmentBuilderTest(String register_codename, String ref_file_name) throws Exception {
+
+        final String register_dir = MXFFragmentBuilderTest.registers_dir_path + "/" + register_codename + "/";
+        
         /* load the registers */
-        Reader fe = new InputStreamReader(ClassLoader.getSystemResourceAsStream(er_path));
+
+        Reader fe = new InputStreamReader(ClassLoader.getSystemResourceAsStream(register_dir + "Elements.xml"));
         assertNotNull(fe);
 
-        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream(gr_path));
+        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream(register_dir + "Groups.xml"));
         assertNotNull(fg);
 
-        Reader ft = new InputStreamReader(ClassLoader.getSystemResourceAsStream(tr_path));
+        Reader ft = new InputStreamReader(ClassLoader.getSystemResourceAsStream(register_dir + "Types.xml"));
         assertNotNull(ft);
 
         ElementsRegister ereg = ElementsRegister.fromXML(fe);
@@ -105,6 +122,7 @@ public class MXFFragmentBuilderTest extends TestCase {
         assertNotNull(treg);
 
         /* build the dictionaries */
+
         EventHandler evthandler = new EventHandler() {
 
             @Override
@@ -115,86 +133,49 @@ public class MXFFragmentBuilderTest extends TestCase {
                 switch (evt.getSeverity()) {
                     case FATAL:
                         LOG.severe(msg);
-                        return false;
-                    case INFO:
-                        LOG.info(msg);
                         break;
                     case ERROR:
+                    case INFO:
                     case WARN:
-                        LOG.warning(msg);
+                        break;
                 }
                 return true;
             }
         };
 
-        return fromRegister(treg, greg, ereg, evthandler);
+        this.mds = fromRegister(treg, greg, ereg, evthandler);
 
-    }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
-        /* build the dictionaries */
-        mds_catsup = buildDictionaryCollection(
-            "registers/catsup/Elements.xml",
-            "registers/catsup/Groups.xml",
-            "registers/catsup/Types.xml"
-        );
-
-        assertNotNull(mds_catsup);
-
-        /* build the dictionaries */
-        mds_brown_sauce = buildDictionaryCollection(
-            "registers/brown_sauce/Elements.xml",
-            "registers/brown_sauce/Groups.xml",
-            "registers/brown_sauce/Types.xml"
-        );
-
-        assertNotNull(mds_brown_sauce);
-
-        /* build the dictionaries */
-        mds_snapshot = buildDictionaryCollection(
-            "registers/snapshot/Elements.xml",
-            "registers/snapshot/Groups.xml",
-            "registers/snapshot/Types.xml"
-        );
-
-        assertNotNull(mds_snapshot);
-
-        mds_ponzu = buildDictionaryCollection(
-            "registers/ponzu/Elements.xml",
-            "registers/ponzu/Groups.xml",
-            "registers/ponzu/Types.xml"
-        );
-
-        assertNotNull(mds_ponzu);
-
+        assertNotNull(mds);
 
         /* setup the doc builder */
+
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
         dbf.setCoalescing(true);
         dbf.setIgnoringElementContentWhitespace(true);
         dbf.setIgnoringComments(true);
-        db = dbf.newDocumentBuilder();
 
-        assertNotNull(db);
+        this.db = dbf.newDocumentBuilder();
+
+        assertNotNull(this.db);
+
+        /* remember the test file name */
+
+        this.ref_file_name = ref_file_name;
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    private void compareGeneratedVsRef(MetaDictionaryCollection mds, String spath, String refpath) throws IOException, SAXException, KLVException, MXFFragmentBuilder.MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
+    @Test
+    public void testGeneratedAgainstReference() throws IOException, SAXException, KLVException, MXFFragmentBuilder.MXFException, ParserConfigurationException, FragmentBuilder.RuleException {
 
         /* get the sample files */
-        InputStream sampleis = ClassLoader.getSystemResourceAsStream(spath);
+        final String mxf_file_name = this.ref_file_name.substring(0, this.ref_file_name.lastIndexOf('.')) + ".mxf";
+
+        InputStream sampleis = ClassLoader.getSystemResourceAsStream(MXFFragmentBuilderTest.mxf_files_dir_path + "/" + mxf_file_name);
+
         assertNotNull(sampleis);
 
         /* build the regxml fragment */
-        Document gendoc = db.newDocument();
+        Document gendoc = this.db.newDocument();
 
         assertNotNull(gendoc);
 
@@ -226,9 +207,9 @@ public class MXFFragmentBuilderTest extends TestCase {
 
         gendoc.appendChild(gendf);
 
-
         /* load the reference document */
-        InputStream refis = ClassLoader.getSystemResourceAsStream(refpath);
+
+        InputStream refis = ClassLoader.getSystemResourceAsStream(MXFFragmentBuilderTest.ref_files_dir_path + "/" + this.ref_file_name);
         assertNotNull(refis);
 
         Document refdoc = db.parse(refis);
@@ -236,137 +217,6 @@ public class MXFFragmentBuilderTest extends TestCase {
 
         /* compare the ref vs the generated */
         assertTrue(compareDOMElement(gendoc.getDocumentElement(), refdoc.getDocumentElement()));
-
-    }
-
-    public void testAudio1AgainstCatsup() throws Exception {
-
-        compareGeneratedVsRef(mds_catsup, "mxf-files/audio1.mxf", "regxml-files/audio1.xml");
-
-    }
-
-    public void testAudio2AgainstCatsup() throws Exception {
-
-        compareGeneratedVsRef(mds_catsup, "mxf-files/audio2.mxf", "regxml-files/audio2.xml");
-
-    }
-
-    public void testVideo1AgainstCatsup() throws Exception {
-
-        compareGeneratedVsRef(mds_catsup, "mxf-files/video1.mxf", "regxml-files/video1.xml");
-
-    }
-
-    public void testVideo2AgainstCatsup() throws Exception {
-
-        compareGeneratedVsRef(mds_catsup, "mxf-files/video2.mxf", "regxml-files/video2.xml");
-
-    }
-
-    public void testIndirectAgainstCatsup() throws Exception {
-
-        compareGeneratedVsRef(mds_catsup, "mxf-files/indirect.mxf", "regxml-files/indirect.xml");
-
-    }
-
-    public void testUTF8AgainstCatsup() throws Exception {
-
-        compareGeneratedVsRef(mds_catsup, "mxf-files/utf8_embedded_text.mxf", "regxml-files/utf8_embedded_text.xml");
-
-    }
-
-    public void testEscapeCharsAgainstCatsup() throws Exception {
-
-        compareGeneratedVsRef(mds_catsup, "mxf-files/escape-chars.mxf", "regxml-files/escape-chars.xml");
-
-    }
-
-    public void testAudio1AgainstBrownSauce() throws Exception {
-
-        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/audio1.mxf", "regxml-files/audio1.xml");
-
-    }
-
-    public void testAudio2AgainstBrownSauce() throws Exception {
-
-        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/audio2.mxf", "regxml-files/audio2.xml");
-
-    }
-
-    public void testVideo1AgainstBrownSauce() throws Exception {
-
-        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/video1.mxf", "regxml-files/video1.xml");
-
-    }
-
-    public void testVideo2AgainstBrownSauce() throws Exception {
-
-        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/video2.mxf", "regxml-files/video2.xml");
-
-    }
-
-    public void testIndirectAgainstBrownSauce() throws Exception {
-
-        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/indirect.mxf", "regxml-files/indirect.xml");
-
-    }
-
-    public void testUTF8AgainstBrownSauce() throws Exception {
-
-        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/utf8_embedded_text.mxf", "regxml-files/utf8_embedded_text.xml");
-
-    }
-
-    public void testEscapeCharsAgainstBrownSauce() throws Exception {
-
-        compareGeneratedVsRef(mds_brown_sauce, "mxf-files/escape-chars.mxf", "regxml-files/escape-chars.xml");
-
-    }
-
-    public void testClass14AgainstSnapshot() throws Exception {
-
-        compareGeneratedVsRef(mds_snapshot, "mxf-files/class14.mxf", "regxml-files/class14.xml");
-    }
-
-    public void testAudio1AgainstPonzu() throws Exception {
-
-        compareGeneratedVsRef(mds_ponzu, "mxf-files/audio1.mxf", "regxml-files/audio1.xml");
-
-    }
-
-    public void testAudio2AgainstPonzu() throws Exception {
-
-        compareGeneratedVsRef(mds_ponzu, "mxf-files/audio2.mxf", "regxml-files/audio2.xml");
-
-    }
-
-    public void testVideo1AgainstPonzu() throws Exception {
-
-        compareGeneratedVsRef(mds_ponzu, "mxf-files/video1.mxf", "regxml-files/video1.xml");
-
-    }
-
-    public void testVideo2AgainstPonzu() throws Exception {
-
-        compareGeneratedVsRef(mds_ponzu, "mxf-files/video2.mxf", "regxml-files/video2.xml");
-
-    }
-
-    public void testIndirectAgainstPonzu() throws Exception {
-
-        compareGeneratedVsRef(mds_ponzu, "mxf-files/indirect.mxf", "regxml-files/indirect.xml");
-
-    }
-
-    public void testUTF8AgainstPonzu() throws Exception {
-
-        compareGeneratedVsRef(mds_ponzu, "mxf-files/utf8_embedded_text.mxf", "regxml-files/utf8_embedded_text.xml");
-
-    }
-
-    public void testEscapeCharsAgainstPonzu() throws Exception {
-
-        compareGeneratedVsRef(mds_ponzu, "mxf-files/escape-chars.mxf", "regxml-files/escape-chars.xml");
 
     }
 
