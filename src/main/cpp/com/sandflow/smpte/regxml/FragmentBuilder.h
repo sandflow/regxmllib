@@ -53,6 +53,7 @@
 #include "com/sandflow/smpte/regxml/definitions/VariableArrayTypeDefinition.h"
 #include "com/sandflow/smpte/regxml/definitions/WeakReferenceTypeDefinition.h"
 #include "com/sandflow/smpte/regxml/definitions/LensSerialFloatTypeDefinition.h"
+#include "com/sandflow/smpte/regxml/definitions/FloatTypeDefinition.h"
 #include "com/sandflow/util/events/EventHandler.h"
 #include "com/sandflow/util/events/NullEventHandler.h"
 #include "com/sandflow/util/strformat.h"

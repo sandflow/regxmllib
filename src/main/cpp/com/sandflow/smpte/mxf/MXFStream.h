@@ -41,7 +41,7 @@ namespace rxml {
 
 	public:
 
-		basic_mxfistream(std::basic_streambuf<CharT, Traits>* sb, typename basic_klvistream<CharT, Traits>::ByteOrder bo = (basic_klvistream<CharT, Traits>::BIG_ENDIAN_BYTE_ORDER)) : basic_klvistream<CharT, Traits>(sb, bo) {}
+		basic_mxfistream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER) : basic_klvistream<CharT, Traits>(sb, bo) {}
 
 		/*void readUUID(UUID &uuid);*/
 		UUID readUUID();

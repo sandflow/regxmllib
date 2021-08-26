@@ -44,6 +44,7 @@
 #include "com/sandflow/smpte/regxml/definitions/VariableArrayTypeDefinition.h"
 #include "com/sandflow/smpte/regxml/definitions/WeakReferenceTypeDefinition.h"
 #include "com/sandflow/smpte/regxml/definitions/LensSerialFloatTypeDefinition.h"
+#include "com/sandflow/smpte/regxml/definitions/FloatTypeDefinition.h"
 
 namespace rxml {
 
@@ -224,6 +225,12 @@ namespace rxml {
 
 		virtual void visit(const SetTypeDefinition & def) {
 			Definition *def_copy = new SetTypeDefinition(def);
+
+			if (!_visit(def_copy)) delete def_copy;
+		}
+
+		virtual void visit(const FloatTypeDefinition& def) {
+			Definition* def_copy = new FloatTypeDefinition(def);
 
 			if (!_visit(def_copy)) delete def_copy;
 		}

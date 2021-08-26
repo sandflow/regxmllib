@@ -24,7 +24,6 @@
 * POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "com/sandflow/smpte/mxf/Set.h"
 #include "Set.h"
 #include "com/sandflow/smpte/klv/MemoryTriplet.h"
 
@@ -63,7 +62,6 @@ namespace rxml {
 			MemoryTriplet *t = new MemoryTriplet(**it);
 
 			items.push_back(t);
-
 		}
 
 		this->key = g.getKey();

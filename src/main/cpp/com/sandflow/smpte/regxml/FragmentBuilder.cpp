@@ -691,7 +691,7 @@ namespace rxml {
 
 		if (definition->identification.equals(Character_UL)) {
 
-			if (value.getByteOrder() == MXFInputStream::BIG_ENDIAN_BYTE_ORDER) {
+			if (value.getByteOrder() == BIG_ENDIAN_BYTE_ORDER) {
 
 				codec = "UTF-16BE";
 
@@ -961,14 +961,14 @@ namespace rxml {
 	void FragmentBuilder::applyRule5_5(xercesc::DOMElement * element, MXFInputStream & value, const IndirectTypeDefinition * definition) {
 
 		/* see https://github.com/sandflow/regxmllib/issues/74 for a discussion on Indirect Type */
-		KLVStream::ByteOrder bo;
+		ByteOrder bo;
 
 		switch (value.readUnsignedByte()) {
 		case 0x4c /* little endian */:
-			bo = KLVStream::LITTLE_ENDIAN_BYTE_ORDER;
+			bo = LITTLE_ENDIAN_BYTE_ORDER;
 			break;
 		case 0x42 /* big endian */:
-			bo = KLVStream::BIG_ENDIAN_BYTE_ORDER;
+			bo = BIG_ENDIAN_BYTE_ORDER;
 			break;
 		default:
 			throw UnknownByteOrderError(

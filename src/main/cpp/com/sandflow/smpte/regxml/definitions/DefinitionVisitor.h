@@ -49,7 +49,7 @@ namespace rxml {
 	struct SetTypeDefinition;
 	struct VariableArrayTypeDefinition;
 	struct FixedArrayTypeDefinition;
-
+	struct FloatTypeDefinition;
 
 	class DefinitionVisitor {
 
@@ -76,6 +76,7 @@ namespace rxml {
 		virtual void visit(const IndirectTypeDefinition &def) = 0;
 		virtual void visit(const StreamTypeDefinition &def) = 0;
 		virtual void visit(const SetTypeDefinition &def) = 0;
+		virtual void visit(const FloatTypeDefinition& def) = 0;
 	};
 
 	/* TODO: refactor in its own file */
@@ -103,6 +104,7 @@ namespace rxml {
 		virtual void visit(const IndirectTypeDefinition &) {};
 		virtual void visit(const StreamTypeDefinition &) {};
 		virtual void visit(const SetTypeDefinition &) {};
+		virtual void visit(const FloatTypeDefinition&) {};
 
 	};
 
@@ -114,7 +116,7 @@ namespace rxml {
 			def.accept(*this);
 		}
 
-		virtual void visit(const D &def) {
+		virtual void visit(const D&) {
 			this->iskind = true;
 		}
 

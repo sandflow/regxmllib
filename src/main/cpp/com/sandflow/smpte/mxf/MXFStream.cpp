@@ -51,7 +51,7 @@ namespace rxml {
 
 		if (!this->good()) throw std::ios_base::failure("UUID read failed");
 
-		if (this->getByteOrder() == KLVStream::LITTLE_ENDIAN_BYTE_ORDER) {
+		if (this->getByteOrder() == LITTLE_ENDIAN_BYTE_ORDER) {
 
 			uuidLEtoBE(buf);
 
@@ -97,7 +97,7 @@ namespace rxml {
 
 		if (!this->good()) throw std::ios_base::failure("IDAU read failed");
 
-		if (this->getByteOrder() == KLVStream::LITTLE_ENDIAN_BYTE_ORDER) {
+		if (this->getByteOrder() == LITTLE_ENDIAN_BYTE_ORDER) {
 
 			uuidLEtoBE(buf);
 

@@ -158,7 +158,7 @@ namespace rxml {
 
 		if (!this->good()) throw std::ios_base::failure("Unsigned short read failed");
 
-		if (byteorder == KLVStream::BIG_ENDIAN_BYTE_ORDER) {
+		if (byteorder == BIG_ENDIAN_BYTE_ORDER) {
 
 			return ((uint16_t)c[1]) | ((uint16_t)c[0] << 8);
 
@@ -200,7 +200,7 @@ namespace rxml {
 
 		if (!this->good()) throw std::ios_base::failure("Unsigned long read failed");
 
-		if (byteorder == KLVStream::BIG_ENDIAN_BYTE_ORDER) {
+		if (byteorder == BIG_ENDIAN_BYTE_ORDER) {
 
 			return (uint32_t)c[3] | ((uint32_t)c[2] << 8) | ((uint32_t)c[1] << 16) | ((uint32_t)c[0] << 24);
 
@@ -220,7 +220,7 @@ namespace rxml {
 
 		if (!this->good()) throw std::ios_base::failure("Long read failed");
 
-		if (byteorder == KLVStream::BIG_ENDIAN_BYTE_ORDER) {
+		if (byteorder == BIG_ENDIAN_BYTE_ORDER) {
 
 			return (int32_t)c[3] | ((int32_t)c[2] << 8) | ((int32_t)c[1] << 16) | ((int32_t)c[0] << 24);
 
@@ -240,7 +240,7 @@ namespace rxml {
 
 		if (!this->good()) throw std::ios_base::failure("Long long read failed");
 
-		if (byteorder == KLVStream::BIG_ENDIAN_BYTE_ORDER) {
+		if (byteorder == BIG_ENDIAN_BYTE_ORDER) {
 
 			return (int64_t)c[7] | ((int64_t)c[6] << 8) | ((int64_t)c[5] << 16) | ((int64_t)c[4] << 24) |
 				((int64_t)c[3] << 32) | ((int64_t)c[2] << 40) | ((int64_t)c[1] << 48) | ((int64_t)c[0] << 56);

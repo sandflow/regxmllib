@@ -24,52 +24,23 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-#ifndef COM_SANDFLOW_SMPTE_KLV_KLVSTREAM_H
-#define COM_SANDFLOW_SMPTE_KLV_KLVSTREAM_H
+#ifndef COM_SANDFLOW_SMPTE_REGXML_DEFINITIONS_FLOATTYPEDEFINITION
+#define COM_SANDFLOW_SMPTE_REGXML_DEFINITIONS_FLOATTYPEDEFINITION
 
-#include "MemoryTriplet.h"
-#include <iostream>
-#include <com/sandflow/smpte/util/AUID.h>
-#include <string>
-#include <stdint.h>
+#include "Definition.h"
+#include "DefinitionVisitor.h"
 
 namespace rxml {
 
-    enum ByteOrder { BIG_ENDIAN_BYTE_ORDER, LITTLE_ENDIAN_BYTE_ORDER };
+	struct FloatTypeDefinition : public Definition {
 
-	template<class CharT, class Traits = std::char_traits<CharT> >
-	class basic_klvistream : public std::basic_istream<CharT, Traits> {
+		virtual void accept(DefinitionVisitor &visitor) const {
+			visitor.visit(*this);
+		}
 
-	public:
-
-		basic_klvistream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER) : std::basic_istream<CharT, Traits>(sb), byteorder(bo) {}
-
-		void readTriplet(MemoryTriplet &t);
-		AUID readAUID();
-		UL readUL();
-		unsigned long int readBERLength();
-		unsigned char readUnsignedByte();
-		char readByte();
-		unsigned short int readUnsignedShort();
-		short int readShort();
-		unsigned long readUnsignedInt() { return readUnsignedLong(); }
-		long readLong();
-		unsigned long readUnsignedLong();
-		long long readLongLong();
-		unsigned long long readUnsignedLongLong();
-
-		void readBytes(unsigned char* buffer, size_t length);
-
-		ByteOrder getByteOrder() const { return this->byteorder; };
-
-	private:
-
-		ByteOrder byteorder;
+		unsigned char	size;
 
 	};
-
-	typedef basic_klvistream<char> KLVStream;
-
 }
 
 #endif

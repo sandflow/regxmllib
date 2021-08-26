@@ -47,6 +47,7 @@
 #include "com/sandflow/smpte/regxml/definitions/VariableArrayTypeDefinition.h"
 #include "com/sandflow/smpte/regxml/definitions/WeakReferenceTypeDefinition.h"
 #include "com/sandflow/smpte/regxml/definitions/LensSerialFloatTypeDefinition.h"
+#include "com/sandflow/smpte/regxml/definitions/FloatTypeDefinition.h"
 #include "com/sandflow/util/strformat.h"
 
 
@@ -373,6 +374,13 @@ namespace rxml {
 
 	}
 
+	void _readFloatTypeDefinition(xercesc::DOMElement* element, FloatTypeDefinition& def) {
+
+		_readDefinition(element, def);
+
+		_readPropertyOfElement(element, XML_NS.c_str(), "Size", def.size);
+	}
+
 	void XMLImporter::fromDOM(xercesc::DOMDocument & dom, MetaDictionary &md, EventHandler * ev)
 	{
 		xercesc::DOMElement *root = dom.getDocumentElement();
@@ -625,6 +633,16 @@ namespace rxml {
 					LensSerialFloatTypeDefinition def;
 
 					_readDefinition(curelement, def);
+
+					def.ns = schemeURI;
+
+					md.addDefinition(def);
+
+				} else if (localname == "TypeDefinitionFloat") {
+
+					FloatTypeDefinition def;
+
+					_readFloatTypeDefinition(curelement, def);
 
 					def.ns = schemeURI;
 
