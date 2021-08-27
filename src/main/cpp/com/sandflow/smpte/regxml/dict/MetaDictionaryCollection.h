@@ -40,7 +40,7 @@ namespace rxml {
 
 		std::map<std::string, MetaDictionary*> dicts;
 
-		std::vector<Definition*> definitions;
+		std::vector<const Definition*> definitions;
 
 	public:
 
@@ -54,7 +54,7 @@ namespace rxml {
 		 */
 		const Definition* getDefinition(std::string ns, const std::string& symbol) const;
 
-		const std::vector<Definition*>& getDefinitions() const;
+		const std::vector<const Definition*>& getDefinitions() const;
 
 		/**
 		 * Adds a MetaDictionary to the collection.

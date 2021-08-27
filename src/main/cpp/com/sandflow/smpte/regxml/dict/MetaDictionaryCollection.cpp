@@ -59,7 +59,7 @@ namespace rxml {
 		return NULL;
 	}
 
-    const std::vector<Definition*>& MetaDictionaryCollection::getDefinitions() const {
+    const std::vector<const Definition*>& MetaDictionaryCollection::getDefinitions() const {
 		return this->definitions;
     }
 

@@ -56,7 +56,7 @@ namespace rxml {
 
 		const Definition* getDefinition(const std::string &symbol) const;
 
-		const std::vector<Definition*>& getDefinitions() const;
+		const std::vector<const Definition*>& getDefinitions() const;
 
 		virtual std::set<AUID> getSubclassesOf(const AUID &identification) const;
 
@@ -88,11 +88,11 @@ namespace rxml {
 
 		std::string description;
 
-		std::vector<Definition*> definitions;
+		std::vector<const Definition*> definitions;
 
-		std::map<AUID, Definition*> definitionsByAUID;
+		std::map<AUID, const Definition*> definitionsByAUID;
 
-		std::map<std::string, Definition*> definitionsBySymbol;
+		std::map<std::string, const Definition*> definitionsBySymbol;
 
 		std::map<AUID, std::set<AUID> > membersOf;
 

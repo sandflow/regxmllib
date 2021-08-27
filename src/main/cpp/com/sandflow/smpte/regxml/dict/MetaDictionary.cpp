@@ -249,7 +249,7 @@ namespace rxml {
 
 	MetaDictionary::~MetaDictionary() {
 
-		for (std::vector<Definition*>::iterator it = definitions.begin(); it != definitions.end(); ++it) {
+		for (std::vector<const Definition*>::iterator it = definitions.begin(); it != definitions.end(); ++it) {
 			delete *it;
 		}
 
@@ -257,7 +257,7 @@ namespace rxml {
 
 	const Definition * MetaDictionary::getDefinition(const AUID & identification) const {
 
-		std::map<AUID, Definition*>::const_iterator it = definitionsByAUID.find(createNormalizedAUID(identification));
+		std::map<AUID, const Definition*>::const_iterator it = definitionsByAUID.find(createNormalizedAUID(identification));
 
 		if (it == definitionsByAUID.end()) return NULL;
 
@@ -271,7 +271,7 @@ namespace rxml {
 		return definitionsBySymbol.at(symbol);
 	}
 
-    const std::vector<Definition*>& MetaDictionary::getDefinitions() const {
+    const std::vector<const Definition*>& MetaDictionary::getDefinitions() const {
 		return this->definitions;
     }
 

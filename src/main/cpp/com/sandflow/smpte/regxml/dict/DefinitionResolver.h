@@ -43,7 +43,7 @@ namespace rxml {
 
 		virtual const Definition* getDefinition(const AUID &identification) const = 0;
 
-        virtual const std::vector<Definition*>& getDefinitions() const = 0;
+        virtual const std::vector<const Definition*>& getDefinitions() const = 0;
 
 		virtual std::set<AUID> getSubclassesOf(const AUID &identification) const = 0;
 
