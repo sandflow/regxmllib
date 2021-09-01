@@ -137,6 +137,26 @@ namespace rxml {
 			return value[VERSION_BYTE];
 		}
 
+		/**
+		* @return Normalized copy of the UL
+		*/
+		UL makeNormalized() const {
+			UL norm_ul(*this);
+
+			/* set version to 0 */
+
+			norm_ul.setValueOctet(7, 0);
+
+			if (norm_ul.isGroup()) {
+
+				/* set byte 6 to 0x7f */
+				norm_ul.setValueOctet(5, 0x7f);
+
+			}
+
+			return norm_ul;
+		}
+
 	};
 
 }
