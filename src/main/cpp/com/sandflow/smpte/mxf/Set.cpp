@@ -125,4 +125,17 @@ namespace rxml {
 
 		this->items.clear();
 	}
+
+	const Triplet* Set::findTriplet(const AUID& id) const {
+
+		for (std::vector<Triplet*>::const_iterator it = this->items.begin(); it != this->items.end(); ++it) {
+				if (id.equals((*it)->getKey().makeNormalized())) {
+					return *it;
+				}
+		}
+
+		return NULL;
+	}
+
 }
+

@@ -160,6 +160,11 @@ namespace rxml {
 
 		}
 
+		/**
+			* @return Normalized copy of the AUID
+			*/
+		AUID makeNormalized() const;
+
 	};
 
 }

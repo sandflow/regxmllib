@@ -126,4 +126,14 @@ namespace rxml {
 		return std::memcmp(this->value, other.value, 16) == 0;
 
 	}
+
+		AUID AUID::makeNormalized() const {
+
+			if (this->isUL()) {
+				return this->asUL().makeNormalized();
+			}
+
+			return *this;
+		}
+
 }

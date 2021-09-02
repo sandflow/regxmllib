@@ -60,7 +60,7 @@ namespace rxml {
 
 		const UUID& getInstanceID() const;
 
-
+		const Triplet* findTriplet(const AUID& id) const;
 
 	private:
 
