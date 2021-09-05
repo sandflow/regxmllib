@@ -23,77 +23,84 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef COM_SANDFLOW_SMPTE_MXF_MXFSTREAM_H
 #define COM_SANDFLOW_SMPTE_MXF_MXFSTREAM_H
 
-
 #include <iostream>
 #include "com/sandflow/smpte/klv/KLVStream.h"
-#include "com/sandflow/smpte/util/UUID.h"
-#include "com/sandflow/smpte/util/UMID.h"
 #include "com/sandflow/smpte/util/IDAU.h"
+#include "com/sandflow/smpte/util/UMID.h"
+#include "com/sandflow/smpte/util/UUID.h"
 
 namespace rxml {
 
-	template<class CharT, class Traits = std::char_traits<CharT> >
-	class basic_mxfistream : public basic_klvistream<CharT, Traits> {
+template <class CharT, class Traits = std::char_traits<CharT> >
+class basic_mxfistream : public basic_klvistream<CharT, Traits> {
+ public:
+  basic_mxfistream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER)
+      : basic_klvistream<CharT, Traits>(sb, bo) {}
 
-	public:
+  /*void readUUID(UUID &uuid);*/
+  UUID readUUID();
 
-		basic_mxfistream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER) : basic_klvistream<CharT, Traits>(sb, bo) {}
+  UMID readUMID();
 
-		/*void readUUID(UUID &uuid);*/
-		UUID readUUID();
+  IDAU readIDAU();
 
-		UMID readUMID();
+  /**
+   * Reads an MXF batch into a Java Collection
+   *
+   * @param <T> Type of the collection elements
+   * @param <W> TripletValueAdapter that is used to convert MXF batch elements into Java collection elements
+   * @return Collection of elements of type T
+   * @throws KLVException
+   * @throws IOException
+   */
+  template <class A, class T>
+  std::vector<T> readBatch() {
+    std::vector<T> batch;
 
-		IDAU readIDAU();
+    unsigned int itemcount = this->readUnsignedLong();
+    unsigned int itemlength = this->readUnsignedLong();
 
-		/**
-		* Reads an MXF batch into a Java Collection
-		*
-		* @param <T> Type of the collection elements
-		* @param <W> TripletValueAdapter that is used to convert MXF batch elements into Java collection elements
-		* @return Collection of elements of type T
-		* @throws KLVException
-		* @throws IOException
-		*/
-		template<class A, class T> std::vector<T> readBatch() {
-			std::vector<T> batch;
+    /* TODO: is this necessary */
+    /*
+    if (itemlength > Integer.MAX_VALUE) {
+            throw new KLVException(KLVException.MAX_LENGTH_EXCEEED);
+    }
+    */
 
-			unsigned int itemcount = this->readUnsignedLong();
-			unsigned int itemlength = this->readUnsignedLong();
+    unsigned char* value = new unsigned char[itemlength];
 
-			/* TODO: is this necessary */
-			/*
-			if (itemlength > Integer.MAX_VALUE) {
-				throw new KLVException(KLVException.MAX_LENGTH_EXCEEED);
-			}
-			*/
+    for (unsigned int i = 0; i < itemcount; i++) {
+      this->read((char*)value, itemlength);
 
-			unsigned char *value = new unsigned char[itemlength];
+      batch.push_back(A::fromValue(value, itemlength));
+    }
 
-			for (unsigned int i = 0; i < itemcount; i++) {
+    delete[] value;
 
-				this->read((char*)value, itemlength);
+    return batch;
+  }
+};
 
-				batch.push_back(A::fromValue(value, itemlength));
+template <class CharT, class Traits = std::char_traits<CharT> >
+class basic_mxfostream : public basic_klvostream<CharT, Traits> {
+ public:
+  basic_mxfostream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER)
+      : basic_klvostream<CharT, Traits>(sb, bo) {}
 
-			}
+  void writeUUID(const UUID& uuid);
 
-			delete[] value;
+  void writeUMID(const UMID& umid);
 
-			return batch;
-		}
+  void writeIDAU(const IDAU& idau);
+};
 
-	};
+typedef basic_mxfistream<char> MXFInputStream;
 
-	typedef basic_mxfistream<char> MXFInputStream;
-}
-
-
+typedef basic_mxfostream<char> MXFOutputStream;
+}  // namespace rxml
 
 #endif
-
-

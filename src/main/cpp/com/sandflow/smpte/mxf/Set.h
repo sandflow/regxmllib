@@ -23,55 +23,54 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef COM_SANDFLOW_SMPTE_MXF_SET_H
 #define COM_SANDFLOW_SMPTE_MXF_SET_H
 
+#include <com/sandflow/smpte/klv/Group.h>
+#include <com/sandflow/smpte/klv/Triplet.h>
 #include <com/sandflow/smpte/util/UL.h>
 #include <com/sandflow/smpte/util/UUID.h>
-#include <com/sandflow/smpte/klv/Triplet.h>
-#include <com/sandflow/smpte/klv/Group.h>
-#include "MXFException.h"
 #include <vector>
+#include "MXFException.h"
 
 namespace rxml {
 
-	class Set : public Group {
+class Set : public Group {
+ public:
+  static const UL INSTANCE_UID_ITEM_UL;
 
-	public:
+  Set(const Group& g);
 
-		static const UL INSTANCE_UID_ITEM_UL;
+  Set();
 
-		Set(const Group &g);
+  virtual ~Set();
 
-		Set();
+  virtual Set& operator=(const Set& src);
 
-		virtual ~Set();
+  virtual const UL& getKey() const;
 
-		virtual Set & operator=(const Set &src);
+  virtual const std::vector<Triplet*>& getItems() const;
 
-		virtual const UL& getKey() const;
+  void fromGroup(const Group& g);
 
-		virtual const std::vector<Triplet*>& getItems() const;
+  static bool hasInstanceUID(const Group& g);
 
-		void fromGroup(const Group &g);
+  const UUID& getInstanceID() const;
 
-		static bool hasInstanceUID(const Group &g);
+  const Triplet* findTriplet(const AUID& id) const;
 
-		const UUID& getInstanceID() const;
+  const Triplet* addTriplet(const Triplet& triplet);
 
-		const Triplet* findTriplet(const AUID& id) const;
+  void setKey(const UL& identification);
 
-	private:
+ private:
+  std::vector<Triplet*> items;
+  UL key;
+  UUID instanceID;
 
-		std::vector<Triplet*> items;
-		UL key;
-		UUID instanceID;
+  void clearItems();
+};
 
-		void clearItems();
-
-	};
-
-
-}
+}  // namespace rxml
 #endif

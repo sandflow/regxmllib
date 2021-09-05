@@ -23,53 +23,87 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 #ifndef COM_SANDFLOW_SMPTE_KLV_KLVSTREAM_H
 #define COM_SANDFLOW_SMPTE_KLV_KLVSTREAM_H
 
-#include "MemoryTriplet.h"
-#include <iostream>
 #include <com/sandflow/smpte/util/AUID.h>
-#include <string>
 #include <stdint.h>
+#include <iostream>
+#include <string>
+#include "MemoryTriplet.h"
 
 namespace rxml {
 
-    enum ByteOrder { BIG_ENDIAN_BYTE_ORDER, LITTLE_ENDIAN_BYTE_ORDER };
+enum ByteOrder { BIG_ENDIAN_BYTE_ORDER, LITTLE_ENDIAN_BYTE_ORDER };
 
-	template<class CharT, class Traits = std::char_traits<CharT> >
-	class basic_klvistream : public std::basic_istream<CharT, Traits> {
+template <class CharT, class Traits = std::char_traits<CharT> >
+class basic_klvistream : public std::basic_istream<CharT, Traits> {
+ public:
+  basic_klvistream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER)
+      : std::basic_istream<CharT, Traits>(sb), byteorder(bo) {}
 
-	public:
+  void readTriplet(MemoryTriplet& t);
+  AUID readAUID();
+  UL readUL();
+  unsigned long int readBERLength();
+  unsigned char readUnsignedByte();
+  char readByte();
+  unsigned short int readUnsignedShort();
+  short int readShort();
+  unsigned long readUnsignedInt() {
+    return readUnsignedLong();
+  }
+  long readLong();
+  unsigned long readUnsignedLong();
+  long long readLongLong();
+  unsigned long long readUnsignedLongLong();
 
-		basic_klvistream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER) : std::basic_istream<CharT, Traits>(sb), byteorder(bo) {}
+  void readBytes(unsigned char* buffer, size_t length);
 
-		void readTriplet(MemoryTriplet &t);
-		AUID readAUID();
-		UL readUL();
-		unsigned long int readBERLength();
-		unsigned char readUnsignedByte();
-		char readByte();
-		unsigned short int readUnsignedShort();
-		short int readShort();
-		unsigned long readUnsignedInt() { return readUnsignedLong(); }
-		long readLong();
-		unsigned long readUnsignedLong();
-		long long readLongLong();
-		unsigned long long readUnsignedLongLong();
+  ByteOrder getByteOrder() const {
+    return this->byteorder;
+  };
 
-		void readBytes(unsigned char* buffer, size_t length);
+ private:
+  ByteOrder byteorder;
+};
 
-		ByteOrder getByteOrder() const { return this->byteorder; };
+template <class CharT, class Traits = std::char_traits<CharT> >
+class basic_klvostream : public std::basic_ostream<CharT, Traits> {
+ public:
+  basic_klvostream(std::basic_streambuf<CharT, Traits>* sb, ByteOrder bo = BIG_ENDIAN_BYTE_ORDER)
+      : std::basic_ostream<CharT, Traits>(sb), byteorder(bo) {}
 
-	private:
+  void writeTriplet(const Triplet& t);
+  void writeAUID(const AUID& auid);
+  void writeUL(const UL& ul);
+  void writeBERLength(uint64_t length);
+  void writeUnsignedByte(uint8_t value);
+  void writeByte(int8_t value);
+  void writeUnsignedShort(uint16_t value);
+  void writeShort(int16_t value);
+  void writeUnsignedLong(uint32_t value);
+  void writeLong(int32_t value);
+  void writeUnsignedLongLong(uint64_t value);
+  void writeLongLong(int64_t value);
+  void writeBytes(const unsigned char* buffer, size_t length);
+  ByteOrder getByteOrder() const {
+    return this->byteorder;
+  };
 
-		ByteOrder byteorder;
+ private:
+  ByteOrder byteorder;
 
-	};
+  void writeUnsignedShortBE(uint16_t value);
+  void writeUnsignedLongBE(uint32_t value);
+  void writeUnsignedLongLongBE(uint64_t value);
+};
 
-	typedef basic_klvistream<char> KLVStream;
+typedef basic_klvistream<char> KLVStream;
 
-}
+typedef basic_klvostream<char> KLVOutputStream;
+
+}  // namespace rxml
 
 #endif
