@@ -106,7 +106,11 @@ public class RegisterImporter {
         /**
          * Enumeration Base Type is not permitted
          */
-        BAD_ENUM_TYPE(Event.Severity.ERROR);
+        BAD_ENUM_TYPE(Event.Severity.ERROR),
+        /**
+         * Type Size is not permitted
+         */
+        BAD_TYPE_SIZE(Event.Severity.ERROR);
 
         public final Event.Severity severity;
 
@@ -391,8 +395,18 @@ public class RegisterImporter {
                         ((IntegerTypeDefinition) tdef).setSize(IntegerTypeDefinition.Size.EIGHT);
                         break;
                     default:
-                        throw new Exception("Illegal Type Size.");
+                        RegisterEvent evt = new RegisterEvent(
+                            EventKind.BAD_TYPE_SIZE,
+                            String.format(
+                                "Type size %d is not supported for Type UL %s.",
+                                type.getTypeSize().intValue(),
+                                type.getUL().toString()
+                            )
+                        );
 
+                        handleEvent(evthandler, evt);
+
+                        continue;
                 }
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.FLOAT_TYPEKIND.equals(type.getTypeKind())) {
@@ -410,8 +424,18 @@ public class RegisterImporter {
                         ((FloatTypeDefinition) tdef).setSize(FloatTypeDefinition.Size.DOUBLE);
                         break;
                     default:
-                        throw new Exception("Illegal Type Size.");
+                        RegisterEvent evt = new RegisterEvent(
+                            EventKind.BAD_TYPE_SIZE,
+                            String.format(
+                                "Type size %d is not supported for Type UL %s.",
+                                type.getTypeSize().intValue(),
+                                type.getUL().toString()
+                            )
+                        );
 
+                        handleEvent(evthandler, evt);
+
+                        continue;
                 }
 
             } else if (com.sandflow.smpte.register.TypesRegister.Entry.LENSSERIALFLOAT_TYPEKIND.equals(type.getTypeKind())) {
