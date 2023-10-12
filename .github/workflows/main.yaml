@@ -25,4 +25,4 @@ jobs:
     - name: Configure CMake
       run: cmake -DCI=1 -B ${{github.workspace}}/build
     - name: Test regxmllibc
-      run: ctest
+      run: ctest --test-dir ${{github.workspace}}/build
