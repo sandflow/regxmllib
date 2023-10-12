@@ -12,11 +12,6 @@ file(GLOB_RECURSE SRC_FILES src/main/cpp/*.cpp src/main/cpp/*.h )
 add_library(${PROJECT_NAME} ${SRC_FILES})
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 
-if ( CI )
-# enforce C++98 conformance during CI
-    set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 98)
-endif()
-
 target_link_libraries ( ${PROJECT_NAME} ${XercesC_LIBRARY} )
 
 foreach(source IN LISTS SRC_FILES)

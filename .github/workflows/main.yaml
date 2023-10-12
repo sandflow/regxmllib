@@ -22,10 +22,9 @@ jobs:
         cache: maven
     - name: Test Java
       run: mvn test
-    - name: Configure CMake
-      run: cmake -DCI=1 -B build
-    - name: Test regxmllibc
+    - name: Test C++
       run: |
+        cmake -B build
         cd build
         make
         ctest
