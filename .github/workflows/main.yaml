@@ -23,6 +23,9 @@ jobs:
     - name: Test Java
       run: mvn test
     - name: Configure CMake
-      run: cmake -DCI=1 -B ${{github.workspace}}/build
+      run: cmake -DCI=1 -B build
     - name: Test regxmllibc
-      run: ctest --test-dir ${{github.workspace}}/build
+      run: |
+        cd build
+        make
+        ctest
