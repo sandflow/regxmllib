@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--Created: Tue Feb 06 15:14:43 PST 2018--><!--By: regxmllib build 620483cf2db693a62a84868c9fab4ceedbaff395--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
+<!--Created: Sun Feb 07 16:42:14 PST 2021--><!--By: regxmllib build 52f8ec992adbcba8bd18d9b06508c69a1e9c459b--><!--See: https://github.com/sandflow/regxmllib--><Extension xmlns="http://www.smpte-ra.org/schemas/2001-1b/2013/metadict">
 <SchemeID>urn:uuid:3c343e7c-f7b1-5fa0-7fc9-96aaa45cb485</SchemeID>
 <SchemeURI>http://www.smpte-ra.org/reg/395/2014/14/9</SchemeURI>
 <MetaDefinitions>
 <ClassDefinition>
 <Identification>urn:smpte:ul:060e2b34.027f0105.0e090603.00000000</Identification>
-<Symbol>IADataDescriptor</Symbol>
-<Description>Immersive Audio Data Descriptor</Description>
-<Name>Immersive Audio Data Descriptor</Name>
+<Symbol>IADataEssenceDescriptor</Symbol>
+<Description>Immersive Audio Data Essence Descriptor</Description>
+<Name>Immersive Audio Data Essence Descriptor</Name>
 <ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010101.01014300</ParentClass>
 <IsConcrete>true</IsConcrete>
 </ClassDefinition>
 <ClassDefinition>
 <Identification>urn:smpte:ul:060e2b34.027f0105.0e090606.00000000</Identification>
-<Symbol>IAEssenceSubDescriptor</Symbol>
-<Description>IA Essence SubDescriptor</Description>
-<Name>IA Essence SubDescriptor</Name>
+<Symbol>IADataEssenceSubDescriptor</Symbol>
+<Description>Defines the Immersive Audio Data Essence SubDescriptor Set</Description>
+<Name>IA Data Essence SubDescriptor</Name>
 <ParentClass>urn:smpte:ul:060e2b34.027f0101.0d010101.01015900</ParentClass>
 <IsConcrete>true</IsConcrete>
 </ClassDefinition>

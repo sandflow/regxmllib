@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Created: Mon Jun 25 20:22:18 PDT 2018--><!--From: class14.mxf--><!--Partition: HEADER--><!--By: regxmllib build 80585d09fb02349076635d0853cc4e518f6651fb--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline" xmlns:r4="http://www.smpte-ra.org/reg/395/2014/14/9" xmlns:r5="http://www.smpte-ra.org/reg/335/2012/14/9">
+<?xml version="1.0" encoding="UTF-8"?><!--Created: Sun Feb 07 16:42:22 PST 2021--><!--From: class14.mxf--><!--Partition: HEADER--><!--By: regxmllib build 52f8ec992adbcba8bd18d9b06508c69a1e9c459b--><!--See: https://github.com/sandflow/regxmllib--><r0:Preface xmlns:r0="http://www.smpte-ra.org/reg/395/2014/13/1/aaf" xmlns:r1="http://www.smpte-ra.org/reg/335/2012" xmlns:r2="http://www.smpte-ra.org/reg/2003/2012" xmlns:r3="http://sandflow.com/ns/SMPTEST2001-1/baseline" xmlns:r4="http://www.smpte-ra.org/reg/395/2014/14/9" xmlns:r5="http://www.smpte-ra.org/reg/335/2012/14/9">
   <r1:InstanceID>urn:uuid:63c6d971-a3e7-44bb-b6e4-5bd231aad15f</r1:InstanceID>
   <r1:FileLastModified>1978-02-10T22:34:48Z</r1:FileLastModified>
   <r1:FormatVersion>1.2</r1:FormatVersion>
@@ -152,24 +152,24 @@
             </r0:TimelineTrack>
           </r1:PackageTracks>
           <r1:EssenceDescription>
-            <r4:IADataDescriptor>
+            <r4:IADataEssenceDescriptor>
               <r1:InstanceID>urn:uuid:827a0781-3ec1-4522-8e3e-1ec0fd5cdea4</r1:InstanceID>
               <r1:SubDescriptors>
-                <r4:IAEssenceSubDescriptor>
+                <r4:IADataEssenceSubDescriptor>
                   <r1:InstanceID>urn:uuid:c6d05921-4848-4e06-906f-88bb752f0752</r1:InstanceID>
                   <r5:ImmersiveAudioID>urn:uuid:fcab28e0-5c84-4eb9-9b41-952876e40ea8</r5:ImmersiveAudioID>
                   <r5:FirstFrame>0</r5:FirstFrame>
                   <r5:MaxChannelCount>10</r5:MaxChannelCount>
                   <r5:MaxObjectCount>118</r5:MaxObjectCount>
                   <r5:ImmersiveAudioVersion>1</r5:ImmersiveAudioVersion>
-                </r4:IAEssenceSubDescriptor>
+                </r4:IADataEssenceSubDescriptor>
               </r1:SubDescriptors>
               <r1:LinkedTrackID>2</r1:LinkedTrackID>
               <r1:SampleRate>24/1</r1:SampleRate>
               <r1:EssenceLength>2</r1:EssenceLength>
               <r1:ContainerFormat>urn:smpte:ul:060e2b34.04010105.0e090605.00000000</r1:ContainerFormat>
               <r1:DataEssenceCoding>urn:smpte:ul:060e2b34.04010105.0e090604.00000000</r1:DataEssenceCoding>
-            </r4:IADataDescriptor>
+            </r4:IADataEssenceDescriptor>
           </r1:EssenceDescription>
         </r0:SourcePackage>
       </r1:Packages>

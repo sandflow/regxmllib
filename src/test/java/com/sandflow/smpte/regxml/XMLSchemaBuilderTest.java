@@ -32,53 +32,61 @@ import com.sandflow.smpte.register.TypesRegister;
 import com.sandflow.smpte.register.exceptions.DuplicateEntryException;
 import com.sandflow.smpte.regxml.dict.MetaDictionary;
 import com.sandflow.smpte.regxml.dict.MetaDictionaryCollection;
-import com.sandflow.smpte.regxml.dict.exceptions.IllegalDefinitionException;
-import com.sandflow.smpte.regxml.dict.exceptions.IllegalDictionaryException;
 import static com.sandflow.smpte.regxml.dict.importers.RegisterImporter.fromRegister;
 import com.sandflow.util.events.Event;
 import com.sandflow.util.events.EventHandler;
-import java.io.EOFException;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import junit.framework.TestCase;
+import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import static org.junit.Assert.*;
+
 
 /**
  *
  * @author Pierre-Anthony Lemieux (pal@sandflow.com)
  */
-public class XMLSchemaBuilderTest extends TestCase {
+@RunWith(Parameterized.class)
+public class XMLSchemaBuilderTest {
 
     private final static Logger LOG = Logger.getLogger(XMLSchemaBuilderTest.class.getName());
 
-    private MetaDictionaryCollection mds_catsup;
-    private MetaDictionaryCollection mds_brown_sauce;
-    private MetaDictionaryCollection mds_ponzu;
-    private MetaDictionaryCollection mds_snapshot;
+    private final MetaDictionaryCollection mds;
 
-    public XMLSchemaBuilderTest(String testName) {
-        super(testName);
-    }
+    private final static String registers_dir_path = "registers";
 
-    private MetaDictionaryCollection buildDictionaryCollection(
-        String er_path,
-        String gr_path,
-        String tr_path
-    ) throws JAXBException, IOException, DuplicateEntryException, Exception {
+    @Parameters(name = "Release: {0}")
+    public static Iterable<? extends Object> data() throws URISyntaxException {
+        File f = new File(ClassLoader.getSystemResource(XMLSchemaBuilderTest.registers_dir_path).toURI());
 
+        return Arrays.asList(f.list());
+     }
+
+    public XMLSchemaBuilderTest(String register_name) throws JAXBException, IOException, DuplicateEntryException, Exception {
+
+        final String register_dir = XMLSchemaBuilderTest.registers_dir_path + "/" + register_name + "/";
+        
         /* load the registers */
-        Reader fe = new InputStreamReader(ClassLoader.getSystemResourceAsStream(er_path));
+
+        Reader fe = new InputStreamReader(ClassLoader.getSystemResourceAsStream(register_dir + "Elements.xml"));
         assertNotNull(fe);
 
-        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream(gr_path));
+        Reader fg = new InputStreamReader(ClassLoader.getSystemResourceAsStream(register_dir + "Groups.xml"));
         assertNotNull(fg);
 
-        Reader ft = new InputStreamReader(ClassLoader.getSystemResourceAsStream(tr_path));
+        Reader ft = new InputStreamReader(ClassLoader.getSystemResourceAsStream(register_dir + "Types.xml"));
         assertNotNull(ft);
 
         ElementsRegister ereg = ElementsRegister.fromXML(fe);
@@ -91,6 +99,7 @@ public class XMLSchemaBuilderTest extends TestCase {
         assertNotNull(treg);
 
         /* build the dictionaries */
+
         EventHandler evthandler = new EventHandler() {
 
             @Override
@@ -113,62 +122,17 @@ public class XMLSchemaBuilderTest extends TestCase {
             }
         };
 
-        return fromRegister(treg, greg, ereg, evthandler);
+        this.mds = fromRegister(treg, greg, ereg, evthandler);
 
+        assertNotNull(mds);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
-        /* build the dictionaries */
-        mds_catsup = buildDictionaryCollection(
-            "registers/catsup/Elements.xml",
-            "registers/catsup/Groups.xml",
-            "registers/catsup/Types.xml"
-        );
-
-        assertNotNull(mds_catsup);
-
-        /* build the dictionaries */
-        mds_brown_sauce = buildDictionaryCollection(
-            "registers/brown_sauce/Elements.xml",
-            "registers/brown_sauce/Groups.xml",
-            "registers/brown_sauce/Types.xml"
-        );
-
-        assertNotNull(mds_brown_sauce);
-
-        /* build the dictionaries */
-        mds_ponzu = buildDictionaryCollection(
-            "registers/ponzu/Elements.xml",
-            "registers/ponzu/Groups.xml",
-            "registers/ponzu/Types.xml"
-        );
-
-        assertNotNull(mds_ponzu);
-
-        /* build the dictionaries */
-        mds_snapshot = buildDictionaryCollection(
-            "registers/snapshot/Elements.xml",
-            "registers/snapshot/Groups.xml",
-            "registers/snapshot/Types.xml"
-        );
-
-        assertNotNull(mds_snapshot);
-
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    private void generateXMLSchema(MetaDictionaryCollection mds) throws ParserConfigurationException, KLVException, XMLSchemaBuilder.RuleException, SAXException, IOException {
+    @Test
+    public void testGenerateXMLSchema() throws ParserConfigurationException, KLVException, XMLSchemaBuilder.RuleException, SAXException, IOException {
 
         /* create the fragment builder */
         XMLSchemaBuilder sb = new XMLSchemaBuilder(
-            mds,
+            this.mds,
             new EventHandler() {
 
                 @Override
@@ -192,34 +156,12 @@ public class XMLSchemaBuilderTest extends TestCase {
             }
         );
 
-        for (MetaDictionary md : mds.getDictionaries()) {
+        for (MetaDictionary md : this.mds.getDictionaries()) {
 
-            sb.fromDictionary(md);
+            Document doc = sb.fromDictionary(md);
+
+            assertNotNull(doc);
         }
-
-    }
-
-    public void testAgainstBrownSauce() throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
-
-        generateXMLSchema(mds_brown_sauce);
-
-    }
-
-    public void testAgainstCatsup() throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
-
-        generateXMLSchema(mds_catsup);
-
-    }
-
-    public void testAgainstPonzu() throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
-
-        generateXMLSchema(mds_ponzu);
-
-    }
-
-    public void testAgainstSnapshot() throws IOException, EOFException, KLVException, ParserConfigurationException, JAXBException, FragmentBuilder.RuleException, TransformerException, IllegalDefinitionException, IllegalDictionaryException, Exception {
-
-        generateXMLSchema(mds_snapshot);
 
     }
 
