@@ -23,6 +23,6 @@ jobs:
     - name: Test Java
       run: mvn test
     - name: Configure CMake
-      run: cmake -DCXX_STANDARD=98 -B ${{github.workspace}}/build
+      run: cmake -DCI=1 -B ${{github.workspace}}/build
     - name: Test regxmllibc
       run: ctest
