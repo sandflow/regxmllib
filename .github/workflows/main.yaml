@@ -22,7 +22,9 @@ jobs:
         cache: maven
     - name: Test Java
       run: mvn test
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build
-    - name: Test regxmllibc
-      run: ctest
+    - name: Test C++
+      run: |
+        cmake -B build
+        cd build
+        make
+        ctest
