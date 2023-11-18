@@ -17,7 +17,7 @@
 <!-- Contact -->
 <!-- ####### -->
 <!--  -->
-<!-- Please email:  30mr10wg-def@lists.smpte.org -->
+<!-- Please email:  30mr-meta-def@smpte.org -->
 <!--  -->
 <!--  -->
 <LabelsRegister xmlns="http://www.smpte-ra.org/schemas/400/2012">
@@ -2152,6 +2152,226 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742ch</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01000000</UL>
+      <Kind>NODE</Kind>
+      <Name>Audio Channels</Name>
+      <Definition>ST377-42 Audio Channels</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chLeftHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01010000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Left Height</Name>
+      <Definition>Intended to drive the Left Height Loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chRightHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01020000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Right Height</Name>
+      <Definition>Intended to drive the Right Height Loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chCenterHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01030000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Center Height</Name>
+      <Definition>Intended to drive the Center Height Loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chLeftSurroundHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01040000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Left Surround Height</Name>
+      <Definition>Intended to drive the Left Surround Height Loudspeaker(s)</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chRightSurroundHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01050000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Right Surround Height</Name>
+      <Definition>Intended to drive the Right Surround Height Loudspeaker(s).</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chLeftSideSurroundHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01060000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Left Side Surround Height</Name>
+      <Definition>Intended to drive the Left Side Surround Height Loudspeaker(s)</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chRightSideSurroundHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01070000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Right Side Surround Height</Name>
+      <Definition>Intended to drive the Right Side Surround Height Loudspeaker(s).</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chLeftRearSurroundHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01080000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Left Rear Surround Height</Name>
+      <Definition>Intended to drive the Left Rear Surround Height Loudspeaker(s)</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chRightRearSurroundHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01090000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Right Rear Surround Height</Name>
+      <Definition>Intended to drive the Right Rear Surround Height Loudspeaker(s)</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chLeftTopSurround</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.010a0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Left Top Surround</Name>
+      <Definition>Intended to drive the Left Top Surround Loudspeaker(s)</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chRightTopSurround</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.010b0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Right Top Surround</Name>
+      <Definition>Intended to drive the Right Top Surround Loudspeaker(s)</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chTopSurround</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.010c0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Top Surround</Name>
+      <Definition>Intended to drive the Top Surround Loudspeaker(s)</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chLFE1</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.010d0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>LFE1</Name>
+      <Definition>Intended to drive Left	Front subwoofer</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chLFE2</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.010e0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>LFE2</Name>
+      <Definition>Intended to drive Right Front subwoofer</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chCenterRearHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.010f0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Center Rear Height</Name>
+      <Definition>Intended to drive the Center Rear Height Loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chCenterRear</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01100000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Center Rear</Name>
+      <Definition>Intended to drive the Center Rear Loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chLeftBelow</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01110000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Left Below</Name>
+      <Definition>Intended to drive the	Left Below Loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chRightBelow</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01120000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Right Below</Name>
+      <Definition>Intended to drive the Right Below Loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742chCenterBelow</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020130.01130000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Center Below</Name>
+      <Definition>Intended to drive the Center Below Loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
       <Symbol>SoundfieldGroup</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010d.03020200.00000000</UL>
       <Kind>NODE</Kind>
@@ -2372,6 +2592,171 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>MGASoundfield</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020222.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>MGA Soundfield</Name>
+      <Definition>Identifies an MGA Soundfield</Definition>
+      <DefiningDocument>SMPTE ST 2127-1</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01000000</UL>
+      <Kind>NODE</Kind>
+      <Name>ST377-42 Soundfield Groups</Name>
+      <Definition>ST377-42 Soundfield Groups</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg60Height</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01010000</UL>
+      <Kind>LEAF</Kind>
+      <Name>6.0 Height</Name>
+      <Definition>L, R, Ls, Rs, Lh, Rh</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg80Height</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01020000</UL>
+      <Kind>LEAF</Kind>
+      <Name>8.0 Height</Name>
+      <Definition>L, R, Ls, Rs, Lh, Rh, Lsh, Rsh</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg91Overhead</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01030000</UL>
+      <Kind>LEAF</Kind>
+      <Name>9.1 Overhead</Name>
+      <Definition>L, C, R, Lss, Rss, Lrs, Rrs, LFE, Lts, Rts</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg91Height</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01040000</UL>
+      <Kind>LEAF</Kind>
+      <Name>9.1 Height</Name>
+      <Definition>L, C, R, Ls, Rs, LFE, Lh, Rh, Lsh, Rsh</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg101Height</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01050000</UL>
+      <Kind>LEAF</Kind>
+      <Name>10.1 Height</Name>
+      <Definition>L, C, R, Lss, Rss, Lrs, Rrs, LFE, Lts, Rts, Ts</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg111Height</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01060000</UL>
+      <Kind>LEAF</Kind>
+      <Name>11.1 Height</Name>
+      <Definition>L, C, R, Ls, Rs, LFE, Lh, Ch, Rh, Lsh, Rsh, Ts</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg131Height</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01070000</UL>
+      <Kind>LEAF</Kind>
+      <Name>13.1 Height</Name>
+      <Definition>L, C, R, Lss, Rss, Lrs, Rrs, LFE, Lh, Ch, Rh, Lsh, Rsh, Ts</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg151Height</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01080000</UL>
+      <Kind>LEAF</Kind>
+      <Name>15.1 Height</Name>
+      <Definition>L, C, R, Lss, Rss, Lrs, Rrs, LFE, Lh, Ch, Rh, Lssh, Rssh, Lrsh, Rrsh, Ts</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg120CenterHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.01090000</UL>
+      <Kind>LEAF</Kind>
+      <Name>12.0 Center Height</Name>
+      <Definition>L, C, R, Lss, Rss, Lrs, Rrs, Ltfs, Rtfs, Ltrs, Rtrs,	Ch</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg121CenterHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.010a0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>12.1	Center Height</Name>
+      <Definition>L, C, R, Lss, Rss, Lrs, Rrs, LFE, Ltfs, Rtfs, Ltrs, Rtrs, Ch </Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg60CenterHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.010b0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>6.0 Center Height</Name>
+      <Definition>L, C, R, Ls, Rs, Ch</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg61CenterHeight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.010c0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>6.1 Center Height</Name>
+      <Definition>L, C, R, LFE, Ls, Rs, Ch</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742sg222UHDTV</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020230.010d0000</UL>
+      <Kind>LEAF</Kind>
+      <Name>22.2 UHDTV</Name>
+      <Definition>L, R, C, LFE1, LFE2, Lss, Rss, Lrs, Rrs, Cr, Lc, Rc, Lh, Rh, Ch, Lssh, Rssh, Crh, Lsh, Rsh, Ts, Lb, Rb, Cb</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
       <Symbol>GroupOfSoundfieldGroups</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010d.03020300.00000000</UL>
       <Kind>NODE</Kind>
@@ -2422,6 +2807,50 @@
       <Name>SMPTE ST 2067-8 Dialog Centric Mix</Name>
       <Definition>Identifies SMPTE ST 2067-8 2067-8 Dialog Centric Mix</Definition>
       <DefiningDocument>ST 2067-8</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742gsg</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020330.01000000</UL>
+      <Kind>NODE</Kind>
+      <Name>ST377-42 Group of Soundfield Groups</Name>
+      <Definition>ST377-42 Group of Soundfield Groups</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742gsgMusicAndEffectsWithOptional</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020330.01010000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Music and Effects with Optional</Name>
+      <Definition>A Group of Soundfield Groups containing a ME Soundfield Group and one or more OP Soundfield Groups</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742gsgDME</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020330.01020000</UL>
+      <Kind>LEAF</Kind>
+      <Name>DME</Name>
+      <Definition>Dialog, Music, and Effects. A Group of Soundfield Groups containing an original language DX</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ST37742gsgNDME</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.03020330.01030000</UL>
+      <Kind>LEAF</Kind>
+      <Name>NDME</Name>
+      <Definition>Narration, Dialog, Music, and Effects. A Group of Soundfield Groups containing program narration, an original language DX Soundfield Group, a MX Soundfield Group and a FX Soundfield Group</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -2665,6 +3094,28 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>TransferCharacteristic_CinemaMezzanineLinear</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010101.01120000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Cinema Mezzanine Linear Transfer Characteristic</Name>
+      <Definition>Identifies the COLOR.APP4.1 transfer characteristic specified in SMPTE ST 2067-40</Definition>
+      <DefiningDocument>SMPTE ST 2067-40</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>TransferCharacteristic_CinemaMezzanineDCDM</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010101.01130000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Cinema Mezzanine DCDM Transfer Characteristic</Name>
+      <Definition>Identifies the COLOR.APP4.2 transfer characteristic specified in SMPTE ST 2067-40</Definition>
+      <DefiningDocument>SMPTE ST 2067-40</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
       <Symbol>CodingEquations</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.04010101.02000000</UL>
       <Kind>NODE</Kind>
@@ -2847,7 +3298,7 @@
       <UL>urn:smpte:ul:060e2b34.0401010d.04010101.03080000</UL>
       <Kind>LEAF</Kind>
       <Name>Cinema Mezzanine Color Primaries</Name>
-      <Definition>Identifies XYZ tristimulus values as specified in ISO 11664-3</Definition>
+      <Definition>Colors are sampled as the X, Y and Z tristimulus values specified in ISO 11664-3 (No color primaries are specified)</Definition>
       <DefiningDocument>SMPTE ST 2067-40</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
@@ -3067,6 +3518,61 @@
       <Name>Uncompressed Picture Coding Planar 420 YCbCr 8-bit</Name>
       <Definition>Identifies Uncompressed Picture Coding Planar 420 YCbCr 8-bit</Definition>
       <DefiningDocument>SMPTE ST 377-1</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ARRIRAWCoding12bit</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010201.02010101</UL>
+      <Kind>LEAF</Kind>
+      <Name>ARRIRAW Essence 12-bit Coding</Name>
+      <Definition>Identifies ARRIRAW Uncompressed 12-bit Picture Coding</Definition>
+      <DefiningDocument>SMPTE RDD 54</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ARRIRAWCoding12bitReverse</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010201.02010102</UL>
+      <Kind>LEAF</Kind>
+      <Name>ARRIRAW Essence 12-bit Reverse Coding</Name>
+      <Definition>Identifies ARRIRAW Uncompressed 12-bit Reverse Picture Coding</Definition>
+      <DefiningDocument>SMPTE RDD 54</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ARRIRAWCoding13bit</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010201.02010103</UL>
+      <Kind>LEAF</Kind>
+      <Name>ARRIRAW Essence 13-bit Coding</Name>
+      <Definition>Identifies ARRIRAW Uncompressed 13-bit Picture Coding</Definition>
+      <DefiningDocument>SMPTE RDD 54</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ARRIRAWCodingHighDensity12bit</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010201.02010201</UL>
+      <Kind>LEAF</Kind>
+      <Name>ARRIRAW Essence 12-bit High Density Coding</Name>
+      <Definition>Identifies ARRIRAW High Density 12-bit Picture Coding</Definition>
+      <DefiningDocument>SMPTE RDD 54</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>ARRIRAWCodingHighDensity13bit</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010201.02010202</UL>
+      <Kind>LEAF</Kind>
+      <Name>ARRIRAW Essence 13-bit High Density Coding</Name>
+      <Definition>Identifies ARRIRAW High Density 13-bit Picture Coding</Definition>
+      <DefiningDocument>SMPTE RDD 54</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -9891,6 +10397,53 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>FFV1PictureCoding</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03090000</UL>
+      <Kind>NODE</Kind>
+      <Name>FFV1PictureCoding</Name>
+      <Definition>FFV1 Picture Essence Coding</Definition>
+      <Applications>RDD48</Applications>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>FFV1PictureCodingV0</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03090100</UL>
+      <Kind>LEAF</Kind>
+      <Name>FFV1PictureCodingV0</Name>
+      <Definition>FFV1 Picture Essence Coding, Format Version 0</Definition>
+      <Applications>RDD48</Applications>
+      <DefiningDocument>SMPTE RDD 48</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>FFV1PictureCodingV1</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03090200</UL>
+      <Kind>LEAF</Kind>
+      <Name>FFV1PictureCodingV1</Name>
+      <Definition>FFV1 Picture Essence Coding, Format Version 1</Definition>
+      <Applications>RDD48</Applications>
+      <DefiningDocument>SMPTE RDD 48</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>FFV1PictureCodingV3</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04010202.03090400</UL>
+      <Kind>LEAF</Kind>
+      <Name>FFV1PictureCodingV3</Name>
+      <Definition>FFV1 Picture Essence Coding, Format Version 3</Definition>
+      <Applications>RDD48</Applications>
+      <DefiningDocument>SMPTE RDD 48</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
       <Symbol>SpecialisedCompressionSchemes</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.04010202.70000000</UL>
       <Kind>NODE</Kind>
@@ -10406,6 +10959,28 @@
       <Name>SMPTE-382M Default Uncompressed Sound Coding</Name>
       <Definition>Identifies SMPTE-382M Default Uncompressed Sound Coding</Definition>
       <DefiningDocument>SMPTE ST 382</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>MGAAudioEssenceSoundCodingSchemes</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04020201.02000000</UL>
+      <Kind>NODE</Kind>
+      <Name>MGA Audio Essence Sound Coding Schemes</Name>
+      <Definition>Identifies MGA Audio Essence Sound Coding Schemes</Definition>
+      <DefiningDocument>SMPTE ST 2127-1</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>MGAAudioEssenceUncompressedSoundCoding</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04020201.02010000</UL>
+      <Kind>LEAF</Kind>
+      <Name>MGA Audio Essence Uncompressed Sound Coding</Name>
+      <Definition>Identifies MGA Audio Essence Uncompressed Sound Coding</Definition>
+      <DefiningDocument>SMPTE ST 2127-1</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -11690,6 +12265,17 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>DataStreamDataEssenceCoding</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04030301.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Data Stream Data Essence Coding</Name>
+      <Definition>Identifies Data Stream Data Essence Coding</Definition>
+      <DefiningDocument>SMPTE RDD 55</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
       <Symbol>Metadata</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.04040000.00000000</UL>
       <Kind>NODE</Kind>
@@ -12249,6 +12835,17 @@
       <Name>Headphone Element Description</Name>
       <Definition>Headphone Element Description</Definition>
       <DefiningDocument>SMPTE RDD 49</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012</NamespaceName>
+      <Symbol>SerialAudioDefinitionModelMetadataPayload</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.04040212.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Serial Audio Definition Model Metadata Payload</Name>
+      <Definition>Identifies Serial Audio Definition Model Metadata Payload</Definition>
+      <DefiningDocument>SMPTE ST 2127-10</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
@@ -39506,6 +40103,107 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCARRIRAWFrameWrappedPacked</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02220100</UL>
+      <Kind>LEAF</Kind>
+      <Name>ARRIRAW Frame-Wrapped Packed Essence Container</Name>
+      <Definition>Identifier for MXF-GC ARRIRAW Frame-Wrapped Essence Container</Definition>
+      <DefiningDocument>SMPTE RDD 54</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCARRIRAWFrameWrappedHDEEncoded</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02220200</UL>
+      <Kind>LEAF</Kind>
+      <Name>ARRIRAW Frame-Wrapped HDE-Encoded Essence Container</Name>
+      <Definition>Identifier for MXF-GC ARRIRAW Frame-Wrapped High Density Essence Container</Definition>
+      <DefiningDocument>SMPTE RDD 54</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCFFV1Pictures</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02230000</UL>
+      <Kind>NODE</Kind>
+      <Name>MXFGCFFV1Pictures</Name>
+      <Definition>MXF-GC FFV1 Essence Container Labels</Definition>
+      <Applications>RDD48</Applications>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCFFV1PicturesFrame</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02230100</UL>
+      <Kind>LEAF</Kind>
+      <Name>MXFGCFFV1PicturesFrame</Name>
+      <Definition>MXF-GC FFV1 Essence Container Label, Frame-wrapped Picture Element</Definition>
+      <Applications>RDD48</Applications>
+      <DefiningDocument>SMPTE RDD 48</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCFFV1PicturesClip</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02230200</UL>
+      <Kind>LEAF</Kind>
+      <Name>MXFGCFFV1PicturesClip</Name>
+      <Definition>MXF-GC FFV1 Essence Container Label, Clip-wrapped Picture Element</Definition>
+      <Applications>RDD48</Applications>
+      <DefiningDocument>SMPTE RDD 48</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCMGAAudioMappings</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02250000</UL>
+      <Kind>NODE</Kind>
+      <Name>MXF-GC MGA Audio Mappings</Name>
+      <Definition>Identifies MXF GC MGA Audio Mappings</Definition>
+      <DefiningDocument>SMPTE ST 2127-1</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCFrameWrappedMGA</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02250100</UL>
+      <Kind>LEAF</Kind>
+      <Name>MXF-GC Frame-wrapped MGA</Name>
+      <Definition>Identifies a Frame-wrapped MGA signal</Definition>
+      <DefiningDocument>SMPTE ST 2127-1</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCClipWrappedMGA</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02250200</UL>
+      <Kind>LEAF</Kind>
+      <Name>MXF-GC Clip-wrapped MGA</Name>
+      <Definition>Identifies a Clip-wrapped MGA signal</Definition>
+      <DefiningDocument>SMPTE ST 2127-1</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
+      <Symbol>MXFGCSupplementalDataFrameWrapped</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010d.0d010301.02260100</UL>
+      <Kind>LEAF</Kind>
+      <Name>Supplemental Data Essence Container</Name>
+      <Definition>Identifies an MXF-GC Supplemental Data Element Frame-Wrapped Essence Container</Definition>
+      <DefiningDocument>SMPTE RDD 55</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/1/aaf</NamespaceName>
       <Symbol>MXFGCGenericEssenceMappings</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010101.0d010301.027f0000</UL>
       <Kind>NODE</Kind>
@@ -40711,6 +41409,27 @@
     </Entry>
     <Entry>
       <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/10</NamespaceName>
+      <Symbol>AESFileExchange</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010c.0d0a0100.00000000</UL>
+      <Kind>NODE</Kind>
+      <Name>AES file exchange</Name>
+      <Definition>File exchange metadata defined in AES standards</Definition>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/10</NamespaceName>
+      <Symbol>AES_ADL</Symbol>
+      <UL>urn:smpte:ul:060e2b34.0401010c.0d0a0101.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>AES ADL</Name>
+      <Definition>Audio edit decision list (ADL) defined in AES31-3</Definition>
+      <DefiningDocument>AES31-3-2008(r2019) Amendment 1</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012/13/11</NamespaceName>
       <Symbol>DutchGuild</Symbol>
       <UL>urn:smpte:ul:060e2b34.0401010b.0d0b0000.00000000</UL>
@@ -41269,6 +41988,138 @@
     <Entry>
       <Register>Labels</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742chLeftWide</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.04010000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Channel Left Wide</Name>
+      <Definition>Intended to drive the Left Wide loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742chRightWide</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.04020000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Channel Right Wide</Name>
+      <Definition>Intended to drive the Right Wide loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742chLeftTopFront</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.04030000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Channel Left Top Front</Name>
+      <Definition>Intended to drive the Left Top Front loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742chRightTopFront</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.04040000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Channel Right Top Front</Name>
+      <Definition>Intended to drive the Right Top Front loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742chTopSideLeft</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.04050000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Channel Top Side Left</Name>
+      <Definition>Intended to drive the Top Side Left loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742chTopSideRight</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.04060000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Channel Top Side Right</Name>
+      <Definition>Intended to drive the Top Side Right loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742chLeftTopBack</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.04070000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Channel Left Top Back</Name>
+      <Definition>Intended to drive the Left Top Back loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742chRightTopBack</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.04080000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Audio Channel Right Top Back</Name>
+      <Definition>Intended to drive the Right Top Back loudspeaker</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742sg514</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.05020000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Soundfield Group 5.1.4</Name>
+      <Definition>L,C,R,Ls,Rs,LFE,Ltfs,Rtfs,Ltrs,Rtrs</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742sg714</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.05040000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Soundfield Group 7.1.4</Name>
+      <Definition>L,C,R,Lss,Rss,Lrs,Rrs,LFE,Ltfs,Rtfs,Ltrs,Rtrs</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742sg914</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.05060000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Soundfield Group 9.1.4</Name>
+      <Definition>L,C,R,Lw,Rw,Lss,Rss,Lrs,Rrs,LFE,Ltfs,Rtfs,Ltrs,Rtrs</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>ST37742sg916</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090101.05070000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Soundfield Group 9.1.6</Name>
+      <Definition>L,C,R,Lw,Rw,Lss,Rss,Lrs,Rrs,LFE,Ltfs,Rtfs,Ltms,Rtms,Ltrs,Rtrs</Definition>
+      <DefiningDocument>ST 377-42</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
       <Symbol>ImmersiveAudioCoding</Symbol>
       <UL>urn:smpte:ul:060e2b34.04010105.0e090604.00000000</UL>
       <Kind>LEAF</Kind>
@@ -41286,6 +42137,39 @@
       <Name>MXF-GC IAData Frame Wrapped</Name>
       <Definition>Identifies Container for Frame Wrapped Immersive Audio Data</Definition>
       <DefiningDocument>SMPTE ST 429-18</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>UTF8TextDataEssenceCoding</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090606.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>UTF-8 Text Data Essence Coding</Name>
+      <Definition>Identifies UTF-8 Text Data Essence Coding</Definition>
+      <DefiningDocument>SMPTE ST 2067-202</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>PHDRImageMetadataWrappingFrame</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090607.01010101</UL>
+      <Kind>LEAF</Kind>
+      <Name>PHDR Image Metadata Wrapping Frame</Name>
+      <Definition>Identifies a frame of wrapped PHDR image metadata</Definition>
+      <DefiningDocument>SMPTE RDD 56</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+    </Entry>
+    <Entry>
+      <Register>Labels</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/400/2012/14/9</NamespaceName>
+      <Symbol>FrameWrappedISXDContainer</Symbol>
+      <UL>urn:smpte:ul:060e2b34.04010105.0e090607.01010103</UL>
+      <Kind>LEAF</Kind>
+      <Name>Frame Wrapped ISXD Container</Name>
+      <Definition>Identifies Frame Wrapped ISXD Container</Definition>
+      <DefiningDocument>SMPTE ST 2067-202</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
     </Entry>
     <Entry>
