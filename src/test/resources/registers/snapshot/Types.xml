@@ -17,7 +17,7 @@
 <!-- Contact -->
 <!-- ####### -->
 <!--  -->
-<!-- Please email:  30mr10wg-def@lists.smpte.org -->
+<!-- Please email:  30mr-meta-def@smpte.org -->
 <!--  -->
 <!--  -->
 <TypesRegister xmlns="http://www.smpte-ra.org/schemas/2003/2012">
@@ -169,6 +169,20 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>UInt48</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.01010900.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>UInt48</Name>
+      <DefiningDocument>IEEE 1588-2019</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Integer</TypeKind>
+      <TypeSize>6</TypeSize>
+      <TypeQualifiers>isNumeric</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>RenamedIntegerTypes</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.01012000.00000000</UL>
       <Kind>NODE</Kind>
@@ -300,6 +314,20 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>ST12_3</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.0101200a.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>ST12-3</Name>
+      <Applications>MXF</Applications>
+      <Notes>big endian</Notes>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Rename</TypeKind>
+      <BaseType>urn:smpte:ul:060e2b34.01040101.01010400.00000000</BaseType>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>PhaseFrameType</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.01012300.00000000</UL>
       <Kind>LEAF</Kind>
@@ -328,6 +356,50 @@
       <Kind>LEAF</Kind>
       <Name>float</Name>
       <Applications>ASPA</Applications>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Integer</TypeKind>
+      <TypeSize>4</TypeSize>
+      <TypeQualifiers>isNumeric isSigned</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>HalfFloat</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.01020300.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>HalfFloat</Name>
+      <Definition>binary16 of IEEE 754</Definition>
+      <DefiningDocument>IEEE 754</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Integer</TypeKind>
+      <TypeSize>2</TypeSize>
+      <TypeQualifiers>isNumeric isSigned</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>LensSerialHalfFloat</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.01020400.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>LensSerialHalfFloat</Name>
+      <Definition>Section 5.5.1 of SMPTE RP 215:2009</Definition>
+      <DefiningDocument>SMPTE RP 215</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Integer</TypeKind>
+      <TypeSize>2</TypeSize>
+      <TypeQualifiers>isNumeric</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>SingleFloat</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.01020500.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>SingleFloat</Name>
+      <DefiningDocument>IEEE 754-2019</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>Integer</TypeKind>
@@ -456,6 +528,21 @@
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>FixedArray</TypeKind>
       <TypeSize>16</TypeSize>
+      <BaseType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</BaseType>
+      <TypeQualifiers>isOrdered isCountImplicit isSizeImplicit</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>UInt8Array20</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.01030400.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>UInt8Array20</Name>
+      <DefiningDocument>SMPTE ST 430-17</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>FixedArray</TypeKind>
+      <TypeSize>20</TypeSize>
       <BaseType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</BaseType>
       <TypeQualifiers>isOrdered isCountImplicit isSizeImplicit</TypeQualifiers>
     </Entry>
@@ -2595,6 +2682,7 @@
       <UL>urn:smpte:ul:060e2b34.01040101.0201012f.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>ColorCorrectionFilterWheelSettingType</Name>
+      <DefiningDocument>SMPTE RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>Enumeration</TypeKind>
@@ -2630,6 +2718,12 @@
           <Value>4</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
+        <Facet>
+          <Symbol>ColorCorrectionFilterWheelSetting_Undefined</Symbol>
+          <Name>ColorCorrectionFilterWheelSetting_Undefined</Name>
+          <Value>255</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
       </Facets>
     </Entry>
     <Entry>
@@ -2639,6 +2733,7 @@
       <UL>urn:smpte:ul:060e2b34.01040101.02010130.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>ImageSensorReadoutModeType</Name>
+      <DefiningDocument>SMPTE RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>Enumeration</TypeKind>
@@ -2662,6 +2757,12 @@
           <Value>2</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
+        <Facet>
+          <Symbol>ImageSensorReadoutMode_Undefined</Symbol>
+          <Name>ImageSensorReadoutMode_Undefined</Name>
+          <Value>255</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
       </Facets>
     </Entry>
     <Entry>
@@ -2671,6 +2772,7 @@
       <UL>urn:smpte:ul:060e2b34.01040101.02010131.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>AutoWhiteBalanceModeType</Name>
+      <DefiningDocument>SMPTE RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>Enumeration</TypeKind>
@@ -2700,6 +2802,12 @@
           <Value>3</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
+        <Facet>
+          <Symbol>AutoWhiteBalanceMode_Undefined</Symbol>
+          <Name>AutoWhiteBalanceMode_Undefined</Name>
+          <Value>255</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
       </Facets>
     </Entry>
     <Entry>
@@ -2709,6 +2817,7 @@
       <UL>urn:smpte:ul:060e2b34.01040101.02010132.00000000</UL>
       <Kind>LEAF</Kind>
       <Name>AutoFocusSensingAreaSettingType</Name>
+      <DefiningDocument>SMPTE RDD 18</DefiningDocument>
       <IsDeprecated>false</IsDeprecated>
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>Enumeration</TypeKind>
@@ -2744,6 +2853,12 @@
           <Value>4</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
+        <Facet>
+          <Symbol>AutoFocusSensingAreaSetting_Undefined</Symbol>
+          <Name>AutoFocusSensingAreaSetting_Undefined</Name>
+          <Value>255</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
       </Facets>
     </Entry>
     <Entry>
@@ -2775,6 +2890,63 @@
           <Symbol>HEVCCodedContent_InterlacedFieldPicture</Symbol>
           <Name>HEVCCodedContent_InterlacedFieldPicture</Name>
           <Value>2</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+      </Facets>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>LuminanceCodeRangeType</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.02010134.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>LuminanceCodeRangeType</Name>
+      <DefiningDocument>SMPTE RDD 18</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Enumeration</TypeKind>
+      <BaseType>urn:smpte:ul:060e2b34.01040101.01010100.00000000</BaseType>
+      <Facets>
+        <Facet>
+          <Symbol>LuminanceCodeRange_UnknownCode</Symbol>
+          <Name>LuminanceCodeRange_UnknownCode</Name>
+          <Value>0</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>LuminanceCodeRange_UnknownPicture</Symbol>
+          <Name>LuminanceCodeRange_UnknownPicture</Name>
+          <Value>1</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>LuminanceCodeRange_FullScaledCode</Symbol>
+          <Name>LuminanceCodeRange_FullScaledCode</Name>
+          <Value>2</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>LuminanceCodeRange_FullScaledPicture</Symbol>
+          <Name>LuminanceCodeRange_FullScaledPicture</Name>
+          <Value>3</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>LuminanceCodeRange_NormalVideo</Symbol>
+          <Name>LuminanceCodeRange_NormalVideo</Name>
+          <Value>5</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>LuminanceCodeRange_VideoRangedCode</Symbol>
+          <Name>LuminanceCodeRange_VideoRangedCode</Name>
+          <Value>6</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>LuminanceCodeRange_LimitedRangeVideo</Symbol>
+          <Name>LuminanceCodeRange_LimitedRangeVideo</Name>
+          <Value>7</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
       </Facets>
@@ -2996,6 +3168,14 @@
         </Facet>
         <Facet>
           <Value>urn:smpte:ul:060e2b34.0401010d.04010101.01110000</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.01120000</Value>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Value>urn:smpte:ul:060e2b34.0401010d.04010101.01130000</Value>
           <IsDeprecated>false</IsDeprecated>
         </Facet>
       </Facets>
@@ -3786,6 +3966,96 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>AssetIntegrityHash</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.03010e00.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>Asset Integrity Hash</Name>
+      <DefiningDocument>SMPTE ST 430-17</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Record</TypeKind>
+      <Facets>
+        <Facet>
+          <Symbol>AssetID</Symbol>
+          <Name>Asset ID</Name>
+          <Type>urn:smpte:ul:060e2b34.01040101.04011100.00000000</Type>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>AssetHash</Symbol>
+          <Name>Asset Hash</Name>
+          <Type>urn:smpte:ul:060e2b34.01040101.01030400.00000000</Type>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+      </Facets>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>CplValidation</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.03010f00.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>CPL Validation</Name>
+      <DefiningDocument>SMPTE ST 430-17</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Record</TypeKind>
+      <Facets>
+        <Facet>
+          <Symbol>CPLID</Symbol>
+          <Name>CPL ID</Name>
+          <Type>urn:smpte:ul:060e2b34.01040101.04011100.00000000</Type>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>ErrorCode</Symbol>
+          <Name>Error Code</Name>
+          <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>PermittedPlaybackStartTime</Symbol>
+          <Name>Permitted Playback Start Time</Name>
+          <Type>urn:smpte:ul:060e2b34.01040101.01010800.00000000</Type>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>ExpirationTime</Symbol>
+          <Name>Expiration Time</Name>
+          <Type>urn:smpte:ul:060e2b34.01040101.01010800.00000000</Type>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+      </Facets>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>PTPTimestamp</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.03011000.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>PTP Timestamp</Name>
+      <DefiningDocument>IEEE 1588-2019</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Record</TypeKind>
+      <Facets>
+        <Facet>
+          <Symbol>Seconds</Symbol>
+          <Name>Seconds</Name>
+          <Type>urn:smpte:ul:060e2b34.01040101.01010900.00000000</Type>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+        <Facet>
+          <Symbol>Nanoseconds</Symbol>
+          <Name>Nanoseconds</Name>
+          <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
+          <IsDeprecated>false</IsDeprecated>
+        </Facet>
+      </Facets>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>Multiples</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.04000000.00000000</UL>
       <Kind>NODE</Kind>
@@ -4088,6 +4358,34 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>HalfFloatArray</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.04011600.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>HalfFloatArray</Name>
+      <DefiningDocument>SMPTE RDD 18</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>VariableArray</TypeKind>
+      <BaseType>urn:smpte:ul:060e2b34.01040101.01020300.00000000</BaseType>
+      <TypeQualifiers>isOrdered</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>SingleFloatArray</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.04011700.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>SingleFloatArray</Name>
+      <DefiningDocument>SMPTE RDD 55</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>VariableArray</TypeKind>
+      <BaseType>urn:smpte:ul:060e2b34.01040101.01020500.00000000</BaseType>
+      <TypeQualifiers>isOrdered</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>RecordArrays</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.04020000.00000000</UL>
       <Kind>NODE</Kind>
@@ -4302,6 +4600,51 @@
       <TypeKind>Set</TypeKind>
       <TypeSize>0</TypeSize>
       <BaseType>urn:smpte:ul:060e2b34.01040101.03010b00.00000000</BaseType>
+      <TypeQualifiers>isIdentified</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>AssetIntegrityHashSet</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.04030500.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>AssetIntegrityHashSet</Name>
+      <DefiningDocument>SMPTE ST 430-17</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Set</TypeKind>
+      <TypeSize>0</TypeSize>
+      <BaseType>urn:smpte:ul:060e2b34.01040101.03010e00.00000000</BaseType>
+      <TypeQualifiers>isIdentified</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>CplValidationSet</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.04030600.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>CplValidationSet</Name>
+      <DefiningDocument>SMPTE ST 430-17</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Set</TypeKind>
+      <TypeSize>0</TypeSize>
+      <BaseType>urn:smpte:ul:060e2b34.01040101.03010f00.00000000</BaseType>
+      <TypeQualifiers>isIdentified</TypeQualifiers>
+    </Entry>
+    <Entry>
+      <Register>Types</Register>
+      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
+      <Symbol>DataEssenceCodingSet</Symbol>
+      <UL>urn:smpte:ul:060e2b34.01040101.04030700.00000000</UL>
+      <Kind>LEAF</Kind>
+      <Name>DataEssenceCodingSet</Name>
+      <DefiningDocument>SMPTE ST 430-17</DefiningDocument>
+      <IsDeprecated>false</IsDeprecated>
+      <ContextScope>UnknownContext</ContextScope>
+      <TypeKind>Set</TypeKind>
+      <TypeSize>0</TypeSize>
+      <BaseType>urn:smpte:ul:060e2b34.01040101.04011100.00000000</BaseType>
       <TypeQualifiers>isIdentified</TypeQualifiers>
     </Entry>
     <Entry>
