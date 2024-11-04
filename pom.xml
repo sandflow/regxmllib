@@ -8,8 +8,8 @@
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <com.sandflow.config.dir>${basedir}/src/main/config</com.sandflow.config.dir>
         <com.sandflow.resources.dir>${basedir}/src/main/resources</com.sandflow.resources.dir>
@@ -52,6 +52,11 @@
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.5</version>
         </dependency>
     </dependencies>
 
@@ -100,21 +105,15 @@
             </properties>
             <dependencies>
                 <dependency>
-                    <groupId>javax.xml.bind</groupId>
-                    <artifactId>jaxb-api</artifactId>
-                    <version>2.3.1</version>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
                     <groupId>com.sun.xml.bind</groupId>
                     <artifactId>jaxb-impl</artifactId>
-                    <version>2.3.1</version>
+                    <version>4.0.5</version>
                     <scope>runtime</scope>
                 </dependency>
                 <dependency>
                     <groupId>com.sun.xml.bind</groupId>
                     <artifactId>jaxb-core</artifactId>
-                    <version>2.3.0.1</version>
+                    <version>4.0.5</version>
                     <scope>runtime</scope>
                 </dependency>
             </dependencies>
