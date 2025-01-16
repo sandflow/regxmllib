@@ -45,7 +45,7 @@ REGXMLLIBJ
 Prerequisites
 -------------
 
-Java 11 language and SDK
+Java 11 and above
 
 Maven
 
