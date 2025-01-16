@@ -25,6 +25,6 @@
  */
 
 /**
- * Defines {@link javax.xml.bind.annotation.adapters.XmlAdapter} implementations for SMPTE-related structures
+ * Defines {@link jakarta.xml.bind.annotation.adapters.XmlAdapter} implementations for SMPTE-related structures
  */
 package com.sandflow.smpte.util.xml;

@@ -26,8 +26,8 @@
 package com.sandflow.smpte.util.xml;
 
 import java.util.Arrays;
-import javax.xml.bind.DatatypeConverter;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.DatatypeConverter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Unmarshals/marshals a hexadecimal integer from/to an xsd:string value

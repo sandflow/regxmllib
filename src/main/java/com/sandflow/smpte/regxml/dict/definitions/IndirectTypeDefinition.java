@@ -25,8 +25,8 @@
  */
 package com.sandflow.smpte.regxml.dict.definitions;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Indirect Type Definition as defined in ST 2001-1
