@@ -4,12 +4,10 @@
 
     <groupId>com.sandflow</groupId>
     <artifactId>regxmllib</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5-rc.1</version>
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <com.sandflow.config.dir>${basedir}/src/main/config</com.sandflow.config.dir>
         <com.sandflow.resources.dir>${basedir}/src/main/resources</com.sandflow.resources.dir>
