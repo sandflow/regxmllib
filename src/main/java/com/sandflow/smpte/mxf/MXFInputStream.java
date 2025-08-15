@@ -26,9 +26,7 @@
 package com.sandflow.smpte.mxf;
 
 import com.sandflow.smpte.klv.KLVInputStream;
-import com.sandflow.smpte.klv.adapters.TripletValueAdapter;
 import com.sandflow.smpte.klv.exceptions.KLVException;
-import com.sandflow.smpte.util.AUID;
 import com.sandflow.smpte.util.IDAU;
 import com.sandflow.smpte.util.UMID;
 import com.sandflow.smpte.util.UUID;
@@ -37,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Function;
 
 /**
  * MXFInputStream allows MXF data structures to be read from an InputStream
@@ -125,8 +124,8 @@ public class MXFInputStream extends KLVInputStream {
      * @throws KLVException
      * @throws IOException
      */
-    public <T, W extends TripletValueAdapter> Collection<T> readArray() throws KLVException, IOException {
-        return readBatch();
+    public <T> Collection<T> readArray(Function<byte[], T> converter) throws KLVException, IOException {
+        return readBatch(converter);
     }
     
     /**
@@ -138,7 +137,7 @@ public class MXFInputStream extends KLVInputStream {
      * @throws KLVException
      * @throws IOException
      */
-    public <T, W extends TripletValueAdapter> Collection<T> readBatch() throws KLVException, IOException {
+    public <T> Collection<T> readBatch(Function<byte[], T> converter) throws KLVException, IOException {
         ArrayList<T> batch = new ArrayList<>();
         long itemcount = readUnsignedInt();
         long itemlength = readUnsignedInt();
@@ -148,7 +147,7 @@ public class MXFInputStream extends KLVInputStream {
         for (int i = 0; i < itemcount; i++) {
             byte[] value = new byte[(int) itemlength];
             read(value);
-            batch.add(W.<T>fromValue(value));
+            batch.add(converter.apply(value));
         }
         return batch;
     }

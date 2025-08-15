@@ -30,7 +30,7 @@ import com.sandflow.smpte.util.UL;
 /**
  * ULValueAdapter converts a UL to and from a KLV Triplet Value
  */
-public class ULValueAdapter extends TripletValueAdapter {
+public class ULValueAdapter {
 
     /**
      * Converts a KLV Triplet Value to a UL.
