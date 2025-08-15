@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, Pierre-Anthony Lemieux (pal@sandflow.com)
+ * Copyright (c) Sandflow Consulting, LLC
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,28 +23,33 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sandflow.smpte.klv.adapters;
 
 /**
- * TripletValueAdapter is an abstract class defining the conversion of KLV Triplet
- * values to Java types.
- * @param <W> Type to which the Triplet Value will be converted to/from
- */
-public class TripletValueAdapter<W> {
-    
-    /**
-     * Converts a KLV Triplet Value to a Java object.
-     * @param <W> Java object type
-     * @param value KLV Triplet Value
-     * @return Java object
-     */
-    public static <W> W fromValue(byte[] value) { return null;}
-    
-    /**
-     * Converts a Java object to a KLV Triplet Value.
-     * @param <W> Java object type
-     * @param obj Java object
-     * @return KLV Triplet Value
-     */
-    public static <W> byte[] toValue(W obj) {return null;}
+* @author Pierre-Anthony Lemieux
+*/
+
+package com.sandflow.smpte.klv;
+
+import java.io.ByteArrayInputStream;
+
+import junit.framework.TestCase;
+
+public class KLVInputStreamTest extends TestCase {
+
+  public KLVInputStreamTest(String testName) {
+    super(testName);
+  }
+
+  public void testReadLong() throws Exception {
+    byte[] NEG_ONE = new byte[] { (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+        (byte) 0xFF, (byte) 0xFF };
+    KLVInputStream kis = new KLVInputStream(new ByteArrayInputStream(NEG_ONE));
+    assertEquals(-1L, kis.readLong());
+  }
+
+  public void testReadUnsignedByte() throws Exception {
+    KLVInputStream kis = new KLVInputStream(new ByteArrayInputStream(new byte[] { (byte) 0xFF }));
+    assertEquals(255, kis.readUnsignedByte());
+  }
+
 }
