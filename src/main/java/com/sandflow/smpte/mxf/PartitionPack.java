@@ -122,7 +122,7 @@ public class PartitionPack {
             
             pp.setBodyOffset(kis.readLong());
             
-            pp.setBodySID(kis.readLong());
+            pp.setBodySID(kis.readUnsignedInt());
             
             pp.setOperationalPattern(kis.readUL());
             
