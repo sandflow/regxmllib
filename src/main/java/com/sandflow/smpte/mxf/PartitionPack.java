@@ -126,7 +126,7 @@ public class PartitionPack {
             
             pp.setOperationalPattern(kis.readUL());
             
-            pp.setEssenceContainers(kis.<UL, ULValueAdapter>readBatch());
+            pp.setEssenceContainers(kis.readBatch(ULValueAdapter::fromValue));
             
         } catch (IOException e) {
             throw new KLVException(e);
