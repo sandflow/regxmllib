@@ -43,7 +43,7 @@ import java.io.Reader;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
