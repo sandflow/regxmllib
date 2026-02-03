@@ -25,9 +25,9 @@
  */
 package com.sandflow.smpte.util.xml;
 
-import static javax.xml.bind.DatatypeConverter.parseHexBinary;
-import static javax.xml.bind.DatatypeConverter.printHexBinary;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import static jakarta.xml.bind.DatatypeConverter.parseHexBinary;
+import static jakarta.xml.bind.DatatypeConverter.printHexBinary;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Unmarshals/marshals a byte from/to an xsd:string

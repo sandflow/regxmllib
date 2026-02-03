@@ -11,8 +11,6 @@ include_directories( ${XercesC_INCLUDE_DIR}
 file(GLOB_RECURSE SRC_FILES src/main/cpp/*.cpp src/main/cpp/*.h )
 add_library(${PROJECT_NAME} ${SRC_FILES})
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 98)
-
 
 target_link_libraries ( ${PROJECT_NAME} ${XercesC_LIBRARY} )
 

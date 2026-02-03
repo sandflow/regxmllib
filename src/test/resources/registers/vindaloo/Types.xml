@@ -1,25 +1,28 @@
-<!-- ************************************* -->
-<!-- ************************************* -->
-<!-- ************************************* -->
-<!-- *****DO NOT EDIT THIS XML FILE******* -->
-<!-- ************************************* -->
-<!-- ************************************* -->
-<!-- ************************************* -->
-<!--  -->
-<!-- DRAFT REGISTER -->
-<!--  -->
-<!-- SMPTE METADATA REGISTER -->
-<!-- ####################### -->
-<!--  -->
-<!-- See https://registry.smpte-ra.org for SMPTE Metadata Registers resources including copies of the  -->
-<!-- SMPTE Metadata Registers that are suitable for editing. -->
-<!--  -->
-<!-- Contact -->
-<!-- ####### -->
-<!--  -->
-<!-- Please email:  30mr-meta-def@smpte.org -->
-<!--  -->
-<!--  -->
+<!-- DO NOT EDIT THIS TAG -->
+<!-- master_commit_tag=v000000084 -->
+<!-- DO NOT EDIT THIS TAG -->
+<!--
+Copyright (c) 2023 SMPTE All rights reserved.
+
+The latest version of this document can be retrieved at
+
+http://smpte-ra.org/smpte-metadata-registry
+
+The document is constructed according to 
+
+ST 2003:2012  -  Types Dictionary Structure,
+
+which is available at http://dx.doi.org/10.5594/SMPTE.ST2003.2012
+
+Use of this file without consulting the corresponding SMPTE Engineering Document is NOT supported.  Interoperability will generally require adherence to additional guidelines and constraints specified in the corresponding prose document.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
 <TypesRegister xmlns="http://www.smpte-ra.org/schemas/2003/2012">
   <Entries>
     <Entry>
@@ -169,20 +172,6 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
-      <Symbol>UInt48</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.01010900.00000000</UL>
-      <Kind>LEAF</Kind>
-      <Name>UInt48</Name>
-      <DefiningDocument>IEEE 1588-2019</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Integer</TypeKind>
-      <TypeSize>6</TypeSize>
-      <TypeQualifiers>isNumeric</TypeQualifiers>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>RenamedIntegerTypes</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.01012000.00000000</UL>
       <Kind>NODE</Kind>
@@ -314,20 +303,6 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
-      <Symbol>ST12_3</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.0101200a.00000000</UL>
-      <Kind>LEAF</Kind>
-      <Name>ST12-3</Name>
-      <Applications>MXF</Applications>
-      <Notes>big endian</Notes>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Rename</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.01040101.01010400.00000000</BaseType>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>PhaseFrameType</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.01012300.00000000</UL>
       <Kind>LEAF</Kind>
@@ -391,20 +366,6 @@
       <TypeKind>Integer</TypeKind>
       <TypeSize>2</TypeSize>
       <TypeQualifiers>isNumeric</TypeQualifiers>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
-      <Symbol>SingleFloat</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.01020500.00000000</UL>
-      <Kind>LEAF</Kind>
-      <Name>SingleFloat</Name>
-      <DefiningDocument>IEEE 754-2019</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Integer</TypeKind>
-      <TypeSize>4</TypeSize>
-      <TypeQualifiers>isNumeric isSigned</TypeQualifiers>
     </Entry>
     <Entry>
       <Register>Types</Register>
@@ -4030,32 +3991,6 @@
     <Entry>
       <Register>Types</Register>
       <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
-      <Symbol>PTPTimestamp</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.03011000.00000000</UL>
-      <Kind>LEAF</Kind>
-      <Name>PTP Timestamp</Name>
-      <DefiningDocument>IEEE 1588-2019</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>Record</TypeKind>
-      <Facets>
-        <Facet>
-          <Symbol>Seconds</Symbol>
-          <Name>Seconds</Name>
-          <Type>urn:smpte:ul:060e2b34.01040101.01010900.00000000</Type>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-        <Facet>
-          <Symbol>Nanoseconds</Symbol>
-          <Name>Nanoseconds</Name>
-          <Type>urn:smpte:ul:060e2b34.01040101.01010300.00000000</Type>
-          <IsDeprecated>false</IsDeprecated>
-        </Facet>
-      </Facets>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
       <Symbol>Multiples</Symbol>
       <UL>urn:smpte:ul:060e2b34.01040101.04000000.00000000</UL>
       <Kind>NODE</Kind>
@@ -4367,20 +4302,6 @@
       <ContextScope>UnknownContext</ContextScope>
       <TypeKind>VariableArray</TypeKind>
       <BaseType>urn:smpte:ul:060e2b34.01040101.01020300.00000000</BaseType>
-      <TypeQualifiers>isOrdered</TypeQualifiers>
-    </Entry>
-    <Entry>
-      <Register>Types</Register>
-      <NamespaceName>http://www.smpte-ra.org/reg/2003/2012</NamespaceName>
-      <Symbol>SingleFloatArray</Symbol>
-      <UL>urn:smpte:ul:060e2b34.01040101.04011700.00000000</UL>
-      <Kind>LEAF</Kind>
-      <Name>SingleFloatArray</Name>
-      <DefiningDocument>SMPTE RDD 55</DefiningDocument>
-      <IsDeprecated>false</IsDeprecated>
-      <ContextScope>UnknownContext</ContextScope>
-      <TypeKind>VariableArray</TypeKind>
-      <BaseType>urn:smpte:ul:060e2b34.01040101.01020500.00000000</BaseType>
       <TypeQualifiers>isOrdered</TypeQualifiers>
     </Entry>
     <Entry>
