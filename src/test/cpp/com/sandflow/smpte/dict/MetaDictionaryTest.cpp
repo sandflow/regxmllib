@@ -211,7 +211,7 @@ int main(int argc, char **argv) {
 
 	MyEventHandler evthandler;
 
-	for (int i = 0; i < 26; i++) {
+	for (int i = 0; i < sizeof(dicts_fname) / sizeof(char*); i++) {
 
 		std::string dict_path = "resources/regxml-dicts/";
 
