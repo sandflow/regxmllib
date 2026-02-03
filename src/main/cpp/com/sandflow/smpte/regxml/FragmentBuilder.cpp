@@ -752,7 +752,7 @@ namespace rxml {
 
 				/* c is guaranteed to be less than 0xFF */
 
-				ss << "$#x" << std::hex << static_cast<unsigned char>(c) << ";";
+				ss << "$#x" << std::hex << static_cast<uint16_t>(c) << ";";
 
 				std::copy(std::istream_iterator<unsigned char>(ss), std::istream_iterator<unsigned char>(),	std::back_inserter(xmlchar));
 
