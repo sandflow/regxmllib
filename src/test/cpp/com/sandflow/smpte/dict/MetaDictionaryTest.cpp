@@ -257,7 +257,6 @@ int main(int argc, char **argv) {
 		std::string ref_fname = "resources/regxml-files/" + std::string(test_names[i]) + ".xml";
 		std::string in_fname = "resources/mxf-files/" + std::string(test_names[i]) + ".mxf";
 
-		try {
 
 		xercesc::LocalFileFormatTarget *ft = new xercesc::LocalFileFormatTarget(out_fname.c_str());
 
@@ -304,21 +303,6 @@ int main(int argc, char **argv) {
 		doc->release();
 
 		delete ft;
-
-		} catch (const xercesc::DOMLSException& e) {
-			char* msg = xercesc::XMLString::transcode(e.getMessage());
-			std::cout << "DOMLSException during test " << test_names[i] << ": " << msg << std::endl;
-			xercesc::XMLString::release(&msg);
-			ret_val |= 1;
-		} catch (const xercesc::DOMException& e) {
-			char* msg = xercesc::XMLString::transcode(e.getMessage());
-			std::cout << "DOMException during test " << test_names[i] << ": " << msg << std::endl;
-			xercesc::XMLString::release(&msg);
-			ret_val |= 1;
-		} catch (...) {
-			std::cout << "Unknown exception during test " << test_names[i] << std::endl;
-			ret_val |= 1;
-		}
 	}
 
 	/* free heap */
