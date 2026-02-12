@@ -46,16 +46,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
     - name: build xerces
       run: |
-        git clone https://github.com/xerces/xerces-c.git
+        git clone https://github.com/xerces/xerces-c.git --depth 1
         cd xerces-c
         mkdir build
         cd build
         cmake .. -DCMAKE_CXX_STANDARD=98 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_CXX_EXTENSIONS=OFF
         make install
-    - name: Checkout repo
-      uses: actions/checkout@v3
     - name: Test C++
       run: |
         cmake -B build -DCMAKE_CXX_STANDARD=98 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_CXX_EXTENSIONS=OFF
