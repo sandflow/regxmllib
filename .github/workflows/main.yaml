@@ -44,8 +44,6 @@ jobs:
     name: Test regxmllibC on c++98
     if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    container:
-      image: gcc:4.8
 
     steps:
     - name: install dependencies
