@@ -39,3 +39,22 @@ jobs:
         cd build
         make
         ctest
+
+  cpp98_build:
+    name: Test regxmllibC on c++98
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    container:
+      image: gcc:4.8
+
+    steps:
+    - name: install dependencies
+      run: sudo apt install libxerces-c-dev
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Test C++
+      run: |
+        cmake -B build -DCMAKE_CXX_STANDARD=98 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_CXX_EXTENSIONS=OFF
+        cd build
+        make
+        ctest
