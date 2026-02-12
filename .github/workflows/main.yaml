@@ -54,7 +54,7 @@ jobs:
         cd xerces-c
         mkdir build
         cd build
-        cmake .. -DCMAKE_CXX_STANDARD=98 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_CXX_EXTENSIONS=OFF
+        cmake .. -DCMAKE_CXX_STANDARD=98 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_CXX_EXTENSIONS=OFF -Dtranscoder=iconv
         sudo make install
     - name: Test C++
       run: |
