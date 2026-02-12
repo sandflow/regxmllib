@@ -46,8 +46,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: install dependencies
-      run: sudo apt install libxerces-c-dev
+    - name: build xerces
+      run: |
+        git clone https://github.com/xerces/xerces-c.git
+        cd xerces-c
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_CXX_STANDARD=98 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCMAKE_CXX_EXTENSIONS=OFF
+        make install
     - name: Checkout repo
       uses: actions/checkout@v3
     - name: Test C++
